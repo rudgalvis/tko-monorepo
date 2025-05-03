@@ -1,0 +1,1067 @@
+{{ 'component-static-header.css' | asset_url | stylesheet_tag }}
+
+{%- assign headerLayout = section.settings['header-layout'] -%}
+<script
+  type="application/json"
+  data-section-type="static-header"
+  data-section-id="{{ section.id }}"
+  data-section-data
+></script>
+
+<header
+  class="
+    header-desktop tko-navigation
+    {% if headerLayout == 'minimal-sticky' %}
+    main-header--{{ headerLayout }}
+    {% assign headerLayout = 'minimal' %}
+    {% endif %}
+  "
+>
+  {% assign popularsearch = settings.popularsearch | split: ',' %}
+  {% assign specialnavitem = section.settings.specialColor | split: ',' %}
+
+  <section
+    class="main-header"
+    id="masterheader"
+    style="top: 30px"
+    data-timer-visible="{{ settings.show_countdown_timer }}"
+    data-popular="{% for popular in popularsearch %}{{popular}}{%if forloop.last != true %},{%endif%}{% endfor %}"
+  >
+    <div class="tko-header-container tko-flex-row">
+      <div class="tko-side tko-left">
+        <ul class="parent">
+          {% assign getMenu = section.settings.menu %}
+          {% for link in linklists[getMenu].links limit: 3 %}
+            <li class="subi">
+              {% assign getLinkTitle = link.title | handleize %}
+
+              <a
+                href="{{link.url}}"
+                {% for purple in specialnavitem %}
+                  {%- assign purplrit = purple | handleize -%}
+                  {%- if getLinkTitle == purplrit %}style="color:{{section.settings.navigatioitemcolor}};"{% endif -%}
+                {% endfor %}
+              >
+                {{- link.title -}}
+              </a>
+              {% assign linkGet = link.title %}
+
+              {% if link.links.size > 0 %}
+                {% for block in section.blocks %}
+                  {% if link.title == block.settings.titleofmenu %}
+                    {% assign getNumberLayout = block.settings.headerlayoutsx %}
+                    {% if block.settings['megamenu-layouts'] == 'image-submenu' %}
+                      <div class="mega-menu">
+                        <div class="mm-main mm-main-height">
+                          {% for child_link in link.links %}
+                            {% if child_link.links.size == 0 %}
+                              <div class="alignmentdiv">
+                                <div class="mm-layout mn-layout">
+                                  <div class="mm-sub">
+                                    {% assign getLinkTitle = child_link.title | handleize %}
+
+                                    <a
+                                      class="mm-a"
+                                      {% for purple in specialnavitem %}
+                                        {% assign purplrit = purple | handleize -%}
+                                        {%- if getLinkTitle == purplrit -%}
+                                          style="color:{{section.settings.navigatioitemcolor}};"
+                                        {%- endif -%}
+                                      {% endfor %}
+                                      href="{{ child_link.url}}"
+                                    >
+                                      {{- child_link.title -}}
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                            {% else %}
+                              <div class="mm-layout">
+                                <h2 class="mm-title">{{ child_link.title }}</h2>
+                                <div class="mm-sub">
+                                  {% if child_link.links.size > 0 %}
+                                    {% for grandchild_link in child_link.links %}
+                                      {% assign getLinkTitle = grandchild_link.title | handleize %}
+
+                                      <a
+                                        class="mm-a"
+                                        {% for purple in specialnavitem %}
+                                          {%- assign purplrit = purple | handleize -%}
+                                          {%- if getLinkTitle == purplrit -%}
+                                            style="color:{{section.settings.navigatioitemcolor}};"
+                                          {%- endif -%}
+                                        {% endfor %}
+                                        href="{{ grandchild_link.url}}"
+                                      >
+                                        {{- grandchild_link.title -}}
+                                      </a>
+                                    {% endfor %}
+                                  {% endif %}
+                                </div>
+                              </div>
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                        <div class="mm-main">
+                          <div class="mm-layout mm-featured">
+                            <h2 class="mm-title">{{ block.settings.titleofimages }}</h2>
+                            <div
+                              class="mm-fe-container"
+                              {% if getNumberLayout == '1' %}
+                                style="grid-template-columns: repeat(1, 1fr);"
+                              {% endif %}
+                              {% if getNumberLayout == '2' %}
+                                style="grid-template-columns: repeat(2, 1fr);"
+                              {% endif %}
+                              {% if getNumberLayout == '3' %}
+                                style="grid-template-columns: repeat(3, 1fr);"
+                              {% endif %}
+                            >
+                              <div class="mm-fe-item">
+                                {% if getNumberLayout == '1' %}
+                                  <div
+                                    class="mega-menu-img-container"
+                                    {% if getNumberLayout == '2' or getNumberLayout == '1' %}
+                                      style="max-height:365px"
+                                    {% endif %}
+                                  >
+                                    <a href="{{block.settings.image_one_url}}">
+                                      <img
+                                        src="{{ block.settings.image_one | img_url: 'x500' }}"
+                                        alt="{{ block.settings.image_one.alt}}"
+                                    ></a>
+                                  </div>
+                                {% else %}
+                                  <div
+                                    class="mega-menu-img-container"
+                                    {% if getNumberLayout == '2' or getNumberLayout == '1' %}
+                                      style="max-height:365px"
+                                    {% endif %}
+                                  >
+                                    <a href="{{block.settings.image_one_url}}">
+                                      <img
+                                        src="{{ block.settings.image_one | img_url: '597x' }}"
+                                        alt="{{ block.settings.image_one.alt}}"
+                                    ></a>
+                                  </div>
+                                {% endif %}
+                                {% if block.settings.urlenabled == true %}
+                                  <h3>
+                                    <a class="btn-darrow" href="{{block.settings.image_one_url}}">
+                                      {{- block.settings.image_one_text -}}
+                                    </a>
+                                  </h3>
+                                {% endif %}
+                              </div>
+                              {% if getNumberLayout == '2' or getNumberLayout == '3' %}
+                                <div class="mm-fe-item">
+                                  <div
+                                    class="mega-menu-img-container"
+                                    {% if getNumberLayout == '2' %}
+                                      style="max-height:365px"
+                                    {% endif %}
+                                  >
+                                    <a href="{{block.settings.image_two_url}}">
+                                      <img
+                                        src="{{ block.settings.image_two | img_url: '597x' }}"
+                                        alt="{{ block.settings.image_two.alt}}"
+                                    ></a>
+                                  </div>
+                                  {% if block.settings.urlenabled == true %}
+                                    <h3>
+                                      <a class="btn-darrow" href="{{block.settings.image_two_url}}">
+                                        {{- block.settings.image_two_text -}}
+                                      </a>
+                                    </h3>
+                                  {% endif %}
+                                </div>
+                              {% endif %}
+                              {% if getNumberLayout == '3' %}
+                                <div class="mm-fe-item">
+                                  <div class="mega-menu-img-container">
+                                    <a href="{{block.settings.image_three_url}}">
+                                      <img
+                                        src="{{ block.settings.image_three | img_url: '597x' }}"
+                                        alt="{{ block.settings.image_three.alt}}"
+                                    ></a>
+                                  </div>
+                                  {% if block.settings.urlenabled == true %}
+                                    <h3>
+                                      <a class="btn-darrow" href="{{block.settings.image_three_url}}">
+                                        {{- block.settings.image_three_text -}}
+                                      </a>
+                                    </h3>
+                                  {% endif %}
+                                </div>
+                              {% endif %}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {% else %}
+                      {%- comment -%}
+                        ------------------------------------------------
+                        Mega Menu Full Image
+                        ------------------------------------------------
+                      {%- endcomment -%}
+                      <div class="mega-menu">
+                        <div class="full-image-container">
+                          <div class="full-image-items">
+                            {% if block.settings.image_one != null or block.settings.image_one != blank %}
+                              <div class="full-image-item">
+                                <div class="full-image">
+                                  <a href="{{block.settings.image_one_url}}">
+                                    <img src="{{block.settings.image_one | img_url : '944x1182'}}"
+                                  ></a>
+                                </div>
+                                <a href="{{block.settings.image_one_url}}">{{ block.settings.image_one_text }}</a>
+                              </div>
+                            {% endif %}
+                            {% if block.settings.image_two != null or block.settings.image_two != blank %}
+                              <div class="full-image-item">
+                                <div class="full-image">
+                                  <a href="{{block.settings.image_two_url}}">
+                                    <img src="{{block.settings.image_two | img_url : '944x1182'}}"
+                                  ></a>
+                                </div>
+                                <a href="{{block.settings.image_two_url}}">{{ block.settings.image_two_text }}</a>
+                              </div>
+                            {% endif %}
+                            {% if block.settings.image_three != null or block.settings.image_three != blank %}
+                              <div class="full-image-item">
+                                <div class="full-image">
+                                  <a href="{{block.settings.image_three_url}}">
+                                    <img src="{{block.settings.image_three | img_url : '944x1182'}}"
+                                  ></a>
+                                </div>
+                                <a href="{{block.settings.image_three_url}}">{{ block.settings.image_three_text }}</a>
+                              </div>
+                            {% endif %}
+                            {% if block.settings.image_four != null or block.settings.image_four != blank %}
+                              <div class="full-image-item">
+                                <div class="full-image">
+                                  <a href="{{block.settings.image_four_url}}">
+                                    <img src="{{block.settings.image_four | img_url : '944x1182'}}"
+                                  ></a>
+                                </div>
+                                <a href="{{block.settings.image_four_url}}">{{ block.settings.image_four_text }}</a>
+                              </div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
+
+                      {%- comment -%}
+                        ------------------------------------------------
+                        Mega Menu Full Image
+                        ------------------------------------------------
+                      {%- endcomment -%}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="tko-side tko-center">
+        <a href="/">
+          <img
+            style="max-width:{{ section.settings.logo-width }}px;"
+            src="{{ section.settings.imagetext }}"
+            alt="The Knotty Ones Logo"
+          >
+        </a>
+      </div>
+
+      <div class="tko-side tko-right">
+        <div class="tko-rs rsfirst">
+          <ul class="parent">
+            {% assign getMenu = section.settings.menu %}
+            {% for link in linklists[getMenu].links limit: 1 offset: 3 %}
+              <li class="subi">
+                {% assign getLinkTitle = link.title | handleize %}
+
+                <a
+                  href="{{link.url}}"
+                  {% for purple in specialnavitem %}
+                    {%- assign purplrit = purple | handleize -%}
+                    {%- if getLinkTitle == purplrit %}style="color:{{section.settings.navigatioitemcolor}};"{% endif -%}
+                  {% endfor %}
+                >
+                  {{- link.title -}}
+                </a>
+                {% assign linkGet = link.title %}
+
+                {% if link.links.size > 0 %}
+                  {% for block in section.blocks %}
+                    {% if link.title == block.settings.titleofmenu %}
+                      {% assign getNumberLayout = block.settings.headerlayoutsx %}
+                      {% if block.settings['megamenu-layouts'] == 'image-submenu' %}
+                        <div class="mega-menu">
+                          <div class="mm-main mm-main-height">
+                            {% for child_link in link.links %}
+                              {% if child_link.links.size == 0 %}
+                                <div class="alignmentdiv">
+                                  <div class="mm-layout mn-layout">
+                                    <div class="mm-sub">
+                                      {% assign getLinkTitle = child_link.title | handleize %}
+
+                                      <a
+                                        class="mm-a"
+                                        {% for purple in specialnavitem %}
+                                          {% assign purplrit = purple | handleize -%}
+                                          {%- if getLinkTitle == purplrit -%}
+                                            style="color:{{section.settings.navigatioitemcolor}};"
+                                          {%- endif -%}
+                                        {% endfor %}
+                                        href="{{ child_link.url}}"
+                                      >
+                                        {{- child_link.title -}}
+                                      </a>
+                                    </div>
+                                  </div>
+                                </div>
+                              {% else %}
+                                <div class="mm-layout">
+                                  <h2 class="mm-title">{{ child_link.title }}</h2>
+                                  <div class="mm-sub">
+                                    {% if child_link.links.size > 0 %}
+                                      {% for grandchild_link in child_link.links %}
+                                        {% assign getLinkTitle = grandchild_link.title | handleize %}
+
+                                        <a
+                                          class="mm-a"
+                                          {% for purple in specialnavitem %}
+                                            {%- assign purplrit = purple | handleize -%}
+                                            {%- if getLinkTitle == purplrit -%}
+                                              style="color:{{section.settings.navigatioitemcolor}};"
+                                            {%- endif -%}
+                                          {% endfor %}
+                                          href="{{ grandchild_link.url}}"
+                                        >
+                                          {{- grandchild_link.title -}}
+                                        </a>
+                                      {% endfor %}
+                                    {% endif %}
+                                  </div>
+                                </div>
+                              {% endif %}
+                            {% endfor %}
+                          </div>
+                          <div class="mm-main">
+                            <div class="mm-layout mm-featured">
+                              <h2 class="mm-title">{{ block.settings.titleofimages }}</h2>
+                              <div
+                                class="mm-fe-container"
+                                {% if getNumberLayout == '1' %}
+                                  style="grid-template-columns: repeat(1, 1fr);"
+                                {% endif %}
+                                {% if getNumberLayout == '2' %}
+                                  style="grid-template-columns: repeat(2, 1fr);"
+                                {% endif %}
+                                {% if getNumberLayout == '3' %}
+                                  style="grid-template-columns: repeat(3, 1fr);"
+                                {% endif %}
+                              >
+                                <div class="mm-fe-item">
+                                  {% if getNumberLayout == '1' %}
+                                    <div
+                                      class="mega-menu-img-container"
+                                      {% if getNumberLayout == '2' or getNumberLayout == '1' %}
+                                        style="max-height:365px"
+                                      {% endif %}
+                                    >
+                                      <a href="{{block.settings.image_one_url}}">
+                                        <img
+                                          src="{{ block.settings.image_one | img_url: 'x500' }}"
+                                          alt="{{ block.settings.image_one.alt}}"
+                                      ></a>
+                                    </div>
+                                  {% else %}
+                                    <div
+                                      class="mega-menu-img-container"
+                                      {% if getNumberLayout == '2' or getNumberLayout == '1' %}
+                                        style="max-height:365px"
+                                      {% endif %}
+                                    >
+                                      <a href="{{block.settings.image_one_url}}">
+                                        <img
+                                          src="{{ block.settings.image_one | img_url: '597x' }}"
+                                          alt="{{ block.settings.image_one.alt}}"
+                                      ></a>
+                                    </div>
+                                  {% endif %}
+                                  {% if block.settings.urlenabled == true %}
+                                    <h3>
+                                      <a class="btn-darrow" href="{{block.settings.image_one_url}}">
+                                        {{- block.settings.image_one_text -}}
+                                      </a>
+                                    </h3>
+                                  {% endif %}
+                                </div>
+                                {% if getNumberLayout == '2' or getNumberLayout == '3' %}
+                                  <div class="mm-fe-item">
+                                    <div
+                                      class="mega-menu-img-container"
+                                      {% if getNumberLayout == '2' %}
+                                        style="max-height:365px"
+                                      {% endif %}
+                                    >
+                                      <a href="{{block.settings.image_two_url}}">
+                                        <img
+                                          src="{{ block.settings.image_two | img_url: '597x' }}"
+                                          alt="{{ block.settings.image_two.alt}}"
+                                      ></a>
+                                    </div>
+                                    {% if block.settings.urlenabled == true %}
+                                      <h3>
+                                        <a class="btn-darrow" href="{{block.settings.image_two_url}}">
+                                          {{- block.settings.image_two_text -}}
+                                        </a>
+                                      </h3>
+                                    {% endif %}
+                                  </div>
+                                {% endif %}
+                                {% if getNumberLayout == '3' %}
+                                  <div class="mm-fe-item">
+                                    <div class="mega-menu-img-container">
+                                      <a href="{{block.settings.image_three_url}}">
+                                        <img
+                                          src="{{ block.settings.image_three | img_url: '597x' }}"
+                                          alt="{{ block.settings.image_three.alt}}"
+                                      ></a>
+                                    </div>
+                                    {% if block.settings.urlenabled == true %}
+                                      <h3>
+                                        <a class="btn-darrow" href="{{block.settings.image_three_url}}">
+                                          {{- block.settings.image_three_text -}}
+                                        </a>
+                                      </h3>
+                                    {% endif %}
+                                  </div>
+                                {% endif %}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      {% else %}
+                        {%- comment -%}
+                          ------------------------------------------------
+                          Mega Menu Full Image
+                          ------------------------------------------------
+                        {%- endcomment -%}
+                        <div class="mega-menu">
+                          <div class="full-image-container">
+                            <div class="full-image-items">
+                              {% if block.settings.image_one != null or block.settings.image_one != blank %}
+                                <div class="full-image-item">
+                                  <div class="full-image">
+                                    <a href="{{block.settings.image_one_url}}">
+                                      <img src="{{block.settings.image_one | img_url : '944x1182'}}"
+                                    ></a>
+                                  </div>
+                                  <a href="{{block.settings.image_one_url}}">{{ block.settings.image_one_text }}</a>
+                                </div>
+                              {% endif %}
+                              {% if block.settings.image_two != null or block.settings.image_two != blank %}
+                                <div class="full-image-item">
+                                  <div class="full-image">
+                                    <a href="{{block.settings.image_two_url}}">
+                                      <img src="{{block.settings.image_two | img_url : '944x1182'}}"
+                                    ></a>
+                                  </div>
+                                  <a href="{{block.settings.image_two_url}}">{{ block.settings.image_two_text }}</a>
+                                </div>
+                              {% endif %}
+                              {% if block.settings.image_three != null or block.settings.image_three != blank %}
+                                <div class="full-image-item">
+                                  <div class="full-image">
+                                    <a href="{{block.settings.image_three_url}}">
+                                      <img src="{{block.settings.image_three | img_url : '944x1182'}}"
+                                    ></a>
+                                  </div>
+                                  <a href="{{block.settings.image_three_url}}">{{ block.settings.image_three_text }}</a>
+                                </div>
+                              {% endif %}
+                              {% if block.settings.image_four != null or block.settings.image_four != blank %}
+                                <div class="full-image-item">
+                                  <div class="full-image">
+                                    <a href="{{block.settings.image_four_url}}">
+                                      <img src="{{block.settings.image_four | img_url : '944x1182'}}"
+                                    ></a>
+                                  </div>
+                                  <a href="{{block.settings.image_four_url}}">{{ block.settings.image_four_text }}</a>
+                                </div>
+                              {% endif %}
+                            </div>
+                          </div>
+                        </div>
+
+                        {%- comment -%}
+                          ------------------------------------------------
+                          Mega Menu Full Image
+                          ------------------------------------------------
+                        {%- endcomment -%}
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="tko-rs rsmiddle">
+          <div class="rsm-item">
+            {%- comment -%}Predictive search{%- endcomment -%}
+
+            <predictive-search class="predictive-search-desktop-component">
+              <form action="{{ routes.search_url }}" method="get" role="search">
+                <input
+                  id="Search"
+                  type="search"
+                  placeholder="{{section.settings.searchplaceholder}}"
+                  name="q"
+                  value="{{ search.terms | escape }}"
+                  {%- if settings.predictive_search_enabled -%}
+                    role="combobox"
+                    aria-expanded="false"
+                    aria-owns="predictive-search-results-list"
+                    aria-controls="predictive-search-results-list"
+                    aria-haspopup="listbox"
+                    aria-autocomplete="list"
+                    autocorrect="off"
+                    autocomplete="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                  {%- endif -%}
+                >
+                <input name="options[prefix]" type="hidden" value="last">
+
+                {%- if settings.predictive_search_enabled -%}
+                  <div id="predictive-search" tabindex="-1"></div>
+                {%- endif -%}
+              </form>
+            </predictive-search>
+
+            {%- comment -%}Predictive search{%- endcomment -%}
+            <a class="predictive" href="javascript:void(0)"
+              ><img
+                src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/tko-search-icon.svg?v=1633602005"
+                alt="The Knotty Ones Search Icon"
+            ></a>
+          </div>
+
+          <div class="rsm-item">
+              <a href="/pages/wishlist">
+                  <div style="width: 22px">{% render 'heart-icon' %}</div>
+
+                  <span class="rsm_cc" style="bottom: 8px" data-wishlist-render="item_count">0</span>
+              </a>
+          </div>
+          <div class="rsm-item" id="open-drawer">
+            <span class="rsm_cc" data-cart-render="item_count"></span>
+            <a href="javascript:void(0);"
+              ><img
+                src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/tko-basket-item.svg?v=1633602005"
+                alt="The Knotty Ones Basket Icon"
+            ></a>
+          </div>
+        </div>
+        <div class="tko-rs rslast" style="margin-top: 10px; width: max-content;">
+            {% render 'currency-selector', right: true %}
+        </div>
+      </div>
+    </div>
+  </section>
+</header>
+
+<header class="header-mobile">
+  <div class="mobile-nav">
+    <div class="mob-nav-item mobile-burger-menu" id="mobile-burger">
+      <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/burger_menu.svg?v=1636816796">
+    </div>
+    <div class="mob-nav-item mni-center">
+      <a style="max-width{{section.settings.logo-width2}}px;" href="/">
+        <img
+          width="{{section.settings.logo-width2}}"
+          src="//cdn.shopify.com/s/files/1/0548/6644/4336/files/tko-logo-png_800x800.png?v=1633605522"
+          alt=""
+        >
+      </a>
+    </div>
+    <div class="mob-nav-item basket-search">
+      <a id="mobile-search--" href="javascript:void(0);"
+        ><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/tko-search-icon.svg?v=1633602005"
+      ></a>
+      <a id="open-drawer-mobile" href="javascript:void(0);"
+        ><span class="mobile_count" data-cart-render="item_count"></span
+        ><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/tko-basket-item.svg?v=1633602005"
+      ></a>
+    </div>
+  </div>
+
+  <div class="mobilenavs" id="mobilenavcontainer">
+    <div class="mobile-close" id="mobile-close">
+      <img width="20" src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/close_mobile.svg?v=1636972586">
+    </div>
+    <div class="mobile-nav-container">
+      <ul class="main_list_nav">
+        <li class="main_list_parent"><a href="javascript:void(0);" id="mobile-nav-search">SEARCH</a></li>
+        {% for link in linklists[getMenu].links %}
+          {% assign getLinkTitle = link.title | handleize %}
+          <li class="main_list_parent">
+            {% if link.links.size > 0 %}
+              <a
+                class="{% if link.links.size > 0 %}haschild{% endif %}"
+                href="javascript:void(0);"
+                {% for purple in specialnavitem %}
+                  {%- assign purplrit = purple | handleize -%}
+                  {%- if getLinkTitle == purplrit -%}
+                    style="color:{{section.settings.navigatioitemcolormobile}};"
+                  {%- endif -%}
+                {% endfor %}
+              >
+                {{- link.title }}
+                <img
+                  class="child-plus-minus"
+                  src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/plus_minus.svg?v=1636976618"
+              ></a>
+              <ul class="parent_list_nav">
+                {% for child_link in link.links %}
+                  <li class="child_list_nav">
+                    {% if child_link.links.size == 0 %}
+                      {% assign getLinkTitle = child_link.links.title | handleize %}
+                      <a
+                        class="nograndchild"
+                        href="{{ child_link.url }}"
+                        {% for purple in specialnavitem %}
+                          {%- assign purplrit = purple | handleize -%}
+                          {%- if getLinkTitle == purplrit -%}
+                            style="color:{{section.settings.navigatioitemcolormobile}};"
+                          {%- endif -%}
+                        {% endfor %}
+                      >
+                        {{- child_link.title -}}
+                      </a>
+                    {% else %}
+                      {% if child_link.links.size > 0 %}
+                        {% assign getLinkTitle = child_link.links.title | handleize %}
+                        <a
+                          class="{% if child_link.links.size > 0 %}hasgrandchild{% endif %}"
+                          href="javascript:void(0);"
+                          {% for purple in specialnavitem %}
+                            {%- assign purplrit = purple | handleize -%}
+                            {%- if getLinkTitle == purplrit -%}
+                              style="color:{{section.settings.navigatioitemcolormobile}};"
+                            {%- endif -%}
+                          {% endfor %}
+                        >
+                          {{- child_link.title }}
+                          <img
+                            {% if forloop.index == 1 %}
+                              style="transform: rotate(45deg);"
+                            {% endif %}
+                            class="grandchild-plus-minus"
+                            src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/plus_minus_mini.svg?v=1636977003"
+                        ></a>
+                        <ul class="grand_child_list_nav {% if forloop.index == 1  %} grandchild-active {% endif %} ">
+                          {% for grandchild_link in child_link.links %}
+                            {% assign getLinkTitle = grandchild_link.title | handleize %}
+                            <li>
+                              <a
+                                href="{{ grandchild_link.url }}"
+                                {% for purple in specialnavitem %}
+                                  {%- assign purplrit = purple | handleize -%}
+                                  {%- if getLinkTitle == purplrit -%}
+                                    style="color:{{section.settings.navigatioitemcolormobile}};"
+                                  {%- endif -%}
+                                {% endfor %}
+                              >
+                                {{- grandchild_link.title -}}
+                              </a>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      {% else %}
+                        {% assign getLinkTitle = child_link.title | handleize %}
+                        <a
+                          href="{{ child_link.url }}"
+                          {% for purple in specialnavitem %}
+                            {%- assign purplrit = purple | handleize -%}
+                            {%- if getLinkTitle == purplrit -%}
+                              style="color:{{section.settings.navigatioitemcolormobile}};"
+                            {%- endif -%}
+                          {% endfor %}
+                        >
+                          {{- child_link.title -}}
+                        </a>
+                      {% endif %}
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              {% assign getLinkTitle = link.title | handleize %}
+              <a
+                href="{{ link.url }}"
+                {% for purple in specialnavitem %}
+                  {%- assign purplrit = purple | handleize -%}
+                  {%- if getLinkTitle == purplrit -%}
+                    style="color:{{section.settings.navigatioitemcolormobile}};"
+                  {%- endif -%}
+                {% endfor %}
+              >
+                {{- link.title -}}
+              </a>
+            {% endif %}
+          </li>
+        {% endfor %}
+          <li class="main_list_parent"><a href="/pages/wishlist">WISHLIST</a></li>
+        {% if customer %}
+          <li class="main_list_parent"><a href="{{ routes.account_url }}">ACCOUNT</a></li>
+        {% else %}
+          <li class="main_list_parent"><a href="{{ routes.account_login_url }}">LOGIN</a></li>
+        {% endif %}
+        <li class="main_list_parent">
+          <a id="mobile-nav-cart" href="javascript:void(0);">CART(<span data-cart-render="item_count"></span>)</a>
+        </li>
+      </ul>
+
+      <div class="currency-social">
+        <div class="mobile-currency">
+            {% render 'currency-selector', left: true, bg: '#b4bed6' %}
+        </div>
+        <div class="mobile-social">
+          <a target="_blank" href="{{settings.social_instagram_link}}"
+            ><img src="//cdn.shopify.com/s/files/1/0548/6644/4336/files/instagram_icon_3aa21a2d-6c71-4a36-a3e2-7f0e2fb44db6_66x.png?v=1636812885"
+          ></a>
+          <a target="_blank" href="{{settings.social_pinterest_link}}"
+            ><img src="//cdn.shopify.com/s/files/1/0548/6644/4336/files/pinterest_icon_e44aae8f-ed85-4d57-ba28-6cc144ea8857_66x.png?v=1636813325"
+          ></a>
+          <a target="_blank" href="{{settings.social_linkedin_link}}"
+            ><img src="//cdn.shopify.com/s/files/1/0548/6644/4336/files/linkedin_icon_09ab3f59-cb3d-43ed-a368-1f672b42b290_66x.png?v=1636812885"
+          ></a>
+          <a target="_blank" href="{{settings.social_facebook_link}}"
+            ><img src="//cdn.shopify.com/s/files/1/0548/6644/4336/files/facebook_icon_e90529f1-0795-4ce2-b9f0-8ca366ffaa0f_66x.png?v=1651070582"
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+{%- comment -%}{%- endcomment -%}
+<div class="mobile-predictive-search">
+  <div class="mob-search-close">
+    <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/drawer_close.svg?v=1638269703">
+  </div>
+  <div class="mobile-predictive-search-container">
+    <predictive-search class="predictive-search-mobile-component">
+      <form action="{{ routes.search_url }}" method="get" role="search">
+        <input
+          id="search-mobile"
+          type="search"
+          placeholder="{{section.settings.searchplaceholder}}"
+          name="q"
+          value="{{ search.terms | escape }}"
+          {%- if settings.predictive_search_enabled -%}
+            role="combobox"
+            aria-expanded="false"
+            aria-owns="predictive-search-results-list-mobile"
+            aria-controls="predictive-search-results-list-mobile"
+            aria-haspopup="listbox"
+            aria-autocomplete="list"
+            autocorrect="off"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+          {%- endif -%}
+        >
+        <div class="search-icon-mobile">
+          <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/tko-search-icon.svg?v=1633602005">
+        </div>
+        <input name="options[prefix]" type="hidden" value="last">
+
+        {%- if settings.predictive_search_enabled -%}
+          <div id="predictive-search" tabindex="-1"></div>
+        {%- endif -%}
+      </form>
+    </predictive-search>
+  </div>
+</div>
+
+{%- comment -%}{%- endcomment -%}
+
+<script>
+  window.headerJSON = {{ section.settings | json }};
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    {% if section.settings.logo %}
+      {% assign image_size = section.settings.logo.width | append: 'x' %}
+      "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
+    {% endif %}
+    "sameAs": [
+      {{ settings.social_twitter_link | json }},
+      {{ settings.social_facebook_link | json }},
+      {{ settings.social_pinterest_link | json }},
+      {{ settings.social_instagram_link | json }},
+      {{ settings.social_tiktok_link | json }},
+      {{ settings.social_tumblr_link | json }},
+      {{ settings.social_snapchat_link | json }},
+      {{ settings.social_youtube_link | json }},
+      {{ settings.social_vimeo_link | json }}
+    ],
+    "url": {{ shop.url | append: page.url | json }}
+  }
+</script>
+
+{%- if request.page_type == 'index' -%}
+  {% assign potential_action_target = shop.url | append: routes.search_url | append: '?q={search_term_string}' %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ shop.url | append: page.url | json }}
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Navigation Color Item"
+    },
+    {
+      "type": "textarea",
+      "id": "specialColor",
+      "label": "Colored Items",
+      "info": "Add menu items separeted by commas"
+    },
+    {
+      "type": "color",
+      "id": "navigatioitemcolor",
+      "label": "Item Color Desktop",
+      "default": "#B4BED6"
+    },
+    {
+      "type": "color",
+      "id": "navigatioitemcolormobile",
+      "label": "Item Color Mobile",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "imagetext",
+      "label": "Logo image",
+      "info": "400 x 200px .jpg recommended"
+    },
+    {
+      "type": "text",
+      "id": "logo-width",
+      "label": "Desktop logo width",
+      "info": "Custom logo width for Desktop (in pixels)",
+      "default": "257"
+    },
+    {
+      "type": "text",
+      "id": "logo-width2",
+      "label": "Logo width",
+      "info": "Custom logo width for Mobile (in pixels)",
+      "default": "170"
+    },
+    {
+      "type": "header",
+      "content": "Search"
+    },
+    {
+      "type": "text",
+      "id": "searchplaceholder",
+      "label": "Search Placeholder Text",
+      "info": "Enter search inputbox placeholder text"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Mega Menu",
+      "type": "menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "titleofmenu",
+          "default": "SHOP",
+          "label": "Select Navigation"
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "megamenu-layouts",
+          "label": "Mega Menu Layout",
+          "default": "image-submenu",
+          "options": [
+            {
+              "value": "full-image",
+              "label": "Full Image Layout"
+            },
+            {
+              "value": "image-submenu",
+              "label": "Image & Submenu"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "titleofimages",
+          "label": "Enter Heading Copy"
+        },
+        {
+          "type": "header",
+          "content": "Mega Menu Images & Links"
+        },
+        {
+          "type": "select",
+          "id": "headerlayoutsx",
+          "label": "Image Layout",
+          "default": "3",
+          "options": [
+            {
+              "value": "3",
+              "label": "3 Column"
+            },
+            {
+              "value": "2",
+              "label": "2 Column"
+            },
+            {
+              "value": "1",
+              "label": "1 Column"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image_one",
+          "label": "Image-1"
+        },
+        {
+          "id": "image_one_url",
+          "type": "url",
+          "label": "First URL"
+        },
+        {
+          "type": "text",
+          "id": "image_one_text",
+          "label": "First Url Text",
+          "info": "Enter First Column Url Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_two",
+          "label": "Image-2"
+        },
+        {
+          "id": "image_two_url",
+          "type": "url",
+          "label": "Second URL"
+        },
+        {
+          "type": "text",
+          "id": "image_two_text",
+          "label": "Second Url Text",
+          "info": "Enter Second Column Url Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_three",
+          "label": "Image-3"
+        },
+        {
+          "id": "image_three_url",
+          "type": "url",
+          "label": "Third URL"
+        },
+        {
+          "type": "text",
+          "id": "image_three_text",
+          "label": "Third Url Text",
+          "info": "Enter Third Column Url Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_four",
+          "label": "Image-4"
+        },
+        {
+          "id": "image_four_url",
+          "type": "url",
+          "label": "Forth URL"
+        },
+        {
+          "type": "text",
+          "id": "image_four_text",
+          "label": "Forth Url Text",
+          "info": "Enter Forth Column Url Text"
+        },
+        {
+          "type": "checkbox",
+          "id": "urlenabled",
+          "label": "Enable URLS",
+          "default": true
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+<script>
+    const targetNode = document.querySelector('.header-mobile');
+    if (targetNode) {
+        const observer = new MutationObserver((mutationsList) => {
+            for (const mutation of mutationsList) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    console.trace('Style changed:', targetNode.style.cssText);
+                }
+            }
+        });
+
+        console.log('IM HERE')
+        observer.observe(targetNode, { attributes: true, attributeFilter: ['style'] });
+    } else {
+        console.error('Element with .header-mobile not found.');
+    }
+</script>

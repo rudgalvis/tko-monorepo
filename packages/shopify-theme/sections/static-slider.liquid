@@ -1,0 +1,225 @@
+{{ 'component-static-slider.css' | asset_url | stylesheet_tag }}
+
+<script
+  type="application/json"
+  data-section-type="static-slider"
+  data-section-id="{{ section.id }}"
+></script>
+
+<div class="tko-main-slider tko-main-slider-desktop">
+    {% for block in section.blocks %}
+     <div class="slider-item">
+         <div class="slider-item-content stable sic-desktop">
+            <img {%if forloop.first == true%} class="ght" {%endif%}  src="{{block.settings.slide-image | img_url: '2772x1442'}}"/> 
+           {%- comment -%}
+            {%
+                render 'rimg'
+                img: block.settings.slide-image,
+                alt: block.settings.slide-image.alt,
+                crop: block.settings.slidercrop,
+                size: '2772x1442',
+              %}
+              {%- endcomment -%}
+             <div class="slider-action">
+             <h1 class="slider-{{section.id}}" style="color:{{ block.settings.slide-text-color}}">{{ block.settings.slide-text}}</h1>
+             <a href="{{ block.settings.button-link}}" class="tko-btn tko-btn-light tko-btn-animation">
+              <div class="btn-animation-content"></div>  
+              <span class="tko-btn-text">{{ block.settings.button-text}}</span>
+              
+             </a>
+            </div>
+         </div>
+        
+         <div class="slider-item-content stable sic-mobile">
+          {%
+              render 'rimg'
+              img: block.settings.slide-image-mobile,
+              alt: block.settings.slide-image-mobile.alt,
+              size: '500x681',
+            %}
+           <div class="slider-action">
+           <h1 class="slider-{{section.id}}" style="color:{{ block.settings.slide-text-color}}">{{ block.settings.slide-text}}</h1>
+           <a href="{{ block.settings.button-link}}" class="tko-btn tko-btn-light tko-btn-animation">
+            <div class="btn-animation-content"></div> 
+            <span class="tko-btn-text">{{ block.settings.button-text}}</span></a>
+          </div>
+       </div>
+      
+     </div>
+     {% endfor %}
+</div>
+
+
+
+
+
+
+<style>
+
+  
+.tko-main-slider .flickity-page-dots .dot {
+  background-color:transparent;
+     border: 1px solid {{section.settings.slider-dot-color}};
+     text-indent: -9999px;
+     border-radius: 50%;
+     padding: 0px;
+     border-radius: 50%;
+     
+}
+
+.tko-main-slider .flickity-page-dots .dot.is-selected {
+  background-color:{{section.settings.slider-dot-color}};
+     border: 1px solid {{section.settings.slider-dot-color}};
+}
+
+
+
+{% if section.settings.dothsenable == true %}
+
+.tko-main-slider .flickity-page-dots{
+  display:block;
+}
+
+{% else %}
+.tko-main-slider .flickity-page-dots {
+
+    display: none;
+
+}
+{% endif %}
+
+.tko-main-slider{
+  opacity:0;
+}
+
+</style>
+
+{% schema %}
+{
+        "name": "Hero Slider", 
+        "settings": [
+        {
+          "type": "header",
+          "content": "Color Options"
+        },
+          {
+            "id": "slider-dot-color",
+            "type": "color",
+            "label": "Dots Color",
+            "default": "#ffffff"
+          },
+          {
+            "type": "header",
+            "content": "Navigation Options"
+          },
+          {
+            "type": "checkbox",
+            "id": "dothsenable",
+            "default": true,
+            "label": "Show Slider Navigation",
+            "info": "Show/Hide Slider dots"
+          },
+          {
+            "type": "header",
+            "content": "Content Max Width"
+          },
+          {
+            "type":"number",
+            "id":"slider_width_desktop",
+            "label":"Desktop",
+            "default":20
+          },
+          {
+            "type":"number",
+            "id":"slider_width_mobile",
+            "label":"Mobile",
+            "default":20
+          }
+        ],
+          "max_blocks": 3,
+          "blocks": [
+          {
+               "type": "Slider", 
+               "name": "Slides",
+               "settings": [
+               {
+                "type": "header",
+                "content": "Image Options"
+              },
+               {
+                "type": "image_picker",
+                "id": "slide-image",
+                "label": "Desktop"
+              },
+              {
+                "type": "image_picker",
+                "id": "slide-image-mobile",
+                "label": "Mobile"
+              },
+              {
+                "type": "header",
+                "content": "Copy Options"
+              },
+               {
+                "id": "slide-text",
+                "type": "textarea",
+                "label": "Text",
+                "default": "Call attention to a special discount, feature, or promotion here."
+              },
+              {
+                "type": "header",
+                "content": "Button Options"
+              },
+              {
+                "id": "button-text",
+                "type": "text",
+                "label": "Button Text",
+                "default": "SHOP ALL KNITS"
+              },
+                      {
+                        "id": "button-link",
+                        "type": "url",
+                        "label": "Link"
+                      },
+                      {
+                        "type": "header",
+                        "content": "Color Options"
+                      },
+                      {
+                        "id": "slide-text-color",
+                        "type": "color",
+                        "label": "Slider Content Color",
+                        "default": "#ffffff"
+                      }
+                      
+             ]
+          }
+           ],
+           "presets": [
+    {
+      "category": "Image",
+      "name": "Main Slider"
+     }
+  ]
+      }
+ 
+
+{% endschema %}
+
+<script>
+  $(document).ready(function () {
+      $('.tko-main-slider').css('opacity','1');
+   });
+</script>
+
+<style>
+  .slider-{{section.id}}{
+    max-width: {{section.settings.slider_width_desktop}}px;
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+  .slider-{{section.id}}{
+    max-width:{{section.settings.slider_width_mobile}}px;
+  }
+  }
+</style>

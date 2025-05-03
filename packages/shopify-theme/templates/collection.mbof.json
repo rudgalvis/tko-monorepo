@@ -1,0 +1,72 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-collection-alternate",
+      "settings": {
+      }
+    },
+    "1648816341e3d58503": {
+      "type": "static-collection-hero",
+      "settings": {
+        "collection_hero_image": "{{ collection.metafields.my_fields.collection_hero_image.value }}",
+        "collection_hero_image_mobile": "{{ collection.metafields.my_fields.collection_hero_image_mobile.value }}"
+      }
+    },
+    "16491555928618b435": {
+      "type": "static-collection-hero-text",
+      "settings": {
+        "collectionherotitle": "{{ collection.title }}",
+        "collectionherocopy": "<p>{{ collection.metafields.my_fields.collection_copy_text | metafield_tag }}</p>"
+      }
+    },
+    "1648817586b25c2c98": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 18,
+        "show_secondary_image": true,
+        "enable_filtering": false,
+        "enable_sorting": false,
+        "enable_filters": false,
+        "autoplay_status": true,
+        "muted_status": true,
+        "controller_status": false,
+        "loop_status": true
+      }
+    },
+    "1654111483738f5f9e": {
+      "type": "static-cta-subscribe",
+      "settings": {
+        "borderlayoutsub": "hide-border",
+        "subbgcolor": "#b4bed6",
+        "subheading": "10% OFF YOUR FIRST ORDER",
+        "subbody": "<p>Good things come to those who subscribe. We don’t spam.<br/>Pinky promise</p>",
+        "maxwidthofcta": 980,
+        "maxwidthofctamobile": 280,
+        "padding_sizeup": 18,
+        "padding_sizedown": 21,
+        "padding_sizeupm": 11,
+        "padding_sizedownm": 10,
+        "containertop_": 62,
+        "containerbottom_": 33,
+        "containertopmobile_": 50,
+        "containerbottommobile_": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1648816341e3d58503",
+    "16491555928618b435",
+    "1648817586b25c2c98",
+    "1654111483738f5f9e"
+  ]
+}

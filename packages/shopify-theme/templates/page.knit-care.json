@@ -1,0 +1,434 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-knit-care",
+      "settings": {
+      }
+    },
+    "1640524672c03325da": {
+      "type": "static-page-hero",
+      "blocks": {
+        "16405246727b6dfa6e-0": {
+          "type": "title",
+          "settings": {
+            "pageherohead": "Care for your knit to cherish it for generations to come.",
+            "herocolor": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "16405246727b6dfa6e-0"
+      ],
+      "settings": {
+        "herolayoutpage": "hide-border",
+        "footer_hero": false,
+        "pageheroimage": "shopify://shop_images/Untitled-design-_7_1386x_27d55876-5578-4ef1-8d05-054bb2f9d1a7.webp",
+        "pageheroimagemobile": "shopify://shop_images/Untitled-design-_1_-_1_692x_bbb3f572-5452-466f-9b92-10d30d584273.webp",
+        "padding_sizeup": 8,
+        "padding_sizedown": 55,
+        "padding_sizeupm": 8,
+        "padding_sizedownm": 10,
+        "pageherotitledesktop": 900,
+        "pageherotitlemobile": 300
+      }
+    },
+    "1640524679e07267c8": {
+      "type": "static-knit-care-accordion",
+      "blocks": {
+        "6e2dfa48-f891-4079-a05b-9ab5b956b61f": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "typeofknit": "WOOL/ALPACA",
+            "accordionheading": "Knit personalities",
+            "accordioncopy": "Wool's a great all-rounder and is easy to care for, which is why we use it for a large number of our knits. \nIt's naturally warm and cool at the same time thanks to its breathable nature, hypoallergenic, self-cleaning, odor resistant and wrinkle resistant. We could keep going. Ours is cruelty free and good for the environment, too.",
+            "knitaccordionbadge": false,
+            "accordionbadgecopy": "",
+            "accopycolor": "",
+            "acbgcolor": ""
+          }
+        },
+        "0d240ab7-9f1e-42a5-bf00-d9a622aec21e": {
+          "type": "Accordion",
+          "settings": {
+            "typeofknit": "WOOL/ALPACA",
+            "accordionimage": "shopify://shop_images/2-Wool-Your-knits-other-home_684x662_730a7835-6925-4050-a2e6-ad03d5b2cce8.webp",
+            "accordionheading": "How to store your knit",
+            "accordioncopy": "Wool sweaters are the most delicate and should be stored folded in a cool, dry place rather than on hangers. This can cause your new sweater to stretch and lose its shape. Avoid hanging anything knitted: weight and gravity are not your friends here and the weight of the knit over time will cause it to stretch and distort from its original shape. We recommend folding all knitted garments.",
+            "knitaccordionbadge": false,
+            "accordionbadgecopy": "",
+            "accopycolor": "",
+            "acbgcolor": ""
+          }
+        },
+        "859c4200-e393-4b51-bde2-4b8e97a957e6": {
+          "type": "Accordion",
+          "settings": {
+            "typeofknit": "WOOL/ALPACA",
+            "accordionimage": "shopify://shop_images/3-Wool-Keeping-your-knit-clean-longer-secrets_684x662_6c6597c3-1d35-4b9c-a9c3-6ac7e4e18301.webp",
+            "accordionheading": "How to air your knit",
+            "accordioncopy": "One of the perks of wool is that it’s a little self-cleaning, so it stays fresh for longer than other fabrics. After each wear, place your knits outside or near a window to air before folding them away. Wear a thin shirt that works as a barrier between your skin and your knits. And, if your knitwear picks up smells or odors throughout the day you can let it air-dry outside, away from direct sunlight.",
+            "knitaccordionbadge": false,
+            "accordionbadgecopy": "",
+            "accopycolor": "",
+            "acbgcolor": ""
+          }
+        },
+        "ce79ff0b-9efc-45e9-922f-d98768e1a50f": {
+          "type": "Accordion",
+          "settings": {
+            "typeofknit": "WOOL/ALPACA",
+            "accordionimage": "shopify://shop_images/4-Wool-Mom-approved-spot-cleaning_2_684x662_58fa6b56-a362-47af-a885-fc415756439d.webp",
+            "accordionheading": "How to spot clean your knit",
+            "accordioncopy": "Use a spot cleaner if your knit only has a little dirt in one teeny place. If you need to remove stains, use only gentle natural soap. You can also try to remove stains by brushing the fabric gently but, professional tip: never rub! For food spills, brush off the food particles as best as you can, and gently clean the area with a sponge and soapy water. And, if you want to be super safe, just take it to the dry cleaners.",
+            "knitaccordionbadge": false,
+            "accordionbadgecopy": "",
+            "accopycolor": "",
+            "acbgcolor": ""
+          }
+        },
+        "1c5b0d8d-23bc-4dfc-a776-7b51eb05f2d3": {
+          "type": "Accordion",
+          "settings": {
+            "typeofknit": "WOOL/ALPACA",
+            "accordionimage": "shopify://shop_images/5-Wool-Dry-cleaner-tips-you-didnt-know-you-needed_684x662_bc473229-e305-4721-b513-591beb8a3e88.webp",
+            "accordionheading": "Finding the right dry cleaner",
+            "accordioncopy": "We recommend dry cleaning all of our knits using professional cleaners that offer sustainable/green/safe dry cleaning. These cleaners often use water as the primary solvent, which can substantially reduce toxicity and the CO2 emissions associated with garment care. When you're dropping off your knits, make sure to request that your sweaters are returned folded and bagged, as hanging will cause them to stretch and lose their shape.",
+            "knitaccordionbadge": false,
+            "accordionbadgecopy": "2 PRODUCTS FOUND",
+            "accopycolor": "#000000",
+            "acbgcolor": "#b4bed6"
+          }
+        },
+        "f25eded1-a547-42b3-8174-bcbc2667022a": {
+          "type": "Accordion",
+          "settings": {
+            "typeofknit": "WOOL/ALPACA",
+            "accordionimage": "shopify://shop_images/6-Wool-Fixup-your-knit-look-sharp_684x662_6260930f-521d-4142-9092-2e0cd2904d89.webp",
+            "accordionheading": "How to safely fix your knit",
+            "accordioncopy": "It's easy to sort out tiny fixes on your knit when you know how. Knitted garments are prone to snagging and pulling if they get caught on jewellery, coats or bags. If you notice a snag in your garment, just let us know. One of our knitters will help to fix it and we'll send over their instructions to you.",
+            "knitaccordionbadge": false,
+            "accordionbadgecopy": "",
+            "accopycolor": "",
+            "acbgcolor": ""
+          }
+        },
+        "531ff1a5-d44d-4015-a2ae-0783945af9c0": {
+          "type": "Accordion",
+          "settings": {
+            "typeofknit": "WOOL/ALPACA",
+            "accordionimage": "shopify://shop_images/7-Wool-Keeping-your-knits-safe_684x662_fb2383bd-50ab-4097-9e0e-fbf53e22cab7.webp",
+            "accordionheading": "How to protect your knits",
+            "accordioncopy": "Turns out moths are pretty big fans of knitwear, too.\n\nThe best way to protect your knits from moths is to keep natural bug repellent in your knit drawers. Bonus: this can also make your knits smell great, as you can use things like blocks of aromatic cedar or lavender or cade oil. If you're storing your woolies for longer periods of time, place them in a cotton or linen storage bag (as opposed to an airtight plastic bin) so they can breathe.",
+            "knitaccordionbadge": false,
+            "accordionbadgecopy": "",
+            "accopycolor": "",
+            "acbgcolor": ""
+          }
+        },
+        "5c92e520-5331-4716-b259-885de7f00ef3": {
+          "type": "Accordion",
+          "settings": {
+            "typeofknit": "WOOL/ALPACA",
+            "accordionimage": "shopify://shop_images/8-Wool-Pilling-is-natural_684x662_ca46231e-28b4-45f9-b72b-b126a9a68048.webp",
+            "accordionheading": "Pilling is natural - here’s what to do",
+            "accordioncopy": "Pilling is a natural process that happens to all wool garments. This means, especially during the first few wears, pilling or shedding may occur. But don't stress: this can be easily removed and it won't affect the look or condition of the knit. We recommend using a fabric shaver . You can also reduce pilling by keeping your knit away from any long term rubbing or friction against another garment or surface.",
+            "knitaccordionbadge": false,
+            "accordionbadgecopy": "3 PRODUCTS FOUND",
+            "accopycolor": "#000000",
+            "acbgcolor": "#b4bed6"
+          }
+        },
+        "c0c15a39-27d8-4714-941d-ded3ed4e7d7b": {
+          "type": "Accordion",
+          "settings": {
+            "typeofknit": "WOOL/ALPACA",
+            "accordionimage": "shopify://shop_images/9-Wool-Steaming-your-knits_684x662_5ef89ab7-bb50-42a3-9b3c-c73df52bc4dc.webp",
+            "accordionheading": "How to steam your knits",
+            "accordioncopy": "A steamer is your BFF when it comes to refreshing your knit and is a great way to freshen up your wool knits between seasonal washing. You can use one to get rid of wrinkles, bad smells, shallow dirt and bacteria. The warmth and moisture of the steam relaxes the knit, flattening wrinkles and smoothing creases from folding. Lay your garment flat over an ironing board or another heat-resistant surface and hold the steamer or an iron about an inch above it as you surge the steam. We recommend testing a small area first. Don't allow the steamer to come in contact with the fabric or it could burn. While the fabric is warm and damp, use your hands to smooth it out and reshape to your liking. Apply more steam as you see fit and then leave to air dry. Good as new!",
+            "knitaccordionbadge": true,
+            "accordionbadgecopy": "3 PRODUCTS FOUND",
+            "accopycolor": "#000000",
+            "acbgcolor": "#b4bed6"
+          }
+        },
+        "ee1296ae-33a3-4841-8488-82ecea22ce8a": {
+          "type": "Accordion",
+          "settings": {
+            "typeofknit": "WOOL/ALPACA",
+            "accordionimage": "shopify://shop_images/10-Wool-Shaving-your-knits_684x662_f27e54e6-b1e6-449e-b337-1df2190e51ed.webp",
+            "accordionheading": "Prolonging your knit’s lifespan",
+            "accordioncopy": "Fabric shavers are the underdog of the garment world: you can use them on everything from delicate materials to clothes to home textiles. But, as you might expect, pill removers should be handled carefully on a flat surface so you don't accidentally damage your new fav knit. To use one properly, gently swipe the fabric with the trimmer to remove fuzz and pilling. If you push too hard, you can damage the fabric. So try it first on a small, less noticeable spot before you go all out. Once you've finished, turn off the machine, remove the storage bin and blade protector and use a little brush to remove the fuzz around the razor blade. Make sure there are no hairs or threads left spinning around, either.",
+            "knitaccordionbadge": true,
+            "accordionbadgecopy": "3 PRODUCTS FOUND",
+            "accopycolor": "#000000",
+            "acbgcolor": "#b4bed6"
+          }
+        }
+      },
+      "block_order": [
+        "6e2dfa48-f891-4079-a05b-9ab5b956b61f",
+        "0d240ab7-9f1e-42a5-bf00-d9a622aec21e",
+        "859c4200-e393-4b51-bde2-4b8e97a957e6",
+        "ce79ff0b-9efc-45e9-922f-d98768e1a50f",
+        "1c5b0d8d-23bc-4dfc-a776-7b51eb05f2d3",
+        "f25eded1-a547-42b3-8174-bcbc2667022a",
+        "531ff1a5-d44d-4015-a2ae-0783945af9c0",
+        "5c92e520-5331-4716-b259-885de7f00ef3",
+        "c0c15a39-27d8-4714-941d-ded3ed4e7d7b",
+        "ee1296ae-33a3-4841-8488-82ecea22ce8a"
+      ],
+      "settings": {
+        "accordionlayoutpage": "hide-border",
+        "selectednav": "",
+        "thisischild": false,
+        "padding_sizeup": 0,
+        "padding_sizedown": 0,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 0
+      }
+    },
+    "1648823794b411ee86": {
+      "type": "static-knit-care-accordion",
+      "blocks": {
+        "e7768127-a36e-4930-930f-22f65597d04e": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "typeofknit": "COTTON",
+            "accordionheading": "Knit personalities",
+            "accordioncopy": "We love cotton for its excellent moisture control. It's breathable, insulating, comforting, hypoallergenic and durable. It also doesn't pile after wear. It has a high tensile strength, which basically means it's strong and less likely to rip or tear. Great for the accident-prone among us.",
+            "knitaccordionbadge": false,
+            "accordionbadgecopy": "",
+            "accopycolor": "",
+            "acbgcolor": ""
+          }
+        },
+        "219efab3-45ef-454c-811c-06c80c69f189": {
+          "type": "Accordion",
+          "settings": {
+            "typeofknit": "COTTON",
+            "accordionimage": "shopify://shop_images/2-Cotton-Your-Knits-Other-Home_684x662_69503e0b-7dd5-4ad4-9c68-12f57cbb8ae6.webp",
+            "accordionheading": "How to store your knit",
+            "accordioncopy": "All cotton sweaters should be stored folded in a cool, dry place rather than on hangers. This can cause your new sweater to stretch and lose its shape. Avoid hanging anything knitted: weight and gravity are not your friends here and the weight of the knit over time will cause it to stretch and distort from its original shape. We recommend folding all knitted garments.",
+            "knitaccordionbadge": false,
+            "accordionbadgecopy": "",
+            "accopycolor": "",
+            "acbgcolor": ""
+          }
+        },
+        "729e2586-8960-468d-8cf5-c46f83a15229": {
+          "type": "Accordion",
+          "settings": {
+            "typeofknit": "COTTON",
+            "accordionimage": "shopify://shop_images/3-Cotton-Keeping-your-knit-clean-longer-secrets_684x662_a5318a64-81dd-41a0-8f55-337d866ef65d.webp",
+            "accordionheading": "How to air your knit",
+            "accordioncopy": "We recommend airing out your cotton garments after each wear, as they may not need washing every single time. If any smells haven't disappeared after airing, it's time to wash. You can also wear a thin shirt underneath that works as a barrier between your skin and your knits. And, if your knitwear picks up smells or odors throughout the day, you can let it air-dry outside, away from direct sunlight.",
+            "knitaccordionbadge": false,
+            "accordionbadgecopy": "",
+            "accopycolor": "",
+            "acbgcolor": ""
+          }
+        },
+        "835604ac-db84-4b5e-91fb-fe270f02636d": {
+          "type": "Accordion",
+          "settings": {
+            "typeofknit": "COTTON",
+            "accordionimage": "shopify://shop_images/4-Cotton-Mom-approved-spot-cleaning_684x662_02af261d-7ded-49d3-8620-08ef5c3d0cc9.webp",
+            "accordionheading": "How to spot clean your knit",
+            "accordioncopy": "Use a spot cleaner if your knit only has a little dirt in one teeny place. If you need to remove stains, use only gentle natural soap. You can also try to remove stains by brushing the fabric gently but, professional tip: never rub! For food spills, brush off the food particles as best as you can, and gently clean the area with a sponge and soapy water. And, if you want to be super safe, just take it to the dry cleaners.",
+            "knitaccordionbadge": false,
+            "accordionbadgecopy": "",
+            "accopycolor": "",
+            "acbgcolor": ""
+          }
+        },
+        "2675d8c5-7059-4068-9506-c0a0098a40fa": {
+          "type": "Accordion",
+          "settings": {
+            "typeofknit": "COTTON",
+            "accordionimage": "shopify://shop_images/5-Cotton-Dry-cleaner-tips-you-didnt-know-you-needed_684x662_9e96b066-98c2-4e51-999b-80b69e67fef2.webp",
+            "accordionheading": "Finding the right dry cleaner",
+            "accordioncopy": "We recommend dry cleaning all of our knits using professional cleaners that offer sustainable/green/safe dry cleaning. These cleaners often use water as the primary solvent, which can substantially reduce toxicity and the CO2 emissions associated with garment care. When you're dropping off your knits, make sure to request that your sweaters are returned folded and bagged, as hanging will cause them to stretch and lose their shape.",
+            "knitaccordionbadge": false,
+            "accordionbadgecopy": "",
+            "accopycolor": "",
+            "acbgcolor": ""
+          }
+        },
+        "d6eaa2f7-3757-453c-a1de-edf3e99db5c2": {
+          "type": "Accordion",
+          "settings": {
+            "typeofknit": "COTTON",
+            "accordionimage": "shopify://shop_images/6-Cotton-Fixup-your-knit-look-sharp_684x662_b012d8ed-fc54-4ef8-b5b3-587bcc65656a.webp",
+            "accordionheading": "How to safely fix your knit",
+            "accordioncopy": "It's easy to sort out tiny fixes on your knit when you know how. Knitted garments are prone to snagging and pulling if they get caught on jewellery, coats or bags. If you notice a snag in your garment, just let us know. One of our knitters will help to fix it and we'll send over their instructions to you.",
+            "knitaccordionbadge": false,
+            "accordionbadgecopy": "",
+            "accopycolor": "",
+            "acbgcolor": ""
+          }
+        },
+        "b455b314-c5e8-47ac-85d2-d8d184480838": {
+          "type": "Accordion",
+          "settings": {
+            "typeofknit": "COTTON",
+            "accordionimage": "shopify://shop_images/7-Cotton-Keeping-your-knits-safe_684x662_6753f11c-5813-4ec7-aa44-7e22145f187f.webp",
+            "accordionheading": "How to protect your knits",
+            "accordioncopy": "Turns out moths are pretty big fans of knitwear, too.\n\nThe best way to protect your knits from moths is to keep natural bug repellent in your knit drawers. Bonus: this can also make your knits smell great, as you can use things like blocks of aromatic cedar or lavender or cade oil. If you're storing your woolies for longer periods of time, place them in a cotton or linen storage bag (as opposed to an airtight plastic bin) so they can breathe.",
+            "knitaccordionbadge": false,
+            "accordionbadgecopy": "",
+            "accopycolor": "",
+            "acbgcolor": ""
+          }
+        },
+        "cd12882f-2bfb-4891-b243-ac947906eba6": {
+          "type": "Accordion",
+          "settings": {
+            "typeofknit": "COTTON",
+            "accordionimage": "shopify://shop_images/8-Cotton-Steaming-Your-Knits-101_684x662_028abdde-d889-42e2-8648-59858b649bd0.webp",
+            "accordionheading": "How to steam your knits",
+            "accordioncopy": "A steamer is your BFF when it comes to refreshing your knit and is a great way to freshen up your wool knits between seasonal washing. You can use one to get rid of wrinkles, bad smells, shallow dirt and bacteria. The warmth and moisture of the steam relaxes the knit, flattening wrinkles and smoothing creases from folding. Lay your garment flat over an ironing board or another heat-resistant surface and hold the steamer or an iron about an inch above it as you surge the steam. We recommend testing a small area first. Don't allow the steamer to come in contact with the fabric or it could burn. While the fabric is warm and damp, use your hands to smooth it out and reshape to your liking. Apply more steam as you see fit and then leave to air dry. Good as new!",
+            "knitaccordionbadge": true,
+            "accordionbadgecopy": "3 PRODUCTS FOUND",
+            "accopycolor": "#000000",
+            "acbgcolor": "#b4bed6"
+          }
+        },
+        "7ac4f469-3ead-41cb-8976-8a3c9e0f81ab": {
+          "type": "Accordion",
+          "settings": {
+            "typeofknit": "COTTON",
+            "accordionimage": "shopify://shop_images/9-Cotton-Shaving-Your_knits-101_684x662_30bc4e09-6758-4996-8e38-fd0b1e52dc62.webp",
+            "accordionheading": "Prolonging your knit’s lifespan",
+            "accordioncopy": "Fabric shavers are the underdog of the garment world: you can use them on everything from delicate materials to clothes to home textiles. But, as you might expect, pill removers should be handled carefully on a flat surface so you don't accidentally damage your new fav knit. To use one properly, gently swipe the fabric with the trimmer to remove fuzz and pilling. If you push too hard, you can damage the fabric. So try it first on a small, less noticeable spot before you go all out. Once you've finished, turn off the machine, remove the storage bin and blade protector and use a little brush to remove the fuzz around the razor blade. Make sure there are no hairs or threads left spinning around, either.",
+            "knitaccordionbadge": true,
+            "accordionbadgecopy": "3 PRODUCTS FOUND",
+            "accopycolor": "#000000",
+            "acbgcolor": "#b4bed6"
+          }
+        }
+      },
+      "block_order": [
+        "e7768127-a36e-4930-930f-22f65597d04e",
+        "219efab3-45ef-454c-811c-06c80c69f189",
+        "729e2586-8960-468d-8cf5-c46f83a15229",
+        "835604ac-db84-4b5e-91fb-fe270f02636d",
+        "2675d8c5-7059-4068-9506-c0a0098a40fa",
+        "d6eaa2f7-3757-453c-a1de-edf3e99db5c2",
+        "b455b314-c5e8-47ac-85d2-d8d184480838",
+        "cd12882f-2bfb-4891-b243-ac947906eba6",
+        "7ac4f469-3ead-41cb-8976-8a3c9e0f81ab"
+      ],
+      "settings": {
+        "accordionlayoutpage": "hide-border",
+        "selectednav": "",
+        "thisischild": true,
+        "padding_sizeup": 0,
+        "padding_sizedown": 0,
+        "padding_sizeupm": 21,
+        "padding_sizedownm": 0
+      }
+    },
+    "static_page_hero_yPqbkF": {
+      "type": "static-page-hero",
+      "blocks": {
+        "title_yn9XHU": {
+          "type": "title",
+          "settings": {
+            "pageherohead": "Repair & rewear your knit with the Knotty Atelier",
+            "herocolor": "#ffffff"
+          }
+        },
+        "button_Q8Mgbk": {
+          "type": "button",
+          "settings": {
+            "pageherobuttext": "GET INFO",
+            "herobuttonColor": "light",
+            "herourl": "shopify://pages/knotty-atelier"
+          }
+        }
+      },
+      "block_order": [
+        "title_yn9XHU",
+        "button_Q8Mgbk"
+      ],
+      "settings": {
+        "herolayoutpage": "top-bottom",
+        "footer_hero": false,
+        "pageheroimage": "shopify://shop_images/4_d1875c7c-9e2b-4d4d-b15f-7f01665eefcd.jpg",
+        "pageheroimagemobile": "shopify://shop_images/5_6bb1f6f7-599d-49af-9c72-ed637ada8028.jpg",
+        "padding_sizeup": 40,
+        "padding_sizedown": 31,
+        "padding_sizeupm": 27,
+        "padding_sizedownm": 27,
+        "pageherotitledesktop": 900,
+        "pageherotitlemobile": 300
+      }
+    },
+    "1640525163a083e905": {
+      "type": "static-hp-product",
+      "settings": {
+        "show_product_secondary_image": true,
+        "selectedProduct": "knit-care",
+        "showproductheader": true,
+        "productheadertext": "KNIT CARE PRODUCTS",
+        "bottomURL": ""
+      }
+    },
+    "1644894170d1e4d19f": {
+      "type": "static-page-hero",
+      "blocks": {
+        "164489417042732c14-0": {
+          "type": "title",
+          "settings": {
+            "pageherohead": "Traditional Baltic craft with a wild-spirited energy",
+            "herocolor": "#ffffff"
+          }
+        },
+        "a1b4335b-75db-4663-8c2d-44ca1ec04887": {
+          "type": "button",
+          "settings": {
+            "pageherobuttext": "Browse Knits",
+            "herobuttonColor": "light",
+            "herourl": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "164489417042732c14-0",
+        "a1b4335b-75db-4663-8c2d-44ca1ec04887"
+      ],
+      "settings": {
+        "herolayoutpage": "hide-border",
+        "footer_hero": true,
+        "pageheroimage": "shopify://shop_images/Untitled-_2774-x-1362-px_1386x_ac937014-0dce-4a8d-96e1-460eed841bc9.webp",
+        "pageheroimagemobile": "shopify://shop_images/Untitled-_2774-x-1362-px_-_692-x-884-px_692x_87f19bf5-0456-4f44-8a06-cc90cda22194.webp",
+        "padding_sizeup": 40,
+        "padding_sizedown": 31,
+        "padding_sizeupm": 27,
+        "padding_sizedownm": 27,
+        "pageherotitledesktop": 900,
+        "pageherotitlemobile": 300
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1640524672c03325da",
+    "1640524679e07267c8",
+    "1648823794b411ee86",
+    "static_page_hero_yPqbkF",
+    "1640525163a083e905",
+    "1644894170d1e4d19f"
+  ]
+}

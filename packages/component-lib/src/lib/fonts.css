@@ -1,0 +1,30 @@
+@import 'https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap';
+
+@font-face {
+    font-family: 'Monument Grotesk';
+    src: url(https://cdn.shopify.com/s/files/1/1243/8188/files/ABCMonumentGrotesk-Medium.woff?v=1636383320);
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'MonumentGrotesk';
+    src: url(https://cdn.shopify.com/s/files/1/0548/6644/4336/files/ABCMonumentGrotesk-Medium.woff2?v=1633599092);
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Panama Regular';
+    src: url(https://cdn.shopify.com/s/files/1/1243/8188/files/PanamaRegular_1.woff?v=1636383207);
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'PanamaRegular';
+    src: url(https://cdn.shopify.com/s/files/1/0548/6644/4336/files/PanamaRegular.woff?v=1633599092);
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}

@@ -1,0 +1,509 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "The Knotty Ones",
+    "theme_version": "1.0",
+    "theme_author": "Black Rooster Digital",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes/os20/themes-by-shopify/dawn",
+    "theme_support_url": "https://support.shopify.com/"
+  },
+  {
+    "name": "t:settings_schema.colors.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.colors.settings.header__1.content"
+      },
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "color",
+        "id": "backgroundColor",
+        "label": "Background",
+        "default": "#EEEEEA"
+      },
+      {
+        "type": "color",
+        "id": "headingColor",
+        "label": "Header Color"
+      },
+      {
+        "type": "color",
+        "id": "paragraphColor",
+        "label": "Paragraph Color"
+      },
+      {
+        "type": "color",
+        "id": "aColor",
+        "label": "Link Color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "colors_solid_button_labels",
+        "default": "#FFFFFF",
+        "label": "t:settings_schema.colors.settings.colors_solid_button_labels.label",
+        "info": "t:settings_schema.colors.settings.colors_solid_button_labels.info"
+      },
+      {
+        "type": "color",
+        "id": "colors_accent_1",
+        "default": "#121212",
+        "label": "t:settings_schema.colors.settings.colors_accent_1.label",
+        "info": "t:settings_schema.colors.settings.colors_accent_1.info"
+      },
+      {
+        "id": "gradient_accent_1",
+        "type": "color_background",
+        "label": "t:settings_schema.colors.settings.gradient_accent_1.label"
+      },
+      {
+        "type": "color",
+        "id": "colors_accent_2",
+        "default": "#334FB4",
+        "label": "t:settings_schema.colors.settings.colors_accent_2.label"
+      },
+      {
+        "id": "gradient_accent_2",
+        "type": "color_background",
+        "label": "t:settings_schema.colors.settings.gradient_accent_2.label"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.colors.settings.header__2.content"
+      },
+      {
+        "type": "color",
+        "id": "colors_text",
+        "default": "#121212",
+        "label": "t:settings_schema.colors.settings.colors_text.label",
+        "info": "t:settings_schema.colors.settings.colors_text.info"
+      },
+      {
+        "type": "color",
+        "id": "colors_outline_button_labels",
+        "default": "#121212",
+        "label": "t:settings_schema.colors.settings.colors_outline_button_labels.label",
+        "info": "t:settings_schema.colors.settings.colors_outline_button_labels.info"
+      },
+      {
+        "type": "color",
+        "id": "colors_background_1",
+        "default": "#FFFFFF",
+        "label": "t:settings_schema.colors.settings.colors_background_1.label"
+      },
+      {
+        "id": "gradient_background_1",
+        "type": "color_background",
+        "label": "t:settings_schema.colors.settings.gradient_background_1.label"
+      },
+      {
+        "type": "color",
+        "id": "colors_background_2",
+        "default": "#F3F3F3",
+        "label": "t:settings_schema.colors.settings.colors_background_2.label"
+      },
+      {
+        "id": "gradient_background_2",
+        "type": "color_background",
+        "label": "t:settings_schema.colors.settings.gradient_background_2.label"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.typography.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.typography.settings.header__1.content"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "default": "assistant_n4",
+        "label": "t:settings_schema.typography.settings.type_header_font.label",
+        "info": "t:settings_schema.typography.settings.type_header_font.info"
+      },
+      {
+        "type": "range",
+        "id": "heading_scale",
+        "min": 100,
+        "max": 150,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.typography.settings.heading_scale.label",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.typography.settings.header__2.content"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "default": "assistant_n4",
+        "label": "t:settings_schema.typography.settings.type_body_font.label",
+        "info": "t:settings_schema.typography.settings.type_body_font.info"
+      },
+      {
+        "type": "range",
+        "id": "body_scale",
+        "min": 100,
+        "max": 130,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.typography.settings.body_scale.label",
+        "default": 100
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.layout.name",
+    "settings": [
+      {
+        "type": "select",
+        "id": "page_width",
+        "options": [
+          {
+            "value": "1200",
+            "label": "t:settings_schema.layout.settings.page_width.options__1.label"
+          },
+          {
+            "value": "1600",
+            "label": "t:settings_schema.layout.settings.page_width.options__2.label"
+          }
+        ],
+        "default": "1600",
+        "label": "t:settings_schema.layout.settings.page_width.label"
+      }
+    ]
+  },
+  {
+    "name": "Social Media Mobile Menu",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.social-media.settings.header.content"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "t:settings_schema.social-media.settings.social_twitter_link.label"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "t:settings_schema.social-media.settings.social_facebook_link.label"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "t:settings_schema.social-media.settings.social_pinterest_link.label"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "t:settings_schema.social-media.settings.social_instagram_link.label"
+      },
+      {
+        "type": "text",
+        "id": "social_linkedin_link",
+        "label": "Linkedin"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.search_input.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.search_input.settings.header.content"
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_enabled",
+        "default": true,
+        "label": "t:settings_schema.search_input.settings.predictive_search_enabled.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "search_product_secondary_image",
+        "default": true,
+        "label": "Show second image in search"
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_show_vendor",
+        "default": false,
+        "label": "t:settings_schema.search_input.settings.predictive_search_show_vendor.label",
+        "info": "t:settings_schema.search_input.settings.predictive_search_show_vendor.info"
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_show_price",
+        "default": true,
+        "label": "t:settings_schema.search_input.settings.predictive_search_show_price.label",
+        "info": "t:settings_schema.search_input.settings.predictive_search_show_price.info"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.favicon.name",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "t:settings_schema.favicon.settings.favicon.label",
+        "info": "t:settings_schema.favicon.settings.favicon.info"
+      }
+    ]
+  },
+  {
+    "name": "Count Down Timer",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_countdown_timer",
+        "label": "Show Countdown Timer",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Countdown Options"
+      },
+      {
+        "type": "collection",
+        "id": "timer_collection",
+        "label": "Select Countdown Collection"
+      },
+      {
+        "type": "text",
+        "id": "buttonText",
+        "label": "Enter Button Text",
+        "default": "Shop now!"
+      },
+      {
+        "type": "select",
+        "id": "selectedmounth",
+        "label": "Section Mounth",
+        "default": "Jan",
+        "options": [
+          {
+            "value": "Jan",
+            "label": "January"
+          },
+          {
+            "value": "Feb",
+            "label": "February"
+          },
+          {
+            "value": "Mar",
+            "label": "March"
+          },
+          {
+            "value": "Apr",
+            "label": "April"
+          },
+          {
+            "value": "May",
+            "label": "May"
+          },
+          {
+            "value": "Jun",
+            "label": "June"
+          },
+          {
+            "value": "Jul",
+            "label": "July"
+          },
+          {
+            "value": "Aug",
+            "label": "August"
+          },
+          {
+            "value": "Sep",
+            "label": "September"
+          },
+          {
+            "value": "Oct",
+            "label": "October"
+          },
+          {
+            "value": "Nov",
+            "label": "November"
+          },
+          {
+            "value": "Dec",
+            "label": "December"
+          }
+        ]
+      },
+      {
+        "type": "number",
+        "id": "selectedday",
+        "label": "Enter Day",
+        "default": 20
+      },
+      {
+        "type": "select",
+        "id": "selectedyear",
+        "label": "Select Year",
+        "default": "2022",
+        "options": [
+          {
+            "value": "2022",
+            "label": "2022"
+          },
+          {
+            "value": "2023",
+            "label": "2023"
+          },
+          {
+            "value": "2024",
+            "label": "2024"
+          },
+          {
+            "value": "2025",
+            "label": "2025"
+          }
+        ]
+      },
+      {
+        "type": "number",
+        "id": "selectedhour",
+        "label": "Enter Hour",
+        "default": 20
+      },
+      {
+        "type": "number",
+        "id": "selectedminute",
+        "label": "Select Minutes",
+        "default": 20
+      },
+      {
+        "type": "number",
+        "id": "selectedsecond",
+        "label": "Select Second",
+        "default": 20
+      },
+      {
+        "type": "color",
+        "id": "countformbg",
+        "label": "Select Form BG Color",
+        "default": "#B4BED6"
+      },
+      {
+        "type": "text",
+        "id": "counttitle",
+        "label": "Enter Title",
+        "default": "Hurry up! Sale ends in:"
+      }
+    ]
+  },
+  {
+    "name": "Popular Search",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Popular Search"
+      },
+      {
+        "type": "textarea",
+        "id": "popularsearch",
+        "label": "Enter popular search parameter with comma"
+      }
+    ]
+  },
+  {
+    "name": "Color Swatch",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Color Swatch Options"
+      },
+      {
+        "type": "textarea",
+        "id": "colorswatch",
+        "label": "Enter Color Swatch Parameter"
+      }
+    ]
+  },
+  {
+    "name": "Color Groups",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Color Groups"
+      },
+      {
+        "type": "textarea",
+        "id": "colorGreen",
+        "label": "Enter All Green Colors"
+      },
+      {
+        "type": "textarea",
+        "id": "colorBlue",
+        "label": "Enter All Blue Colors"
+      },
+      {
+        "type": "textarea",
+        "id": "colorBeige",
+        "label": "Enter All Beiges Colors"
+      },
+      {
+        "type": "textarea",
+        "id": "colorBrown",
+        "label": "Enter All Brown Colors"
+      },
+      {
+        "type": "textarea",
+        "id": "colorGrey",
+        "label": "Enter All Grey Colors"
+      },
+      {
+        "type": "textarea",
+        "id": "colorPink",
+        "label": "Enter All Pink Colors"
+      },
+      {
+        "type": "textarea",
+        "id": "colorPurple",
+        "label": "Enter All Purple Colors"
+      },
+      {
+        "type": "textarea",
+        "id": "colorBlack",
+        "label": "Enter All Black Colors"
+      },
+      {
+        "type": "textarea",
+        "id": "colorWhite",
+        "label": "Enter All White Colors"
+      },
+      {
+        "type": "textarea",
+        "id": "colorRed",
+        "label": "Enter All Red Colors"
+      },
+      {
+        "type": "textarea",
+        "id": "colorYellow",
+        "label": "Enter All Yellow Colors"
+      }
+    ]
+  },
+  {
+    "name": "Gift upsell",
+    "settings": [
+      {
+        "type": "number",
+        "id": "gift_upsell_goal",
+        "label": "Cart size goal (€)",
+        "placeholder": "Enter the cart size goal in €",
+        "default": 300
+      }
+    ]
+  }
+]

@@ -1,0 +1,839 @@
+.dreams-accordion-container{
+    width:100%;
+    height: auto;
+    position: relative;
+}
+
+
+/* ul.found-container-accordion {
+position: absolute;
+bottom: -162px;
+width: 100%;
+height: auto;
+}*/
+
+.show-selection {
+position: absolute;
+width: 100%;
+height: auto;
+top: 0px;
+z-index: 2;
+}
+
+li.found-meta {
+
+background-color: #d8d8d8;
+width: 100%;
+text-align: center;
+margin-bottom: 0px;
+height: 50px;
+display: flex;
+align-items: center;
+justify-content: center;
+display: none;
+font-family: 'Monument';
+font-size: 14px;
+letter-spacing: -0.34px;
+line-height: 16px;
+color: black;
+}
+
+
+
+
+.money-changer {
+position: absolute;
+width: 100%;
+height: 100%;
+z-index: 3;
+}
+
+.dreams-accordion-content{
+    width:100%;
+    height: auto;
+    position: relative;
+}
+.dreams-accordion-content ul{
+    width:100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.dream-accordion-header{
+    width:100%;
+    height: 241px;
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: center;
+    border-top: 1px solid black;
+border-bottom: 1px solid black;
+}
+
+.dream-accordion-footer{
+    width: 100%;
+height: auto;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+padding: 58px 0px 17px 0px;
+}
+
+
+.dream-accordion-footer a{
+    font-family:'Monument';
+    font-size:22px;
+    letter-spacing: -0.34px;
+    color:black;
+}
+
+.dream-accordion-header h2{
+    font-family:'Panama';
+    font-size:62px;
+    letter-spacing: -0.95px;
+    line-height: 70px;
+    color:black;
+
+}
+
+.currency-holder{
+    font-family:'Monument';
+    font-size:14px !important;
+    letter-spacing: -0.34px;
+    line-height:16px;
+    color:black;
+}
+
+.dreams-list-content{
+    width: 100%;
+height: auto;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: flex-start;
+position: relative;
+z-index:2;
+}
+
+.dreams-list-content p{
+    font-family:'Panama';
+    font-size:28px;
+    letter-spacing: -0.43px;
+    color:black;
+    margin-left:32px;
+    margin-block-end: 1.1em;
+
+}
+
+.list-dreams{
+    width:100%;
+    height: auto;
+    position: relative;
+    border-bottom:1px solid black;
+    cursor: pointer;
+    /*padding: 30px 0px;*/
+}
+
+.open-item{
+  
+padding-bottom: 16px;
+position: relative;
+z-index: 3;
+}
+
+
+.dream-list{
+    width:100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.dream-arrow{
+   /* font-family:'Formular';*/
+   font-family: 'Monument Regular';
+    font-size:28px;
+    letter-spacing: -0.43px;
+    color:black;
+    position: relative;
+    z-index: 1;
+    margin-left:auto;
+    margin-right: 25px;
+}
+
+.donate-show{
+width:100%;
+height:auto;
+display:flex;
+flex-direction: column;
+align-items: flex-start;
+justify-content: space-between;
+}
+
+.donate-show-accordion{
+width: 85%;
+height: auto;
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+justify-content: flex-start;
+padding-left:12px;
+}
+
+.donate-accordion button{
+font-size: 14px;
+border: none;
+color: #fff;
+background-color: black;
+font-family: 'Monument';
+width: 100%;
+height: 50px;
+text-transform: uppercase;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+letter-spacing: -.22px;
+padding: 0px 34px;
+margin-left:15px;
+}
+
+
+
+.show-bottom-accordion{
+width: 30%;
+height:auto;
+height: 50px;
+position: relative;
+background-color: #D8D8D8;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+max-width: 120px;
+min-width:92px;
+}
+
+.show-bottom-accordion select{
+border: none;
+background-color:transparent;
+color:black;
+width:100%;
+height: 41px;
+text-align: center;
+font-family: "Monument";
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+-moz-appearance:none; /* Firefox */
+-webkit-appearance:none; /* Safari and Chrome */
+appearance:none;
+position: relative;
+z-index: 3;
+text-align: center;
+text-align-last: center;
+-moz-text-align-last: center;
+}
+
+.chavron-price{
+position: absolute;
+right: 9px;
+top: 10px;
+z-index: 0;
+}
+
+
+
+.dreams-thumb{
+    width:100%;
+    max-width: 124px;
+    height: 124px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius:50%;
+    margin-right: 34px;
+    }
+
+.dreams-thumb img{
+    width:100%;
+}
+
+.dreams-item{
+    width: 100%;
+height: auto;
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+justify-content: flex-end;
+margin-left: auto;
+padding-left: 329px;
+opacity:0;
+    display: none;
+}
+
+.dream{
+    width:50%;
+    height: auto;
+}
+
+.dreams-left p{
+    font-family:'Monument Regular';
+    font-size:21px;
+    letter-spacing: -0.32px;
+    line-height: 32px;
+    color:black;
+    margin-block-start: 0em;
+margin-block-end: 0em;
+margin-bottom:50px;
+max-width: 542px;
+margin-left: 10px;
+}
+
+.dreams-left a{
+    font-family:'Monument';
+    font-size:22px;
+    letter-spacing: -0.34px;
+    color:black;
+}
+
+.dreams-list-content h3{
+    font-family:'Monument';
+    font-size:28px;
+    letter-spacing: -0.43px;
+    line-height: 70px;
+    color:black;
+    min-width: 147px;
+    text-transform: uppercase;
+
+}
+
+.dreams-right img{
+    width:100%;
+    min-width: 417px;
+  
+}
+
+li.list-dreams.active .dreams-item {
+   display:flex;
+   margin-bottom: 13px;
+}
+
+.dreams-right{
+height: auto;
+position: relative;
+width:40%;
+margin-top: -148px;
+z-index:2;
+margin-right: 68px;
+
+}
+
+.dreams-left {
+width: 60%;
+padding: 0px 37px 0px 0px;
+}
+
+
+
+
+
+.tr-line {
+    display: block !important;
+position: absolute;
+width: 95%;
+height: 88%;
+z-index: 2;
+border-bottom: 1px solid black;
+border-top: 1px solid black;
+    }
+
+
+.dream.dream-left {
+padding: 0px 117px 50px 40px;
+}
+.fade {
+-webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+   -moz-animation: fadein 1s; /* Firefox < 16 */
+    -ms-animation: fadein 1s; /* Internet Explorer */
+     -o-animation: fadein 1s; /* Opera < 12.1 */
+        animation: fadein 1s;
+}
+
+@keyframes fadein {
+from { opacity: 0; }
+to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+from { opacity: 0; }
+to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+from { opacity: 0; }
+to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+from { opacity: 0; }
+to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+from { opacity: 0; }
+to   { opacity: 1; }
+}
+
+
+
+.hidelist{
+display:none;
+}
+
+.show-top-accordion{
+width:100%;
+height:50px;
+background:white;
+display:flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+
+}
+
+.show-top-accordion p{
+font-size:9px;
+color:black;
+text-transform: uppercase;
+font-family: "Monument";
+text-align: center;
+letter-spacing: -0.19px;
+margin-block-start: 0em;
+margin-block-end: 0em;
+line-height:23px;
+}
+
+.dream-copys {
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: row;
+width: auto;
+min-height: 60px;
+}
+
+
+@media (width: 1024px) and (height: 1366px) {
+
+.dream-copys {
+display: flex;
+align-items: flex-start;
+justify-content: center;
+flex-direction: column;
+width: auto;
+min-height: 60px;
+}
+
+
+li.list-dreams.active .dreams-item {
+display: flex;
+flex-direction: column;
+}
+
+.dreams-left {
+width: 100%;
+}
+
+.dreams-right {
+width: 100%;
+margin-right: unset;
+
+}
+
+.donate-show-accordion {
+width: 82%;
+justify-content: flex-start;
+}
+
+.show-bottom-accordion {
+height: 42px;
+max-width: 100px;
+}
+
+.donate-accordion button {
+font-size: 11px;
+height: 42px;
+letter-spacing: -0.17px;
+padding: 0px 20px;
+
+}
+.show-bottom-accordion select{
+font-size:11px;
+text-align: center;
+text-align-last: center;
+-moz-text-align-last: center;
+display: flex;
+align-items: center;
+justify-content: center;
+text-indent: 22%;
+}
+/*.show-bottom-accordion span{
+position: absolute;
+right: 16px;
+top: 7px;
+z-index: 3;
+}*/
+
+
+
+
+}
+
+@media (max-width: 812px) {
+
+.dream-accordion-header h2 {
+font-size: 28px;
+letter-spacing: -0.43px;
+line-height: 17.5px;
+}
+
+.dream-copys {
+display: flex;
+align-items: flex-start;
+justify-content: center;
+flex-direction: column;
+width: auto;
+min-height: 60px;
+}
+
+.dream-list{
+
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.currency-holder {
+font-family: 'Monument';
+font-size: 11px !important;
+letter-spacing: -0.17px;
+line-height: 16px;
+color: black;
+}
+
+.dream-accordion-header {
+height: 107px;
+justify-content: flex-start;
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+}
+.dreams-thumb {
+max-width: 65px;
+height: 65px;
+margin-right: 27px;
+}
+.dreams-list-content {
+flex-wrap: wrap;
+max-width: 100%;
+}
+.dreams-list-content h3 {
+font-size: 12px;
+letter-spacing: -0.19px;
+line-height: 16px;
+margin-top: 0;
+margin-block-start: 0em;
+margin-block-end: 0em;
+width: auto;
+min-width: auto;
+margin-right: 32px;
+}
+
+.dreams-list-content p {
+font-size: 12px;
+letter-spacing: -0.19px;
+margin-left: 0px;
+line-height: 16px;
+margin-top: 0px;
+margin-block-start: 0em;
+margin-block-end: 0em;
+}
+.dreams-item {
+padding-left: 0px;
+flex-direction: column;
+margin-top: 20px;
+}
+.dreams-left p {
+font-family: 'Monument Regular';
+font-size: 14px;
+letter-spacing: -0.22px;
+line-height: 20px;
+margin-bottom: 18px;
+}
+.dreams-left {
+width: 100%;
+padding: 0px 22px;
+margin-bottom: 30px;
+}
+.dreams-right {
+width: 100%;
+margin-top: 0px;
+margin-right: unset;
+}
+.dreams-left a {
+font-size: 12px;
+letter-spacing: -0.18px;
+}
+.dreams-right img {
+width: 100%;
+padding: 0px 20px;
+min-width: unset;
+
+}
+
+.dream-arrow {
+font-size: 12px;
+letter-spacing: -0.18px;
+margin-right: unset;
+}
+.list-dreams {
+padding: 17px 0px;
+}
+.dream-accordion-footer a {
+font-size: 16px;
+letter-spacing: -0.25px;
+}
+.dream-accordion-footer {
+padding: 44px 0px 28px 0px;
+}
+.donate-show-accordion {
+width: 82%;
+justify-content: flex-start;
+margin-bottom:24px;
+}
+
+.show-bottom-accordion {
+height: 42px;
+max-width: 100px;
+}
+
+.donate-accordion button {
+font-size: 11px;
+height: 42px;
+letter-spacing: -0.17px;
+padding: 0px 20px;
+
+}
+.show-bottom-accordion select{
+font-size:11px;
+text-align: center;
+text-align-last: center;
+-moz-text-align-last: center;
+display: flex;
+align-items: center;
+justify-content: center;
+text-indent: -16%;
+}
+/*.show-bottom-accordion span{
+position: absolute;
+right: 16px;
+top: 7px;
+z-index: 3;
+}*/
+li.found-meta {
+
+font-size: 11px;
+letter-spacing: -0.17px;
+height: 42px;
+z-index: 3;
+}
+.show-selection {
+top: 45px;
+}
+.chavron-price {
+position: absolute;
+right: 9px;
+top: 7px;
+z-index: 0;
+}
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+.dream-accordion-header h2 {
+font-size: 28px;
+letter-spacing: -0.43px;
+line-height: 17.5px;
+}
+
+.currency-holder {
+font-family: 'Monument';
+font-size: 11px;
+letter-spacing: -0.17px;
+line-height: 16px;
+color: black;
+}
+
+.chavron-price {
+position: absolute;
+right: 9px;
+top: 7px;
+z-index: 0;
+}
+
+.show-selection {
+top: 0px;
+}
+
+.dream-list{
+
+margin-top: 0px;
+margin-bottom: 0px;
+padding-left:7px
+}
+
+.dream-accordion-header {
+height: 93px;
+justify-content: flex-start;
+border-top: .5px solid black;
+border-bottom: .5px solid black;
+padding-left:17px;
+}
+.dreams-thumb {
+max-width: 65px;
+height: 65px;
+margin-right: 27px;
+}
+.dreams-list-content {
+flex-wrap: wrap;
+
+}
+.dreams-list-content h3 {
+font-size: 12px;
+letter-spacing: -0.19px;
+line-height: 16px;
+/* margin-top: -19px;*/
+}
+
+.centerit{
+margin-top:0px !important;
+}
+
+.dreams-list-content p {
+font-size: 12px;
+letter-spacing: -0.19px;
+/*margin-left: 93px;*/
+line-height: 16px;
+/* margin-top: -49px;*/
+}
+.dreams-item {
+padding-left: 0px;
+flex-direction: column;
+margin-top: 20px;
+}
+.dreams-left p {
+font-family: 'Monument Regular';
+font-size: 14px;
+letter-spacing: -0.22px;
+line-height: 20px;
+margin-bottom: 18px;
+margin-left:0px;
+}
+.dreams-left {
+width: 100%;
+padding: 0px 22px;
+margin-bottom: 30px;
+margin-top:4px;
+}
+.dreams-right {
+width: 100%;
+margin-top: 0px;
+margin-right: unset;
+}
+.dreams-left a {
+font-size: 12px;
+letter-spacing: -0.18px;
+}
+.dreams-right img {
+width: 100%;
+padding: 0px 20px;
+min-width: unset;
+
+}
+
+.dream-arrow {
+font-size: 12px;
+letter-spacing: -0.18px;
+position: absolute;
+top: 24px;
+right: 15px;
+margin-right: unset;
+}
+
+.centeritarrow {
+/*top: -7px !important;*/
+}
+.list-dreams {
+padding: 14px 0px;
+border-bottom: .5px solid black;
+}
+.dream-accordion-footer a {
+font-size: 16px;
+letter-spacing: -0.25px;
+}
+.dream-accordion-footer {
+padding: 44px 0px 28px 0px;
+}
+
+.donate-show-accordion {
+width: 82%;
+justify-content: flex-start;
+padding-left:0px;
+margin-bottom:24px;
+}
+
+.show-bottom-accordion {
+height: 42px;
+max-width: 100px;
+}
+
+.donate-accordion button {
+font-size: 11px;
+height: 42px;
+letter-spacing: -0.17px;
+padding: 0px 20px;
+
+}
+.show-bottom-accordion select{
+font-size:11px;
+text-align: center;
+text-align-last: center;
+-moz-text-align-last: center;
+display: flex;
+align-items: center;
+justify-content: center;
+text-indent: -16%;
+}
+/*.show-bottom-accordion span{
+position: absolute;
+right: 16px;
+top: 7px;
+z-index: 3;
+}*/
+
+li.found-meta {
+
+font-size: 11px;
+letter-spacing: -0.17px;
+height: 42px;
+z-index: 3;
+}
+}

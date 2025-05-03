@@ -1,0 +1,13 @@
+<div class="bb-container">
+    <select name="" id="">
+        {% for variant in product.variants %}
+{% unless variant.metafields.secomapp.freegifts %}
+{% unless variant.title contains '(Freegifts)' %}
+
+        <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}>{{ variant.title }}</option>
+
+{%endunless%}
+{%endunless%}
+        {% endfor %}
+    </select>
+</div>

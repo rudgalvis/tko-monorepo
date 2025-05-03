@@ -1,0 +1,330 @@
+{%- comment -%}
+-----------------------------------------------------------
+Some data has special formatters!
+
+Product Image:
+Smallest product images
+
+Product Name:
+Delete variants on the title
+
+Product Price:
+Delete HTML elements on the price
+
+If you want to change formatters
+Assets --> black-rooster.js
+-----------------------------------------------------------
+{%- endcomment -%}
+
+
+{% assign colors3 = settings.colorswatch | split: ',' %}
+{% assign freeshippingvalue = section.settings.fsvalue | times: 100 %}
+{% assign freeshippinggap = freeshippingvalue | minus: 1 %}
+
+{{ 'component-drawer.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+----------------------------------------------
+Create Json for product variant color or image
+----------------------------------------------
+{%- endcomment -%}
+
+<div id="data-holder" class="data-holder" data-colors='
+{% for color in colors3 %}
+{% assign getColor3 = color | split: ':' %}
+{% assign colorCorrect3 = getColor3[0] %}
+{% assign HEXcolor3 = getColor3[1] %}
+{% assign detectImage3 = HEXcolor3 | slice: 0 %}
+
+{% if detectImage3 == '#' %}
+{
+"name" : "{{ colorCorrect3 }}",
+"color" : "{{ HEXcolor3 }}"
+}{% if forloop.last != true %},{% endif %}
+{% else %}
+{% assign value3 = HEXcolor3 %}
+{% assign color_swatch_name3 = value3 | handle | append: '.png' %}
+{% assign color_swatch_image3 = images[color_swatch_name3] %}
+{
+    "name" : "{{ colorCorrect3 }}",
+    "color" : "{{ color_swatch_image3 | img_url: '64x64' }}"  
+}{% if forloop.last != true %},{% endif %}
+{% endif %}
+{% endfor %}
+'></div>
+
+{%- comment -%}
+----------------------------------------------
+Create Json for product variant color or image
+----------------------------------------------
+{%- endcomment -%}
+
+
+<div class="color-holder__x" data-colorb="{{ settings.colorswatch }}"></div>
+<div class="drawer-container" data-cart-view="data-cart-view">
+
+    <div class="drawer-content">
+        <div class="drawer-header-item item-close" id="close-drawer">
+            <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/drawer_close.svg?v=1638269703"/>
+        </div>
+        <div class="drawer-header">
+            <div class="drawer-header-item item-title">CART</div>
+            <div class="drawer-header-item item-count"><span data-cart-render="item_count"></span> ITEM<span
+                        rv-show="cart.item_count | gt 1">S</span></div>
+
+
+        </div>
+        <div rv-show="cart.currency | eq 'EUR'" class="drawer-announcement-content">
+            <p rv-show="cart.total_price | lt {{ freeshippinggap }}">You are only <span
+                        rv-text="{{ freeshippingvalue }} | minus cart.total_price | money Currency.currentCurrency | removehtml">22.50€</span>
+                away from free domestic shipping!</p>
+            <p rv-show="cart.total_price | gt {{ freeshippinggap }}" style="color: #018849;">{{ section.settings.freeshippingext }}</p>
+        </div>
+
+
+        <div class="drawer-product-container" rv-each-item="cart.items">
+            <div class="drawer-product-item">
+
+                <div class="dpi dpi-left" style="cursor: pointer" onclick="location.href=this.getAttribute('data-url')" rv-data-url="item.url">
+                    <img class="drawer-product-image" rv-src="item.featured_image.url | addsize "/>
+
+                </div>
+
+
+                <div class="dpi dpi-right">
+                    <a class="remove-item-to-basket" href="javascript:void(0);"
+                       rv-data-cart-remove="index | plus 1"><img
+                                src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/svg-remove-item.svg?v=1639399863"></a>
+                    <span rv-hide="item.product_title | eq 'For The Dream Fund'">
+                         <h2 class="pro-title" rv-text="item.product_title | formatName" style="cursor: pointer" onclick="location.href=this.getAttribute('data-url')" rv-data-url="item.url">Pieva Bralette</h2>
+                      </span>
+                    <span rv-show="item.product_title | eq 'For The Dream Fund'">
+                         <h2 class="pro-donate" rv-text="item.product_title | formatName" style="cursor: pointer" onclick="location.href=this.getAttribute('data-url')" rv-data-url="item.url">Pieva Bralette</h2>
+                     </span>
+                    <div class="dpi-detail-container">
+                        <div class="dpi-price-size">
+                            <p class="product-size-drawer" rv-text="item.variant_options.1" style="cursor: pointer" onclick="location.href=this.getAttribute('data-url')" rv-data-url="item.url"></p>
+                            {%- comment -%}
+                            --------------------------------------------------------
+                            if you want to show product type delete to comment line.
+                            --------------------------------------------------------
+                            <p rv-text="item.product_type"></p>
+                            {%- endcomment -%}
+
+
+                        </div>
+                        <div class="drawer-bottom-container">
+                            <div class="color-drawer" style="cursor: pointer" onclick="location.href=this.getAttribute('data-url')" rv-data-url="item.url">
+                                <span rv-text="item.properties.title"></span>
+                                <span rv-hide="item.product_title | eq 'For The Dream Fund'">
+                            <div class="color-circle" rv-data-colorselect="item.variant_options.0"></div>
+                            </span>
+                            </div>
+
+
+                            <div>
+                                <div class="dpi-action-container">
+                                    <div class="dpi-quantity">
+                                        <a href="javascript:void(0);" rv-data-cart-update="index | plus 1"
+                                           rv-data-cart-quantity="item.quantity | minus 1">-</a>
+                                        <span class="quantity-number" rv-text="item.quantity">2</span>
+                                        <a href="javascript:void(0);" rv-data-cart-update="index | plus 1"
+                                           rv-data-cart-quantity="item.quantity | plus 1">+</a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="drawer-price-container">
+                                <p class="drawer-price" rv-html="item.line_price | money Currency.currentCurrency ">
+                                    120€</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+        {% assign productx = section.settings.fundproduct %}
+        {% if section.settings.enablefund == true %}
+            <div class="tko-dream-fund-content">
+                <div class="df df-left">
+                    <div class="donate-show">
+                        <div class="show-top">
+                            <p>DONATE</p>
+
+                            <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/heart.svg?v=1638271250"/>
+                        </div>
+                        <div class="show-bottom">
+                            <div class="show-selection">
+
+
+                                <ul class="found-container-drawer">
+                                    {% assign foundmanytimes = section.settings.multiplier_fund %}
+                                    {% for fundavlue in (1..foundmanytimes) %}
+                                        <li class="found-meta-drawer" data-itemsize="{{ forloop.index }}"
+                                            data-value="{{ productx.variants[0].id }}"><span
+                                                    class="money">{{ productx.variants[0].price | times: forloop.index | money_without_trailing_zeros | strip_html }}</span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <span class="currency-holder-drawer money">{{ productx.variants[0].price | money_without_trailing_zeros | strip_html }}</span>
+                            <span class="chavron-price-drawer">
+                                <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/arrow_for_select.svg?v=1638272830"/>
+
+                            </span>
+                            <div data-open-currency="0" class="money-changer-drawer"></div>
+                            {%- comment -%}
+                            <select name="id" id="product-select">
+                            
+                                {% for variant in productx.variants %}
+                                 <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}>{{ variant.price | money }}</option>
+                                {% endfor %}
+                            </select>
+                            {%- endcomment -%}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="df df-right">
+                    <div class="donate-description">
+                        <div class="df-title">{{ section.settings.donatetitle }}</div>
+                        <p>{{ section.settings.donatedesc }}</p>
+                        <button style="background-color:{{ section.settings.donatebuttoncolor }}; color:{{ section.settings.donatebuttontextcol }};"
+                                data-quantity="1" id="donate"
+                                data-productID="{{ productx.variants[0].id }}">{{ section.settings.donatebuttontext }}</button>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="dpi-footer">
+            <div style="margin: 10px -25px 0 0;">
+                <div class="cart-recommendations"></div>
+            </div>
+
+            <div class="title-price">
+                <p>TOTAL</p>
+                <p rv-html="cart.total_price | money Currency.currentCurrency ">480€</p>
+            </div>
+            <span class="co-wrapper" rv-show="cart.total_price | gt 0">
+             <form action="/cart" method="post">
+                <button class="co_button" type="submit" name="checkout"><span
+                            id="checkout-text">CHECKOUT</span></button>
+               </form>
+              </span>
+
+            {% comment %}TODO: uncomment to enable drawer upsell. Currently left as christmas{% endcomment %}
+            {% render 'cart-recommendations' %}
+
+        </div>
+
+    </div>
+
+    <div rv-show="cart.item_count | lt 1">
+        <span colspan="5">You don't have any items in your cart.</span>
+    </div>
+</div>
+
+<style>
+    .recommendation-title{
+        font-size: 14px;
+        color: #000;
+        font-family: Monument, sans-serif;
+        text-align: left;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        letter-spacing: -.22px;
+        /*border-bottom: 1px solid black;*/
+        margin-top: -15px;
+        margin-bottom: 0px;
+    }
+    .recommend-divider {
+        border-bottom: 1px solid black;
+        margin-top: 15px;
+    }
+
+</style>
+
+{% schema %}
+{
+  "name": "Drawer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Donation Options"
+    },
+    {
+      "type": "checkbox",
+      "id": "enablefund",
+      "default": true,
+      "label": "Enable donation section"
+    },
+    {
+      "type": "product",
+      "id": "fundproduct",
+      "label": "Select donation product"
+    },
+    {
+      "type": "number",
+      "id": "multiplier_fund",
+      "label": "Multiplier fund value",
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "donatetitle",
+      "label": "Enter Donation Heading Copy"
+    },
+    {
+      "type": "textarea",
+      "id": "donatedesc",
+      "label": "Enter Donation Copy"
+    },
+    {
+      "type": "header",
+      "content": "Donation Button Options"
+    },
+    {
+      "type": "color",
+      "id": "donatebuttoncolor",
+      "label": "Select Donation Button Color"
+    },
+    {
+      "type": "color",
+      "id": "donatebuttontextcol",
+      "label": "Select Donation Button Text Color"
+    },
+    {
+      "type": "text",
+      "id": "donatebuttontext",
+      "label": "Enter Donation Button Copy"
+    },
+    {
+      "type": "header",
+      "content": "Free Shipping Options"
+    },
+    {
+      "type": "number",
+      "id": "fsvalue",
+      "label": "Enter Free Shipping Value",
+      "default": 100
+    },
+    {
+      "type": "text",
+      "id": "freeshippingext",
+      "label": "Enter Free Shipping Copy"
+    }
+  ]
+}
+
+
+{% endschema %}

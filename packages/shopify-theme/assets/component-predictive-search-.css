@@ -1,0 +1,84 @@
+.tko-pre-heading{
+    font-family: 'Monument';
+    font-size:14px;
+    letter-spacing:-0.22px;
+    text-transform: uppercase;
+    color:black;
+  }
+
+  .predictive-search-popular {
+    width: 100%;
+    padding: 0px 0px;
+}
+
+.popular-result {
+    height: unset;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: baseline !important;
+    justify-content: flex-start !important;
+    height: auto !important;
+    padding: 11px 20px;
+}
+
+.popular-result li{
+  line-height: 22px;
+}
+
+.popular-result li a{
+  text-transform: uppercase;
+  letter-spacing: -0.22px;
+}
+
+.popular-line-container
+{
+  width:100%;
+  height: 2px;
+  padding: 20px 20px;
+}
+
+.pl-line-v{
+  width:100%;
+  height: 2px;
+  border-bottom: 1px solid black;
+}
+
+.sale_price_ {
+    font-size: 14px;
+    letter-spacing: -.22px;
+    line-height: 14px;
+    margin-left: 4px;
+    color: #c4c4c4;
+    text-decoration: line-through;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+.tko-pre-heading{
+    line-height: 15px;
+  }
+
+  .productPriceMobile {
+    font-size: 14px;
+    letter-spacing: -0.22px;
+    color: black;
+    margin-top: 11px;
+}
+.popular-result {
+    height: unset;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: baseline !important;
+    justify-content: flex-start !important;
+    height: auto !important;
+    padding: 0px 8px;
+}
+
+.popular-line-container {
+    padding: 20px 0px;
+}
+
+.pl-line-v {
+    border-bottom: .5px solid black;
+}
+
+}

@@ -1,0 +1,469 @@
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-grid.css' | asset_url | stylesheet_tag }}
+
+
+{% assign countdowndetection =  settings.countdowncollection %}
+{% assign countdowncollection = countdowndetection.title | handleize  %}
+{% assign currentcollection = collection.title | handleize  %}
+{% assign videoURL = collection.metafields.my_fields.collection_video  %}
+
+{% assign videoExist =  collection.metafields.my_fields.collection_video_show_%}
+
+
+
+
+
+<link rel="preload" href="{{ 'component-rte.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+
+{% if videoExist ==  false %}
+<style>
+
+.product-container:nth-of-type(3n+3) .frame-container{
+border-right: none;
+border-left: none;
+
+}
+
+.product-container:nth-of-type(3n+1) .frame-container{
+   border-left:none;
+   border-right:1px solid black;
+
+}
+
+.product-container:nth-of-type(3n+2) .frame-container{
+   border-left:none;
+   border-right:1px solid black;
+
+}
+
+
+
+@media (min-width: 768px) and (max-width: 1024px) { 
+    
+  .product-container:nth-of-type(2n+1) .frame-container{
+border-right: .5px solid black;;
+border-left: none;
+
+}
+
+.product-container:nth-of-type(2n+2) .frame-container{
+   border-left:none;
+   border-right:none;
+
+}
+
+
+    
+    }
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+  .product-container:nth-of-type(2n+1) .frame-container{
+border-right: .5px solid black;;
+border-left: none;
+
+}
+
+.product-container:nth-of-type(2n+2) .frame-container{
+   border-left:none;
+   border-right:none;
+
+}
+
+}
+
+</style>
+
+{% else %}
+<style>
+
+.product-container:nth-of-type(3n+3) .frame-container{
+  border-right: 1px solid black;
+  border-left: none;
+  
+  }
+  
+  .product-container:nth-of-type(3n+1) .frame-container{
+     border-left:none;
+     border-right:none;
+  
+  }
+
+
+  .frame-container:nth-of-type(3n+2){
+     border-left:none;
+     border-right:1px solid black;
+  
+  }
+
+  .product-container:nth-of-type(3) .frame-container{
+     border-left:none;
+     border-right:none;
+  
+  }
+
+  .product-container:nth-of-type(1) .frame-container{
+     border-left:none;
+     border-right:1px solid black;
+  
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    .product-container:nth-of-type(2n+1) .frame-container{
+    border-right:.5px solid black;
+    border-left:none;
+    padding: 0px 5px 0px 6.5px;
+
+    }
+
+    .product-container:nth-of-type(2n+2) .frame-container{
+    border-right:none;
+    padding: 0px 6.5px 0px 5px;
+  
+
+    }
+
+  }
+
+
+
+
+</style>
+{% endif %}
+
+
+
+
+
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+
+{{ 'component-facets.css' | asset_url | stylesheet_tag }}
+
+
+{% if section.settings.enable_filters == true %}
+{% render 'blackrooster-filter' , disable_filter: section.settings.enable_filtering , disable_sorting: section.settings.enable_sorting %}
+{% endif %}
+
+
+
+
+{{ 'component-hp-product.css' | asset_url | stylesheet_tag }}
+
+
+{% assign collectiontitle = collection.title | handleize %}
+{% assign detectVariantSort  =  0 %}
+{% assign detectVariantSortForVideo  =  0 %}
+{% assign videoControlDuplicate  =  0 %}
+
+<div id="ProductGridContainer" class="hp-product-container">
+
+    <div id="product-grid" data-id="{{ section.id }}" class="hp-product-content">
+      {% paginate collection.products by section.settings.products_per_page %}  
+
+    
+
+        <div class="collection page-width" data-paginate="{{section.settings.products_per_page}}">
+    
+                {% if countdowncollection == currentcollection %}
+                {% assign isCountDownProduct = true %}
+                {% else %}
+                {% assign isCountDownProduct = false %}
+                {% endif %}
+        {% for product in collections[collectiontitle].products %}
+        {% assign sca_product = product %}{% assign sca_product_id_text = "," | append : sca_product.id | append : "," %}{% assign sca_price = sca_product.price %}{% assign sca_price_min = sca_product.price_min %}{% assign sca_price_max = sca_product.price_max %}{% assign sca_compare_at_price = sca_product.compare_at_price %}{% assign sca_compare_at_price_min = sca_product.compare_at_price_min %}{% assign sca_compare_at_price_max = sca_product.compare_at_price_max %}{% assign sca_product_available = sca_product.available %}{% assign sca_product_variantCount = sca_product.variants.size %}{% assign sca_compare_at_price_varies = sca_product.compare_at_price_varies %}{% assign sca_price_varies = sca_product.price_varies %}{% assign sca_has_only_default_variant = false %}{% capture sca_product_variants_json %}{{sca_product.variants | json }}{% endcapture %} {% capture sca_product_json %}{ {% if sca_all_gift_products_ids == null or sca_all_gift_products_ids contains sca_product_id_text %}{% assign sca_product_available = false %}{% assign sca_product_variantCount = 0 %}{% assign sca_has_only_default_variant = true %}{% assign sca_is_first_variant = true %}{% capture sca_variants_json %} [{% for variant in sca_product.variants %}{% unless variant.metafields.secomapp.freegifts %}{% unless variant.title contains '(Freegifts)' %}{% unless variant.title contains '% off' %}{% unless variant.metafields.shappify_qb.qb_hide == "1" %}{% unless variant.metafields.shappify_bundle.is_bundle == "true" %}{% unless variant.metafields.brodev_scn.hide == "true" %}{% unless variant.metafields.wholesaler2.wholesale %}{% unless variant.metafields.Wholesaler.level %}{% unless variant.title contains '(Wholesale' %}{% if sca_is_first_variant%} {{ variant | json }}{% assign sca_price = variant.price %} {% assign sca_price_min = variant.price %} {% assign sca_price_max = variant.price %} {% assign sca_compare_at_price = variant.compare_at_price %} {% assign sca_compare_at_price_min = variant.compare_at_price %} {% assign sca_compare_at_price_max = variant.compare_at_price %} {% assign sca_product_available = variant.available %} {% assign sca_product_variantCount = 1 %} {% assign sca_is_first_variant = false%}{% else %},{{variant | json }} {% if sca_price_min >= variant.price %} {% assign sca_price_min = variant.price %} {% assign sca_price = variant.price %}{% endif %} {% if sca_price_max <= variant.price %} {% assign sca_price_max = variant.price %} {% endif %} {% if variant.compare_at_price %} {% if sca_compare_at_price_min==null or sca_compare_at_price_min >= variant.compare_at_price %} {% assign sca_compare_at_price_min = variant.compare_at_price %} {% assign sca_compare_at_price = variant.compare_at_price %} {% endif %} {% if sca_compare_at_price_max==null or sca_compare_at_price_max < variant.compare_at_price %} {% assign sca_compare_at_price_max = variant.compare_at_price %} {% endif %} {% endif %} {% if variant.available == true %} {% assign sca_product_available = true %} {% endif %} {% assign sca_product_variantCount = sca_product_variantCount | plus: 1 %}{% endif %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{%endfor%} ]{% endcapture %}{% if sca_price_min < sca_price_max %}{% assign sca_price_varies = true %}{% else %}{% assign sca_price_varies = false %}{% endif %}{% if sca_compare_at_price_min < sca_compare_at_price_max %}{% assign sca_compare_at_price_varies = true %}{% else %}{% assign sca_compare_at_price_varies = false %}{% endif %}{% if sca_product_variantCount > 1 %}{% assign sca_has_only_default_variant = false %}{% endif %}{% if sca_product_variantCount == sca_product.variants.size %} "variants":{{ sca_product.variants }},{% else %}{%assign sca_product_variants_json = sca_variants_json %} "variants":{{ sca_variants_json }},{% endif %}{% else %} "variants":{{ sca_product_variants_json }},{% endif %} "id": {{sca_product.id}}, "title": {{sca_product.title | json}}, "handle": {{sca_product.handle | json}}, "description": {{sca_product.description | json}}, "published_at": "{{sca_product.published_at | date: "%Y-%m-%dT%H-%M-%S%:z" }}", "created_at": "{{sca_product.created_at | date: "%Y-%m-%dT%H-%M-%S%:z" }}", "vendor": {{sca_product.vendor | json}}, "type": {{sca_product.type | json}}, "tags": {{sca_product.tags | json}}, "price": {{sca_price}}, "price_min": {{sca_price_min}}, "price_max": {{sca_price_max}}, "available": {{sca_product.available}}, "price_varies": {{sca_price_varies}}, "compare_at_price": {{sca_compare_at_price}}, "compare_at_price_min": {{sca_compare_at_price_min}}, "compare_at_price_max": {{sca_compare_at_price_max}}, "compare_at_price_varies": {{sca_compare_at_price_varies}}, "images": {{sca_product.images | json}}, "featured_image": {{sca_product.featured_image | json }}, "options": {{sca_product.options | json}}, "media": {{sca_product.media | json }}, "content": {{sca_product.content | json }}} {% endcapture sca_product_json %}
+            {% for variant in product.variants %}
+{% unless variant.metafields.secomapp.freegifts %}
+{% unless variant.title contains '(Freegifts)' %}
+
+             
+                {% assign color1 = variant.option1 %}
+                {% if color1 != color2 %}
+                    {%- comment -%}{%- endcomment -%}
+                   
+                    {% assign detectVariantSortForVideo  =  detectVariantSortForVideo | plus: 1 %}
+                    <div class="product-container negative-margin product-grid" data-video="{{detectVariantSortForVideo}}">
+                        <div class="line-cont pl-up">
+                            <div class="llc">
+                                <div class="product-line"></div>
+                            </div>  
+                        </div>
+                        
+                         <div class="frame-container"> 
+                            {% assign detectVariantSort  =  detectVariantSort | plus: 1 %}
+                            
+                             <div class="productname">
+                                 <h2>
+                                     <a href="{{ product.url }}">
+                                         {{ product.title }}
+                                     </a>
+                                </h2>
+                                </div>
+                                {% assign getfirstvar = product.selected_or_first_available_variant.option1 %}
+                             <div class="mainholder {% if countdowncollection == currentcollection%} nohover {% endif %}">
+                               
+                            
+                        
+                               {%- comment -%}counter{%- endcomment -%}
+                                {% if countdowncollection == currentcollection %}
+                                 {% render 'counter' %}  
+                                 {% endif %}
+                        
+                               {%- comment -%}counter{%- endcomment -%}
+                        
+                               {% if countdowncollection != currentcollection %}
+                                <div class="buy-button">ADD TO CART</div> 
+                                <div class="select-size" data-open="0">
+                                    SELECT SIZE<span class="btn-larrow-buy">↓</span>
+                        
+                                </div>   
+                                {% endif %}
+                                <ul class="variant-holder" data-selectedv = "{{product.variants[forloop.index0].option1}}">
+                                    {% assign getVariant = product.selected_or_first_available_variant.option1 %}
+                                    {% for variant in product.variants %}
+                                        {% assign isAvailable = variant.available %}
+                                        {% if isAvailable == true %}
+                                            {% if variant.option1 == getVariant %}
+                                                 <li class="xfg"  data-productColor="{{ variant.option1 }}" data-productID="{{ variant.id }}" data-productavailable="{{variant.available}}">{{ variant.option2 }}
+                                                  <span style="display:none;" class="money original_price">{{ variant.compare_at_price | money | strip_html }}</span>
+                                                  <span style="display:none;" class="money show_price">{{ variant.price | money | strip_html }}</span>
+                                                 </li>
+                                            {% else %}
+                                                  <li class="xfg fg" data-productColor="{{ variant.option1 }}" data-productID="{{ variant.id }}" data-productavailable="{{variant.available}}">{{ variant.option2 }}
+                                                    <span style="display:none;" class="money original_price">{{ variant.compare_at_price | money | strip_html }}</span>
+                                                    <span style="display:none;" class="money show_price">{{ variant.price | money | strip_html }}</span>
+                                                  </li>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>    
+                             <a {% if countdowncollection != currentcollection %} href="{{ product.url }}?variant={{product.variants[forloop.index0].option1 | handleize }}" {% else %} href="javascript:void(0);" {% endif %}>
+                                <div class="main-image-container">
+                                    <div class="progreesbar">
+                                        <div class="bar"></div>
+                                      </div>
+                                    {% if sca_price < sca_compare_at_price %}
+                                    {% render 'bages' %}
+                                    {% endif %}
+                                <div class="productimage">
+                                    {% if countdowncollection == currentcollection %}
+                                       <div class="blur"></div>
+                                    {% endif %}
+                                {%
+                                    render 'rimg'
+                                    img: variant.metafields.variantImg.img-1,
+                                    size: '996x1100',
+                                    lazy: true
+                                  %}
+                                  {% if section.settings.show_secondary_image %}
+                                  {% assign second_image = product.media[1].preview_image %}
+                                  {%
+                                    render 'rimg',
+                                    img: variant.metafields.variantImg.img-2,
+                                    size: '996x1100',
+                                    lazy: true,
+                                  %}
+                                {% endif %}
+                             </div>
+                            </div>
+                            </a> 
+                        </div>   
+                             <div class="buy-container">
+                                <div class="product-type">{{ product.type }}</div>
+                                <div class="productVarient">
+                                    {% if countdowncollection != currentcollection %}
+                                    <div class="price-holder">
+                                    <div class="productPrice">{{ product.variants[0].price | money }}</div>
+                                    {% if product.variants[0].price < product.variants[0].compare_at_price %}
+                                    <span class="sale_price">
+                                        {{ sca_compare_at_price | money }}
+                                    </span>
+                                    {% endif %} 
+                                   
+                                </div>
+                                {% endif %}
+                                    {% assign current_variant_size = sca_product_variantCount %} 
+                                    <ul>
+                                        {% assign color2  = "empty" %}
+                                        {% assign activeDetect = 0 %}
+                                        {% for variant in product.variants %}
+                                        {% assign color1 = variant.option1 %}
+                                       
+                                        {% if color1 != color2 %}
+                                        {% assign activeDetect = activeDetect | plus: 1 %}
+                                        {% if  current_variant_size > 1 %}
+                                        <li data-variant='{{ variant.option1 }}'>
+                                            {%- assign current_variant = product.selected_or_first_available_variant -%}
+                                            <div class="color-schema {% if detectVariantSort == activeDetect %} selected {% endif %}">
+                                            {% render 'color-select' 
+                                            getvariantcolor : variant.option1 ,
+                                            firstimage : variant.metafields.variantImg.img-1 , 
+                                            secondimage: variant.metafields.variantImg.img-2, 
+                                            variantprice : variant.price,
+                                            variantdiscount : variant.compare_at_price,
+                                            variantid : variant.id, 
+                                            varriantCircle : detectVariantSort,
+                                            countobject: isCountDownProduct, 
+                                            variantlevel : 'first' %}
+                                            </div>
+                                        </li>
+                                        {% else %}
+                                        <li data-variant='{{ variant.option1 }}'>
+                                            {%- assign current_variant = product.selected_or_first_available_variant -%}
+                                            {% render 'color-select' 
+                                            getvariantcolor : variant.option1 , 
+                                            firstimage : variant.metafields.variantImg.img-1 , 
+                                            secondimage:variant.metafields.variantImg.img-2, 
+                                            variantprice : variant.price,
+                                            variantid : variant.id, 
+                                            varriantCircle : detectVariantSort,
+                                            countobject: isCountDownProduct, 
+                                            variantlevel : 'second' %}
+                                            
+                                            <div class="border-hare selected"></div>
+                                        </li>
+                                        {% endif %}
+                                        {% assign color2 = variant.option1 %}
+                                        {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                  
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="line-cont pl-down">
+                            <div class="llc">
+                                <div class="product-line"></div>
+                            </div>  
+                        </div>
+                        </div>
+
+                       
+
+
+                    {%- comment -%}{%- endcomment -%}
+                {% assign color2 = variant.option1 %}
+                {% endif %}
+
+                {% if detectVariantSortForVideo == 3 and collection.metafields.my_fields.collection_video != nil and videoExist == true and  videoControlDuplicate != 1 %}
+                {% assign videoControlDuplicate  =  1 %}
+                {% render 'collection-video',
+                videostatus: videoExist,
+                urlstatus: videoURL ,
+                posterstatus: section.settings.poster_status, 
+                autoplaystatus: section.settings.autoplay_status,
+                mutestatus: section.settings.muted_status,
+                controlstatus: section.settings.controller_status, 
+                loopstatus: section.settings.loop_status 
+                
+                %}
+            {% endif %}
+     
+
+
+{%endunless%}
+{%endunless%}
+            {% endfor %}
+           
+      
+     
+        {% endfor %}
+        </div>
+
+        <div id="pagination_other">
+        <div class="pagination-container {%- comment -%}{% if paginationControl < section.settings.products_per_page %} nopagination {% endif %}{%- endcomment -%}">
+          <div class="pagination-article">
+           {{ paginate | default_pagination: next: '→', previous: '←' }}
+         </div>  
+        </div>
+        </div>
+   
+        {% endpaginate %}
+
+    </div>
+
+</div>
+
+
+
+
+{% schema %}
+{
+  "name": "Static Collection Variant",
+  "class": "spaced-section collection-grid-section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "default": 16,
+      "label": "t:sections.main-collection-product-grid.settings.products_per_page.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-collection-product-grid.settings.header__3.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.show_secondary_image.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-collection-product-grid.settings.header__1.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "default": true,
+      "label": "t:sections.main-collection-product-grid.settings.enable_filtering.label",
+      "info": "t:sections.main-collection-product-grid.settings.enable_filtering.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "default": true,
+      "label": "t:sections.main-collection-product-grid.settings.enable_sorting.label"
+    },
+    {
+      "type": "header",
+      "content": "Video Options"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay_status",
+      "default": true,
+      "label": "Activate Autoplay",
+      "info": "Video play automatically"
+    },
+    {
+      "type": "checkbox",
+      "id": "muted_status",
+      "default": true,
+      "label": "Activate Mute",
+      "info": "Video will not play automatically on mobile if this section has not ticked"
+    },
+    {
+      "type": "checkbox",
+      "id": "controller_status",
+      "default": true,
+      "label": "Activate Controller",
+      "info": "Show play pause and stream bar on video"
+    },
+    {
+      "type": "checkbox",
+      "id": "loop_status",
+      "default": true,
+      "label": "Activate Loop",
+      "info": "Infinity video loop"
+    }
+  ]
+}
+{% endschema %}

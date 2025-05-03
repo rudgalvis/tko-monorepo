@@ -1,0 +1,24 @@
+@media screen and (min-width: 1025px) {
+    .mobile-only {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .desktop-only {
+        display: none;
+    }
+}
+
+.mt-4 {
+    margin-top: 16px;
+}
+
+.px-4_5 {
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+:root {
+    --color-buy-button: #018849;
+}

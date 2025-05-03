@@ -1,0 +1,350 @@
+{{ 'component-CTA-small-text.css' | asset_url | stylesheet_tag }}
+
+
+<section class="kto-main-container" {% if section.settings.sectionID != nil %}id="{{ section.settings.sectionID }}" {% endif %}>
+    <div class="tko-lines smalltextcta-{{section.id}}"
+    {% if section.settings.smallTextlayoutmidtext == 'top-bottom'%}
+    style="
+      border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+       
+    ">
+    {% elsif  section.settings.smallTextlayoutmidtext == 'only-top' %}
+    style="
+    border-top-style:  solid;
+    border-top-color:   black;
+    border-bottom: none;
+       
+    ">
+    {% elsif  section.settings.smallTextlayoutmidtext == 'only-bottom' %}
+    style="
+    border-top: none;
+    border-bottom-style:  solid;
+    border-bottom-color:   black;
+     
+    ">
+    
+    {% else %}
+    
+    style="
+    border-top: none;
+    border-bottom: none;
+        
+    "> 
+  
+    {% endif %}
+
+<div class="tko-small-text-container tko-small-padidng-{{section.id}}">
+    <div class="tko-small-text-content">
+        {%- for block in section.blocks -%}
+        {%- case block.type -%}
+        {%- when 'small-text-title'-%}
+        <h2 class="smallcta-heading-{{section.id}}">{{ block.settings.sttitle}}</h2>
+        {%- when 'small-text-body'-%}
+        <p class="{{ section.settings.stmobilepadding }} smallcta-copy-{{section.id}}">{{ block.settings.stbody}}</p>
+        {%- endcase -%}
+        {%- endfor -%}
+    </div>
+</div>
+
+</div>
+</section>
+
+<style>
+  .tko-small-text-content h2{
+    text-align: {{ section.settings.titlealigndesktop }};
+
+
+}
+
+
+.tko-small-text-content p{
+    text-align: {{ section.settings.titlealigndesktop }};
+}
+
+
+@media (max-width: 812px) {
+  .tko-small-text-content h2{
+    text-align: {{ section.settings.titlealignmobile }};
+    margin-right: auto;
+}
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .tko-small-text-content p {
+    text-align: {{ section.settings.titlealignmobile }};
+  }
+
+  .tko-small-text-content h2{
+    text-align: {{ section.settings.titlealignmobile }}; 
+}
+
+}
+</style>
+
+
+{% schema %}
+
+{
+    "name": "Small Panama Text Section", 
+    "blocks": [
+
+    {
+      "type": "small-text-title",
+      "name": "Small Text Title",
+      "limit": 1,
+      "settings": [
+      {
+        "type": "textarea",
+        "id": "sttitle",
+        "default": "Text block",
+        "label": "Hero Section Title"
+      }
+      ]
+    },
+    {
+        "type": "small-text-body",
+        "name": "Small Text Body",
+        "limit": 1,
+        "settings": [
+        {
+          "type": "textarea",
+          "id": "stbody",
+          "default": "Text block",
+          "label": "Small Text Body Copy"
+        }
+        ]
+      }  
+  ],
+    "settings": [
+    {
+      "type": "header",
+      "content": "Line Layout Options"
+    },
+    {
+
+      "type": "select",
+      "id": "smallTextlayoutmidtext",
+      "label": "Section Border Options",
+      "default": "top-bottom",
+      "options": [
+        {
+          "value": "top-bottom",
+          "label": "Show Border Top & Bottom" 
+        },
+        {
+          "value": "only-top",
+          "label": "Show Border Only Top"
+        },
+        {
+            "value": "only-bottom",
+            "label": "Show Border Only Bottom"
+          },
+        {
+            "value": "hide-border",
+            "label": "Hide Borders"
+          }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Title Max Width"
+    },
+    {
+      "type":"number",
+      "id":"maxwidthofsmalltext",
+      "label":"Maximum Title Width Desktop",
+      "default":15
+    },
+    {
+      "type":"number",
+      "id":"maxwidthofsmalltextm",
+      "label":"Maximum Title Width Mobile",
+      "default":15
+    },
+    {
+      "type": "header",
+      "content": "Copy Max Width"
+    },
+    {
+      "type":"number",
+      "id":"maxwidthofsmallbody",
+      "label":"Maximum Copy Width Desktop",
+      "default":15
+    },
+    {
+      "type":"number",
+      "id":"maxwidthofsmallbodym",
+      "label":"Maximum Copy Width Mobile",
+      "default":15
+    },
+     
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup",
+        "label":"Line Padding Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedown",
+        "label":"Line Padding Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeupm",
+        "label":"Line Padding Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedownm",
+        "label":"Line Padding Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Padding Top & Bottom Desktop"
+      },
+      {
+        "type":"number",
+        "id":"smallttopdesktop",
+        "label":"Padding Top Desktop",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"smalltbottomdesktop",
+        "label":"Padding Bottom Desktop",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Padding Top & Bottom Mobile"
+      },
+      {
+        "type":"number",
+        "id":"smallttopmobile",
+        "label":"Padding Top Mobile",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"smalltbottommobile",
+        "label":"Padding Bottom Mobile",
+        "default":15
+      },
+      {
+        "type": "select",
+        "id": "titlealigndesktop",
+        "label": "Text Align Desktop",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left Align"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+              "value": "right",
+              "label": "Right Align"
+            }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "titlealignmobile",
+        "label": "Text Align Mobile",
+        "default": "center",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left Align"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+              "value": "right",
+              "label": "Right Align"
+            }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Anchor Point Options"
+      },
+      {
+        "id": "sectionID",
+        "type": "text",
+        "label": "Anchor Point"
+      }
+    ],
+    "presets": [
+    {
+        "name": "Small Panama Text Section",
+        "blocks": [
+          {
+            "type": "small-text-title"
+          },
+          {
+            "type": "small-text-body"
+          }
+        
+        ]
+       }
+]
+  }
+{% endschema %}
+
+
+<style>
+  .smalltextcta-{{section.id}}{
+        padding: {{section.settings.padding_sizeup}}px 0px {{section.settings.padding_sizedown}}px 0px;
+        border-width:1px;
+  }
+
+  .smallcta-heading-{{section.id}}{
+        max-width:{{ section.settings.maxwidthofsmalltext}}px;
+  }
+  .smallcta-copy-{{section.id}}{
+        max-width:{{ section.settings.maxwidthofsmallbody}}px;
+  }
+
+  .tko-small-padidng-{{section.id}}{
+          padding: {{section.settings.smallttopdesktop}}px 0px {{section.settings.smalltbottomdesktop}}px 0px;
+  }
+
+  @media (max-width: 812px) {
+    .smalltextcta-{{section.id}}{
+        padding: {{section.settings.padding_sizeupm}}px 0px {{section.settings.padding_sizedownm}}px 0px;
+        border-width:0.5px;
+  }
+  .smallcta-heading-{{section.id}}{
+        max-width:{{section.settings.maxwidthofsmalltextm}}px;
+  }
+  .smallcta-copy-{{section.id}}{
+        max-width:{{section.settings.maxwidthofsmallbodym}}px;
+  }
+
+  .tko-small-padidng-{{section.id}}{
+          padding: {{section.settings.smallttopmobile}}px 0px {{section.settings.smalltbottommobile}}px 0px;
+  }
+
+  } 
+</style>

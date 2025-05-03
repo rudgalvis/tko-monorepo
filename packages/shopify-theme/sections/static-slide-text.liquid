@@ -1,0 +1,345 @@
+<section class="kto-main-container kto-nopadding">
+    <div class="tko-lines"
+    {% if section.settings.slidetextlayout == 'top-bottom'%}
+    style="
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        padding: 0px 0px;
+    ">
+    {% elsif  section.settings.slidetextlayout == 'only-top' %}
+    style="
+        border-top: 1px solid black;
+        border-bottom: 0px solid black;
+        padding: 0px 0px;
+    ">
+    {% elsif  section.settings.slidetextlayout == 'only-bottom' %}
+    style="
+        border-top: 0px solid black;
+        border-bottom: 1px solid black;
+        padding: 0px 0px;
+    ">
+    
+    {% else %}
+    
+    style="
+        border-top: 0px solid black;
+        border-bottom: 0px solid black;
+        padding: 0px 0px;
+    "> 
+  
+    {% endif %}
+
+<div class="wrapperx">
+    <div class="marqueex">
+      <p class="enabledesktop">
+        {% for block in section.blocks %} 
+         <span><a href="{{ block.settings.urllisturl2}}">{{ block.settings.urllisttext2}}</a></span>
+         {% endfor %}
+        
+         {% if section.settings.stopslide == false %}
+         {% for block in section.blocks %} 
+         <span><a href="{{ block.settings.urllisturl2}}">{{ block.settings.urllisttext2}}</a></span>
+         {% endfor %}
+        
+         {% for block in section.blocks %} 
+         <span><a href="{{ block.settings.urllisturl2}}">{{ block.settings.urllisttext2}}</a></span>
+         {% endfor %}
+         
+         {%endif%}
+        
+      </p>
+      <p class="nodesktop">
+        {% for block in section.blocks %}
+        <span><a href="{{ block.settings.urllisturl2}}">{{ block.settings.urllisttext2}}</a></span>
+         {% endfor %}
+        
+         {% if section.settings.stopslide == false %}
+           
+         {% for block in section.blocks %}
+         <span><a href="{{ block.settings.urllisturl2}}">{{ block.settings.urllisttext2}}</a></span>
+         {% endfor %}
+        
+         {% for block in section.blocks %}
+         <span><a href="{{ block.settings.urllisturl2}}">{{ block.settings.urllisttext2}}</a></span>
+         {% endfor %}
+        
+         {%endif%}
+       
+      </p>
+    </div>
+  </div>
+
+  </div>
+  </section>
+
+<style>
+  .wrapperx {
+    max-width: 100%;
+    overflow: hidden;
+    display:inherit;
+    height:114px;
+  }
+
+  
+  .marqueex {
+   /* width:100%;
+    padding-top:31px;*/
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+    {% if section.settings.stopslide == false %}
+    animation: marqueex 50s linear infinite;
+    width:auto;
+    {% endif %}
+    padding-top:31px;
+    
+  }
+  
+  /*.marqueex:hover{
+      animation-play-state: paused;
+  }*/
+  
+  .marqueex p {
+    display: inline-block;
+    width:100%;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    {% if section.settings.stopslide == true %}
+    padding-left:22px;
+    padding-right:22px;
+    {% endif %}
+  }
+
+
+  {% if section.settings.stopslide == false %}
+  .marqueex p span{
+    margin-left:40px;
+    margin-right:40px;
+  }
+  {% endif %}
+
+
+  .marqueex p span a{
+    font-family: 'Monument';
+            font-size:14px;
+            line-height:16px;
+            color:black;
+            letter-spacing: -0.22px;
+            text-transform: uppercase;
+  }
+
+  .enabledesktop span:nth-child(n+7){
+    /*  display:none;*/
+  }
+
+  {% if section.settings.stopslide == false %}
+
+  .marqueex p span{
+    margin-left:50px;
+    margin-right:50px;
+  }
+
+  {% endif %}
+
+
+
+
+  .marqueex p span a:hover{
+            font-family: 'Monument';
+            font-size:14px;
+            line-height:16px;
+            color:black;
+        }
+  
+        .nodesktop{
+            display:none !important;
+        }
+  
+  @keyframes marqueex {
+    100% {
+      transform: translate3d(-33.7%, 0, 0);
+    }
+  }
+
+  @media (max-width: 812px) {
+    .wrapperx {
+    max-width: 100%;
+    overflow: hidden;
+    display:inherit;
+    height:53px;
+  }
+
+  
+  .marqueex {
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    animation: marqueex 30s linear infinite;
+    padding-top:2px;
+    width: auto;
+  }
+
+ 
+  
+  /*.marqueex:hover{
+      animation-play-state: paused;
+  }*/
+  
+  .marqueex p {
+    display: inline-block;
+  }
+
+
+  .marqueex p span{
+    margin-left:20px;
+    margin-right:20px;
+  }
+
+
+  .enabledesktop span:nth-child(n+7){
+      display:inline-block;
+  }
+
+  .nodesktop{
+            display:inline-block !important;
+        }
+
+        .marqueex p span a{
+            font-size:12px;
+
+  }
+
+  .marqueex p span a:hover{
+            font-size:12px;
+        }
+  
+
+
+
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+
+    .wrapperx {
+    max-width: 100%;
+    overflow: hidden;
+    display:inherit;
+    height:53px;
+  }
+
+  @keyframes marqueex {
+    100% {
+      transform: translate3d(-25%, 0, 0);
+    }
+  }
+
+  
+  .marqueex {
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    padding-top:0px;
+  }
+  
+  /*.marqueex:hover{
+      animation-play-state: paused;
+  }*/
+  
+  .marqueex p {
+    display: inline-block;
+  }
+
+  .marqueex p span{
+    margin-left:20px;
+    margin-right:20px;
+  }
+
+
+  .enabledesktop span:nth-child(n+7){
+      display:inline-block;
+  }
+
+  .nodesktop{
+            display:inline-block !important;
+        }
+
+        .marqueex p span a{
+            font-size:8px;
+
+  }
+
+  .marqueex p span a:hover{
+            font-size:8px;
+        }
+  
+
+
+
+  }
+</style>
+
+{% schema %}
+
+{
+    "name": "News Ticker", 
+    "settings": [
+      {
+        "type": "select",
+        "id": "slidetextlayout",
+        "label": "Section Border Options",
+        "default": "top-bottom",
+        "options": [
+          {
+            "value": "top-bottom",
+            "label": "Show Border Top & Bottom"
+          },
+          {
+            "value": "only-top",
+            "label": "Show Border Only Top"
+          },
+          {
+              "value": "only-bottom",
+              "label": "Show Border Only Bottom"
+            },
+          {
+              "value": "hide-border",
+              "label": "Hide Borders"
+            }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "stopslide",
+        "label": "Stop Ticker on Desktop"
+      }
+    ],
+    "max_blocks": 6,
+    "blocks": [
+    {
+         "type": "List", 
+         "name": "Slide List Item",
+         "settings": [
+         {
+          "type": "text",
+          "id": "urllisttext2",
+          "label": "URL Text"
+        },
+         {
+          "id": "urllisturl2",
+          "type": "url",
+          "label": "Select URL"
+        }
+       ]
+    }
+     ],
+    "presets": [
+{
+"category": "News Ticker",
+"name": "News Ticker"
+}
+]
+  }
+{% endschema %}

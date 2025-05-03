@@ -1,0 +1,340 @@
+{{ 'component-static-how-to-donate.css' | asset_url | stylesheet_tag }}
+
+<section class="kto-main-container" {% if section.settings.sectionID != nil %}id="{{ section.settings.sectionID }}" {% endif %}>
+  <div class="tko-lines htd-{{section.id}}"
+  {% if section.settings.howonlyTextlayout == 'top-bottom'%}
+  style="
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      
+  ">
+  {% elsif  section.settings.howonlyTextlayout == 'only-top' %}
+  style="
+      border-top: 1px solid black;
+      border-bottom: 0px solid black;
+   
+  ">
+  {% elsif  section.settings.howonlyTextlayout == 'only-bottom' %}
+  style="
+      border-top: 0px solid black;
+      border-bottom: 1px solid black;
+    
+  ">
+  
+  {% else %}
+  
+  style="
+      border-top: 0px solid black;
+      border-bottom: 0px solid black;
+    
+  "> 
+
+  {% endif %}
+
+<div class="how-cta-text-container padding-{{section.id}}"   style="background-color:{{section.settings.howbgOnlyTextCTA}};">
+    <div class="how-cta-text-content">
+        {% if section.settings.howheadingOnlyTextCTA != "" %}
+        <h2 class="two-col-h2-{{section.id}}">{{ section.settings.howheadingOnlyTextCTA }}</h2>
+        {% endif %}
+        <p class="two-col-p-{{section.id}}" style="max-width:{{section.settings.howmaxwidthoftext}}px;">{{ section.settings.howbodytextOnlyTextCTA }}</p>
+        {% if section.settings.howshowurlOnlyTextCTA == true %}
+        <a href="{{ section.settings.howlinkOnlyTextCTA }}" class="btn-darrow inside-section">{{section.settings.howlinktextOnlyTextCTA}}</a>
+        {% endif %}
+
+        {% assign productfordream = section.settings.productdonate %}
+        <div class="donate-show-accordion insection">
+           
+            <div class="show-bottom-accordion">
+                <div class="show-selection">
+               
+                <ul class="found-container-accordion">
+                  {% assign foundmanytimes = section.settings.multiplier_fund %}
+                  {% for  fundavlue in (1..foundmanytimes) %}
+                       <li class="found-meta" data-itemsize="{{forloop.index}}" data-value="{{ productfordream.variants[0].id }}"><span class="money">{{ productfordream.variants[0].price | times: forloop.index  | money_without_trailing_zeros | strip_html }}</span></li> 
+                    {% endfor %}   
+                  </ul>
+                </div>  
+                <span  class="currency-holder money">{{productfordream.variants[0].price  | money_without_trailing_zeros | strip_html }} </span>   
+                <span class="chavron-price">
+                    <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/arrow_for_select.svg?v=1638272830" />
+
+                </span>
+                <div data-open-currency="0" class="money-changer"></div>
+        
+  
+
+    </div>
+    <div class="donate-accordion">
+    <button style="background-color:black; color:white;" class="donate2" data-quantity="1" data-productID="{{productfordream.variants[0].id}}">DONATE TO THE FUND</button>
+    </div>
+</div>
+
+
+
+    </div>
+</div>
+
+</div>
+</section>
+
+
+
+{% schema %}
+
+{
+    "name": "How To Donate", 
+    "class" : "static-how-to-donate",
+    "settings": [
+    {
+      "type": "header",
+      "content": "Line Layout Options"
+    },
+    {
+      "type": "select",
+      "id": "howonlyTextlayout",
+      "label": "Section Border Options",
+      "default": "top-bottom",
+      "options": [
+        {
+          "value": "top-bottom",
+          "label": "Show Border Top & Bottom"
+        },
+        {
+          "value": "only-top",
+          "label": "Show Border Only Top"
+        },
+        {
+            "value": "only-bottom",
+            "label": "Show Border Only Bottom"
+          },
+        {
+            "value": "hide-border",
+            "label": "Hide Borders"
+          }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Fund Product Options"
+    },
+    {
+      "id": "productdonate",
+      "type": "product",
+      "label": "Select Donation Product"
+    },
+    {
+      "type": "number",
+      "id": "multiplier_fund",
+      "label": "Multiplier fund value",
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Color Options"
+    },
+    {
+      "id": "howbgOnlyTextCTA",
+      "type": "color",
+      "label": "Background Color",
+      "default": "#EEEEEA"
+    },
+      {
+        "id": "howcolorOnlyTextCTA",
+        "type": "color",
+        "label": "How to donate CTA color",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Title Options"
+      },
+      {
+        "id": "howheadingOnlyTextCTA",
+        "type": "text",
+        "label": "Title"
+      },
+      {
+        "type": "header",
+        "content": "Body Options"
+      },
+      {
+        "id": "howbodytextOnlyTextCTA",
+        "type": "textarea",
+        "label": "Body"
+      },
+      {
+        "type": "header",
+        "content": "URL Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "howshowurlOnlyTextCTA",
+        "label": "Enable URL",
+        "default": false
+      },
+      {
+        "id": "howlinkOnlyTextCTA",
+        "type": "url",
+        "label": "URL"
+      },
+      {
+        "id": "howlinktextOnlyTextCTA",
+        "type": "text",
+        "label": "URL Copy"
+      },
+      
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup",
+        "label":"Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedown",
+        "label":"Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeupm",
+        "label":"Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedownm",
+        "label":"Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Section Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeupd_section",
+        "label":"Top",
+        "default":60
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedownd_section",
+        "label":"Bottom",
+        "default":60
+      },
+      {
+        "type": "header",
+        "content": "Section Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeupm_section",
+        "label":"Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedownm_section",
+        "label":"Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Title Max Width"
+      },
+      {
+        "type":"number",
+        "id":"titledesktop",
+        "label":"Desktop",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"titlemobile",
+        "label":"Mobile",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Copy Max Width"
+      },
+      {
+        "type":"number",
+        "id":"copydesktop",
+        "label":"Desktop",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"copymobile",
+        "label":"Mobile",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Anchor Point Options"
+      },
+      {
+        "id": "sectionID",
+        "type": "text",
+        "label": "Anchor Point"
+      }
+     
+    ],
+    "presets": [
+{
+"category": "CTA",
+"name": "How to donate"
+}
+]
+  }
+{% endschema %}
+
+<style>
+  .htd-{{section.id}}{
+         padding: {{section.settings.padding_sizeup}}px 0px {{section.settings.padding_sizedown}}px 0px;
+   }
+ 
+   .two-col-h2-{{section.id}}{
+         max-width:{{section.settings.titledesktop}}px; 
+   }
+ 
+   .two-col-p-{{section.id}} {
+         max-width:{{section.settings.copydesktop}}px; 
+   }
+
+   .padding-{{section.id}}{
+     padding: {{section.settings.padding_sizeupd_section}}px 17px {{section.settings.padding_sizedownd_section}}px 17px !important;
+   }
+
+   .insection{
+     justify-content: center;
+     align-items: center;
+   }
+ 
+ 
+   @media (max-width: 812px) {
+     .htd-{{section.id}}{
+         padding: {{section.settings.padding_sizeupm}}px 0px {{section.settings.padding_sizedownm}}px 0px;
+   }
+   .two-col-h2-{{section.id}}{
+         max-width:{{section.settings.titlemobile}}px; 
+   }
+ 
+   .two-col-p-{{section.id}} {
+         max-width:{{section.settings.copymobile}}px; 
+   }
+   .padding-{{section.id}}{
+     padding: {{section.settings.padding_sizeupm_section}}px 17px {{section.settings.padding_sizedownm_section}}px 17px !important;
+   }
+   } 
+ </style>

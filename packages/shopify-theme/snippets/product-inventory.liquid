@@ -1,0 +1,181 @@
+{% assign currentVariant = product.selected_or_first_available_variant %}
+{% assign r1 = r1 %}
+{% assign r2 = r2 %}
+{% assign mobile = mobile %}
+
+<script>
+    // Initialize the array
+    const variantStock = []
+
+    window.appendVariantStock = (id, value) => {
+        variantStock[id] = value
+    }
+
+    /**
+     * @type {NodeListOf<HTMLElement>}
+     * */
+    let $productInventory
+
+    const hideStock = () => {
+        if (!$productInventory) $productInventory = document.querySelectorAll('.product-inventory')
+        if (!$productInventory) return
+
+        $productInventory.forEach(e => e.classList.add('fade-out'))
+    }
+
+    const showStock = () => {
+        if (!$productInventory) $productInventory = document.querySelectorAll('.product-inventory')
+        if (!$productInventory) return
+
+        $productInventory.forEach(e => e.classList.remove('product-inventory---unavailable'))
+        $productInventory.forEach(e => e.classList.remove('fade-out'))
+    }
+
+    const suffix = ''
+
+    const getInventoryMessage = quantity => {
+        if (quantity === 1) {
+            return `only <b>1 piece</b> left. ${suffix}`;
+        } else if (quantity < 5) {
+            return `only <b>${quantity} pieces</b> left. ${suffix}`;
+        } else {
+            return `<b>${quantity} pieces</b>. ${suffix}`;
+        }
+    };
+
+    const onMount = () => {
+        /**
+         * @type {NodeListOf<HTMLElement>}
+         * */
+        const currentVariantStock = document.querySelectorAll('#product-inventory-stock-value')
+
+        {% comment %}These comes from either variantes or connected recommended products like core colors or seasonal colors{% endcomment %}
+        {% for variant in product.variants %}appendVariantStock({{- variant.id -}}, {{ variant.inventory_quantity }});
+        {% endfor %}
+        {% for product in r1 %}{% for variant in product.variants %}appendVariantStock({{- variant.id -}}, {{ variant.inventory_quantity }});{% endfor %}
+        {% endfor %}
+        {% for product in r2 %}{% for variant in product.variants %}appendVariantStock({{- variant.id -}}, {{ variant.inventory_quantity }});{% endfor %}
+        {% endfor %}
+
+        if (!currentVariantStock) return
+
+        $(".size-selection").click((e) => {
+            let variantId =
+                $(this).attr("data-variant-id") ||
+                e.target.getAttribute('data-variant-id') ||
+                e.target.parentElement.getAttribute('data-variant-id');
+            const available = variantStock[variantId]
+
+            if (!available || available < 1) {
+                hideStock()
+            } else {
+                showStock()
+
+                currentVariantStock.forEach(e => e.innerHTML = getInventoryMessage(available))
+            }
+        })
+
+        $(".color-changer").click((e) => {
+            /**
+             * @type HTMLElement
+             * */
+            const el = e.target
+            let noStock = el.classList.contains('no-stock')
+
+            if(noStock) {
+                hideStock()
+            } else {
+                showStock()
+            }
+
+            currentVariantStock.forEach(e => e.innerHTML = `<span style="opacity: .5">select size to see availability</span>`)
+        })
+    }
+
+    window.addEventListener('load', onMount)
+</script>
+
+
+<div class="product-inventory
+                {% if product.available and currentVariant.inventory_quantity < 1 %}product-inventory---unavailable{% endif %}
+                {% if currentVariant.inventory_quantity < 0 %}fade-out{% endif %}
+                {% if mobile %}product-inventory---mobile{% endif %}
+                {% if mobile == false %}product-inventory---desktop{% endif %}
+    ">
+    {% if currentVariant.inventory_quantity == 1 %}
+        <span class="product-inventory--label">In stock:</span>
+        <span class="product-inventory--value" id="product-inventory-stock-value">
+                only {{ currentVariant.inventory_quantity }} piece left. 
+            </span>
+    {% elsif currentVariant.inventory_quantity < 5 %}
+        <span class="product-inventory--label">In stock:</span>
+        <span class="product-inventory--value" id="product-inventory-stock-value">
+                only {{ currentVariant.inventory_quantity }} pieces left. 
+            </span>
+    {% else %}
+        <span class="product-inventory--label">In stock:</span>
+        <span class="product-inventory--value" id="product-inventory-stock-value">
+                 {{ currentVariant.inventory_quantity }} pieces. 
+            </span>
+    {% endif %}
+</div>
+
+<style>
+    .product-inventory {
+        font-size: 14px;
+        transition: opacity .3s ease;
+        display: block;
+        text-align: right;
+        margin-bottom: -24px;
+    }
+
+    .product-inventory.fade-out {
+        opacity: 0;
+    }
+
+    .product-inventory--label,
+    .product-inventory--value {
+        font-family: Monument Regular, sans-serif;
+        letter-spacing: -.22px;
+        line-height: 32px;
+        color: #018849;
+    }
+
+    .product-inventory--value {
+        color: #018849;
+    }
+
+    .product-inventory---mobile {
+        display: none;
+    }
+
+    .product-inventory---unavailable {
+        display: none!important;
+    }
+
+    @media screen and (max-width: 1024px) {
+        .product-inventory {
+            display: flex;
+            gap: 12px;
+            padding: 0px 19px 0px;
+            font-size: 12px;
+            border-top: .5px solid black;
+            margin-bottom: -1.7rem;
+            margin-top: 1.7rem;
+            text-align: left;
+        }
+
+        .product-inventory--label {
+            font-weight: 500;
+        }
+
+        .product-inventory---mobile {
+            display: block;
+        }
+
+        .product-inventory---desktop {
+            display: none;
+        }
+    }
+
+</style>

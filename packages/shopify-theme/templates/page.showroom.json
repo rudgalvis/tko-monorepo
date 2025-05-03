@@ -1,0 +1,384 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "about-page",
+      "settings": {}
+    },
+    "16400025067a204b40": {
+      "type": "static-onlytext",
+      "settings": {
+        "onlyTextlayout": "only-bottom",
+        "bgOnlyTextCTA": "#eeeeea",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "Come say hi in person at our showroom in Vilnius, Lithuania.",
+        "maxwidthoftitle": 400,
+        "maxwidthoftitlemobiled": 260,
+        "bodytextOnlyTextCTA": "Cool stuff here: our top selling pieces, online exchanges and returns, phone orders, styling tips.",
+        "fontsizetune": "27px",
+        "maxwidthoftext": 1200,
+        "maxwidthoftextmobile": 320,
+        "showurlOnlyTextCTA": false,
+        "linkOnlyTextCTA": "",
+        "linktextOnlyTextCTA": "",
+        "padding_sizeup_sot": 11,
+        "padding_sizedow_sot": 15,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 50,
+        "containerbottom": 50,
+        "containertopmobile": 20,
+        "containerbottommobile": 20,
+        "sectionID": ""
+      }
+    },
+    "1640010261cb9fbbf2": {
+      "type": "static-video",
+      "disabled": true,
+      "settings": {
+        "borderlayoutVideo": "hide-border",
+        "vimeovideoID": "695744760",
+        "padding_sizeup_video": 18,
+        "padding_sizedow_videon": 18,
+        "padding_sizeup_videom": 12,
+        "padding_sizedow_videonm": 9,
+        "sectionID": ""
+      }
+    },
+    "164001637237a519bf": {
+      "type": "static-mid-text",
+      "disabled": true,
+      "settings": {
+        "onlyTextlayoutmidtext": "only-top",
+        "positionoftext": "centeralign",
+        "paragraphtitle": "JANE DOE",
+        "hed_padding_sec": 1000,
+        "hed_padding_secm": 300,
+        "paragraphtextsub": "“At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.”",
+        "cop_padding_sec": 300,
+        "cop_padding_secm": 200,
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "padding_top_sec": 65,
+        "padding_bottom_sec": 65,
+        "padding_top_secm": 16,
+        "padding_bottom_secm": 16
+      }
+    },
+    "16446108729381799e": {
+      "type": "static-page-navigation",
+      "blocks": {
+        "39729372-50a6-4f7e-9d56-e83b68860ba6": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "THE FOUNDERS",
+            "pnid": "section-1"
+          }
+        },
+        "c097f8d1-c228-47c2-8547-43213a04ed3e": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "CELEBRATING ARTISANS",
+            "pnid": "section-2"
+          }
+        },
+        "01d891b3-53fd-454b-b79f-8c33971bd228": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "BALTIC HERITAGE",
+            "pnid": "section-3"
+          }
+        },
+        "04d27017-820b-447e-81af-b7a9e27f0c36": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "BETTER FOR OUR PLANET",
+            "pnid": "section-4"
+          }
+        },
+        "38402a37-723e-46fe-991e-873704589561": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "Knitter's Dream Fund",
+            "pnid": "section-5"
+          }
+        }
+      },
+      "block_order": [
+        "39729372-50a6-4f7e-9d56-e83b68860ba6",
+        "c097f8d1-c228-47c2-8547-43213a04ed3e",
+        "01d891b3-53fd-454b-b79f-8c33971bd228",
+        "04d27017-820b-447e-81af-b7a9e27f0c36",
+        "38402a37-723e-46fe-991e-873704589561"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "164001900656e472ca": {
+      "type": "static-two-column-alt3",
+      "disabled": true,
+      "settings": {
+        "borderlayouttwoclthreealt": "top-bottom",
+        "altsectionlayouttwthree": "image-text",
+        "nopadding": true,
+        "altthreeimage": "shopify://shop_images/1-Section-Our-Story-Founders_1080x1080_81be70e6-c841-4ea0-ba4d-d4419d60cce4.webp",
+        "altheadingclthree": "Founded by best friends",
+        "h2maxwidthdesktop": 600,
+        "h2maxwidthmobile": 300,
+        "altbodyclthree": "<p>Dorm rooms, travels, sweaters: Akvilė, Danutė and Sandra have shared them all. Three Lithuanian natives with a penchant for sustainable fashion, they met back in 2011 at grad school and have been inseparable ever since. <br/><br/>Growing up in Lithuania comes with a few certainties: being dressed head to toe in knits made by our grandmas and aunties and spending summers outdoors in forests, lakes and meadows.  We're seriously proud of our Baltic heritage and the traditions passed down by our ancestors. That freedom-filled, wild-spirited energy? That’s what you’ll find here, in clothes form. Pieces that represent our heritage with inspiration drawn from our Pagan roots. </p>",
+        "pmaxwidthdesktop": 900,
+        "pmaxwidthmobile": 312,
+        "padding_sizeup": 28,
+        "padding_sizedown": 18,
+        "padding_sizeupm": 18,
+        "padding_sizedownm": 13,
+        "padding_sizeupm_section": 35,
+        "padding_sizedownm_section": 15,
+        "sectionID": "section-1"
+      }
+    },
+    "164009869053d5286d": {
+      "type": "static-collage",
+      "blocks": {
+        "7ef1be76-87bf-453d-9756-45b12ac5a2b1": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/Showroom_crop_-_3.png",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "4e420f4b-3629-41a6-ac7d-503cdcb5f903": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/3_afacbcc8-59d8-40f9-8a42-574882275818.png",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "697b780b-8639-4f4b-b2d8-920182e7b0d0": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "https://cdn.shopify.com/s/files/1/0548/6644/4336/files/3-OurStory-Collage.mp4?v=1649183522",
+            "caollageimage": "shopify://shop_images/4_ae746ec8-d24e-46f4-a93d-f08d4e55dcf8.png",
+            "caollagecolor": "#eeeeea",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "b24af7a7-0acf-420f-a10f-f4213fbc3862": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/1_e0673698-c4cd-4114-b82f-9b5fa55231c4.png",
+            "caollagecolor": "#b4bed6",
+            "collagetext": "",
+            "caollagecolortext": "#000000"
+          }
+        },
+        "6f86ff4e-0953-4750-84a6-3a0bccd3ea20": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/2_30f61f71-01a2-47a0-9cbc-9a9beffc7b5e.png",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "c0ca98b9-f04b-4f53-b363-a9f2fcc83401": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/6_e8c77aa8-6350-4f50-b31b-f8fd7d5ae95c.png",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        }
+      },
+      "block_order": [
+        "7ef1be76-87bf-453d-9756-45b12ac5a2b1",
+        "4e420f4b-3629-41a6-ac7d-503cdcb5f903",
+        "697b780b-8639-4f4b-b2d8-920182e7b0d0",
+        "b24af7a7-0acf-420f-a10f-f4213fbc3862",
+        "6f86ff4e-0953-4750-84a6-3a0bccd3ea20",
+        "c0ca98b9-f04b-4f53-b363-a9f2fcc83401"
+      ],
+      "settings": {
+        "borderlayoutcollage": "only-bottom",
+        "padding_sizeup": 25,
+        "padding_sizedown": 25,
+        "padding_sizeupm": 18,
+        "padding_sizedownm": 18
+      }
+    },
+    "1640097600a0caa913": {
+      "type": "static-two-column-text",
+      "settings": {
+        "borderlayouttwocltext": "only-bottom",
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "padding_top_sec": 70,
+        "padding_bottom_sec": 50,
+        "padding_top_secm": 32,
+        "padding_bottom_secm": 25,
+        "twocolheading": "ADDRESS & WORKING HOURS",
+        "hed_padding_sec": 243,
+        "hed_padding_secm": 243,
+        "twocolcopy": "<p><a href=\"https://maps.app.goo.gl/VtKP2jwvESEh7cfA8\" target=\"_blank\" title=\"https://maps.app.goo.gl/VtKP2jwvESEh7cfA8\">Vilnius Street 18, Vilnius, Lithuania. LT-01402.</a><br/>Entrance through the black gate next to \"Meating room\". </p><p>Press No. 22 on the doors to your right. Second floor.</p><p></p><p>Monday - Wednesday: 10am-4pm </p><p><a href=\"https://www.instagram.com/reel/C5BO0L6LY1H/\" target=\"_blank\" title=\"Instagram Video guide to Knotty Ones Showroom\">Click here for a video guide on how to find us.</a></p>",
+        "cop_padding_sec": 1200,
+        "cop_padding_secm": 900,
+        "sectionID": "section-2"
+      }
+    },
+    "1640096383fb219167": {
+      "type": "static-fullscreen-img-CTA",
+      "disabled": true,
+      "settings": {
+        "borderlayoutCTA": "only-bottom",
+        "fs-image": "shopify://shop_images/OurStory-Full-width-Image-1-Desktop_x761_3395d45c-ba24-4be9-a8ae-786317b648e9.webp",
+        "fs-image-mobile": "shopify://shop_images/OurStory-Full-width-Image-1-Mobile_692x_1f0dd2fd-e84f-4cfc-88d1-a8c91f35e560.webp",
+        "showcontent": false,
+        "fsTitle": "",
+        "fsTitleColor": "",
+        "fsURL": "",
+        "fsBtntitle": "",
+        "ctabuttonColor": "light",
+        "padding_sizeup": 23,
+        "padding_sizedown": 7,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 5
+      }
+    },
+    "1640179165e980a659": {
+      "type": "static-onlytext",
+      "settings": {
+        "onlyTextlayout": "only-bottom",
+        "bgOnlyTextCTA": "#eeeeea",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "",
+        "maxwidthoftitle": 20,
+        "maxwidthoftitlemobiled": 20,
+        "bodytextOnlyTextCTA": "If you are hoping to try a specific product, size or color, we recommend dropping an email at hello@theknottyones.com prior to make sure that we have it readily available on the day.",
+        "fontsizetune": "27px",
+        "maxwidthoftext": 1060,
+        "maxwidthoftextmobile": 320,
+        "showurlOnlyTextCTA": true,
+        "linkOnlyTextCTA": "mailto:hello@theknottyones.com",
+        "linktextOnlyTextCTA": "CONTACT US",
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 10,
+        "containerbottom": 10,
+        "containertopmobile": 30,
+        "containerbottommobile": 30,
+        "sectionID": ""
+      }
+    },
+    "1640179650339e56d9": {
+      "type": "static-two-column",
+      "disabled": true,
+      "settings": {
+        "borderlayouttwocl": "top-bottom",
+        "textposition": "space-between",
+        "sectionlayouttwocl": "image-text",
+        "headingcl": "HEADER HERE?",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 15,
+        "h2maxwidthmobile": 15,
+        "bodycl": "Join our sisterhood and, each time you shop, you’ll get to know a little more about the women behind your knit(s). The Knotty Ones wouldn’t be The Knotty Ones without our incredible community and that’s something we’re going to keep on growing.",
+        "pmaxwidthdesktop": 15,
+        "pmaxwidthmobile": 15,
+        "padding_sizeupm_section": 15,
+        "padding_sizedownm_section": 15,
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "showurlcl": false,
+        "linkTextcl": "",
+        "linkclUrl": "",
+        "sectionID": ""
+      }
+    },
+    "1640179882f0ead277": {
+      "type": "static-fullscreen-img-CTA",
+      "disabled": true,
+      "settings": {
+        "borderlayoutCTA": "hide-border",
+        "fs-image": "shopify://shop_images/OurStory-Full-width-Image-3-Bottom-Desktop_x761_e63e3f8d-8f15-4d2e-975a-2d222d90f038.webp",
+        "fs-image-mobile": "shopify://shop_images/OurStory-Full-width-Image-3-Bottom-Mobile_692x_d8792f88-5417-4792-8c18-4e4d566e041f.webp",
+        "showcontent": false,
+        "fsTitle": "",
+        "fsTitleColor": "",
+        "fsURL": "",
+        "fsBtntitle": "",
+        "ctabuttonColor": "light",
+        "padding_sizeup": 19,
+        "padding_sizedown": 10,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 6
+      }
+    },
+    "16401799220e8e4350": {
+      "type": "static-cta-subscribe",
+      "disabled": true,
+      "settings": {
+        "borderlayoutsub": "only-top",
+        "subbgcolor": "#b4bed6",
+        "subheading": "10% OFF YOUR FIRST ORDER",
+        "subbody": "<p>Good things come to those who subscribe. We don’t spam.<br/>Pinky promise</p>",
+        "maxwidthofcta": 980,
+        "maxwidthofctamobile": 280,
+        "padding_sizeup": 18,
+        "padding_sizedown": 21,
+        "padding_sizeupm": 14,
+        "padding_sizedownm": 10,
+        "containertop_": 62,
+        "containerbottom_": 33,
+        "containertopmobile_": 50,
+        "containerbottommobile_": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "16400025067a204b40",
+    "1640010261cb9fbbf2",
+    "164001637237a519bf",
+    "16446108729381799e",
+    "164001900656e472ca",
+    "164009869053d5286d",
+    "1640097600a0caa913",
+    "1640096383fb219167",
+    "1640179165e980a659",
+    "1640179650339e56d9",
+    "1640179882f0ead277",
+    "16401799220e8e4350"
+  ]
+}

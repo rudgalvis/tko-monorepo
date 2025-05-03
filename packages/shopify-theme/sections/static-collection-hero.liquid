@@ -1,0 +1,47 @@
+    <link rel="preload" as="image" href="{{ section.settings.collection_hero_image | img_url: '1386x540'}}">
+    
+
+
+
+    {% if collection.metafields.my_field.collection_hero == true %}
+    <div class="collection-hero-image-container">
+        <img loading="eager" class="desktop-img" src="{{ section.settings.collection_hero_image | img_url: '1386x540'}}"/>
+        <img loading="lazy" class="mobile-img" src="{{ section.settings.collection_hero_image_mobile | img_url: '500x'}}"/>
+        <h2>{{collection.title }}</h2>
+    </div>
+    {%endif%}
+
+    {{ 'component-static-collection-hero.css' | asset_url | stylesheet_tag }}
+
+
+{% schema %}
+{
+  "name": "Collection Hero",
+  "class": "collection-hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Collection Hero Options"
+    },
+    {
+        "type": "image_picker",
+        "id": "collection_hero_image",
+        "label": "Desktop",
+        "info": "Select collection hero image for desktop"
+      },
+      {
+        "type": "image_picker",
+        "id": "collection_hero_image_mobile",
+        "label": "Mobile",
+        "info": "Select collection hero image for mobile"
+      }
+      
+  ],
+  "presets": [ 
+{
+"category": "Collection",
+"name": "Collection Hero"
+}
+]
+}
+{% endschema %}

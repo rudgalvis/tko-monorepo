@@ -1,0 +1,66 @@
+<section>
+{% comment %}<knitters-accordion>{% endcomment %}
+
+  <knitter-accordion>
+    {% for block in section.blocks %}
+        <knitter-accordion-item
+            name="{{ block.settings.knitter_name }}"
+            id="{{ block.settings.knitter_id }}"
+            description="{{ block.settings.description }}"
+            photo="{{ block.settings.main_image | img_url: '1330x1330' }}"
+            avatar="{{ block.settings.thumbnail | img_url: '240x240' }}">
+        </knitter-accordion-item>
+    {% endfor %}
+  </knitter-accordion>
+{% comment %}</knitters-accordion>{% endcomment %}
+</section>
+
+{% schema %}
+{
+  "name": "Knitters accordion",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "knitter",
+      "name": "Knitter",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "main_image",
+          "label": "Main Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "thumbnail",
+          "label": "Thumbnail"
+        },
+        {
+          "type": "text",
+          "id": "knitter_name",
+          "label": "Knitter's Name",
+          "default": "Default Knitter Name"
+        },
+        {
+          "type": "text",
+          "id": "knitter_id",
+          "label": "Knitter's ID",
+          "default": "name-surname-1",
+          "info": "Must be unique. Used for QR code generation and user messages attribution."
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Default description for the knitter."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Knitters accordion",
+      "category": "Knitters"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,8 @@
+{% comment %}
+Usage
+   {% render 'dump', value: some-var, label: 'some label' %}
+{% endcomment %}
+
+<script>
+    console.log('{{ label }}' || 'DUMP', {{ value | json }});
+</script>

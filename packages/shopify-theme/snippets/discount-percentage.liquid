@@ -1,0 +1,6 @@
+{% comment %}
+    Returns percentage only. You have to add "-" in front and "% off" in the end of the returned value.
+    Has to be single line to avoid spacing issues.
+
+    {% render 'discount-percentage', compare_at_price: variant.compare_at_price, price: variant.price %}
+{% endcomment %}{% assign original_price = compare_at_price %}{% assign sale_price = price  %}{% assign discount_amount = original_price | minus: sale_price %}{% assign discount_percentage = discount_amount |  times: 100 | divided_by: original_price %}{{ discount_percentage | strip_html }}

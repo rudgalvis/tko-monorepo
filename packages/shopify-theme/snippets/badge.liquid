@@ -1,0 +1,135 @@
+{% comment %}
+    Props:
+    - type ('New in', 'Selling fast'): The type of badge to display. Options: 'onsale', 'soldout'
+    - (optional) product: The product object
+
+    Usage:
+        {% render 'badge', type: product.metafields.custom.badge, product: product %}
+{% endcomment %}
+
+{% assign isSale = false %}
+{% assign variantprice = 0 %}
+{% assign variantcompare = 0 %}
+
+{% for variant in product.variants %}
+    {% assign variantprice = product.variants[0].price %}
+    {% assign variantcompare = product.variants[0].compare_at_price %}
+
+    {% if variant.compare_at_price > variant.price %}
+        {% assign isSale = true %}
+    {% endif %}
+{% endfor %}
+
+<div class="badge-container" data-variant-id="{{ product.variants[0].id }}">
+    <div class="badge-v2 badge-v2---on-sale prefab" style="display: none" data-badge-on-sale-prefab>
+        On sale
+    </div>
+
+    {% if isSale %}
+        <div class="badge-v2 badge-v2---on-sale">
+            On sale
+        </div>
+    {% endif %}
+
+    {% if type %}
+        <div class="badge-v2 badge-v2---{{ type | handleize }}">
+            {{ type }}
+        </div>
+    {% endif %}
+</div>
+
+<script type="module">
+	if (typeof window['getAutomaticDiscount'] !== 'undefined') {
+        window.addEventListener('DOMContentLoaded', async () => {
+            const badgeContainer = document.querySelector('[data-variant-id="{{ product.variants[0].id }}"]')
+            const hasSale = badgeContainer.querySelector('.badge-v2.badge-v2---on-sale:not(.prefab)')
+
+            if(hasSale) return
+
+            const productContainer = badgeContainer.closest('.product-container')
+            const discount = productContainer.querySelector('product-discount-percentage')
+
+            let attempt = 0, val = null
+            while(attempt < 10 && !val) {
+                await new Promise(resolve => setTimeout(resolve, 200))
+
+                attempt++
+                val = +discount.discountPercentage
+            }
+
+            if(val) {
+                let prefab = document.querySelector('[data-badge-on-sale-prefab]')
+                prefab = prefab.cloneNode(true)
+                prefab.style.display = 'block'
+
+                badgeContainer.prepend(prefab)
+            }
+        })
+	}
+
+</script>
+
+<style scoped>
+    .badge-container {
+        position: absolute;
+        left: 22px;
+        top: 22px;
+        z-index: 4;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .badge-v2 {
+        /*border-radius: 1em;*/
+        padding: 4px 16px 3px;
+        line-height: 1.5em;
+
+        font-size: 14px;
+        letter-spacing: -.22px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-family: Monument, sans-serif;
+        font-weight: 200;
+        text-transform: uppercase;
+        color: black;
+    }
+
+    .badge-v2---new-in {
+        background-color: #EEEEEA;
+    }
+
+    .badge-v2---selling-fast {
+        background-color: #B4BED6;
+    }
+
+    .badge-v2---on-sale {
+        background-color: #B0BEB2;
+    }
+
+    @media screen and (max-width: 767px) {
+        .badge-container {
+            top: 9px;
+            left: 9px;
+        }
+
+        .badge-v2 {
+            font-size: 7px;
+            padding: .35em .7em;
+        }
+    }
+
+    @media screen and (max-width: 376px) {
+        .badge-container {
+            top: 7px;
+            left: 7px;
+            gap: 2px;
+        }
+
+        .badge-v2 {
+            font-size: 6px;
+            padding: 2px 4px 1px;
+            line-height: 1em;
+        }
+    }
+</style>

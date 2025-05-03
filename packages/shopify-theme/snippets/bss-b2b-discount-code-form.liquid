@@ -1,0 +1,238 @@
+
+                        {% assign discount_box_input_border_style = "solid" %}
+                        {% assign discount_box_input_border_color = "#a5a5a5" %}
+                        {% assign discount_box_input_border_radius = "3" %}
+                        {% assign discount_box_input_border_width = "1" %}
+                        {% assign discount_box_input_width = "300" %}
+                        {% assign discount_box_input_height = "36" %}
+                        {% assign discount_box_input_placeholder = "Enter discount code" %}
+                        {% assign discount_box_button_color = "#000000" %}
+                        {% assign discount_box_button_text_color = "#ffffff" %}
+                        {% assign discount_box_button_border_radius = "3" %}
+                        {% assign discount_box_button_width = "300" %}
+                        {% assign discount_box_button_height = "36" %}
+                        {% assign discount_box_header_font_size = "18.72" %}
+                        {% assign discount_box_header_color = "#000000" %}
+                        {% assign discount_box_layout = "block" %}
+                    <script>
+    if (typeof BSS_B2B !== "undefined") {
+        {% comment %} BSS integrated and compatible discount code with LangShop {% endcomment %}
+        if (BSS_B2B.integrate && BSS_B2B.integrate.langShop && BSS_B2B.integrate.langShop.handleAllTranslation) {
+            window.addEventListener('load', ()=>{
+                setTimeout(()=>{
+                      BSS_B2B.integrate.langShop.handleAllTranslation('dc');
+                }, 1000)
+            })
+        }
+    }
+</script>
+<div class="bss-b2b-discount-code-wrapper">
+    <p class="bss-b2b-translation-dc-form_header_text">{{ discount_code_form_header_text }}</p>
+    <div style= "display:{{discount_box_layout}}; gap: 10px">
+        <div id="bss-b2b-discount-code-input-wrapper">
+            <input type="text" id="bss-b2b-discount-code-input" placeholder="{{discount_box_input_placeholder}}" onChange="handleStopPropagationInputChange(event)" />
+            <div id="bss-b2b-discount-code-message"></div>
+            <div id="bss-b2b-discount-code-applied-wrapper"></div>
+        </div>
+        <button id="bss-b2b-discount-code-submit" class="bss-b2b-translation-dc-button_apply"><span>{{ discount_code_apply_button }}</span></button>
+    </div>
+</div>
+<style type="text/css">
+    .bss-b2b-translation-dc-form_header_text{
+        font-size: {{discount_box_header_font_size}}px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 23px;
+
+        color: {{discount_box_header_color}};
+        margin-bottom: 10px;
+    }
+    #bss-b2b-discount-code-submit {
+        margin-top: 0;
+        height: {{discount_box_button_height}}px;
+        width: {{discount_box_button_width}}px;
+        appearance: none;
+        display: inline-block;
+        text-decoration: none;
+        text-align: center;
+        vertical-align: middle;
+        cursor: pointer;
+        border: 1px solid transparent;
+        border-radius: {{discount_box_button_border_radius}}px;
+        padding: 8px 15px;
+        background-color: {{discount_box_button_color}};
+        color: {{discount_box_button_text_color}};
+        letter-spacing: .08em;
+        white-space: normal;
+        font-size: calc(((var(--font-size-base) - 2) / (var(--font-size-base))) * 1em);
+        position: relative;
+    }
+    #bss-b2b-discount-code-submit.loading span {
+        visibility: hidden;
+    }
+    #bss-b2b-discount-code-submit.loading:after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        margin: -10px 0 0 -10px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        border-top-color: #000;
+        animation: spin 0.6s linear infinite;
+    }
+    .bss-b2b-discount-code-wrapper {
+        margin-bottom: 30px;
+        display: none;
+        width: 300px;
+    }
+    #bss-b2b-discount-code-input-wrapper {
+        margin-bottom: 10px
+    }
+    
+    #bss-b2b-discount-code-input-wrapper input#bss-b2b-discount-code-input {
+        min-height: 35px;
+        height: {{discount_box_input_height}}px;
+        width: {{discount_box_input_width}}px;
+        border: {{discount_box_input_border_width}}px {{discount_box_input_border_color}} {{discount_box_input_border_style}};
+        outline: none;
+        border-radius: {{discount_box_input_border_radius}}px;
+        color: #666;
+        padding: 0 15px;
+        background: transparent;
+    }
+    #bss-b2b-clear-discount-code {
+        line-height: 20px;
+        position: relative;
+        height: 20px;
+        width: 20px;
+        right: 5px;
+        border-radius: 20px;
+        background: #a5a5a5;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+        font-size: 11px;
+        padding-left: 1px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #bss-b2b-clear-discount-code:hover {
+        background: #ccc;
+    }
+    #bss-b2b-discount-code-applied-wrapper {
+        display: flex;
+    }
+    div#bss-b2b-discount-code-applied {
+        border-radius: 4px;
+        background-color: rgba(113,113,113,0.11);
+        color: #717171;
+        font-size: 15px;
+        padding: 5px 0 5px 5px;
+        overflow: hidden;
+        margin-left: 5px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    #bss-b2b-discount-code-message {
+        margin-left: 5px;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .bss-b2b-discount-code-wrapper {
+            width: 70%;
+            margin-left: 15%;
+            margin-top: 5%;
+        }
+    }
+    .bss-modal-warning-dc-wrap {
+        top: 21%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: table;
+        z-index: 199999999;
+        position: fixed;
+        outline: none !important;
+        -webkit-backface-visibility: hidden;
+        pointer-events: none;
+      }
+    .bss-modal-dc {
+        opacity: .5;
+        color: black;
+        background-color: white;
+        max-width: 500px;
+        margin: 18px auto;
+        width: calc(100% - 36px);
+        pointer-events: auto;
+        border: solid white 1px;
+    }
+    .bss-modal-dc.activeDc {
+        opacity: 1;
+        transition: all 0.25s ease-in;
+        border-width: 0px;
+    }
+    .bss-modal-dc-header {
+        padding: 10px;
+        background: #ff9800;
+    }
+      .bss-modal-dc-title{
+        margin-left: 12px;
+        color: #000;
+        font-size: 20px;
+    }
+    .bss-modal-dc button {
+        user-select: none;
+        -webkit-user-select: none;
+        cursor: pointer;
+        float: right;
+        width: unset;
+    }
+    .bss-modal-dc-button-close {
+        font-style: normal;
+        margin-top: -5px;
+        margin-right: -5px;
+        font-size: 35px;
+        font-family: Arial, Baskerville, monospace;
+        overflow: visible;
+        background: transparent;
+        border: 0;
+        -webkit-appearance: none;
+        display: block;
+        outline: none;
+        padding: 0 0 0 10px;
+        box-shadow: none;
+        opacity: .65;
+    }
+    .bss-modal-dc-body {
+        padding: 18px;
+        background: #ffffff;
+        color: #000000;
+    }
+    .bss-dc-list-warning {
+        margin-left: 10px;
+        margin-top: -10px;
+    }
+    .bss-warning-minimum-amount-title {
+
+    }
+    .bss-dc-list-warning-amount {
+
+    }
+    .bss-amo-text-warning {
+        list-style: none;
+        position: relative;
+        padding: 3px 0 2px 40px;
+    }
+</style>
+<script type="text/javascript" id="bss-b2b-discount-code-script">
+  function handleStopPropagationInputChange(event) {
+    event.stopPropagation();
+ }
+</script>

@@ -1,0 +1,303 @@
+<section class="kto-main-container" {% if section.settings.sectionID != nil %}id="{{ section.settings.sectionID }}" {% endif %}>
+    <div class="tko-lines tko-two-column-{{section.id}}"
+    {% if section.settings.borderlayouttwoclthreealt == 'top-bottom'%}
+    style="
+      border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+
+    ">
+    {% elsif  section.settings.borderlayouttwoclthreealt == 'only-top' %}
+    style="
+    border-top-style:  solid;
+    border-top-color:   black;
+    border-bottom: none;
+
+    ">
+    {% elsif  section.settings.borderlayouttwoclthreealt == 'only-bottom' %}
+    style="
+    border-top: none;
+    border-bottom-style:  solid;
+    border-bottom-color:   black;
+    ">
+    
+    {% else %}
+    
+    style="
+    border-top: none;
+    border-bottom: none;
+
+    "> 
+  
+    {% endif %}
+
+    {{ 'component-two-column-alt3.css' | asset_url | stylesheet_tag }}
+
+<div class="two-column-container-alt3 {{section.settings.altsectionlayouttwthree}}  section-padding-{{section.id}}">
+  {% assign selectedLayerAlt = section.settings.altsectionlayouttwthree %}
+   <div class="alt3 alt3-left">
+    {%
+        render 'rimg'
+        img: section.settings.altthreeimage,
+        alt: section.settings.altthreeimage.alt,
+        size: '1080x1080',
+      %}
+   </div>
+   
+   <div class="alt3 alt3-right padding-{{section.id}}">
+          <h2 class="two-col-h2-{{section.id}}">{{ section.settings.altheadingclthree }}</h2>
+          <div class="alt3-content  two-col-p-{{section.id}}">
+          {{ section.settings.altbodyclthree }}
+          </div>
+   </div>
+</div>
+
+</div>
+</section>
+
+
+
+{% schema %}
+
+{
+    "name": "2 Column Layout No.3", 
+    "settings": [
+    {
+      "type": "header",
+      "content": "Line Layout Options"
+    },
+    {
+      "type": "select",
+      "id": "borderlayouttwoclthreealt",
+      "label": "Section Border Options",
+      "default": "top-bottom",
+      "options": [
+        {
+          "value": "top-bottom",
+          "label": "Show Border Top & Bottom"
+        },
+        {
+          "value": "only-top",
+          "label": "Show Border Only Top"
+        },
+        {
+            "value": "only-bottom",
+            "label": "Show Border Only Bottom"
+          },
+        {
+            "value": "hide-border",
+            "label": "Hide Borders"
+          }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "altsectionlayouttwthree",
+      "label": "Template Side Options",
+      "default": "image-text",
+      "options": [
+        {
+          "value": "image-text",
+          "label": "Left Image - Right Text"
+        },
+        {
+          "value": "text-image",
+          "label": "Left Text - Right Image"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "nopadding",
+      "default": false,
+      "label": "No padding"
+    },
+    {
+      "type": "header",
+      "content": "Image Options"
+    },
+    {
+        "id": "altthreeimage",
+        "type": "image_picker",
+        "label": "Select Image"
+      },
+      {
+        "type": "header",
+        "content": "Title Options"
+      },
+      {
+        "id": "altheadingclthree",
+        "type": "text",
+        "label": "Title"
+      },
+      {
+        "type": "header",
+        "content": "Title Maximum Width Options"
+      },
+      {
+        "type":"number",
+        "id":"h2maxwidthdesktop",
+        "label":"Desktop",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"h2maxwidthmobile",
+        "label":"Mobile",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Body Options"
+      },
+      {
+        "id": "altbodyclthree",
+        "type": "richtext",
+        "label": "Body Copy"
+      },
+      {
+        "type": "header",
+        "content": "Copy Maximum Width Options"
+      },
+      {
+        "type":"number",
+        "id":"pmaxwidthdesktop",
+        "label":"Desktop",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"pmaxwidthmobile",
+        "label":"Mobile",
+        "default":15
+      },
+      
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup",
+        "label":"Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedown",
+        "label":"Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeupm",
+        "label":"Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedownm",
+        "label":"Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Section Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeupm_section",
+        "label":"Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedownm_section",
+        "label":"Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Anchor Point Options"
+      },
+      {
+        "id": "sectionID",
+        "type": "text",
+        "label": "Anchor Point"
+      }
+      
+    ],
+    "presets": [
+{
+"category": "2 Column Layout No.3",
+"name": "2 Column Layout No.3"
+}
+]
+  }
+{% endschema %}
+
+
+
+
+
+<style>
+  .tko-two-column-{{section.id}}{
+         padding: {{section.settings.padding_sizeup}}px 0px {{section.settings.padding_sizedown}}px 0px;
+         border-width: 1px ;
+   }
+ 
+   .two-col-h2-{{section.id}}{
+         max-width:{{section.settings.h2maxwidthdesktop}}px; 
+   }
+ 
+   .two-col-p-{{section.id}} p{
+         max-width:{{section.settings.pmaxwidthdesktop}}px; 
+   }
+ 
+ 
+   @media (max-width: 812px) {
+
+   } 
+
+   @media (min-width: 320px) and (max-width: 480px) {
+    .tko-two-column-{{section.id}}{
+         padding: {{section.settings.padding_sizeupm}}px 0px {{section.settings.padding_sizedownm}}px 0px;
+         border-width: 0.5px;
+   }
+   .two-col-h2-{{section.id}}{
+         max-width:{{section.settings.h2maxwidthmobile}}px; 
+   }
+ 
+   .two-col-p-{{section.id}} p{
+         max-width:{{section.settings.pmaxwidthmobile}}px; 
+   }
+   .padding-{{section.id}}{
+     padding: {{section.settings.padding_sizeupm_section}}px 17px {{section.settings.padding_sizedownm_section}}px 17px !important;
+   }
+   }
+ </style>
+
+ <style>
+  {% if section.settings.nopadding  ==  true %}
+  .alt3-right h2{
+    margin-block-start: 0.23em;
+   }
+   .alt3-right p{
+    margin-block-end: 0.1em;
+   }
+   .alt3-right {
+    padding-top: 0px;
+    padding-right: 60px;
+    padding-bottom: 0px;
+   
+}
+  }
+
+
+  {% endif %}
+  </style>

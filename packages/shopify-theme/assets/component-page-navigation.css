@@ -1,0 +1,312 @@
+
+.pn-main{
+    width:100%;
+    position: relative;
+}
+
+.line-second{
+    width: 100%;
+    height: 3px;
+    position: sticky;
+    bottom: 0px;
+    padding: 0px 6.5px;
+    display: flex;
+    justify-content: center;
+    bottom: 2px;
+    left: 0px;
+}
+
+.sl-top{
+    width: 100%;
+    height: 3px;
+    position: sticky;
+    top: 0px;
+    padding: 0px 6.5px;
+    display: flex;
+    justify-content: center;
+    bottom: 2px;
+    left: 0px;
+}
+
+.line-child{
+    width: 100%;
+    height: 2px;
+    border-bottom: 0.5px solid black;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ghost-container{
+    display:none;
+    width:100%;
+    height: 48px;
+}
+
+
+
+    .page-navigation{
+        display:none;
+    }
+
+    .pn-line-container {
+    width: 100%;
+    position: absolute;
+    height: 2px;
+    left: 0px;
+    top: 45px;
+    padding:0px 6.5px;
+    z-index: 8;
+    display:none;
+    
+
+}
+
+.pn-child{
+    width: calc(100% - 13px);
+    height: 2px;
+    border-bottom: .5px solid black;
+    position: fixed;
+    z-index: 8;
+}
+
+
+
+    .nav-line{
+        width: 100%;
+        height: 2px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-line-item{
+        width: 95%;
+    height: 2px;
+    border-top: 1px solid black;
+    display: none;
+
+    }
+
+    .nav-line-item-bottom{
+        width: 95%;
+    height: 2px;
+    border-bottom: 1px solid black;
+display:none;
+    }
+
+    .section-nav{
+        /*width: 100%;*/
+        width: auto;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    }
+/*
+    .section-nav a{
+        font-family: 'Monument';
+    font-size: 14px;
+    letter-spacing: -0.22px;
+    color: black;
+    padding: 10px 0px;
+    width: 100%;
+    text-align: center;
+    opacity:.5;
+    }*/
+    .section-nav a{    
+        line-height: 11px;
+    font-size: 11px;
+    letter-spacing: -0.17px;
+    text-align: left;
+    width: auto;
+    white-space: pre;
+    padding-right: 50px;
+    text-transform: uppercase;
+    }
+
+    .myclass:first-child .section-nav a{
+        padding-left:0px;
+    } 
+
+    .myclass:last-child .section-nav a{
+        padding-right:6.5px;
+    } 
+        
+    
+
+   .page-nav-master{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 12px;
+    /*margin-right:282px;*/
+   }
+
+   .page-nav-master li {
+   /* width: 100%;*/
+    width: 100%;
+    display: block;
+    float: left;
+    padding-left: 6.5px;
+}
+
+.page-nav-master li:last-child .section-nav a{
+    border-right: none;
+    margin-right:0px;
+}
+
+.page-navigation{
+    position: relative;
+    width: 100%;
+    background: #eeeee9;
+
+}
+
+.page-navigation::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+    display:none;
+}
+
+
+
+
+.thisFixed{
+   
+   position: fixed;
+   /*top: 93px;*/
+   z-index: 4;
+}
+
+.thisFixed .line-second{
+    display:none;
+}
+
+
+
+
+
+
+
+@media (min-width: 768px) and (max-width: 1024px) { 
+    .page-navigation{
+    position: relative;
+    width: 100%;
+    background: #eeeee9;
+    
+
+}
+
+    .thisFixed{
+   
+   position: fixed;
+   top: 52px;
+   z-index: 4;
+   opacity:0;
+   
+}
+
+.page-navigation{
+        display:block;
+    }
+
+}
+
+@media screen and (min-width: 750px) and (max-width : 1023px) {
+    .page-navigation{
+    position: relative;
+    width: 100%;
+    background: #eeeee9;
+
+}
+
+    .thisFixed{
+   
+   position: fixed;
+   top: 52px;
+   z-index: 4;
+}
+
+.thisFixed 
+
+.page-navigation{
+        display:block;
+    }
+}
+
+@media screen and (max-width: 749px) {
+    .page-navigation{
+    position: relative;
+    width: 100%;
+    background: #eeeee9;
+
+}
+
+    .thisFixed{
+   
+   position: fixed;
+   top: 52px;
+   z-index: 4;
+}
+
+.page-navigation{
+        display:block;
+    }
+}
+
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+    .ghost-container{
+    display:block;
+   
+}
+ 
+.page-navigation{
+    width: 100%;
+    overflow-y: hidden;
+    position: relative;
+    top: 0px;
+    background: #eeeee9;
+    z-index: 4;
+}
+
+.thisFixed{
+   
+    position: fixed;
+    top: 52px;
+    z-index: 4;
+}
+
+.page-nav-master {
+    display: flex;
+    padding: 0px 0px;
+    float: left;
+    width: auto;
+    height: 31px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+.page-nav-master li {
+    width: auto;
+    display: inline-block;
+}
+
+.section-nav a{
+
+    line-height: 11px;
+    font-size: 11px;
+    letter-spacing: -0.17px;
+
+    }
+
+.page-navigation{
+        display:block;
+    }
+
+}

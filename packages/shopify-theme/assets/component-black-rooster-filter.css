@@ -1,0 +1,365 @@
+.loading-overlay {
+    right: 0px;
+    left: unset;
+}
+
+
+
+.remove-holder-br {
+    width: 100%;
+    padding: 0px 25px;
+    position: relative;
+}
+
+.number_style{
+  font-family: 'Panama';
+}
+
+.filter-main{
+  width:100%;
+  height: auto;
+  position: relative;
+}
+
+.filter-group{
+  display: flex;
+  flex-direction: row;
+}
+
+.remove-holder{
+  width: 100%;
+  border-top:1px solid black;
+  position: relative;
+  height: 81px;
+  display: flex;
+    align-items: center;
+}
+
+.three-angle-size-setsave {
+    position: absolute;
+    top: -18px;
+}
+
+.sort-by--container {
+    position: relative;
+    margin-left: 22rem;
+}
+
+
+
+ul.sortby-list-container li a {
+  position: relative;
+    font-size: 12px;
+    font-family: 'Monument';
+    text-transform: uppercase;
+    color: black;
+    letter-spacing: -0.22px;
+    line-height: 12px;
+    width: 121px;
+}
+
+ul.sortby-list-container li {
+  height: 20px;
+  display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+ul#removeFilter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+li.removeButton {
+  font-family: 'Monument';
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: -0.22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    cursor: pointer;
+    margin-right: 20px;
+    color: rgba(0,0,0,.3);
+}
+
+
+.tko-filter-container{
+  width:100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items:flex-start;
+  justify-content: flex-start;
+}
+
+.filter-close-img {
+    position: relative;
+    top: 0.6px;
+    margin-left:4px;
+}
+
+.filter--{
+  width: auto;
+    min-width: 155px;
+  
+}
+
+.filter-- div h2{
+  padding: 0px 0px 0px 0px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    top: 0;
+    z-index: 1;
+    font-family: 'Panama';
+}
+
+.input_slice{
+position: relative;
+
+}
+
+.checkmark{
+display:none;
+margin-left:5px;
+}
+
+.color-circle-up{
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  margin-top: -2px;
+  margin-right: 0px;
+  cursor: pointer;
+}
+
+span.btn-larrow {
+    font-family: 'Monument';
+    font-size: 14px;
+    color: black;
+    letter-spacing: -0.22px;
+    line-height: 14px;
+    margin-right: 50px;
+}
+
+.closegap{
+  margin-left:0px !important;
+}
+
+
+.filter-product[type='checkbox'] {
+ position: absolute;
+ appearance: none;
+ -webkit-appearance: none;
+
+
+}
+.filter-pos{
+display: flex;
+ align-items: center;
+ justify-content: flex-start;
+ flex-direction: row;
+ position: relative;
+}
+
+.filter-product[type=checkbox] {
+ display: inline-block;
+ margin-right: 0.5rem;
+ height: 20px;
+ width: 100px;
+ z-index: 7;
+}
+
+.filter-product[type='checkbox'] {
+ cursor: pointer;
+}
+
+.filter-product[type="checkbox"] ~ label {
+ position: relative;
+ font-size: 14px;
+ word-break: break-word;
+ font-family: 'Monument';
+ text-transform: uppercase;
+ color: black;
+ letter-spacing: -0.22px;
+}
+
+
+.filterCount a{
+    font-family: 'Monument';
+    font-size: 11px;
+    color: black;
+    letter-spacing: -0.17px;
+    line-height: 14px;
+} 
+
+.filterCount span{
+    font-family: 'Panama';
+} 
+
+.filter-product[type="checkbox"]:disabled ~ label {
+color: rgba(0,0,0,.2);
+}
+
+.filter-product[type="checkbox"]:checked ~ .checkmark {
+display:block;
+height: 11px;
+display: flex;
+}
+
+
+#filter-form[open]{
+   display:flex;
+}
+
+
+.filterCount {
+    display: none;
+}
+
+
+.categoryurl {
+    letter-spacing: -0.22px;
+    position: relative;
+    font-size: 14px;
+    word-break: break-word;
+    font-family: 'Monument';
+    text-transform: uppercase;
+    color: black;
+    letter-spacing: -0.22px;
+}
+
+.disbale_filter_url {
+  position: relative;
+  font-size: 14px;
+  word-break: break-word;
+  font-family: 'Monument';
+  text-transform: uppercase;
+  color: #0003;
+  letter-spacing: -.22px;
+  cursor: default;
+}
+
+.productFound {
+  align-self: center;
+    margin-left: auto;
+    font-family: 'Monument';
+    font-size: 10px;
+    color: black;
+    letter-spacing: -0.15px;
+    line-height: 10px;
+    position: relative;
+    margin-top: 18px;
+}
+
+@media (max-width: 812px) {
+  .remove-holder-br {
+    padding: 0px 6.5px;
+}
+.sort-by--container {
+    margin-left: 1rem;
+}
+
+.filter-group{
+  display: flex;
+  flex-direction: column;
+}
+#filter-form {
+    background-color: rgb(var(--color-background));
+    position: relative;
+    width: auto;
+    filter: none;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 6.5px 12px 6.5px;
+    min-width: unset;
+    z-index: 6;
+    top: 0px;
+    left: 0px;
+
+}
+
+.productFound {
+  align-self: center;
+  margin-left: auto;
+  font-family: Monument;
+  font-size: 11px;
+  color: #000;
+  letter-spacing: -.15px;
+  line-height: 10px;
+  position: relative;
+  margin-top: 18px;
+  position: absolute;
+  bottom: 10px;
+  background: #eeeeea;
+  width: auto;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  z-index: 4;
+  right:6.5px;
+}
+
+
+
+.filterCount {
+    margin-left: auto;
+    display: block;
+}
+
+.tko-filter-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding:0px 0px 30px 30px;
+}
+.remove-holder {
+    width: 100%;
+    border-top: .5px solid black;
+    position: relative;
+    height: 45px;
+    display: flex;
+    align-items: center;
+}
+span.btn-larrow {
+    font-family: 'Monument';
+    font-size: 11px;
+    color: black;
+    letter-spacing: -0.17px;
+    line-height: 14px;
+    margin-right: 50px;
+}
+.filter-- {
+    width: auto;
+    min-width: 146px;
+}
+
+.three-angle-size-setsave {
+    position: absolute;
+    top: -17px;
+}
+
+.remove-text-sortby span{
+  margin-right: 0px;
+}
+ul#removeFilter {
+    display: none;
+}
+.filter--:nth-child(2){
+  order:3
+}
+.filter--:nth-child(3){
+  order:4
+}
+.filter--:nth-child(4){
+  order:2
+}
+}

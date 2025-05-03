@@ -1,0 +1,312 @@
+{{ 'component-static-onlyethical-yarns.css' | asset_url | stylesheet_tag }}
+
+<section class="kto-main-container" {% if section.settings.sectionID != nil %}id="{{ section.settings.sectionID }}" {% endif %}>
+    <div class="tko-lines ethical-yarns-{{section.id}}"
+    {% if section.settings.eoylayoutpage == 'top-bottom'%}
+    style="
+      border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+
+    ">
+    {% elsif  section.settings.eoylayoutpage == 'only-top' %}
+    style="
+    border-top-style:  solid;
+    border-top-color:   black;
+    border-bottom: none;
+ 
+    ">
+    {% elsif  section.settings.eoylayoutpage == 'only-bottom' %}
+    style="
+    border-top: none;
+    border-bottom-style:  solid;
+    border-bottom-color:   black;
+  
+    ">
+    
+    {% else %}
+    
+    style="
+    border-top: none;
+    border-bottom: none;
+    
+    "> 
+  
+    {% endif %}
+
+<div class="onlyethical-yarns-container">
+  <div class="sus_arrow_container">
+    <div class="sus_arrows">
+         <div class="sus_arr sus_arr_left">
+           <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/left_arrow_slider.svg?v=1644507227">
+         </div>
+         <div class="sus_arr sus_arr_right">
+           <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/right_arrow_slider.svg?v=1644507227">
+         </div>
+    </div>
+</div>
+    <div class="eoy-footer">
+      <h2>{{ section.settings.eoysectiontitle }}</h2>
+    </div>
+    <div class="sliders-container">
+    <div class="col-1 eoy-thumb-container stable">
+        {% for block in section.blocks %}
+        <div data-selector=".cell{{forloop.index}}" class="eoy-line {% if forloop.first == true %} trackerIndex2 {% endif %}" data-que2="{{forloop.index0}}">
+                <div class="eoy-selected-line" {%if forloop.first == true%}style="display:block"{%endif%}></div>
+                <div class="eoy-thumb" >
+                    <img src="{{ block.settings.eoythumbimage | img_url: '180x180'}}"/>
+                </div>
+        </div>
+        {% endfor %}
+    </div>
+  
+    <div class="col-2 sliderholder stable" id="ethical-slick" style="background-color:{{ section.settings.eoyslidercolor }};">
+        
+        {% for block in section.blocks%} 
+        <div class="sliderpose cell{{forloop.index}}">
+            <div class="onlyethical-yarns-content">
+                <div class="oey oey-left">
+                   <span>
+                    <h2>{{block.settings.eoyslidertitle}}</h2>
+                    <p class="oey-description">{{block.settings.eoyslidercopy}}</p>
+                  </span>
+                    {% if block.settings.eoysmalltext == true %}
+                    <span>
+                    <div class="yarntoproduct-container">{{block.settings.eoyslidersmall}}</div>
+                    {% endif %} 
+                    {% if block.settings.showlogos == true %}
+                        <div class="oey-logo-container">
+                            <div class="oey-logo-item">
+                        
+                            <img src="{{block.settings.eoylogo | img_url: 'x100'}}" />
+                     
+                            
+                            </div>
+                        </div>
+                     {% endif %} 
+                    </span>  
+                </div>
+                <div class="oey oey-right" style="background-image: url({{block.settings.eoyimage | img_url: '514x643'}});">
+                  {%- comment -%}
+                     <img src="{{block.settings.eoyimage | img_url: '514x643'}}"/>
+                     {%- endcomment -%}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+
+</div>
+</section>
+
+
+
+
+
+{% schema %}
+{
+    "name": "Ethical Yarn Slider",
+    "settings": [
+    {
+      "type": "header",
+      "content": "Line Layout Options"
+    },
+    {
+      "type": "select",
+      "id": "eoylayoutpage",
+      "label": "Section Border Options",
+      "default": "top-bottom",
+      "options": [
+        {
+          "value": "top-bottom",
+          "label": "Show Border Top & Bottom"
+        },
+        {
+          "value": "only-top",
+          "label": "Show Border Only Top"
+        },
+        {
+            "value": "only-bottom",
+            "label": "Show Border Only Bottom"
+          },
+        {
+            "value": "hide-border",
+            "label": "Hide Borders"
+          }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Title Options"
+    },
+    {
+        "type": "text",
+        "id": "eoysectiontitle",
+        "label": "Section Title"
+      },
+      {
+        "type": "header",
+        "content": "Background Options"
+      },
+    {
+        "type": "color",
+        "id": "eoyslidercolor",
+        "label": "Slider Color"
+      },
+    
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup",
+        "label":"Line Padding Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedown",
+        "label":"Line Padding Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeupm",
+        "label":"Line Padding Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedownm",
+        "label":"Line Padding Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Anchor Point Options"
+      },
+      {
+        "id": "sectionID",
+        "type": "text",
+        "label": "Anchor Point"
+      }
+    ],
+          "max_blocks": 6,
+          "blocks": [
+          {
+               "type": "Slider", 
+               "name": "Ethical Yarn Slider",
+               "settings": [
+               {
+                "type": "header",
+                "content": "Ethical Yarn Items"
+              },
+               {
+                "type": "image_picker",
+                "id": "eoyimage",
+                "label": "Ethical Yarn Image"
+              },
+              {
+                "type": "text",
+                "id": "eoyslidertitle",
+                "label": "Slider Title Copy"
+              },
+              {
+                "type": "textarea",
+                "id": "eoyslidercopy",
+                "label": "Slider Body Copy"
+              },
+              {
+                "type": "richtext",
+                "id": "eoyslidersmall",
+                "label": "Slider Used For Copy"
+              },
+              {
+                "type": "checkbox",
+                "id": "eoysmalltext",
+                "label": "Show Used For Section",
+                "default": true
+              },
+              {
+                "type": "image_picker",
+                "id": "eoylogo",
+                "label": "Ethical Yarn Logo"
+              },
+              {
+                "type": "checkbox",
+                "id": "showlogos",
+                "label": "Show Logo",
+                "default": true
+              },
+              {
+                "type": "header",
+                "content": "Ethical Yarn Thumbnail"
+              },
+              {
+                "type": "image_picker",
+                "id": "eoythumbimage",
+                "label": "Ethical Yarn Thumbnail"
+              }
+             ]
+          }
+           ],
+    "presets": [
+       {
+        "name": "Ethical Yarn Slider",
+        "category": "Slider"
+       }
+    ]
+
+}
+
+{% endschema %}
+
+
+<script>
+
+  $('.sus_arr_left').click(function(){
+      $('.sliderholder').flickity('previous');
+  });
+
+  $('.sus_arr_right').click(function(){
+      $('.sliderholder').flickity('next');
+  });
+</script>
+
+<style>
+  .ethical-yarns-{{section.id}}{
+        padding: {{section.settings.padding_sizeup}}px 0px {{section.settings.padding_sizedown}}px 0px;
+        border-width: 1px;
+  }
+
+  .sliderpose{
+  width:100%;
+}
+
+  @media (max-width: 812px) {
+    .ethical-yarns-{{section.id}}{
+        padding: {{section.settings.padding_sizeupm}}px 0px {{section.settings.padding_sizedownm}}px 0px;
+        border-width: 0.5px;
+  }
+
+  .sliderpose{
+  width:100%;
+  padding:0px 25px;
+}
+
+  } 
+
+  .is-nav-selected > .eoy-selected-line {
+  display:block;
+}
+
+
+</style>

@@ -1,0 +1,99 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-gift",
+      "blocks": {
+        "d0ccb157-90a5-42e8-a968-05b910be6efa": {
+          "type": "title",
+          "settings": {
+          }
+        },
+        "a86423b6-a848-4821-89fb-36ca01444cba": {
+          "type": "price",
+          "settings": {
+          }
+        },
+        "276c0300-171c-417b-8141-6a49b73f8c58": {
+          "type": "size",
+          "settings": {
+          }
+        },
+        "2c918a32-4850-47e5-8727-20be4588538a": {
+          "type": "description",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "d0ccb157-90a5-42e8-a968-05b910be6efa",
+        "a86423b6-a848-4821-89fb-36ca01444cba",
+        "276c0300-171c-417b-8141-6a49b73f8c58",
+        "2c918a32-4850-47e5-8727-20be4588538a"
+      ],
+      "settings": {
+        "bid_header": "",
+        "bid_content": "",
+        "knitter_name": "",
+        "knitter_comment": ""
+      }
+    },
+    "16483123229192bec2": {
+      "type": "static-product-collage",
+      "disabled": true,
+      "settings": {
+        "borderlayoutcollage": "top-bottom",
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15
+      }
+    },
+    "1657028551149346c9": {
+      "type": "foursixty-pdp",
+      "disabled": true,
+      "settings": {
+        "onlyTextlayout": "only-top",
+        "pdp_insta_title": "",
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20
+      }
+    },
+    "1648312446fc35bbec": {
+      "type": "static-cta-subscribe",
+      "disabled": true,
+      "settings": {
+        "borderlayoutsub": "only-top",
+        "subbgcolor": "#b4bed6",
+        "subheading": "20% OFF YOUR FIRST ORDER",
+        "subbody": "<p>Good things come to those who subscribe. We don’t spam.<br/>Pinky promise</p>",
+        "maxwidthofcta": 900,
+        "maxwidthofctamobile": 280,
+        "padding_sizeup": 20,
+        "padding_sizedown": 19,
+        "padding_sizeupm": 33,
+        "padding_sizedownm": 15,
+        "containertop_": 20,
+        "containerbottom_": 20,
+        "containertopmobile_": 20,
+        "containerbottommobile_": 20
+      }
+    }
+  },
+  "order": [
+    "main",
+    "16483123229192bec2",
+    "1657028551149346c9",
+    "1648312446fc35bbec"
+  ]
+}

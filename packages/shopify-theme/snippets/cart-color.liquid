@@ -1,0 +1,29 @@
+{% assign cartvariantcolor = cartgetvariantcolor %}
+
+{% case cartvariantcolor %}
+
+{% when 'Dusty Pink' %}
+
+{% assign cartHEXcolor = '#D9B6B2' %}
+
+{% when 'Mass Green' %}
+
+{% assign cartHEXcolor = '#596863' %}
+
+{% when 'Beige' %}
+
+{% assign cartHEXcolor = '#F1EDE2' %}
+
+{% when 'Red' %}
+
+{% assign cartHEXcolor = '#AE2D36' %}
+
+{% when 'Grey' %}
+
+{% assign cartHEXcolor = '#808080' %}
+
+{% else %}
+
+{% assign cartHEXcolor = '#808080' %}
+
+{% endcase %}

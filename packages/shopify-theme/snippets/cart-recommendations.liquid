@@ -1,0 +1,199 @@
+{% comment %}
+
+This file contains javascript logic to
+fetch cart product recommendation section
+and render it inside a specified wrapper
+
+{% endcomment %}
+<script type="module">
+    const devsole = {
+        MARK_LOGS_FOR_DEV: true,
+        color: 'color: blue',
+        log: (...args) => {
+            if (devsole.MARK_LOGS_FOR_DEV) return console.log('%c MARK_LOGS_FOR_DEV', devsole.color, ...args)
+
+            return console.log(arguments)
+        },
+        error: (...args) => {
+            if (devsole.MARK_LOGS_FOR_DEV) return console.error('%c MARK_LOGS_FOR_DEV', devsole.color, ...args)
+
+            return console.error(arguments)
+        }
+    }
+
+    const getCart = async () => fetch(window.Shopify.routes.root + 'cart.js', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .catch((error) => devsole.error('Network Error:', error))
+
+    /**
+     * Fetch product recommendations from Shopify.
+     * https://shopify.dev/docs/api/ajax/reference/product-recommendations
+     *
+     * @param {number} productId - The ID of the product to get recommendations for.
+     * @param {number} limit - The maximum number of recommendations to fetch.
+     * @param {string} intent - The intent of the recommendations. Possible values: 'related', 'complementary'.
+     * @returns {Promise<Object>} The product recommendations.
+     * */
+    const getRecommendations = async (productId, limit = 4, intent = 'related') => fetch(window.Shopify.routes.root + `recommendations/products.json?product_id=${productId}&limit=${limit}&intent=${intent}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(({products}) => products)
+        .catch((error) => devsole.error('Network Error:', error))
+
+    /**
+     * Fetch product recommendations HTML from sections.
+     * https://shopify.dev/docs/api/ajax/reference/product-recommendations
+     *
+     * @param {number} productId - The ID of the product to get recommendations for.
+     * @param {string} section_id - The name of section liquid file.
+     * @param {number} limit - The maximum number of recommendations to fetch.
+     * @param {string} intent - The intent of the recommendations. Possible values: 'related', 'complementary'.
+     * @param {string} intent - The intent of the recommendations. Possible values: 'related', 'complementary'.
+     * @returns {Promise<string>} The product recommendations.
+     * */
+    const getRecommendationsHTML = async (productId, section_id, limit = 4, intent = 'related',) => fetch(window.Shopify.routes.root + `recommendations/products?product_id=${productId}&limit=${limit}&section_id=${section_id}&intent=${intent}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.text())
+        .catch((error) => devsole.error('Network Error:', error))
+
+    /**
+     * Randomly selects a set amount of keys from an array.
+     *
+     * @param {Array} array - The array to select keys from.
+     * @param {number} numKeys - The number of keys to select.
+     * @returns {Array} The selected keys.
+     */
+    const getRandomKeys = (array, numKeys) => {
+        // Shuffle the array
+        const shuffledArray = array.sort(() => 0.5 - Math.random());
+
+        // Select the specified number of keys
+        return shuffledArray.slice(0, numKeys);
+    }
+
+    /**
+     * Selects random integer between [0; max]
+     */
+    const random = (max) => Math.floor(max * Math.random())
+
+    /**
+     * Retrieve a value from an object using a dot-separated key string.
+     *
+     * @param {Object} obj - The object to retrieve the value from.
+     * @param {string} keyString - The dot-separated key string.
+     * @returns {*} The value retrieved from the object.
+     */
+    const getValueByKeyString = (obj, keyString) => {
+        return keyString.split('.').reduce((acc, key) => acc && acc[key], obj);
+    }
+
+    /**
+     * Insert HTML into an element and execute any script tags within the HTML.
+     *
+     * @param {HTMLElement} element - The target element to insert HTML into.
+     * @param {string} html - The HTML string containing script tags.
+     */
+    const setInnerHTMLWithScripts = (element, html) => {
+        // Create a temporary container to parse the HTML
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+
+        console.log({html})
+
+        // Extract and remove script tags
+        const scripts = tempDiv.querySelectorAll('script');
+        scripts.forEach(script => {
+            const newScript = document.createElement('script');
+            if (script.src) {
+                newScript.src = script.src;
+            } else {
+                newScript.textContent = script.textContent;
+            }
+
+            newScript.setAttribute('type', script.getAttribute('type'))
+
+            document.head.appendChild(newScript).parentNode.removeChild(newScript);
+            script.parentNode.removeChild(script);
+        });
+
+        // Set the innerHTML of the target element without script tags
+        element.innerHTML = tempDiv.innerHTML;
+    };
+
+    /**
+     * Non scalable solution
+     * */
+    const isFreeGiftApplied = async ({items}) => {
+        if (!items || items.length === 0) return false
+
+        return items.some(({discounts}) => {
+            return discounts.some(({title}) => title.indexOf('free') !== -1)
+        })
+    }
+
+    const onMount = async () => {
+        // Config
+        const MAX_RECOMMENDATION_SOURCES = 3
+        const RENDER_IN_SELECTOR = '.cart-recommendations'
+
+        const recommendationHolder = document.querySelectorAll(RENDER_IN_SELECTOR)
+
+        const cart = await getCart()
+        const itemsIds = cart.items.map(item => +item.product_id)
+        const recommendFor = getRandomKeys(itemsIds, MAX_RECOMMENDATION_SOURCES)
+        const recommendForOneOf = recommendFor[random(recommendFor.length - 1)]
+
+        if (await isFreeGiftApplied(cart)) {
+            console.log('DUMP', 'Free gift applied. Skipping recommendations')
+
+            // Remove recommendations
+            recommendationHolder.forEach(e => {
+                const html = document.createElement('div');
+
+                setInnerHTMLWithScripts(e, html.innerHTML)
+            })
+        } else {
+            const cartRecommendations = await getRecommendationsHTML(recommendForOneOf, 'product-recommendations-cart', 5)
+
+            recommendationHolder.forEach(e => {
+                const html = document.createElement('div');
+                html.innerHTML = cartRecommendations;
+
+                setInnerHTMLWithScripts(e, html.innerHTML)
+            })
+        }
+    }
+
+    onMount()
+
+    /* Listeners */
+    let timeout;
+    const handleCartChange = () => {
+        clearTimeout(timeout)
+        timeout = setTimeout(onMount, 500)
+    }
+
+    const handleBeforeCartChange = () => {
+        clearTimeout(timeout)
+        timeout = setTimeout(onMount, 500)
+    }
+
+    document.removeEventListener("cart:update", handleCartChange);
+    document.addEventListener("cart:update", handleCartChange);
+
+    document.removeEventListener("cart:before-update", handleBeforeCartChange);
+    document.addEventListener("cart:before-update", handleBeforeCartChange);
+</script>

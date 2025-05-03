@@ -1,0 +1,521 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-sustainability",
+      "settings": {
+      }
+    },
+    "164052221295780e20": {
+      "type": "static-onlytext",
+      "settings": {
+        "onlyTextlayout": "only-bottom",
+        "bgOnlyTextCTA": "#eeeeea",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "",
+        "maxwidthoftitle": 20,
+        "maxwidthoftitlemobiled": 20,
+        "bodytextOnlyTextCTA": "Sure, our knits are designed to \nlook good. But we care about people and the planet, too.",
+        "fontsizetune": "30px",
+        "maxwidthoftext": 1020,
+        "maxwidthoftextmobile": 289,
+        "showurlOnlyTextCTA": false,
+        "linkOnlyTextCTA": "",
+        "linktextOnlyTextCTA": "",
+        "padding_sizeup_sot": 30,
+        "padding_sizedow_sot": 72,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 30,
+        "containerbottom": 30,
+        "containertopmobile": 40,
+        "containerbottommobile": 82,
+        "sectionID": ""
+      }
+    },
+    "164052305762d92650": {
+      "type": "static-collage",
+      "blocks": {
+        "608e63a9-32c0-4a8b-923e-b2cb4c27ed23": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "https://cdn.shopify.com/s/files/1/0548/6644/4336/files/Sustainability_Viceo_2_1.mp4?v=1644888805",
+            "caollageimage": "shopify://shop_images/1-Sustainability-Collage_600x_5da875a0-5af3-4b12-b7f5-746688255a09.webp",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": "#ffffff"
+          }
+        },
+        "ba3a21a4-bcc6-4e67-ac2b-65eb62df0f48": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/2-Sustainability-Collage_600x_2b9d34e4-f4df-4b82-9063-9d9bb4b3ed33.webp",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "fad1da9d-5975-4cb9-885d-bd8637e50e5e": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "https://cdn.shopify.com/s/files/1/0548/6644/4336/files/249044417_2889339151332064_2622184667073844729_n.mp4?v=1640610700",
+            "caollageimage": "shopify://shop_images/3-Sustainability-Collage_600x_762e8517-5475-4552-a716-7b3385afe135.webp",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "39a91e18-4816-46a3-b12d-4c174d8feda2": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": true,
+            "collagevideo": "https://cdn.shopify.com/s/files/1/0548/6644/4336/files/4-Sustainability-Collage.mp4?v=1649185571",
+            "caollagecolor": "#b4bed6",
+            "collagetext": "",
+            "caollagecolortext": "#000000"
+          }
+        },
+        "088e28b2-739b-4951-92d0-42eb2675de8f": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "https://cdn.shopify.com/s/files/1/0548/6644/4336/files/249044417_2889339151332064_2622184667073844729_n.mp4?v=1640610700",
+            "caollageimage": "shopify://shop_images/5-Sustainability-Collage_600x_25b3cb7d-9e3b-4aa9-a108-d0d6ef65da0c.webp",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "8abf60a3-aeea-41fd-96ed-d795a1009246": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/6-Sustainability-Collage_600x_122df373-f0ed-4eed-bc90-3295701c2a5b.webp",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        }
+      },
+      "block_order": [
+        "608e63a9-32c0-4a8b-923e-b2cb4c27ed23",
+        "ba3a21a4-bcc6-4e67-ac2b-65eb62df0f48",
+        "fad1da9d-5975-4cb9-885d-bd8637e50e5e",
+        "39a91e18-4816-46a3-b12d-4c174d8feda2",
+        "088e28b2-739b-4951-92d0-42eb2675de8f",
+        "8abf60a3-aeea-41fd-96ed-d795a1009246"
+      ],
+      "settings": {
+        "borderlayoutcollage": "hide-border",
+        "padding_sizeup": 15,
+        "padding_sizedown": 8,
+        "padding_sizeupm": 10,
+        "padding_sizedownm": 15
+      }
+    },
+    "1647017570751022d0": {
+      "type": "static-page-navigation",
+      "blocks": {
+        "3f9d111c-a919-41d0-be92-e34c870f385b": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "WOMEN WHO MADE YOUR KNITS",
+            "pnid": "section-1"
+          }
+        },
+        "c38631f5-2f94-4dba-915a-16853b368cd4": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "CAREERS NOT JOBS",
+            "pnid": "section-2"
+          }
+        },
+        "6fc86e87-27ae-4a98-a07f-3ebb1cf1c143": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "OUR YARNS",
+            "pnid": "section-3"
+          }
+        },
+        "bacde3d1-414e-491c-b80f-a25b5f3abb0c": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "SUSTAINABILITY",
+            "pnid": "section-4"
+          }
+        },
+        "3c2a8bc7-9470-4ba9-a9c2-0d0de2f16914": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "Packaging",
+            "pnid": "section-5"
+          }
+        }
+      },
+      "block_order": [
+        "3f9d111c-a919-41d0-be92-e34c870f385b",
+        "c38631f5-2f94-4dba-915a-16853b368cd4",
+        "6fc86e87-27ae-4a98-a07f-3ebb1cf1c143",
+        "bacde3d1-414e-491c-b80f-a25b5f3abb0c",
+        "3c2a8bc7-9470-4ba9-a9c2-0d0de2f16914"
+      ],
+      "settings": {
+      }
+    },
+    "164052310178b452d0": {
+      "type": "static-CTA-small-text",
+      "blocks": {
+        "b2c09dab-668b-418f-8a68-581792269517": {
+          "type": "small-text-body",
+          "settings": {
+            "stbody": "We do individual pieces, rather than collections. Pre-orders rather than deadstock. Patiently waiting for our Corozo buttons to fall from the tree rather than using plastic. You get the point. Sustainability is at the core of all of our decisions. The overall goal? To produce sustainable knitwear that delivers social change in Lithuania’s rural communities."
+          }
+        }
+      },
+      "block_order": [
+        "b2c09dab-668b-418f-8a68-581792269517"
+      ],
+      "settings": {
+        "smallTextlayoutmidtext": "only-bottom",
+        "maxwidthofsmalltext": 15,
+        "maxwidthofsmalltextm": 15,
+        "maxwidthofsmallbody": 920,
+        "maxwidthofsmallbodym": 244,
+        "padding_sizeup": 0,
+        "padding_sizedown": 6,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "smallttopdesktop": 5,
+        "smalltbottomdesktop": 15,
+        "smallttopmobile": 59,
+        "smalltbottommobile": 59,
+        "titlealigndesktop": "center",
+        "titlealignmobile": "center",
+        "sectionID": ""
+      }
+    },
+    "1640523146784c4311": {
+      "type": "static-two-column",
+      "settings": {
+        "borderlayouttwocl": "only-bottom",
+        "textposition": "space-between",
+        "sectionlayouttwocl": "image-text",
+        "headingcl": "On each garment you'll see the name of the knitter who made your piece",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 441,
+        "h2maxwidthmobile": 207,
+        "bodycl": "We're seriously proud of the knitters team we've gathered. Some work full time, others knit when they have time after taking care of their families. Currently, we have around 70 hand-knitters who work from home in rural Lithuania and two vetted, audited, family-run, female-founded partner production factories.",
+        "pmaxwidthdesktop": 530,
+        "pmaxwidthmobile": 253,
+        "cl-image": "shopify://shop_images/STB-Section-1-On-Each-Garment_938x_a4e2a985-7cb6-4e4f-b188-c2f04e8c7e97.webp",
+        "padding_sizeupm_section": 30,
+        "padding_sizedownm_section": 24,
+        "padding_sizeup": 19,
+        "padding_sizedown": 10,
+        "padding_sizeupm": 8,
+        "padding_sizedownm": 14,
+        "showurlcl": false,
+        "linkTextcl": "",
+        "linkclUrl": "",
+        "sectionID": "section-1"
+      }
+    },
+    "1640523316c2dd29d6": {
+      "type": "static-two-column",
+      "settings": {
+        "borderlayouttwocl": "only-bottom",
+        "textposition": "space-between",
+        "sectionlayouttwocl": "text-image",
+        "headingcl": "Not just providing jobs, but also strengthening communities",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 400,
+        "h2maxwidthmobile": 224,
+        "bodycl": "Financial independence for all of our knitters is the goal. And a little extra. In many parts of rural Lithuania, men are still the breadwinners. By encouraging financial independence, we’re ensuring women here have voices in their households and communities. We encourage them to dream and we help to bring those dreams to life.",
+        "pmaxwidthdesktop": 900,
+        "pmaxwidthmobile": 250,
+        "cl-image": "shopify://shop_images/STB-Section-2-Not-just-providing-jobs_938x_33c94538-acf2-41b8-9937-48f4aebdb644.webp",
+        "padding_sizeupm_section": 30,
+        "padding_sizedownm_section": 14,
+        "padding_sizeup": 19,
+        "padding_sizedown": 10,
+        "padding_sizeupm": 9,
+        "padding_sizedownm": 15,
+        "showurlcl": false,
+        "linkTextcl": "",
+        "linkclUrl": "",
+        "sectionID": "section-2"
+      }
+    },
+    "16405233286e7fe101": {
+      "type": "static-two-column",
+      "settings": {
+        "borderlayouttwocl": "only-bottom",
+        "textposition": "space-between",
+        "sectionlayouttwocl": "image-text",
+        "headingcl": "Au naturel and not <br> ashamed of that",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 900,
+        "h2maxwidthmobile": 200,
+        "bodycl": "All of our knits are 100% biodegradable - you’ll never find any synthetic stuff or microplastics. We only use the highest quality natural fabrics to craft our knits, like 100% Merino wool, cotton or linen.",
+        "pmaxwidthdesktop": 900,
+        "pmaxwidthmobile": 246,
+        "cl-image": "shopify://shop_images/STB-Section-3-Au-Naturale_938x_7a165aa9-efbc-4a31-8b08-dcec612d4c68.webp",
+        "padding_sizeupm_section": 30,
+        "padding_sizedownm_section": 25,
+        "padding_sizeup": 19,
+        "padding_sizedown": 10,
+        "padding_sizeupm": 9,
+        "padding_sizedownm": 15,
+        "showurlcl": false,
+        "linkTextcl": "",
+        "linkclUrl": "",
+        "sectionID": "section-3"
+      }
+    },
+    "1640523403f06c473a": {
+      "type": "static-onlyethical-yarns",
+      "blocks": {
+        "afa8e31c-f5da-4fef-a3c6-dbd557a320d9": {
+          "type": "Slider",
+          "settings": {
+            "eoyimage": "shopify://shop_images/2-Yarns-Alpaca-Wool-widget_514x643_a79f4ae0-5fea-43f6-9bdd-85ba8395198b.jpg",
+            "eoyslidertitle": "Alpaca Wool",
+            "eoyslidercopy": "Alpaca fleece is soft, durable and silky. For Žemiau and Ethno we use undyed alpaca wool, which naturally comes in more than 300 shades. Alpaca wool is one of the warmest animal fibers and it's also highly water-resistant. Our Jūra and Laimė supplier is another socially responsible company with a Peru Fair Trade Certification. That means it's also involved in social and cultural projects that support local schools and artists in the Peruvian Highlands.",
+            "eoyslidersmall": "<p>USED FOR: <a href=\"/products/ethno-sweater-brown\" title=\"Ethno Sweater\">ETHNO SWEATER</a>, <a href=\"/products/zemiau-cardigan-off-white-baltic-fields\" title=\"Žemiau Cardigan\">ŽEMIAU CARDIGAN</a>, <a href=\"/products/jura-sweater-naked\" title=\"Jūra Sweater\">JŪRA SWEATER</a>, <a href=\"/products/laime-vest-naked-oat-milk\" title=\"Laimė Vest\">LAIMĖ VEST</a></p>",
+            "eoysmalltext": true,
+            "eoylogo": "shopify://shop_images/logos_3_x100_bf80b4df-eea5-4db2-9ac2-f5a445aa2789.webp",
+            "showlogos": true,
+            "eoythumbimage": "shopify://shop_images/new_alpaca_icon_180x180_15ddcea8-66ef-4af4-8ec4-6b979208c287.webp"
+          }
+        },
+        "fe727d7d-2402-470d-b330-3e27d968db17": {
+          "type": "Slider",
+          "settings": {
+            "eoyimage": "shopify://shop_images/1-Yarns-Merino-Wool-widget_514x643_101cb2b0-0805-41df-9c62-bf6304863a52.webp",
+            "eoyslidertitle": "Merino Wool",
+            "eoyslidercopy": "We know it as Merino wool but you might know it as “cashwool”, thanks to its cashmere-like qualities. We source our Merino wool from Italy, where it’s spun and dyed in-house. The process is carried out locally to ensure absolute control of ethical and sustainable production. Our Italian suppliers are Responsible Wool Standard (RWS) certified, which is an internationally valid license that ensures best practices and respect towards animals, land management and social welfare.",
+            "eoyslidersmall": "<p>USED FOR: <a href=\"https://the-knotty-ones-development.myshopify.com/collections/laumes\" target=\"_blank\" title=\"https://the-knotty-ones-development.myshopify.com/collections/laumes\">LAUMĖS SWEATER</a>, <a href=\"/products/preila-merino-wool-cardigan\" target=\"_blank\" title=\"Preila\">PREILA CARDIGAN</a>, <a href=\"/products/milda-merino-wool-sweater\" title=\"Milda\">MILDA TURTLENECK</a></p>",
+            "eoysmalltext": true,
+            "eoylogo": "shopify://shop_images/responsible-wool-standard-rws-logo-vector_x100_2f93a198-8c0c-4db8-9a0b-49fe4f15581c.webp",
+            "showlogos": true,
+            "eoythumbimage": "shopify://shop_images/new_merino_icon_180x180_8bff1c7c-de81-4bd6-b80c-302b4e057226.webp"
+          }
+        },
+        "3b336f4a-c4e4-46cb-a2f1-1ad53412bc1a": {
+          "type": "Slider",
+          "settings": {
+            "eoyimage": "shopify://shop_images/3-Yarns-Wool-widget_514x643_33b63158-f952-463d-99a8-a91c77aef2e9.webp",
+            "eoyslidertitle": "Wool",
+            "eoyslidercopy": "Wool's the OG when it comes to fibers and was one of the first to be woven into fabric. It's the most reusable and recyclable on the planet and is easy to care for, which is why we use it for a large number of our knits. The wool we use comes from sustainable suppliers, who invest into reducing their ecological footprint and encourage conversations and actions in-house about environmental concerns. We use 100% natural, museling free yarn with a GOTS Certificate.",
+            "eoyslidersmall": "<p>USED FOR: <a href=\"/products/barbora-wool-turtleneck\" title=\"Barbora\">BARBORA SWEATER</a>, <a href=\"/products/jurgis-wool-cardigan\" title=\"Jurgis\">JURGIS CARDIGAN</a>, <a href=\"https://the-knotty-ones-development.myshopify.com/collections/heartbreaker\" target=\"_blank\" title=\"https://the-knotty-ones-development.myshopify.com/collections/heartbreaker\">HEARTBREAKER SWEATER</a>, <a href=\"/products/tommy-wool-cardigan\" title=\"Tommy\">TOMMY CARDIGAN</a>, <a href=\"/products/twisted-erik-wool-cardigan\" title=\"Twisted Erik\">TWISTED ERIK CARDIGAN</a>, <a href=\"/products/slabada-wool-sweater\" title=\"Slabada\">SLABADA SWEATER</a>, <a href=\"/products/leggy-wool-sweater-dress\" title=\"Leggy\">LEGGY DRESS</a></p>",
+            "eoysmalltext": true,
+            "eoylogo": "shopify://shop_images/logos_3_x100_12a26c46-19b3-4bd0-9743-f33789c1f877.webp",
+            "showlogos": true,
+            "eoythumbimage": "shopify://shop_images/wool_icon_180x180_27306eea-8a5a-4aad-9da2-d1163fe5a8a6.webp"
+          }
+        },
+        "7b9b9411-c5b8-4c50-bfe3-9547581c9e15": {
+          "type": "Slider",
+          "settings": {
+            "eoyimage": "shopify://shop_images/4-Yarns-Cotton-widget_514x643_e55115ca-4149-4e13-855b-fefe734cbd3b.webp",
+            "eoyslidertitle": "Cotton",
+            "eoyslidercopy": "All the cotton we use is OEKO-TEX® certified, which guarantees it's free of substances harmful to human health and that it's safe from an ecological point of view. Our cotton supplier for Delčia, Pilnatis, Pieva, Juostų and Aistis emphasizes the entire lifecycle of the product, sourcing ethical materials from field to fleece and also factoring in their afterlife of the fabric. Their goal is to reduce the overall impact on the environment by reducing our chemical and water expenditures.",
+            "eoyslidersmall": "<p>USED FOR: <a href=\"/products/nida-cotton-sweater\" title=\"Nida\">NIDA SWEATER</a>, <a href=\"/products/marina-cotton-cardigan\" title=\"Marina\">MARINA CARDIGAN</a>, <a href=\"/collections/delcia\" title=\"Delčia\">DELČIA SWEATER</a>, <a href=\"/products/pilnatis-cotton-shorts\" title=\"Pilnatis\">PILNATIS SHORTS</a>, <a href=\"/products/pieva-cotton-shorts\" title=\"Pieva\">PIEVA SHORTS</a>, <a href=\"/products/pieva-cotton-bralette\" title=\"Pieva\">PIEVA BRALETTE</a>, <a href=\"/products/juostu-cotton-crop-top\" title=\"Juostų\">JUOSTŲ CROP TOP</a>, <a href=\"/products/aistis-cotton-t-shirt\" title=\"Aistis\">AISTIS T-SHIRT</a></p>",
+            "eoysmalltext": true,
+            "eoylogo": "shopify://shop_images/logos_4_x100_72622a5c-7af4-4110-87a9-f849b0b5fe75.webp",
+            "showlogos": true,
+            "eoythumbimage": "shopify://shop_images/cotton_icon_180x180_72545552-83d4-43ee-9913-9a149a16cc7f.webp"
+          }
+        },
+        "b8ebcd1a-f066-450d-b3c7-108496518d11": {
+          "type": "Slider",
+          "disabled": true,
+          "settings": {
+            "eoyslidertitle": "",
+            "eoyslidercopy": "",
+            "eoyslidersmall": "",
+            "eoysmalltext": true,
+            "showlogos": true
+          }
+        }
+      },
+      "block_order": [
+        "afa8e31c-f5da-4fef-a3c6-dbd557a320d9",
+        "fe727d7d-2402-470d-b330-3e27d968db17",
+        "3b336f4a-c4e4-46cb-a2f1-1ad53412bc1a",
+        "7b9b9411-c5b8-4c50-bfe3-9547581c9e15",
+        "b8ebcd1a-f066-450d-b3c7-108496518d11"
+      ],
+      "settings": {
+        "eoylayoutpage": "only-bottom",
+        "eoysectiontitle": "ONLY ETHICAL YARNS",
+        "eoyslidercolor": "#b4bed6",
+        "padding_sizeup": 5,
+        "padding_sizedown": 20,
+        "padding_sizeupm": 20,
+        "padding_sizedownm": 10,
+        "sectionID": ""
+      }
+    },
+    "164052340611e6cfc0": {
+      "type": "static-two-column",
+      "settings": {
+        "borderlayouttwocl": "only-bottom",
+        "textposition": "space-between",
+        "sectionlayouttwocl": "image-text",
+        "headingcl": "Deadstock? We don’t know her",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 450,
+        "h2maxwidthmobile": 280,
+        "bodycl": "We have our handmade production and then we have our “fully fashioned” production. That’s an industry term that basically means each sweater piece is individually factory-knitted and then sewn together by hand. This zero-waste approach is pretty cool because it ensures no leftover scraps - we literally knit the shapes that’ll be sewn together.",
+        "pmaxwidthdesktop": 900,
+        "pmaxwidthmobile": 252,
+        "cl-image": "shopify://shop_images/STB-Section-3-Deadstock-we-dont-know-her_938x_d11207a3-3d33-4fea-ab6a-9ae3a86791f6.webp",
+        "padding_sizeupm_section": 33,
+        "padding_sizedownm_section": 28,
+        "padding_sizeup": 19,
+        "padding_sizedown": 9,
+        "padding_sizeupm": 10,
+        "padding_sizedownm": 15,
+        "showurlcl": false,
+        "linkTextcl": "",
+        "linkclUrl": "",
+        "sectionID": "section-4"
+      }
+    },
+    "1640523591076c9553": {
+      "type": "static-onlytext",
+      "settings": {
+        "onlyTextlayout": "only-bottom",
+        "bgOnlyTextCTA": "#eeeeea",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "",
+        "maxwidthoftitle": 20,
+        "maxwidthoftitlemobiled": 20,
+        "bodytextOnlyTextCTA": "Our goal is to only ever produce as much as you and the rest of our community needs, when you need it.",
+        "fontsizetune": "30px",
+        "maxwidthoftext": 980,
+        "maxwidthoftextmobile": 302,
+        "showurlOnlyTextCTA": false,
+        "linkOnlyTextCTA": "",
+        "linktextOnlyTextCTA": "",
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 55,
+        "padding_sizedow_sotm": 75,
+        "containertop": 10,
+        "containerbottom": 55,
+        "containertopmobile": 20,
+        "containerbottommobile": 20,
+        "sectionID": ""
+      }
+    },
+    "1644713745366deea0": {
+      "type": "static-two-column",
+      "settings": {
+        "borderlayouttwocl": "only-bottom",
+        "textposition": "space-between",
+        "sectionlayouttwocl": "text-image",
+        "headingcl": "Plastic? No thanks",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 450,
+        "h2maxwidthmobile": 280,
+        "bodycl": "You’ll see no plastic anywhere at The Knotty Ones. Nada. Zero. Zilch. That means no microplastic in our knits, no plastic packaging and that even extends to our buttons. Those are made from Northern South American Corozo seeds, so each one is ever so slightly unique. We wait for the seeds to drop naturally, which is one of the reasons we wouldn’t be able to mass-produce knits, even if we wanted to.",
+        "pmaxwidthdesktop": 900,
+        "pmaxwidthmobile": 252,
+        "cl-image": "shopify://shop_images/STB-Section-4-Plastic-no-thanks_938x_b193178a-95c5-4b58-9214-2a3a0995dfd7.webp",
+        "padding_sizeupm_section": 33,
+        "padding_sizedownm_section": 28,
+        "padding_sizeup": 19,
+        "padding_sizedown": 9,
+        "padding_sizeupm": 10,
+        "padding_sizedownm": 15,
+        "showurlcl": false,
+        "linkTextcl": "",
+        "linkclUrl": "",
+        "sectionID": "section-4"
+      }
+    },
+    "164052364270f5c10d": {
+      "type": "static-two-column",
+      "settings": {
+        "borderlayouttwocl": "hide-border",
+        "textposition": "space-between",
+        "sectionlayouttwocl": "image-text",
+        "headingcl": "Our plant-based packaging goes in the compost, not in the bin",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 450,
+        "h2maxwidthmobile": 230,
+        "bodycl": "Our packaging is 100% recycled and recyclable - don’t throw it away! It’s made from corn starch, which is non-toxic and breaks down within six months in home compost. We use only certified home compostable mailing satchels, which can be used twice (they have fitted tapes for second use) before it’s composted for good.",
+        "pmaxwidthdesktop": 900,
+        "pmaxwidthmobile": 252,
+        "cl-image": "shopify://shop_images/4-_2_938x_f77f7f53-b0d4-4ec1-834a-5dcda79a8bef.webp",
+        "padding_sizeupm_section": 33,
+        "padding_sizedownm_section": 28,
+        "padding_sizeup": 19,
+        "padding_sizedown": 9,
+        "padding_sizeupm": 10,
+        "padding_sizedownm": 12,
+        "showurlcl": false,
+        "linkTextcl": "",
+        "linkclUrl": "",
+        "sectionID": "section-5"
+      }
+    },
+    "1644891789487b7d29": {
+      "type": "static-two-column",
+      "settings": {
+        "borderlayouttwocl": "only-top",
+        "textposition": "space-between",
+        "sectionlayouttwocl": "text-image",
+        "headingcl": "It’s a conversation we’ll never <br> stop having",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 450,
+        "h2maxwidthmobile": 200,
+        "bodycl": "No fashion brand is perfect and we don’t claim to be. Sustainable fashion is an ever-evolving thing and we’re always finding new ways to stay at the forefront of the action. We’re open to hearing your feedback and/or suggestions as to how we can become greener or make a bigger impact. After all, the more people get involved, the bigger changes we’ll see.",
+        "pmaxwidthdesktop": 900,
+        "pmaxwidthmobile": 251,
+        "cl-image": "shopify://shop_images/STB-Section-6-Its-a-conversation_938x_3017100a-2414-4d80-8630-55f3e4fac840.webp",
+        "padding_sizeupm_section": 33,
+        "padding_sizedownm_section": 28,
+        "padding_sizeup": 19,
+        "padding_sizedown": 9,
+        "padding_sizeupm": 10,
+        "padding_sizedownm": 15,
+        "showurlcl": false,
+        "linkTextcl": "",
+        "linkclUrl": "",
+        "sectionID": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "164052221295780e20",
+    "164052305762d92650",
+    "1647017570751022d0",
+    "164052310178b452d0",
+    "1640523146784c4311",
+    "1640523316c2dd29d6",
+    "16405233286e7fe101",
+    "1640523403f06c473a",
+    "164052340611e6cfc0",
+    "1640523591076c9553",
+    "1644713745366deea0",
+    "164052364270f5c10d",
+    "1644891789487b7d29"
+  ]
+}

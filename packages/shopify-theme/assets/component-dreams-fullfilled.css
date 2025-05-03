@@ -1,0 +1,530 @@
+.dreams-fullfilled-container{
+    width:100%;
+    height: auto;
+    position: relative;
+}
+
+.dreams-fullfilled-content{
+    width:100%;
+    height: auto;
+    position: relative;
+}
+
+.dreams-fullfilled-header{
+     width:100%;
+     height: 173px;
+     position: relative;
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     justify-content: center;
+     border-top: 1px solid black;
+}
+
+.dreams-fullfilled-header h2{
+    font-family: 'Monument';
+    font-size: 22px;
+    letter-spacing: -0.34px;
+    color: black;
+    text-align: center;
+}
+
+.dreams-fullfilled-featured{
+    width:100%;
+    height: auto;
+    position: relative;
+}
+
+.dreams-fullfilled-featured li{
+    width:100%;
+    height: auto;
+    position: relative;
+    padding-bottom: 50px;
+}
+
+.df-featured-hero{
+    width:100%;
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 57px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.df-featured-hero video{
+    width:100%;
+    height:100%;
+}
+
+.df-featured-hero img{
+    width:100%;
+}
+
+.dff-content{
+    position:absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.dff-content h2{
+    font-family: 'Monument';
+    font-size: 36px;
+    letter-spacing: -.55px;
+    color: #fff;
+    line-height: 70px;
+    text-align: center;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-bottom: 45px;
+}
+
+.dff-content p{
+    font-size: 62px;
+    letter-spacing: -0.95px;
+    color: white;
+    line-height: 70px;
+    text-align: center;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
+.df-featured-summary{
+    width:100%;
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.dffs{
+    width:50%;
+}
+
+.dffs-avatar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.dffs-avatar img{
+     width:124px;
+     height: 124px;
+     border-radius: 50%;
+}
+
+.dffs-name{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: 55px;
+}
+
+.dffs-name h2{
+    font-family: 'Monument';
+    font-size: 28px;
+    letter-spacing: -0.43px;
+    color: black;
+    line-height: 34px;
+    text-align: left;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    text-transform: uppercase;
+}
+
+.dffs-name p{
+    font-size: 28px;
+    letter-spacing: -0.43px;
+    color: black;
+    line-height: 34px;
+    text-align: left;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
+.dffs-right img{
+    width:100%;
+}
+
+.dffs-right p{
+    font-family: 'Monument Regular';
+    font-size: 21px;
+    letter-spacing: -0.32px;
+    color: black;
+    line-height: 32px;
+    text-align: left;
+    max-width: 671px;
+}
+
+.dffs.dffs-right {
+    padding-right: 0px;
+    opacity: 0;
+    width: 100%;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 15px;
+    
+}
+
+.fullfilled-content-summary {
+    width: 86%;
+    padding-left: 179px;
+}
+
+.fullfilled-img-container {
+    width: 40%;
+    position: relative;
+    top: -115px;
+    z-index: 2;
+}
+
+.dffs-block {
+    display:none;
+}
+
+
+.df-summary {
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.dreams-fullfilled-list li{
+    width: 100%;
+    height: auto;
+    border-top: 1px solid black;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 30px 0px;
+    position: relative;
+}
+
+li.active.fullfilledli {
+
+    padding: 30px 0px 0px 0px;
+}
+
+
+
+.dream-arrow.fullfilled-dr {
+    font-family: 'Monument Regular';
+    position: absolute;
+    right: 14px;
+    top:66px;
+    z-index: 1;
+}
+
+.dreams-fullfilled-list li:last-child {
+
+    border-bottom: 1px solid #000;
+}
+
+.fullfilled-footer{
+    width:100%;
+    height: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 90px 0px 57px 0px;
+}
+
+.fullfilled-footer a{
+    font-family: 'Monument';
+    font-size: 22px;
+    letter-spacing: -0.34px;
+    color: black;
+    line-height: 22px;
+}
+
+video::-internal-media-controls-download-button {
+    display:none;
+}
+
+video::-webkit-media-controls-enclosure {
+    overflow:hidden;
+}
+
+video::-webkit-media-controls-panel {
+    width: calc(100% + 30px); /* Adjust as needed */
+}
+
+@media (min-width: 1921px) and (max-width: 4000px) {
+    .content-vid{
+        overflow: hidden;
+        max-height: 1062px;
+    }
+}
+
+@media (width: 1024px) and (height: 1366px) {
+
+.dffs-right img{
+    width:100%;
+}
+    
+
+}
+
+@media (max-width: 812px) {
+
+    .dreams-fullfilled-header {
+        justify-content: flex-start;
+        height: 100px;
+        border-top: 0.5px solid black;
+    }
+
+    .dreams-fullfilled-header h2 {
+        text-align: left;
+        max-width: 230px;
+    }
+    .dff-content p {
+        font-size: 22px;
+        letter-spacing: -0.34px;
+        line-height: 24px;
+    }
+
+    .dff-content h2 {
+        font-size: 22px;
+        letter-spacing: -.43px;
+        line-height: 30px;
+        margin-bottom: 4px;
+    }
+
+    .dffs-avatar img {
+        width: 65px;
+        height: 65px;
+    }
+    .dffs-name h2 {
+        font-size: 12px;
+        letter-spacing: -.19px;
+        line-height: 16px;
+    }
+
+    .dffs-name p {
+        font-size: 12px;
+        letter-spacing: -.19px;
+        line-height: 16px;
+    }
+
+    .dffs-name {
+        margin-left: 27px;
+    }
+
+    .df-featured-summary {
+        flex-direction: column;
+    }
+
+    .dffs {
+        width: 100%;
+    }
+    .dffs-right p {
+        font-size: 14px;
+        letter-spacing: -.22px;
+        line-height: 20px;
+     
+
+    }
+
+    .dffs.dffs-right {
+        padding-right: 0px;
+        padding-left: 0px;
+        margin-top:10px;
+        flex-direction: column;
+    }
+
+    .df-featured-hero {
+        margin-bottom: 35px;
+    }
+
+   
+
+    .dreams-fullfilled-featured li {
+        padding-bottom: 28px;
+    }
+
+    .dreams-fullfilled-list li {
+        padding: 13px 0;
+        border-top:.5px solid black;
+    }
+
+    .dreams-fullfilled-list li:last-child {
+
+        border-bottom: .5px solid #000;
+    }
+
+    .fullfilled-footer {
+        padding: 64px 0 48px;
+
+    }
+
+    .fullfilled-footer a {
+        font-size: 16px;
+        letter-spacing: -.25px;
+        line-height: 16px;
+    }
+
+    .df-summary {
+        flex-direction: column;
+    }
+
+    .dffs-block img{
+        width:100%;
+    }
+
+    .dream-arrow.fullfilled-dr {
+        right: 4px;
+        top: 27px;
+    }
+
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .dreams-fullfilled-header {
+        justify-content: center;
+        height: 100px;
+        border-top: 0.5px solid black;
+    }
+
+    li.active.fullfilledli {
+        padding: 13px 0px;
+    }
+
+    .dreams-fullfilled-header h2 {
+        text-align: center;
+    max-width: 284px;
+    font-size: 16px;
+    }
+    .dff-content p {
+        font-size: 22px;
+        letter-spacing: -0.34px;
+        line-height: 24px;
+    }
+
+    .dff-content h2 {
+        font-size: 22px;
+        letter-spacing: -.43px;
+        line-height: 30px;
+        margin-bottom: 4px;
+    }
+
+    .dffs-avatar img {
+        width: 65px;
+        height: 65px;
+    }
+    .dffs-name h2 {
+        font-size: 12px;
+        letter-spacing: -.19px;
+        line-height: 16px;
+    }
+
+    .dffs-name p {
+        font-size: 12px;
+        letter-spacing: -.19px;
+        line-height: 16px;
+    }
+
+    .dffs-name {
+        margin-left: 27px;
+    }
+
+    .df-featured-summary {
+        flex-direction: column;
+    }
+
+    .dffs {
+        width: 100%;
+        padding: 0px 10px;
+    }
+    .dffs-right p {
+        font-size: 14px;
+        letter-spacing: -.22px;
+        line-height: 20px;
+        max-width:307px;
+    }
+
+    .dffs.dffs-right {
+        padding-right: 0px;
+        padding-left: 0px;
+        margin-top:10px;
+        flex-direction: column;
+    }
+
+    .fullfilled-content-summary {
+        width: 100%;
+        padding: 0px 24px 0px 24px;
+    }
+
+    .fullfilled-img-container {
+        width: 100%;
+        position: relative;
+        top: 0px;
+        padding: 0px 24px 0px 24px;
+    }
+    
+
+    .df-featured-hero {
+        margin-bottom: 35px;
+    }
+
+   
+
+    .dreams-fullfilled-featured li {
+        padding-bottom: 28px;
+    }
+
+    .dreams-fullfilled-list li {
+        padding: 13px 0;
+        border-top:.5px solid black;
+    }
+
+    .dreams-fullfilled-list li:last-child {
+
+        border-bottom: .5px solid #000;
+    }
+
+    .fullfilled-footer {
+        padding: 64px 0 48px;
+
+    }
+
+    .fullfilled-footer a {
+        font-size: 16px;
+        letter-spacing: -.25px;
+        line-height: 16px;
+    }
+
+    .df-summary {
+        flex-direction: column;
+    }
+
+    .dffs-block img{
+        width:100%;
+        margin-top:13px;
+        margin-bottom:8px;
+    }
+
+    .dream-arrow.fullfilled-dr {
+        right: 11px;
+        top: 27px;
+    }
+}
+
+

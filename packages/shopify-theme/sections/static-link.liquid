@@ -1,0 +1,227 @@
+<section class="kto-main-container">
+    <div class="tko-lines sot-{{section.id}} {{section.settings.onlyTextlayout}}"
+    {% if section.settings.onlyTextlayout == 'top-bottom'%}
+    style="
+        border-top-style:  solid;
+        border-top-color:   black;
+        border-bottom-style: solid;
+        border-bottom-color:  black;
+       
+        
+    ">
+    {% elsif  section.settings.onlyTextlayout == 'only-top' %}
+    style="
+        border-top-style:  solid;
+        border-top-color:   black;
+        border-bottom: none;
+     
+    ">
+    {% elsif  section.settings.onlyTextlayout == 'only-bottom' %}
+    style="
+        border-top: none;
+        border-bottom-style:  solid;
+        border-bottom-color:   black;
+      
+    ">
+    
+    {% else %}
+    
+    style="
+        border-top: none;
+        border-bottom: none;
+      
+    "> 
+  
+    {% endif %}
+
+    {{ 'component-static-link.css' | asset_url | stylesheet_tag }}
+
+
+
+<div class="link-container-- container-padding-{{section.id}}">
+      <a class="btn-darrow {% if section.settings.justheader == true %} justheader {%endif%} {% if section.settings.thisisbigurl ==  true %} smaller-text{%endif%}" href="{{section.settings.linkurl}}">{{section.settings.linktext}}</a>
+</div>
+
+
+</div>
+</section>
+
+
+
+{% schema %}
+{
+        "name": "Link Section", 
+        "settings": [
+        {
+          "type": "header",
+          "content": "Layout Options"
+        },
+        {
+          "type": "select",
+          "id": "onlyTextlayout",
+          "label": "Section Border Options",
+          "default": "top-bottom",
+          "options": [
+            {
+              "value": "top-bottom",
+              "label": "Show Border Top & Bottom"
+            },
+            {
+              "value": "only-top",
+              "label": "Show Border Only Top"
+            },
+            {
+                "value": "only-bottom",
+                "label": "Show Border Only Bottom"
+              },
+            {
+                "value": "hide-border",
+                "label": "Hide Borders"
+              }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Link Options"
+        },
+        {
+            "id": "linktext",
+            "type": "text",
+            "label": "Link Text",
+            "default": "GO TO SOMEWHERE!"
+          },
+          {
+            "id": "linkurl",
+            "type": "url",
+            "label": "Link URL"
+          },
+          {
+            "type": "checkbox",
+            "id": "thisisbigurl",
+            "label": "Smaller Font Size For Mobile",
+            "default": false
+          },
+{
+            "type": "checkbox",
+            "id": "justheader",
+            "label": "Just header options",
+            "default": false
+          },
+          
+          {
+            "type": "header",
+            "content": "Line Padding Options Desktop"
+          },
+          {
+            "type":"number",
+            "id":"padding_sizeup_sot",
+            "label":"Top",
+            "default":20
+          },
+          {
+            "type":"number",
+            "id":"padding_sizedow_sot",
+            "label":"Bottom",
+            "default":20
+          },
+          
+          {
+            "type": "header",
+            "content": "Line Padding Options Mobile"
+          },
+          {
+            "type":"number",
+            "id":"padding_sizeup_sotm",
+            "label":"Top",
+            "default":20
+          },
+          {
+            "type":"number",
+            "id":"padding_sizedow_sotm",
+            "label":"Bottom",
+            "default":20
+          },
+          {
+            "type": "header",
+            "content": "Container Padding Desktop"
+          },
+          {
+            "type":"number",
+            "id":"containertop",
+            "label":"Top",
+            "default":20
+          },
+          {
+            "type":"number",
+            "id":"containerbottom",
+            "label":"Bottom",
+            "default":20
+          },
+          
+          
+          {
+            "type": "header",
+            "content": "Container Padding Mobile"
+          },
+          {
+            "type":"number",
+            "id":"containertopmobile",
+            "label":"Top",
+            "default":20
+          },
+          
+          {
+            "type":"number",
+            "id":"containerbottommobile",
+            "label":"Bottom",
+            "default":20
+          }
+        ],
+           "presets": [
+    {
+      "category": "URL",
+      "name": "Link Section"
+     }
+  ]
+      }
+ 
+
+{% endschema %}
+
+
+
+<style>
+  .justheader:after{
+      content:'';
+    }
+    .sot-{{ section.id }}{
+      padding: {{section.settings.padding_sizeup_sot}}px 0px {{section.settings.padding_sizedow_sot}}px 0px;
+      border-width: 1px ;
+      
+     }
+     .mxwidth-{{section.id}}{
+      max-width: {{section.settings.maxwidthoftext}}px;
+     }
+     .mxwidth-header-{{section.id}}{
+      max-width: {{section.settings.maxwidthoftitle}}px;   
+     }
+     .container-padding-{{section.id}}{
+       padding:{{section.settings.containertop}}px 0px {{section.settings.containerbottom}}px 0px;   
+     }
+     @media (min-width: 320px) and (max-width: 480px) {
+      .sot-{{ section.id }}{
+      padding: {{section.settings.padding_sizeup_sotm}}px 0px {{section.settings.padding_sizedow_sotm}}px 0px;
+      border-width: 0.5px;
+     }
+    
+     .mxwidth-{{section.id}}{
+      max-width: {{section.settings.maxwidthoftextmobile}}px;
+     }
+     .mxwidth-header-{{section.id}}{
+      max-width: {{section.settings.maxwidthoftitlemobiled}}px;   
+     }
+     .container-padding-{{section.id}}{
+      padding:{{section.settings.containertopmobile}}px 0px {{section.settings.containerbottommobile}}px 0px;     
+     }
+     }    
+</style>

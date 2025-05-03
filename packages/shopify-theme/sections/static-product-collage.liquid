@@ -1,0 +1,324 @@
+{{ 'component-static-collage.css' | asset_url | stylesheet_tag }}
+{% assign collage_state = product.metafields.my_fields.collage_asset_1 | strip | split: '?' %}
+{% assign lastthree = collage_state[0] | slice: -3 ,3 %}
+{% assign lastlite = lastthree | strip %}
+
+{% if lastlite == 'mp4' or lastlite == 'jpg' or lastlite == 'png' or lastlite == 'ebp' %}
+
+<section class="kto-main-container">
+    <div class="tko-lines collage-line-{{section.id}}"
+    {% if section.settings.borderlayoutcollage == 'top-bottom'%}
+    style="
+        border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+    ">
+    {% elsif  section.settings.borderlayoutcollage == 'only-top' %}
+    style="
+    border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom: none;
+    ">
+    {% elsif  section.settings.borderlayoutcollage == 'only-bottom' %}
+    style="
+    border-top: none;
+    border-bottom-style:  solid;
+    border-bottom-color:   black;
+    ">
+    
+    {% else %}
+    
+    style="
+    border-top: none;
+    border-bottom: none;
+    ">   
+  
+    {% endif %}
+
+{% assign file_1 = product.metafields.my_fields.collage_asset_1  | split: '?' %}
+{% assign file_2 = product.metafields.my_fields.collage_asset_2  | split: '?' %}
+{% assign file_3 = product.metafields.my_fields.collage_asset_3  | split: '?' %}
+{% assign file_4 = product.metafields.my_fields.collage_asset_4  | split: '?' %}
+{% assign file_5 = product.metafields.my_fields.collage_asset_5  | split: '?' %}
+{% assign file_6 = product.metafields.my_fields.collage_asset_6  | split: '?' %}
+
+
+
+ 
+{% assign file_1_1 =  file_1[0] | slice: -3 ,3  %}
+{% assign file_2_2 =  file_2[0] | slice: -3 ,3  %}
+{% assign file_3_3 =  file_3[0] | slice: -3 ,3  %}
+{% assign file_4_4 =  file_4[0] | slice: -3 ,3  %}
+{% assign file_5_5 =  file_5[0] | slice: -3 ,3  %}
+{% assign file_6_6 =  file_6[0] | slice: -3 ,3  %}
+
+
+
+
+<div class="grid-collage-container">
+    <div class="grid-collage-content angry-grid">
+      <div class="grid-system system-1">
+        <div class="tko-grid">
+               
+ 
+
+            <div class="item-1 grid-item" {% if file_1_1 == 'jpg' or file_1_1 == 'ebp' or file_1_1 == 'png' %} style="background-image:url({{ product.metafields.my_fields.collage_asset_1 }}); background-color:{{ block.settings.caollagecolor}}; --aspect-ratio: 4/5;" {% endif %}>
+                <div class="obj-1">
+                  {% if product.metafields.my_fields.collage_text_1 != nil %}  
+                 <p>{{product.metafields.my_fields.collage_text_1}}</p>
+            {% else %}
+                {% if file_1_1 == 'mp4' %}
+                <div class="video-block">
+                <video preload="metadata" autoplay loop muted playsinline class="tko-video tko-video-collage" width="400">
+                  {% assign video_1 = product.metafields.my_fields.collage_asset_1  %}
+                  {% assign video_1_1 = video_1 | split:'?' %}
+                  {% assign video_1_2 = video_1_1[0] | append: '#t=0.5' %}
+                    <source src="{{ video_1_2 }}" type="video/mp4">
+                </video>
+                </div>
+                {% endif %}
+            {% endif %}
+                </div>
+            </div>
+
+
+          <div class="item-2 grid-item" {% if file_2_2 == 'jpg' or file_2_2 == 'ebp' or file_2_2 == 'png' %} style="background-image:url({{ product.metafields.my_fields.collage_asset_2 }}); background-color:{{ block.settings.caollagecolor}}; --aspect-ratio: 4/5;"{% endif %}>
+                <div class="obj-1">
+                    {% if file_2_2 == 'mp4' %}
+                    <div class="video-block">
+                    <video autoplay loop muted playsinline class="tko-video tko-video-collage" width="400">
+                        <source src="{{ product.metafields.my_fields.collage_asset_2 }}" type="video/mp4">
+                    </video>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+
+            <div class="item-3 grid-item" {% if file_3_3 == 'jpg' or file_3_3 == 'ebp' or file_3_3 == 'png' %} style="background-image:url({{ product.metafields.my_fields.collage_asset_3 }}); background-color:{{ block.settings.caollagecolor}}; --aspect-ratio: 4/5;"{% endif %}>
+                <div class="obj-1">
+                    {% if file_3_3 == 'mp4' %}
+                    <div class="video-block">
+                    <video preload="metadata" autoplay loop muted playsinline class="tko-video tko-video-collage" width="400">
+                      {% assign video_3 = product.metafields.my_fields.collage_asset_3  %}
+                      {% assign video_3_1 = video_3 | split:'?' %}
+                      {% assign video_3_2 = video_3_1[0] | append: '#t=0.5' %}
+                        <source src="{{ video_3_2 }}" type="video/mp4">
+                    </video>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+
+
+            </div>
+            </div>
+
+
+
+
+            <div class="grid-system system-1">
+                <div class="tko-grid tko-grid-2">
+        
+        
+                    <div class="item-4 grid-item" {% if file_4_4 == 'jpg' or file_4_4 == 'ebp' or file_4_4 == 'png' %}style="background-image:url({{ product.metafields.my_fields.collage_asset_4 }}); background-color:{{ block.settings.caollagecolor}}; --aspect-ratio: 4/5;" {% endif %}>
+                        <div class="obj-1">
+                        {% if product.metafields.my_fields.collage_text_2 != nil %}  
+                            <p>{{product.metafields.my_fields.collage_text_2}}</p>
+                        {% else %}
+                            {% if file_4_4 == 'mp4' %}
+                            <div class="video-block">
+                              {% assign video_4 = product.metafields.my_fields.collage_asset_4  %}  
+                            <video preload="metadata" autoplay loop muted playsinline class="tko-video tko-video-collage" width="400">
+                             
+                              {% assign video_4_1 = video_4 | split:'?' %}
+                              {% assign video_4_2 = video_4_1[0] | append: '#t=0.5' %}
+                                <source src="{{ video_4_2 }}" type="video/mp4">
+                            </video>
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                        </div>
+                    </div>
+        
+        
+                  <div class="item-5 grid-item" {% if file_5_5 == 'jpg' or file_5_5 == 'ebp' or file_5_5 == 'png' %} style="background-image:url({{ product.metafields.my_fields.collage_asset_5 }}); background-color:{{ block.settings.caollagecolor}}; --aspect-ratio: 4/5;" {% endif %}>
+                        <div class="obj-1">
+                            {% if file_5_5 == 'mp4'%}
+                            <div class="video-block">
+                            <video preload="metadata" autoplay loop muted playsinline class="tko-video tko-video-collage" width="400">
+                                  {% assign video_5 = product.metafields.my_fields.collage_asset_5  %}
+                                 {% assign video_5_1 = video_5 | split:'?' %}
+                                 {% assign video_5_2 = video_5_1[0] | append: '#t=0.5' %}
+                                <source src="{{ video_5_2 }}" type="video/mp4">
+                            </video>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+        
+        
+                    <div class="item-6 grid-item" {% if file_6_6 == 'jpg' or file_6_6 == 'ebp' or file_6_6 == 'png' %}  style="background-image:url({{ product.metafields.my_fields.collage_asset_6 }}); background-color:{{ block.settings.caollagecolor}}; --aspect-ratio: 4/5;"{% endif %}>
+                        <div class="obj-1">
+                            {% if file_6_6 == 'mp4'  %}
+                            <div class="video-block">
+                            <video preload="metadata" autoplay loop muted playsinline class="tko-video tko-video-collage" width="400">
+                                 {% assign video_6 = product.metafields.my_fields.collage_asset_6  %}
+                                 {% assign video_6_1 = video_6 | split:'?' %}
+                                 {% assign video_6_2 = video_6_1[0] | append: '#t=0.5' %}
+                                <source src="{{ video_6_2 }}" type="video/mp4">
+                            </video>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+        
+        
+        
+                    </div>
+                    </div>
+      
+    </div>
+</div>
+
+</div>
+</section>
+
+{% endif %}
+
+
+
+{% schema %}
+  
+{
+    "name": "Product Collage", 
+    "settings": [
+    {
+        "type": "header",
+        "content": "Options"
+      },
+      {
+        "type": "select",
+        "id": "borderlayoutcollage",
+        "label": "Section Border Options",
+        "default": "top-bottom",
+        "options": [
+          {
+            "value": "top-bottom",
+            "label": "Show Border Top & Bottom"
+          },
+          {
+            "value": "only-top",
+            "label": "Show Border Only Top"
+          },
+          {
+              "value": "only-bottom",
+              "label": "Show Border Only Bottom"
+            },
+          {
+              "value": "hide-border",
+              "label": "Hide Borders"
+            }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup",
+        "label":"Line Padding Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedown",
+        "label":"Line Padding Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeupm",
+        "label":"Line Padding Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedownm",
+        "label":"Line Padding Bottom",
+        "default":15
+      }
+      ],
+    "presets": [ 
+{
+"category": "Column",
+"name": "Product Collage"
+}
+]
+  }
+{% endschema %}
+
+<style>
+  .angry-grid {
+   display: grid; 
+
+   grid-template-rows: 1fr;
+   grid-template-columns: 1fr 1fr;
+   
+   gap: 10px;
+   height: 100%;
+   
+}
+
+.obj-1 p{
+   font-family: 'Panama';
+   font-size:28px;
+   color: black;
+   line-height:34px;
+   letter-spacing:-0.43px;
+   text-align: center;
+   margin-left:auto;
+   margin-right: auto;
+   max-width: 300px;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .angry-grid {
+  grid-template-columns: 1fr ;
+  gap: 8px;
+}
+.obj-1 p {
+    font-family: 'Panama';
+    font-size: 14px;
+    color: black;
+    line-height: 18px;
+    letter-spacing: -0.22px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 145px;
+}
+}
+  
+</style>
+
+<style>
+  .collage-line-{{section.id}}{
+        padding: {{section.settings.padding_sizeup}}px 0px {{section.settings.padding_sizedown}}px 0px;
+        border-width:1px;
+  }
+
+  @media (max-width: 812px) {
+    .collage-line-{{section.id}}{
+        padding: {{section.settings.padding_sizeupm}}px 0px {{section.settings.padding_sizedownm}}px 0px;
+        border-width:0.5px;
+  }
+  } 
+</style>

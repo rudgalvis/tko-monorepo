@@ -1,0 +1,544 @@
+{% assign collectionN =  collectionname %}
+{% assign currentcollection = collectionN.title | handleize  %}
+{% assign countdowncollection = countdownCol.title | handleize  %}
+{% assign altText = bottomText %}
+{% assign altURL = bottomURL %}
+{% assign showBottom = bottomURLContainer %}
+
+{% if countdowncollection == currentcollection %}
+{% assign isCountDownProduct = true %}
+{% else %}
+{% assign isCountDownProduct = false %}
+{% endif %}
+
+
+
+
+{% if collectionN == nil %}
+      {% assign collectionN = 'all'%}
+{% endif %}
+
+
+{% for product in collections[collectionN].products %}
+
+{% assign productUrltr = product.url %}
+
+{% assign detectFund = product.title | handleize%}
+{% if detectFund != 'for-the-dream-fund'%}
+
+<div class="product-container">
+<div class="line-cont pl-up">
+    <div class="llc">
+        <div class="product-line"></div>
+    </div>  
+</div>
+
+ <div class="frame-container">
+    
+     <div class="productname">
+         <h2>
+             <a href="{{ product.url }}?variant={{product.variants[forloop.index0].option1 | handleize }}">
+                 {%- render 'product-title', name: product.title -%}
+             </a>
+        </h2>
+        </div>
+        {% assign getfirstvar = product.selected_or_first_available_variant.option1 %}
+     <div class="mainholder {% if countdowncollection == currentcollection%} nohover {% endif %} {% if  product.selected_or_first_available_variant.option2 == nil or product.variants[0].option2 == 'One Size'  %}only-color-product{% endif %}">
+       
+        {% if countdowncollection != currentcollection %}
+        {%- render 'button-wishlist', getproduct: product -%}
+        {% endif %}
+       {%- comment -%}counter{%- endcomment -%}
+        {% if countdowncollection == currentcollection %}
+         {% render 'counter' %}  
+         {% endif %}
+
+       {%- comment -%}counter{%- endcomment -%}
+
+       {% assign kindofproduct =  product.variants[0].option2 | strip %}
+
+       {% if countdowncollection != currentcollection %}
+       {% if  product.selected_or_first_available_variant.option2 != nil %}
+
+
+       {% if kindofproduct == 'One Size'%}
+            <div class="buy-button" data-id="{{product.selected_or_first_available_variant.id}}">ADD TO CART</div>  
+       {% else %}
+
+        <div class="buy-button">ADD TO CART</div> 
+        
+
+        {%- comment -%}detect button type{%- endcomment -%}
+
+        {% assign typebuttondetect = false %}
+        {% for tag in product.tags %}
+           {% if tag contains 'typebutton'%} 
+               {% assign typebuttondetect = true %}
+               {% break %}
+           {% endif %}
+        {% endfor %}
+
+       
+
+         {%- comment -%}detect button type{%- endcomment -%} 
+
+
+        <div class="select-size" data-open="0">
+            SELECT {%if typebuttondetect != true%}SIZE{%else%}TYPE{%endif%}<span class="btn-larrow-buy">↓</span>
+
+        </div> 
+          {% endif %}
+        {% else %}
+        <div class="buy-button" data-id="{{product.selected_or_first_available_variant.id}}">ADD TO CART</div>  
+        {% endif %}    
+        {% endif %}
+           {%- comment -%}
+               -------------------------------------------------
+                SIZE SECTION FOR PRODUCT (Core pieces)
+               -------------------------------------------------
+               {%- endcomment -%} 
+               <ul class="variant-holder" data-selectedv = "{{product.variants[0].option1}}">
+                {% assign getVariant = product.variants[0].option1 %}
+    
+                {% assign recommended_products =  product.metafields.variantproduct.productgroupseasonal.value %}
+                {% assign recommended_products_core =  product.metafields.variantproduct.productgroup.value %}
+    
+                {% for product in recommended_products_core  %} 
+    
+                {% for variant in product.variants %}
+            
+                    {% assign isAvailable = variant.available %}
+                    {% assign ispush = variant.inventory_policy %}
+                    
+    
+                    {% if product.selected_or_first_available_variant.option2 != nil  %}
+                        {% if variant.option1 == getVariant %}
+                             {% if variant.inventory_quantity > 0 %}
+                                <li class="xfg"  data-productColor="{{ variant.option1 }}" data-productID="{{ variant.id }}" data-productavailable="{{variant.inventory_quantity}}">{{ variant.option2 }}
+                                    <span style="display:none;" class="money original_price">{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}</span>
+                                    <span style="display:none;" class="money show_price">{{ variant.price | money_without_trailing_zeros | strip_html }}</span>
+                                </li>
+                             {% else %}  
+                                {% if ispush == 'continue' %} 
+                                    <li class="xfg xfg__preorder"  data-productColor="{{ variant.option1 }}" data-productID="{{ variant.id }}" data-productavailable="{{variant.inventory_quantity}}">{{ variant.option2 }}
+                                      <span style="display:none;" class="money original_price">{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}</span>
+                                      <span style="display:none;" class="money show_price">{{ variant.price | money_without_trailing_zeros | strip_html }}</span>
+                                    </li>
+                                 {% else %}  
+                                    <li class="xfg xfg__soldout"  data-productColor="{{ variant.option1 }}" data-productID="{{ variant.id }}" data-productavailable="{{variant.inventory_quantity}}">{{ variant.option2 }}
+                                      <span style="display:none;" class="money original_price">{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}</span>
+                                      <span style="display:none;" class="money show_price">{{ variant.price | money_without_trailing_zeros | strip_html }}</span>
+                                   </li>
+                                {% endif %}
+                             {% endif %}
+                        {% else %}
+                            {% if variant.inventory_quantity > 0 %}
+                                <li class="xfg fg" data-productColor="{{ variant.option1 }}" data-productID="{{ variant.id }}" data-productavailable="{{variant.inventory_quantity}}">{{ variant.option2 }}
+                                    <span style="display:none;" class="money original_price">{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}</span>
+                                    <span style="display:none;" class="money show_price">{{ variant.price | money_without_trailing_zeros | strip_html }}</span> 
+                                </li>
+                            {% else %}   
+                               {% if ispush == 'continue' %} 
+                                  <li class="xfg xfg__preorder fg" data-productColor="{{ variant.option1 }}" data-productID="{{ variant.id }}" data-productavailable="{{variant.inventory_quantity}}">{{ variant.option2 }}
+                                    <span style="display:none;" class="money original_price">{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}</span>
+                                    <span style="display:none;" class="money show_price">{{ variant.price | money_without_trailing_zeros | strip_html }}</span> 
+                                  </li>
+                               {% else %}    
+                                  <li class="xfg xfg__soldout fg" data-productColor="{{ variant.option1 }}" data-productID="{{ variant.id }}" data-productavailable="{{variant.inventory_quantity}}">{{ variant.option2 }}
+                                    <span style="display:none;" class="money original_price">{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}</span>
+                                    <span style="display:none;" class="money show_price">{{ variant.price | money_without_trailing_zeros | strip_html }}</span> 
+                                  </li>
+                               {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    
+    
+    
+                {% endfor %}
+                {% endfor %}
+    
+                   {%- comment -%}
+                   -------------------------------------------------
+                    SIZE SECTION FOR PRODUCT (Core pieces)
+                   -------------------------------------------------
+                   {%- endcomment -%} 
+    
+                
+    
+                  {%- comment -%}
+                   -------------------------------------------------
+                    SIZE SECTION FOR PRODUCT (Seasonal pieces)
+                   -------------------------------------------------
+                   {%- endcomment -%} 
+              {% for product in recommended_products  %} 
+    
+                {% for variant in product.variants %}
+            
+                    {% assign isAvailable = variant.available %}
+                    {% assign ispush = variant.inventory_policy %}
+                    
+    
+                    {% if product.selected_or_first_available_variant.option2 != nil  %}
+                        {% if variant.option1 == getVariant %}
+                             {% if variant.inventory_quantity > 0 %}
+                                <li class="xfg"  data-productColor="{{ variant.option1 }}" data-productID="{{ variant.id }}" data-productavailable="{{variant.inventory_quantity}}">{{ variant.option2 }}
+                                    <span style="display:none;" class="money original_price">{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}</span>
+                                    <span style="display:none;" class="money show_price">{{ variant.price | money_without_trailing_zeros | strip_html }}</span>
+                                </li>
+                             {% else %}  
+                                {% if ispush == 'continue' %} 
+                                    <li class="xfg xfg__preorder"  data-productColor="{{ variant.option1 }}" data-productID="{{ variant.id }}" data-productavailable="{{variant.inventory_quantity}}">{{ variant.option2 }}
+                                      <span style="display:none;" class="money original_price">{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}</span>
+                                      <span style="display:none;" class="money show_price">{{ variant.price | money_without_trailing_zeros | strip_html }}</span>
+                                    </li>
+                                 {% else %}  
+                                    <li class="xfg xfg__soldout"  data-productColor="{{ variant.option1 }}" data-productID="{{ variant.id }}" data-productavailable="{{variant.inventory_quantity}}">{{ variant.option2 }}
+                                      <span style="display:none;" class="money original_price">{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}</span>
+                                      <span style="display:none;" class="money show_price">{{ variant.price | money_without_trailing_zeros | strip_html }}</span>
+                                   </li>
+                                {% endif %}
+                             {% endif %}
+                        {% else %}
+                            {% if variant.inventory_quantity > 0 %}
+                                <li class="xfg fg" data-productColor="{{ variant.option1 }}" data-productID="{{ variant.id }}" data-productavailable="{{variant.inventory_quantity}}">{{ variant.option2 }}
+                                    <span style="display:none;" class="money original_price">{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}</span>
+                                    <span style="display:none;" class="money show_price">{{ variant.price | money_without_trailing_zeros | strip_html }}</span> 
+                                </li>
+                            {% else %}   
+                               {% if ispush == 'continue' %} 
+                                  <li class="xfg xfg__preorder fg" data-productColor="{{ variant.option1 }}" data-productID="{{ variant.id }}" data-productavailable="{{variant.inventory_quantity}}">{{ variant.option2 }}
+                                    <span style="display:none;" class="money original_price">{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}</span>
+                                    <span style="display:none;" class="money show_price">{{ variant.price | money_without_trailing_zeros | strip_html }}</span> 
+                                  </li>
+                               {% else %}    
+                                  <li class="xfg xfg__soldout fg" data-productColor="{{ variant.option1 }}" data-productID="{{ variant.id }}" data-productavailable="{{variant.inventory_quantity}}">{{ variant.option2 }}
+                                    <span style="display:none;" class="money original_price">{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}</span>
+                                    <span style="display:none;" class="money show_price">{{ variant.price | money_without_trailing_zeros | strip_html }}</span> 
+                                  </li>
+                               {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    
+    
+    
+                {% endfor %}
+                {% endfor %}
+                   {%- comment -%}
+                   -------------------------------------------------
+                    SIZE SECTION FOR PRODUCT (Seasonal pieces)
+                   -------------------------------------------------
+                   {%- endcomment -%} 
+            </ul>    
+     <a {% if countdowncollection != currentcollection %} href="{{ product.url }}" {% else %} href="javascript:void(0);" {% endif %}>
+        <div class="main-image-container">
+          
+            <div class="progreesbar">
+                <div class="bar"></div>
+              </div>
+
+                {% render 'badge', type: product.metafields.custom.badge, product: product %}
+
+              {% comment %}{% assign fvariantprice = product.variants[0].price %}{% endcomment %}
+              {% comment %}{% assign fvariantcompare = product.variants[0].compare_at_price %}{% endcomment %}
+              {% comment %}{% assign fvariantsoldout = product.available %} {% endcomment %}
+              {% comment %}{% assign fvariantSize =  product.options_with_values[0].name %}{% endcomment %}
+{% comment %}{% endcomment %}
+              {% comment %}{% render 'bages', fprice: fvariantprice , cprice: fvariantcompare , vavailable : fvariantsoldout %}{% endcomment %}
+
+
+            
+        <div class="productimage">
+       
+            
+        
+
+      
+
+         
+         
+            {% if countdowncollection == currentcollection %}
+               <div class="blur"></div>
+            {% endif %}
+         
+              {% assign first_image =  product.media[0].preview_image %}
+              {% assign second_image =  product.media[1].preview_image %}
+  
+        {%
+            render 'rimg',
+            img: first_image,
+            size: '996x1100',
+            lazy: true
+          %}
+         
+          {% if section.settings.show_product_secondary_image %}
+          {%
+            render 'rimg',
+            img: second_image,
+            size: '996x1100',
+            lazy: true
+          %}
+        {% endif %}
+       
+
+        
+     </div>
+    </div>
+    </a> 
+</div>   
+     <div class="buy-container">
+        <div class="product-type">{{ product.type }}</div>
+        <div class="productVarient">
+            {% if countdowncollection != currentcollection %}
+                {% render 'product-container-price', product: product %}
+
+            {% comment %}<div class="price-holder">{% endcomment %}
+              {% comment %}<div class="productPrice">{% endcomment %}
+{% comment %}{% endcomment %}
+               {% comment %}{%- comment -%}{% endcomment %}
+               {% comment %}-------------------------------------------------{% endcomment %}
+                {% comment %}PRODUCT PRICE FOR SIZES{% endcomment %}
+               {% comment %}-------------------------------------------------{% endcomment %}
+               {% comment %}{%- endcomment -%}{% endcomment %}
+{% comment %}{% endcomment %}
+               {% comment %}{% for product_option in product.options_with_values %}{% endcomment %}
+                   {% comment %}{% assign detectProductType = product_option.name  | strip | handleize %}{% endcomment %}
+               {% comment %}{% endfor %}{% endcomment %}
+{% comment %}{% endcomment %}
+                {% comment %}{% assign getVariant = product.variants[0].option1 %}{% endcomment %}
+{% comment %}{% endcomment %}
+                {% comment %}{% assign recommended_products =  product.metafields.variantproduct.productgroupseasonal.value %}{% endcomment %}
+                {% comment %}{% assign recommended_products_core =  product.metafields.variantproduct.productgroup.value %}{% endcomment %}
+                {% comment %}{% assign first_variant_ = product.variants[0].id %}{% endcomment %}
+{% comment %}{% endcomment %}
+{% comment %}{% endcomment %}
+                {% comment %}{% if detectProductType == 'title' %}{% endcomment %}
+                    {% comment %}<span data-color="{{product.variants[0].option1 | handleize}}" data-varid="{{product.variants[0].id}}" class="money">{{ product.variants[0].price | money_without_trailing_zeros | strip_html }}</span>{% endcomment %}
+               {% comment %}{% else %}{% endcomment %}
+{% comment %}{% endcomment %}
+                {% comment %}{% for product in recommended_products_core  %}{% endcomment %}
+                     {% comment %}{% for variant in product.variants %}{% endcomment %}
+                          {% comment %}{% if getVariant == variant.option1 and variant.id == first_variant_%}{% endcomment %}
+                          {% comment %}<span data-color="{{variant.option1 | handleize}}" data-varid="{{variant.id}}" class="money">{{ variant.price | money_without_trailing_zeros | strip_html }}</span>{% endcomment %}
+                          {% comment %}{% else %}{% endcomment %}
+                          {% comment %}<span style="display:none;" data-color="{{variant.option1 | handleize}}" data-varid="{{variant.id}}" class="money">{{ variant.price | money_without_trailing_zeros | strip_html }}</span>{% endcomment %}
+                          {% comment %}{% endif %}{% endcomment %}
+                     {% comment %}{% endfor %}{% endcomment %}
+                {% comment %}{% endfor %}{% endcomment %}
+{% comment %}{% endcomment %}
+                {% comment %}{% for product in recommended_products  %}{% endcomment %}
+                     {% comment %}{% for variant in product.variants %}{% endcomment %}
+                     {% comment %}{% if getVariant == variant.option1 and variant.id == first_variant_%}{% endcomment %}
+                     {% comment %}<span data-color="{{variant.option1 | handleize}}" data-varid="{{variant.id}}" class="money">{{ variant.price | money_without_trailing_zeros | strip_html }}</span>{% endcomment %}
+                     {% comment %}{% else %}{% endcomment %}
+                     {% comment %}<span style="display:none;" data-color="{{variant.option1 | handleize}}" data-varid="{{variant.id}}" class="money">{{ variant.price | money_without_trailing_zeros | strip_html }}</span>{% endcomment %}
+                     {% comment %}{% endif %}{% endcomment %}
+                     {% comment %}{% endfor %}{% endcomment %}
+                {% comment %}{% endfor %}{% endcomment %}
+{% comment %}{% endcomment %}
+                {% comment %}{% endif %}{% endcomment %}
+{% comment %}{% endcomment %}
+               {% comment %}{%- comment -%}{% endcomment %}
+               {% comment %}-------------------------------------------------{% endcomment %}
+                {% comment %}PRODUCT PRICE FOR SIZES{% endcomment %}
+               {% comment %}-------------------------------------------------{% endcomment %}
+               {% comment %}{%- endcomment -%}{% endcomment %}
+{% comment %}{% endcomment %}
+              {% comment %}</div>{% endcomment %}
+{% comment %}{% endcomment %}
+               {% comment %}{%- comment -%}{% endcomment %}
+               {% comment %}-------------------------------------------------{% endcomment %}
+                {% comment %}COMPARE AT PRICE FOR SIZES{% endcomment %}
+               {% comment %}-------------------------------------------------{% endcomment %}
+               {% comment %}{%- endcomment -%}{% endcomment %}
+{% comment %}{% endcomment %}
+               {% comment %}{% if detectProductType == 'title' %}{% endcomment %}
+               {% comment %}{% for variant in product.variants %}{% endcomment %}
+               {% comment %}<span data-varid="{{variant.id}}" class="sale_price money"  {% if variant.compare_at_price != nil and variant.id == first_variant_ %}style="display:block;" {% else %}style="display:none;"{%endif%}>{% endcomment %}
+                 {% comment %}{% if variant.price < variant.compare_at_price %}{% endcomment %}
+                    {% comment %}{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}{% endcomment %}
+                 {% comment %}{% endif %}{% endcomment %}
+               {% comment %}</span>{% endcomment %}
+          {% comment %}{% endfor %}{% endcomment %}
+{% comment %}{% endcomment %}
+               {% comment %}{% else %}{% endcomment %}
+{% comment %}{% endcomment %}
+{% comment %}{% endcomment %}
+              {% comment %}{% for product in recommended_products_core  %}{% endcomment %}
+                     {% comment %}{% for variant in product.variants %}{% endcomment %}
+                          {% comment %}<span data-varid="{{variant.id}}" class="sale_price money"  {% if variant.compare_at_price != nil and variant.id == first_variant_ %}style="display:block;" {% else %}style="display:none;"{%endif%}>{% endcomment %}
+                            {% comment %}{% if variant.price < variant.compare_at_price %}{% endcomment %}
+                               {% comment %}{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}{% endcomment %}
+                            {% comment %}{% endif %}{% endcomment %}
+                          {% comment %}</span>{% endcomment %}
+                     {% comment %}{% endfor %}{% endcomment %}
+              {% comment %}{% endfor %}{% endcomment %}
+              {% comment %}{% for product in recommended_products  %}{% endcomment %}
+                     {% comment %}{% for variant in product.variants %}{% endcomment %}
+                          {% comment %}<span data-varid="{{variant.id}}" class="sale_price money"  {% if variant.compare_at_price != nil and variant.id == first_variant_ %}style="display:block;" {% else %}style="display:none;"{%endif%}>{% endcomment %}
+                            {% comment %}{% if variant.price < variant.compare_at_price %}{% endcomment %}
+                               {% comment %}{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}{% endcomment %}
+                            {% comment %}{% endif %}{% endcomment %}
+                          {% comment %}</span>{% endcomment %}
+                     {% comment %}{% endfor %}{% endcomment %}
+              {% comment %}{% endfor %}{% endcomment %}
+{% comment %}{% endcomment %}
+              {% comment %}{% endif %}{% endcomment %}
+{% comment %}{% endcomment %}
+               {% comment %}{%- comment -%}{% endcomment %}
+               {% comment %}-------------------------------------------------{% endcomment %}
+                {% comment %}COMPARE AT PRICE FOR SIZES{% endcomment %}
+               {% comment %}-------------------------------------------------{% endcomment %}
+               {% comment %}{%- endcomment -%}{% endcomment %}
+          {% comment %}</div>{% endcomment %}
+        {% endif %}
+        {% assign current_variant_size = product.variants | size %} 
+        <ul>
+          {% assign currentProductColorthis = product.variants[0].option1 | handleize %}
+          {% assign recommended_products =  product.metafields.variantproduct.productgroupseasonal.value %}
+          {% assign recommended_products_core =  product.metafields.variantproduct.productgroup.value %}
+
+{%- comment -%}seasonal_colors{%- endcomment -%}
+{% for product in recommended_products_core  %}  
+{% assign productbitURL = product.url %}
+           {%- comment -%}
+           ------------------
+           variant -hide -show depends on quantity
+           ------------------
+           {%- endcomment -%}
+{% assign colorCount_selected = product.variants[0].option1 | handleize %}
+{% assign colorCount_selected_push = product.variants[0].option1 %}
+{% assign colorCount_selected_quantity = 0 %}
+{% assign isContinue = 0%}
+
+{% for variant in product.variants %}
+    {% assign colorCount = variant.option1 | handleize %}
+   
+
+       {% if  colorCount == colorCount_selected  %}
+       {% assign colorCount_selected_quantity = colorCount_selected_quantity | plus: product.variants[0].inventory_quantity %}
+           {% if product.variants[0].inventory_policy == 'continue' %}
+                 {% assign isContinue = isContinue | plus: 1 %}
+            {% endif %}
+       {% endif%}
+{% endfor %}
+           {%- comment -%}
+           ------------------
+           variant -hide -show depends on quantity
+            if colorCount_selected_quantity > 0 or isContinue > 0 
+           ------------------
+           {%- endcomment -%}
+
+              
+
+             
+
+                 <li data-variant="{{ colorCount_selected_push }}">
+                 {% assign getImageFirst = product.images[1] %}  
+                 {% assign getImagesecond = product.images[0] %}  
+                   <div class="color-schema {% if colorCount == currentProductColorthis %} selected {% endif %}">
+                     {% render 'color-select' 
+                     getvariantcolor : product.variants[0].option1 ,
+                     firstimage :  getImageFirst, 
+                     secondimage:  getImagesecond, 
+                     variantprice :  product.variants[0].price,
+                     variantdiscount :  product.variants[0].compare_at_price,
+                     variantid :  product.variants[0].id, 
+                     countobject: isCountDownProduct, 
+                     urlHider: productbitURL,
+                     variantlevel : 'second' %}
+                     </div>
+
+                 </li> 
+
+
+           
+           {% endfor %}
+
+
+{%- comment -%}
+seasonal_colors
+{%- endcomment -%}
+
+
+          {% for product in recommended_products  %}  
+          {% assign productbitURL = product.url %}
+          {%- comment -%}
+          ------------------
+          variant -hide -show depends on quantity
+          ------------------
+          {%- endcomment -%}
+{% assign colorCount_selected = product.variants[0].option1 | handleize %}
+{% assign colorCount_selected_push = product.variants[0].option1 %}
+{% assign colorCount_selected_quantity = 0 %}
+{% assign isContinue = 0%}
+
+{% for variant in product.variants %}
+   {% assign colorCount = variant.option1 | handleize %}
+  
+
+      {% if  colorCount == colorCount_selected  %}
+      {% assign colorCount_selected_quantity = colorCount_selected_quantity | plus: product.variants[0].inventory_quantity %}
+          {% if product.variants[0].inventory_policy == 'continue' %}
+                {% assign isContinue = isContinue | plus: 1 %}
+           {% endif %}
+      {% endif%}
+{% endfor %}
+          {%- comment -%}
+          ------------------
+          variant -hide -show depends on quantity
+          colorCount_selected_quantity > 0 or isContinue > 0 
+          ------------------
+          {%- endcomment -%}
+
+       
+
+                <li data-variant="{{ colorCount_selected_push }}">
+                {% assign getImageFirst = product.images[1] %}  
+                {% assign getImagesecond = product.images[0] %}  
+                  <div class="color-schema  {% if colorCount == currentProductColorthis %} selected {% endif %}">
+                    {% render 'color-select' 
+                    getvariantcolor : product.variants[0].option1 ,
+                    firstimage :  getImageFirst, 
+                    secondimage:  getImagesecond, 
+                    variantprice :  product.variants[0].price,
+                    variantdiscount :  product.variants[0].compare_at_price,
+                    variantid :  product.variants[0].id, 
+                    productAvailable : product.available,
+                    countobject: isCountDownProduct, 
+                    urlHider: productbitURL,
+                    variantlevel : 'second' %}
+                    </div>
+
+                </li> 
+
+
+          {% endfor %}
+
+
+         
+          
+         
+
+          </ul>
+          
+        </div>
+    </div> 
+</div>
+<div class="line-cont pl-down">
+    <div class="llc">
+        <div class="product-line"></div>
+    </div>  
+</div>
+</div>
+
+{% endif %}
+{% endfor %}
+{%- comment -%}
+{% if showBottom == true %}
+<div class="footerlink">
+     <a href="{{bottomURL}}" class="btn-darrow">{{altText}}</a>
+</div>
+{% endif %}
+{%- endcomment -%}

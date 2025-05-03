@@ -1,0 +1,357 @@
+<section class="kto-main-container">
+    <div class="tko-lines static-mid-text-{{section.id}}"
+    {% if section.settings.onlyTextlayoutmidtext == 'top-bottom'%}
+    style="
+      border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+    ">
+    {% elsif  section.settings.onlyTextlayoutmidtext == 'only-top' %}
+    style="
+    border-top-style:  solid;
+    border-top-color:   black;
+    border-bottom: none;
+    ">
+    {% elsif  section.settings.onlyTextlayoutmidtext == 'only-bottom' %}
+    style="
+    border-top: none;
+    border-bottom-style:  solid;
+    border-bottom-color:   black;
+    ">
+    
+    {% else %}
+    
+    style="
+    border-top: none;
+    border-bottom: none;
+     
+    "> 
+  
+    {% endif %}
+
+<div class="mid-text-container tct-section-{{section.id}}">
+    <div class="mid-text-content">
+        <p class="tct-h2-{{section.id}}">{{ section.settings.paragraphtextsub }}</p>
+        <small class="tct tct-right tct-p-{{section.id}}">{{ section.settings.paragraphtitle }}</small>
+    </div>
+</div>
+
+</div>
+</section>
+
+
+<style>
+    .mid-text-container{
+        width: 100%;
+        height: auto;
+    }
+
+    .mid-text-content{
+        width:100%;
+        height: auto;
+        display: flex;
+       /* padding: 65px 0px;*/
+        flex-direction: column;
+        {% if section.settings.positionoftext == 'leftalign' %}
+        align-items: flex-start; 
+        justify-content: flex-start;
+        {% endif %}
+
+
+        {% if section.settings.positionoftext == 'centerslign' %}
+        align-items: center; 
+        justify-content: center;
+        {% endif %}
+
+        {% if section.settings.positionoftext == 'rightalign' %}
+        align-items: flex-end; 
+        justify-content: flex-start;
+        {% endif %}
+    }
+
+
+    .mid-text-content p{
+        font-family: 'Panama';
+        font-size: 28px;
+        color: black;
+        letter-spacing: -0.43px;
+        line-height: 34px;
+        margin-bottom: 35px;
+    }
+
+    .mid-text-content small{
+        font-family: 'Monument';
+        font-size: 20px;
+        color: black;
+        letter-spacing: -0.31px;
+        text-transform: uppercase;
+    }
+
+    @media (max-width: 812px) {
+      .mid-text-content {
+       /* padding: 16px 0px;*/
+      }
+      .mid-text-content p {
+    font-size: 14px;
+    letter-spacing: -0.22px;
+    line-height: 18px;
+    text-align: center;
+    margin-bottom: 17px;
+    padding: 0px 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.mid-text-content small {
+    font-size: 10px;
+    letter-spacing: -0.15px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+    }
+
+    @media (min-width: 320px) and (max-width: 480px) {
+
+      .mid-text-content {
+       /* padding: 16px 0px;*/
+      }
+      .mid-text-content p {
+    font-size: 14px;
+    letter-spacing: -0.22px;
+    line-height: 18px;
+    text-align: center;
+    margin-bottom: 17px;
+    padding: 0px 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.mid-text-content small {
+    font-size: 10px;
+    letter-spacing: -0.15px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+    }
+</style>
+
+{% schema %}
+
+{
+    "name": "Quote Text Section", 
+    "settings": [
+    {
+      "type": "header",
+      "content": "Line Layout Options"
+    },
+    {
+      "type": "select",
+      "id": "onlyTextlayoutmidtext",
+      "label": "Section Border Options",
+      "default": "top-bottom",
+      "options": [
+        {
+          "value": "top-bottom",
+          "label": "Show Border Top & Bottom"
+        },
+        {
+          "value": "only-top",
+          "label": "Show Border Only Top"
+        },
+        {
+            "value": "only-bottom",
+            "label": "Show Border Only Bottom"
+          },
+        {
+            "value": "hide-border",
+            "label": "Hide Borders"
+          }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "positionoftext",
+      "label": "Section Position",
+      "default": "leftalign",
+      "options": [
+        {
+          "value": "leftalign",
+          "label": "Section Position Left"
+        },
+        {
+          "value": "centeralign",
+          "label": "Section Position Center"
+        },
+        {
+            "value": "rightalign",
+            "label": "Section Position Right"
+          }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Title Options"
+    },
+    {
+      "id": "paragraphtitle",
+      "type": "text",
+      "label": "Title Copy"
+    },
+    {
+      "type": "header",
+      "content": "Title Max. Width"
+    },
+    {
+      "type":"number",
+      "id":"hed_padding_sec",
+      "label":"Desktop",
+      "default":15
+    },
+    {
+      "type":"number",
+      "id":"hed_padding_secm",
+      "label":"Mobile",
+      "default":15
+    },
+    
+    {
+      "type": "header",
+      "content": "Body Copy Options"
+    },
+      {
+        "id": "paragraphtextsub",
+        "type": "textarea",
+        "label": "Body"
+      },
+      {
+        "type": "header",
+        "content": "Body Max. Width"
+      },
+      {
+        "type":"number",
+        "id":"cop_padding_sec",
+        "label":"Desktop",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"cop_padding_secm",
+        "label":"Mobile",
+        "default":15
+      },
+      
+      
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup",
+        "label":"Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedown",
+        "label":"Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeupm",
+        "label":"Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedownm",
+        "label":"Bottom",
+        "default":15
+      },
+      
+      {
+        "type": "header",
+        "content": "Section Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_top_sec",
+        "label":"Top",
+        "default":65
+      },
+      {
+        "type":"number",
+        "id":"padding_bottom_sec",
+        "label":"Bottom",
+        "default":65
+      },
+      {
+        "type": "header",
+        "content": "Section Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_top_secm",
+        "label":"Top",
+        "default":16
+      },
+      {
+        "type":"number",
+        "id":"padding_bottom_secm",
+        "label":"Bottom",
+        "default":16
+      }
+    ],
+    "presets": [
+{
+"category": "text",
+"name": "Quote Text Section"
+}
+]
+  }
+{% endschema %}
+
+
+<style>
+  .static-mid-text-{{section.id}}{
+        padding: {{section.settings.padding_sizeup}}px 0px {{section.settings.padding_sizedown}}px 0px;
+        border-width:1px;
+  }
+
+  .tct-section-{{section.id}}{
+        padding: {{section.settings.padding_top_sec}}px 0px {{section.settings.padding_bottom_sec}}px 0px;
+  }
+
+  .tct-h2-{{section.id}}{
+    max-width:{{section.settings.hed_padding_sec}}px;
+  }
+
+  .tct-p-{{section.id}}{
+    max-width:{{section.settings.cop_padding_sec}}px;
+  }
+
+  @media (max-width: 812px) {
+    .static-two-text-{{section.id}}{
+        padding: {{section.settings.padding_sizeupm}}px 0px {{section.settings.padding_sizedownm}}px 0px;
+        border-width:0.5px;
+  }
+
+  .static-mid-text-{{section.id}}{
+        padding: {{section.settings.padding_top_secm}}px 0px {{section.settings.padding_bottom_secm}}px 0px;
+  }
+  .tct-h2-{{section.id}}{
+    max-width:{{section.settings.hed_padding_secm}}px;
+  }
+  .tct-p-{{section.id}} {
+    max-width:{{section.settings.cop_padding_secm}}px;
+  }
+
+  } 
+</style>

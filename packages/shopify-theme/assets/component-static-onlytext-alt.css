@@ -1,0 +1,126 @@
+.cta-text-container-{
+    box-sizing: border-box;
+    /*padding:0px 25px;*/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin:18px 0px;
+ }  
+
+ .cta-text-content-{
+     width:100%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+ }
+
+ .cta-text-content- h2{
+     font-size:22px;
+     text-transform: uppercase;
+     color:black;
+     text-align: center;
+     font-weight:400;
+     letter-spacing: -0.34px;
+     line-height:22px;
+ }
+
+ .cta-text-content- p{
+     width:100%;
+     font-size:28px;
+     font-weight:400;
+     color:black;
+     text-align: center;
+     line-height: 34px;
+     margin-left:auto;
+     margin-right:auto;
+     letter-spacing: -0.43px;
+     margin-block-start: 1.2em;
+     margin-block-end: 0em;
+ }
+
+ .inside-section-{
+   letter-spacing: -0.22px;
+   font-size: 14px; 
+   color:black;
+   margin-top:46px;
+ }
+
+
+ @media (max-width: 812px) {
+
+
+  .cta-text-content- h2 {
+    font-size:14px;
+    line-height: 16px;
+  }
+
+  .cta-text-content- p {
+    font-size:14px;
+    line-height: 18px;
+    letter-spacing: -0.22px;
+  }
+
+  .cta-text-content-{
+    min-height: auto;
+  }
+
+  .cta-text-container-{
+   /* padding: 38px 46px;*/
+    margin: 0px 0px;
+  }
+
+  .play-icon- img{
+      width:46px;
+  }
+
+  .cta-text-content- {
+   /* min-height: 223px !important;*/
+}
+
+.inside-section-{
+margin-top:40px;
+font-size: 12px; 
+color:black;
+letter-spacing: -0.18px;
+line-height:12px;
+}
+
+
+}
+
+ @media (min-width: 320px) and (max-width: 480px) {
+
+  .cta-text-content- h2 {
+    font-size:14px;
+    line-height: 16px;
+  }
+
+  .cta-text-content- p {
+    font-size:14px;
+    line-height: 18px;
+    letter-spacing: -0.22px;
+  }
+
+  .cta-text-content-{
+    min-height: auto;
+  }
+
+  .cta-text-container-{
+    /*padding: 38px 46px;*/
+    margin: 0px 0px;
+  }
+
+  .play-icon- img{
+      width:46px;
+  }
+  .inside-section-{
+    margin-top:40px;
+    font-size: 12px; 
+    color:black;
+    letter-spacing: -0.18px;
+    line-height:12px;
+    }
+
+ }

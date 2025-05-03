@@ -1,0 +1,460 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "idea-page",
+      "settings": {}
+    },
+    "1640185938b1de605c": {
+      "type": "static-page-hero",
+      "blocks": {
+        "1640185938c69b396a-0": {
+          "type": "title",
+          "settings": {
+            "pageherohead": "Making positive impact in rural communities throughout Lithuania",
+            "herocolor": "#ffffff"
+          }
+        },
+        "c9a875e5-3339-48ba-b8af-cb975fe18de9": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "pageherobuttext": "READ MORE",
+            "herobuttonColor": "light",
+            "herourl": ""
+          }
+        }
+      },
+      "block_order": [
+        "1640185938c69b396a-0",
+        "c9a875e5-3339-48ba-b8af-cb975fe18de9"
+      ],
+      "settings": {
+        "herolayoutpage": "hide-border",
+        "footer_hero": false,
+        "pageheroimage": "shopify://shop_images/knitters_page_header_-_desktop_1_1386x_44c4a8f9-9685-4557-97fa-bd9d95fe7270.webp",
+        "pageheroimagemobile": "shopify://shop_images/knitters_page_header_-_mob_1_692x_359b68b2-a6bb-459a-93c0-4dd848b16507.webp",
+        "padding_sizeup": 20,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 10,
+        "pageherotitledesktop": 900,
+        "pageherotitlemobile": 300
+      }
+    },
+    "1644596778fae8eb1b": {
+      "type": "static-page-navigation",
+      "blocks": {
+        "31863873-b54a-46de-9485-83fef8bae301": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "HOW IT ALL STARTED",
+            "pnid": "section-1"
+          }
+        },
+        "16b26073-c12c-4867-8e35-37fba43d1d27": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "MEET THE KNITTERS",
+            "pnid": "section-2"
+          }
+        },
+        "6b03c1f7-f9fa-4560-a1c7-d865e2f677c8": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "WORKING ENVIRONMENT",
+            "pnid": "section-3"
+          }
+        },
+        "3bff5562-b0cd-434b-bdf4-faa9eca8c0bd": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "Audited partner factories",
+            "pnid": "section-4"
+          }
+        },
+        "3a9cb427-085f-475d-9e04-22c3734ae733": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "Careers not jobs",
+            "pnid": "section-5"
+          }
+        }
+      },
+      "block_order": [
+        "31863873-b54a-46de-9485-83fef8bae301",
+        "16b26073-c12c-4867-8e35-37fba43d1d27",
+        "6b03c1f7-f9fa-4560-a1c7-d865e2f677c8",
+        "3bff5562-b0cd-434b-bdf4-faa9eca8c0bd",
+        "3a9cb427-085f-475d-9e04-22c3734ae733"
+      ],
+      "settings": {}
+    },
+    "1647179955e138dcaa": {
+      "type": "static-onlytext-alt",
+      "disabled": true,
+      "settings": {
+        "onlyTextlayout_": "top-bottom",
+        "headingOnlyTextCTA_": "it all started with an ad  printed in our local paper",
+        "maxwidthoftitle_": 373,
+        "maxwidthoftitlemobiled_": 200,
+        "bodytextOnlyTextCTA_": "We're not joking when we say we do some things traditionally around here. \nWe started The Knotty Ones with the dream of providing stable jobs, fair wages, and financial independence to women in marginalized areas of Lithuania, where these opportunities didn’t previously exist. We wanted to create something that made you feel good wearing it. Not only because you looked great, but also because you knew the woman who made your sweater got paid fairly and worked in a safe environment. We work with both artisans and local vetted factories to create opportunities in these rural communities. We honor our artisans, we learn from them, and we grow together.",
+        "maxwidthoftext_": 1000,
+        "maxwidthoftextmobile_": 280,
+        "showurlOnlyTextCTA_": false,
+        "linkOnlyTextCTA_": "",
+        "linktextOnlyTextCTA_": "",
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop_": 45,
+        "containerbottom_": 80,
+        "containertopmobile_": 40,
+        "containerbottommobile_": 40,
+        "sectionID": ""
+      }
+    },
+    "1647374180b9af9f48": {
+      "type": "static-two-column-text",
+      "settings": {
+        "borderlayouttwocltext": "top-bottom",
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "padding_top_sec": 72,
+        "padding_bottom_sec": 80,
+        "padding_top_secm": 31,
+        "padding_bottom_secm": 28,
+        "twocolheading": "IT ALL STARTED WITH AN AD PRINTED IN OUR LOCAL PAPER",
+        "hed_padding_sec": 300,
+        "hed_padding_secm": 274,
+        "twocolcopy": "<p>We're not joking when we say we do some things traditionally around here.</p><p>We started The Knotty Ones with the dream of providing stable jobs, fair wages, and financial independence to women in marginalized areas of Lithuania, where these opportunities didn’t previously exist. We wanted to create something that made you feel good wearing it. Not only because you looked great, but also because you knew the woman who made your sweater got paid fairly and worked in a safe environment. We work with both artisans and local vetted factories to create opportunities in these rural communities.</p>",
+        "cop_padding_sec": 900,
+        "cop_padding_secm": 305,
+        "sectionID": "section-1"
+      }
+    },
+    "16405372972b43bab6": {
+      "type": "static-collage",
+      "blocks": {
+        "b5fae8a8-f82e-4b2f-bfc1-09da62cc24d0": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": true,
+            "collagevideo": "https://cdn.shopify.com/s/files/1/0548/6644/4336/files/1-Collage-Meet-the-Knitters-Danute_knitting.mp4?v=1649184056",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "f73e4400-d835-4ba0-9931-203172f086b1": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/2-Collage-Meet-the-Knitters_600x_f342b74c-d370-4408-93dc-d4c54bf7a321.webp",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "c7156a48-f25c-424f-81f7-0e7d1d1b9c64": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/3-Collage-Meet-the-Knitters_600x_e878205b-53b3-4868-acd2-ffc11dc73bce.webp",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "6d9f363f-f72a-44b5-af9f-e28271d2399d": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/4-Collage-Meet-the-Knitters_600x_f0bd86b4-3c08-456a-98e1-9666a1ed16de.webp",
+            "caollagecolor": "#b4bed6",
+            "collagetext": "",
+            "caollagecolortext": "#000000"
+          }
+        },
+        "ae033e7a-a666-4c6b-9024-f391f78af4bb": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": true,
+            "collagevideo": "https://cdn.shopify.com/s/files/1/0548/6644/4336/files/5-Collage-Meet-the-Knitters_ce35ed5e-ea3a-43a2-b3f1-561b915de88b.mp4?v=1649962273",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "2f34c3bc-46f3-481d-97fe-cc6f71d1941a": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/6-Collage-Meet-the-Knitters_600x_755effce-5990-48c6-b031-4d89882f16ef.webp",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        }
+      },
+      "block_order": [
+        "b5fae8a8-f82e-4b2f-bfc1-09da62cc24d0",
+        "f73e4400-d835-4ba0-9931-203172f086b1",
+        "c7156a48-f25c-424f-81f7-0e7d1d1b9c64",
+        "6d9f363f-f72a-44b5-af9f-e28271d2399d",
+        "ae033e7a-a666-4c6b-9024-f391f78af4bb",
+        "2f34c3bc-46f3-481d-97fe-cc6f71d1941a"
+      ],
+      "settings": {
+        "borderlayoutcollage": "only-bottom",
+        "padding_sizeup": 18,
+        "padding_sizedown": 18,
+        "padding_sizeupm": 11,
+        "padding_sizedownm": 11
+      }
+    },
+    "1640267763d0ad4410": {
+      "type": "static-meet-the-knitters",
+      "blocks": {
+        "1880d70d-4902-46dc-ae29-51f70a5634aa": {
+          "type": "Slider",
+          "settings": {
+            "contentimage": "shopify://shop_images/Knitters_Photos.jpg",
+            "contentheading": "Danutė",
+            "contentcopy": "You won’t find anyone who loves their 9-5 quite as much as our knitter Danutė does. A ray of sunshine, Danutė adores knitting above anything and considers it her own personal form of meditation. Knitting is one thing that makes her truly happy; that and her 3 Persian cats. One woman that she’s constantly inspired by and is most proud of is her daughter.",
+            "thumbimage": "shopify://shop_images/Knitters_Icons_3.jpg"
+          }
+        },
+        "917dbf8b-e202-4c79-9a0f-b7a20f47fbc4": {
+          "type": "Slider",
+          "settings": {
+            "contentimage": "shopify://shop_images/Knitters_Photos_1_5c1e618a-01f7-4242-baff-d7b0676df8d2.jpg",
+            "contentheading": "Jurgita",
+            "contentcopy": "Jurgita's an avid knitter, frequent baker and lover of active travel. Jurgita got loads of compliments on the first knit she made for herself, so she decided to take the craft more seriously. Now, it's one of her biggest passions. She says knitting is her favorite kind of therapy and meditation. She only knits when she’s in a good mood so, if you feel extra good vibes when you wear your knit, you’ve got Jurgita to thank.",
+            "thumbimage": "shopify://shop_images/Knitters_Icons_2.jpg"
+          }
+        },
+        "1db60e66-2f69-4284-b6eb-618c1285df67": {
+          "type": "Slider",
+          "settings": {
+            "contentimage": "shopify://shop_images/Ruta-bio_420x526_52461e5e-4cf5-48bd-b83e-e4c6f0e582aa.webp",
+            "contentheading": "Rūta",
+            "contentcopy": "Rūta started knitting when she was only five years old, which means she has almost 50 years of experience under her belt. In case you thought that wasn't impressive enough, she's also a licensed veterinarian! Rūta lives only a few minutes away from our warehouse in Prienai so often drops by for tea and chats with the warehouse team and also personally delivers her knits by hand.",
+            "thumbimage": "shopify://shop_images/Ruta-BW-icon_99x99_ba79f084-86ce-4a93-b37f-925e35b662ec.webp"
+          }
+        },
+        "c47705fd-d4bf-436c-bab5-52496b88736a": {
+          "type": "Slider",
+          "settings": {
+            "contentimage": "shopify://shop_images/Aldona-bio_420x526_c9b5428a-4384-4697-9f1e-3ba6a7608053.webp",
+            "contentheading": "Aldona",
+            "contentcopy": "Aldona likes to take two to three months off each summer so she can focus on her garden, where she grows berries, veggies and apple trees. This is great for us, as she always fills our pockets with apples whenever we drop by for a visit! She was one of our very first knitters and has been with us since 2015.",
+            "thumbimage": "shopify://shop_images/Aldona-BW-icon_99x99_33f10bc6-fd74-45c3-97b4-2acbaca007bd.webp"
+          }
+        },
+        "d009941b-ec05-40a9-9022-59d8e90d1ace": {
+          "type": "Slider",
+          "settings": {
+            "contentimage": "shopify://shop_images/Knitters_Photos_1.jpg",
+            "contentheading": "Ingrida",
+            "contentcopy": "Every day, Ingrida tries to remind herself that she’s happy and has a beautiful, healthy family: she's big on practicing gratitude. She's an early bird who typically wakes up at 4am, just to get some peace and quiet (in her words) before her five children, including 2 pairs of twins, wake up! Ingrida always spends her time knitting thinking about new patterns she'd like to play around with.",
+            "thumbimage": "shopify://shop_images/Knitters_Icons_4.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "1880d70d-4902-46dc-ae29-51f70a5634aa",
+        "917dbf8b-e202-4c79-9a0f-b7a20f47fbc4",
+        "1db60e66-2f69-4284-b6eb-618c1285df67",
+        "c47705fd-d4bf-436c-bab5-52496b88736a",
+        "d009941b-ec05-40a9-9022-59d8e90d1ace"
+      ],
+      "settings": {
+        "knitterslayoutpage": "hide-border",
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 0,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 0,
+        "sliderheading": "MEET THE KNITTERS",
+        "sectionID": "section-2"
+      }
+    },
+    "1653484412354d3133": {
+      "type": "static-link",
+      "settings": {
+        "onlyTextlayout": "only-bottom",
+        "linktext": "SEE ALL KNITTERS",
+        "linkurl": "shopify://pages/see-all-knitters",
+        "thisisbigurl": false,
+        "justheader": false,
+        "padding_sizeup_sot": 40,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 20,
+        "containerbottom": 38,
+        "containertopmobile": 20,
+        "containerbottommobile": 20
+      }
+    },
+    "1644594325eebf8fda": {
+      "type": "static-two-column-alt3",
+      "settings": {
+        "borderlayouttwoclthreealt": "only-bottom",
+        "altsectionlayouttwthree": "image-text",
+        "nopadding": false,
+        "altthreeimage": "shopify://shop_images/1-_MTK-Section-Remote-Working_1080x1080_667cbc2f-c46b-4a6f-9983-d87a5379acd0.webp",
+        "altheadingclthree": "Remote working (and flexible hours) before it was cool",
+        "h2maxwidthdesktop": 446,
+        "h2maxwidthmobile": 300,
+        "altbodyclthree": "<p>Our artisans who work on handmade pieces choose schedules that work for them and their families, whether that's part time, full time or while their kids are napping. They can work from the comfort of their homes, with everything they need to work safely and comfortably.</p>",
+        "pmaxwidthdesktop": 900,
+        "pmaxwidthmobile": 300,
+        "padding_sizeup": 20,
+        "padding_sizedown": 12,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "padding_sizeupm_section": 27,
+        "padding_sizedownm_section": 0,
+        "sectionID": "section-3"
+      }
+    },
+    "1640537616c18afe0e": {
+      "type": "static-onlytext",
+      "settings": {
+        "onlyTextlayout": "only-bottom",
+        "bgOnlyTextCTA": "#eeeeea",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "",
+        "maxwidthoftitle": 20,
+        "maxwidthoftitlemobiled": 20,
+        "bodytextOnlyTextCTA": "“Made in Lithuania.” Nope. \nMore like “What’ve you been reading lately, Virginija?” or “What’re you baking this weekend, Ingrida?”",
+        "fontsizetune": "27px",
+        "maxwidthoftext": 1160,
+        "maxwidthoftextmobile": 300,
+        "showurlOnlyTextCTA": false,
+        "linkOnlyTextCTA": "",
+        "linktextOnlyTextCTA": "",
+        "padding_sizeup_sot": 91,
+        "padding_sizedow_sot": 95,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 20,
+        "containerbottom": 20,
+        "containertopmobile": 15,
+        "containerbottommobile": 32,
+        "sectionID": ""
+      }
+    },
+    "16445946127f12c018": {
+      "type": "static-two-column-alt3",
+      "settings": {
+        "borderlayouttwoclthreealt": "hide-border",
+        "altsectionlayouttwthree": "text-image",
+        "nopadding": false,
+        "altthreeimage": "shopify://shop_images/2-MTK-Section-Carefully-Selected-Factories_1080x1080_42a6272c-3603-470d-a9de-bfd16c4f48ea.webp",
+        "altheadingclthree": "Audited partner factories",
+        "h2maxwidthdesktop": 300,
+        "h2maxwidthmobile": 300,
+        "altbodyclthree": "<p>Even in factories, all of our detailing is done by hand. We work only with audited factories that share the same values as us: female-founded, family run, and small team focused. That includes a 40 hour working week, fair wages, 100% safe working conditions, healthcare benefits, paid maternity leave and paid sick leave. Stuff we might take for granted but rarely exists in the garment industry.<br/></p>",
+        "pmaxwidthdesktop": 900,
+        "pmaxwidthmobile": 300,
+        "padding_sizeup": 21,
+        "padding_sizedown": 12,
+        "padding_sizeupm": 7,
+        "padding_sizedownm": 15,
+        "padding_sizeupm_section": 27,
+        "padding_sizedownm_section": 0,
+        "sectionID": "section-4"
+      }
+    },
+    "1644876171ff86ce90": {
+      "type": "static-two-column-alt3",
+      "settings": {
+        "borderlayouttwoclthreealt": "top-bottom",
+        "altsectionlayouttwthree": "image-text",
+        "nopadding": false,
+        "altthreeimage": "shopify://shop_images/3-MTK-Section-Careers-not-jobs_1080x1080_b62bb85f-b404-42ef-9b6a-b6b960eafadd.webp",
+        "altheadingclthree": "Careers not jobs",
+        "h2maxwidthdesktop": 300,
+        "h2maxwidthmobile": 300,
+        "altbodyclthree": "<p>As we grow as a business, so do our knitters. We train our knitters on things like Excel and project management: skills they can take to their future jobs. Often, our knitters will grow upwards at The Knotty Ones, like Marina, our first ever knitter who now works as our Head of Production, managing over 70 knitters. Our wish is to empower women in rural areas by helping them to become more financially independent: we encourage them to dream and we help make these dreams come true. </p>",
+        "pmaxwidthdesktop": 900,
+        "pmaxwidthmobile": 300,
+        "padding_sizeup": 21,
+        "padding_sizedown": 12,
+        "padding_sizeupm": 7,
+        "padding_sizedownm": 15,
+        "padding_sizeupm_section": 27,
+        "padding_sizedownm_section": 0,
+        "sectionID": "section-5"
+      }
+    },
+    "1640537776fe890e26": {
+      "type": "static-page-hero",
+      "blocks": {
+        "1640537776b99b44d6-0": {
+          "type": "title",
+          "settings": {
+            "pageherohead": "We take things a little further than your standard care label.",
+            "herocolor": "#ffffff"
+          }
+        },
+        "1640537776b99b44d6-1": {
+          "type": "button",
+          "settings": {
+            "pageherobuttext": "SEE ALL KNITTERS’ DREAMS",
+            "herobuttonColor": "light",
+            "herourl": "shopify://pages/dream-fund"
+          }
+        }
+      },
+      "block_order": [
+        "1640537776b99b44d6-0",
+        "1640537776b99b44d6-1"
+      ],
+      "settings": {
+        "herolayoutpage": "hide-border",
+        "footer_hero": true,
+        "pageheroimage": "shopify://shop_images/knitters_page_bottom_-_desktop_1_1386x_75701311-d72c-45ae-92da-33d59ef97a8e.webp",
+        "pageheroimagemobile": "shopify://shop_images/knitters_page_bottom_-_mobile_1_692x_904b0922-3a39-496a-8377-7738784a9714.webp",
+        "padding_sizeup": 21,
+        "padding_sizedown": 21,
+        "padding_sizeupm": 7,
+        "padding_sizedownm": 7,
+        "pageherotitledesktop": 900,
+        "pageherotitlemobile": 300
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1640185938b1de605c",
+    "1644596778fae8eb1b",
+    "1647179955e138dcaa",
+    "1647374180b9af9f48",
+    "16405372972b43bab6",
+    "1640267763d0ad4410",
+    "1653484412354d3133",
+    "1644594325eebf8fda",
+    "1640537616c18afe0e",
+    "16445946127f12c018",
+    "1644876171ff86ce90",
+    "1640537776fe890e26"
+  ]
+}

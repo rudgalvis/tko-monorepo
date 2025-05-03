@@ -1,0 +1,50 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "settings": {
+      }
+    },
+    "static_onlytext_DPYakx": {
+      "type": "static-onlytext",
+      "disabled": true,
+      "settings": {
+        "onlyTextlayout": "top-bottom",
+        "bgOnlyTextCTA": "#EEEEEA",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "Oops! THIS KNIT SEEMS TO HAVE VANISHED",
+        "maxwidthoftitle": 950,
+        "maxwidthoftitlemobiled": 300,
+        "bodytextOnlyTextCTA": "The piece you’re searching for is no longer available. Explore our latest arrivals and find a knit to love forever.",
+        "fontsizetune": "27px",
+        "maxwidthoftext": 950,
+        "maxwidthoftextmobile": 300,
+        "showurlOnlyTextCTA": false,
+        "linkOnlyTextCTA": "shopify://collections/best-sellers",
+        "linktextOnlyTextCTA": "EXPLORE OUR KNITS",
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 20,
+        "containerbottom": 20,
+        "containertopmobile": 20,
+        "containerbottommobile": 20,
+        "sectionID": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "static_onlytext_DPYakx"
+  ]
+}

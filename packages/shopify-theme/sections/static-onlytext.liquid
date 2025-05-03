@@ -1,0 +1,328 @@
+{{ 'component-static-onlytext.css' | asset_url | stylesheet_tag }}
+
+<section class="kto-main-container" {% if section.settings.sectionID != nil %}id="{{ section.settings.sectionID }}" {% endif %}>
+  <div class="tko-lines sot-{{section.id}} {{section.settings.onlyTextlayout}}"
+  {% if section.settings.onlyTextlayout == 'top-bottom'%}
+  style="
+      border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+     
+      
+  ">
+  {% elsif  section.settings.onlyTextlayout == 'only-top' %}
+  style="
+      border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom: none;
+   
+  ">
+  {% elsif  section.settings.onlyTextlayout == 'only-bottom' %} 
+  style="
+      border-top: none;
+      border-bottom-style:  solid;
+      border-bottom-color:   black;
+    
+  ">
+  
+  {% else %}
+  
+  style="
+      border-top: none;
+      border-bottom: none;
+    
+  "> 
+
+  {% endif %}
+
+<div class="cta-text-container cta-text-{{ section.settings.testgh }} container-padding-{{section.id}}"  style="background-color:{{section.settings.bgOnlyTextCTA}};">
+    <div class="cta-text-content">
+        {% if section.settings.headingOnlyTextCTA != "" %}
+        <h2 class="{{ section.settings.headermaxwidth }} mxwidth-header-{{section.id}}">{{ section.settings.headingOnlyTextCTA }}</h2>
+        {% endif %}
+        <p class="mxwidth-{{section.id}}">{{ section.settings.bodytextOnlyTextCTA }}</p>
+        {% if section.settings.showurlOnlyTextCTA == true %}
+        <a href="{{ section.settings.linkOnlyTextCTA }}" class="btn-darrow inside-section">{{section.settings.linktextOnlyTextCTA}}</a>
+        {% endif %}
+    </div>
+</div>
+
+</div>
+</section>
+{% assign desktopheight = section.settings.testgh %}
+
+<style>
+      .sot-{{ section.id }}{
+        padding: {{section.settings.padding_sizeup_sot}}px 0px {{section.settings.padding_sizedow_sot}}px 0px;
+        border-width: 1px ;
+        
+       }
+       .mxwidth-{{section.id}}{
+        max-width: {{section.settings.maxwidthoftext}}px;
+       
+       }
+       .mxwidth-header-{{section.id}}{
+        max-width: {{section.settings.maxwidthoftitle}}px;    
+       }
+       .container-padding-{{section.id}}{
+         padding:{{section.settings.containertop}}px 0px {{section.settings.containerbottom}}px 0px;   
+       }
+
+
+       @media (min-width: 768px) and (max-width: 1024px) {
+        .mxwidth-{{section.id}}{
+        font-size: {{section.settings.fontsizetune}} !important;
+        {% if section.settings.fontsizetune == '30px' %}
+        letter-spacing: -0.46px !important;
+        line-height:32px !important;
+        {% else %}
+        letter-spacing: -0.42px !important;
+        line-height:32px !important;
+        {% endif %}
+       }
+       }
+
+  
+
+       @media (min-width: 320px) and (max-width: 480px) {
+        .sot-{{ section.id }}{
+        padding: {{section.settings.padding_sizeup_sotm}}px 0px {{section.settings.padding_sizedow_sotm}}px 0px;
+        border-width: 0.5px;
+       }
+      
+       .mxwidth-{{section.id}}{
+        max-width: {{section.settings.maxwidthoftextmobile}}px;
+        font-size: {{section.settings.fontsizetune}} !important;
+        {% if section.settings.fontsizetune == '30px' %}
+        letter-spacing: -0.46px !important;
+        line-height:32px !important;
+        {% else %}
+        letter-spacing: -0.42px !important;
+        line-height:32px !important;
+        {% endif %}
+       }
+       .mxwidth-header-{{section.id}}{
+        max-width: {{section.settings.maxwidthoftitlemobiled}}px;   
+       }
+       .container-padding-{{section.id}}{
+        padding:{{section.settings.containertopmobile}}px 0px {{section.settings.containerbottommobile}}px 0px;     
+       }
+
+       }    
+  </style>
+
+
+
+{% schema %}
+
+{
+    "name": "Only Text Section No.1", 
+    "class" : "static-only-text", 
+    "settings": [
+    {
+        "type": "header",
+        "content": "Line Layout Options"
+      },
+      {
+        "type": "select",
+        "id": "onlyTextlayout",
+        "label": "Section Border Options",
+        "default": "top-bottom",
+        "options": [
+          {
+            "value": "top-bottom",
+            "label": "Show Border Top & Bottom"
+          },
+          {
+            "value": "only-top",
+            "label": "Show Border Only Top"
+          },
+          {
+              "value": "only-bottom",
+              "label": "Show Border Only Bottom"
+            },
+          {
+              "value": "hide-border",
+              "label": "Hide Borders"
+            }
+        ]
+      },
+    {
+        "type": "header",
+        "content": "Color Options"
+      },
+    {
+      "id": "bgOnlyTextCTA",
+      "type": "color",
+      "label": "Background Color",
+      "default": "#EEEEEA"
+    },
+      {
+        "id": "colorOnlyTextCTA",
+        "type": "color",
+        "label": "Only Text CTA color",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Heading Options"
+      },
+      {
+        "id": "headingOnlyTextCTA",
+        "type": "text",
+        "label": "Heading Text"
+      },
+      {
+        "type":"number",
+        "id":"maxwidthoftitle",
+        "label":"Maximum Title Width Desktop",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"maxwidthoftitlemobiled",
+        "label":"Maximum Title Width Mobile",
+        "default":20
+      },
+      {
+        "type": "header",
+        "content": "Body Text Options"
+      },
+      {
+        "id": "bodytextOnlyTextCTA",
+        "type": "textarea",
+        "label": "Body Text"
+      },
+      {
+        "type": "select",
+        "id": "fontsizetune",
+        "label": "Mobile Font Size",
+        "default": "27px",
+        "options": [
+          {
+            "value": "30px",
+            "label": "Big font size"
+          },
+          {
+            "value": "27px",
+            "label": "Small font size"
+          }
+        ]
+      },
+      {
+        "type":"number",
+        "id":"maxwidthoftext",
+        "label":"Copy Width Desktop",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"maxwidthoftextmobile",
+        "label":"Copy Width Mobile",
+        "default":20
+      },
+      {
+        "type": "header",
+        "content": "URL Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "showurlOnlyTextCTA",
+        "label": "Enable link",
+        "default": false
+      },
+      {
+        "id": "linkOnlyTextCTA",
+        "type": "url",
+        "label": "CTA Url"
+      },
+      {
+        "id": "linktextOnlyTextCTA",
+        "type": "text",
+        "label": "CTA Copy"
+       
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup_sot",
+        "label":"Line Padding Desktop",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedow_sot",
+        "label":"Line Bottom Padding Desktop",
+        "default":20
+      },
+      
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup_sotm",
+        "label":"Line Top Padding Mobile",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedow_sotm",
+        "label":"Line Bottom Padding Mobile",
+        "default":20
+      },
+      {
+        "type": "header",
+        "content": "Container Padding Desktop"
+      },
+      {
+        "type":"number",
+        "id":"containertop",
+        "label":"Container Top Padding",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"containerbottom",
+        "label":"Container Bottom Padding",
+        "default":20
+      },
+      {
+        "type": "header",
+        "content": "Container Padding Mobile"
+      },
+      {
+        "type":"number",
+        "id":"containertopmobile",
+        "label":"Container Top Padding",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"containerbottommobile",
+        "label":"Container Bottom Padding",
+        "default":20
+      },
+      {
+        "type": "header",
+        "content": "Anchor Point Options"
+      },
+      {
+        "id": "sectionID",
+        "type": "text",
+        "label": "Anchor Point"
+      }
+    ],
+    "presets": [
+{
+"category": "Only Text Section No.1",
+"name": "Only Text Section No.1"
+}
+]
+  }
+{% endschema %}

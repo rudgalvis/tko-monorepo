@@ -1,0 +1,230 @@
+<section class="kto-main-container" {% if section.settings.sectionID != nil %}id="{{ section.settings.sectionID }}" {% endif %}>
+    <div class="tko-lines gghy-{{ section.id }}"
+    {% if section.settings.borderlayoutVideo == 'top-bottom'%} 
+    style="
+       border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+       
+    ">
+    {% elsif  section.settings.borderlayoutVideo == 'only-top' %}
+    style="
+    border-top-style:  solid;
+    border-top-color:   black;
+    border-bottom: none;
+      
+    ">
+    {% elsif  section.settings.borderlayoutVideo == 'only-bottom' %}
+    style="
+    border-top: none;
+    border-bottom-style:  solid;
+    border-bottom-color:   black;
+     
+    ">
+    
+    {% else %}
+    
+    style="
+    border-top: none;
+    border-bottom: none;
+    "> 
+  
+    {% endif %}
+
+    {{ 'component-video.css' | asset_url | stylesheet_tag }}
+
+<div class="video-container">
+    <div class="video-content">
+        <div class="video-holder">
+          {%- comment -%}{%- endcomment -%}
+          <div class="tko-video" id="about_video" data-vimeoid="{{section.settings.vimeovideoID}}"></div>
+          <script src="https://player.vimeo.com/api/player.js"></script>
+
+          <script>
+           
+           var getVimeoID = $('#about_video').attr('data-vimeoid');
+           const options = {
+               id: getVimeoID,
+               loop: true,
+               autoplay: true,
+               muted:true,
+               controls: false
+           };
+
+           var mdmVideo = new MobileDetect(window.navigator.userAgent);
+           var isMobileforVideo = mdmVideo.mobile();
+       
+           const player = new Vimeo.Player('about_video', options);
+       
+           player.setVolume(0);
+           var videoQuality = '720p';
+
+           if(isMobileforVideo != null){
+            videoQuality = '360p'
+           }
+       
+          
+           player.setQuality(videoQuality).then(function(quality) {
+            console.log(videoQuality);
+            player.on('play', function() {
+              console.log('played the video!');
+            });
+
+           }).catch(function(error) {
+            switch (error.name) {
+              case 'TypeError':
+              break;
+
+              default:
+              break;
+            }
+           });
+
+
+           var controlSound = 0;
+           $(document).on('click','.mute-icon--', function (event){ 
+            event.preventDefault(); //or return false;
+
+           if( controlSound == 0 ){
+             player.setVolume(0.8);
+             $(this).find('img').attr('src','https://cdn.shopify.com/s/files/1/0548/6644/4336/files/sound_br.svg?v=1648411552');
+             controlSound = 1;
+           }
+           else{
+             player.setVolume(0);
+             $(this).find('img').attr('src','https://cdn.shopify.com/s/files/1/0548/6644/4336/files/mute_br.svg?v=1648411552');
+             controlSound = 0;
+           }
+
+
+ 
+
+         });
+
+       </script>
+          {%- comment -%}{%- endcomment -%}
+           
+
+            <div class="mute-icon--">
+              <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/mute_br.svg?v=1648411552">
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</section>
+
+
+
+
+
+{% schema %}
+  
+{
+    "name": "Video Section", 
+    "settings": [
+    {
+      "type": "header",
+      "content": "Line Layout Options"
+    },
+      {
+        "type": "select",
+        "id": "borderlayoutVideo",
+        "label": "Section Border Options",
+        "default": "top-bottom",
+        "options": [
+          {
+            "value": "top-bottom",
+            "label": "Show Border Top & Bottom"
+          },
+          {
+            "value": "only-top",
+            "label": "Show Border Only Top"
+          },
+          {
+              "value": "only-bottom",
+              "label": "Show Border Only Bottom"
+            },
+          {
+              "value": "hide-border",
+              "label": "Hide Borders"
+            }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Video Options"
+      },
+      {
+        "id": "vimeovideoID",
+        "type": "text",
+        "label": "Vimeo Video ID",
+        "info": "How can you get Vimeo video ID ? ([?](https://www.weavers.space/answers/vimeo-video-id))"
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup_video",
+        "label":"Top",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedow_videon",
+        "label":"Bottom",
+        "default":20
+      },
+      
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup_videom",
+        "label":"Top",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedow_videonm",
+        "label":"Bottom",
+        "default":20
+      },
+      {
+        "type": "header",
+        "content": "Anchor Point Options"
+      },
+      {
+        "id": "sectionID",
+        "type": "text",
+        "label": "Anchor Point"
+      }
+    ],
+    "presets": [ 
+{
+"category": "Video",
+"name": "Video Section"
+}
+]
+  }
+{% endschema %}
+
+
+<style>
+  .gghy-{{ section.id }}{
+    padding: {{section.settings.padding_sizeup_video}}px 0px {{section.settings.padding_sizedow_videon}}px 0px;
+    border-width: 1px ;
+   }
+   @media (min-width: 320px) and (max-width: 480px) {
+    .gghy-{{ section.id }}{
+    padding: {{section.settings.padding_sizeup_videom}}px 0px {{section.settings.padding_sizedow_videonm}}px 0px;
+    border-width: 0.5px;
+   }
+   }    
+</style>

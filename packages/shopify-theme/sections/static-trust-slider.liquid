@@ -1,0 +1,264 @@
+<section class="kto-main-container">
+  <div class="tko-lines trus-slider-{{section.id}}"
+  {% if section.settings.borderlayout == 'top-bottom'%}
+  style="
+           border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+
+  ">
+  {% elsif  section.settings.borderlayout == 'only-top' %} 
+  style="
+  border-top-style:  solid;
+  border-top-color:   black;
+  border-bottom: none;;
+  
+  ">
+  {% elsif  section.settings.borderlayout == 'only-bottom' %}
+  style="
+  border-top: none;
+      border-bottom-style:  solid;
+      border-bottom-color:   black;
+  
+  ">
+  
+  {% else %}
+  
+  style="
+  border-top: none;
+  border-bottom: none;
+    
+  "> 
+
+  {% endif %}
+  
+  {{ 'component-trust-slider.css' | asset_url | stylesheet_tag }}
+  
+  
+  
+  
+  <div class="trust-slider-container padding-{{section.id}}" style="background-color: {{ section.settings.itpbgcolor }};" >
+    <div class="trust-slider-content">
+        <div class="ts-heading">{{ section.settings.itpheading}}</div>
+        {% if section.settings.showcarousel != false %}
+        <div class="trust-slider-copy">
+            <ul class="trust-copy">
+                {% for block in section.blocks %}
+                <li>{{ block.settings.itpcopy}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% if section.settings.showthumbnail != false %}
+        <div class="trust-slider-thumb">
+          <div class="trust-thumb">
+          
+              <div id="desktop-icon" class="tt-img-container"><img src=" {{ section.settings.itplogo1 | img_url : 'x116'}} "></div>
+           
+          
+              <div id="mobile-icon" class="tt-img-container"><img src=" {{ section.settings.itplogo2 | img_url : 'x374'}} "></div>
+          
+            
+          </div>
+        </div>
+        {% endif %}
+    </div>
+</div> 
+  </div> 
+  </section>
+  
+  
+  
+  {% schema %}
+  
+  {
+      "name": "In The Press", 
+      "settings": [
+      {
+        "type": "header",
+        "content": "Layout Options"
+      },
+      {
+        "type": "select",
+        "id": "borderlayout",
+        "label": "Section Border Options",
+        "default": "top-bottom",
+        "options": [
+          {
+            "value": "top-bottom",
+            "label": "Show Border Top & Bottom"
+          },
+          {
+            "value": "only-top",
+            "label": "Show Border Only Top"
+          },
+          {
+              "value": "only-bottom",
+              "label": "Show Border Only Bottom"
+            },
+          {
+              "value": "hide-border",
+              "label": "Hide Borders"
+            }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "showcarousel",
+        "default": true,
+        "label": "Show Comments"
+      },
+      {
+        "type": "checkbox",
+        "id": "showthumbnail",
+        "default": true,
+        "label": "Show Logos"
+      },
+      {
+        "type": "header",
+        "content": "Color Options"
+      },
+        {
+          "id": "itpbgcolor",
+          "type": "color",
+          "label": "Background Color",
+          "default": "#B4BED6"
+        },
+        {
+          "type": "header",
+          "content": "Title Options"
+        },
+        {
+          "id": "itpheading",
+          "type": "text",
+          "label": "Title"
+        },
+
+                {
+                  "type": "header",
+                  "content": "Section Logos"
+                },
+                 {
+                  "id": "itplogo1",
+                  "type": "image_picker",
+                  "label": "Desktop"
+                },
+                {
+                  "id": "itplogo2",
+                  "type": "image_picker",
+                  "label": "Mobile"
+                },
+        
+        {
+          "type": "header",
+          "content": "Line Padding Options Desktop"
+        },
+        {
+          "type":"number",
+          "id":"padding_sizeup",
+          "label":"Top",
+          "default":15
+        },
+        {
+          "type":"number",
+          "id":"padding_sizedown",
+          "label":"Bottom",
+          "default":15
+        },
+        {
+          "type": "header",
+          "content": "Line Padding Options Mobile"
+        },
+        {
+          "type":"number",
+          "id":"padding_sizeupm",
+          "label":"Top",
+          "default":15
+        },
+        {
+          "type":"number",
+          "id":"padding_sizedownm",
+          "label":"Bottom",
+          "default":15
+        },
+        {
+          "type": "header",
+          "content": "Section Padding Options Desktop"
+        },
+        {
+          "type":"number",
+          "id":"padding_sizeupsectiondesktop",
+          "label":"Top",
+          "default":60
+        },
+        {
+          "type":"number",
+          "id":"padding_sizedownsectiondesktop",
+          "label":"Bottom",
+          "default":60
+        },
+        {
+          "type": "header",
+          "content": "Section Padding Options Mobile"
+        },
+        {
+          "type":"number",
+          "id":"padding_sizeupsectionmobile",
+          "label":"Top",
+          "default":60
+        },
+        {
+          "type":"number",
+          "id":"padding_sizedownsectionmobile",
+          "label":"Bottom",
+          "default":60
+        }
+       
+      ],
+            "max_blocks": 5,
+            "blocks": [
+            {
+                 "type": "Slider", 
+                 "name": "In The Press Slider",
+                 "settings": [
+                 {
+                  "type": "textarea",
+                  "id": "itpcopy",
+                  "label": "Comment Copy"
+                }
+               ]
+            }
+             ],
+      "presets": [
+  {
+  "category": "Slider",
+  "name": "In The Press Slider"
+  }
+  ]
+    }
+  {% endschema %}
+
+
+  <style>
+    .trus-slider-{{section.id}}{
+           padding: {{section.settings.padding_sizeup}}px 0px {{section.settings.padding_sizedown}}px 0px;
+           border-width: 1px ;
+     }
+
+     .padding-{{section.id}}{
+            padding: {{section.settings.padding_sizeupsectiondesktop}}px 0px {{section.settings.padding_sizedownsectiondesktop}}px 0px;
+     }
+   
+     @media (max-width: 812px) {
+       .trus-slider-{{section.id}}{
+           padding: {{section.settings.padding_sizeupm}}px 0px {{section.settings.padding_sizedownm}}px 0px;
+           border-width: 0.5px;
+     }
+
+     .padding-{{section.id}}{
+            padding: {{section.settings.padding_sizeupsectionmobile}}px 0px {{section.settings.padding_sizedownsectionmobile}}px 0px;
+     }
+
+     } 
+   </style>

@@ -1,0 +1,317 @@
+.knitcare-accordion-container{
+    width:100%;
+    height: auto;
+    position: relative;
+    margin-top: 30px;
+}
+
+.child-element {
+    margin-top: 0px;
+}
+
+.knitcare-accordion-content{
+    width:100%;
+    height: auto;
+    position: relative;
+}
+.knitcare-accordion-content ul{
+    width:100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.list-knitcare{
+    width:100%;
+    height: auto;
+    position: relative;
+    border-bottom:1px solid black;
+    cursor: pointer;
+    padding: 24px 0px;
+    
+}
+
+.knitcare-list{
+    width:100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 38px;
+}
+
+.knitcare-list img{
+    margin-right: 34px;
+}
+
+.flex-it{
+    display:flex;
+}
+
+.knitcare-item{
+    width:100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-start;
+    display: none;
+    opacity:0;
+}
+
+
+
+.knitcare{
+    width:50%;
+    height: auto;
+}
+
+.knitcare-left p{
+    font-family:'Monument Regular';
+    font-size:21px;
+    letter-spacing: -0.32px;
+    line-height: 32px;
+    color:black;
+}
+
+.knitcare-list h3{
+    font-family:'Monument';
+    font-size:22px;
+    letter-spacing: -0.34px;
+    color:black;
+    text-transform: uppercase;
+}
+
+.knitcare-right img{
+    width:100%;
+}
+
+li.list-knitcare.active .knitcare-item {
+  /* display:flex;*/
+}
+
+
+.knitcare-right{
+width: 50%;
+height: auto;
+position: relative;
+top: -47px;
+}
+
+.accordion-menu ul{
+        width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    }
+
+
+.accordion-menu ul li:nth-child(2) a{
+    border-right: none;
+}
+
+    .accordion-menu ul li a{
+opacity:.5;
+text-align: center;
+font-size: 22px;
+color: black;
+position: relative;
+z-index: 3;
+width: 100%;
+height: auto;
+padding: 19px 0px 13px 0px;
+min-height: 61px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-right: 1px solid black;
+letter-spacing: -0.34px;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+margin-top: 10px;
+}
+
+a.accordion-control.active {
+opacity:1;
+}
+
+.tr-line {
+    display: block !important;
+position: absolute;
+width: 95%;
+height: 88%;
+z-index: 2;
+border-bottom: 1px solid black;
+border-top: 1px solid black;
+    }
+
+    .knitcare.knitcare-left {
+        padding: 0px 117px 95px 40px;
+    }
+    .fade {
+        -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+           -moz-animation: fadein 1s; /* Firefox < 16 */
+            -ms-animation: fadein 1s; /* Internet Explorer */
+             -o-animation: fadein 1s; /* Opera < 12.1 */
+                animation: fadein 1s;
+    }
+    
+    @keyframes fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+    
+    /* Firefox < 16 */
+    @-moz-keyframes fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+    
+    /* Safari, Chrome and Opera > 12.1 */
+    @-webkit-keyframes fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+    
+    /* Internet Explorer */
+    @-ms-keyframes fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+    
+    /* Opera < 12.1 */
+    @-o-keyframes fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+    
+    
+    .accordionbadge{
+        width: auto;
+        position: absolute;
+        right: 0px;
+        font-family: 'Monument';
+        letter-spacing: -0.25px;
+        font-size: 16px;
+   
+        top: 32px;
+        width: 256px;
+        height: 58.8px;
+    }
+
+    .accordionbadge a{
+      width:100%;
+      height:100%;
+      display: flex;
+      align-items:center;
+      justify-content: center;
+    }
+    
+    .hidelist{
+        display:none;
+    }
+    
+    @media (min-width: 320px) and (max-width: 480px) {
+    .accordion-menu ul li {
+        height: 55px;
+        padding: 10px 0px;
+    }
+
+    .accordion-menu ul li a{
+
+        border-width: .5px;
+
+        }
+        
+    
+    .accordion-menu ul li:nth-child(1) .tr-line {
+    
+        border-bottom: .5px solid black !important;
+        border-top: .5px solid black !important;
+    }
+    
+    .accordion-menu ul li:nth-child(2) .tr-line {
+        border-bottom: .5px solid black !important;
+        border-top: .5px solid black !important;
+    }
+    
+    
+    
+    .accordion-menu ul li a {
+        font-size: 11px;
+        padding: 17px 0px 17px 0px;
+        min-height: 11px;
+        letter-spacing: -0.17px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        margin-top: 7px;
+        position: relative;
+        top:0px;
+    }
+    .knitcare-list h3 {
+        font-family: 'Monument';
+        font-size: 12px;
+        letter-spacing: -0.19px;
+        color: black;
+    }
+    .knitcare-list img {
+        margin-right: 15px;
+        width: 11px;
+    }
+    
+    .knitcare-list {
+        padding-left: 18px;
+    }
+    .knitcare-left p {
+        font-size: 14px;
+        letter-spacing: -0.22px;
+        line-height: 20px;
+    }
+    .knitcare-item{
+        flex-direction: column;
+    }
+    .knitcare.knitcare-left {
+        padding: 70px 15px 24px 19px;
+    }
+    
+    .knitcare {
+        width: 100%;
+        height: auto;
+    }
+    
+    .knitcare-right {
+        width: 100%;
+        top: 0px;
+    }
+    
+    .list-knitcare {
+        padding: 17px 0px 12px 0px;
+        border-bottom: .5px solid black;
+    
+    }
+    
+    .accordionbadge {
+        width: auto;
+        position: absolute;
+        right: 0px;
+        font-family: 'Monument';
+        letter-spacing: -0.25px;
+        font-size: 8px;
+      
+        top: 21px;
+        width:109px;
+        height:29px;
+        padding-top: 2px;
+    }
+    
+    .knitcare-accordion-container{
+        margin-top: -21px;
+    }
+    
+    }

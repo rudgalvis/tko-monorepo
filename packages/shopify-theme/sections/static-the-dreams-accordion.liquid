@@ -1,0 +1,353 @@
+<section  class="kto-main-container" {% if section.settings.sectionID != nil %}id="{{ section.settings.sectionID }}" {% endif %}>
+    <div class="tko-lines dream-accor-{{section.id}}"
+    {% if section.settings.accordionlayoutdream == 'top-bottom'%}
+    style="
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    ">
+    {% elsif  section.settings.accordionlayoutdream == 'only-top' %}
+    style="
+        border-top: 1px solid black;
+        border-bottom: 0px solid black;
+    ">
+    {% elsif  section.settings.accordionlayoutdream == 'only-bottom' %}
+    style="
+        border-top: 0px solid black;
+        border-bottom: 1px solid black;
+    ">
+    
+    {% else %}
+    
+    style="
+        border-top: 0px solid black;
+        border-bottom: 0px solid black;
+    "> 
+  
+    {% endif %}
+
+    {{ 'component-the-dream-accordion.css' | asset_url | stylesheet_tag }}
+
+
+<div class="dreams-accordion-container">
+    <div class="dreams-accordion-content">
+        {% if section.settings.showheader == true %}
+        <div class="dream-accordion-header">
+            <h2>{{section.settings.sectionheading}}</h2>
+        </div>
+        {% endif %}
+        <ul>
+            {% for block in section.blocks %}
+            <li   class="list-dreams {% if forloop.index == 1 and section.settings.notfirst != true %} open-item {% endif %} {% if activetype != block.settings.typeofknit %} hidelist {% endif %}">
+                    <div class="dream-list">
+                        <div data-itemnumber="{{forloop.index}}" class="dreams-list-content">
+                         <div class="dreams-thumb">
+                             <img src="{{ block.settings.dreamaccordionthumb | img_url: '124x124'}}"/>
+                         </div>
+                         <div class="dream-copys">
+                         <h3 class="{% if template.suffix != 'dream-fund' %}centerit{%endif%}">{{ block.settings.accordionheadingdream }}</h3>
+                         {% if section.settings.hidedescription != true %}
+                         <p>{{ block.settings.accordionsubdream }}</p>
+                         {% endif %}
+                        </div>
+                         <div class="dream-arrow {% if section.settings.hidedescription != true %}centeritarrow{%endif%}">↓</div>
+                        </div>
+                     
+                        
+                     
+                         
+                    </div>
+                    <div class="dreams-item" id="dream-accor-{{forloop.index}}">
+                    <div class="dreams dreams-left">
+                        <p>{{ block.settings.accordioncopydream}}</p>
+
+                        {% assign productx = block.settings.fundproduct %}
+                        {% if block.settings.enablefund ==  true %}
+                        <div class="donate-show-accordion">
+                           
+                            <div class="show-bottom-accordion">
+                                <div class="show-selection">
+                               
+                                <ul class="found-container-accordion">
+                                   {% assign foundmanytimes = block.settings.multiplier_fund %}
+                                     {% for  fundavlue in (1..foundmanytimes) %}
+                                       <li class="found-meta" data-value="{{ productx.variants[0].id }}" data-itemsize="{{forloop.index}}"><span class="money">{{ productx.variants[0].price | times: forloop.index  | money_without_trailing_zeros | strip_html }}</span></li>
+                                    {% endfor %}   
+                                  </ul>
+                                </div>  
+                                <span  class="currency-holder money">{{productx.variants[0].price  | money_without_trailing_zeros | strip_html }}</span>   
+                                <span class="chavron-price">
+                                    <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/arrow_for_select.svg?v=1638272830" />
+    
+                                </span>
+                                <div data-open-currency="0" class="money-changer"></div>
+                              
+
+                          
+
+{%- comment -%}
+
+                        <select name="id" class="product-select2">
+                                        
+                            {% for variant in productx.variants %}
+                             <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}>{{ variant.price | money }}</option>
+                            {% endfor %}
+                        </select>
+                         {%- endcomment -%}
+                   
+                       
+
+                    </div>
+                    <div class="donate-accordion">
+                    <button style="background-color:{{section.settings.donatebuttoncolor}}; color:{{section.settings.donatebuttontextcol}};" class="donate2"  data-quantity="1"  data-productID="{{productx.variants[0].id}}">DONATE TO THE FUND</button>
+                    </div>
+                </div>
+                {% endif %}
+
+                        {% if block.settings.dreamurlcontrol == true %}
+                        <a href="{{ block.settings.fundurl }}" class="btn-darrow">{{ block.settings.fundurltext }}</a>
+                        {% endif %}
+                    </div>
+                    <div class="dreams dreams-right">
+                        <img src="{{ block.settings.dreamaccordionimage | img_url: '424x539' }}"/>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% if section.settings.showfooter == true %}
+        <div class="dream-accordion-footer">
+            <a href="{{ section.settings.dreamfooterurl }}" class="btn-darrow btn-monument">{{ section.settings.dreamfootertext }}</a>
+        </div>
+        {% endif %} 
+    </div>
+</div>
+</div>
+</section>
+
+
+
+
+
+
+
+{% schema %}
+  
+{
+    "name": "Dream Fund Accordion", 
+    "settings": [
+    {
+        "type": "header",
+        "content": "Line Layout Options"
+      },
+      {
+        "type": "select",
+        "id": "accordionlayoutdream",
+        "label": "Section Border Options",
+        "default": "top-bottom",
+        "options": [
+          {
+            "value": "top-bottom",
+            "label": "Show Border Top & Bottom"
+          },
+          {
+            "value": "only-top",
+            "label": "Show Border Only Top"
+          },
+          {
+              "value": "only-bottom",
+              "label": "Show Border Only Bottom"
+            },
+          {
+              "value": "hide-border",
+              "label": "Hide Borders"
+            }
+        ]
+      },
+    {
+        "type": "header",
+        "content": "Title Options"
+      },
+      {
+               
+        "type": "text",
+        "id": "sectionheading",
+        "label": "Title"
+      },
+      
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup",
+        "label":"Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedown",
+        "label":"Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeupm",
+        "label":"Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedownm",
+        "label":"Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Show/Hide Section"
+      },
+      {
+        "type": "checkbox",
+        "id": "showheader",
+        "label": "Show Header",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "notfirst",
+        "label": "This is a secondary list",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "hidedescription",
+        "label": "Hide Accordion Sub-Heading",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Anchor Point Options"
+      },
+      {
+        "id": "sectionID",
+        "type": "text",
+        "label": "Anchor Point"
+      }
+      
+      ],
+      "max_blocks": 20,
+      "blocks": [
+      {
+           "type": "Accordion", 
+           "name": "Dream Fund Accordion",
+           "settings": [
+           {
+              "type": "header",
+              "content": "Image Options"
+            },
+            {
+              "type": "image_picker",
+              "id": "dreamaccordionimage",
+              "label": "Main Image"
+            },
+            {
+                "type": "image_picker",
+                "id": "dreamaccordionthumb",
+                "label": "Thumbnail"
+              },
+              {
+                "type": "header",
+                "content": "Heading Options"
+              },
+            {
+              "id": "accordionheadingdream",
+              "type": "text",
+              "label": "Heading"
+            },
+            {
+                "id": "accordionsubdream",
+                "type": "textarea",
+                "label": "Sub-Heading"
+              },
+           {
+               
+            "type": "textarea",
+            "id": "accordioncopydream",
+            "label": "Body"
+          },
+          {
+            "type": "header",
+            "content": "URL Options"
+          },
+          {
+            "type": "checkbox",
+            "id": "dreamurlcontrol",
+            "label": "Show URL",
+            "default": true
+          },
+          {
+            "id": "fundurltext",
+            "type": "text",
+            "label": "URL Copy"
+          },
+          {
+            "id": "fundurl",
+            "type": "url",
+            "label": "URL"
+          },
+          {
+            "type": "header",
+            "content": "Dream Fund Options"
+          },
+          {
+            "type": "checkbox",
+            "id": "enablefund",
+            "default": true,
+            "label": "Enable fund section"
+          },
+          {
+            "type": "number",
+            "id": "multiplier_fund",
+            "label": "Multiplier fund value",
+            "default": 5
+          },
+          {
+            "type": "product",
+            "id": "fundproduct",
+            "label": "Dream Fund Product"
+          }
+         ]
+      }
+       ],
+
+        
+    "presets": [ 
+{
+"category": "Accordion",
+"name": "Dream Fund Accordion"
+}
+]
+  }
+{% endschema %}
+
+
+
+<style>
+    .dream-accor-{{section.id}}{
+           padding: {{section.settings.padding_sizeup}}px 0px {{section.settings.padding_sizedown}}px 0px;
+     }
+   
+     
+   
+   
+     @media (max-width: 812px) {
+       .dream-accor-{{section.id}}{
+           padding: {{section.settings.padding_sizeupm}}px 0px {{section.settings.padding_sizedownm}}px 0px;
+     }
+    
+     } 
+   </style>

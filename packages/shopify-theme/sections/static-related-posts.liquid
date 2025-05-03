@@ -1,0 +1,317 @@
+<div class="related-posts-container">
+    <div class="rp-heading">
+        <h3>RELATED POSTS</h3>
+    </div>
+
+    <div class="related-post-items">
+        {%- assign currenttag = article.title-%}
+
+       
+
+        {%- assign blog = blogs[section.settings.blog] -%} 
+       
+        {%- comment -%}related article item{%- endcomment -%}
+        {% assign forlooholder = 0 %}
+        {%- for article in blog.articles -%}
+
+        {% if article.title != currenttag %}
+   
+        {% if forlooholder < 3 %}
+
+
+        <div class="related-blog-container">
+            <div class="rr rr-up">
+               <div class="rr-line">
+                   <div class="r-line"></div>
+               </div>
+            </div>  
+            <div class="related-item">
+                <div class="related-img">
+                 <a href="{{ article.url }}">{{ article | img_url: '444x325', scale: 2 | crop: 'center' | img_tag: article.title }}</a>
+                </div>
+                <div class="related-reach-content">
+                   <h3><a href="{{article.url}}">{{ article.title }}</a></h3>
+                </div>
+            </div>
+            <div class="rr rr-down">
+              <div class="rr-line">
+                <div class="r-line"></div>
+            </div>
+            </div>  
+        </div>
+        {% assign forlooholder = forlooholder | plus: 1 %}
+        {% endif %}
+        {% endif %}
+        {%- endfor -%}
+        {%- comment -%}related article item{%- endcomment -%}
+    </div>
+{%- comment -%}
+    <div class="loadmore">
+        <a class="btn-darrow" href="">LOAD MORE</a>
+    </div>
+    {%- endcomment -%}
+</div>
+
+
+<style>
+
+.loadmore {
+    width:100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+} 
+
+.loadmore a{
+    font-size:14px;
+    color:black;
+    letter-spacing:-0.22px;
+    text-align: center;
+} 
+
+.related-post-items{
+    display: grid;
+grid-template-columns: repeat(3, 1fr);
+grid-template-rows: 1fr;
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+    padding: 0px 14px;
+}
+
+.related-reach-content{
+    width:100%;
+    margin-top: 55px;
+    margin-bottom: 68px;
+}
+
+.related-reach-content h3{
+    font-family: 'Panama';
+    font-size: 28px;
+    letter-spacing: -0.43px;
+    line-height:34px;
+    text-align: center;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
+.related-reach-content h3 a{
+    font-family: 'Panama';
+    font-size: 28px;
+    letter-spacing: -0.43px;
+    line-height: 34px;
+    text-align: center;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    text-transform: inherit;
+
+}
+
+.related-img{
+    width: 100%;
+    overflow: hidden;
+    aspect-ratio: 1.36;
+}
+
+.related-img img{
+    width:100%;
+    margin-bottom:0px;
+}
+
+.related-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    padding: 0px 11px;
+    border-right: 1px solid black;
+}
+
+.related-blog-container:nth-child(3) .related-item{
+
+    border-right:none;
+    padding: 0px 11px 0px 11px;
+}
+
+
+.related-blog-container:nth-child(3) .rr{
+
+padding: 0px 11px 0px 11px;
+}
+
+.related-blog-container:nth-child(1) .related-item{
+    padding: 0px 11px 0px 11px;
+}
+
+.related-blog-container:nth-child(1) .rr{
+    padding: 0px 11px 0px 11px;
+}
+
+.kto-main-container{
+        padding:0px 25px;
+    }
+
+
+   
+
+.related-blog-container{
+      position: relative;
+      width:100%;
+      height: auto;
+      padding-top: 18px;
+      padding-bottom: 18px;
+    }
+
+    .rr{
+    width: 100%;
+    padding: 0px 10px;
+    position: absolute;
+}
+
+.rr-up{
+  top:0px;
+}
+
+.rr-down{
+  bottom:0px;
+}
+
+.rr-line{
+  position: relative;
+  width: 100%;
+}
+
+.r-line{
+  width: 100%;
+  border-top: 1px solid black;
+  height: 2px;
+  display: block !important;
+}
+
+
+
+
+
+
+.related-blog-container:nth-child(-n+2){
+    padding-top:18px;
+    padding-bottom: 0px;
+}
+
+.related-blog-container:nth-child(2n+1) .article-item{
+    border-left:none;
+    padding:0px 21px 0px 0px;
+}
+
+.related-blog-container:nth-child(2n+2) .article-item{
+    padding:0px 0px 0px 21px;
+}
+
+    .related-posts-container{
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+
+
+    .rp-heading{
+        width:100%;
+        height: 165px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .rp-heading h3{
+        font-family: 'Monument';
+        font-size:22px;
+        letter-spacing:-0.34px;
+        text-align: center;
+        color: black;
+    }
+
+    @media (min-width: 320px) and (max-width: 480px) {
+
+        .rr{
+    padding: 0px 6.5px;  
+}
+
+        .related-blog-container:nth-child(1) .related-item{
+    padding: 0px 6.5px 0px 6.5px;
+}
+
+.related-blog-container {
+
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+
+.related-blog-container:nth-child(-n+2){
+    padding-top:12px;
+    padding-bottom: 0px;
+}
+
+.related-item{
+
+    padding: 0px 6.5px;
+    border-right: .5px solid black;
+}
+
+.r-line{
+
+  border-top: .5px solid black;
+
+}
+
+.related-blog-container:nth-child(3) .related-item{
+
+    border-right:none;
+    padding: 0px 6.5px 0px 6.5px;
+}
+
+
+.related-blog-container:nth-child(3) .rr{
+
+padding: 0px 6.5px 0px 6.5px;
+}
+
+.related-blog-container:nth-child(1) .related-item{
+    padding: 0px 6.5px 0px 6.5px;
+}
+
+.related-blog-container:nth-child(1) .rr{
+    padding: 0px 6.5px 0px 6.5px;
+}
+
+    }
+</style>
+
+{% schema %}
+
+{
+    "name": "Related Posts", 
+    "settings": [
+    {
+        "type": "header",
+        "content": "Related Posts Options"
+      },
+      {
+        "id": "blog",
+        "type": "blog",
+        "label": "Blog"
+      }
+
+    ],
+    "presets": [
+{
+"category": "Blog",
+"name": "Related Posts"
+}
+]
+  }
+{% endschema %}

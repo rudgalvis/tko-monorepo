@@ -1,0 +1,115 @@
+.spr-summary.rte {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+a.spr-summary-actions-newreview {
+    background: black;
+    color: white;
+    padding: 6px 46px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+    margin-top: 20px;
+    font-family: Monument;
+    letter-spacing: -.25px;
+}
+
+a.spr-summary-actions-newreview:hover {
+    color: white;
+}
+
+.spr-header-title {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 22px;
+    letter-spacing: -0.34px;
+    color: black;
+}
+
+.spr-form-title {
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 0;
+    letter-spacing: -0.22px;
+}
+
+
+.spr-form-label+.spr-form-input {
+    margin: 0;
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid black;
+    min-height: 35px;
+    padding-bottom: 11px;
+    margin-bottom: 29px;
+}
+
+.spr-form-review-body .spr-form-input textarea {
+    border: none;
+    background: transparent;
+    font-family: 'Monument Regular';
+}
+
+.spr-button, .spr-button-primary {
+    width: auto;
+    margin: 0;
+    min-height: 1em;
+    padding-top: 11px;
+    color: #fff;
+    font-family: Monument;
+    font-size: 16px;
+    letter-spacing: -.25px;
+    text-transform: uppercase;
+}
+
+
+ @media (max-width: 812px) {
+.spr-header-title {
+    font-size: 16px;
+    letter-spacing: -.25px;
+}
+   .spr-summary-actions-newreview:after {
+    content: " ";
+     display: inherit;
+}
+
+      .spr-summary-actions-newreview:before {
+    content: " ";
+     display: inherit;
+}
+
+   span.spr-summary-actions {
+    margin-top: 15px;
+}
+
+   a.spr-summary-actions-newreview {
+    background: black;
+    color: #fff;
+    padding: 9px 30px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 10px;
+    margin-top: 20px;
+    font-family: Monument;
+    letter-spacing: -.22px;
+}
+
+   .spr-button, .spr-button-primary {
+    width: auto;
+    margin: 0;
+    min-height: 1em;
+    padding-top: 11px;
+    color: #fff;
+    font-family: Monument;
+    font-size: 10px;
+    letter-spacing: -.12px;
+    text-transform: uppercase;
+}
+   
+ }
+
+

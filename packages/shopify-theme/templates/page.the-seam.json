@@ -1,0 +1,640 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "about-page",
+      "settings": {
+      }
+    },
+    "16400025067a204b40": {
+      "type": "static-onlytext",
+      "settings": {
+        "onlyTextlayout": "only-bottom",
+        "bgOnlyTextCTA": "#eeeeea",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "THE KNOTTY ONES x THE SEAM",
+        "maxwidthoftitle": 354,
+        "maxwidthoftitlemobiled": 210,
+        "bodytextOnlyTextCTA": "Knotty Atelier",
+        "fontsizetune": "30px",
+        "maxwidthoftext": 920,
+        "maxwidthoftextmobile": 250,
+        "showurlOnlyTextCTA": true,
+        "linkOnlyTextCTA": "https://app.theseam.uk/theknottyones",
+        "linktextOnlyTextCTA": "BOOK NOW",
+        "padding_sizeup_sot": 11,
+        "padding_sizedow_sot": 15,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 0,
+        "containertop": 50,
+        "containerbottom": 50,
+        "containertopmobile": 14,
+        "containerbottommobile": 14,
+        "sectionID": ""
+      }
+    },
+    "164001637237a519bf": {
+      "type": "static-mid-text",
+      "disabled": true,
+      "settings": {
+        "onlyTextlayoutmidtext": "only-top",
+        "positionoftext": "centeralign",
+        "paragraphtitle": "JANE DOE",
+        "hed_padding_sec": 1000,
+        "hed_padding_secm": 300,
+        "paragraphtextsub": "“At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.”",
+        "cop_padding_sec": 300,
+        "cop_padding_secm": 200,
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "padding_top_sec": 65,
+        "padding_bottom_sec": 65,
+        "padding_top_secm": 16,
+        "padding_bottom_secm": 16
+      }
+    },
+    "16446108729381799e": {
+      "type": "static-page-navigation",
+      "blocks": {
+        "39729372-50a6-4f7e-9d56-e83b68860ba6": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "THE FOUNDERS",
+            "pnid": "section-1"
+          }
+        },
+        "c097f8d1-c228-47c2-8547-43213a04ed3e": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "CELEBRATING ARTISANS",
+            "pnid": "section-2"
+          }
+        },
+        "01d891b3-53fd-454b-b79f-8c33971bd228": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "BALTIC HERITAGE",
+            "pnid": "section-3"
+          }
+        },
+        "04d27017-820b-447e-81af-b7a9e27f0c36": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "BETTER FOR OUR PLANET",
+            "pnid": "section-4"
+          }
+        },
+        "38402a37-723e-46fe-991e-873704589561": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "Knitter's Dream Fund",
+            "pnid": "section-5"
+          }
+        }
+      },
+      "block_order": [
+        "39729372-50a6-4f7e-9d56-e83b68860ba6",
+        "c097f8d1-c228-47c2-8547-43213a04ed3e",
+        "01d891b3-53fd-454b-b79f-8c33971bd228",
+        "04d27017-820b-447e-81af-b7a9e27f0c36",
+        "38402a37-723e-46fe-991e-873704589561"
+      ],
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "164001900656e472ca": {
+      "type": "static-two-column-alt3",
+      "settings": {
+        "borderlayouttwoclthreealt": "only-bottom",
+        "altsectionlayouttwthree": "image-text",
+        "nopadding": true,
+        "altthreeimage": "shopify://shop_images/4-_2_938x_f77f7f53-b0d4-4ec1-834a-5dcda79a8bef_938x_webp.jpg",
+        "altheadingclthree": "REPAIR & REWEAR",
+        "h2maxwidthdesktop": 600,
+        "h2maxwidthmobile": 300,
+        "altbodyclthree": "<p>We design timeless pieces that you’ll cherish season after season, year after year. Sometimes, when you fall in love with a knit as much as we hope you will, it needs a bit of extra care. That’s why we’re thrilled to introduce our Knotty Atelier partnership with The Seam. This service is all about extending the life of your beloved The Knotty Ones knits.</p>",
+        "pmaxwidthdesktop": 900,
+        "pmaxwidthmobile": 312,
+        "padding_sizeup": 28,
+        "padding_sizedown": 18,
+        "padding_sizeupm": 18,
+        "padding_sizedownm": 13,
+        "padding_sizeupm_section": 35,
+        "padding_sizedownm_section": 15,
+        "sectionID": "section-1"
+      }
+    },
+    "164009869053d5286d": {
+      "type": "static-collage",
+      "blocks": {
+        "7ef1be76-87bf-453d-9756-45b12ac5a2b1": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/1-OurStory-Collage_600x_c9b44a49-7a62-43bd-a760-b2e9ae4753f6.webp",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "4e420f4b-3629-41a6-ac7d-503cdcb5f903": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/2-OurStory-Collage_600x_c8c5c929-5ed6-481e-b1ea-94a543020198.webp",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "697b780b-8639-4f4b-b2d8-920182e7b0d0": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": true,
+            "collagevideo": "https://cdn.shopify.com/s/files/1/0548/6644/4336/files/3-OurStory-Collage.mp4?v=1649183522",
+            "caollagecolor": "#eeeeea",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "b24af7a7-0acf-420f-a10f-f4213fbc3862": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/4-OurStory-Collage_600x_0655b011-8549-4284-a639-0017eb1ba93b.webp",
+            "caollagecolor": "#b4bed6",
+            "collagetext": "",
+            "caollagecolortext": "#000000"
+          }
+        },
+        "6f86ff4e-0953-4750-84a6-3a0bccd3ea20": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/5-OurStory-Collage_600x_efe81dfd-d0d7-49c9-8ae9-2d50a6192d47.webp",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "c0ca98b9-f04b-4f53-b363-a9f2fcc83401": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/6-OurStory-Collage_600x_7d9de9fe-8baa-4a56-8235-5d4cd2b54596.webp",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        }
+      },
+      "block_order": [
+        "7ef1be76-87bf-453d-9756-45b12ac5a2b1",
+        "4e420f4b-3629-41a6-ac7d-503cdcb5f903",
+        "697b780b-8639-4f4b-b2d8-920182e7b0d0",
+        "b24af7a7-0acf-420f-a10f-f4213fbc3862",
+        "6f86ff4e-0953-4750-84a6-3a0bccd3ea20",
+        "c0ca98b9-f04b-4f53-b363-a9f2fcc83401"
+      ],
+      "disabled": true,
+      "settings": {
+        "borderlayoutcollage": "only-bottom",
+        "padding_sizeup": 25,
+        "padding_sizedown": 25,
+        "padding_sizeupm": 18,
+        "padding_sizedownm": 18
+      }
+    },
+    "1640096383fb219167": {
+      "type": "static-fullscreen-img-CTA",
+      "disabled": true,
+      "settings": {
+        "borderlayoutCTA": "only-bottom",
+        "fs-image": "shopify://shop_images/OurStory-Full-width-Image-1-Desktop_x761_3395d45c-ba24-4be9-a8ae-786317b648e9.webp",
+        "fs-image-mobile": "shopify://shop_images/OurStory-Full-width-Image-1-Mobile_692x_1f0dd2fd-e84f-4cfc-88d1-a8c91f35e560.webp",
+        "showcontent": false,
+        "fsTitle": "",
+        "fsTitleColor": "",
+        "fsURL": "",
+        "fsBtntitle": "",
+        "ctabuttonColor": "light",
+        "padding_sizeup": 23,
+        "padding_sizedown": 7,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 5
+      }
+    },
+    "1640179165e980a659": {
+      "type": "static-onlytext",
+      "settings": {
+        "onlyTextlayout": "only-bottom",
+        "bgOnlyTextCTA": "#b4bed6",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "",
+        "maxwidthoftitle": 20,
+        "maxwidthoftitlemobiled": 20,
+        "bodytextOnlyTextCTA": "The Seam connects you with local, vetted Makers who can repair and alter your pieces. You can choose an in-person fitting, or send your knit directly to your specialist Maker.",
+        "fontsizetune": "27px",
+        "maxwidthoftext": 1060,
+        "maxwidthoftextmobile": 250,
+        "showurlOnlyTextCTA": true,
+        "linkOnlyTextCTA": "https://app.theseam.uk/theknottyones",
+        "linktextOnlyTextCTA": "EXPLORE MORE",
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 10,
+        "containerbottom": 49,
+        "containertopmobile": 80,
+        "containerbottommobile": 80,
+        "sectionID": ""
+      }
+    },
+    "1640097600a0caa913": {
+      "type": "static-two-column-text",
+      "settings": {
+        "borderlayouttwocltext": "hide-border",
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "padding_top_sec": 70,
+        "padding_bottom_sec": 50,
+        "padding_top_secm": 32,
+        "padding_bottom_secm": 25,
+        "twocolheading": "How it works",
+        "hed_padding_sec": 243,
+        "hed_padding_secm": 243,
+        "twocolcopy": "<p><strong>Tell us about your knit</strong>: visit <a href=\"https://app.theseam.uk/theknottyones\" target=\"_blank\" title=\"https://app.theseam.uk/theknottyones\">The Seam</a> and answer a few simple questions about the knit you are making a booking for. </p><p></p><p><strong>Meet your maker</strong>: The Seam will match you to a specialist Maker based on your location and the details of your booking. </p><p></p><p><strong>Book your service</strong>: Your Maker will provide a quote for your project, arrange a fitting or postage with you, and set price within the platform. </p>",
+        "cop_padding_sec": 1200,
+        "cop_padding_secm": 900,
+        "sectionID": "section-2"
+      }
+    },
+    "static_link_Qt4DHH": {
+      "type": "static-link",
+      "settings": {
+        "onlyTextlayout": "top-bottom",
+        "linktext": "GET STARTED",
+        "linkurl": "https://app.theseam.uk/theknottyones",
+        "thisisbigurl": false,
+        "justheader": false,
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 20,
+        "containerbottom": 20,
+        "containertopmobile": 20,
+        "containerbottommobile": 20
+      }
+    },
+    "1640179754b50f7c90": {
+      "type": "static-fullscreen-img-CTA",
+      "disabled": true,
+      "settings": {
+        "borderlayoutCTA": "only-bottom",
+        "fs-image": "shopify://shop_images/OurStory-Full-width-Image-2-Desktop_x761_260dd8ed-91db-497f-a5dc-c7b807061997.webp",
+        "fs-image-mobile": "shopify://shop_images/OurStory-Full-width-Image-2-Mobile_692x_0f64c1bf-e7ee-460b-abf4-5421a11de3ee.webp",
+        "showcontent": false,
+        "fsTitle": "",
+        "fsTitleColor": "",
+        "fsURL": "",
+        "fsBtntitle": "",
+        "ctabuttonColor": "light",
+        "padding_sizeup": 31,
+        "padding_sizedown": 7,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 5
+      }
+    },
+    "static_collage_WHnFxn": {
+      "type": "static-collage",
+      "blocks": {
+        "collage_HHEBTJ": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/Untitled_design_2_88280be8-d487-4c83-9017-5b24faf13b3e.png",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "collage_iaMfXp": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": true,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/8.jpg",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "collage_F4fgRn": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": true,
+            "collagevideo": "https://cdn.shopify.com/videos/c/o/v/32475fbc568f4e2f8c8e077a34897939.mp4",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "collage_PFVfBi": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/2-MTK-Section-Carefully-Selected-Factories_1080x1080_42a6272c-3603-470d-a9de-bfd16c4f48ea_1080x1080_webp.jpg",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "collage_yLbkH9": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/STB-Section-3-Au-Naturale_938x_7a165aa9-efbc-4a31-8b08-dcec612d4c68_938x_webp.jpg",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "collage_a8a7tq": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/17_d43a258e-3e70-49cb-ac2d-e581d2cb2e31.jpg",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        }
+      },
+      "block_order": [
+        "collage_HHEBTJ",
+        "collage_iaMfXp",
+        "collage_F4fgRn",
+        "collage_PFVfBi",
+        "collage_yLbkH9",
+        "collage_a8a7tq"
+      ],
+      "settings": {
+        "borderlayoutcollage": "hide-border",
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15
+      }
+    },
+    "static_the_dreams_accordion_UNGLkb": {
+      "type": "static-the-dreams-accordion",
+      "blocks": {
+        "accordion_G88qCQ": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/16_1b2a0e7c-a95e-419c-9694-d01209189ad5.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/16_1b2a0e7c-a95e-419c-9694-d01209189ad5.jpg",
+            "accordionheadingdream": "how does it work?",
+            "accordionsubdream": "",
+            "accordioncopydream": "Click on 'Booking Portal' to begin your project. You'll be asked some questions about your knit(s) and we'll match you to the best Maker for your project. You'll be prompted to create an account or sign in if you have one already.\n\nYou'll hear from your Maker within 48 hours. You can discuss the project, and choose to send your piece(s) by post, visit a local studio or have your Maker visit your home for a fitting.\n\nYou can keep track of your bookings at all times by logging into The Seam and clicking on 'My Projects'.",
+            "dreamurlcontrol": true,
+            "fundurltext": "BOOK SERVICE",
+            "fundurl": "https://app.theseam.uk/theknottyones",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": ""
+          }
+        },
+        "accordion_TKy4nB": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/11_1cf9366d-440b-4a9c-89e1-43ac68401457.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/11_1cf9366d-440b-4a9c-89e1-43ac68401457.jpg",
+            "accordionheadingdream": "How can I book an in-person fitting?",
+            "accordionsubdream": "",
+            "accordioncopydream": "If your booking requires a fitting, once you have been matched with your Maker they will arrange the best time and place to meet with you for this. You can arrange a fitting at home, at your workplace or at the Makers’ studio. When you opt for a home fitting, Makers charge £15/hour to cover the travel time. Your Maker can provide a quote for this prior to the fitting.\n\n\nPlease note, services which require fittings (alterations) are currently only available in London, and other select cities where a nearby Maker is available. All other services are available UK-wide, via post.",
+            "dreamurlcontrol": true,
+            "fundurltext": "",
+            "fundurl": "https://app.theseam.uk/theknottyones",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": ""
+          }
+        },
+        "accordion_Rbpj4i": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/14_d2340c0a-45f2-4012-b35a-7554681fd147.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/14_d2340c0a-45f2-4012-b35a-7554681fd147.jpg",
+            "accordionheadingdream": "How does pick up and delivery work?",
+            "accordionsubdream": "",
+            "accordioncopydream": "There are three options for pick-up and collection. You can meet your Maker in person, send your knits by Royal Mail or book a convenient courier collection when you pay for your order.",
+            "dreamurlcontrol": true,
+            "fundurltext": "",
+            "fundurl": "https://app.theseam.uk/theknottyones",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": ""
+          }
+        },
+        "accordion_RMmq9y": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/extra-shots-1200x1500-00022.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/extra-shots-1200x1500-00022.jpg",
+            "accordionheadingdream": "How does The Seam's service fee work?",
+            "accordionsubdream": "",
+            "accordioncopydream": "The price set by our Makers for each project is the amount of money they earn for each project. On top of the Maker's price, we apply a 20% service fee to protect each booking and offer customer support.",
+            "dreamurlcontrol": true,
+            "fundurltext": "",
+            "fundurl": "https://app.theseam.uk/theknottyones",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": ""
+          }
+        },
+        "accordion_r3THQr": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/13_7ed32210-94f2-4992-bc59-d49dbce0351f.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/13_7ed32210-94f2-4992-bc59-d49dbce0351f.jpg",
+            "accordionheadingdream": "Where can I find the pricing for my project?",
+            "accordionsubdream": "",
+            "accordioncopydream": "Every project is uniquely priced; however you can see a link to our Guide prices here.",
+            "dreamurlcontrol": true,
+            "fundurltext": "SEE PRICING",
+            "fundurl": "https://www.theseam.uk/pricing",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": ""
+          }
+        },
+        "accordion_bcgV3G": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/extra-shots-1200x1500-00026.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/extra-shots-1200x1500-00026.jpg",
+            "accordionheadingdream": "Can I add more knits after placing my order?",
+            "accordionsubdream": "",
+            "accordioncopydream": "You can contact your Maker at any point throughout the booking process to discuss and request changes. If you are booking for multiple knits, we recommend making an additional booking for each piece.\n\n\nWhere possible, we'll aim to match you with a single Maker. However, in order to always ensure your knits are worked on with specialist skills, we often need to match you with different Makers for different services.",
+            "dreamurlcontrol": true,
+            "fundurltext": "",
+            "fundurl": "https://app.theseam.uk/theknottyones",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": ""
+          }
+        },
+        "accordion_YWKwE8": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/12_94638e40-1222-4597-9d0c-857c14e3955c.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/12_94638e40-1222-4597-9d0c-857c14e3955c.jpg",
+            "accordionheadingdream": "When do I get my project back?",
+            "accordionsubdream": "",
+            "accordioncopydream": "Our standard service turnaround time is 10 days for garments. We will always let you know if a project is going to take longer than this to complete. If you need a knit completed by a certain date please let us know at the beginning of your booking.",
+            "dreamurlcontrol": true,
+            "fundurltext": "",
+            "fundurl": "https://app.theseam.uk/theknottyones",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": ""
+          }
+        },
+        "accordion_4CNx7Y": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/STB-Section-4-Plastic-no-thanks_938x_b193178a-95c5-4b58-9214-2a3a0995dfd7_938x_webp.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/STB-Section-4-Plastic-no-thanks_938x_b193178a-95c5-4b58-9214-2a3a0995dfd7_938x_webp.jpg",
+            "accordionheadingdream": "I’m not happy with my project, what do I do?",
+            "accordionsubdream": "",
+            "accordioncopydream": "We’re sorry to hear you’re not happy with your project. Please contact us at support@theseam.uk and our team will get back to you within 24 hours.",
+            "dreamurlcontrol": true,
+            "fundurltext": "CONTACT THE SEAM",
+            "fundurl": "mailto:support@theseam.uk",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": ""
+          }
+        }
+      },
+      "block_order": [
+        "accordion_G88qCQ",
+        "accordion_TKy4nB",
+        "accordion_Rbpj4i",
+        "accordion_RMmq9y",
+        "accordion_r3THQr",
+        "accordion_bcgV3G",
+        "accordion_YWKwE8",
+        "accordion_4CNx7Y"
+      ],
+      "settings": {
+        "accordionlayoutdream": "only-bottom",
+        "sectionheading": "FAQs",
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "showheader": true,
+        "notfirst": true,
+        "hidedescription": true,
+        "sectionID": ""
+      }
+    },
+    "static_link_pyM6Ni": {
+      "type": "static-link",
+      "settings": {
+        "onlyTextlayout": "top-bottom",
+        "linktext": "BOOK A KNOTTY ATELIER SERVICE NOW",
+        "linkurl": "https://app.theseam.uk/theknottyones",
+        "thisisbigurl": true,
+        "justheader": false,
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 20,
+        "containerbottom": 20,
+        "containertopmobile": 20,
+        "containerbottommobile": 20
+      }
+    },
+    "static_page_hero_UWFjXN": {
+      "type": "static-page-hero",
+      "blocks": {
+        "title_Em8KGc": {
+          "type": "title",
+          "settings": {
+            "pageherohead": "Care for your knit to cherish it for generations to come.",
+            "herocolor": "#ffffff"
+          }
+        },
+        "button_LdHbHN": {
+          "type": "button",
+          "settings": {
+            "pageherobuttext": "KNIT CARE GUIDE",
+            "herobuttonColor": "light",
+            "herourl": "shopify://pages/knit-care"
+          }
+        }
+      },
+      "block_order": [
+        "title_Em8KGc",
+        "button_LdHbHN"
+      ],
+      "settings": {
+        "herolayoutpage": "top-bottom",
+        "footer_hero": false,
+        "pageheroimage": "shopify://shop_images/Untitled-design-_7_1386x_27d55876-5578-4ef1-8d05-054bb2f9d1a7.jpg",
+        "pageheroimagemobile": "shopify://shop_images/Untitled-design-_1_-_1_692x_bbb3f572-5452-466f-9b92-10d30d584273.jpg",
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "pageherotitledesktop": 900,
+        "pageherotitlemobile": 300
+      }
+    }
+  },
+  "order": [
+    "main",
+    "16400025067a204b40",
+    "164001637237a519bf",
+    "16446108729381799e",
+    "164001900656e472ca",
+    "164009869053d5286d",
+    "1640096383fb219167",
+    "1640179165e980a659",
+    "1640097600a0caa913",
+    "static_link_Qt4DHH",
+    "1640179754b50f7c90",
+    "static_collage_WHnFxn",
+    "static_the_dreams_accordion_UNGLkb",
+    "static_link_pyM6Ni",
+    "static_page_hero_UWFjXN"
+  ]
+}

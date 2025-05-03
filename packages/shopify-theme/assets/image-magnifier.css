@@ -1,0 +1,28 @@
+/* -------------------------------- 
+
+File#: _1_image-magnifier
+Title: Image Magnifier
+Descr: Plugin to create a magnifying effect on an image
+Usage: codyhouse.co/license
+
+-------------------------------- */
+  /* variables */
+  :root {
+    /* colors */
+    --it7-color-primary-hsl: 250, 84%, 54%;
+    --it7-color-bg-hsl: 0, 0%, 100%;
+    --it7-color-contrast-high-hsl: 230, 7%, 23%;
+    --it7-color-contrast-higher-hsl: 230, 13%, 9%;
+  }
+  
+  /* component */
+  .img-mag {
+    overflow: hidden;
+  }
+  
+  .img-mag__asset {
+    display: block;
+    width: 100%;
+    -webkit-transform-origin: left top;
+            transform-origin: left top;
+  }

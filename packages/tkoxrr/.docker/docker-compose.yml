@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  external:
+    container_name: rrxtko
+    # The name of the image that will be created when building this container
+    image: external-website
+    build:
+      context: ./../
+      dockerfile: ./.docker/Dockerfile
+    user: "node"
+    environment:
+      # Internal server error messages will not send stacktrace to the browser in production
+      - NODE_ENV=production
+      # Sets the timezone of the containers OS
+      - TZ=Europe/Vilnius
+    # Points to a file with the sensitive environment variables
+    env_file:
+      - ../.env
+    restart: unless-stopped
+    ports:
+      - 59000:3000

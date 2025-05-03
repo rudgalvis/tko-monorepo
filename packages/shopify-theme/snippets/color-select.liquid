@@ -1,0 +1,89 @@
+{% assign variantcolor = getvariantcolor %}
+{% assign levelofvariant = varianlevel %}
+{% assign firstImage = firstimage %}
+{% assign secondImage = secondimage %}
+{% assign variantID = variantid %}
+{% assign variantDiscountPrice = variantdiscount %}
+{% assign variantPrice = variantprice %}
+{% assign iscount = countobject %}
+{% assign urlg = urlHider %}
+{% assign continueCon = continuehit %}
+{% assign isAvailableProduct = productAvailable %}
+
+
+
+
+
+
+{% assign colors = settings.colorswatch | split: ',' %}
+
+
+{% assign HEXcolor = '000000' %}
+
+{% for color in colors %}
+     {% assign getColor = color | split : ':' %}
+     {% assign colorCorrect = getColor[0] %}
+     {% if variantcolor == colorCorrect %}
+          {% assign HEXcolor = getColor[1] %}
+          
+     {% endif %}
+{% endfor %}
+
+
+        {% assign bgGet =  HEXcolor %}
+        {% assign value = bgGet %}
+        {% assign color_swatch_name = value | handle | append: '.png' %}
+        {% assign color_swatch_image = images[color_swatch_name]  %}
+
+
+
+{% if levelofvariant == 'second' %}
+{% assign colorDetect = HEXcolor | slice: 0 %}
+    {% if  colorDetect == '#' %}
+          <div class="onlyproductColor" style="background-color:{{ HEXcolor }};">.</div>
+        {% else %}
+        
+          <div class="onlyproductColor" style="background-image:url({{ color_swatch_image | img_url: '64x64' }});">.</div>
+    {% endif %}
+{% else %}
+
+
+{% assign colorDetect2 = HEXcolor | slice: 0 %}
+{% if  colorDetect2 == '#' %}
+<button class="productColor {% if isAvailableProduct == false %} soldout_color {% endif %} {% if iscount == true %} selectdisable {% endif %} {% if continueCon == true %} continue_change {% endif %}" 
+data-vID="{{ variantID }}" 
+data-vImg="{{  firstImage | img_url : '586x'  }}" 
+data-sImg="{{ secondImage | img_url : '586x' }}" 
+data-vID-mobile="{{ variantID }}" 
+data-vImg-mobile="{{  firstImage | img_url : '293x'  }}" 
+data-sImg-mobile="{{ secondImage | img_url : '293x' }}" 
+data-vPrice="{{ variantPrice | money | strip_html }}"  
+data-rPrice="{% if variantDiscountPrice != nil %}{{ variantDiscountPrice | money | strip_html }}{%else%}nodiscount{%endif%}" 
+data-urlcolor="{{variantcolor | handleize }}" 
+data-url="{{urlg}}" 
+style="background-color:{{ HEXcolor }};">
+    {% if iscount == false %}
+    <div class="border-hare"></div>
+    {% endif %}
+    {{ forloop.index }}
+  
+</button>
+{% else %}
+<button class="productColor {% if isAvailableProduct == false %} soldout_color {% endif %} {% if iscount == true %} selectdisable {% endif %}  {% if continueCon == true %} continue_change {% endif %}" 
+data-vID="{{ variantID }}" 
+data-vImg-mobile="{{  firstImage | img_url : '293x'  }}" 
+data-sImg-mobile="{{ secondImage | img_url : '293x' }}" 
+data-vImg="{{  firstImage | img_url : '586x'  }}" 
+data-sImg="{{ secondImage | img_url : '586x' }}" 
+data-vPrice="{{ variantPrice | money | strip_html }}"  
+data-rPrice="{% if variantDiscountPrice != nil %}{{ variantDiscountPrice | money | strip_html }}{%else%}nodiscount{%endif%}"  
+data-urlcolor="{{variantcolor | handleize }}" 
+data-url="{{urlg}}" style="background-image:url({{ color_swatch_image | img_url: '64x64' }});">
+    {% if iscount == false %}
+     <div class="border-hare"></div>
+    {% endif %}
+    {{ forloop.index }}
+   
+</button>
+{% endif %}
+{% endif %}

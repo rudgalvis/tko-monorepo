@@ -1,0 +1,135 @@
+.tko-small-text-container{
+    width:100%;
+    height: auto;
+    position: relative;
+}
+
+.tko-small-text-content{
+    width:100%;
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:80px 0px;
+}
+
+.tko-small-text-content h2{
+    font-family: 'Monument';
+    font-size: 22px;
+    letter-spacing: -0.34px;
+    color: black;
+    text-transform: uppercase;
+}
+
+
+.tko-small-text-content p{
+    font-family: 'Panama';
+    font-size: 28px;
+    letter-spacing: -0.43px;
+    color: black;
+    line-height: 34px; 
+}
+
+.xs-padding{
+padding:0px;
+}
+
+.s-padding{
+
+padding:0px;    
+    
+}
+
+.m-padding{
+    padding:0px;  
+}
+
+.l-padding{
+    padding:0px;   
+}
+
+.xl-padding{
+    padding:0px; 
+}
+
+.no-padding{
+    padding:0px;  
+}
+
+
+
+
+@media (max-width: 812px) {
+    .tko-small-text-content p {
+        font-family: 'Panama';
+        font-size: 14px;
+        letter-spacing: -.22px;
+        color: #000;
+        line-height: 18px;
+        
+    }
+
+    .tko-small-text-content {
+        padding: 18px 24px;
+    }
+
+    .tko-small-text-content h2{
+
+        font-size: 16px;
+        letter-spacing: -0.25px;
+        line-height:18px;
+
+    }
+}
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .tko-small-text-content p {
+        font-family: 'Panama';
+        font-size: 14px;
+        letter-spacing: -.22px;
+        color: #000;
+        line-height: 18px;
+        
+    }
+
+    .tko-small-text-content {
+        padding: 18px 24px;
+    }
+
+    .tko-small-text-content h2{
+
+        font-size: 16px;
+        letter-spacing: -0.25px;
+        line-height:18px;
+
+    }
+
+    .xs-padding{
+        padding: 20px 26px;
+    }
+    
+    .s-padding{
+        padding: 30px 36px;
+    }
+    
+    .m-padding{
+        padding: 40px 46px;
+    }
+    
+    .l-padding{
+        padding: 50px 56px;
+    }
+    
+    .xl-padding{
+        padding: 60px 66px;
+    }
+    
+    .no-padding{
+        padding: 0px;
+    }
+    
+
+}

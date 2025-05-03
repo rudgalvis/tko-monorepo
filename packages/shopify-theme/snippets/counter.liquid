@@ -1,0 +1,99 @@
+{{ 'counter.css' | asset_url | stylesheet_tag }}
+
+{% assign isOpenFix = isFinish  %} 
+{% assign date23 =  "now" |  date:  "%s" %}
+
+<div class="counter-holder {% if isOpenFix == true %}isfinish{%endif%}">
+   {%- comment -%}get date & time{%- endcomment -%}
+   {% assign mm = datetimeMe | split: 'T' %} 
+   {%- comment -%}get date & time{%- endcomment -%}
+
+   {%- comment -%}render month{%- endcomment -%}
+
+
+
+   {% assign getMM = mm[0] | split: '-' %}
+   {% assign numberMM = getMM[1] %}
+
+
+   {% case numberMM %}
+     
+   {% when "01" %}
+      {% assign realMM = "Jan" %}
+   {% when "02" %}
+      {% assign realMM = "Feb" %}
+   {% when "03" %}
+      {% assign realMM = "Mar" %}
+   {% when "04" %}
+      {% assign realMM = "Apr" %}
+   {% when "05" %}
+      {% assign realMM = "May" %} 
+   {% when "06" %}
+      {% assign realMM = "Jun" %}    
+   {% when "07" %}
+      {% assign realMM = "Jul" %}
+   {% when "08" %}
+      {% assign realMM = "Aug" %}
+   {% when "09" %}
+      {% assign realMM = "Sep" %}
+   {% when "10" %}
+      {% assign realMM = "Oct" %}
+   {% when "11" %}
+      {% assign realMM = "Nov" %} 
+   {% when "12" %}
+      {% assign realMM = "Dec" %}  
+   {% else %}
+      {% assign realMM = "Jan" %}
+
+   {% endcase %}
+
+   {%- comment -%}render month{%- endcomment -%}
+
+   {% assign realDD = getMM[2] %}
+   {% assign realYY = getMM[0] %}
+
+   {%- comment -%}get time{%- endcomment -%}
+
+   {% assign getTime = mm[1] | split: ':' %}
+
+   {% assign realHH = getTime[0] %}
+   {% assign realMMM = getTime[1] %}
+   {% assign realSSS = getTime[2] | split: '+' %}
+   {% assign realSS = realSSS[0] %}
+
+
+  {%- comment -%}get time{%- endcomment -%} 
+
+<div
+data-mm="{{ realMM }}"
+data-dd="{{ realDD }}"
+data-yy="{{ realYY }}"
+data-hh="{{ realHH }}"
+data-mmm="{{ realMMM }}"
+data-ss="{{ realSS | remove: 'Z' }}"
+
+ data-actualTime = "{{date23 | plus: 0}}" 
+
+  
+class="countdown {% if isOpenFix == true %}isfinish{%endif%}"></div>
+{% if isOpenFix == false %}
+<a data-fancybox data-src="#subscribeform" href="javascript:;" data-options='{"touch" : false}' class="btn-count btn-darrow">GET NOTIFIED</a>
+{% endif %}
+</div>
+
+{% if isOpenFix == false %}
+<div id="subscribeform" style="display:none;">
+ 
+    <div class="cta-sub-container-fr" style="background-color:{{ settings.countformbg }};">
+        <div class="cta-sub-content-fr">
+            <h2>{{settings.countformtitle}}</h2>
+            {{settings.countformcopy}}
+             <div class="form-container-fr">
+                 <div class="klaviyo-form-ReRtBV countdown_form_desktop"></div>
+                 <div class="klaviyo-form-UDJXRL countdown_form_mobile"></div>
+             </div>  
+        </div>
+   </div>
+
+</div>
+{% endif %}

@@ -1,0 +1,260 @@
+<style>
+
+    .master-col-list{
+        width:100%;
+        height: auto;
+        box-sizing: border-box;
+        padding:0px 25px;
+    }
+    .collection-link-container{
+        width:100%;
+        height: auto;
+        border-top:1px solid black;
+        border-bottom:1px solid black;
+    }
+
+    .collection-link-container ul{
+        width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    }
+
+    .banners-container:after {
+content: 'flickity';
+display: none; /* hide :after */
+}
+
+    .collection-link-container ul li{
+        width: 25%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    height: 105px;
+    padding: 10px 0px;
+    }
+
+    .collection-link-container ul li a{
+    text-align: center;
+    font-size: 22px;
+    color: black;
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    height: auto;
+    padding: 19px 0px 10px 0px;
+    min-height: 61px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid black;
+    letter-spacing: -0.34px;
+    -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-transform: uppercase;
+}
+
+   
+
+.lr-line {
+    display: block !important;
+    position: absolute;
+    width: 95%;
+    height: 88%;
+    z-index: 2;
+    border-bottom: 1px solid black;
+    }
+
+.collection-link-container ul li:nth-child(4) .lr-line{
+    width:100;
+} 
+
+
+    .collection-link-container ul li:nth-child(4n+4) a{
+        border-right: 0px solid black;
+}
+
+.collection-link-container ul li:nth-child(1n+5) > .lr-line{
+        border-bottom: 0px solid black;
+}
+
+{% if section.settings.lineNumber == "1" %}
+
+.lr-line{
+    display:none !important;
+}
+
+{% endif %}
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .lr-line {
+  
+    border-bottom: .5px solid black;
+    }
+
+    .master-col-list {
+padding: 0px 6.5px;
+}
+
+.collection-link-container ul li a{
+    font-size: 14px;
+}
+
+}
+
+@media (max-width: 812px) {
+    .collection-link-container ul li a{
+    font-size: 14px;
+}
+}
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .banners-container:after {
+content: '';
+}
+
+    .lr-line {
+  
+  border-bottom: .5px solid black;
+  }
+
+    .collection-link-container ul li a{
+        border-right: .5px solid black;
+    font-size: 11px;
+}
+
+.collection-link-container ul li{
+        width: 50%;
+    }
+
+    .collection-link-container ul li:nth-child(4n+4) a{
+        border-right: .5px solid black;
+}
+
+.collection-link-container ul li:nth-child(1n+5) > .lr-line{
+        border-bottom: .5px solid black;
+}
+
+.collection-link-container ul li:nth-child(2n+2) a{
+        border-right: 0px solid black;
+}
+
+.collection-link-container ul li:nth-last-child(-n+2) > .lr-line{
+        border-bottom: 0px solid black;
+}
+
+.master-col-list{
+        padding:0px 6.5px;
+    }
+
+    .collection-link-container ul li a {
+        min-height: 35px;
+         border-right: 0.5px solid black;
+         padding: 4px 0px 0px 5px;
+
+}
+
+.collection-link-container ul li {
+    height: 51px;
+    padding: 7px 0px
+ 
+}
+
+{% if section.settings.lineNumber == "1" %}
+
+.lr-line:nth-child(-n+2){
+    display:block !important;
+}
+
+{% endif %}
+
+
+.collection-link-container{
+     
+     border-top:.5px solid black;
+     border-bottom:.5px solid black;
+ }
+
+}
+
+
+</style>
+
+
+
+<div class="master-col-list">
+    <div class="collection-link-container">
+        {% if section.settings.lineNumber == "2"%}
+        <ul>
+            {% for block in section.blocks %}
+            <li>
+                <a href="{{ block.settings.selcollection.url }}" class="btn-darrow">{{ block.settings.selcollection.title }}</a>
+                <div class="lr-line"></div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <ul>
+            {% for block in section.blocks limit:4 %}
+            <li>
+                <a href="{{ block.settings.selcollection.url }}" class="btn-darrow">{{ block.settings.selcollection.title }}</a>
+                <div class="lr-line"></div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif%}
+    </div>
+    </div>
+    
+
+   
+    
+    {% schema %}
+    {
+        "name": "Collection Link Section", 
+        "settings": [
+        {
+          "type": "select",
+          "id": "lineNumber",
+          "label": "Section Row Options",
+          "default": "2",
+          "options": [
+            {
+              "value": "1",
+              "label": "Section has 1 row"
+            },
+            {
+              "value": "2",
+              "label": "Section has 2 row"
+            }
+          ]
+        }
+      ],
+              "max_blocks": 8,
+              "blocks": [
+              {
+                   "type": "collection", 
+                   "name": "Collection Link",
+                   "settings": [
+                   {
+                    "type": "collection",
+                    "id": "selcollection",
+                    "label": "Select Collection"
+                  }
+                 ]
+              }
+               ],
+        "presets": [
+    {
+    "category": "Collection",
+    "name": "Collection Link Section"
+    }
+    ]
+      }
+    {% endschema %}

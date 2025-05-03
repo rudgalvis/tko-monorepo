@@ -1,0 +1,1058 @@
+{{ 'component-black-rooster-filter.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+     assign sort_by = results.sort_by | default: results.default_sort_by
+     assign total_active_values = 0
+     if results.url
+       assign results_url = results.url
+     else 
+       assign terms = results.terms | escape
+       assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by 
+     endif
+   -%}
+   
+   {%- liquid
+     assign sort_by_mobile = results.sort_by_mobile | default: results.default_sort_by
+     assign total_active_values = 0
+     if results.url
+       assign results_url = results.url
+     else 
+       assign terms = results.terms | escape
+       assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by_mobile 
+     endif
+   -%}
+
+
+   {%- capture contentForQuerystring -%}{{ content_for_header }}{%- endcapture -%}
+
+{% comment %} Use string splitting to pull the value from content_for_header and apply some string clean up {% endcomment %}
+{%- assign pageUrl = contentForQuerystring | split:'"pageurl":"' | last | split:'"' | first | split:'.myshopify.com' | last |
+   replace:'\/','/' | 
+   replace:'%20',' ' | 
+   replace:'\u0026','&'
+-%}
+{% assign debug = false %}
+{%- for i in (1..1) -%}
+{%- unless pageUrl contains "?" -%}{% break %}{%- endunless -%}
+{%- assign pageQuerystring = pageUrl | split:'?' | last -%}
+
+
+
+{%-endfor-%}
+
+
+
+{% assign removefilter =  disable_filter %}
+{% assign removesortby =  disable_sorting %}
+
+
+
+
+
+{% assign colors = settings.colorswatch | split: ',' %}
+{% assign HEXcolor2 = 'Black' %}
+
+
+{% assign groupofColors= 'Greens,Blues,Beiges,Browns,Greys,Pinks,Purples,Blacks,Whites,Reds,Yellows' | split: ','%}
+
+<div class="filter-main">
+<div class="remove-holder-br">
+  <div class="remove-holder">
+
+{% if removefilter != false %}
+  <div class="remove-text" open-data="0">
+      <span class="btn-larrow">FILTERS</span>
+  </div>  
+
+
+
+<ul id="removeFilter" data-color="">
+     {% assign trackIt = 0 %}
+     {%- for filter in collection.filters -%}
+          
+           
+     {%- for groupColors in groupofColors -%}
+
+     {% assign handle = groupColors %} 
+     {% case handle %}
+     {% when 'Greens' %} 
+
+          {% render 'removeItem' 
+          removeSource: filter.active_values, 
+          removeColors: settings.colorGreen,
+          removeColorsURL: 'filter.v.option.color=Pine,Sage+Green,Fern+Green,Forest,Moss+Green', 
+          pageURLItem:  pageUrl,
+          groupName : '#497b55'  
+          %}
+
+   
+
+     {% when 'Blues' %}      
+
+
+
+     {% render 'removeItem' 
+     removeSource: filter.active_values, 
+     removeColors: settings.colorBlue,
+     removeColorsURL: 'filter.v.option.color=Baltic Blue,Navy',
+     pageURLItem:  pageUrl,
+     groupName : '#7a8da5'    
+     %}
+
+     {% when 'Beiges' %}
+
+
+    
+
+     {% render 'removeItem' 
+     removeSource: filter.active_values, 
+     removeColors: settings.colorBeige,
+     removeColorsURL: 'filter.v.option.color=Beige,Dark+Wheat,Sand+Dune,Embroidered+Oat+Milk,Oat+Milk,Naked+Oat+Milk,Off-White,Pearl',
+     pageURLItem:  pageUrl,
+     groupName : '#e7dcc5'    
+     %}
+
+     
+
+     {% when 'Browns' %}
+
+     {% render 'removeItem' 
+     removeSource: filter.active_values, 
+     removeColors: settings.colorBrown,
+     removeColorsURL: 'filter.v.option.color=Brown,Brown+Baltic+Fields,Earth,Camel',
+     pageURLItem:  pageUrl,
+     groupName : '#8d6b55'    
+     %}
+
+     {% when 'Greys' %}
+
+     {% render 'removeItem' 
+     removeSource: filter.active_values, 
+     removeColors: settings.colorGrey,
+     removeColorsURL: 'filter.v.option.color=Grey,Dove+Grey,Light+Grey,Naked+Pebble+Grey,Embroidered+Pebble+Grey',
+     pageURLItem:  pageUrl ,
+     groupName : '#807f80'   
+     %}
+
+
+     
+     {% when 'Pinks' %}
+
+     {% render 'removeItem' 
+     removeSource: filter.active_values, 
+     removeColors: settings.colorPink,
+     removeColorsURL: 'filter.v.option.color=Dusty Pink',
+     pageURLItem:  pageUrl,
+     groupName : '#e0b4b1'    
+     %}
+
+     {% when 'Purples' %}
+
+     {% render 'removeItem' 
+     removeSource: filter.active_values, 
+     removeColors: settings.colorPurple,
+     removeColorsURL: 'filter.v.option.color=Lavender,Lilly Blue,Violet',
+     pageURLItem:  pageUrl,
+     groupName : '#c2bfd2'    
+     %}
+
+     {% when 'Blacks' %}
+
+     {% render 'removeItem' 
+     removeSource: filter.active_values, 
+     removeColors: settings.colorBlack,
+     removeColorsURL: 'filter.v.option.color=Black',
+     pageURLItem:  pageUrl,
+     groupName : '#000000'  
+      
+     %}
+
+     {% when 'Whites' %}
+
+     {% render 'removeItem' 
+     removeSource: filter.active_values, 
+     removeColors: settings.colorWhite,
+     removeColorsURL: 'filter.v.option.color=White,Sea+Salt',
+     pageURLItem:  pageUrl,
+     groupName : '#ffffff'   
+     %}
+
+     {% when 'Reds' %}
+
+     {% render 'removeItem' 
+     removeSource: filter.active_values, 
+     removeColors: settings.colorRed,
+     removeColorsURL: 'filter.v.option.color=Red',
+     pageURLItem:  pageUrl,
+     groupName : '#be1930'   
+     %}
+
+     {% when 'Yellows' %}
+
+     {% render 'removeItem' 
+     removeSource: filter.active_values, 
+     removeColors: settings.colorYellow,
+     removeColorsURL: 'filter.v.option.color=Yellow',
+     pageURLItem:  pageUrl,
+     groupName : '#fadc90'   
+     %}
+
+  
+
+     {% endcase %}
+
+     {%endfor%}
+
+
+
+
+       
+
+     {%-endfor-%}  
+     {%- for filter in collection.filters -%}
+     {% assign filterlabelcopy =  filter.label %}
+     {% if filter.label == 'Size' %}
+     {%- for value in filter.active_values -%}
+          <li data-root="filter.v.option.size" data-items="{{ value.label | replace: ' ','+' }}" data-url="{{ filter.url_to_remove }}" class="removeButton" class="active-facets__button active-facets__button--light"> {{ value.label | escape | upcase }}
+            <div class="filter-close-img"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/filter-clear-icon.svg?v=1642092965"/></div>
+          </li>
+     {%-endfor-%} 
+     {% endif %}    
+
+     {% if filter.label == 'material' %}
+     {%- for value in filter.active_values -%}
+          <li data-root="filter.p.m.productmaterial.material" data-items="{{ value.label | replace: ' ','+' }}" data-url="{{ filter.url_to_remove }}" class="removeButton" class="active-facets__button active-facets__button--light"> {{ value.label | escape | upcase }}
+            <div class="filter-close-img"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/filter-clear-icon.svg?v=1642092965"/></div>
+          </li>
+     {%-endfor-%} 
+     {% endif %}  
+
+     {%-endfor-%}  
+</ul>
+{% endif %}
+
+{% if removesortby != false %}
+
+
+<div class="sort-by--container {% if disable_filter == false %}closegap{%endif%}">
+
+<div class="remove-text-sortby">
+  <span class="btn-larrow sortby-header " open-data="0">SORT BY</span>
+</div>
+<ul class="sortby-list-container" >
+  <div class="three-angle-size-setsave ">
+    <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/arrow-size-selection.svg?v=1647027468">
+  </div>
+  {% for option in collection.sort_options %}
+<li>
+  {% assign optionName = option.name %}
+   {% if optionName == 'Featured'%} 
+   {% assign optionName = 'Featured' %}
+   {% else %}
+   {% assign optionName = option.name %}
+   {% endif %}
+  <a class="sortby--" href="javascript:void(0);" data-sortby="{{ option.value }}">{{ optionName }}</a>
+</li>
+  {% endfor %}
+</ul>
+</div>
+
+{% endif %}
+
+<div class="filterCount">
+   <a href="javascript:void(0);">CLEAR ALL <span>(</span><span id="filterCounter"></span><span>)</span></a>
+</div>
+
+
+<div id="loading_anim" class="loading-overlay hidden">
+  <div class="loading-overlay__spinner">
+    <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+      <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+    </svg>
+  </div>
+</div>
+
+
+
+
+{%- comment -%}{%- endcomment -%}
+</div>
+</div>
+
+
+
+
+
+<div id="filter-form">
+  <div class="ps-threeangle-up">
+    <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/predictivesearchthreeangle.svg?v=1639156945" alt="The Knotty Ones Predictive Search">
+  </div> 
+  <div id="productCount" class="productFound">
+    {% if collection.products_count != 1%}
+    <span>{% if collection.products_count > 1 %} PRODUCTS FOUND{% else %} PRODUCT FOUND{%endif%} <span class="number_style">({{ collection.products_count }})</span></span>
+    {% endif %}
+    </div>
+<form class="tko-filter-container" >
+
+
+
+
+
+  {% assign majorColor = settings.colorGreen | split: ',' %}
+<span class="filter-group">
+  <div class="filter--">
+    <div>
+        <h2>Category</h2>
+       </div>
+  <ul>
+    {% assign detectCollection = request.path | split:"/" %}
+    {% assign isCollection = detectCollection[1] | handleize %}
+    {% assign whichCollection = detectCollection[2] | handleize %}
+
+
+
+
+
+
+    {%- for link in linklists['filter-collection'].links -%}
+                  {% assign collectionprop = link.title %}
+                   <li class="list-menu__item facets__item">
+                   {% assign getLinkofFilter = link.title | handleize %}  
+                   {% if whichCollection == getLinkofFilter %}  
+
+                    <label for="Filter-{{ collectionprop | handleize  }}-{{ forloop.index }}" class="facet-checkbox">
+                      <a class="categoryurl disbale_filter_url" type="checkbox" 
+                      href="javascript:void(0)"
+                      data-homeofurl="{{ link.url | handleize | replace: 'collections-' }}"
+                      id="Filter-{{ collectionprop | handleize }}-{{ forloop.index }}"
+                    >
+      
+                    {{ link.title }}
+                    </a>
+                    </label>
+
+                    {% else %}
+
+                    <label for="Filter-{{ collectionprop | handleize  }}-{{ forloop.index }}" class="facet-checkbox">
+                      <a class="categoryurl" type="checkbox" 
+                      href="javascript:void(0)"
+                      data-homeofurl="{{ link.url | handleize | replace: 'collections-' }}"
+                      id="Filter-{{ collectionprop | handleize }}-{{ forloop.index }}"
+                    >
+                    {{ link.title }}
+                    </a>
+                    </label>
+
+                    {% endif %}
+                    </li>
+                    {%- endfor -%} 
+  
+                  </ul>
+                  </div>
+
+                  
+{%- for filter in collection.filters -%}
+
+
+
+{%if filter.label == 'Color' %}
+  <div class="filter--">
+  <div>
+      <h2>{{filter.label}}</h2>
+     </div>
+
+
+
+
+
+     <ul>
+  {%- for groupColors in groupofColors -%}
+
+  {% assign handle = groupColors %}
+
+  {% case handle %}
+   {% when 'Greens' %} 
+
+   {%- comment -%}
+   ------------------------
+     casestart
+   ------------------------
+   {%- endcomment -%}
+
+   {% assign majorColor = settings.colorGreen | split: ','%}
+   
+
+   {% assign size = currentColors | size | minus: 1 %}
+
+   <li class="filter-pos">
+     <div class="color-circle-filter" style="background-color:#497b55;"></div>
+  <input class="filter-product uniquecolors" type="checkbox" name="filter.v.option.color"
+  value="{% for colorOrder in majorColor %}{{colorOrder | replace: ' ','+' }}{% if forloop.last != true %},{%endif%}{%endfor%}"
+  id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+  {% assign productItem = 0 %}
+  {% for value in filter.values %}
+      {% for colorOrder in majorColor %}
+
+         {% if  value.label == colorOrder %}
+             {% if value.active %} checked {% endif %}
+           
+             {% assign productItem = productItem | plus : value.count %}
+         {% endif %}
+    
+     
+     {% endfor %}
+  {% endfor %}
+  {% if productItem == 0 %}
+     disabled
+  {% endif %}
+ >
+ <label for="html">{{handle}}</label>
+ <span class="checkmark"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/check-icon.svg?v=1641999123"/></span>
+
+</li>
+   {%- comment -%}
+   ------------------------
+     caseend
+   ------------------------
+   {%- endcomment -%}
+
+
+  {% when 'Blues' %} 
+
+    {%- comment -%}
+   ------------------------
+     casestart
+   ------------------------
+   {%- endcomment -%}
+
+   {% assign majorColor = settings.colorBlue | split: ','%}
+
+{%- comment -%}
+   {% assign currentColors = "" %}
+
+
+   {% for value in filter.values %}
+   {% for colorOrder in majorColor %}
+   {% if  value.label == colorOrder %}
+   {% assign currentColors = currentColors | append: value.value | strip | append: ',' %}
+   {%endif%}
+   {% endfor %}
+   {% endfor %}
+   {%- endcomment -%}
+
+   {% assign size = currentColors | size | minus: 1 %}
+   <li class="filter-pos">
+     <div class="color-circle-filter" style="background-color:#7a8da5;"></div>
+  <input class="filter-product uniquecolors" type="checkbox" name="filter.v.option.color"
+  value="{% for colorOrder in majorColor %}{{colorOrder | replace: ' ','+' }}{% if forloop.last != true %},{%endif%}{%endfor%}"
+  id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+  {% assign productItem = 0 %}
+  {% for value in filter.values %}
+  {% for colorOrder in majorColor %}
+
+     {% if  value.label == colorOrder %}
+         {% if value.active %} checked {% endif %}
+       
+         {% assign productItem = productItem | plus : value.count %}
+     {% endif %}
+
+ 
+ {% endfor %}
+{% endfor %}
+
+{{productItem}}
+{% if productItem == 0 %}
+ disabled
+{% endif %}
+ 
+ >
+ <label for="html">{{handle}}</label>
+ <span class="checkmark"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/check-icon.svg?v=1641999123"/></span>
+
+</li>
+   {%- comment -%}
+   ------------------------
+     caseend
+   ------------------------
+   {%- endcomment -%}
+
+   {% when 'Beiges' %} 
+
+     {%- comment -%}
+   ------------------------
+     casestart
+   ------------------------
+   {%- endcomment -%}
+
+   {% assign majorColor = settings.colorBeige | split: ','%}
+                          
+   
+  
+
+   {% assign currentColors = "" %}
+
+{%- comment -%}
+   {% for value in filter.values %}
+   {% for colorOrder in majorColor %}
+   {% if  value.label == colorOrder %}
+   {% assign currentColors = currentColors | append: value.value | strip | append: ',' %}
+   {%endif%}
+   {% endfor %}
+   {% endfor %}
+
+   {%- endcomment -%}
+
+   {% assign size = currentColors | size | minus: 1 %}
+   <li class="filter-pos">
+     <div class="color-circle-filter" style="background-color:#e7dcc5;"></div>
+  <input class="filter-product uniquecolors" type="checkbox" name="filter.v.option.color"
+  value="{% for colorOrder in majorColor %}{{colorOrder | replace: ' ','+' }}{% if forloop.last != true %},{%endif%}{%endfor%}"
+  id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+  {% assign productItem = 0 %}
+  {% for value in filter.values %}
+      {% for colorOrder in majorColor %}
+
+         {% if  value.label == colorOrder %}
+             {% if value.active %} checked {% endif %}
+           
+             {% assign productItem = productItem | plus : value.count %}
+         {% endif %}
+    
+     
+     {% endfor %}
+  {% endfor %}
+  {% if productItem == 0 %}
+     disabled
+  {% endif %}
+ 
+ >
+ <label for="html">{{handle}}</label>
+ <span class="checkmark"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/check-icon.svg?v=1641999123"/></span>
+</li>
+
+   {%- comment -%}
+   ------------------------
+     caseend
+   ------------------------
+   {%- endcomment -%}
+
+   {% when 'Browns' %} 
+
+     {%- comment -%}
+   ------------------------
+     casestart
+   ------------------------
+   {%- endcomment -%}
+
+   {% assign majorColor = settings.colorBrown | split: ','%}
+
+   {% assign currentColors = "" %}
+
+
+   {% for value in filter.values %}
+   {% for colorOrder in majorColor %}
+   {% if  value.label == colorOrder %}
+   {% assign currentColors = currentColors | append: value.value | strip | append: ',' %}
+   {%endif%}
+   {% endfor %}
+   {% endfor %}
+
+   {% assign size = currentColors | size | minus: 1 %}
+   <li class="filter-pos">
+     <div class="color-circle-filter" style="background-color:#8d6b55;"></div>
+  <input class="filter-product uniquecolors" type="checkbox" name="filter.v.option.color"
+  value="{% for colorOrder in majorColor %}{{colorOrder | replace: ' ','+' }}{% if forloop.last != true %},{%endif%}{%endfor%}"
+  id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+  {% assign productItem = 0 %}
+  {% for value in filter.values %}
+  {% for colorOrder in majorColor %}
+
+     {% if  value.label == colorOrder %}
+         {% if value.active %} checked {% endif %}
+       
+         {% assign productItem = productItem | plus : value.count %}
+     {% endif %}
+
+ 
+ {% endfor %}
+{% endfor %}
+{% if productItem == 0 %}
+ disabled
+{% endif %}
+ 
+ >
+ <label for="html">{{handle}}</label>
+ <span class="checkmark"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/check-icon.svg?v=1641999123"/></span>
+
+</li>
+   {%- comment -%}
+   ------------------------
+     caseend
+   ------------------------
+   {%- endcomment -%}
+
+   {% when 'Greys' %} 
+
+    {%- comment -%}
+   ------------------------
+     casestart
+   ------------------------
+   {%- endcomment -%}
+
+   {% assign majorColor = settings.colorGrey | split: ','%}
+
+   {% assign currentColors = "" %}
+
+
+   {% for value in filter.values %}
+   {% for colorOrder in majorColor %}
+   {% if  value.label == colorOrder %}
+   {% assign currentColors = currentColors | append: value.value | strip | append: ',' %}
+   {%endif%}
+   {% endfor %}
+   {% endfor %}
+
+   {% assign size = currentColors | size | minus: 1 %}
+<li class="filter-pos">
+<div class="color-circle-filter" style="background-color:#807f80;"></div>
+  <input class="filter-product uniquecolors" type="checkbox" name="filter.v.option.color"
+  value="{% for colorOrder in majorColor %}{{colorOrder | replace: ' ','+' }}{% if forloop.last != true %},{%endif%}{%endfor%}"
+  id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+  {% assign productItem = 0 %}
+  {% for value in filter.values %}
+      {% for colorOrder in majorColor %}
+
+         {% if  value.label == colorOrder %}
+             {% if value.active %} checked {% endif %}
+           
+             {% assign productItem = productItem | plus : value.count %}
+         {% endif %}
+    
+     
+     {% endfor %}
+  {% endfor %}
+  {% if productItem == 0 %}
+     disabled
+  {% endif %}
+ 
+ >
+ <label for="html"> {{handle}}</label>
+ <span class="checkmark"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/check-icon.svg?v=1641999123"/></span>
+
+</li>
+   {%- comment -%}
+   ------------------------
+     caseend
+   ------------------------
+   {%- endcomment -%}
+
+   {% when 'Pinks' %} 
+
+    {%- comment -%}
+   ------------------------
+     casestart
+   ------------------------
+   {%- endcomment -%}
+
+   {% assign majorColor = settings.colorPink | split: ',' %}
+
+
+   {% assign currentColors = "" %}
+
+
+   {% for value in filter.values %}
+   {% for colorOrder in majorColor %}
+   {% if  value.label == colorOrder %}
+   {% assign currentColors = currentColors | append: value.value | strip | append: ',' %}
+   {%endif%}
+   {% endfor %}
+   {% endfor %}
+
+   {% assign size = currentColors | size | minus: 1 %}
+<li class="filter-pos">
+<div class="color-circle-filter" style="background-color:#e0b4b1;"></div>
+  <input class="filter-product uniquecolors" type="checkbox" name="filter.v.option.color"
+  value="{% for colorOrder in majorColor %}{{colorOrder | replace: ' ','+' }}{% if forloop.last != true %},{%endif%}{%endfor%}"
+  id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+  {% assign productItem = 0 %}
+  {% for value in filter.values %}
+      {% for colorOrder in majorColor %}
+
+         {% if  value.label == colorOrder %}
+             {% if value.active %} checked {% endif %}
+           
+             {% assign productItem = productItem | plus : value.count %}
+         {% endif %}
+    
+     
+     {% endfor %}
+  {% endfor %}
+  {% if productItem == 0 %}
+     disabled
+  {% endif %}
+ 
+ >
+ <label for="html">{{handle}}</label>
+ <span class="checkmark"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/check-icon.svg?v=1641999123"/></span>
+
+</li>
+   {%- comment -%}
+   ------------------------
+     caseend
+   ------------------------
+   {%- endcomment -%}
+
+   {% when 'Purples' %} 
+
+    {%- comment -%}
+   ------------------------
+     casestart
+   ------------------------
+   {%- endcomment -%}
+
+   {% assign majorColor = settings.colorPurple | split: ','%}
+
+   {% assign currentColors = "" %}
+
+
+   {% for value in filter.values %}
+   {% for colorOrder in majorColor %}
+   {% if  value.label == colorOrder %}
+   {% assign currentColors = currentColors | append: value.value | strip | append: ',' %}
+   {%endif%}
+   {% endfor %}
+   {% endfor %}
+
+   {% assign size = currentColors | size | minus: 1 %}
+   <li class="filter-pos">
+     <div class="color-circle-filter" style="background-color:#c2bfd2;"></div>
+  <input class="filter-product uniquecolors" type="checkbox" name="filter.v.option.color"
+
+
+
+
+  value="{% for colorOrder in majorColor %}{{colorOrder | replace: ' ','+' }}{% if forloop.last != true %},{%endif%}{%endfor%}"
+  id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+  {% assign productItem = 0 %}
+  {% for value in filter.values %}
+      {% for colorOrder in majorColor %}
+
+         {% if  value.label == colorOrder %}
+             {% if value.active %} checked {% endif %}
+           
+             {% assign productItem = productItem | plus : value.count %}
+         {% endif %}
+    
+     
+     {% endfor %}
+  {% endfor %}
+  {% if productItem == 0 %}
+     disabled
+  {% endif %}
+ 
+ >
+ <label for="html">{{handle}}</label>
+ <span class="checkmark"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/check-icon.svg?v=1641999123"/></span>
+</li>
+
+   {%- comment -%}
+   ------------------------
+     caseend
+   ------------------------
+   {%- endcomment -%}
+
+   {% when 'Blacks' %} 
+
+    {%- comment -%}
+   ------------------------
+     casestart
+   ------------------------
+   {%- endcomment -%}
+
+   {% assign majorColor = settings.colorBlack | split: ','%}
+   {% assign currentColors = "" %}
+
+
+   {% for value in filter.values %}
+   {% for colorOrder in majorColor %}
+   {% if  value.label == colorOrder %}
+   {% assign currentColors = currentColors | append: value.value | strip | append: ',' %}
+   {%endif%}
+   {% endfor %}
+   {% endfor %}
+
+   {% assign size = currentColors | size | minus: 1 %}
+   <li class="filter-pos">
+     <div class="color-circle-filter" style="background-color:black;"></div>
+
+  <input class="filter-product uniquecolors" type="checkbox" name="filter.v.option.color"
+
+  value="{% for colorOrder in majorColor %}{{colorOrder | replace: ' ','+' }}{% if forloop.last != true %},{%endif%}{%endfor%}"
+  id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+  {% assign productItem = 0 %}
+  {% for value in filter.values %}
+      {% for colorOrder in majorColor %}
+
+         {% if  value.label == colorOrder %}
+             {% if value.active %} checked {% endif %}
+           
+             {% assign productItem = productItem | plus : value.count %}
+         {% endif %}
+    
+     
+     {% endfor %}
+  {% endfor %}
+  {% if productItem == 0 %}
+     disabled
+  {% endif %}
+ 
+ >
+ <label for="html">{{handle}}</label>
+ <span class="checkmark"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/check-icon.svg?v=1641999123"/></span>
+
+</li>
+   {%- comment -%}
+   ------------------------
+     caseend
+   ------------------------
+   {%- endcomment -%}
+
+   {% when 'Whites' %} 
+
+    {%- comment -%}
+   ------------------------
+     casestart
+   ------------------------
+   {%- endcomment -%}
+
+   {% assign majorColor = settings.colorWhite | split: ','%}
+
+   {% assign currentColors = "" %}
+
+
+   {% for value in filter.values %}
+   {% for colorOrder in majorColor %}
+   {% if  value.label == colorOrder %}
+   {% assign currentColors = currentColors | append: value.value | strip | append: ',' %}
+   {%endif%}
+   {% endfor %}
+   {% endfor %}
+
+   {% assign size = currentColors | size | minus: 1 %}
+
+   <li class="filter-pos">
+     <div class="color-circle-filter" style="background-color:white;"></div>
+
+
+  <input class="filter-product uniquecolors" type="checkbox" name="filter.v.option.color"
+  value="{% for colorOrder in majorColor %}{{colorOrder | replace: ' ','+' }}{% if forloop.last != true %},{%endif%}{%endfor%}"
+  id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+  {% assign productItem = 0 %}
+  {% for value in filter.values %}
+      {% for colorOrder in majorColor %}
+
+         {% if  value.label == colorOrder %}
+             {% if value.active %} checked {% endif %}
+           
+             {% assign productItem = productItem | plus : value.count %}
+         {% endif %}
+    
+     
+     {% endfor %}
+  {% endfor %}
+  {% if productItem == 0 %}
+     disabled
+  {% endif %}
+ 
+ >
+ <label class="input_slice" for="html">{{handle}}</label>
+ <span class="checkmark"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/check-icon.svg?v=1641999123"/></span>
+</li>
+
+   {%- comment -%}
+   ------------------------
+     caseend
+   ------------------------
+   {%- endcomment -%}
+
+   {% when 'Reds' %} 
+
+    {%- comment -%}
+   ------------------------
+     casestart
+   ------------------------
+   {%- endcomment -%}
+
+   {% assign majorColor = settings.colorRed | split: ','%}
+
+
+   {% assign currentColors = "" %}
+
+
+   {% for value in filter.values %}
+   {% for colorOrder in majorColor %}
+   {% if  value.label == colorOrder %}
+   {% assign currentColors = currentColors | append: value.value | strip | append: ',' %}
+   {%endif%}
+   {% endfor %}
+   {% endfor %}
+
+   {% assign size = currentColors | size | minus: 1 %}
+   <li class="filter-pos">
+  
+  <div class="color-circle-filter" style="background-color:#be1930;"></div>
+  <input class="filter-product uniquecolors" type="checkbox" name="filter.v.option.color"
+
+  value="{% for colorOrder in majorColor %}{{colorOrder | replace: ' ','+' }}{% if forloop.last != true %},{%endif%}{%endfor%}"
+  id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+  {% assign productItem = 0 %}
+  {% for value in filter.values %}
+      {% for colorOrder in majorColor %}
+
+         {% if  value.label == colorOrder %}
+             {% if value.active %} checked {% endif %}
+           
+             {% assign productItem = productItem | plus : value.count %}
+         {% endif %}
+    
+     
+     {% endfor %}
+  {% endfor %}
+  {% if productItem == 0 %}
+     disabled
+  {% endif %}
+ 
+ >
+ <label for="html">
+{{handle}}</label>
+<span class="checkmark"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/check-icon.svg?v=1641999123"/></span>
+
+</li>
+
+
+{% when 'Yellows' %} 
+
+{%- comment -%}
+------------------------
+ casestart
+------------------------
+{%- endcomment -%}
+
+{% assign majorColor = settings.colorYellow | split: ','%}
+
+
+
+{% assign currentColors = "" %}
+
+
+{% for value in filter.values %}
+{% for colorOrder in majorColor %}
+{% if  value.label == colorOrder %}
+{% assign currentColors = currentColors | append: value.value | strip | append: ',' %}
+{%endif%}
+{% endfor %}
+{% endfor %}
+
+{% assign size = currentColors | size | minus: 1 %}
+<li class="filter-pos">
+
+<div class="color-circle-filter" style="background-color:#fadc90;"></div>
+<input class="filter-product uniquecolors" type="checkbox" name="filter.v.option.color"
+
+value="{% for colorOrder in majorColor %}{{colorOrder | replace: ' ','+' }}{% if forloop.last != true %},{%endif%}{%endfor%}"
+id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+{% assign productItem = 0 %}
+{% for value in filter.values %}
+  {% for colorOrder in majorColor %}
+
+     {% if  value.label == colorOrder %}
+         {% if value.active %} checked {% endif %}
+       
+         {% assign productItem = productItem | plus : value.count %}
+         {{productItem}}
+     {% endif %}
+
+ 
+ {% endfor %}
+{% endfor %}
+{% if productItem == 0 %}
+ disabled
+{% endif %}
+
+>
+<label for="html">
+{{handle}}</label>
+<span class="checkmark"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/check-icon.svg?v=1641999123"/></span>
+
+</li>
+
+
+
+
+
+  {% endcase %}
+  {%-endfor-%}
+
+  </ul>
+
+         </div>  
+        </span>
+{%endif%}
+
+
+
+{%if filter.label == 'Size' %}
+  <div class="filter--">
+  <div>
+      <h2>{{filter.label | capitalize}}</h2>
+     </div>
+  {%- for value in filter.values -%}
+  <li class="filter-pos" data-pi="{{value.active}}">
+  <input class="filter-product" type="checkbox" name="{{ value.param_name }}"
+  value="{{ value.value | replace: ' ','+' }}"
+  id="Filter-{{ filter.label | escape }}-{{ forloop.index }}-"
+ 
+  {% if value.active == true %}checked{% endif %}
+  {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+  <label for="html">{{value.label}}</label>
+  <span class="checkmark"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/check-icon.svg?v=1641999123"/></span>
+</li>
+
+  {%-endfor-%}
+
+       
+         </div>  
+         
+{%endif%}
+
+{%if filter.label == 'Material' %}
+<div class="filter--">
+  <div>
+      <h2>{{filter.label | capitalize}}</h2>
+     </div>
+  {%- for value in filter.values -%}
+  <li class="filter-pos" data-pi="{{value.active}}">
+  <input class="filter-product" type="checkbox" name="{{ value.param_name }}"
+  value="{{ value.value | replace: ' ','+' }}"
+  id="Filter-{{ filter.label | escape }}-{{ forloop.index }}-"
+ 
+  {% if value.active == true %}checked{% endif %}
+  {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+  <label for="html">{{value.label}}</label>
+  <span class="checkmark"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/check-icon.svg?v=1641999123"/></span>
+</li>
+
+  {%-endfor-%}
+
+       
+         </div>  
+{%endif%} 
+{%- endfor -%}                 
+</form>
+</div>
+
+
+
+
+
+</div>

@@ -1,0 +1,320 @@
+{{ 'component-static-two-column.css' | asset_url | stylesheet_tag }}
+
+<section class="kto-main-container {% if section.settings.sectionID != nil %} targetID {% endif %}" {% if section.settings.sectionID != nil %}id="{{ section.settings.sectionID }}" {% endif %}>
+    <div class="tko-lines tko-two-column-{{section.id}}"
+    {% if section.settings.borderlayouttwocl == 'top-bottom'%} 
+    style="
+      border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+       
+    ">
+    {% elsif  section.settings.borderlayouttwocl == 'only-top' %}
+    style="
+    border-top-style:  solid;
+    border-top-color:   black;
+    border-bottom: none;
+      
+    ">
+    {% elsif  section.settings.borderlayouttwocl == 'only-bottom' %}
+    style="
+    border-top: none;
+    border-bottom-style:  solid;
+    border-bottom-color:   black;
+      
+    ">
+    
+    {% else %}
+    
+    style="
+    border-top: none;
+    border-bottom: none;
+      
+    "> 
+  
+    {% endif %}
+
+    <div class="two-column-container {{section.settings.sectionlayouttwocl}}">
+        {% assign selectedLayer = section.settings.sectionlayouttwocl %}
+        <div class="two-column cl-left">
+            {%
+                render 'rimg'
+                img: section.settings.cl-image,
+                alt: section.settings.cl-image.alt,
+                size: '938x',
+              %}
+        </div>
+        <div class="two-column cl-right cl-uppercase padding-{{section.id}}" {% if selectedLayer == 'text-image'%} style="order:1; justify-content:{{ section.settings.textposition }};" {% else %} style="order:2; justify-content:{{ section.settings.textposition }};" {% endif %}>
+          {% if section.settings.showtitletwo == true %}
+            <h2 class="two-col-h2-{{section.id}}">{{ section.settings.headingcl }}</h2>
+          {% endif %}  
+            <div class="cl-content">
+                <p class="two-col-p-{{section.id}}">{{ section.settings.bodycl }}</p>
+                {% if section.settings.showurlcl == true %}
+                <a href="{{ section.settings.linkclUrl }}" class="btn-darrow inside-section">{{section.settings.linkTextcl}}</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </section>
+
+
+
+{% schema %}
+
+{
+    "name": "2 Column Layout No.1", 
+    "settings": [
+    {
+      "type": "header",
+      "content": "Layout Options"
+    },
+    {
+      "type": "select",
+      "id": "borderlayouttwocl",
+      "label": "Section Border Options",
+      "default": "top-bottom",
+      "options": [
+        {
+          "value": "top-bottom",
+          "label": "Show Border Top & Bottom"
+        },
+        {
+          "value": "only-top",
+          "label": "Show Border Only Top"
+        },
+        {
+            "value": "only-bottom",
+            "label": "Show Border Only Bottom"
+          },
+        {
+            "value": "hide-border",
+            "label": "Hide Borders"
+          }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "textposition",
+      "label": "Section Position Options", 
+      "default": "space-between",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+            "value": "flex-end",
+            "label": "Bottom"
+          },
+          {
+            "value": "space-between",
+            "label": "Default"
+          }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "sectionlayouttwocl",
+      "label": "Template Side Options",
+      "default": "image-text",
+      "options": [
+        {
+          "value": "image-text",
+          "label": "Left Image - Right Text"
+        },
+        {
+          "value": "text-image",
+          "label": "Left Text - Right Image"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Title Options"
+    },
+    {
+      "id": "headingcl",
+      "type": "text",
+      "label": "Title"
+    },
+    {
+      "type": "checkbox",
+      "id": "showtitletwo",
+      "label": "Show Title",
+      "default": true
+    },
+    {
+      "type":"number",
+      "id":"h2maxwidthdesktop",
+      "label":"Title Max Width",
+      "default":15
+    },
+    {
+      "type":"number",
+      "id":"h2maxwidthmobile",
+      "label":"Title Max Width",
+      "default":15
+    },
+    {
+      "type": "header",
+      "content": "Copy Options"
+    },
+    {
+      "id": "bodycl",
+      "type": "textarea",
+      "label": "Body Copy"
+    },
+    {
+      "type":"number",
+      "id":"pmaxwidthdesktop",
+      "label":"Copy Max Width Desktop",
+      "default":15
+    },
+    {
+      "type":"number",
+      "id":"pmaxwidthmobile",
+      "label":"Copy Max Width Mobile",
+      "default":15
+    },
+    {
+      "type": "header",
+      "content": "Image Options"
+    },
+    {
+        "id": "cl-image",
+        "type": "image_picker",
+        "label": "Select Image"
+      },
+      {
+        "type": "header",
+        "content": "Section Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeupm_section",
+        "label":"Section Padding Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedownm_section",
+        "label":"Section Padding Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup",
+        "label":"Line Padding Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedown",
+        "label":"Line Padding Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeupm",
+        "label":"Line Padding Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedownm",
+        "label":"Line Padding Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "URL Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "showurlcl",
+        "label": "Enable link",
+        "default": false
+      },
+      {
+        "id": "linkTextcl",
+        "type": "text",
+        "label": "URL Copy"
+      },
+      {
+        "id": "linkclUrl",
+        "type": "url",
+        "label": "URL"
+      },
+   
+      
+      {
+        "type": "header",
+        "content": "Anchor Point Options"
+      },
+      {
+        "id": "sectionID",
+        "type": "text",
+        "label": "Anchor Point"
+      }
+    ],
+    "presets": [
+{
+"category": "2 Column Layout No.1",
+"name": "2 Column Layout No.1"
+}
+]
+  }
+{% endschema %}
+
+<style>
+ .tko-two-column-{{section.id}}{
+        padding: {{section.settings.padding_sizeup}}px 0px {{section.settings.padding_sizedown}}px 0px;
+        border-width:1px;
+  }
+
+  .two-col-h2-{{section.id}}{
+        max-width:{{section.settings.h2maxwidthdesktop}}px; 
+  }
+
+  .two-col-p-{{section.id}}{
+        max-width:{{section.settings.pmaxwidthdesktop}}px; 
+  }
+
+
+  @media (max-width: 812px) {
+ 
+  } 
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    .tko-two-column-{{section.id}}{
+        padding: {{section.settings.padding_sizeupm}}px 0px {{section.settings.padding_sizedownm}}px 0px;
+        border-width:0.5px;
+  }
+  .two-col-h2-{{section.id}}{
+        max-width:{{section.settings.h2maxwidthmobile}}px; 
+  }
+
+  .two-col-p-{{section.id}}{
+        max-width:{{section.settings.pmaxwidthmobile}}px; 
+  }
+  .padding-{{section.id}}{
+    padding: {{section.settings.padding_sizeupm_section}}px 0px {{section.settings.padding_sizedownm_section}}px 0px !important;
+  }
+  }
+</style>

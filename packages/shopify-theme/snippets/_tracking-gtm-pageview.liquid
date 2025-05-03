@@ -1,0 +1,9 @@
+<script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        product_id: '{{ product.id }}',
+        product_category: '{{ product.metafields.mm-google-shopping.google_product_category }}',
+        user_email: '{{ customer.email | md5 }}',
+        event: 'Pageview',
+    });
+</script>

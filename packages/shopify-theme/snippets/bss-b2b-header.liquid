@@ -1,0 +1,441 @@
+<script id="bss-b2b-store-data" type="application/json">
+{
+  "shop": {
+    "domain": "{{ shop.domain }}",
+    "permanent_domain": "{{ shop.permanent_domain }}",
+    "url": "{{ shop.url }}",
+    "secure_url": "{{ shop.secure_url }}",
+    "money_format": {{ shop.money_format | json }},
+    "currency": {{ shop.currency | json }},
+    "cart_current_currency": {{ cart.currency.iso_code | json }},
+    "multi_currencies": [
+        {% for currency in shop.enabled_currencies %}
+            "{{ currency.iso_code }}"{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+    ]
+  },
+  "customer": {
+    "id": {{ customer.id | json }},
+    "tags": {{ customer.tags | json }},
+    "tax_exempt": {{ customer.tax_exempt | json }},
+    "first_name": {{ customer.first_name | json }},
+    "last_name": {{ customer.last_name | json }},
+    "phone": {{ customer.phone | json }},
+    "email": "{{ customer.email | join }}",
+    "country_code": "{{ customer.default_address.country_code }}"
+  },
+  "cart": {{ cart | json }},
+  "line_item_products": {{ cart | map: "items"  | map: "product" | json }},
+  "template": "{{ template | split: "." | first }}",
+  "product": {{ product | json }},
+  "product_collections": [
+    {% for collection in product.collections %}
+      {{ collection.id }}{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ],
+  "collection": {{ collection.products | json }},
+  "collections": [
+    {% for collection in product.collections %}
+      {{ collection.id }}{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ],
+  "taxes_included": {{ cart.taxes_included | json }}
+}
+</script>
+
+<style>
+.bss-b2b-qty-table-row:hover,
+.bss-b2b-cart-item-qty-table-header:hover,
+.bss-b2b-qty-table-row-ef:hover,
+.bss-b2b-cart-item-qty-table-header-ef:hover
+{
+    cursor: pointer;
+    opacity: 0.7;
+}
+.bss-b2b-qty-table-row.qty-row-active, .bss-b2b-qty-table-row-ef.qty-row-active {
+    border: 1px solid;
+    opacity: 0.7;
+    font-weight: bold;
+}
+.bss-b2b-cart-item-qty-table-header,.bss-b2b-cart-item-qty-table-header-ef {
+    display: flex;
+    padding: 2px 5px;
+    box-sizing: border-box;
+    margin-bottom: 0px;
+}
+
+.bss-b2b-cart-item-qty-table {
+    border: 2px solid transparent;
+    width: 100%;
+}
+.bss-b2b-cart-item-qty-table table{
+    width: 100%;
+}
+.bss-b2b-cart-item-qty-table table td{
+    padding: 10px;
+    text-align: center;
+}
+.bss-b2b-cart-item-qty-table-ef {
+    border: 2px solid transparent;
+    width: 100%;
+}
+.bss-b2b-cart-item-qty-table-ef table{
+    margin-bottom: 2px;
+    width: 100%;
+}
+.bss-b2b-cart-item-qty-table-ef table td{
+    padding: 10px !important;
+    text-align: center;
+}
+.bss-b2b-qty-table-wrapper th,.bss-b2b-qty-table-wrapper-ef th {
+    font-weight: bold !important;
+    padding: 10px;
+    text-align: center;
+    text-transform: capitalize !important;
+}
+
+@keyframes moneyAnimation { to { visibility: visible; } }
+
+.bss-loader {
+    border: 1px solid black;
+    border-radius: 50%;
+    border-top: 1px solid lightgrey;
+    width: 15px;
+    height: 15px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    margin: auto;
+}
+
+#RegisterForm {
+    display: none;
+}
+#bss-abn-status {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-grid;
+    margin: auto;
+    border: solid 1px black;
+}
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/* modal amo warning */
+.bss-modal-warning-amo-wrap {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: table;
+  z-index: 199999999;
+  position: fixed;
+  outline: none !important;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none;
+}
+
+
+.bss-modal-amo.active {
+  opacity: 1;
+  transition: all 0.25s ease-in;
+  border-width: 0px;
+}
+
+.bss-modal-amo {
+  opacity: .5;
+  color: black;
+  background-color: white;
+  max-width: 500px;
+  margin: 18px auto;
+  width: calc(100% - 36px);
+  pointer-events: auto;
+  border: solid white 1px;
+}
+
+.bss-modal-amo button {
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  float: right;
+  width: unset;
+}
+
+.bss-modal-button-close {
+  font-style: normal;
+  margin-top: -5px;
+  margin-right: -5px;
+  font-size: 35px;
+  font-family: Arial, Baskerville, monospace;
+  overflow: visible;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  display: block;
+  outline: none;
+  padding: 0 0 0 10px;
+  box-shadow: none;
+  opacity: .65;
+}
+
+.bss-modal-warning-amo-wrap > div {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.bss-amo-modal-bg {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 199999998;
+  overflow: hidden;
+  position: fixed;
+  background: #000000;
+  opacity: .2;
+}
+
+b.bss-modal-amo-title {
+  font-size: 20px;
+}
+
+li.bss-amo-text-warning {
+  list-style: none;
+  position: relative;
+  padding: 3px 0 2px 40px;
+}
+
+li.bss-amo-text-warning::before {
+  content: '\26AB';
+  position: absolute;
+  left: 0;
+  font-size: 5px;
+  margin-left: 20px;
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.bss-amo-list-warning-minimum-quantity, .bss-amo-list-warning-maximum-quantity {
+  margin-bottom: 10px;
+}
+
+.bss-warning-minimum-amount-title, .bss-warning-minimum-quantity-title {
+  display: none;
+}
+
+.bss-warning-maximum-amount-title, .bss-warning-maximum-quantity-title {
+    display: none;
+}
+
+.bss-amo-list-warning {
+  margin-left: 10px;
+  margin-top: -10px;
+}
+
+/* modal qi warning */
+.modalWarningQI {
+    display: none;
+}
+#modalWarningQI {
+    display: none;
+}
+
+.bss-modal-warning-qi-wrap {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: table;
+  z-index: 199999999;
+  position: fixed;
+  outline: none !important;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none;
+}
+
+
+.bss-modal-qi.active {
+  opacity: 1;
+  transition: all 0.25s ease-in;
+  border-width: 0px;
+}
+
+.bss-modal-qi {
+  opacity: .5;
+  color: black;
+  background-color: white;
+  max-width: 500px;
+  margin: 18px auto;
+  width: calc(100% - 36px);
+  pointer-events: auto;
+  border: solid white 1px;
+}
+
+.bss-modal-qi button {
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  float: right;
+  width: unset;
+}
+
+.bss-modal-button-close {
+  font-style: normal;
+  margin-top: -5px;
+  margin-right: -5px;
+  font-size: 35px;
+  font-family: Arial, Baskerville, monospace;
+  overflow: visible;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  display: block;
+  outline: none;
+  padding: 0 0 0 10px;
+  box-shadow: none;
+  opacity: .65;
+}
+
+.bss-modal-warning-qi-wrap > div {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.bss-qi-modal-bg {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 199999998;
+  overflow: hidden;
+  position: fixed;
+  background: #000000;
+  opacity: .2;
+}
+
+b.bss-modal-qi-title {
+  font-size: 20px;
+}
+
+li.bss-qi-text-warning {
+  list-style: none;
+  position: relative;
+  padding: 3px 0 2px 40px;
+}
+
+li.bss-qi-text-warning::before {
+  content: '\26AB';
+  position: absolute;
+  left: 0;
+  font-size: 5px;
+  margin-left: 20px;
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.bss-qi-list-warning-quantity {
+  margin-bottom: 10px;
+}
+
+.bss-warning-qiunt-title, .bss-warning-quantity-title {
+  display: none;
+}
+
+.bss-qi-list-warning {
+  margin-left: 10px;
+  margin-top: -10px;
+}
+
+[bss-b2b-bcp-cart-subtotal-price], [bss-b2b-bcp-cart-total-price], .bss-b2b-bcp-new-line-item-price {
+    visibility: hidden;
+}
+.bss-b2b-vat-input-wrapper {
+    min-height: 35px;
+    display: flex;
+    width: 300px;
+    box-shadow: unset !important;
+}
+.bss-b2b-vat-selected{
+    box-shadow: unset;
+    outline: none;
+}
+.bss-b2b-vat-input{
+    width: 100%;
+    outline: none;
+    box-shadow: unset;
+}
+.bss-custom-modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.3);
+    align-items: center;
+    justify-content: center;
+    z-index: 199999999;
+    transition: opacity 0.3s ease;
+}
+.bss-custom-modal {
+    background-color: #fff;
+    padding: 30px 50px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 600px;
+    max-width: 100%;
+    text-align: center;
+    opacity: 1;
+    transition: all 0.25s ease-in;
+    border-width: 0px;
+    color: black;
+    margin: 18px auto;
+    pointer-events: auto;
+    border: solid white 1px;
+}
+.bss-b2b-cart-item-qty-table {
+  max-width: fit-content;
+}
+.bss_rf_privacy_policy_container{
+  margin-bottom: 10px
+}
+.bss_rf_privacy_policy_container p{
+  display: inline;
+}
+</style>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <script id="bss-b2b-config-data">
+                        if (typeof BSS_B2B == 'undefined') {
+                            var BSS_B2B = {};
+                        }
+                
+                        BSS_B2B.storeId = 15851;
+                        BSS_B2B.currentPlan = "false";
+                        BSS_B2B.planCode = "null";
+                        BSS_B2B.shopModules = [{"code":"qb","status":0},{"code":"cp","status":0},{"code":"act","status":0},{"code":"form","status":0},{"code":"tax_exempt","status":0},{"code":"amo","status":0},{"code":"mc","status":0},{"code":"public_api","status":0},{"code":"dc","status":0},{"code":"cart_note","status":0},{"code":"mo","status":0},{"code":"tax_display","status":0},{"code":"sr","status":0},{"code":"bogo","status":0},{"code":"qi","status":0},{"code":"ef","status":0}];
+                        BSS_B2B.integrationApp = [];
+                        
+                        var bssB2bApiServer = "https://b2b-solution-api.bsscommerce.com";
+                        var bssB2bCheckoutUrl = "https://b2b-solution-checkout.bsscommerce.com"
+                        var bssB2bCmsUrl = "https://b2b-solution.bsscommerce.com";
+                        var bssGeoServiceUrl = "https://geo-ip-service.bsscommerce.com";
+                    </script><style type="text/css">.bss-b2b-discount-code-wrapper {display: none !important}</style><style type="text/css">.bss-sub-offer-price,.bss-sub-offer-compare-at-price {display: none !important}</style> 

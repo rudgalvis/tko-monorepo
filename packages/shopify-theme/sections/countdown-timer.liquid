@@ -1,0 +1,140 @@
+{% assign month_number = '01' %}
+{% case settings.selectedmounth %}
+    {% when 'Jan' %}
+        {% assign month_number = '01' %}
+    {% when 'Feb' %}
+        {% assign month_number = '02' %}
+    {% when 'Mar' %}
+        {% assign month_number = '03' %}
+    {% when 'Apr' %}
+        {% assign month_number = '04' %}
+    {% when 'May' %}
+        {% assign month_number = '05' %}
+    {% when 'Jun' %}
+        {% assign month_number = '06' %}
+    {% when 'Jul' %}
+        {% assign month_number = '07' %}
+    {% when 'Aug' %}
+        {% assign month_number = '08' %}
+    {% when 'Sep' %}
+        {% assign month_number = '09' %}
+    {% when 'Oct' %}
+        {% assign month_number = '10' %}
+    {% when 'Nov' %}
+        {% assign month_number = '11' %}
+    {% when 'Dec' %}
+        {% assign month_number = '12' %}
+{% endcase %}
+
+{% assign selectedday = settings.selectedday | prepend: '0' | slice: -2, 2 %}
+{% assign selectedhour = settings.selectedhour | prepend: '0' | slice: -2, 2 %}
+{% assign selectedminute = settings.selectedminute | prepend: '0' | slice: -2, 2 %}
+{% assign selectedsecond = settings.selectedsecond | prepend: '0' | slice: -2, 2 %}
+
+{% assign target_date = settings.selectedyear
+        | append: '-'
+        | append: month_number
+        | append: '-'
+        | append: selectedday
+        | append: 'T'
+        | append: selectedhour
+        | append: ':'
+        | append: selectedminute
+        | append: ':'
+        | append: selectedsecond
+        | append: 'Z'
+%}
+
+<div
+        class="countdown-timer-fixed tw--flex tw--width-full tw--justify-center tw--p-2 tw--items-center"
+        style="background: {{ settings.countformbg }}"
+        id="countdown-timer"
+        data-countdown-target="{{ target_date }}"
+>
+    <div class="tw--font-['Monument'] tw--text-gray-900 tw--mr-4">{{ settings.counttitle }}</div>
+    <div class="tw--flex tw--mr-4 tw--text-gray-900" id="countdown-timer">
+        <div class="tw--font-['Monument'] tw--flex tw--flex-col">
+            <span class="tw--text-xl " id="days"></span>
+            <div class="tw--text-[10px] tw--mt-[-6px]">Days</div>
+        </div>
+        <div class="tw--font-['Monument'] tw--flex tw--flex-col">
+            <span class="tw--text-xl tw--mx-1">:</span>
+        </div>
+        <div class="tw--font-['Monument'] tw--flex tw--flex-col">
+            <span class="tw--text-xl" id="hours"></span>
+            <div class="tw--text-[10px] tw--mt-[-6px]">Hrs</div>
+        </div>
+        <div class="tw--font-['Monument'] tw--flex tw--flex-col">
+            <span class="tw--text-xl tw--mx-1">:</span>
+        </div>
+        <div class="tw--font-['Monument'] tw--flex tw--flex-col">
+            <span class="tw--text-xl" id="minutes"></span>
+            <div class="tw--text-[10px] tw--mt-[-6px]">Mins</div>
+        </div>
+        <div class="tw--hidden md:tw--block tw--font-['Monument'] tw--flex tw--flex-col">
+            <span class="tw--text-xl tw--mx-1">:</span>
+        </div>
+        <div class="tw--hidden md:tw--block tw--font-['Monument'] tw--flex tw--flex-col">
+            <span class="tw--text-xl" id="seconds"></span>
+            <div class="tw--text-[10px] tw--mt-[-6px]">Secs</div>
+        </div>
+    </div>
+    <a
+            href="{{- settings.timer_collection.url -}}"
+            class="tw--text-gray-900 btn-darrow smaller-text"
+    >
+        {{- settings.buttonText -}}
+    </a>
+</div>
+
+<style>
+    .countdown-timer-fixed {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 53px;
+        z-index: 10;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        // Immediately trigger the announcement bar close functionality
+
+
+        // Check if the countdown timer should be visible
+        var countdownTimer = $('#countdown-timer');
+        var targetDate = countdownTimer.data('countdown-target')
+            ? new Date(countdownTimer.data('countdown-target')).getTime()
+            : null;
+
+        if (targetDate) {
+            $('.main-header').addClass('timer-visible'); // Add class to adjust header position if countdown is active
+
+            var x = setInterval(function () {
+                var now = new Date().getTime();
+                var distance = targetDate - now;
+
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                countdownTimer.find('#days').text(days);
+                countdownTimer.find('#hours').text(hours);
+                countdownTimer.find('#minutes').text(minutes);
+                countdownTimer.find('#seconds').text(seconds);
+
+                if (distance < 0) {
+                    clearInterval(x);
+                    countdownTimer.html('EXPIRED');
+                    $('.main-header').removeClass('timer-visible'); // Remove the class if countdown has expired
+                }
+            }, 1000);
+        } else {
+            // If no countdown is set or it's expired, ensure the header is adjusted back if needed
+            $('.main-header').removeClass('timer-visible');
+        }
+    });
+</script>

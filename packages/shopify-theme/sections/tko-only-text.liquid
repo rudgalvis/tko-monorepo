@@ -1,0 +1,149 @@
+{{ 'component-static-only-text.css' | asset_url | stylesheet_tag }}
+
+<section class="kto-main-container">
+    <div class="tko-lines"
+    {% if section.settings.onlyTextlayout == 'top-bottom'%}
+    style="
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        padding: 28px 0px;
+    ">
+    {% elsif  section.settings.onlyTextlayout == 'only-top' %}
+    style="
+        border-top: 1px solid black;
+        border-bottom: 0px solid black;
+        padding: 28px 0px;
+    ">
+    {% elsif  section.settings.onlyTextlayout == 'only-bottom' %}
+    style="
+        border-top: 0px solid black;
+        border-bottom: 1px solid black;
+        padding: 28px 0px;
+    ">
+    
+    {% else %}
+    
+    style="
+        border-top: 0px solid black;
+        border-bottom: 0px solid black;
+        padding: 28px 0px;
+    "> 
+  
+    {% endif %}
+  
+  <div class="cta-text-container">
+      <div class="cta-text-content">
+
+      </div>
+  </div>
+  
+  </div>
+  </section>
+  
+  
+
+
+  
+  
+  {% schema %}
+  {
+    "name": "Copy Based Layout",
+    "blocks": [
+      {
+        "type": "title_case",
+        "name": "CTA Title",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "headingOnlyTextCTA",
+            "default": "Text block",
+            "label": "Only Text CTA Header"
+          },
+          {
+            "id": "colorOnlyTextCTA",
+            "type": "color",
+            "label": "Only Text CTA color",
+            "default": "#000000"
+          }
+        ]
+      },
+      {
+        "type": "copy_case",
+        "name": "Body Copy",
+        "limit": 1,
+        "settings": [
+        {
+          "type": "textarea",
+          "id": "bodytextOnlyTextCTA",
+          "default": "Text block",
+          "label": "Only Text CTA"
+        },
+        {
+          "id": "colorOnlyCopyCTA",
+          "type": "color",
+          "label": "Only Text CTA color",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "maxwidthoftext",
+          "min": 920,
+          "max": 1500,
+          "step": 20,
+          "default": 920,
+          "label": "Maximum Copy Width"
+        }
+      ]
+      },
+      {
+        "type": "assignlink",
+        "name": "URL",
+        "limit": 1
+      }
+    ],
+    "settings": [
+    {
+      "type": "select",
+      "id": "onlyTextlayout",
+      "label": "Section Border Options",
+      "default": "top-bottom",
+      "options": [
+        {
+          "value": "top-bottom",
+          "label": "Show Border Top & Bottom"
+        },
+        {
+          "value": "only-top",
+          "label": "Show Border Only Top"
+        },
+        {
+            "value": "only-bottom",
+            "label": "Show Border Only Bottom"
+          },
+        {
+            "value": "hide-border",
+            "label": "Hide Borders"
+          }
+      ]
+    }
+    ],
+    "presets": [
+      {
+        "name": "Copy Based Layout",
+        "blocks": [
+          {
+            "type": "title_case"
+          },
+          {
+            "type": "copy_case"
+          },
+          {
+            "type": "assignlink"
+          }
+        ]
+      }
+      ]
+    }
+  
+    {% endschema %}

@@ -1,0 +1,55 @@
+<link rel="stylesheet" href="{{ 'section-main-page.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<div class="page-width">
+  <div class="page_title">
+      <h1 {% if section.settings.headertextalignment == "center" %}style="margin-left:auto; margin-right:auto;"{% endif %} class="page-h1_{{section.id}}">{{page.title}}</h1>
+  </div>
+
+  <div class="rte">
+    {{ page.content }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "class": "spaced-section",
+  "settings": [
+  {
+            "type": "header",
+            "content": "Header Options"
+          },
+          {
+            "type": "select",
+            "id": "headertextalignment",
+            "label": "Text Alignment Options",
+            "default": "left",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left Align"
+              },
+              {
+                "value": "center",
+                "label": "Center Align"
+              },
+              {
+                  "value": "right",
+                  "label": "Right Align"
+                }
+            ]
+          }
+  
+
+      ]
+}
+{% endschema %} 
+
+
+<style>
+  .page-h1_{{section.id}}{
+    text-align:{{section.settings.headertextalignment}} !important;
+  }
+</style>

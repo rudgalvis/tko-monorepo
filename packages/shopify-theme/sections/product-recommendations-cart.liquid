@@ -1,0 +1,120 @@
+{% comment %}
+
+This file is meant to be dynamicly fetched
+via GET at recommendations/products with
+section parameter of `product-recommendations-cart`
+and rendered inside some element
+
+{% endcomment %}
+<script type="module">
+    const wait = (delay) => new Promise(resolve => setTimeout(resolve, delay))
+    const waitFowSwiper = async (attempt = 0) => {
+        if (attempt > 20) throw new Error('Timeout waiting for Swiper')
+        try {
+            if (Swiper) {
+                return true
+            }
+        } catch (e) {
+            await wait(300)
+
+            return waitFowSwiper(attempt + 1)
+        }
+    }
+
+    let wrapper;
+
+    const onMount = async () => {
+        await waitFowSwiper()
+
+        wrapper = document.getElementById('product-recommendations-cart')
+        if (!wrapper) throw new Error('Could not found wrapper element')
+
+        // Initialize swiper
+        if (window['swiper']) window['swiper'].destroy()
+        window['swiper'] = new Swiper('.product-recommendations-cart .swiper', {
+            loop: true,
+            direction: 'horizontal',
+            allowTouchMove: false,
+            spaceBetween: 0,
+            pagination: {
+                el: '.swiper-pagination',
+                type: 'bullets',
+            },
+        })
+
+        if (!swiper) throw new Error('Swiper not loaded')
+
+        wrapper.classList.add('loaded')
+    }
+
+    onMount()
+</script>
+
+{%- if recommendations.performed? -%}
+    <div class="product-recommendations-cart" id="product-recommendations-cart">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                {%- for product in recommendations.products -%}
+                    {% comment %}Exclude donation recomendation as it's already in cart{% endcomment %}
+                    {% unless product.title == "For The Dream Fund" %}
+                        <div class="swiper-slide" style="padding-right: 25px;">
+                            <cart-recommendation-card title="{{ product.title }}"
+                                                      featured_image="{{ product.featured_image | img_url: '300x' }}"
+                                                      color="{{ product.variants[0].option1 }}"
+                                                      size="{{ product.variants[0].option2 }}"
+                                                      url="{{ product.url }}"
+                                                      onNext="window['swiper'].slideNext()"
+                                                      onPrevious="window['swiper'].slidePrev()"
+                                                      price="{{ product.price | money_with_currency | strip_html }}"
+                                                      id="{{ product.variants.first.id }}"
+                                                      spend_goal="{{ settings.gift_upsell_goal }}"
+                                                      already_spent={{ cart.total_price | divided_by: 100 }}>
+                            </cart-recommendation-card>
+                        </div>
+                    {% endunless %}
+                {%- endfor -%}
+            </div>
+
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <div style="padding-right: 25px">
+            <div class="recommend-divider"></div>
+        </div>
+    </div>
+{%- endif -%}
+
+<link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+
+<style>
+    .product-recommendations-cart {
+        opacity: 0;
+        /*transform: translateX(100%);*/
+        transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .product-recommendations-cart.loaded {
+        opacity: 1;
+        /*transform: translateX(0);*/
+    }
+</style>
+
+
+{% schema %}
+{
+  "name": "Product RCMND Cart",
+  "tag": "section",
+  "class": "product-recommendation-cart",
+  "settings": [
+  ],
+  "presets": [
+    {
+      "category": "Collection",
+      "name": "Product Recommendation"
+    }
+  ]
+}
+{% endschema %}

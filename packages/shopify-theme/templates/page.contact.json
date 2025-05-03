@@ -1,0 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-contact",
+      "settings": {
+      }
+    },
+    "1640708094611bf85e": {
+      "type": "contact-form",
+      "settings": {
+        "heading": "Contact form"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1640708094611bf85e"
+  ]
+}

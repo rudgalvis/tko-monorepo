@@ -1,0 +1,298 @@
+<section class="kto-main-container" {% if section.settings.sectionID != nil %}id="{{ section.settings.sectionID }}" {% endif %}>
+    <div class="tko-lines sot-{{section.id}}"
+    {% if section.settings.borderlayouttwoclalt == 'top-bottom'%}
+    style="
+      border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+    ">
+    {% elsif  section.settings.borderlayouttwoclalt == 'only-top' %}
+    style="
+    border-top-style:  solid;
+    border-top-color:   black;
+    border-bottom: none;
+    ">
+    {% elsif  section.settings.borderlayouttwoclalt == 'only-bottom' %}
+    style="
+    border-top: none;
+    border-bottom-style:  solid;
+    border-bottom-color:   black;
+    ">
+    
+    {% else %}
+    
+    style="
+    border-top: none;
+    border-bottom: none;
+    "> 
+  
+    {% endif %}
+
+    {{ 'component-two-column-alternate.css' | asset_url | stylesheet_tag }}
+
+    <div class="two-column-container-alt">
+        {% assign selectedLayer = section.settings.altsectionlayouttwocl %}
+        <div class="two-column-alt cl-left-alt" {% if selectedLayer == 'text-image'%} style="order:2" {% else %} style="order:1" {% endif %}>
+            {%
+                render 'rimg'
+                img: section.settings.clalt-image,
+                alt: section.settings.clalt-image.alt,
+                size: '938x',
+              %}
+        </div>
+        <div class="two-column-alt cl-right-alt alternatedisplay" {% if selectedLayer == 'text-image'%} style="order:1" {% else %} style="order:2" {% endif %}>
+            <div class="topsection-alt">
+            <h2 class="mxwidth-header-{{section.id}}">{{ section.settings.altheadingcl }}</h2>
+            <h3 class="mxwidth-header-3-{{section.id}}">{{ section.settings.altheadingclsub}}</h3>
+        </div>
+            <div class="cl-content-alt">
+                <p class="mxwidth-{{section.id}}">{{ section.settings.altbodycl }}</p>
+                {% if section.settings.altshowurlcl == true %}
+                <a href="{{ section.settings.altlinkclUrl }}" class="btn-darrow inside-section">{{section.settings.altlinkTextcl}}</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </section>
+
+
+{% schema %}
+
+{
+    "name": "2 Column Layout No.2", 
+    "settings": [
+    {
+      "type": "header",
+      "content": "Layout Options"
+    },
+    {
+      "type": "select",
+      "id": "borderlayouttwoclalt",
+      "label": "Section Border Options",
+      "default": "top-bottom",
+      "options": [
+        {
+          "value": "top-bottom",
+          "label": "Show Border Top & Bottom"
+        },
+        {
+          "value": "only-top",
+          "label": "Show Border Only Top"
+        },
+        {
+            "value": "only-bottom",
+            "label": "Show Border Only Bottom"
+          },
+        {
+            "value": "hide-border",
+            "label": "Hide Borders"
+          }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "altsectionlayouttwocl",
+      "label": "Template Side Options",
+      "default": "image-text",
+      "options": [
+        {
+          "value": "image-text",
+          "label": "Left Image - Right Text"
+        },
+        {
+          "value": "text-image",
+          "label": "Left Text - Right Image"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Image Options"
+    },
+    {
+        "id": "clalt-image",
+        "type": "image_picker",
+        "label": "Select Image"
+      },
+      {
+        "type": "header",
+        "content": "Heading Options"
+      },
+      {
+        "id": "altheadingcl",
+        "type": "text",
+        "label": "Heading"
+      },
+      {
+        "type":"number",
+        "id":"maxwidthoftitle",
+        "label":"Heading Width Desktop",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"maxwidthoftitlemobiled",
+        "label":"Heading Width Mobile",
+        "default":20
+      },
+      {
+        "type": "header",
+        "content": "Sub-Heading Options"
+      },
+      {
+        "id": "altheadingclsub",
+        "type": "textarea",
+        "label": "Sub-Heading"
+      },
+      {
+        "type":"number",
+        "id":"maxwidthof2title",
+        "label":"Sub-Heading Width Desktop",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"maxwidthof2titlemobiled",
+        "label":"Sub-Heading Width Mobile",
+        "default":20
+      },
+      {
+        "type": "header",
+        "content": "Body Copy Options"
+      },
+      {
+        "id": "altbodycl",
+        "type": "textarea",
+        "label": "Body"
+      },
+      {
+        "type":"number",
+        "id":"maxwidthoftext",
+        "label":"Copy Width Desktop",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"maxwidthoftextmobile",
+        "label":"Copy Width Mobile",
+        "default":20
+      },
+      {
+        "type": "header",
+        "content": "URL Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "altshowurlcl",
+        "label": "Enable link",
+        "default": false
+      },
+      {
+        "id": "altlinkTextcl",
+        "type": "text",
+        "label": "URL Copy"
+      },
+     
+      {
+        "id": "altlinkclUrl",
+        "type": "url",
+        "label": "URL"
+      },
+    
+      {
+        "type": "header",
+        "content": "Anchor Point Options"
+      },
+      
+      {
+        "id": "sectionID",
+        "type": "text",
+        "label": "Anchor Point"
+      },
+      
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup_sot",
+        "label":"Top",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedow_sot",
+        "label":"Bottom",
+        "default":20
+      },
+      
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup_sotm",
+        "label":"Top",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedow_sotm",
+        "label":"Bottom",
+        "default":20
+      }
+    ],
+    "presets": [
+{
+"category": "2 Column Layout No.2",
+"name": "2 Column Layout No.2"
+}
+]
+  }
+{% endschema %}
+
+
+
+<style>
+  .sot-{{ section.id }}{
+    padding: {{section.settings.padding_sizeup_sot}}px 0px {{section.settings.padding_sizedow_sot}}px 0px;
+    border-width: 1px ;
+    
+   }
+   .mxwidth-{{section.id}}{
+    max-width: {{section.settings.maxwidthoftext}}px;
+   }
+   .mxwidth-header-{{section.id}}{
+    max-width: {{section.settings.maxwidthoftitle}}px;   
+   }
+   .container-padding-{{section.id}}{
+     padding:{{section.settings.containertop}}px 0px {{section.settings.containerbottom}}px 0px;   
+   }
+   .mxwidth-header-3-{{section.id}}{
+     max-width:{{section.settings.maxwidthof2title}}px;
+   }
+   @media (min-width: 320px) and (max-width: 480px) {
+    .sot-{{ section.id }}{
+    padding: {{section.settings.padding_sizeup_sotm}}px 0px {{section.settings.padding_sizedow_sotm}}px 0px;
+    border-width: 0.5px;
+   }
+  
+   .mxwidth-{{section.id}}{
+    max-width: {{section.settings.maxwidthoftextmobile}}px;
+   }
+   .mxwidth-header-{{section.id}}{
+    max-width: {{section.settings.maxwidthoftitlemobiled}}px;   
+   }
+   .container-padding-{{section.id}}{
+    padding:{{section.settings.containertopmobile}}px 0px {{section.settings.containerbottommobile}}px 0px;     
+   }
+   .mxwidth-header-3-{{section.id}}{
+    max-width:{{section.settings.maxwidthof2titlemobiled}}px;
+    }
+   }    
+</style>

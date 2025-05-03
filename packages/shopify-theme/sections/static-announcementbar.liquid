@@ -1,0 +1,295 @@
+{{ 'component-announcement-bar.css' | asset_url | stylesheet_tag }}
+
+{% assign enable_announcement = section.settings.show_announcement %}
+{% assign homepage_only = section.settings.announcement_home_only %}
+{% assign show_announcement = false %}
+
+{% assign enable_announcement2 = section.settings.show_announcement2 %}
+{% assign homepage_only2 = section.settings.announcement_home_only2 %}
+{% assign show_announcement2 = false %}
+
+{% if enable_announcement2 and homepage_only2 == false %}
+  {% assign show_announcement2 = true %}
+{% endif %}
+
+{% if enable_announcement2 and homepage_only2 and template.name == 'index' %}
+  {% assign show_announcement2 = true %}
+{% endif %}
+
+{% unless show_announcement2 %}
+  {% break %}
+{% endunless %}
+
+<script
+  type="application/json"
+  data-section-type="static-announcement-bar"
+  data-section-id="{{ section.id }}"
+></script>
+
+<div
+  id="announcementbarsecond"
+  data-lt="{{section.settings.ltcountries}}"
+  data-eu="{{section.settings.eucountries}}"
+  data-uk="{{section.settings.ukcountries}}"
+  data-au="{{section.settings.aucountries}}"
+  data-us="{{section.settings.uscountries}}"
+  data-second="{{section.settings.datasecond}}"
+  class="tko-announcement-bar tko-flex-row"
+  style="background-color: {{ section.settings.announcement_background2 }};"
+>
+  <div class="but-annou-close" id="anouncementClose">
+    <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/announcement_close_mini.svg?v=1639137194">
+  </div>
+  <div class="annou-slider">
+    {% for block in section.blocks %}
+      {% if block.settings.announcement_text2 == blank %}
+        {% assign show_announcement2 = false %}
+      {% endif %}
+
+      <div class="annou_grand country-{{ block.settings.selectCountry}}">
+        {% if block.settings.announcement_text_mobile2 != blank %}
+          <div
+            id="annou-mobile-{{forloop.index}}"
+            class="pxs-announcement-bar-text-mobile"
+            data-country="{{ block.settings.selectCountry }}"
+          >
+            {{ block.settings.announcement_text_mobile2 }}
+          </div>
+        {% endif %}
+
+        {% if block.settings.announcement_text2 != blank %}
+          <div
+            id="annou-desktop-{{forloop.index}}"
+            class="pxs-announcement-bar-text-desktop"
+            data-country="{{ block.settings.selectCountry }}"
+          >
+            {{ block.settings.announcement_text2 }}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .pxs-announcement-bar-text-desktop p{
+    color: {{ section.settings.announcement_color2 }};
+    }
+
+    .pxs-announcement-bar-text-desktop p a{
+         color: {{ section.settings.announcement_color2 }};
+    }
+
+
+    .pxs-announcement-bar-text-mobile p{
+    color: {{ section.settings.announcement_color2 }};
+    }
+
+
+    .pxs-announcement-bar-text-mobile p a{
+      color: {{ section.settings.announcement_color2 }};
+
+    }
+
+    .pxs-announcement-bar-text-desktop{
+      display:block;
+    }
+
+    .pxs-announcement-bar-text-mobile{
+      display:none;
+    }
+
+
+    @media (max-width: 812px) {
+      .pxs-announcement-bar-text-desktop{
+      display:none;
+    }
+
+    .pxs-announcement-bar-text-mobile{
+      display:block;
+    }
+    }
+</style>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "id": "eucountries",
+      "type": "textarea",
+      "label": "Europe Country List",
+      "info": "Add Europe country with comma. How can you get Country code? ([?](https://www.iban.com/country-codes))"
+    },
+    {
+      "id": "uscountries",
+      "type": "textarea",
+      "label": "United States Country List",
+      "info": "Add United States country with comma. How can you get Country code? ([?](https://www.iban.com/country-codes))"
+    },
+    {
+      "id": "aucountries",
+      "type": "textarea",
+      "label": "Australia Country List",
+      "info": "Add Australia country with comma. How can you get Country code? ([?](https://www.iban.com/country-codes))"
+    },
+    {
+      "id": "ukcountries",
+      "type": "textarea",
+      "label": "United Kingdom Country List",
+      "info": "Add United Kingdom country with comma. How can you get Country code? ([?](https://www.iban.com/country-codes))"
+    },
+    {
+      "id": "ltcountries",
+      "type": "textarea",
+      "label": "Lithuania Country List",
+      "info": "Add Lithuania country with comma. How can you get Country code? ([?](https://www.iban.com/country-codes))"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_announcement2",
+      "label": "Show announcement",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "announcement_home_only2",
+      "label": "Show on home page only",
+      "default": false
+    },
+    {
+      "id": "announcement_color2",
+      "type": "color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "id": "announcement_background2",
+      "type": "color",
+      "label": "Background color",
+      "default": "#000000"
+    }
+  ],
+  "max_blocks": 20,
+  "blocks": [
+    {
+      "type": "Announcement",
+      "name": "Announcement Items",
+      "settings": [
+        {
+          "type": "select",
+          "id": "selectCountry",
+          "label": "Select Country",
+          "options": [
+            {
+              "value": "UK",
+              "label": "United Kingdom"
+            },
+            {
+              "value": "EU",
+              "label": "Europe"
+            },
+            {
+              "value": "US",
+              "label": "United States"
+            },
+            {
+              "value": "AU",
+              "label": "Australia"
+            },
+            {
+              "value": "LT",
+              "label": "Lithuania"
+            },
+            {
+              "value": "ALL",
+              "label": "All Country"
+            }
+          ],
+          "default": "UK"
+        },
+        {
+          "id": "announcement_text2",
+          "type": "richtext",
+          "label": "Text",
+          "default": "<p>Call attention to a special discount, feature, or promotion here.</p>"
+        },
+        {
+          "id": "announcement_text_mobile2",
+          "type": "richtext",
+          "label": "Text (mobile)",
+          "default": "<p>Use less text on mobile!</p>",
+          "info": "Use this option if you want to display alternate text in mobile. Recommended for shortening announcement text to make suitable for mobile."
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+  var euCountry;
+  var usCountry;
+  var auCountry;
+  var gbCountry;
+  var ltCountry;
+
+  $(document).ready(function () {
+    euCountry = $('#announcementbarsecond').attr('data-eu').split(',');
+    usCountry = $('#announcementbarsecond').attr('data-us').split(',');
+    auCountry = $('#announcementbarsecond').attr('data-au').split(',');
+    gbCountry = $('#announcementbarsecond').attr('data-uk').split(',');
+    ltCountry = $('#announcementbarsecond').attr('data-lt').split(',');
+
+    console.log(euCountry);
+
+    var detectCountry;
+    jQuery.get('/browsing_context_suggestions.json', (d) => {
+      detectCountry = d.detected_values.country.handle;
+      console.log(detectCountry);
+
+      var getCountry;
+
+      for (let i = 0; i < euCountry.length; i++) {
+        if (detectCountry == euCountry[i]) {
+          getCountry = 'EU';
+        }
+      }
+      for (let i = 0; i < usCountry.length; i++) {
+        if (detectCountry == usCountry[i]) {
+          getCountry = 'US';
+        }
+      }
+      for (let i = 0; i < auCountry.length; i++) {
+        if (detectCountry == auCountry[i]) {
+          getCountry = 'AU';
+        }
+      }
+
+      for (let i = 0; i < gbCountry.length; i++) {
+        if (detectCountry == gbCountry[i]) {
+          getCountry = 'GB';
+        }
+      }
+      for (let i = 0; i < ltCountry.length; i++) {
+        if (detectCountry == ltCountry[i]) {
+          getCountry = 'LT';
+        }
+      }
+
+      if (getCountry == 'GB') {
+        $('.country-UK').css('display', 'flex');
+      } else if (getCountry == 'EU') {
+        $('.country-EU').css('display', 'flex');
+      } else if (getCountry == 'US') {
+        $('.country-US').css('display', 'flex');
+      } else if (getCountry == 'AU') {
+        $('.country-AU').css('display', 'flex');
+      } else if (getCountry == 'LT') {
+        $('.country-LT').css('display', 'flex');
+      } else {
+        $('.country-ALL').css('display', 'flex');
+      }
+    });
+  });
+</script>

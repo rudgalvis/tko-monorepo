@@ -1,0 +1,640 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-all-knitters",
+      "settings": {}
+    },
+    "16477767430fe272a2": {
+      "type": "static-onlytext",
+      "settings": {
+        "onlyTextlayout": "only-top",
+        "bgOnlyTextCTA": "#eeeeea",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "",
+        "maxwidthoftitle": 900,
+        "maxwidthoftitlemobiled": 20,
+        "bodytextOnlyTextCTA": "Fair wages support our knitters' financial goals but our Knitters' Dream fund supports their personal goals.",
+        "fontsizetune": "27px",
+        "maxwidthoftext": 1024,
+        "maxwidthoftextmobile": 280,
+        "showurlOnlyTextCTA": false,
+        "linkOnlyTextCTA": "",
+        "linktextOnlyTextCTA": "",
+        "padding_sizeup_sot": 131,
+        "padding_sizedow_sot": 80,
+        "padding_sizeup_sotm": 88,
+        "padding_sizedow_sotm": 70,
+        "containertop": 20,
+        "containerbottom": 20,
+        "containertopmobile": 20,
+        "containerbottommobile": 20,
+        "sectionID": ""
+      }
+    },
+    "knitters_accordion_zqHdh4": {
+      "type": "knitters-accordion",
+      "blocks": {
+        "knitter_DKC89X": {
+          "type": "knitter",
+          "settings": {
+            "main_image": "shopify://shop_images/Knitters_Photos.jpg",
+            "thumbnail": "shopify://shop_images/Knitters_Icons.jpg",
+            "knitter_name": "Danutė",
+            "knitter_id": "danute-1",
+            "description": "You won’t find anyone who loves their 9-5 quite as much as our knitter Danutė does. A ray of sunshine, Danutė adores knitting above anything and considers it her own personal form of meditation. Knitting is one thing that makes her truly happy; that and her 3 Persian cats. One woman that she’s constantly inspired by and is most proud of is her daughter."
+          }
+        },
+        "knitter_J7Qnyd": {
+          "type": "knitter",
+          "settings": {
+            "main_image": "shopify://shop_images/20_2_424x539_cd611a2d-e280-4e72-b806-9e904886521b.webp",
+            "thumbnail": "shopify://shop_images/20_3_124x124_60301ac4-34e5-4a93-b386-9bf9f7b13337.webp",
+            "knitter_name": "Vilijeta",
+            "knitter_id": "vilijeta-1",
+            "description": "Vilijeta used to buy her yarn on the black market during the Soviet Union days. Vilijeta’s mom taught her how to knit but tells us that she wasn’t the most natural when she started. But, honestly? Today, Vilijeta is one of our most skillful knitters. We think her mom would be proud. When she’s not knitting, Vilijeta also works as the director of Birštonas museum in a small resort town that’s super proud of its history."
+          }
+        }
+      },
+      "block_order": [
+        "knitter_DKC89X",
+        "knitter_J7Qnyd"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "1647776773f01f73b5": {
+      "type": "static-the-dreams-accordion",
+      "blocks": {
+        "51932419-2626-4b5d-a2e0-bf37d60f3c47": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Knitters_Photos.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/Knitters_Icons.jpg",
+            "accordionheadingdream": "Danutė",
+            "accordionsubdream": "",
+            "accordioncopydream": "You won’t find anyone who loves their 9-5 quite as much as our knitter Danutė does. A ray of sunshine, Danutė adores knitting above anything and considers it her own personal form of meditation. Knitting is one thing that makes her truly happy; that and her 3 Persian cats. One woman that she’s constantly inspired by and is most proud of is her daughter.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "b9e17f46-d1c0-494b-818a-cc5ec2f644fc": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/20_2_424x539_cd611a2d-e280-4e72-b806-9e904886521b.webp",
+            "dreamaccordionthumb": "shopify://shop_images/20_3_124x124_60301ac4-34e5-4a93-b386-9bf9f7b13337.webp",
+            "accordionheadingdream": "Vilijeta",
+            "accordionsubdream": "",
+            "accordioncopydream": "Vilijeta used to buy her yarn on the black market during the Soviet Union days. Vilijeta’s mom taught her how to knit but tells us that she wasn’t the most natural when she started. But, honestly? Today, Vilijeta is one of our most skillful knitters. We think her mom would be proud. When she’s not knitting, Vilijeta also works as the director of Birštonas museum in a small resort town that’s super proud of its history.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "071c7b24-6d85-4c71-8f76-59f0c5745ea8": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/27_1_1_424x539_7d656f44-aa90-4851-8542-c1a47660237b.webp",
+            "dreamaccordionthumb": "shopify://shop_images/27_2_124x124_27cca683-26a7-4246-8d44-7ff800bf711e.webp",
+            "accordionheadingdream": "Rūta",
+            "accordionsubdream": "",
+            "accordioncopydream": "Rūta started knitting when she was only five years old, which means she has almost 50 years of experience under her belt. In case you thought that wasn't impressive enough, she's also a licensed veterinarian! Rūta lives only a few minutes away from our warehouse in Prienai so often drops by for tea and chats with the warehouse team. This means she also personally delivers her knits by hand, which we're super grateful for.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "13086fe1-af25-4587-b2f8-81e311cea520": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/22_1_1_424x539_760c9cfe-929d-49ac-92e8-545c672f7833.webp",
+            "dreamaccordionthumb": "shopify://shop_images/22_2_124x124_90e9d43f-edaf-4e70-8cd6-912aedb410ca.webp",
+            "accordionheadingdream": "Aldona",
+            "accordionsubdream": "",
+            "accordioncopydream": "Aldona likes to take two to three months off each summer so she can focus on her garden, where she grows berries, veggies and apple trees. This is great for us, as she always fills our pockets with apples whenever we drop by for a visit! She was one of our very first knitters and has been with us since 2015.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "4eb5cc0f-f010-49b9-a0d8-ba6aff5bb484": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Knitters_Photos_1.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/Knitters_Icons_1.jpg",
+            "accordionheadingdream": "Ingrida",
+            "accordionsubdream": "",
+            "accordioncopydream": "Every day, Ingrida tries to remind herself that she’s happy and has a beautiful, healthy family: she's big on practicing gratitude. She's an early bird who typically wakes up at 4am, just to get some peace and quiet (in her words) before her five children, including 2 pairs of twins, wake up! Ingrida always spends her time knitting thinking about new patterns she'd like to play around with.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "c47c552b-f8f4-4111-a2a2-edde9348960b": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/21_3_424x539_888e9093-5452-4db9-80b0-fee201f445d6.webp",
+            "dreamaccordionthumb": "shopify://shop_images/21_4_124x124_899025a4-3021-409a-b7f4-cb308af56b8a.webp",
+            "accordionheadingdream": "Jolanta",
+            "accordionsubdream": "",
+            "accordioncopydream": "Jolanta used to work as a nurse but lost her job through a combination of illness and stress. So she joined The Knotty Ones, after her daughter found out about our knitting roles and told her mom. Now, Jolanta says she's doing what she loves most. When she's not knitting for work or for fun, she's reading a book, watching a TV show or walking her adorable dog, Toby the collie.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "56e90246-3863-4d08-9d15-f4066c2ecdcc": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/25_1_424x539_1397d90f-205c-4b3d-9c10-e1be0f0d7084.webp",
+            "dreamaccordionthumb": "shopify://shop_images/25_2_124x124_0978d0a4-7a12-48cc-a0c9-aad96093d9e4.webp",
+            "accordionheadingdream": "Žaneta",
+            "accordionsubdream": "",
+            "accordioncopydream": "Žaneta started taking knitting seriously in fifth grade, when she wanted new clothes but couldn't buy any due to lack of supply during the Soviet period. The answer? To make use of the knitting skills and make a new skirt or sweater herself, copying the patterns from magazines. Her favorite combo for relaxation is watching a movie while knitting. She doesn't have a particular favorite, but mostly watches Russian movies.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "4112337a-4225-4b11-8f89-9700db4d4ab9": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/34_1_424x539_8b5263f6-9caf-42a8-bc23-0dca35326b7d.webp",
+            "dreamaccordionthumb": "shopify://shop_images/34_124x124_3f1f0301-9297-49e3-945c-a7677eb1d382.webp",
+            "accordionheadingdream": "Daina",
+            "accordionsubdream": "",
+            "accordioncopydream": "Each morning, Daina starts her day with a cup of coffee with cinnamon sprinkles. That’s one of her non-negotiables. The rest of the day could go in any direction - maybe she will zipline over one of her local rivers in Lithuania or maybe she’ll dye her hair red again (the silliest thing she’s done - her words).",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "5526ab17-8e6d-401d-a1c9-95816da59f39": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/29_1_424x539_50f87cc0-32a4-443e-bd75-afb3d3cd0a65.webp",
+            "dreamaccordionthumb": "shopify://shop_images/29_2_124x124_32f1d5c4-91da-4363-9d21-640f4e15698e.webp",
+            "accordionheadingdream": "Marina",
+            "accordionsubdream": "",
+            "accordioncopydream": "Marina started knitting back in middle school, when she won a Handcraft Competition using crochet napkins made by her mother. Afraid of being caught out, she actually learned how to crochet before learning to knit. Now, every single knit we produce goes past Marina first. She not only manages more than 70 knitters, but she also trained them and made any alterations to your knit before it arrived at your door.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "2db17b1d-6368-4a61-8236-059abdaabd6e": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/33_1_424x539_5a4fe815-5598-45fe-85b7-484863ff5efd.webp",
+            "dreamaccordionthumb": "shopify://shop_images/33_124x124_d35dbdc0-fd60-4df5-8d38-b7afad7201d8.webp",
+            "accordionheadingdream": "Ingrida",
+            "accordionsubdream": "",
+            "accordioncopydream": "Before we headhunted Ingrida as our professional multi-tasker, she used to work at a theme park baking pancakes and later she worked at a big garment factory in Lithuania. Now she basically runs our warehouse: accepting knits as they arrive, checking, folding, packing, labeling and sending them off. She has exceptional attention to detail and she personally quality-checked your knit before handing it over to a courier.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "12d4ab94-6837-4675-97b4-b5716cf240df": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/31_1_424x539_f53d562d-8d41-4be9-bfc6-e7bf7118b536.webp",
+            "dreamaccordionthumb": "shopify://shop_images/31_124x124_25738de9-f4d5-4c91-9b28-473a75a75b05.webp",
+            "accordionheadingdream": "Jovita",
+            "accordionsubdream": "",
+            "accordioncopydream": "See those hand-sewn labels on your knit? They were all stitched by Jovita. Her career started out in the Soviet Union days, assembling Russian TVs and radios. With the fall of the Soviet Union, she started working at clothing factories before joining our partner factory. When she’s not sewing labels or removing loose threads, she’s daydreaming about exploring her local parks and tending to her plants.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "c0b877da-2773-4a05-9a57-7f573c168b67": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/32_1_424x539_92b0c5df-edbf-4fe9-ad1e-22c1846538e3.webp",
+            "dreamaccordionthumb": "shopify://shop_images/32_124x124_d0690114-613e-4884-930b-a0b8859e4b27.webp",
+            "accordionheadingdream": "Ligija",
+            "accordionsubdream": "",
+            "accordioncopydream": "Ligija spends her time at work making holes. And we promise that’s a good thing. Her expertise is crafting holes for the buttons on your Preila knit. So next time you button it up and feel its warmth enveloping you, you’ve got Ligija to thank. She’s deft with her hands and puts that skill to work in her garden, where she grows carrots and onions. Outside of work, she’s usually found with her head in a crime novel.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "b63b1266-bfd7-4beb-9d44-be37f97002aa": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/28_1_424x539_50c0920a-efef-4587-ac60-539a68e660e8.webp",
+            "dreamaccordionthumb": "shopify://shop_images/28-_2_124x124_46dbd026-5e0d-4d6b-9c68-8f9c30f31bf9.webp",
+            "accordionheadingdream": "Valentina",
+            "accordionsubdream": "",
+            "accordioncopydream": "OK, so technically Ms. Valentina does not make our knits. But she does work at our partner factory and works really hard.\nMonday to Friday she's here dusting, sweeping, mopping. She's making sure that people who do make our clothes find their workstations tidy, always have soap in the bathroom, and are well taken care of.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "9b3f03f6-679c-486d-93e7-29f32a106465": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/19_424x539_f5fcc55d-4a66-4d0f-8042-5b9149e32407.webp",
+            "dreamaccordionthumb": "shopify://shop_images/19_1_124x124_fc12571b-a6e4-4a3c-8507-096814c4b9c2.webp",
+            "accordionheadingdream": "Virginija",
+            "accordionsubdream": "",
+            "accordioncopydream": "No one knows our Laumės, Preila and Milda knits better than Virginija does. As a Quality Control Manager at our partner factory, she personally checks each garment before it’s posted to you. You don’t want to mess with Virginija: not only is she the boss, she also has a great eye for spotting errors. Virginija loves taking 30km bike rides a few times a week.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "6e504b6f-bf22-4b3b-ac80-4bf36e856fb0": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/26_1_424x539_8ee04587-6215-4939-8241-08c4a4cd06e6.webp",
+            "dreamaccordionthumb": "shopify://shop_images/26_124x124_84c109f1-ba59-4c28-8d18-23e5700d9925.webp",
+            "accordionheadingdream": "Violeta",
+            "accordionsubdream": "",
+            "accordioncopydream": "We’re pretty envious of Violeta’s steaming skills. Every single knit (including yours) is steamed and folded by Violeta, which is how they arrive so beautifully fresh. It’s a skill our moms wish we were able to do, too. Violeta spends her free time reading crime and romance novels and is a huge fan of anything with Hercule Poirot.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "7cd0fe54-0c99-492a-9658-8e34129c49ea": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/30_1_424x539_9a5299c8-1100-42c6-84e5-1a24a673b962.webp",
+            "dreamaccordionthumb": "shopify://shop_images/30_124x124_ef7397a6-c3df-4145-8d6f-a7cb7c7e5b35.webp",
+            "accordionheadingdream": "Regina",
+            "accordionsubdream": "",
+            "accordioncopydream": "After Regina finishes a day at work in Mrs Zina’s knitting factory that we partner with, she heads home to relax by sitting back with a fresh ball of yarn. That’s right - when she’s not knitting for work, she’s knitting for fun. Talk about being passionate about something!",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        }
+      },
+      "block_order": [
+        "51932419-2626-4b5d-a2e0-bf37d60f3c47",
+        "b9e17f46-d1c0-494b-818a-cc5ec2f644fc",
+        "071c7b24-6d85-4c71-8f76-59f0c5745ea8",
+        "13086fe1-af25-4587-b2f8-81e311cea520",
+        "4eb5cc0f-f010-49b9-a0d8-ba6aff5bb484",
+        "c47c552b-f8f4-4111-a2a2-edde9348960b",
+        "56e90246-3863-4d08-9d15-f4066c2ecdcc",
+        "4112337a-4225-4b11-8f89-9700db4d4ab9",
+        "5526ab17-8e6d-401d-a1c9-95816da59f39",
+        "2db17b1d-6368-4a61-8236-059abdaabd6e",
+        "12d4ab94-6837-4675-97b4-b5716cf240df",
+        "c0b877da-2773-4a05-9a57-7f573c168b67",
+        "b63b1266-bfd7-4beb-9d44-be37f97002aa",
+        "9b3f03f6-679c-486d-93e7-29f32a106465",
+        "6e504b6f-bf22-4b3b-ac80-4bf36e856fb0",
+        "7cd0fe54-0c99-492a-9658-8e34129c49ea"
+      ],
+      "settings": {
+        "accordionlayoutdream": "hide-border",
+        "sectionheading": "All Knitters",
+        "padding_sizeup": 0,
+        "padding_sizedown": 0,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 0,
+        "showheader": true,
+        "notfirst": false,
+        "hidedescription": false,
+        "sectionID": ""
+      }
+    },
+    "1647779108157f9b29": {
+      "type": "static-the-dreams-accordion",
+      "blocks": {
+        "29e02b5e-a8e8-47d5-818b-299e4275db60": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/24_1_424x539_174f0050-4b7d-4639-b910-1cd5adf53127.webp",
+            "dreamaccordionthumb": "shopify://shop_images/24_124x124_c6b127d1-17d4-424e-a13e-3eb0c0609f12.webp",
+            "accordionheadingdream": "Mrs Zina",
+            "accordionsubdream": "",
+            "accordioncopydream": "Mrs Zina is the definition of a true matriarch. She started her knitting career back in the Soviet Union days, as a 19-year-old with a four-month-old baby by her side. When her husband was away working in Kazakhstan, Mrs Zina was secretly knitting in a rented garage. Even though now she’s in charge of her own factory with over 20 employees, she still likes to get involved with crafting a Preila or Laumės knit herself.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "82ec0366-e99f-4981-b26d-2593280d0714": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Knitters_Photos_b1113450-31bd-4ffd-8219-a02845d1e9a9.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/Knitters_Icons_d2976518-21e2-4143-8eb5-04474a9c6310.jpg",
+            "accordionheadingdream": "Neringa",
+            "accordionsubdream": "",
+            "accordioncopydream": "Neringa still remembers knitting her first orange sock sitting by the fireplace. Now she mostly knits sweaters, but once she's sourced the perfect yarn, she dreams of knitting a classy two piece: a blazer and a skirt. All of Neringa's time is spent knitting; it's not only a job but also her biggest hobby. Neringa also loves baking and makes a mean Chebureki (a national Crimean Tatar dish) as well as pies and pizzas.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "40cfba4e-8f74-4414-bedc-dcdc42bf8bee": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/knitters_1200_x_1500_px_1_424x539_d7192d16-92d5-43b3-8b18-b58723176d42.webp",
+            "dreamaccordionthumb": "shopify://shop_images/knitters_icons_200x200_1_124x124_7b5a14c8-64ad-4c97-b2d5-513d4d1852f5.webp",
+            "accordionheadingdream": "Žydra",
+            "accordionsubdream": "",
+            "accordioncopydream": "Žydra's passion for knitting is one she inherited from her mom, and also one that she's passed down to her identical twin daughters. Sometimes the three of them even work on a sweater together. The only time Žydra isn't knitting is when she's in nature. She loves to spend her spare time picking mushrooms in Dzūkija, a beautiful region in Lithuania famed for its plants and berries, which she then mostly marinates at home.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "e93e965c-c2b7-4273-a585-865eebfb2df0": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/knitters_1200_x_1500_px_2_424x539_0110f324-48f9-4254-93f9-d063aaad17e4.webp",
+            "dreamaccordionthumb": "shopify://shop_images/knitters_icons_200x200_2_124x124_b8c3cafb-91d6-4b1c-a9b4-9c255f176662.webp",
+            "accordionheadingdream": "Daiva",
+            "accordionsubdream": "",
+            "accordioncopydream": "Daiva opened a knitting factory with her husband, Redas, 25 years ago. Now she employs over 15 women in rural Lithuania, including her daughters Armina and Gabija. Even though she's in charge of the factory, she still likes to get involved with the knitting herself. When she's not working, Daiva loves collecting statues and figurines. She was born on the 13th day of the month and has a self-confessed witch obsession: she even has one the same size as her.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "3dcc7507-cf86-4084-a65c-20171f498cc0": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Knitters_Photos_1_5c1e618a-01f7-4242-baff-d7b0676df8d2.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/Knitters_Icons_1_6dffbff4-cf38-47a3-b2e6-4a933c1e25e3.jpg",
+            "accordionheadingdream": "Jurgita",
+            "accordionsubdream": "",
+            "accordioncopydream": "Jurgita's an avid knitter, frequent baker and lover of active travel. Jurgita got loads of compliments on the first knit she made for herself, so she decided to take the craft more seriously. Now, it's one of her biggest passions. She says knitting is her favorite kind of therapy and meditation. She only knits when she’s in a good mood so, if you feel extra good vibes when you wear your knit, you’ve got Jurgita to thank.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "cc8e3380-bd4a-453c-8555-012d49361775": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "accordionheadingdream": "Danutė B.",
+            "accordionsubdream": "",
+            "accordioncopydream": "",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "6631cfb4-5f59-4431-a21c-994c5c9e7bf3": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Vidmante-bio_424x539_7c2cc25b-77b3-454e-9c34-21cd55c168b9.webp",
+            "dreamaccordionthumb": "shopify://shop_images/Vidmante-icon_124x124_4498c352-9098-4e1f-a35e-fec2156fb884.webp",
+            "accordionheadingdream": "Vidmantė",
+            "accordionsubdream": "",
+            "accordioncopydream": "Vidmantė's entire family is big on knitting. She was taught to knit by her grandmother and grew up watching her mom, Žydra (another TKO artisan), knit. She also has an identical twin sister, Vytautė, who shares the passion. When they have days off, they meet up for coffee and knitting: you could say crafting has always been in her blood. Vidmantė always carries needles and yarn with her in case inspiration strikes.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "accordion_63Jqkm": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Knitters_Photos_26b56941-fe50-4ffb-b01f-d5ac82853de0.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/Knitters_Icons_fcbf3a87-8c98-471d-9055-97aee7c33f92.jpg",
+            "accordionheadingdream": "Judita",
+            "accordionsubdream": "",
+            "accordioncopydream": "For Judita, knitting isn’t just a skill—it’s a way of life. She learned from her mother at a young age and was hooked immediately, even crocheting little gifts for her mom as a child. By the time she was ten, she had already knitted her first sweater. These days, she can’t even watch a movie without knitting in her hands. It’s safe to say knitting is second nature to her.",
+            "dreamurlcontrol": true,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": ""
+          }
+        },
+        "accordion_irCXHj": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Knitters_Photos_82817019-8dab-4f18-9315-2c82b74e296f.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/Knitters_Icons_2c34c0b8-585e-4774-b878-18441c94dafc.jpg",
+            "accordionheadingdream": "Jūratė",
+            "accordionsubdream": "",
+            "accordioncopydream": "Jūratė has been knitting for as long as she can remember. Back in her student days, she would knit clothes for herself, and later, her children grew up wrapped in her handmade pieces. Even now, her family eagerly awaits her knits—especially her husband, who refuses to wear store-bought sweaters. For Jūratė, knitting is more than a craft; it's her peaceful escape. She has a cozy knitting corner at home where she spends countless hours, lost in the rhythm of the stitches.",
+            "dreamurlcontrol": true,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": ""
+          }
+        },
+        "accordion_9adAzd": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/2_a1202a45-4f2a-487d-a297-87fe1c4ab83c.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/2_c44214f5-af11-44b3-84a3-7cd6855dd3d3.jpg",
+            "accordionheadingdream": "Danutė",
+            "accordionsubdream": "",
+            "accordioncopydream": "Danutė has been knitting for The Knotty Ones for over five years now. For her, it’s more than just making garments—it’s a way to unwind, recharge, and find a moment of calm in the everyday. With a cup of coffee by her side and no cats to curl up in her lap, it’s just her and the joy of knitting. It’s a quiet ritual that brings her fulfillment and a sense of purpose, one stitch at a time.",
+            "dreamurlcontrol": true,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": ""
+          }
+        },
+        "accordion_QMKNbG": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/1_ecba2e3b-2f72-40ba-b5c6-7593468c7a25.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/1_922a7a85-4cb7-4ced-b03c-3bffc9b6c7e7.jpg",
+            "accordionheadingdream": "Valerija",
+            "accordionsubdream": "",
+            "accordioncopydream": "Valerija has been knitting since she was six years old, and her needles have followed her through every stage of life. For her, knitting isn’t just a craft—it’s pure joy. Discovering The Knotty Ones felt like finding a hidden gem, and she calls it one of the best surprises along her journey. Unlike the typical image of a knitter, Valerija doesn’t sip coffee while she knits—she finishes it first. And though she has no cats to tangle up her yarn, she manages just fine without furry assistants.",
+            "dreamurlcontrol": true,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": ""
+          }
+        },
+        "accordion_3GJy9p": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/KNITTERS_FOR_WEB.png",
+            "dreamaccordionthumb": "shopify://shop_images/Untitled_design_5_9cf8dcbb-39dc-4391-9dfb-ea87c9355a4b.jpg",
+            "accordionheadingdream": "LAIMA",
+            "accordionsubdream": "",
+            "accordioncopydream": "Laima has been crafting since her school days, a passion inherited from her mother. Over the years, she's explored knitting, crocheting, and embroidery—once even running a cozy outdoor café where she baked kibinai with care. Now, at 55, Laima enjoys the calm of solo life in a new city, finding joy in contributing to The Knotty Ones. She's especially grateful to Marina for keeping her engaged with new patterns and projects. Not every design goes perfectly the first time, she says with a smile—but they always find a way forward together.",
+            "dreamurlcontrol": true,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": ""
+          }
+        },
+        "f588d075-2f3b-4f00-a93c-7ce31e7472c1": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "accordionheadingdream": "Jovita",
+            "accordionsubdream": "",
+            "accordioncopydream": "",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        }
+      },
+      "block_order": [
+        "29e02b5e-a8e8-47d5-818b-299e4275db60",
+        "82ec0366-e99f-4981-b26d-2593280d0714",
+        "40cfba4e-8f74-4414-bedc-dcdc42bf8bee",
+        "e93e965c-c2b7-4273-a585-865eebfb2df0",
+        "3dcc7507-cf86-4084-a65c-20171f498cc0",
+        "cc8e3380-bd4a-453c-8555-012d49361775",
+        "6631cfb4-5f59-4431-a21c-994c5c9e7bf3",
+        "accordion_63Jqkm",
+        "accordion_irCXHj",
+        "accordion_9adAzd",
+        "accordion_QMKNbG",
+        "accordion_3GJy9p",
+        "f588d075-2f3b-4f00-a93c-7ce31e7472c1"
+      ],
+      "settings": {
+        "accordionlayoutdream": "hide-border",
+        "sectionheading": "",
+        "padding_sizeup": 0,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 0,
+        "padding_sizedownm": 15,
+        "showheader": false,
+        "notfirst": true,
+        "hidedescription": true,
+        "sectionID": ""
+      }
+    },
+    "16477800847fcc1abd": {
+      "type": "static-cta-subscribe",
+      "settings": {
+        "borderlayoutsub": "hide-border",
+        "subbgcolor": "#b4bed6",
+        "subheading": "20% OFF YOUR FIRST ORDER",
+        "subbody": "<p>Good things come to those who subscribe. We don’t spam.<br/>Pinky promise</p>",
+        "maxwidthofcta": 900,
+        "maxwidthofctamobile": 280,
+        "padding_sizeup": 18,
+        "padding_sizedown": 21,
+        "padding_sizeupm": 11,
+        "padding_sizedownm": 10,
+        "containertop_": 62,
+        "containerbottom_": 33,
+        "containertopmobile_": 50,
+        "containerbottommobile_": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "16477767430fe272a2",
+    "knitters_accordion_zqHdh4",
+    "1647776773f01f73b5",
+    "1647779108157f9b29",
+    "16477800847fcc1abd"
+  ]
+}

@@ -1,0 +1,413 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "colors_solid_button_labels": "#FFFFFF",
+    "colors_accent_1": "#121212",
+    "colors_accent_2": "#334FB4",
+    "colors_text": "#121212",
+    "colors_outline_button_labels": "#121212",
+    "colors_background_1": "#EEEEEA",
+    "colors_background_2": "#F3F3F3",
+    "type_header_font": "assistant_n4",
+    "type_body_font": "assistant_n4",
+    "social_facebook_link": "https://www.facebook.com/theknottyones/",
+    "social_pinterest_link": "https://www.pinterest.co.uk/theknottyones",
+    "social_instagram_link": "https://www.instagram.com/theknottyones/",
+    "social_linkedin_link": "https://www.linkedin.com/company/theknottyones/",
+    "favicon": "shopify://shop_images/favicon.png",
+    "show_countdown_timer": false,
+    "timer_collection": "winter-sale",
+    "buttonText": "",
+    "selectedmounth": "Jan",
+    "selectedday": 13,
+    "selectedyear": "2025",
+    "selectedhour": 10,
+    "selectedminute": 0,
+    "selectedsecond": 59,
+    "countformbg": "#d21910",
+    "counttitle": "WINTER SALE ENDS IN",
+    "popularsearch": "Delčia Cotton Sweater,Pilnatis Cotton Shorts,Pieva Cotton Bralette,Laumės Merino Wool Sweater,Heartbreaker Wool Sweater, Kalvos Vest",
+    "colorswatch": "Black:#000000,Acorn:#8B4202,Buckwheat:#927865,Earth:#705646,Off-White:#faf9f3,Pebble Grey:#e3e1dc,Dark Grey:#242526,Oat Milk:#fff2db,Naked Oat Milk:#fff8e8,Embroidered Oat Milk:Embroidered Oat Milk,Pearl:#ccc1ae,Grey:#807f80,Sage Green:#7abb97,Fern Green:#497b55,Lavender:#c2bfcf,Dark Wheat:#d3b787,Sea Salt:#fffef4,Beige:#e7dcc5,Dusty Pink:#B98182,Violet:#4f3d64,Forest:#415242,Moss Green:#556962,Light Grey:#e2e2e2,Sand Dune:#deccbe,Cherry:#8a0100,Baltic Blue:#7a8da5,Camel:#d09e5c,White:#ffffff,Red:#be1930,Pine:#193f34,Naked Pebble Grey:#d6d6d6,Embroidered Pebble Grey:Embroidered Pebble Grey,Lilly Blue:#c2bfd2,Navy:#192034,Brown:#8d6b55,Off-White Baltic Fields:#fbfaf3,Brown Baltic Fields:#8d6b55,Gold:#d4b66b,Silver:#c0c0c0,Blue:#507099,Green:#028060,Embroidered Grey:Embroidered Pebble Grey,Naked Brown:#8D6B55,Lemon:#FADC90,Olive:#8F824F,Moss:#727339,Sunflower:Sunflower,Sand:#E5E3DC,Natural Linen:#E1DED4,Soft Blue:#BBC7C8,Land:land,Sea:sea,Natural Yarn:natural yarn,Fantasy Blue:fantasy blue,Oat Milk And Sea:oat milk and sea,Oat Milk And Fern Green:oat milk and fern green,Denim Blue:#7B899F,Midnight Blue:#3C4E74,Soft Beige:#E1D9D3,Wheat:#D7C4AD,Pine Green:#4B4B31,Dove Grey: dove grey,Striped Grey: striped grey,Sage:#82816C,Dusty Blue:#8798B1,Terracotta:#AB5C52,Ecru:#DBC8B1,Grass Green:#5F8458,Dusk: dusk,Dawn: dawn,Forest Green:#739B67,Tweed:tweed,Buckwheat and Blue:buckwheat and blue,Buckwheat and Off White:buckwheat and off white,Smoke:#51596B,Rhubarb:#A83554,Fantasy Rhubarb:fantasy rhubarb,Sky:sky,Waves:waves,Light:light,Dark:dark,Marble:marble,Honey:#F5e199,Nutmeg:#bb8151,Charcoal:#36454f,Onyx:#353839,Hellebore:#550d11,Dew:#DCE2EC,Sea Foam:#a4c2be,Fantasy Sea Foam:fantasy sea foam,Silver Grey:#d7d7d7,Golden Hour:#E3BCA3,Sunrise Yellow:#F4ED8C,Straw:#C49570,Slate:#B0A08C,Hellebore And Oat Milk:hellebore and oat milk,Sunrise And Oat Milk:sunrise and oat milk,Rhubarb And Fern Green:rhubarb and fern green,Nettle:#2E352E,Cloud Grey:#D0CBC7,Embroidered Cloud Grey:embroidered cloud grey,Fog Grey:#939299,Lilac And Oat Milk:lilac and oat milk,Nutmeg And Oak:nutmeg and oak,Burned Orange:#992A19,Lilac:#D0C0D3,Lilac And Black Flower:lilac and black flower,Lilac And Oat Milk Flower:lilac and oat milk flower,Lilac And Lemon Flower:lilac and lemon flower,Iris:#352852,Orange:#DE923B,Purple:#65314C",
+    "colorGreen": "Pine,Sage Green,Fern Green,Forest,Moss Green,Olive,Land,Forest Green,Pine Green,Sage,Grass Green,Sea Foam, Fantasy Sea Foam, Nettle",
+    "colorBlue": "Baltic Blue,Navy,Soft Blue,Denim BLue,Sea,Fantasy Blue,Midnight Blue,Dusty Blue,Sky,Waves,Dew,Sea Foam,Fantasy Sea Foam",
+    "colorBeige": "Beige,Dark Wheat,Sand Dune,Embroidered Oat Milk,Oat Milk,Naked Oat Milk,Sea Salt,Off-White,Pearl,Off-White Baltic Fields,Natural Linen,Oat Milk and Land,Oat Milk and Sea,Natural Yarn,Sand,Soft Beige,Oat Milk And Sea,Oat Milk And Fern Green,Wheat,Ecru,Dusk,Dawn,Golden Hour, Straw",
+    "colorBrown": "Brown,Brown Baltic Fields,Earth,Camel,Terracotta,Dusk,Dark, Sand, Tweed, Buckwheat, Buckwheat and Blue, Buckwheat and Off White,Slate, Nutmeg And Oak",
+    "colorGrey": "Grey,Dove Grey,Light Grey,Naked Pebble Grey,Embroidered Pebble Grey,Striped Grey,Smoke, Dark Grey,Charcoal,Onyx, Silver Grey,Slate, Cloud Grey, Embroidered Silver Grey, Fog Grey",
+    "colorPink": "Dusty Pink,Dawn,Rhubarb,Fantasy Rhubarb",
+    "colorPurple": "Lavender,Lilly Blue,Violet, Lilac And Oat Milk,Lilac,Lilac And Lemon Flower,Lilac And Black Flower,Lilac And Oat Milk Flower,Iris,Purple",
+    "colorBlack": "Black",
+    "colorWhite": "White,Off-White",
+    "colorRed": "Red,Terracotta, Fantasy Rhubarb, Hellebore, Burned Orange,Orange",
+    "colorYellow": "Lemon,Light, Sunrise Yellow",
+    "checkout_logo_image": "shopify://shop_images/tko-logo-png_a5c54f86-9a41-4d89-9fcc-f508b4c71784.png",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_color": "#eeeeea",
+    "checkout_accent_color": "#000000",
+    "checkout_button_color": "#000000",
+    "countdowncollection": "archive-sale",
+    "countformtitle": "Wanna see it first?",
+    "countformcopy": "<p>Drop your email below.<br/>We’ll let you know when it’s online</p>",
+    "countformplaceholder": "YOUR EMAIL",
+    "colorgroups": "Green,Blue,Beige,Brown,Grey,Pink,Purple,Black,White,Red",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "blocks": {
+          "announcement-bar-0": {
+            "type": "announcement",
+            "settings": {
+              "color_scheme": "background-1"
+            }
+          }
+        },
+        "block_order": [
+          "announcement-bar-0"
+        ],
+        "settings": {}
+      },
+      "static-announcementbar": {
+        "type": "static-announcementbar",
+        "blocks": {
+          "93d1cb0c-5b5c-4caa-a467-6dab828b9729": {
+            "type": "Announcement",
+            "settings": {
+              "selectCountry": "US",
+              "announcement_text2": "<h4>FREE SHIPPING. US DUTIES & TAXES INCLUDED.</h4>",
+              "announcement_text_mobile2": "<h4>FREE SHIPPING. US DUTIES & TAXES INCLUDED.</h4>"
+            }
+          },
+          "d02e68ec-d38b-4d9f-a1d0-d4c083477e44": {
+            "type": "Announcement",
+            "settings": {
+              "selectCountry": "EU",
+              "announcement_text2": "<h4>FREE WORLDWIDE SHIPPING</h4>",
+              "announcement_text_mobile2": "<h4>FREE WORLDWIDE SHIPPING</h4>"
+            }
+          },
+          "7217c372-c6e4-47e9-ad10-ff267ba787a9": {
+            "type": "Announcement",
+            "settings": {
+              "selectCountry": "UK",
+              "announcement_text2": "<h4>FREE SHIPPING. UK DUTIES & TAXES INCLUDED.</h4>",
+              "announcement_text_mobile2": "<h4>FREE SHIPPING. UK DUTIES & TAXES INCLUDED.</h4>"
+            }
+          },
+          "1dc1e8fe-b2e9-45d2-8404-f6255b708b52": {
+            "type": "Announcement",
+            "settings": {
+              "selectCountry": "ALL",
+              "announcement_text2": "<h4>FREE WORLDWIDE SHIPPING. DUTIES & TAXES INCLUDED.</h4>",
+              "announcement_text_mobile2": "<h4>FREE WORLDWIDE SHIPPING. DUTIES & TAXES INCLUDED.</h4>"
+            }
+          },
+          "7ba786a5-7f72-46aa-b6fa-9f994a534b38": {
+            "type": "Announcement",
+            "settings": {
+              "selectCountry": "AU",
+              "announcement_text2": "<h4>FREE WORLDWIDE SHIPPING. DUTIES & TAXES INCLUDED.</h4>",
+              "announcement_text_mobile2": "<h4>FREE WORLDWIDE SHIPPING. DUTIES & TAXES INCLUDED.</h4>"
+            }
+          },
+          "710025a2-82e7-4b4c-8e1c-b10a04d306e2": {
+            "type": "Announcement",
+            "settings": {
+              "selectCountry": "LT",
+              "announcement_text2": "<h4>FREE WORLDWIDE SHIPPING</h4>",
+              "announcement_text_mobile2": "<h4>FREE WORLDWIDE SHIPPING</h4>"
+            }
+          }
+        },
+        "block_order": [
+          "93d1cb0c-5b5c-4caa-a467-6dab828b9729",
+          "d02e68ec-d38b-4d9f-a1d0-d4c083477e44",
+          "7217c372-c6e4-47e9-ad10-ff267ba787a9",
+          "1dc1e8fe-b2e9-45d2-8404-f6255b708b52",
+          "7ba786a5-7f72-46aa-b6fa-9f994a534b38",
+          "710025a2-82e7-4b4c-8e1c-b10a04d306e2"
+        ],
+        "settings": {
+          "eucountries": "AT,BE,BA,BG,DE,EE,FI,FR,GR,HU,IS,IT,LV,NL,NO,PL,PT,RO,RS,ES,SE,TN,TR,UA",
+          "uscountries": "US",
+          "aucountries": "AU",
+          "ukcountries": "GB",
+          "ltcountries": "LT",
+          "show_announcement2": true,
+          "announcement_home_only2": false,
+          "announcement_color2": "#000000",
+          "announcement_background2": "#b4bed6"
+        }
+      },
+      "static-header": {
+        "type": "static-header",
+        "blocks": {
+          "dc85cb10-6347-476f-9349-73bdf668c47f": {
+            "type": "menu",
+            "settings": {
+              "titleofmenu": "SHOP",
+              "megamenu-layouts": "image-submenu",
+              "titleofimages": "Featured",
+              "headerlayoutsx": "3",
+              "image_one": "shopify://shop_images/menu_cards_-_ss24_424fe124-7225-4bea-aec6-3331bf2888af.png",
+              "image_one_url": "shopify://collections/co-ords",
+              "image_one_text": "Matching Sets",
+              "image_two": "shopify://shop_images/6.png",
+              "image_two_url": "shopify://collections/best-sellers",
+              "image_two_text": "Best Sellers",
+              "image_three": "shopify://shop_images/5_fcd6d474-b59c-4356-8416-f6401d65ce80.png",
+              "image_three_url": "shopify://collections/handmade",
+              "image_three_text": "Handmade Pieces",
+              "image_four_url": "",
+              "image_four_text": "",
+              "urlenabled": true
+            }
+          },
+          "2e22bd71-9e28-4a41-98b5-225c74175958": {
+            "type": "menu",
+            "settings": {
+              "titleofmenu": "EXPLORE",
+              "megamenu-layouts": "full-image",
+              "titleofimages": "",
+              "headerlayoutsx": "1",
+              "image_one": "shopify://shop_images/AboutNavigation-Our-Story_944x1182_c449516a-2da3-4479-a5ee-e2b584df706e.webp",
+              "image_one_url": "shopify://pages/about",
+              "image_one_text": "OUR STORY",
+              "image_two": "shopify://shop_images/AboutNavigation-Meet-the-Knitters_944x1182_05d47c54-b490-48e8-9e94-01b8437effce.webp",
+              "image_two_url": "shopify://pages/the-idea",
+              "image_two_text": "MEET THE KNITTERS",
+              "image_three": "shopify://shop_images/knit-repair_dd96cbd3-8623-488a-8da0-5440b5bf647f.jpg",
+              "image_three_url": "shopify://pages/knotty-atelier",
+              "image_three_text": "KNOTTY ATELIER",
+              "image_four": "shopify://shop_images/mega_menu_cards_-_ss24_472_x_591_px_fcae5eba-7279-467a-a854-cd4909accf30.jpg",
+              "image_four_url": "shopify://pages/the-knotty-ones-x-not-perfect-linen",
+              "image_four_text": "NOT PERFECT LINEN COLLABORATION",
+              "urlenabled": true
+            }
+          },
+          "d241092f-e2b3-4771-977a-d8bdfbe4ea27": {
+            "type": "menu",
+            "disabled": true,
+            "settings": {
+              "titleofmenu": "EXPLORE",
+              "megamenu-layouts": "full-image",
+              "titleofimages": "",
+              "headerlayoutsx": "1",
+              "image_one": "shopify://shop_images/knit-care_4a7034d6-62fe-4097-9f67-bdb9102ac502.jpg",
+              "image_one_url": "shopify://pages/knit-care",
+              "image_one_text": "KNIT CARE GUIDE",
+              "image_two": "shopify://shop_images/knit-repair_78fc235d-d32b-4a08-91d3-176647c65d15.jpg",
+              "image_two_url": "shopify://pages/knotty-atelier",
+              "image_two_text": "KNOTTY ATELIER",
+              "image_three": "shopify://shop_images/mega_menu_cards_-_ss24_472_x_591_px.jpg",
+              "image_three_url": "shopify://pages/vilnius-showroom",
+              "image_three_text": "VILNIUS SHOWROOM",
+              "image_four": "shopify://shop_images/1.jpg",
+              "image_four_url": "shopify://blogs/news",
+              "image_four_text": "THE KNOTTY JOURNAL",
+              "urlenabled": true
+            }
+          }
+        },
+        "block_order": [
+          "dc85cb10-6347-476f-9349-73bdf668c47f",
+          "2e22bd71-9e28-4a41-98b5-225c74175958",
+          "d241092f-e2b3-4771-977a-d8bdfbe4ea27"
+        ],
+        "settings": {
+          "menu": "main-menu",
+          "specialColor": "",
+          "navigatioitemcolor": "#b4bed6",
+          "navigatioitemcolormobile": "#b4bed6",
+          "imagetext": "https://cdn.shopify.com/s/files/1/1243/8188/files/tko-logo.svg?v=1657549727",
+          "logo-width": "273",
+          "logo-width2": "170",
+          "searchplaceholder": "Search products"
+        }
+      },
+      "tko-footer": {
+        "type": "tko-footer",
+        "blocks": {
+          "63abfd53-28cb-4533-b41e-d29d5e7acec2": {
+            "type": "Icon",
+            "settings": {
+              "siicon": "shopify://shop_images/instagram_icon_66x_e5362c6e-37ef-4137-9d60-6378a396e5e3.webp",
+              "siiconurl": "https://www.instagram.com/theknottyones"
+            }
+          },
+          "d35b4b9d-6193-44ed-af8d-dfd0c3549268": {
+            "type": "Icon",
+            "settings": {
+              "siicon": "shopify://shop_images/pinterest_icon_66x_c571c6ec-5719-4bc4-926f-b52d65453ce0.webp",
+              "siiconurl": "https://www.pinterest.com/theknottyones"
+            }
+          },
+          "08aa8858-8a86-45f2-a79a-98874fdf05b5": {
+            "type": "Icon",
+            "settings": {
+              "siicon": "shopify://shop_images/linkedin_icon_66x_ffa1e298-3236-417f-a12e-9bc3b634638f.webp",
+              "siiconurl": "https://www.linkedin.com/company/theknottyones"
+            }
+          },
+          "a36bb03b-48ef-4ea9-8165-2638cde7c461": {
+            "type": "Icon",
+            "settings": {
+              "siicon": "shopify://shop_images/facebook_icon_66x_ec460c6e-d1ab-47fc-bef3-880a3165be5e.webp",
+              "siiconurl": "https://www.facebook.com/theknottyones/"
+            }
+          }
+        },
+        "block_order": [
+          "63abfd53-28cb-4533-b41e-d29d5e7acec2",
+          "d35b4b9d-6193-44ed-af8d-dfd0c3549268",
+          "08aa8858-8a86-45f2-a79a-98874fdf05b5",
+          "a36bb03b-48ef-4ea9-8165-2638cde7c461"
+        ],
+        "settings": {
+          "footerlayout": "top-bottom",
+          "padding_sizeup_sot": 28,
+          "padding_sizedow_sot": 28,
+          "padding_sizeup_sotm": 10,
+          "padding_sizedow_sotm": 28,
+          "tkoabouttext": "ABOUT",
+          "tkoaboutcopy": "<p>Based between New York and Lithuania, The Knotty Ones was founded by three best friends who set out to create the perfect knit while giving back to less privileged women in their community. We believe in close-knit sisterhood. We support independent female artisans as well as female-founded factories to create our knitwear, providing them with financial independence and a voice in their households and communities. <br/><br/>We also take sustainability pretty seriously. We only use natural yarns, which are not only great for your wardrobe, but also for the planet.</p>",
+          "logofooter": "shopify://shop_images/0310_Newsletter_Archive_Sale_Laumes_Blue_reminder.png",
+          "tkosocialtext": "SOCIAL",
+          "socialmenu": "",
+          "tkofootertext": "FOOTER",
+          "footermenu": "footer",
+          "footernewshead": "NEWSLETTER",
+          "footernewscopy": "Subscribe to receive updates, access \nto exclusive deals, and more.",
+          "footercopyc": "© THE KNOTTY ONES"
+        }
+      },
+      "drawer": {
+        "type": "drawer",
+        "settings": {
+          "enablefund": true,
+          "fundproduct": "for-the-dream-fund",
+          "multiplier_fund": 5,
+          "donatetitle": "FOR THE DREAM FUND",
+          "donatedesc": "Encouraging our knitters to dream bigger.",
+          "donatebuttoncolor": "#000000",
+          "donatebuttontextcol": "#ffffff",
+          "donatebuttontext": "ADD DONATION",
+          "fsvalue": 0,
+          "freeshippingext": "Free Worldwide Shipping"
+        }
+      },
+      "static-tko-predictive": {
+        "type": "static-tko-predictive",
+        "settings": {}
+      },
+      "main-password-header": {
+        "type": "main-password-header",
+        "settings": {
+          "logo": "shopify://shop_images/tko-logo-png.png",
+          "logo_max_width": 200,
+          "color_scheme": "background-1"
+        }
+      },
+      "main-password-footer": {
+        "type": "main-password-footer",
+        "settings": {
+          "color_scheme": "background-1"
+        }
+      },
+      "countdown-timer": {
+        "type": "countdown-timer",
+        "settings": {}
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "7570552984445421165": {
+        "type": "shopify://apps/yotpo-product-photo-reviews/blocks/settings/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+        "disabled": false,
+        "settings": {}
+      },
+      "15683396631634586217": {
+        "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
+        "disabled": true,
+        "settings": {
+          "button_color": "#202a36",
+          "button_icon": "chat_bubble",
+          "button_text": "chat_with_us",
+          "button_horizontal_position": "bottom_right",
+          "button_vertical_position": "lowest",
+          "greeting_message": "👋 Hi, message us with any questions. We're happy to help!"
+        }
+      },
+      "1513253815146976218": {
+        "type": "shopify://apps/omnisend-email-marketing-sms/blocks/app-embed/44704aa2-794f-4c5d-8c8e-039c841158e9",
+        "disabled": false,
+        "settings": {}
+      },
+      "5439026248262864547": {
+        "type": "shopify://apps/preorder-globo/blocks/app-embed/e547a0ad-8212-4bcc-b02f-761faa9b8af2",
+        "disabled": true,
+        "settings": {}
+      },
+      "16387799423947206774": {
+        "type": "shopify://apps/ecf-contact-form-builder/blocks/cs-app-block/f801eb98-c038-452f-9400-11754de52b77",
+        "disabled": false,
+        "settings": {
+          "ecfversion": "v2"
+        }
+      },
+      "855628211100114053": {
+        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
+        "disabled": true,
+        "settings": {}
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "colors_solid_button_labels": "#FFFFFF",
+      "colors_accent_1": "#121212",
+      "colors_accent_2": "#334FB4",
+      "colors_text": "#121212",
+      "colors_outline_button_labels": "#121212",
+      "colors_background_1": "#FFFFFF",
+      "colors_background_2": "#F3F3F3",
+      "type_header_font": "assistant_n4",
+      "type_body_font": "assistant_n4",
+      "sections": {
+        "announcement-bar": {
+          "type": "announcement-bar",
+          "blocks": {
+            "announcement-bar-0": {
+              "type": "announcement",
+              "settings": {
+                "color_scheme": "background-1"
+              }
+            }
+          },
+          "block_order": [
+            "announcement-bar-0"
+          ],
+          "settings": {}
+        }
+      }
+    },
+    "Craft": {
+      "colors_solid_button_labels": "#EFECEC",
+      "colors_accent_1": "#2A332F",
+      "colors_accent_2": "#476154",
+      "colors_text": "#1C1A1A",
+      "colors_outline_button_labels": "#7B8382",
+      "colors_background_1": "#EFECEC",
+      "colors_background_2": "#C1BCAE",
+      "type_header_font": "americana_n4",
+      "type_body_font": "quattrocento_sans_n4"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{{ 'component-static-link.css' | asset_url | stylesheet_tag }}
+
+{% assign justheader = isJustHeader %}
+{% assign bigURL = isBigURL %}
+{% assign linkt = isLinkt %}
+
+
+
+
+<div class="link-container-- container-padding-{{section.id}}">
+      <a class="btn-darrow {% if justheader == true %} justheader {%endif%} {% if bigURL ==  true %} smaller-text{%endif%}" href="javascript:void(0);">{{linkt}}</a>
+</div>
+
+<style>
+    .container-padding-{{section.id}}{
+        padding-bottom:40px;
+        padding-top:50px;
+    }
+
+    .container-padding-{{section.id}} > a:after{
+        content:'' !important;
+    }
+    @media (max-width: 812px) {
+        .container-padding-{{section.id}}{
+        padding-bottom:15px;
+        padding-top:20px;
+    }
+    }
+</style>

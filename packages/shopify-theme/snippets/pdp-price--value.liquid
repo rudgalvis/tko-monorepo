@@ -1,0 +1,16 @@
+{% comment %}
+    {% render 'pdp-price--value', variant: variant, price: variant.compare_at_price, highlihght: true %}
+    {% render 'pdp-price--value', variant: variant, price: variant.price %}
+
+    params:
+        variant: variant
+        hidden: boolean,
+        price: number
+        highlight: number
+{% endcomment %}
+
+<span class="{% if highlight %}highlight-price{% endif %}"
+      data-varid="{{ variant.id }}"
+      style="{% if hidden %}display:none;{% endif %}">
+    {{ price | money_without_trailing_zeros | strip_html }}
+</span>

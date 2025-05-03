@@ -1,0 +1,43 @@
+{% comment %}
+  Shopify Wishlist
+  Usage:
+    - Markup: {%- render 'icon-heart', class: product -%}
+    - Place this snippet inside your existing product card snippet
+
+  Parameters:
+    - class: Add a css class for custom styling (optional)
+{% endcomment %}
+{%- comment -%}
+<svg class="icon icon-heart {{ class -}}" viewBox="0 0 290 256" xmlns="http://www.w3.org/2000/svg"><path d="M258.844192 127.790368L145 241.63456 31.1558082 127.790368c-26.9461761-26.946176-26.9461761-70.6345598 0-97.5807359 26.9461762-26.94617613 70.6345598-26.94617613 97.5807358 0L145 46.4730881l16.263456-16.263456c26.946176-26.94617613 70.63456-26.94617613 97.580736 0 26.946176 26.9461761 26.946176 70.6345599 0 97.5807359z"  stroke-width="20"  fill-rule="evenodd"/></svg>
+{%- endcomment -%}
+
+{% assign getdimentionforicon = dimention_heart %}
+
+{% assign getclassheart = extraclass %}
+
+<svg preserveAspectRatio="none" width="50" height="50" viewBox="{{getdimentionforicon}}" class="icon icon-heart {{ class -}} {{getclassheart}}" xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+
+    <path class="fgh"  d="m18.71362,4.7881c-0.70377,-1.64936 -1.96655,-2.58803 -3.72454,-2.75902c-1.71428,-0.16739 -3.08025,0.52814 -4.07642,1.94228c-0.15624,0.22222 -0.27449,0.47186 -0.42284,0.72943c-0.02437,-0.05194 -0.04372,-0.09307 -0.0645,-0.1342c-0.77472,-1.5404 -2.00955,-2.41774 -3.72311,-2.55267c-1.18322,-0.09307 -2.24533,0.27057 -3.1555,1.03392c-1.0019,0.84127 -1.53869,1.92496 -1.54671,3.24747c-0.00846,1.38672 0.39001,2.65729 1.13319,3.82179c0.52102,0.81674 1.12303,1.57143 1.79025,2.26768c1.76372,1.84127 3.54537,3.66666 5.32056,5.49639c0.1591,0.16378 0.35977,0.15656 0.52317,-0.01082c1.34304,-1.3723 2.68823,-2.74098 4.02698,-4.11689c0.8987,-0.92424 1.78092,-1.86363 2.56066,-2.89538c0.91662,-1.21356 1.53224,-2.54473 1.63114,-4.09091c0.04372,-0.68109 -0.00358,-1.3492 -0.27233,-1.97907" stroke-width="1"  fill-rule="evenodd"/>
+ 
+  
+  </svg>
+
+  <style>
+    
+
+     .{{getclassheart}} {
+      fill: transparent;
+      stroke: #000000;
+      width: 65px;
+      height: 65px;
+     }
+
+     .active .{{getclassheart}} {
+      fill: #000000;
+      stroke: #000000;
+     }
+  </style>
+ 
+ 
+ 

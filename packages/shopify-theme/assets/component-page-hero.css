@@ -1,0 +1,138 @@
+.page-hero-container{
+    width:100%;
+    height: auto;
+    position: relative;
+}
+
+.hero-image-mobile{
+  display:none;
+}
+
+.hero-image-desktop{
+  display:block;
+}
+
+.page-hero-content{
+    width:100%;
+    height:auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content a{
+text-transform: uppercase;
+}
+.hero-image-container{
+    width:100%;
+    height: auto;
+    position: relative;
+    display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: row;
+}
+
+.hero-image-container img{
+    width:100%;
+}
+
+.hero-content{
+    width:100%;
+    position: absolute;
+    display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.hero-content h1{
+    font-family: 'Panama';
+    font-size: 62px;
+    letter-spacing: -0.95px;
+    line-height: 70px;
+    text-align: center;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    /*margin-bottom:80px;*/
+}
+
+.hero-btn{
+  margin-top:80px;
+}
+
+@media (max-width: 812px) {
+ /* .hero-image-mobile{
+    display:block;
+  }
+  
+  .hero-image-desktop{
+    display:none;
+  }*/
+  .hero-content {
+  
+  padding: 0px 35px;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+  }
+  
+  .hero-content h1 {
+  font-family: 'Panama';
+  font-size: 30px;
+  letter-spacing: -0.46px;
+  line-height: 32px;
+  margin-bottom: 0px;
+  }
+  
+  .hero-content a{
+      font-size: 12px;
+      padding: 10px 26px;
+  }
+
+}
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .hero-image-mobile{
+  display:block;
+}
+
+.hero-image-desktop{
+  display:none;
+}
+.hero-content {
+
+padding: 0px 35px;
+width: 100%;
+position: absolute;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-evenly;
+height: 100%;
+}
+
+.hero-content h1 {
+font-family: 'Panama';
+font-size: 30px;
+letter-spacing: -0.46px;
+line-height: 32px;
+margin-bottom: 0px;
+}
+
+.hero-content a{
+    font-size: 12px;
+    padding: 10px 26px;
+}
+
+
+
+
+}

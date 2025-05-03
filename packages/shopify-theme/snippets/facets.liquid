@@ -1,0 +1,445 @@
+{% comment %}
+    Renders facets (filtering and sorting)
+
+    Accepts:
+    - results: {Object} Collection or Search object
+    - enable_filtering: {Boolean} Show filtering when true
+    - enable_sorting: {Boolean} Show sorting when true
+    - collapse_on_larger_devices: {Boolean} Collapse filtering/sorting into menu on larger devices when true
+
+    Usage:
+    {% render 'facets', results: collection, enable_filtering: true, enable_sorting: true, collapse_on_larger_devices: false %}
+{% endcomment %}
+
+
+{{ 'facets.css' | asset_url | stylesheet_tag }}
+
+
+{% assign colors = settings.colorswatch | split: ',' %}
+{% assign HEXcolor2 = 'Black' %}
+
+{%- liquid
+  assign sort_by = results.sort_by | default: results.default_sort_by
+  assign total_active_values = 0
+  if results.url
+    assign results_url = results.url
+  else 
+    assign terms = results.terms | escape
+    assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by 
+  endif
+-%}
+
+{%- comment -%}
+
+{%- liquid
+  assign sort_by_mobile = results.sort_by_mobile | default: results.default_sort_by
+  assign total_active_values = 0
+  if results.url
+    assign results_url = results.url
+  else 
+    assign terms = results.terms | escape
+    assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by_mobile 
+  endif
+-%}
+
+{%- endcomment -%}
+
+<div class="facets-container">
+  {%- unless collapse_on_larger_devices -%}
+    <facet-filters-form class="facets small-hide">
+      <form id="FacetFiltersForm" class="facets__form">
+
+        {%- if results.terms -%}
+          <input type="hidden" name="q" value="{{ results.terms | escape }}">
+          <input name="options[prefix]" type="hidden" value="last">
+        {%- endif -%}
+<div class="filterbox">
+        {% if enable_filtering %}
+        <div class="facets-filter-active_____filters">
+          <div id="FacetsWrapperDesktop" class="facets__wrapper">
+  
+            <details class="disclosure-has-popup facets__disclosure">
+              <summary class="facets__summary caption-large focus-offset">
+               
+                <div>
+                  <span class="btn-larrow btn-space">FILTERS</span>
+                 
+                </div>
+       
+              </summary>
+              <div class="facets__display">
+                <div class="ps-threeangle-up">
+                  <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/predictivesearchthreeangle.svg?v=1639156945" alt="The Knotty Ones Predictive Search">
+                </div> 
+                <div class="list-wrapper" data-index="0">
+                <ul class="facets__list list-unstyled" role="list">
+                  <div class="facets__header">
+         
+    
+                      Category
+    
+    
+                </div>
+
+              {%- for link in linklists['filter-collection'].links -%}
+                {% assign collectionprop = link.title %}
+                 <li class="list-menu__item facets__item">
+                  <label for="Filter-{{ collectionprop | handleize  }}-{{ forloop.index }}" class="facet-checkbox">
+                    <a class="categoryurl" type="checkbox" 
+                    href="javascript:void(0)"
+                    data-homeofurl="{{ collectionprop | handleize }}"
+                    id="Filter-{{ collectionprop | handleize }}-{{ forloop.index }}"
+                  >
+    
+                  {{ link.title }}
+                  </a>
+                  </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- for filter in results.filters -%}
+              {%- assign total_active_values = total_active_values | plus: filter.active_values.size -%}
+              {% case filter.type %}
+              {% when 'list' %}
+               
+           
+                   <div class="list-wrapper js-filter" data-index="{{forloop.index}}">
+
+                    <ul class="facets__list list-unstyled" role="list">
+                      <div class="facets__header">
+                        {{ filter.label | capitalize }}
+                         
+                      </div>
+                      {%- comment -%}
+
+                      {% assign groupofColors= "Green,Blue,Beiges,Brown,Grey,Pink,Purple,Black,White,Red" | split: ','%}
+                      {% assign Green = "Pine,Sage Green,Fern Green,Forest,Moss Green" | split: ','%}
+                      {% assign Blue = "Baltic Blue,Navy" | split: ','%}
+                      {% assign Beiges = "Beige,Dark Wheat,Sand Dune,Embroidered Oat Milk,Oat Milk,Naked Oat Milk,Sea Salt,Off-White,Pearl,Off-White Baltic Fields" | split: ','%}
+                      {% assign Brown = "Brown,Brown Baltic Field,Camel" | split: ','%}
+                      {% assign Grey = "Grey,Dove Grey,Light Grey,Pebble Grey,Naked Pebble Grey,Embroidered Pebble Grey" | split: ','%}
+                      {% assign Pink = "Pink" | split: ','%}
+                      {% assign Purple = "Lavender,Violet,Lilly Blue" | split: ','%}
+                      {% assign Black = "Black" | split: ','%}
+                      {% assign White = "White,Off-White Baltic Fields,Sea Salt" | split: ','%}
+                      {% assign Red = "Red" | split: ','%}
+
+{%- endcomment -%}
+
+{%- comment -%}
+
+                      {% assign groupofColors = "Green" | split: ','%}
+                      {% assign groupofColors= "Green,Blue,Beiges,Brown,Grey,Pink,Purple,Black,White,Red,Other" | split: ','%}
+
+                      {% if filter.label == "Color" %}
+                    
+
+                      {% for groupColors in groupofColors %}
+                      {% assign handle = groupColors %}
+                      {% case handle %}
+                            {% when 'Green' %} 
+                            {% assign majorColor = "Pine,Sage Green,Fern Green,Forest,Moss Green" %}
+                            {% render 'color-groups' getAllColors: settings.colorswatch , getGroupcolor: 'Green' , filterValue : filter.values , filteredColors: majorColor %}
+                            {% when 'Blue' %} 
+                            {% assign majorColor = "Baltic Blue,Navy" %}
+                            {% render 'color-groups' getAllColors: settings.colorswatch , getGroupcolor: 'Blue' , filterValue : filter.values , filteredColors: majorColor %}
+                            {% when 'Beiges' %} 
+                            {% assign majorColor = "Beige,Dark Wheat,Sand Dune,Embroidered Oat Milk,Oat Milk,Naked Oat Milk,Sea Salt,Off-White,Pearl,Off-White Baltic Fields" %}
+                            {% render 'color-groups' getAllColors: settings.colorswatch , getGroupcolor: 'Beige' , filterValue : filter.values , filteredColors: majorColor %}
+                            {% when 'Brown' %} 
+                            {% assign majorColor = "Brown,Brown Baltic Field,Camel" %}
+                            {% render 'color-groups' getAllColors: settings.colorswatch , getGroupcolor: 'Brown' , filterValue : filter.values , filteredColors: majorColor %}
+                            {% when 'Grey' %} 
+                            {% assign majorColor = "Grey,Dove Grey,Light Grey,Pebble Grey,Naked Pebble Grey,Embroidered Pebble Grey" %}
+                            {% render 'color-groups' getAllColors: settings.colorswatch , getGroupcolor: 'Grey' , filterValue : filter.values , filteredColors: majorColor %}
+                            {% when 'Pink' %} 
+                            {% assign majorColor = "Pink" %}
+                            {% render 'color-groups' getAllColors: settings.colorswatch , getGroupcolor: 'Pink' , filterValue : filter.values , filteredColors: majorColor %}
+                            {% when 'Purple' %} 
+                            {% assign majorColor = "Lavender,Violet,Lilly Blue" %}
+                            {% render 'color-groups' getAllColors: settings.colorswatch , getGroupcolor: 'Purple' , filterValue : filter.values , filteredColors: majorColor %}
+                            {% when 'Black' %} 
+                            {% assign majorColor = "Black" %}
+                            {% render 'color-groups' getAllColors: settings.colorswatch , getGroupcolor: 'Black' , filterValue : filter.values , filteredColors: majorColor %}
+                            {% when 'White' %} 
+                            {% assign majorColor = "White,Off-White Baltic Fields,Sea Salt" %}
+                            {% render 'color-groups' getAllColors: settings.colorswatch , getGroupcolor: 'White' , filterValue : filter.values , filteredColors: majorColor %}
+                            {% when 'Red' %} 
+                            {% assign majorColor = "Red" %}
+                            {% render 'color-groups' getAllColors: settings.colorswatch , getGroupcolor: 'Red' , filterValue : filter.values , filteredColors: majorColor %}
+                            {% else %}
+                            {% assign majorColor = "Embroidered Peblle Grey,Embroidered Oat Milk,Pebble Grey" %}
+                            {% render 'color-groups' getAllColors: settings.colorswatch , getGroupcolor: 'Multi' , filterValue : filter.values , filteredColors: majorColor %}
+                            {% endcase %}
+                      {% endfor %}
+
+                      {% endif %}
+                      {%- endcomment -%}
+
+
+
+
+
+
+
+                      {%- for value in filter.values -%}
+                     
+                        <li class="list-menu__item facets__item">
+
+                          <label for="Filter-{{ filter.label | escape }}-{{ forloop.index }}" class="facet-checkbox{% if value.count == 0 and value.active == false %} facet-checkbox--disabled{% endif %}">
+
+
+
+                            {% for color in colors %}
+                            {% assign getColor2 = color | split : ':' %}
+                            {% assign colorCorrect2 = getColor2[0] %}
+
+                        
+     
+                            {% if value.label == colorCorrect2 %}
+                            {% assign HEXcolor2 = getColor2[1] %}
+                            {% assign detectImage = HEXcolor2 | slice: 0%}
+                            {% if detectImage == '#' %}
+                             <div class="color-circle-filter" style="background-color:{{HEXcolor2}};"></div>
+                            {% else %}
+                            {% assign value2 = HEXcolor2 %}
+                            {% assign color_swatch_name2 = value2 | handle | append: '.png' %}
+                            {% assign color_swatch_image2 = images[color_swatch_name2]  %}
+                            <div class="color-circle-filter" style="background-image:url({{ color_swatch_image2 | img_url: '64x64' }});"></div>
+                            {% endif %}
+    
+                            
+                            {% endif %}
+                        {% endfor %}
+
+                         <div class="labal__name">
+                            {{ value.label | escape }}
+                          </div>
+                          
+                            
+                            <input class="filter-input-control mobile-facets__checkbox__control" type="checkbox"
+                              name="{{ value.param_name }}"
+                              value="{{ value.value }}"
+                              id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+                              {% if value.active %}checked{% endif %}
+                              {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                            >
+
+                           
+                            <span class="checkmark"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/check-icon.svg?v=1641999123"/></span>
+                            
+                          </label>
+
+                        </li>
+                       
+                      {%- endfor -%}
+
+
+                     
+                    </ul>
+                  </div>
+              
+               
+              {% endcase %}
+            {%- endfor -%}
+          
+           
+         
+          </div>
+          </details>
+           
+            <noscript>
+              <button type="submit" class="facets__button-no-js button button--tertiary">{{ 'products.facets.filter_button' | t }}</button>
+            </noscript>
+          </div>
+
+         
+        <div class="active-facets active-facets-desktop">
+          {%- for filter in results.filters -%}
+            {%- for value in filter.active_values -%}
+              <facet-remove>
+                <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light">
+                  <div class="active-facets__button-inner button button--tertiary">
+
+
+
+                    {% for color in colors %}
+                          {% assign getColor5 = color | split : ':' %}
+                          {% assign colorCorrect5 = getColor5[0] %}
+  
+                          {% if value.label == colorCorrect5 %}
+                          {% assign HEXcolor5 = getColor5[1] %}
+                          {% assign detectImage5 = HEXcolor5 | slice: 0%}
+                          {% if detectImage5 == '#' %}
+                           <div class="color-circle-up" style="background-color:{{HEXcolor5}};"></div>
+                          {% else %}
+                          {% assign value5 = HEXcolor5 %}
+                          {% assign color_swatch_name5 = value5 | handle | append: '.png' %}
+                          {% assign color_swatch_image5 = images[color_swatch_name5]  %}
+                          <div class="color-circle-up" style="background-image:url({{ color_swatch_image5 | img_url: '64x64' }});"></div>
+                          {% endif %}
+  
+                          
+                          {% endif %}
+                      {% endfor %}
+
+                    {% if filter.label != 'Color' %}
+                    <div class="facets__remove__label">{{ value.label | escape }}</div>
+                    {% endif %}
+               
+                    <div class="filter-close-img"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/filter-clear-icon.svg?v=1642092965"/></div>
+                    <span class="visually-hidden">{{ 'products.facets.clear_filter' | t }}</span>
+                  </div>
+                </a>
+              </facet-remove>
+            {%- endfor -%}
+            {% if filter.type == "price_range" %}
+              {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+                <facet-remove>
+                  <a href="{{ filter.url_to_remove }}" class="active-facets__button active-facets__button--light">
+                    <span class="active-facets__button-inner button button--tertiary">
+                      {%- if filter.min_value.value -%}{{ filter.min_value.value | money }}{%- else -%}{{ 0 | money }}{%- endif -%}-{%- if filter.max_value.value -%}{{ filter.max_value.value | money }}{%- else -%}{{ filter.range_max | money }}{%- endif -%}
+                      {% render 'icon-close-small' %}
+                      <span class="visually-hidden">{{ 'products.facets.clear_filter' | t }}</span>
+                    </span>
+                  </a>
+                </facet-remove>
+              {%- endif -%}
+            {% endif %}
+          {%- endfor -%}
+          <facet-remove class="active-facets__button-wrapper">
+            <a id="mobile-clear-all" href="{{ results_url }}" class="active-facets__button-remove underlined-link">
+              CLEAR ALL<span>(</span><span data-item="0" id="clear-count">0</span><span>)</span>
+            </a>
+            
+            
+          </facet-remove>
+        </div>
+      </div>
+ 
+        {%- if enable_sorting -%}
+        <div class="facet-filters sorting caption">
+          <div class="facet-filters__field">
+
+            <div class="select">
+             <!--<div class="btn-larrow select-arrow"></div>--> 
+   
+              {%- assign sort_by = results.sort_by | default: results.default_sort_by -%}
+              
+              <select name="sort_by" class="facet-filters__sort select__select caption-large btn-larrow" id="SortBy" aria-describedby="a11y-refresh-page-message">
+                 <option value="">SORT BY</option>
+                {%- for option in results.sort_options -%}
+                  <option value="{{ option.value | escape }}">{{ option.name | escape }}</option>
+                {%- endfor -%}
+                 <option selected value="title-ascending">Alphabetically, A-Z</option>
+              </select>
+             <div class="custom_select_box_controller">
+              <div class="heder_custom btn-larrow btn-space">
+                SORT BY
+              </div> 
+              <ul class="sortby_container">
+                <div class="three-angle-size-setsave ">
+                  <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/arrow-size-selection.svg?v=1647027468">
+                </div>
+                {%- for option in results.sort_options -%}
+                <li class="sort_custom hideit" data-sort="{{ option.value | escape }}">{{ option.name | escape }}</li>
+                {%- endfor -%}
+              </ul>
+            </div> 
+              
+
+      
+            </div>
+          </div>
+          <button type="submit" class="facets__button-no-js button button--tertiary"></button>
+          <noscript>
+          <!-- <button type="submit" class="facets__button-no-js button button--tertiary">{{ 'products.facets.sort_button' | t }}</button>-->
+          </noscript>
+        </div>
+      {%- endif -%}
+  
+       {% endif %} 
+
+         
+     
+      </div>
+       
+
+        {% if results.current_vendor or results.current_type %}
+          <input type="hidden" name="q" value="{{ results.current_vendor }}{{ results.current_type }}">
+        {% endif %}
+
+    
+
+        <div class="product-count" role="status">
+
+          <p id="ProductCountDesktop" class="product-count__text" style="display:none; position: absolute;">
+            {%- if results.results_count -%}
+              {{ 'templates.search.results_with_count' | t: terms: results.terms, count: results.results_count }}
+            {%- elsif results.products_count == results.all_products_count -%}
+              {{ 'products.facets.product_count_simple' | t: count: results.products_count }}
+            {%- else -%}
+              {{ 'products.facets.product_count' | t: product_count: results.products_count, count: results.all_products_count }}
+            {%- endif -%}
+          </p>
+
+          <div class="loading-overlay__spinner">
+            <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+              <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+            </svg>
+          </div>
+        </div>   
+      
+      </form>
+    </facet-filters-form>
+  {%- endunless -%}
+
+
+
+  <div id="removeCounter" class="active-facets active-facets-mobile {% unless collapse_on_larger_devices %} medium-hide large-up-hide{% endunless %}">
+    {%- for filter in results.filters -%}
+      {%- for value in filter.active_values -%}
+        <facet-remove>
+          <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light">
+            <span class="active-facets__button-inner button button--tertiary">
+              {{ value.label | escape }}
+              {% render 'icon-close-small' %}
+              <span class="visually-hidden">{{ 'products.facets.clear_filter' | t }}</span>
+            </span>
+          </a>
+        </facet-remove>
+      {%- endfor -%}
+
+      {%- if filter.type == "price_range" -%}
+        {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+          <facet-remove>
+            <a href="{{ filter.url_to_remove }}" class="active-facets__button active-facets__button--light">
+              <span class="active-facets__button-inner button button--tertiary">
+                {%- if filter.min_value.value -%}{{ filter.min_value.value | money }}{%- else -%}{{ 0 | money }}{%- endif -%}-{%- if filter.max_value.value -%}{{ filter.max_value.value | money }}{%- else -%}{{ filter.range_max | money }}{%- endif -%}
+                {% render 'icon-close-small' %}
+                <span class="visually-hidden">{{ 'products.facets.clear_filter' | t }}</span>
+              </span>
+            </a>
+          </facet-remove>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+    <facet-remove class="active-facets__button-wrapper">
+      <a href="{{ results_url }}" class="active-facets__button-remove underlined-link">
+        <span id="ProductCount">{{ 'products.facets.clear_all' | t }}</span>
+      </a>
+    </facet-remove>
+  </div>
+  <div class="product-count {% unless collapse_on_larger_devices %} medium-hide large-up-hide{% endunless %}" role="status">
+   
+  
+  </div>
+
+</div>
+              
+    
+     
+    </summary>
+  
+  </details>
+</menu-drawer>

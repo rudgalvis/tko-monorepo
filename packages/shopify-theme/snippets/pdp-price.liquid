@@ -1,0 +1,34 @@
+{% comment %}
+    {% render 'pdp-price', product: product, pageQuerystring:pageQuerystring %}
+{% endcomment %}
+
+{% for variant in product.variants %}
+    {% assign color1y = variant.option1 %}
+    {% assign gg = color1y | handleize %}
+
+    {% if pageQuerystring == gg %}
+        {% assign variantId = variant.id %}
+        {% assign variantPriceF = variant.price %}
+        {% assign variantPriceR = variant.compare_at_price %}
+
+        {% assign price = variant.price %}
+        {% assign compared_at = variant.compare_at_price %}
+        {% break %}
+    {% endif %}
+{% endfor %}
+
+<product-price price="{{ price | money_without_trailing_zeros }}"
+               compared_at="{{ compared_at | money_without_trailing_zeros }}"
+               iso_code="{{ localization.country.iso_code }}"
+               variant_id="{{ variantId }}">
+</product-price>
+
+<style>
+    @media screen and (max-width: 1024px) {
+        pdp-price {
+            display: block;
+            margin-top: -6px;
+        }
+    }
+
+</style>

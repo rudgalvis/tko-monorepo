@@ -1,0 +1,1715 @@
+{% comment %}theme-check-disable TemplateLength{% endcomment %}
+{{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+{{ 'component-rte.css' | asset_url | stylesheet_tag }}
+{{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+
+<link rel="stylesheet" href="{{ 'component-deferred-media.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+{{ 'main-only-color.css' | asset_url | stylesheet_tag }} 
+{{ 'review.css' | asset_url | stylesheet_tag }}
+
+{%- capture contentForQuerystring -%}{{ content_for_header }}{%- endcapture -%}
+{%- assign pageUrl = contentForQuerystring | split:'"pageurl":"' | last | split:'"' | first | split:'the-knotty-ones-development.myshopify.com' | last |
+ replace:'\/','/' | 
+ replace:'%20',' ' | 
+ replace:'\u0026','&' 
+-%}
+{% assign debug = false %}
+{% assign control = false %}
+
+{% if pageUrl contains "?variant="  %}
+
+{%- assign pageQuerystring = pageUrl | split:'?' | last | remove: 'variant=' -%}
+{% assign control = true %}
+{%else%}  
+{% assign pageQuerystring = product.variants[0].option1 | handleize %}
+{% endif %}
+
+
+{% if pageUrl contains "&dfw_tracker=" %}
+     {% assign pageQuerystring = product.variants[0].option1 | handleize %}
+{% endif %}  
+
+{% if pageUrl contains "&variant="  %}
+
+{% if pageUrl contains "?utm_content=" %}
+       {% assign pageQuerystring = product.variants[0].option1 | handleize %}
+  {% else %}  
+
+{%- assign pageQuerystring = pageUrl | split:'&' | last | remove: 'variant=' -%}
+{% assign getID = pageQuerystring | strip %}
+
+{% assign control = true %}
+    {% for variant in product.variants %}
+    {% assign getVariantID = variant.id | strip %}    
+      {% if getVariantID == getID %}
+           {% assign pageQuerystring = variant.option1 | handleize %} 
+      {% endif %}
+    {% endfor %}
+
+{% endif %}
+
+{% endif %}
+
+
+
+
+
+
+
+{% assign colors = settings.colorswatch | split: ',' %}
+{% assign HEXcolor2 = 'Black' %}
+
+<!---
+Mobile Slider
+----->
+<section class="mobile-slider-wrapper">
+  <div class="PDP-wishlist-container">
+    {%- render 'button-wishlist-mobile', getproduct: product ,dimention: '0 0 42 42', h_width: 24 , h_height:24 , color:'#ffffff' -%}
+    </div> 
+
+        <div class="mobile-product-slider active">
+         
+            <div class="mps-container mobile-slider stable" data-flickity>
+       
+             
+             
+              {% for media in product.media %}
+              {% assign getOrderNumberG = forloop.index | append: "" %}
+            
+               <div class="mps-item carousel-cell">
+                {% case media.media_type %}
+                {% when 'image' %}
+                <img src="{{ media | img_url: '1100x' }}"/>
+                {% when 'video' %}
+
+                  {{ media | video_tag: autoplay:true , muted:true , loop:true }}
+
+                {% endcase %}
+
+   {%- comment -%}
+          {%- endcomment -%}
+          {% for fields in product.variants[0].metafields.variantModelInfo %}
+          {% assign getOrderNumberStepOne = fields[0] | split: "/" %}
+          {% assign getOrderNumberStepTwo = getOrderNumberStepOne[0] | split: "-" %}
+          {% assign getOrderNumberStepThree = getOrderNumberStepTwo[1] %}
+           {% if getOrderNumberStepThree == getOrderNumberG %}
+                <a data-gendertype="" class="model-info-button" href="javascript:void(0);">MODEL INFO</a>
+                {% break %}
+           {% endif %}
+
+       {% endfor %}
+
+
+          {%- comment -%}
+          {%- endcomment -%}
+
+
+          <div class="infobox" data-variantoption="{{variant.option1}}">
+           
+              <ul class="info-window">
+                <div class="infobox_close">
+                  <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/svg-remove-item.svg?v=1639399863">
+                </div>
+              <div class="change-mager">
+                  <div class="inches active" class="mager-text" disabled="true">in</div>
+                  <span>/</span>
+                  <div class="cm" class="mager-text">cm</div>
+              </div>
+              
+              {% for fields in product.variants[0].metafields.variantModelInfo %}
+
+              {% assign getOrderNumberStepOne = fields[0] | split: "/" %}
+              {% assign getOrderNumberStepTwo = getOrderNumberStepOne[0] | split: "-" %}
+              {% assign getOrderNumberStepThree = getOrderNumberStepTwo[1] %}
+           
+              {% if getOrderNumberStepThree == getOrderNumberG %}
+              {% assign correctInfo = fields[0] | split: '/' %}
+
+                 {% if correctInfo[1] == 'Man' and correctInfo[0] == getOrderNumberG %}
+                 {% assign gendercontrol = fields[1] %}
+               
+                 {% endif %}
+
+                 {% if correctInfo[1] == 'Modelnameinch'%}  
+                 <p class="nameinch"  style="order:1;">{{ fields[1] }}</p>
+                 {% elsif correctInfo[1] == 'Modelname' %}
+                 
+                 <p class="namecm" style="order:1;">{{ fields[1] }}</p>
+                     {% else %} 
+                     {% if correctInfo[1] == 'Bust'%}
+                     <li class="bodypart_{{correctInfo[1] | handleize}}"  style="order:2;">
+                      <span class="header-info-item">
+
+                        {{ correctInfo[1] }}:
+             
+                      </span>
+                      {% assign getValueInfo = fields[1] %} 
+                      
+                      <span class="info-value" data-mager="{{getValueInfo.value | remove: 'cm' | strip }}">{{getValueInfo.value | remove: 'cm' | strip }}"</span>
+                
+                    </li>
+                    {% endif %}
+
+                    {% if correctInfo[1] == 'Waist'%}
+                    <li class="bodypart_{{correctInfo[1] | handleize}}"  style="order:2;">
+                      <span class="header-info-item">
+
+                        {{ correctInfo[1] }}:
+             
+                      </span>
+                      {% assign getValueInfo = fields[1] %} 
+                      
+                      <span class="info-value" data-mager="{{getValueInfo.value | remove: 'cm' | strip }}">{{getValueInfo.value | remove: 'cm' | strip }}"</span>
+                
+                    </li>
+               
+                    {% endif %}
+
+                    {% if correctInfo[1] == 'Hips'%}
+                    <li class="bodypart_{{correctInfo[1] | handleize}}"  style="order:3;">
+                      <span class="header-info-item">
+
+                        {{ correctInfo[1] }}:
+             
+                      </span>
+                      {% assign getValueInfo = fields[1] %} 
+                      
+                      <span class="info-value" data-mager="{{getValueInfo.value | remove: 'cm' | strip }}">{{getValueInfo.value | remove: 'cm' | strip }}"</span>
+                
+                    </li>
+               
+                    {% endif %}
+                     {% endif %}
+
+                {% endif %} 
+             
+              {% endfor %}
+          
+              </div>
+
+              <span class="imageGender" data-imgender="{% if gendercontrol == true %}male{% endif %}"></span>
+
+               </div>
+               {% endfor %}
+         
+         
+  
+           
+            </div>
+           
+        </div>
+    
+  </section>
+
+
+
+ 
+  
+  <!---
+  Mobile Slider
+  ----->
+
+
+
+<section class="page-width product-major">
+  <div class="product grid grid--1-col grid--2-col-tablet">
+    <div class="grid__item product__media-wrapper">
+      <div class="slider-mobile-gutter">
+        <a class="skip-to-content-link button visually-hidden" href="#ProductInfo-{{ section.id }}">
+          {{ "accessibility.skip_to_product_info" | t }}
+        </a>
+
+            <ul class="pimage-wrapper {{pageQuerystring}} active">
+              {% for media in product.media %}
+              {% assign getOrderNumberG = forloop.index | append: "" %}
+              {% if forloop.first %}
+              {% assign size_of_image = forloop.length %}
+              {% assign size_of_imageDetect = size_of_image | modulo:2  %}
+              {% endif %}
+                 <li class="pimage  {% if forloop.last == true and size_of_imageDetect != 0 %}full-size-product-image{% endif %}"> 
+
+                 
+                 
+                    {% case media.media_type %}
+                    {% when 'image' %}
+                    <img src="{{ media | img_url: '1100x' }}"/>
+                    {% when 'video' %}
+                    
+
+                      {{ media | video_tag: autoplay:true , muted:true , loop:true , image_size: "550x" }}
+
+                    {% endcase %}
+
+                
+                   
+                    {% for fields in product.variants[0].metafields.variantModelInfo %}
+                       {% assign getOrderNumberStepOne = fields[0] | split: "/" %}
+                       {% assign getOrderNumberStepTwo = getOrderNumberStepOne[0] | split: "-" %}
+                       {% assign getOrderNumberStepThree = getOrderNumberStepTwo[1] %}
+                        {% if getOrderNumberStepThree == getOrderNumberG %}
+                             <a data-gendertype="{{gendercontrol}}" class="model-info-button" href="javascript:void(0);">MODEL INFO</a>
+                             {% break %}
+                        {% endif %}
+
+                    {% endfor %}
+                    <div class="infobox" data-variantoption="{{product.variants[0].option1}}">
+                    <ul class="info-window">
+                        <div class="infobox_close">
+                          <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/svg-remove-item.svg?v=1639399863">
+                        </div>
+                       <div class="change-mager">
+                           <div class="inches active" class="mager-text" disabled="true">in</div>
+                           <span>/</span>
+                           <div class="cm" class="mager-text">cm</div>
+                       </div>
+                   
+                        {% for fields in product.variants[0].metafields.variantModelInfo %}
+                        {% assign getOrderNumberStepOne = fields[0] | split: "/" %}
+                        {% assign getOrderNumberStepTwo = getOrderNumberStepOne[0] | split: "-" %}
+                        {% assign getOrderNumberStepThree = getOrderNumberStepTwo[1] %}
+                         {% if getOrderNumberStepThree == getOrderNumberG %}
+                        {% assign correctInfo = fields[0] | split: '/' %}
+                        {% if correctInfo[1] == 'Man' %}
+                              {% assign gendercontrol = fields[1] %}
+                        {% endif %}
+                        {% if correctInfo[1] == 'Modelnameinch'%}  
+                              <p class="nameinch"  style="order:1;">{{ fields[1] }}</p>
+                        {% elsif correctInfo[1] == 'Modelname' %}
+                              <p class="namecm" style="order:1;">{{ fields[1] }}</p>
+                       {% else %} 
+
+                       {% if correctInfo[1] == 'Bust'%}
+                       <li class="bodypart_{{correctInfo[1] | handleize}}"  style="order:2;">
+                        <span class="header-info-item">
+
+                          {{ correctInfo[1] }}:
+               
+                        </span>
+                        {% assign getValueInfo = fields[1] %} 
+                        
+                        <span class="info-value" data-mager="{{getValueInfo.value | remove: 'cm' | strip }}">{{getValueInfo.value | remove: 'cm' | strip }}"</span>
+                  
+                      </li>
+                      {% endif %}
+
+                      {% if correctInfo[1] == 'Waist'%}
+                      <li class="bodypart_{{correctInfo[1] | handleize}}"  style="order:2;">
+                        <span class="header-info-item">
+
+                          {{ correctInfo[1] }}:
+               
+                        </span>
+                        {% assign getValueInfo = fields[1] %} 
+                        
+                        <span class="info-value" data-mager="{{getValueInfo.value | remove: 'cm' | strip }}">{{getValueInfo.value | remove: 'cm' | strip }}"</span>
+                  
+                      </li>
+                 
+                      {% endif %}
+
+                      {% if correctInfo[1] == 'Hips'%}
+                      <li class="bodypart_{{correctInfo[1] | handleize}}"  style="order:3;">
+                        <span class="header-info-item">
+
+                          {{ correctInfo[1] }}:
+               
+                        </span>
+                        {% assign getValueInfo = fields[1] %} 
+                        
+                        <span class="info-value" data-mager="{{getValueInfo.value | remove: 'cm' | strip }}">{{getValueInfo.value | remove: 'cm' | strip }}"</span>
+                  
+                      </li>
+                 
+                      {% endif %}
+
+                       {% endif %}
+                       {% endif %}
+                       {% endfor %}
+                     
+                     </ul>  
+                    </div> 
+                </li> 
+
+             
+                 
+                 {% if forloop.index == 4 and section.settings.bid_header != "" and forloop.length > 4 %}
+                 <div class="pdp-image-module">
+                    <h2>{{ section.settings.bid_header}}</h2>
+                        {{ section.settings.bid_content}}
+                 </div>
+                 {% endif %}
+
+               {% endfor %}
+          
+            </ul>
+           
+       
+
+      </div>
+      
+    </div>
+    <div class="product__info-wrapper grid__item">
+      <div id="ProductInfo-{{ section.id }}" class="product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
+        {%- assign product_form_id = 'product-form-' | append: section.id -%}
+
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+
+         
+          {%- when 'title' -%}
+          <div class="mobile___adjustment">
+          <div class="mobile___price_holder">
+            <div class="title-heart-container">
+              <h1 class="product__title" {{ block.shopify_attributes }}>
+                {{ product.title | escape }}
+              </h1>
+              <div class="PDP-wishlist-container-desktop">{%- render 'button-wishlist-mobile', getproduct: product ,dimention: '0 0 84 84', h_width: 20 , h_height:20 , color:'#ffffff' , device: 'PDP', getClass:'heart-PDP' -%}</div>
+             </div>
+            <h2 class="product__type">
+              {{ product.type | escape }}
+            </h2>
+          </div>
+            {%- when 'text' -%}
+            <p class="product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}" {{ block.shopify_attributes }}>
+              {{- block.settings.text -}}
+            </p>
+          {%- when 'price' -%}
+          <div class="price___adjustment  {% if product.tags contains 'pre-order' %} price_adjustment_pre__order {% endif %}">
+          <div class="price-holder-product">
+
+            {% for variant in product.variants %}
+            {% assign color1y = variant.option1 %}
+            {% assign gg = color1y | handleize %}
+           
+            {% if pageQuerystring == gg  %}
+               {% assign variantPriceF = variant.price %}
+               {% assign variantPriceR = variant.compare_at_price  %} 
+               {%break%}
+            {% endif %}
+            {% endfor %}
+
+
+            <div class="productPrice-product">
+              <span class="money" data-varid="{{variant.id}}">{{ variantPriceF | money_without_trailing_zeros | strip_html }}</span>
+              {% for variant in product.variants %}
+               <span style="display:none;" class="money" data-varid="{{variant.id}}">{{variant.price | money_without_trailing_zeros | strip_html }}</span>
+              {% endfor %}
+            </div>
+           
+            <span class="sale_price-product">
+                {% if variantPriceF < variantPriceR %} <span class="money">{{ variantPriceR | money_without_trailing_zeros | strip_html }}</span>{% endif %} 
+                {% for variant in product.variants %}
+                <span style="display:none;" class="money" data-varid="{{variant.id}}">{% if variant.compare_at_price != nil %}{{variant.compare_at_price | money_without_trailing_zeros | strip_html }}{% endif %} </span>
+               {% endfor %}
+            </span>
+            {%- comment -%}
+            <div class="PDP-wishlist-container">
+              {%- render 'button-wishlist-mobile', getproduct: product ,dimention: '0 0 36 36', h_width: 24 , h_height:24 , color:'#000000' -%}
+            </div> 
+            {%- endcomment -%}
+           
+           
+        </div>
+
+        <div class="split-container {% if product.tags contains 'pre-order' %} split_pre__order {% endif %}">
+          <p>or interest-free payments with <span class="split-bold">Split-it</span>.  Learn more  <span class="split-arrow">→</span></p>
+        </div>
+          </div>
+          </div>
+
+        {%- comment -%}
+        {% if product.tags contains 'pre-order' %}
+              <div class="pre-order-holder">
+                {{ product.metafields.preorder.preordercontent }}
+              </div>
+        {% endif %}
+        {%- endcomment -%}
+
+        <div id="preorderholder" class="pre-order-holder" style="display:none;">
+                   
+        </div>
+         
+          {%- when 'description' -%}
+          <div class="product___summary">
+            <p>{{product.content}}</p>
+          </div>
+          
+        
+         
+          {%- when 'variant_picker' -%}
+          
+          {% assign sizeofsize = product.variants[0].option2%}
+
+
+           {%- comment -%}
+             Seasonal Color or Core Color 
+          {%- endcomment -%}
+
+          {% if pageQuerystring != nil %}
+          {% assign optionmeColor = pageQuerystring | handleize %}
+          {% else %}
+          {% assign optionmeColor = product.variants[0].option1 | handleize %}
+          {% endif %}
+
+          {% assign pp = 0 %}
+          {% assign pr = 0 %}
+
+          {% for option in product.options %}
+            {% if option == "Color" or option == "Colour" %}
+              {% for variant in product.variants %}           
+                {% if variant.metafields.colortype.seasonal == true  %}
+                {% assign pp = pp | plus:1 %}
+                   {% assign optionme = variant.option1 | handleize %}
+                   {% if optionmeColor == optionme %}
+                     {% assign seasonalColorName = optionme %}
+                   {% endif %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+
+
+
+              {% for product_option in product.options_with_values %}
+                {% if product_option.name == 'Color'%}
+                {% for value in product_option.values %}
+                {% assign pr = pr | plus:1 %}
+                
+              
+              {% endfor %}
+              {% endif %}     
+             {% endfor %}
+
+
+          
+            
+
+
+           {%- comment -%}
+             Seasonal Color or Core Color 
+          {%- endcomment -%}
+
+       
+
+          <div class="mobile__colors_adjusments">
+            <div class="color-holder">       
+            <div class="colors--">
+
+              <div class="color-selector-product mobile-float">
+
+                  <div class="colortype">
+
+
+                      <div class="f-small">Core Colors:</div>
+               
+                      <span id="selectedColor" class="selected-color">
+                        {% if seasonalColorName == nil %}
+                        {% if control  ==  false %}
+                        {{product.variants[0].option1 | capitalize}}
+                        {% else %}
+                          {% assign colorName = pageQuerystring %}
+                           {% if colorName contains '-' %}
+                             {% assign colorNameArray = colorName | split: '-' %}
+                             {% assign firstWord = colorNameArray[0] | capitalize %}
+                             {% assign secondWord = colorNameArray[1] | capitalize %}
+                             {% capture fullWord %}{{firstWord}} {{secondWord}}{% endcapture%}
+                             {{fullWord}}
+                           {% else %}  
+                             {{pageQuerystring | capitalize}}
+                           {% endif %}
+                        {% endif %}
+                        {% endif %}
+                      </span>
+
+                  </div>
+
+                  <div class="colorvariants-holder">
+                      {% assign currentProductColorthis = product.variants[0].option1 | handleize %}
+                  
+                          {% assign recommended_products =  product.metafields.variantproduct.productgroup.value %}
+                          {% for product in recommended_products  %}  
+                          {% assign currentProductColorthem = product.variants[0].option1 | handleize %}
+                          <label class="color-changer-wrap" for="{{ product.variants[0].id }}-{{ product.variants[0].option1 | handleize }}-{{ forloop.index0 }}">
+                              {% if control == true %}
+                              {% render 'variant-color' , 
+                              colorsource : settings.colorswatch,
+                              forsource : product.variants[0].option1, 
+                              control1 : pageQuerystring,
+                              control2 : currentProductColorthem,
+                              circletriger : 'empty-circle'
+          
+                              %}
+                              {% else %}
+                              {% render 'variant-color' , 
+                              colorsource : settings.colorswatch,
+                              forsource :product.variants[0].option1 | handleize, 
+                              control1 : currentProductColorthis,
+                              control2 : currentProductColorthem ,
+                              circletriger : 'empty-circle'
+          
+                              %}
+                              {% endif  %}
+
+
+                                  {%- comment -%}getModelinfo{%- endcomment -%}
+                         
+                        
+                          {% assign variantColorGet = product.variants[0].option1 %}
+
+                        
+                             
+                          {% for fields in product.variants[0].metafields.variantModelInfo %}
+
+
+                          {% assign imageOrderModel = fields[0] | split:'/' %}
+                          {% assign imageOrderWeist = fields[1]  %}
+                          
+                       
+                          
+
+                          {% assign imageOrder = imageOrderModel[0] %}
+                          {% assign imageWeist = imageOrderWeist.value | remove: 'cm' | strip  %}
+                          {% assign imageInfo = imageOrderWeist.value %}
+                          {% assign imageIn = imageOrderWeist.value %}
+                          {% assign imageGender = imageOrderWeist.value %}
+
+                       
+                     
+
+                          {% unless modeldata contains imageOrder %}
+                          {% assign modeldata = imageOrder | append: ',' | append: modeldata  %}
+                          {% endunless %}
+
+
+                          {% if fields[0] contains 'Man'%}
+                          {% assign modeldataGender = imageGender | append: ',' | append: modeldataGender  %}
+                          {% endif %}
+                      
+
+                          {% if fields[0] contains 'Waist'%}
+                          {% assign modeldataWeist = imageWeist | append: ',' | append: modeldataWeist  %}
+                          {% endif %}
+
+                          {% if fields[0] contains 'Hips'%}
+                          {% assign modeldataHips = imageWeist | append: ',' | append: modeldataHips  %}
+                          {% endif %}
+
+                          {% if fields[0] contains 'Bust'%}
+                          {% assign modeldataBust = imageWeist | append: ',' | append: modeldataBust  %}
+                          {% endif %}
+
+                          {% if imageOrderModel[1] == 'Modelname'%}
+                          {% assign modeldatacm = imageInfo | append: ',' | append: modeldatacm  %}
+                          {% endif %}
+
+                          {% if imageOrderModel[1] == 'Modelnameinch'%}
+                          {% assign modeldatain = imageIn | append: ',' | append: modeldatain  %}
+                          {% endif %}
+                  
+                         
+                          
+
+                          {% endfor %}
+
+                           
+                     
+                          {%- comment -%}getModelinfo{%- endcomment -%}
+
+
+                              <input class="color-changer onlycolor {% if sizeofsize == 'One Size' %}one-size-product{%endif%}" type="radio" data-rprice="{{ product.variants[0].price | money_without_trailing_zeros | strip_html }}" data-cprice="{% if product.variants[0].compare_at_price != nil %}{{ product.variants[0].compare_at_price | money_without_trailing_zeros | strip_html }}{%else%}nodiscount{%endif%}" data-fistID="{{ product.variants[0].id }}" id="{{ product.variants[0].id }}-{{ product.variants[0].option1 | handleize | strip }}-{{ }}"
+                              name="color"
+                              value="{{ product.variants[0].option1 | handleize | strip }}"
+                              data-colorShow = "{{ product.variants[0].option1 | strip }}"
+                              data-order="--{{product.variants[0].option1 | handleize | strip}}"
+                              form="product-form-{{ variant.id }}"
+                              data-modelinfo="{{modeldata | remove :'img-'}}"
+                              data-waist='{{modeldataWeist}}'
+                              data-gender='{{modeldataGender}}'
+                              data-hips='{{modeldataHips}}'
+                              data-bust='{{modeldataBust}}'
+                              data-heading='{{ section.settings.bid_header | strip_html | replace: '"' , '”' | replace: "'" , "’"}}'
+                              data-content='{{ section.settings.bid_content | strip_html | replace: '"' , '”' | replace: "'" , "’"}}'
+                              data-modelcm = "{{modeldatacm | replace: '"' , '”' | replace: "'" , "’"}}"
+                              data-modelin = "{{modeldatain | replace: '"' , '”' | replace: "'" , "’"}}"
+                              data-images = ' {% for media in product.media %}{% case media.media_type %}{% when 'image' %}{{ media | img_url: '550x' }},{% when 'video' %}{{ media.sources[1].url }},{% endcase %}{% endfor %}'
+          {% if option  == first_variant %}{% endif %}>
+                        </label>
+
+
+                        {% assign modeldata = '' %}
+                        {% assign modeldataWeist = '' %}
+                        {% assign modeldataHips = '' %}
+                        {% assign modeldataBust = '' %}
+                        {% assign modeldatacm = '' %}
+                        {% assign modeldatain = '' %}
+                        {% assign modeldataGender = '' %}
+                       
+                          {% endfor %}
+                   
+                  </div>
+
+              </div>  
+              
+              <div class="color-selector-product">
+                {% assign recommended_products =  product.metafields.variantproduct.productgroupseasonal.value %}
+                {%if recommended_products !=  nil  %}
+                       
+        
+                  <div class="colortype">
+
+
+                      <div class="f-small">Seasonal Colors:</div>
+               
+                      <span id="selectedColorSeasonal" class="selected-color">
+                          {% if seasonalColorName != nil %}
+                          {% if control  ==  false %}
+                          {{product.variants[0].option1 | capitalize}}
+                          {% else %}
+                          {% assign colorName = seasonalColorName %}
+                                 {% if colorName contains '-' %}
+                                   {% assign colorNameArray = colorName | split: '-' %}
+                                   {% assign firstWord = colorNameArray[0] | capitalize %}
+                                   {% assign secondWord = colorNameArray[1] | capitalize %}
+                                   {% capture fullWord %}{{firstWord}} {{secondWord}}{% endcapture%}
+                                   {{fullWord}}
+                                 {% else %}  
+                                   {{seasonalColorName | capitalize}}
+                                 {% endif %}
+        
+                          {% endif %}
+                        {% endif %}
+                        </span>
+
+                  </div>
+                  {% endif %}
+
+                  <div class="colorvariants-holder">
+                      {% assign currentProductColorthis = product.variants[0].option1 | handleize %}
+                  
+                        
+
+                  
+
+                          {% for product in recommended_products  %}  
+                          {% assign currentProductColorthem = product.variants[0].option1 | handleize %}
+                          <label class="color-changer-wrap" for="{{ product.variants[0].id }}-{{ product.variants[0].option1 | handleize }}-{{ forloop.index0 }}">
+                              {% if control == true %}
+                              {% render 'variant-color' , 
+                              colorsource : settings.colorswatch,
+                              forsource : product.variants[0].option1, 
+                              control1 : pageQuerystring,
+                              control2 : currentProductColorthem,
+                              circletriger : 'empty-circle'
+          
+                              %}
+                              {% else %}
+                              {% render 'variant-color' , 
+                              colorsource : settings.colorswatch,
+                              forsource :product.variants[0].option1 | handleize, 
+                              control1 : currentProductColorthis,
+                              control2 : currentProductColorthem ,
+                              circletriger : 'empty-circle'
+          
+                              %}
+                              {% endif  %}
+
+
+                                   {%- comment -%}getModelinfo{%- endcomment -%}
+                         
+                        
+                          {% assign variantColorGet = product.variants[0].option1 %}
+                             
+                          {% for fields in product.variants[0].metafields.variantModelInfo %}
+                          {% assign imageOrderModel = fields[0] | split:'/' %}
+                          {% assign imageOrderWeist = fields[1]  %}
+                          
+                          
+                          
+
+                          {% assign imageOrder = imageOrderModel[0] %}
+                          {% assign imageWeist = imageOrderWeist.value | remove: 'cm' | strip  %}
+                          {% assign imageInfo = imageOrderWeist.value %}
+                          {% assign imageIn = imageOrderWeist.value %}
+                          {% assign imageGender = imageOrderWeist.value %}
+
+                       
+                     
+
+                          {% unless modeldata contains imageOrder %}
+                          {% assign modeldata = imageOrder | append: ',' | append: modeldata  %}
+                          {% endunless %}
+
+
+                          {% if fields[0] contains 'Man'%}
+                          {% assign modeldataGender = imageGender | append: ',' | append: modeldataGender  %}
+                          {% endif %}
+                      
+
+                          {% if fields[0] contains 'Waist'%}
+                          {% assign modeldataWeist = imageWeist | append: ',' | append: modeldataWeist  %}
+                          {% endif %}
+
+                          {% if fields[0] contains 'Hips'%}
+                          {% assign modeldataHips = imageWeist | append: ',' | append: modeldataHips  %}
+                          {% endif %}
+
+                          {% if fields[0] contains 'Bust'%}
+                          {% assign modeldataBust = imageWeist | append: ',' | append: modeldataBust  %}
+                          {% endif %}
+
+                          {% if imageOrderModel[1] == 'Modelname'%}
+                          {% assign modeldatacm = imageInfo | append: ',' | append: modeldatacm  %}
+                          {% endif %}
+
+                          {% if imageOrderModel[1] == 'Modelnameinch'%}
+                          {% assign modeldatain = imageIn | append: ',' | append: modeldatain  %}
+                          {% endif %}
+                  
+                         
+                          
+
+                          {% endfor %}
+
+                           
+                     
+                          {%- comment -%}getModelinfo{%- endcomment -%}
+
+
+
+                              <input class="color-changer seasonal onlycolor{% if sizeofsize == 'One Size' %}one-size-product{%endif%}" type="radio" data-rprice="{{ product.variants[0].price | money_without_trailing_zeros | strip_html }}" data-cprice="{% if product.variants[0].compare_at_price != nil %}{{ product.variants[0].compare_at_price | money_without_trailing_zeros | strip_html }}{%else%}nodiscount{%endif%}" data-fistID="{{ product.variants[0].id }}" id="{{ product.variants[0].id }}-{{ product.variants[0].option1 | handleize | strip }}-{{ }}"
+                              name="color"
+                              value="{{ product.variants[0].option1 | handleize | strip }}"
+                              data-colorShow = "{{ product.variants[0].option1 | strip }}"
+                              data-order="--{{product.variants[0].option1 | handleize | strip}}"
+                              form="product-form-{{ variant.id }}"
+                              data-modelinfo="{{modeldata | remove :'img-'}}"
+                              data-waist='{{modeldataWeist}}'
+                              data-gender='{{modeldataGender}}'
+                              data-hips='{{modeldataHips}}'
+                              data-bust='{{modeldataBust}}'
+                              data-heading='{{ section.settings.bid_header | strip_html | replace: '"' , '”' | replace: "'" , "’"}}'
+                              data-content='{{ section.settings.bid_content | strip_html | replace: '"' , '”' | replace: "'" , "’"}}'
+                              data-modelcm = "{{modeldatacm | replace: '"' , '”' | replace: "'" , "’"}}"
+                              data-modelin = "{{modeldatain | replace: '"' , '”' | replace: "'" , "’"}}"
+                              data-images = ' {% for media in product.media %}{% case media.media_type %}{% when 'image' %}{{ media | img_url: '550x' }},{% when 'video' %}{{ media.sources[1].url }},{% endcase %}{% endfor %}'
+          {% if option  == first_variant %}{% endif %}>
+                        </label>
+
+                        {% assign modeldata = '' %}
+                        {% assign modeldataWeist = '' %}
+                        {% assign modeldataHips = '' %}
+                        {% assign modeldataBust = '' %}
+                        {% assign modeldatacm = '' %}
+                        {% assign modeldatain = '' %}
+                        {% assign modeldataGender = '' %}
+
+                       
+                          {% endfor %}
+                   
+                  </div>
+
+              </div>   
+           
+            
+     
+               
+            
+          {%- comment -%}seasonal{%- endcomment -%}
+        
+      </div> 
+          {%- comment -%}seasonal{%- endcomment -%}
+        </div> 
+
+        <div id="warning" class="warning-select-size">
+          {% assign typebuttondetect = false %}
+          {% for tag in product.tags %}
+             {% if tag contains 'typebutton'%} 
+                 {% assign typebuttondetect = true %}
+                 {% break %}
+             {% endif %}
+          {% endfor %}
+
+          <p>*Please choose {%if typebuttondetect != true%}size{%else%}type{%endif%}</p>
+          <div class="warning_close">
+            <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/svg-remove-item.svg?v=1639399863">
+          </div>
+     </div>
+
+
+        </div>
+
+          {%- when 'size' -%}
+
+
+           {%- comment -%}detect button type{%- endcomment -%}
+
+ {% assign typebuttondetect = false %}
+ {% for tag in product.tags %}
+    {% if tag contains 'typebutton'%} 
+        {% assign typebuttondetect = true %}
+        {% break %}
+    {% endif %}
+ {% endfor %}
+
+
+
+  {%- comment -%}detect button type{%- endcomment -%}
+
+
+          {%- comment -%}
+          <ul>
+            {% for product_option in product.options_with_values %}
+              {% if product_option.name contains 'Size' and product_option.position == 2 %}
+                 <li>{{ product_option.position }} - {{ product_option.name }} </li>
+              {%endif%}
+            {% endfor %}
+          </ul>
+          {%- endcomment -%}
+
+          <div class="sw-ghost"></div>
+          <div class="pre-order-mobile-holder" id="pre-order-mobile-holder" style="display:none;">
+           {{ product.metafields.preorder.preordercontent }}
+         </div>
+
+          {% assign variantControlsize = 0%}
+           <div class="size___wrapper">
+            <div class="sizes one-size-sizes main--">
+          
+            {% for variant in product.variants %}
+            {% for option in variant.options %}
+            {% assign variantControlsize = variantControlsize | plus:1%}
+            <ul class="size-holder {{option | downcase}} {%if variantControlsize == 1  %}active {%endif%} one-size-holder">
+              {% if variant.inventory_quantity > 0 %}
+              <li>
+                <a data-variant-id="{{ variant.id }}" 
+                data-i="{{variant.option1 | handleize}}" 
+                data-varprice="{{ variant.price | money_without_trailing_zeros | strip_html }}" 
+                data-vardiscount="{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}" 
+                class="size-selection" 
+                {%- comment -%}
+                {% if product.variants[0].option2 == variant.option2 %}
+                 active 
+                 {% endif %} 
+                 {%- endcomment -%}
+                 href="javascript:void(0)">ONE SIZE</a>
+              </li> 
+              {% else %}
+                   {% if variant.inventory_policy == 'continue' %}
+                      <li class="no-stock">
+                        <a data-variant-id="{{ variant.id }}" 
+                        data-i="{{variant.option1 | handleize}}" 
+                        data-varprice="{{ variant.price | money_without_trailing_zeros | strip_html }}" 
+                        data-vardiscount="{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}" 
+                        class="size-selection no_stock_preorder
+                        {% if product.variants[0].option2 == variant.option2 %}
+                        active 
+                        {% endif %}" 
+                        href="javascript:void(0)">ONE SIZE</a>
+                      </li> 
+                   {% else %}
+                      <li class="no-sell">
+                       ONE SIZE
+                      </li> 
+                   {% endif %}
+              {% endif %}
+          </ul>
+          {% endfor %}
+          {% endfor %}
+            
+              
+      </div>
+
+
+      <div class="buy-button-holder">
+        <button onclick="dataLayer.push({'product_id': '{{product.id}}','product_price': '{{product.price | money_without_currency | strip_html }}','user_email':'{{customer.email | md5 }}','product_category' : '{{product.metafields.mm-google-shopping.google_product_category}}','event': 'Add to Cart'});" class="product-buy-button-active"
+        {% if control != true %}
+        data-id="{{product.variants[0].id}}"
+        {% else %}
+        data-id="{% for variant in product.variants %}{% assign getCurrentVariant  =  variant.option1 | handleize %}{% if getCurrentVariant ==  pageQuerystring%}{{ variant.id | strip }}{% break %}{% endif %}{% endfor %}" 
+        {% endif %}
+        type="button">
+          {% if product.tags contains 'pre-order' %}
+          <span class="add-to-cart___text">Pre Order</span>
+          {% else %}
+          <span class="add-to-cart___text">Add to Cart</span>
+          {% endif %}
+          <div class="loading-overlay__spinner buybutton-animation">
+            <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+              <circle class="pathbuy" fill="none" stroke-width="6" stroke="white" cx="33" cy="33" r="30"></circle>
+            </svg>
+          </div>
+        </button>
+      </div>
+           </div>
+
+           {%- when 'information' -%}
+
+           {% assign informationcontrol = block.settings.specialfeatures %}
+
+           {% if informationcontrol != "" %}
+
+      <div class="product-options__wrapper">
+       {% assign information = block.settings.specialfeatures | split: ","%}
+       {% if product.metafields.productsize.sizeguide != nil %}
+           <div class="size-guide">
+               {% render 'size-guide-link' %}
+           </div>
+           {% endif %}
+           <div class="option-select__wrapper">
+            {% for informations in information %}
+               <div class="osp osp-left">
+                 <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/product-dots.svg?v=1642786923"/>
+                 <p> {{informations | escape}} </p>
+               </div>
+               {% endfor %}  
+           </div>
+           {%- comment -%}
+           {% if product.tags contains 'pre-order' %}
+              <div class="pre-order-mobile-holder" id="pre-order-mobile-holder">
+                {{ product.metafields.preorder.preordercontent }}
+              </div>
+        {% endif %}
+        {%- endcomment -%}
+      </div>
+
+      {% endif %} 
+
+      {% assign collapsecontrol = "" %}
+
+
+      {%- when 'collapse' -%}
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+        {%- when 'collapsible_tab' -%}
+             {% assign collapsecontrolx = block.settings.content | strip %}
+        {%- endcase -%}
+        {%-endfor-%}
+        {% if collapsecontrolx != "" %}
+      <div class="product___descriptions_holder">
+           <ul>
+            {%- for block in section.blocks -%}
+
+            {%- case block.type -%}
+            {%- when 'collapsible_tab' -%}
+            {% assign collapsecontrol = collapsecontrol | plus : 1 %} 
+          
+             {% assign collapsecontrol = block.settings.content  | strip_html %}
+             {% if collapsecontrol != "" %}
+             
+
+              
+            
+             <li class="desc-item" data-open="0">
+                <div class="arrow-title-content">
+                 <div class="pdesc-arrow active">
+                   <img  src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/pdp_arrows_2.png?v=1646145714"/> 
+                 </div>
+                 <div class="pdesc-title">{{block.settings.heading}}</div>
+                </div>
+               
+                {% if block.settings.collapse_order == 'first' %} 
+                <p>{{ product.metafields.my_fields.material_care.value }}</p>
+                {% endif %}
+                {% if block.settings.collapse_order == 'second' %}
+                <p>{{ product.metafields.my_fields.free_shipping_returns.value }}</p>
+                {% endif %}
+                {% if block.settings.collapse_order == 'third' %}
+                <p>{{ product.metafields.my_fields.sustainability.value }}</p>
+                {% endif %}
+               
+             </li>
+             {% endif %}
+             {%- endcase -%}
+             {%-endfor-%}
+           </ul>
+      </div>
+      {% endif %}
+      {%- when 'setsaveme' -%}
+      {% if block.settings.setsaveproduct != nil  %}
+     
+
+      <div class="saveset-container-main">
+    {% assign getProduct =  block.settings.setsaveproduct %}
+    {% assign sizeofsizesetsave = getProduct.variants[0].option2%}
+
+    {% if sizeofsizesetsave == nil %}
+        {% assign sizeofsizesetsave = 'One Size'%}
+    {% endif %}
+
+
+    {% for product_option in getProduct.options_with_values %}
+
+        {% if product_option.name contains 'Size' %}
+          {% assign autoSizeAdd = false %}
+        {% else %}
+           {% assign autoSizeAdd = true %}
+        {% endif %}
+    {% endfor %}
+
+
+     <div class="setsave-container">
+        
+      <div class="setsave satsave-left">
+
+        {% assign fvariantSize =  getProduct.options_with_values[0].name %} 
+       
+        {% assign setsaveImage = getProduct.media[0].preview_image %}  
+    
+
+    
+        
+          <a href="{{getProduct.url}}"><img id="imagepath" src="{{ setsaveImage | img_url : '312x390'}}" /></a>
+      </div>
+
+      <div class="setsave satsave-right">
+          <div class="setsave-title">
+            <a href="{{getProduct.url}}"><h2>{{block.settings.setsavetitle}}</h2></a>
+            <h3>{{ getProduct.title}}</h3>
+            <h4>{{ getProduct.type}}</h4>
+          </div>
+          <div class="setsave-price">
+            {% for variant in getProduct.variants %}
+              {% if forloop.first == true %}
+                 <span class="money show-setsave" data-vrid="{{variant.id}}" >{{ variant.price | money_without_trailing_zeros | strip_html }}</span>
+              {% else %}  
+                <span style="display:none;" class="money show-setsave" data-vrid="{{variant.id}}" >{{ variant.price | money_without_trailing_zeros | strip_html }}</span> 
+              {% endif %}
+            {% endfor %}
+            {% for variant in getProduct.variants %}
+            {% if forloop.first == true %}
+               <span data-vrid="{{variant.id}}" class="money sale-setsave">{% if variant.compare_at_price != nil %}{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}{% endif %}</span>
+               {% else %}  
+               <span style="display:none;" class="money sale-setsave" data-vrid="{{variant.id}}">{% if variant.compare_at_price != nil %}{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}{% endif %}</span>
+               {% endif %}
+            {% endfor %}
+          </div>
+      </div>
+       
+    
+
+     </div>
+
+
+     {% assign variantCorrection = getProduct.variants[0].option1 | handleize %}
+     {% assign variantColorType = getProduct.variants[0].metafields.colortype.seasonal.value %}
+
+
+   
+     {% if variantCorrection != 'default-title' %}
+     <div class="setsave__main_color" >
+    
+     <div class="setsave-variant-colors color-selector-product setsave-holder">
+      <div class="color-holder">
+      
+        <small>Core Colors</small>
+        <span id="selectedColorsetsave" class="selected-color">{% if variantColorType != true %}{{getProduct.variants[0].option1}}{% endif %}</span>
+      </div>
+      <div class="setsave___colors">
+    
+        {% assign recommended_products =  getProduct.metafields.variantproduct.productgroup.value %}
+        {% assign currentProductColorthis = getProduct.variants[0].option1 | handleize %}
+        {% for product in recommended_products  %} 
+        {% assign currentProductColorthem = product.variants[0].option1 | handleize %}
+        {% assign recommended_products_image =  recommended_products.media[0].preview_image %}
+
+               {%if product.variants[0].metafields.colortype.seasonal != true%}
+               <label class="color-changer-wrap" for="{{ product.variants[0].id }}-{{ option | handleize }}-{{ forloop.index0 }}">
+
+                {% render 'variant-color' , 
+                            colorsource : settings.colorswatch,
+                            forsource : product.variants[0].option1, 
+                            control1 : currentProductColorthis,
+                            control2 : currentProductColorthem,
+                            circletriger : 'empty-circle-satsave'
+                            %}
+
+                  <input class="color-changer-setsave {% if sizeofsizesetsave == 'One Size' %}onlycolorsetsave{%endif%}" type="radio" data-rprice="{{ variant.price | money_without_trailing_zeros | strip_html }}" data-cprice="{% if variant.compare_at_price != nil %}{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}{%else%}nodiscount{%endif%}" data-fistID="{{ variant.id }}" id="{{ variant.id }}-{{ variant.option1 }}-{{ }}"
+                        name="color"
+                        value="{{ product.variants[0].option1 | handleize }}"
+                        data-colorShow = "{{ product.variants[0].option1 }}"
+                        data-image="{{ product.images[0] | product_img_url: '312x390' }}"
+                        form="product-form-{{ variant.id }}"
+                        {% if product.variants[0].option1  == getProduct.variants[0].option1 %}checked{% endif %}
+                  >
+               
+                  </label>
+               {% else %}
+              
+               {% endif %}
+        {% endfor %}
+
+      </div>
+    </div>
+
+    <div class="setsave-variant-colors color-selector-product setsave-holder">
+      <div class="color-holder">
+
+       
+  
+        {% for variant in getProduct.variants %}
+            {% if variant.metafields.colortype.seasonal == true  %}
+            <small>Seasonal Colors</small>
+            {% break %}
+            {% endif %}
+            {% endfor %}
+        <span id="selectedColorsetsaveSeasonal" class="selected-color">{% if variantColorType == true %}{{getProduct.variants[0].option1}}{% endif %}</span>
+      </div>
+      <div class="setsave___colors">
+        {% assign recommended_products =  getProduct.metafields.variantproduct.productgroupseasonal.value %}
+        {% for product in recommended_products  %} 
+        {% assign currentProductColorthem = product.variants[0].option1 | handleize %}
+        {% assign recommended_products_image =  recommended_products.media[0].preview_image   %}
+
+               {%if product.variants[0].metafields.colortype.seasonal == true %}
+               <label class="color-changer-wrap" for="{{ product.variants[0].id }}-{{ option | handleize }}-{{ forloop.index0 }}">
+
+                {% render 'variant-color' , 
+                            colorsource : settings.colorswatch,
+                            forsource : product.variants[0].option1, 
+                            control1 : currentProductColorthis,
+                            control2 : currentProductColorthem,
+                            circletriger : 'empty-circle-satsave'
+                            %}
+
+                  <input class="color-changer-setsave seasonal {% if sizeofsizesetsave == 'One Size' %}onlycolorsetsave{%endif%}" type="radio" data-rprice="{{ variant.price | money_without_trailing_zeros | strip_html }}" data-cprice="{% if variant.compare_at_price != nil %}{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}{%else%}nodiscount{%endif%}" data-fistID="{{ variant.id }}" id="{{ variant.id }}-{{ variant.option1 }}-{{ }}"
+                        name="color"
+                        value="{{ product.variants[0].option1 | handleize }}"
+                        data-colorShow = "{{ product.variants[0].option1 }}"
+                        data-image="{{ product.images[0] | product_img_url: '312x390' }}"
+                        form="product-form-{{ variant.id }}"
+                        {% if product.variants[0].option1  == getProduct.variants[0].option1 %}checked{% endif %}
+                  >
+               
+                  </label>
+               {% else %}
+              
+               {% endif %}
+        {% endfor %}
+
+    </div>
+    </div>
+    </div>
+    {% endif %}
+
+    {% assign typebuttondetect = false %}
+        {% for tag in getProduct.tags %}
+           {% if tag contains 'typebutton'%} 
+               {% assign typebuttondetect = true %}
+               {% break %}
+           {% endif %}
+        {% endfor %}
+   
+
+    <div id="warning-setsave" class="warning-select-size">
+      <p>*Please Choose Size</p>
+    </div>
+
+    <div class="size___wrapper-setsave">
+      {% if autoSizeAdd == true %}
+      <div class="one__size">ONE SIZE</div>
+      {% else %}
+      <div class="choose___button__setsave {% if typebuttondetect == true%}type__button{%endif%} {% if sizeofsizesetsave == 'One Size' %}one-size-choose-setsave{%endif%}">CHOOSE {% if typebuttondetect == true%}TYPE{% else %}SIZE{%endif%}</div>
+      {% endif %}
+      
+      <div class="sizes-setsave {% if sizeofsizesetsave == 'One Size' %}one-size-sizes-setsave{%endif%}">
+      
+       
+       
+
+       {%- comment -%}
+        <li>
+          <a data-variant-id="{{ variant.id }}"  data-i="{{variant.option1 | handleize}}" data-varprice="{{ variant.price | money_without_trailing_zeros | strip_html }}" data-vardiscount="{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}" class="size-selection-setsave  active " href="javascript:void(0)">ONE SIZE</a>
+        </li>
+{%- endcomment -%}
+
+     
+
+    
+
+    
+       {% assign recommended_products =  getProduct.metafields.variantproduct.productgroupseasonal.value %}
+       {% assign recommended_products_core =  getProduct.metafields.variantproduct.productgroup.value %}
+
+       {% assign current_productd =  getProduct.variants[0].option1 | handleize %}
+       {% for product in recommended_products  %} 
+
+      {% assign loopColor = product.variants[0].option1 | handleize %} 
+
+       <ul class="size-holder-setsave {{product.variants[0].option1 | handleize}}  {% if sizeofsizesetsave == 'One Size' or autoSizeAdd == true %}one-size-holder-setsave{%endif%} {% if loopColor == current_productd %} active {% endif %}">
+       
+        <div class="three-angle-size-setsave {% if sizeofsizesetsave == 'One Size' %}one-size-threeangle-setsave{%endif%}">
+            <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/arrow-size-selection.svg?v=1647027468"/>
+          </div> 
+          <div class="close-x-setsave {% if sizeofsizesetsave == 'One Size' %}one-size-close-x-setsave{% endif %}">
+            <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/size-selection-close.svg?v=1647088856"/>
+          </div>
+
+        {% for variant in product.variants %}
+                {% for option in variant.option2 %} 
+                {% if variant.inventory_quantity > 0 %}
+       
+                <li>
+                  <a data-variant-id="{{ variant.id }}"  data-i="{{variant.option1 | handleize}}" data-varprice="{{ variant.price | money_without_trailing_zeros | strip_html }}" data-vardiscount="{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}" class="size-selection-setsave {%- comment -%}{% if getProduct.variants[0].option2 == variant.option2 %} active {% endif %}{%- endcomment -%}" href="javascript:void(0)">{{ option }}</a>
+                </li>
+               {% else %}
+                {% if variant.inventory_policy == 'continue' %}
+                    <li class="no-stock">
+                      <a data-variant-id="{{ variant.id }}"  data-i="{{variant.option1 | handleize}}" data-varprice="{{ variant.price | money_without_trailing_zeros | strip_html }}" data-vardiscount="{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}" class="size-selection-setsave {%- comment -%}{% if getProduct.variants[0].option2 == variant.option2 %} active {% endif %}{%- endcomment -%}" href="javascript:void(0)">{{ option }}</a>
+                    </li>
+                {% else %}
+                   <li class="no-sell"> {{ option }}</li>
+                {% endif %}
+              
+               {% endif %}
+                {% endfor %}
+        {% endfor %}        
+       </ul>
+       {% endfor %}
+       {% for product in recommended_products_core  %} 
+       {% assign loopColor = product.variants[0].option1 | handleize %} 
+       <ul class="size-holder-setsave {{product.variants[0].option1 | handleize}}  {% if sizeofsizesetsave == 'One Size' or autoSizeAdd == true %}one-size-holder-setsave{%endif%} {% if loopColor == current_productd %} active {% endif %}">
+       
+        <div class="three-angle-size-setsave {% if sizeofsizesetsave == 'One Size' %}one-size-threeangle-setsave{%endif%}">
+            <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/arrow-size-selection.svg?v=1647027468"/>
+          </div> 
+          <div class="close-x-setsave {% if sizeofsizesetsave == 'One Size' %}one-size-close-x-setsave{% endif %}">
+            <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/size-selection-close.svg?v=1647088856"/>
+          </div>
+
+        {% for variant in product.variants %}
+        {% for option in variant.option2 %} 
+
+        {% if variant.inventory_quantity > 0 %}
+       
+        <li>
+          <a data-variant-id="{{ variant.id }}"  data-i="{{variant.option1 | handleize}}" data-varprice="{{ variant.price | money_without_trailing_zeros | strip_html }}" data-vardiscount="{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}" class="size-selection-setsave {%- comment -%}{% if getProduct.variants[0].option2 == variant.option2 %} active {% endif %}{%- endcomment -%}" href="javascript:void(0)">{{ option }}</a>
+        </li>
+       {% else %}
+        {% if variant.inventory_policy == 'continue' %}
+            <li class="no-stock">
+              <a data-variant-id="{{ variant.id }}"  data-i="{{variant.option1 | handleize}}" data-varprice="{{ variant.price | money_without_trailing_zeros | strip_html }}" data-vardiscount="{{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}" class="size-selection-setsave {%- comment -%}{% if getProduct.variants[0].option2 == variant.option2 %} active {% endif %}{%- endcomment -%}" href="javascript:void(0)">{{ option }}</a>
+            </li>
+        {% else %}
+           <li class="no-sell"> {{ option }}</li>
+        {% endif %}
+      
+       {% endif %}
+        {% endfor %}
+{% endfor %}        
+       </ul>
+       {% endfor %}
+       
+
+
+</div>
+<div class="buy-button-holder">
+
+ <button class="product-buy-button-active-setsave" data-id="{% if sizeofsizesetsave == 'One Size' or autoSizeAdd == true %}{{getProduct.variants[0].id}}{%endif%}" type="button">
+   {% if getProduct.tags contains 'pre-order' %}
+   <span class="add-to-cart___text">Pre Order</span>
+   {% else %}
+   <span class="add-to-cart___text setsave-add-to-cart">Complete the look</span>
+   {% endif %}
+   <div class="loading-overlay__spinner buybutton-animation">
+     <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+       <circle class="pathbuy" fill="none" stroke-width="6" stroke="white" cx="33" cy="33" r="30"></circle>
+     </svg>
+   </div>
+ </button>
+</div>
+</div>
+          
+
+
+
+  </div>
+
+  {% endif %}
+
+
+         
+
+      
+          {%- endcase -%}
+
+   
+        {%- endfor -%}
+
+     
+      </div>
+    </div>
+  </div>
+
+  
+
+
+  <div id="sizeguide" class="sizeguide" style="display:none;">
+    <div class="close-meger">
+      <button data-fancybox-close >
+        <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/announcement_close_mini.svg?v=1639137194"/>
+        </button>
+      
+    </div>
+    <div class="size-main-container">
+    <div class="sg sizeguideknitter">
+      <h2>Size Guide</h2>
+      <div class="size-knitter-container">
+         <div class="thumbnail-size">
+           <img src="{{section.settings.knitter_comment_img | img_url: '270x270'}}"/>
+         </div>
+         <h3>{{ section.settings.knitter_name}}</h3>
+         <p>{{ section.settings.knitter_comment}}</p>
+      </div>
+    </div>
+    <div class="sg sizeguidetable">
+      <h2>Size Guide</h2>
+     <div class="size-switcher">
+        <span>in</span>
+        <div class="switcher">
+          <img id="switcher-dot" src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/switcher-dot.svg?v=1642854039" alt="The Knotty Ones Switcher"/>
+        </div>
+        <span>cm</span>
+     </div> 
+    {{ product.metafields.productsize.sizeguide }}
+    </div>
+  </div>
+
+
+
+
+
+  </div>
+
+
+</section>
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org/",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "url": {{ shop.url | append: product.url | json }},
+    {%- if product.selected_or_first_available_variant.featured_media -%}
+      {%- assign media_size = product.selected_or_first_available_variant.featured_media.preview_image.width | append: 'x' -%}
+      "image": [
+        {{ product.selected_or_first_available_variant.featured_media | img_url: media_size | prepend: "https:" | json }}
+      ],
+    {%- endif -%}
+    "description": {{ product.description | strip_html | json }},
+    {%- if product.selected_or_first_available_variant.sku != blank -%}
+      "sku": {{ product.selected_or_first_available_variant.sku | json }},
+    {%- endif -%}
+    "brand": {
+      "@type": "Thing",
+      "name": {{ product.vendor | json }}
+    },
+    "offers": [
+      {%- for variant in product.variants -%}
+        {
+          "@type" : "Offer",
+          {%- if variant.sku != blank -%}
+            "sku": {{ variant.sku | json }},
+          {%- endif -%}
+          "availability" : "http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+          "price" : {{ variant.price | divided_by: 100.00 | json }},
+          "priceCurrency" : {{ cart.currency.iso_code | json }},
+          "url" : {{ shop.url | append: variant.url | json }}
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Only Color Product",
+  "tag": "section",
+  "class": "product-section product-main-holder",
+  "blocks": [
+    {
+      "type": "information",
+      "name": "Product Information",
+      "limit": 3,
+      "settings": [
+        {
+           "type": "text",
+           "id": "specialfeatures",
+           "label"  :"Special Information",
+           "info" : "Special Information"
+        }
+        ]
+    },
+    {
+      "type": "title",
+      "name": "t:sections.main-product.blocks.title.name",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "t:sections.main-product.blocks.price.name",
+      "limit": 1
+    },
+    {
+      "type": "collapse",
+      "name": "Collapse Menu",
+      "limit": 1
+    },
+    {
+      "type": "variant_picker",
+      "name": "Color Selector",
+      "limit": 1
+    },
+    {
+      "type": "size",
+      "name": "Size Selector",
+      "limit": 1
+    },
+    {
+      "type": "description",
+      "name": "Product Description",
+      "limit": 1
+    },
+    {
+      "type": "setsaveme",
+      "name": "Set & Save",
+      "limit": 1,
+      "settings": [
+      {
+        "type": "product",
+        "id": "setsaveproduct",
+        "info": "Select Set & Save Product",
+        "label": "More information"
+      },
+      {
+        "type": "text",
+        "id": "setsavetitle",
+        "info": "Title of Section",
+        "label": "Enter titile"
+      }
+    ]
+    },
+    {
+      "type": "collapsible_tab",
+      "name": "t:sections.main-product.blocks.collapsible_tab.name",
+      "settings": [
+      {
+        "type": "select",
+        "id": "collapse_order",
+        "label": "Collapse Order",
+        "options": [
+          {
+            "value": "first",
+            "label": "First"
+          },
+          {
+            "value": "second",
+            "label": "Second"
+          },
+          {
+            "value": "third",
+            "label": "Third"
+          }
+        ],
+        "default": "first"
+      },
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Collapsible tab",
+          "info": "t:sections.main-product.blocks.collapsible_tab.settings.heading.info",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.heading.label"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.content.label"
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.page.label"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "bid_header",
+      "label": "Between Image Description Title"
+    },
+    {
+      "type": "richtext",
+      "id": "bid_content",
+      "label": "Between Image Description Text"
+    },
+    {
+      "type": "header",
+      "content": "Knitter Comment"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_comment_img",
+      "label": "Knitter Comment Avatar"
+    },
+    {
+      "type": "text",
+      "id": "knitter_name",
+      "label": "Knitter Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_comment",
+      "label": "Knitter Comment"
+    }
+
+  ]
+}
+{% endschema %}
+
+
+
+
+<script>
+  $(document).ready(function () {
+      $('.mobile-slider-wrapper').css('opacity','1');
+      $('.mobile-slider').flickity('resize');  
+   });
+
+   var getAllImages = [];
+   var newArray = [];
+   var ImagePorter;
+   var ImagePorterDesktop;
+
+   var dataImages;
+   var waist;
+   var bust;
+   var hips;
+   var modelcm;
+   var modelin;
+
+   var detectFormatsplit;
+
+
+   $('.color-changer').click(function(){
+
+
+
+     $('.pimage-wrapper').find('li').remove();
+     $('.pimage-wrapper').find('div').remove();
+
+     getAllImages = $(this).attr('data-images').split(',');
+     for (let i = 0; i < getAllImages.length-1; i++) {
+
+     
+    
+
+
+
+      detectFormatsplit = getAllImages[i].split('?');
+      detectFormatType = detectFormatsplit[0].slice(-3);
+
+       if(i == 0){
+        if(detectFormatType == 'mp4'){
+          ImagePorter = '<div class="mps-item carousel-cell"><video width="320" playsinline="" autoplay muted="" loop=""><source src="'+getAllImages[0]+'" type="video/mp4"></video></div>';
+          ImagePorterDesktop = '<li class="pimage"><video width="320" playsinline="" autoplay muted="" loop=""><source src="'+getAllImages[0]+'" type="video/mp4"></video></li>';
+          $('.pimage-wrapper').append(ImagePorterDesktop);
+        }
+        else{
+        ImagePorter = '<div class="mps-item carousel-cell"><img src="'+getAllImages[0]+'"></div>';
+        ImagePorterDesktop = '<li class="pimage"><img src="'+getAllImages[0]+'"></li>';
+        $('.pimage-wrapper').append(ImagePorterDesktop);
+         }
+       }
+       else{
+        if(detectFormatType == 'mp4'){
+        ImagePorter = ImagePorter+'<div class="mps-item carousel-cell"><video width="320" autoplay playsinline="" muted="" loop=""><source src="'+getAllImages[i]+'" type="video/mp4"></video></div>';
+        ImagePorterDesktop = '<li class="pimage"><video width="320" playsinline="" autoplay muted="" loop=""><source src="'+getAllImages[i]+'" type="video/mp4"></video></li>';
+        $('.pimage-wrapper').append(ImagePorterDesktop);
+        }
+        else{
+          ImagePorter = ImagePorter+'<div class="mps-item carousel-cell"><img src="'+getAllImages[i]+'"></div>';
+          ImagePorterDesktop = '<li class="pimage"><img src="'+getAllImages[i]+'"></li>';
+          $('.pimage-wrapper').append(ImagePorterDesktop);
+        }
+       }  
+
+    
+      }
+
+      $('.pimage-wrapper').addClass('active');
+
+
+      var $carousel = $('.mobile-slider').flickity({
+        initialIndex: 1
+      });
+
+      var $cells = $carousel.find('.carousel-cell');
+      $carousel.flickity( 'remove', $cells);
+
+
+      var $cellElems;
+
+ 
+        $cellElems = $(ImagePorter);
+        //console.log($cellElems);
+        $carousel.flickity( 'insert', $cellElems );
+        $cellElems = "";
+        $('.mobile-product-slider').addClass('active');
+
+  
+
+      $carousel.flickity('destroy');
+      $carousel.flickity({
+        cellAlign: 'left',
+        contain: false,
+        ImagesLoaded: true,
+        resize:true,
+        prevNextButtons: false,
+        pageDots: true,
+        setGallerySize: true,
+        lazyLoad: 2
+      });
+
+
+      getAllImages = [];
+
+      $(".mobile-product-slider").addClass('active');
+
+      function onLoadeddata( event ) {
+            var cell = $('.mobile-slider').flickity( 'getParentCell', event.target );
+            $('.mobile-slider').flickity( 'cellSizeChange', cell && cell.element );
+            $('.mobile-slider').flickity('resize');
+          }
+   
+      $('.mobile-slider').find('video').each( function( i, video ) {
+           var lengthVideo = $('.mobile-slider').find('video');
+           if(lengthVideo.length > 0){
+            video.play();
+           $( video ).on( 'loadeddata', onLoadeddata );
+      }
+          });
+
+
+
+
+
+
+   
+      
+ $('.mobile-slider').flickity('resize');  
+          
+   });
+
+
+
+
+
+
+</script>

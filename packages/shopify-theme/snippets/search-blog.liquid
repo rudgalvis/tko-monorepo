@@ -1,0 +1,24 @@
+<div class="search-border-blog-container">
+    <div class="search-ll search-ll-up">
+       <div class="search-ll-line">
+           <div class="search-l-line"></div>
+       </div>
+    </div>  
+    <div class="search-article-item">
+        <div class="search-article-img">
+            {{ item | img_url: '455x300', scale: 2 | img_tag: item.title }}
+        </div>
+        <div class="search-article-reach-content">
+              {% for tag in item.tags %}
+                <a class="search-article-tag" href="{{ item.url }}/tagged/{{ tag | handle }}">{{ tag | remove: ","  }}</a>
+              {% endfor %}
+            <h2>{{ item.title }}</h2>
+                <a class="search-blogatag btn-darrow search-inside-section" href="{{ item.url }}">READ MORE</a>
+        </div>
+    </div>
+    <div class="search-ll search-ll-down">
+      <div class="search-ll-line">
+        <div class="search-l-line"></div>
+    </div>
+    </div>  
+</div>

@@ -1,0 +1,207 @@
+<script data-cfasync="false" type="text/javascript">if (typeof Shopify === "undefined") var Shopify = {}; Shopify.cart = {{ cart | json }};</script> 
+<div id="sca-fg-owl-carousel">
+  <div id="freegift_cart_container" class="sca-fg-cart-container" style="display: none;">
+    <div id="freegift_message" class="owl-carousel"></div>
+  </div> 
+  <div id="sca-fg-slider-cart" style="display: none;">
+    <div class="sca-fg-cart-title">
+      <strong>Select your free gift (s)</strong>
+    </div>
+    <div id="sca_freegift_list" class="owl-carousel"></div>
+  </div>
+</div>
+<div id="sca_fg_cart">
+{{ 'component-cart.css' | asset_url | stylesheet_tag }}
+{{ 'component-totals.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+{{ 'component-main-cart.css' | asset_url | stylesheet_tag }}
+
+
+
+
+<div rv-show="cart.item_count | gt 0" class="cart-master-container" data-cart-view="data-cart-view">
+      <div class="cart-master-header">
+         <h1>CART</h1>
+         <h2><a class="btn-darrow" href="/collections/all">CONTINUE SHOPPING</a></h2>
+      </div>
+      {%- comment -%}Cart Item{%- endcomment -%}
+
+      <div  class="cart-items-container">
+         <ul class="cart-item-header-item">
+            <li>PRODUCT<span rv-show="cart.item_count | gt 1">S</span></li>
+            <li></li>
+            <li>PRICE</li>
+         </ul>
+
+         <ul class="real-cart-item">
+           <li rv-each-item="cart.items" >
+               <div class="cart-items-for-cart">
+
+                <a class="remove-item-to-basket-for-cart" href="javascript:void(0);" rv-data-cart-remove="index | plus 1"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/svg-remove-item.svg?v=1639399863"></a>
+
+                    <div class="cart-node cart-items-image">
+                      <img  class="drawer-product-image" rv-src="item.featured_image.url | addsize " />
+                    </div>
+                    <div class="product-summary-for-cart">
+                      <span>
+                       <h3 rv-text="item.product_title"></h3>
+                       {%- comment -%}
+                       <h4 rv-text="item.product_type"></h3>
+                        {%- endcomment -%}
+                       <p rv-text="item.variant_options.1"></p>
+                      </span>
+                      <span>
+                       <div class="color-circle" rv-data-colorselect="item.variant_options.0"></div>
+                      
+                      
+                      </span>
+                    </div>
+                    <div class="cart-node cart-items-quantity">
+                      <div class="dpi-quantity-for-cart">
+                        <a href="javascript:void(0);" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">-</a>
+                        <span class="quantity-number-for-cart" rv-text="item.quantity">2</span>
+                        <a href="javascript:void(0);" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1">+</a>
+                       </div>
+                    </div>
+                    <div class="cart-node cart-items-price">
+                      <div class="drawer-price-container-for-cart">
+                        <p class="drawer-price-for-cart" rv-html="item.line_price | money Currency.currentCurrency"></p>
+                      </div>
+                    </div>
+               </div>
+           </li>
+         </ul>
+      </div>
+{%- comment -%}
+      <div class="cart-items-footer">
+        <div class="cart-item-subtotal"></div>
+        <small></small>
+        <button></button>
+        <div class="cart-quick-checkout">
+
+        </div>
+      </div>
+
+{%- endcomment -%}
+
+      <div  class="footer-master page-width{% if cart == empty %} is-empty{% endif %}" id="main-cart-footer" data-id="{{ section.id }}">
+        <div class="footer-master-child">
+          <div class="cart__footer">
+            {%- if section.settings.show_cart_note -%}
+              <cart-note class="cart__note field">
+                <label for="Cart-note">{{ 'sections.cart.note' | t }}</label>
+                <textarea class="text-area text-area--resize-vertical field__input" name="note" id="Cart-note" placeholder="{{ 'sections.cart.note' | t }}">{{ cart.note }}</textarea>
+              </cart-note>
+            {%- endif -%}
+      
+            <div class="cart__blocks">
+              {% for block in section.blocks %}
+                {%- case block.type -%}
+                  {%- when '@app' -%}
+                    {% render block %}
+                  {%- when 'subtotal' -%}
+                    <div class="js-contents" {{ block.shopify_attributes }}>
+                      <div class="totals">
+                        <h3 class="totals__subtotal">{{ 'sections.cart.subtotal' | t }}</h3>
+                        <p rv-html="cart.total_price | money Currency.currentCurrency" class="totals__subtotal-value"></p>
+                      </div>
+      
+                      <div>
+                        {%- if cart.cart_level_discount_applications.size > 0 -%}
+                          <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
+                            {%- for discount in cart.cart_level_discount_applications -%}
+                              <li class="discounts__discount discounts__discount--end">
+                                {%- render 'icon-discount' -%}
+                                {{ discount.title }}
+                                (-{{ discount.total_allocated_amount | money_without_trailing_zeros | strip_html }})
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        {%- endif -%}
+                      </div>
+      
+                      <small class="tax-note caption-large rte">
+                        {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+                          {{ 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                        {%- elsif cart.taxes_included -%}
+                          {{ 'sections.cart.taxes_included_but_shipping_at_checkout' | t }}
+                        {%- elsif shop.shipping_policy.body != blank -%}
+                          {{ 'sections.cart.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+                        {%- else -%}
+                          {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
+                        {%- endif -%}
+                      </small>
+                    </div>
+                  {%- else -%}
+                    <div class="cart__ctas" {{ block.shopify_attributes }}>
+                      <noscript>
+                        <button type="submit" class="cart__update-button button button--secondary" form="cart">
+                          {{ 'sections.cart.update' | t }}
+                        </button>
+                      </noscript>
+
+                      <form action="/cart" method="post">
+                        <button class="cart__checkout-button button" type="submit" name="checkout"><span id="checkout-text">CHECKOUT</span></button>
+                       </form>
+                    </div>
+      
+                    {%- if additional_checkout_buttons -%}
+                      <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
+                        {{ content_for_additional_checkout_buttons }}
+                      </div>
+                    {%- endif -%}
+                {%- endcase -%}
+              {% endfor %}
+      
+              <div id="cart-errors"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      
+</div>
+
+<div rv-hide="cart.item_count | gt 0" class="empty-cart-container" data-cart-view="data-cart-view">
+  
+ 
+    <h1>CART</h1>
+    <p>"You have no items in your shopping cart"</p>
+    <h2><a class="btn-darrow" href="/collections/all">CONTINUE SHOPPING</a></h2>
+ 
+</div>
+
+
+{% schema %}
+{
+  "name": "t:sections.main-cart-footer.name",
+  "class": "cart__footer-wrapper",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_cart_note",
+      "default": false,
+      "label": "t:sections.main-cart-footer.settings.show_cart_note.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "subtotal",
+      "name": "t:sections.main-cart-footer.blocks.subtotal.name",
+      "limit": 1
+    },
+    {
+      "type": "buttons",
+      "name": "t:sections.main-cart-footer.blocks.buttons.name",
+      "limit": 1
+    },
+    {
+      "type": "@app"
+    }
+  ]
+}
+{% endschema %}
+
+</div>

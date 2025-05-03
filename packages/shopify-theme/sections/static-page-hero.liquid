@@ -1,0 +1,299 @@
+{{ 'component-page-hero.css' | asset_url | stylesheet_tag }}
+
+<section class="kto-main-container">
+    <div class="tko-lines page-hero-{{section.id}}"
+    {% if section.settings.herolayoutpage == 'top-bottom'%}
+    style="
+      border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+    ">
+    {% elsif  section.settings.herolayoutpage == 'only-top' %}
+    style="
+    border-top-style:  solid;
+    border-top-color:   black;
+    border-bottom: none;
+    ">
+    {% elsif  section.settings.herolayoutpage == 'only-bottom' %} 
+    style="
+    border-top: none;
+    border-bottom-style:  solid;
+    border-bottom-color:   black;
+    ">
+    
+    {% else %}
+    
+    style="
+    border-top: none;
+    border-bottom: none;
+    ">  
+  
+    {% endif %}
+
+<div class="page-hero-container">
+    <div class="page-hero-content">
+        <div class="hero-image-container">
+            <img class="hero-image-desktop" src="{{ section.settings.pageheroimage | img_url: '1386x'}}" />
+            <img class="hero-image-mobile" src="{{ section.settings.pageheroimagemobile | img_url: '692x'}}" />
+            <div class="hero-content alignment-{{section.id}}">
+                {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                {%- when 'title' -%}
+                <h1 class="page-hero-title-{{section.id}}" style="color:{{ block.settings.herocolor }};">{{ block.settings.pageherohead }}</h1>
+                {%- when 'button' -%}
+                {% assign btnSelectedThemeHero = block.settings.herobuttonColor %}
+                <a href="{{ block.settings.herourl }}" class="tko-btn tko-btn-light hero-btn btn-alignment-{{section.id}} tko-btn-animation">
+                  <div class="btn-animation-content"></div> 
+                 <span class="tko-btn-text">{{ block.settings.pageherobuttext }}</span> </a>
+                {%- endcase -%}
+                {%- endfor -%}
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</section>
+
+{% if section.settings.footer_hero == true %}
+
+<style>
+
+@media (max-width: 812px) {
+  .alignment-{{section.id}} {
+    justify-content: flex-end;
+    padding-bottom:34px;
+}
+
+.btn-alignment-{{section.id}} {
+    margin-top: 165px;
+}
+
+}
+
+</style>
+
+{% endif %}
+
+
+{% schema %}
+{
+    "name": "Page Hero",
+    "blocks": [
+
+      {
+        "type": "title",
+        "name": "Hero Title",
+        "limit": 1,
+        "settings": [
+        {
+          "type": "textarea",
+          "id": "pageherohead",
+          "default": "Text block",
+          "label": "Title"
+        },
+        {
+            "type": "color",
+            "id": "herocolor",
+            "default": "#000000",
+            "label": "Title Color"
+        }
+        ]
+      },
+
+      {
+        "type": "button",
+        "name": "Hero Button",
+        "limit": 1,
+        "settings": [
+        {
+          "type": "text",
+          "id": "pageherobuttext",
+          "default": "READ MORE",
+          "label": "Button Copy"
+        },
+        {
+            "type": "select",
+            "id": "herobuttonColor",
+            "label": "Button Style",
+            "default": "light",
+            "options": [
+              {
+                "value": "light",
+                "label": "Light"
+              },
+              {
+                "value": "dark",
+                "label": "Dark"
+              }
+            ]
+          },
+          {
+            "type": "url",
+            "id": "herourl",
+            "label": "Button URL"
+          }
+        ]
+      }  
+       
+
+    
+    
+    ],
+    "settings": [
+    {
+      "type": "header",
+      "content": "Line Layout Options"
+    },
+    {
+      "type": "select",
+      "id": "herolayoutpage",
+      "label": "Section Border Options",
+      "default": "top-bottom",
+      "options": [
+        {
+          "value": "top-bottom",
+          "label": "Show Border Top & Bottom"
+        },
+        {
+          "value": "only-top",
+          "label": "Show Border Only Top"
+        },
+        {
+            "value": "only-bottom",
+            "label": "Show Border Only Bottom"
+          },
+        {
+            "value": "hide-border",
+            "label": "Hide Borders"
+          }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "footer_hero",
+      "label": "This is footer hero",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Image Options"
+    },
+    {
+      "type": "image_picker",
+      "id": "pageheroimage",
+      "label": "Desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "pageheroimagemobile",
+      "label": "Mobile"
+    },
+    
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup",
+        "label":"Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedown",
+        "label":"Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeupm",
+        "label":"Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedownm",
+        "label":"Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Title Max. Width Desktop"
+      },
+      {
+        "type":"number",
+        "id":"pageherotitledesktop",
+        "label":"Title Width Desktop",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Title Max. Width Mobile"
+      },
+      {
+        "type":"number",
+        "id":"pageherotitlemobile",
+        "label":"Title Width Mobile",
+        "default":15
+      }
+    ],
+    "presets": [
+       {
+        "name": "Page Hero",
+        "blocks": [
+          {
+            "type": "title",
+            "settings": {
+                "pageherohead": "Lorem Ipsum Dolar Sitamet",
+                "herocolor": "#000000"
+              }
+          },
+          {
+            "type": "button",
+            "settings": {
+                "pageherobuttext": "READ MORE",
+                "herobuttonColor": "light"
+              }
+          }
+        
+        ]
+       }
+    ]
+
+}
+
+{% endschema %}
+
+
+
+
+<style>
+  .page-hero-{{section.id}}{
+        padding: {{section.settings.padding_sizeup}}px 0px {{section.settings.padding_sizedown}}px 0px;
+        border-width:1px;
+  }
+
+  .page-hero-title-{{section.id}}{
+    max-width: {{section.settings.pageherotitledesktop}}px;
+  }
+
+  
+
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    .page-hero-{{section.id}}{
+        padding: {{section.settings.padding_sizeupm}}px 0px {{section.settings.padding_sizedownm}}px 0px;
+        border-width:0.5px;
+  }
+  .page-hero-title-{{section.id}}{
+    max-width: {{section.settings.pageherotitlemobile}}px;
+  }
+  }
+</style>

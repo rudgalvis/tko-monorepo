@@ -1,0 +1,36 @@
+@mixin global-color($type, $class-name, $color) {
+    .#{$class-name} {
+        #{$type}: $color;
+    }
+
+    :global(.#{$class-name}) {
+        @extend .#{$class-name};
+    }
+}
+
+/* Colors */
+$green-600: #018849;
+
+/**
+ * Text styles
+ */
+
+// Creator
+@mixin text-green-600 {
+    @include global-color('color', 'text-green-600', $green-600);
+}
+
+// Include everywhere
+@include text-green-600;
+
+/**
+ * Background styles
+ */
+
+// Creator
+@mixin bg-green-600 {
+    @include global-color('background-color', 'bg-green-600', $green-600);
+}
+
+// Include everywhere
+@include bg-green-600;

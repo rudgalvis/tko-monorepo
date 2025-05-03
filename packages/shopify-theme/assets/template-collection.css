@@ -1,0 +1,207 @@
+.collection-grid-section {
+  margin-top: 3rem;
+}
+
+.collection {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.pagination-container{
+  width: 100%;
+  height: 202px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+
+}
+
+div#pagination_other {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 202px;
+  border-bottom:1px solid black;
+}
+
+.no_border{
+  border-bottom:none !important;
+}
+
+.pagination-article {
+  width: 100%;
+  height: auto;
+  max-width: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+span.page.current {
+color:black;
+}
+
+.pagination-article .page a{
+color:#B4B4B4;
+}
+
+.pagination-article .next a{
+font-family: 'Monument Regular';
+color:#B4B4B4;
+}
+
+.pagination-article .prev a{
+  font-family: 'Monument Regular';
+color:#B4B4B4;
+
+}
+
+.pagination-article span {
+  margin-left: 8px;
+  margin-right: 8px;
+  font-family: 'Monument';
+  font-size:22px;
+  letter-spacing:-0.34px;
+  color:#B4B4B4;
+  min-width: 18px;
+
+}
+
+.nopagination{
+  height:0px;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) { 
+    
+  .pagination-container{
+      width: 100%;
+      height: 100px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+  
+    }
+
+    .pagination-article span {
+      font-size: 12px;
+      letter-spacing: -0.18px;
+  }
+
+  .collection-grid-section {
+    margin-top: 1.3rem;
+  }
+  
+  }
+
+@media screen and (max-width: 749px) {
+  .collection .grid__item:only-child {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .collection .title:not(.title--no-heading) {
+    margin-top: -1rem;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .collection .title-wrapper-with-link--no-heading {
+    margin-top: calc(6rem + var(--page-width-margin));
+  }
+}
+
+@media screen and (max-width: 989px) {
+  .collection .slider.slider--tablet {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.collection .loading-overlay {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  width: 100%;
+  padding: 0 1.5rem;
+  opacity: 0.7;
+}
+
+@media screen and (min-width: 750px) {
+  .collection .loading-overlay {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
+.collection.loading .loading-overlay {
+  display: block;
+}
+
+.collection--empty .title-wrapper {
+  margin-top: 10rem;
+  margin-bottom: 15rem;
+}
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+
+
+.pagination-container{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  div#pagination_other {
+
+    height: 100px;
+    border-bottom:.5px solid black;
+  }
+
+  .pagination-container{
+    width: 100%;
+    height: 202px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 202px;
+  
+  }
+
+  .pagination-article span {
+    font-size: 12px;
+    letter-spacing: -0.18px;
+    margin:0px 5px;
+    min-width: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.collection-grid-section {
+  margin-top: 1.3rem;
+}
+
+.pagination-article .page a {
+  padding: 0px 5px;
+}
+
+}

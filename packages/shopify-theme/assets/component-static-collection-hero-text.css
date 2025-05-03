@@ -1,0 +1,71 @@
+.static-collection-hero-text-container{
+    width:100%;
+    height: auto;
+    position: relative;
+    padding: 23px 25px 38px 25px;
+}
+
+
+
+.static-collection-hero-text-container h2{
+   font-family: "Monument";
+   font-size:14px;
+   letter-spacing: -0.22px;
+   line-height:23px;
+   color: black;
+   text-transform: uppercase;
+}
+
+.static-collection-hero-text-container p{
+   font-family: "Panama";
+   font-size:20px;
+   letter-spacing: -0.31px;
+   line-height:26px;
+   color: black;
+   max-width: 710px;
+   margin-block-start: 0em;
+   margin-block-end: 1em;
+}
+
+.collection-start{
+    margin-top:150px;
+}
+
+.collection-hero-image-container{
+    aspect-ratio:2.57/1
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .collection-start{
+    margin-top:101px;
+}
+
+.static-collection-hero-text-container{
+    padding: 20px 10px 21px 10px;
+}
+
+
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+.collection-start {
+margin-top: 95px;
+}
+
+.static-collection-hero-text-container{
+padding: 26px 25px 21px 25px;
+}
+.static-collection-hero-text-container p{
+   font-size:18px;
+   letter-spacing: -0.28px;
+   line-height:23px;
+   margin-block-start: 0.6em;
+    margin-block-end: 1em; 
+}
+
+.collection-hero-image-container{
+    aspect-ratio:16/9
+}
+
+
+}

@@ -1,0 +1,215 @@
+.page-title {
+  margin-top: 0;
+}
+
+.page-width{
+  width:100%;
+  height:auto;
+  display: flex;
+  align-items: center;
+  justify-content:flex-start;
+  margin-top:220px;
+  flex-direction:column;
+  padding-bottom:120px;
+}
+
+.rte{
+  width:100%;
+  max-width:1000px;
+  margin: auto;
+}
+
+
+
+.page_title {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.rte a{
+   text-decoration:underline;
+   font-size: 21px;
+   font-family: Monument Regular;
+   letter-spacing: -.32px;
+   line-height: 32px;
+   text-align: left;
+   color: #000;
+   text-transform: none;
+
+}
+
+.page_title h1 {
+  font-size: 62px;
+  letter-spacing: -.95px;
+  font-family: Panama;
+  line-height: 70px;
+  color: #000;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-bottom: 60px;
+  text-align: left;
+}
+
+.rte h3 {
+  font-size: 20px;
+  letter-spacing: -.31px;
+  font-family: 'Monument';
+  line-height: 24px;
+  color: #000;
+  text-align: left;
+}
+
+.rte h4 {
+  letter-spacing: -.31px;
+}
+
+.rte h2 {
+  font-size: 20px;
+  font-family: Monument;
+  letter-spacing: -.31px;
+  line-height: 24px;
+  text-align: left;
+  color: #000;
+}
+
+.rte p {
+  font-size: 21px;
+  font-family: Monument Regular;
+  letter-spacing: -.32px;
+  line-height: 32px;
+  text-align: left;
+  color: #000;
+}
+
+.rte p strong {
+  font-size: 21px;
+  font-family: 'Monument';
+  letter-spacing: -.32px;
+  line-height: 32px;
+  text-align: left;
+  color: #000;
+  font-weight: 700;
+}
+
+.rte span{
+  font-size: 21px;
+  font-family: Monument Regular;
+  letter-spacing: -.32px;
+  line-height: 32px;
+  text-align: left;
+  color: #000;
+}
+
+.main-page-title {
+  margin-bottom: 3rem; 
+}
+
+@media screen and (min-width: 750px) {
+  .main-page-title {
+    margin-bottom: 4rem;
+  }
+ 
+}
+
+
+
+
+@media (max-width: 812px) {
+
+.page_title h1 {
+  font-size: 30px;
+    letter-spacing: -.46px;
+    line-height: 33px;
+    text-align: left;
+    max-width: 250px;
+
+   
+  }
+
+  .page_title {
+    width: 100%;
+    max-width: 1000px;
+    padding:0px 6.5px;
+  }
+
+  .page-width{
+
+    margin-top:130px;
+    padding-bottom:80px !important;
+    max-width: unset;
+    padding: 0px 7px;
+}
+
+  .rte h2 {
+    font-size: 18px;
+    letter-spacing: -.25px;
+    line-height: 18px;
+}
+
+.rte a{
+  font-size: 14px;
+  font-family: Monument Regular;
+  letter-spacing: -.22px;
+  line-height: 20px;
+}
+
+
+.rte h3 {
+  font-size: 16px;
+  letter-spacing: -.25px;
+  line-height: 18px;
+}
+
+.rte p {
+  font-size: 14px;
+  font-family: "Monument Regular";
+  letter-spacing: -.22px;
+  line-height: 20px;
+}
+
+.rte p strong {
+  font-size: 14px;
+  font-family: "Monument";
+  letter-spacing: -0.02em;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.rte{
+  width:100%;
+  max-width:1000px;
+  margin: auto;
+  padding:0px 6.5px
+}
+
+.page_title {
+  width: 100%;
+  max-width: 1000px;
+  padding:0px 6.5px;
+}
+
+.rte span {
+  font-size: 14px;
+  font-family: Monument Regular;
+  letter-spacing: -.22px;
+  line-height: 20px;
+}
+
+}
+
+
+
+
+
+
+
+
+.page-placeholder-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.page-placeholder {
+  width: 52.5rem;
+  height: 52.5rem;
+}

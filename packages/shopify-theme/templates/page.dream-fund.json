@@ -1,0 +1,502 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-dream-fund",
+      "settings": {
+      }
+    },
+    "164328289303867b5f": {
+      "type": "static-page-hero",
+      "blocks": {
+        "1643282893a69fddd3-0": {
+          "type": "title",
+          "settings": {
+            "pageherohead": "Knitters’ dream fund lorem ipsum dolor sit amet consectetur elit. Integer non sit amet cursus.",
+            "herocolor": "#ffffff"
+          }
+        },
+        "1643282893a69fddd3-1": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "pageherobuttext": "READ MORE",
+            "herobuttonColor": "light",
+            "herourl": ""
+          }
+        }
+      },
+      "block_order": [
+        "1643282893a69fddd3-0",
+        "1643282893a69fddd3-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "herolayoutpage": "top-bottom",
+        "footer_hero": false,
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "pageherotitledesktop": 15,
+        "pageherotitlemobile": 15
+      }
+    },
+    "164053940504080a3b": {
+      "type": "static-onlytext",
+      "settings": {
+        "onlyTextlayout": "only-bottom",
+        "bgOnlyTextCTA": "#eeeeea",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "",
+        "maxwidthoftitle": 900,
+        "maxwidthoftitlemobiled": 300,
+        "bodytextOnlyTextCTA": "Fair wages support our knitters' financial goals but our Knitters Dream fund supports their personal goals.",
+        "fontsizetune": "30px",
+        "maxwidthoftext": 1150,
+        "maxwidthoftextmobile": 280,
+        "showurlOnlyTextCTA": false,
+        "linkOnlyTextCTA": "",
+        "linktextOnlyTextCTA": "",
+        "padding_sizeup_sot": 1,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 55,
+        "containerbottom": 79,
+        "containertopmobile": 40,
+        "containerbottommobile": 80,
+        "sectionID": ""
+      }
+    },
+    "1640539487782b1a90": {
+      "type": "static-fullscreen-img-CTA",
+      "settings": {
+        "borderlayoutCTA": "hide-border",
+        "fs-image": "shopify://shop_images/KDF-1-Full-width-Image_Desktop_x761_32fe9582-5aa5-4e0f-a247-41d1b9340476.webp",
+        "fs-image-mobile": "shopify://shop_images/KDF-1-Full-width-Image_Mobile_692x_463713af-2dec-4eae-88c3-a9549b0eff66.webp",
+        "showcontent": false,
+        "fsTitle": "",
+        "fsTitleColor": "",
+        "fsURL": "",
+        "fsBtntitle": "",
+        "ctabuttonColor": "light",
+        "padding_sizeup": 20,
+        "padding_sizedown": 10,
+        "padding_sizeupm": 10,
+        "padding_sizedownm": 0
+      }
+    },
+    "16484869778d5b371a": {
+      "type": "static-page-navigation",
+      "blocks": {
+        "bf4e617a-5c3d-4a02-bb96-ae5184bfd755": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "HOW IT WORKS",
+            "pnid": "section-1"
+          }
+        },
+        "efd48704-51b4-4828-82a2-b68d6934a104": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "THE DREAMS",
+            "pnid": "section-2"
+          }
+        },
+        "451e0820-3713-475f-905d-1dc13ca9f4d1": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "FULLFILLED DREAMS",
+            "pnid": "section-3"
+          }
+        }
+      },
+      "block_order": [
+        "bf4e617a-5c3d-4a02-bb96-ae5184bfd755",
+        "efd48704-51b4-4828-82a2-b68d6934a104",
+        "451e0820-3713-475f-905d-1dc13ca9f4d1"
+      ],
+      "settings": {
+      }
+    },
+    "16405394909cd4d5f2": {
+      "type": "static-two-column-text",
+      "settings": {
+        "borderlayouttwocltext": "top-bottom",
+        "padding_sizeup": 80,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 10,
+        "padding_top_sec": 3,
+        "padding_bottom_sec": 60,
+        "padding_top_secm": 40,
+        "padding_bottom_secm": 40,
+        "twocolheading": "Encouraging our knitters to dream bigger",
+        "hed_padding_sec": 300,
+        "hed_padding_secm": 250,
+        "twocolcopy": "<p>Being able to invest in driving lessons or go on a mother-daughter vacation probably isn't too crazy of a concept for most of us. But for the majority of garment workers across the world, it's a whole other story. So we wanted to create a platform that gave our knitters a realistic shot at achieving their personal dreams. <br/><br/>We're a small, independent label with premium design, marketing and material costs. We’d love to raise our knitters’ salaries way beyond just living wage but, with our overheads, that’s currently not possible. Our Knitters Dream fund helps to bring these dreams to life bit by bit. With each purchase, you can choose to donate directly towards a dream of a woman who made your knit. That extra donation goes towards hiring a nutritionist, buying those beautiful apartment curtains or paying for dental implants. Or whatever else they’ve been been daydreaming about paying for.</p>",
+        "cop_padding_sec": 1020,
+        "cop_padding_secm": 290,
+        "sectionID": "section-1"
+      }
+    },
+    "16405395574d8e78f3": {
+      "type": "static-onlytext",
+      "settings": {
+        "onlyTextlayout": "only-bottom",
+        "bgOnlyTextCTA": "#eeeeea",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "",
+        "maxwidthoftitle": 20,
+        "maxwidthoftitlemobiled": 20,
+        "bodytextOnlyTextCTA": "We're super grateful to you for helping us to create stable jobs and income for women.",
+        "fontsizetune": "27px",
+        "maxwidthoftext": 1020,
+        "maxwidthoftextmobile": 300,
+        "showurlOnlyTextCTA": false,
+        "linkOnlyTextCTA": "",
+        "linktextOnlyTextCTA": "",
+        "padding_sizeup_sot": 5,
+        "padding_sizedow_sot": 22,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 50,
+        "containerbottom": 82,
+        "containertopmobile": 44,
+        "containerbottommobile": 70,
+        "sectionID": ""
+      }
+    },
+    "16474437019a47c39f": {
+      "type": "static-two-columnlayout-alt-2",
+      "settings": {
+        "borderlayouttwocl": "hide-border",
+        "sectionlayouttwocl": "text-image",
+        "cl-image": "shopify://shop_images/KDF-Section-1_938x_8744ca97-a339-4344-820b-5602e0ecefc5.webp",
+        "padding_sizeupm_section": 61,
+        "padding_sizedownm_section": 13,
+        "headingcl": "",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 15,
+        "h2maxwidthmobile": 375,
+        "pmaxwidthdesktop": 536,
+        "pmaxwidthmobile": 340,
+        "bodycl": "That extra donation is always optional on your purchases, but it's always seriously appreciated. Scroll down for some of our knitters' dreams and to see what we've achieved so far.",
+        "textposition": "center",
+        "padding_sizeup": 17,
+        "padding_sizedown": 1,
+        "padding_sizeupm": 8,
+        "padding_sizedownm": 15,
+        "showurlcl": false,
+        "linkclUrl": "",
+        "linkTextcl": "",
+        "sectionID": ""
+      }
+    },
+    "1640612342ff96b6fb": {
+      "type": "static-the-dreams-accordion",
+      "blocks": {
+        "9b6d4586-62ad-497c-a8e2-fc4809c4d153": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "accordionheadingdream": "Svetlana",
+            "accordionsubdream": "Sewing course + supplies",
+            "accordioncopydream": "Svetlana's dream is to one day enrol on a sewing course, to take her crafting skills to the next level and to create her own masterpieces. She's been crafting since childhood, when she'd spend a lot of time sewing clothes for her dolls after a friend showed her how. Now, as she has more free time, she really wants to brush up her sewing skills and create some designs using a new sewing machine.",
+            "dreamurlcontrol": false,
+            "fundurltext": "DONATE TO THE FUND",
+            "fundurl": "shopify://pages/dream-fund",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "5f9c3229-6d7d-494b-a7e8-b39fce2f6c54": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/KDF-Dream-2-Regina_424x539_f997c90f-a182-43c3-85ef-5e93afb731c2.webp",
+            "dreamaccordionthumb": "shopify://shop_images/27_124x124_2_124x124_3f8ed154-18fc-4289-abdc-00ab9574f773.webp",
+            "accordionheadingdream": "Valentina",
+            "accordionsubdream": "A flat screen TV",
+            "accordioncopydream": "Ms. Valentina has been dreaming of a big, flat screen TV. Like the ones you see in the movies! She explains to us that the one she currently has distorts colors and is the size of  a \"banana box\". And damn, we think she deserves a fancy, flat screen TV! Especially given how much she loves true crime TV series.",
+            "dreamurlcontrol": false,
+            "fundurltext": "DONATE TO THE FUND",
+            "fundurl": "shopify://pages/dream-fund",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "7a31e8cc-e27f-452e-8c21-52b617e77231": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Danute-bio_424x539_d59e3843-7d23-4498-b170-a918b2730f90.webp",
+            "dreamaccordionthumb": "shopify://shop_images/Danute-icon_124x124_1e609a52-fb44-4975-bb5e-5adc16540f7c.webp",
+            "accordionheadingdream": "Danutė",
+            "accordionsubdream": "A grill and cooking classes",
+            "accordioncopydream": "Danutė is a great chef and loves cooking up a feast for her family. She's always dreamt of being a chef star for her family gatherings from her own yard. We'll be helping her to bring those dreams to life with a grill and cooking classes so she can spend her free time thinking up incredible new recipes and bringing them to life! Maybe one day we'll all get together for a knitters' grill session...",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "7c622824-2f62-40ea-923c-1d6533f6f53e": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/KDF-Dream-3-Regina_424x539_e8fce78c-c19e-4dad-b3d4-df875e74c40a.webp",
+            "dreamaccordionthumb": "shopify://shop_images/27_124x124_3_124x124_abaad2f2-f36d-4823-aa04-53a41e51d297.webp",
+            "accordionheadingdream": "Regina",
+            "accordionsubdream": "A set of new teeth",
+            "accordioncopydream": "Regina’s biggest dream is fixing her teeth: orthodontic visits in Lithuania are super expensive but she hopes she’ll feel less self conscious and more open to dating when she’s happier with them. This is one of our Knitter’s Dreams that we’re hoping to help her fulfill. We’d love to see her beautiful smile more often!",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "8c99c5b7-ca87-4e2c-a3c7-62ab2dc5079c": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Ingrida-bio_424x539_fff8d7cd-fef0-4443-8143-aeb6e44e8f03.webp",
+            "dreamaccordionthumb": "shopify://shop_images/Ingrida-icon_124x124_6b083952-c2ad-4c04-bb0f-4656692b6559.webp",
+            "accordionheadingdream": "Ingrida",
+            "accordionsubdream": "Coffee machine and barista classes",
+            "accordioncopydream": "Ingrida loves a good cup of coffee and usually grabs hers from the local gas station. She'd love to make it at home and save money, so we're planning on gifting her a coffee making course so her lattes can be as good (or better) than anywhere else outside her home. Ingrida has five children, so she definitely needs a caffeine-fuelled energy boost and deserves some time to relax and enjoy her coffee in peace!",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        }
+      },
+      "block_order": [
+        "9b6d4586-62ad-497c-a8e2-fc4809c4d153",
+        "5f9c3229-6d7d-494b-a7e8-b39fce2f6c54",
+        "7a31e8cc-e27f-452e-8c21-52b617e77231",
+        "7c622824-2f62-40ea-923c-1d6533f6f53e",
+        "8c99c5b7-ca87-4e2c-a3c7-62ab2dc5079c"
+      ],
+      "settings": {
+        "accordionlayoutdream": "hide-border",
+        "sectionheading": "The Dreams",
+        "padding_sizeup": 5,
+        "padding_sizedown": 0,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "showheader": true,
+        "notfirst": false,
+        "hidedescription": false,
+        "sectionID": "section-2"
+      }
+    },
+    "16492040783e0611ad": {
+      "type": "static-link",
+      "settings": {
+        "onlyTextlayout": "hide-border",
+        "linktext": "SEE MORE DREAMS",
+        "linkurl": "shopify://pages/see-all-dreams",
+        "thisisbigurl": false,
+        "justheader": false,
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 66,
+        "containerbottom": 64,
+        "containertopmobile": 20,
+        "containerbottommobile": 20
+      }
+    },
+    "1644598025fec9c18b": {
+      "type": "static-how-to-donate",
+      "settings": {
+        "howonlyTextlayout": "hide-border",
+        "productdonate": "for-the-dream-fund",
+        "multiplier_fund": 5,
+        "howbgOnlyTextCTA": "#b4bed6",
+        "howcolorOnlyTextCTA": "#000000",
+        "howheadingOnlyTextCTA": "DONATE TO THE FUND",
+        "howbodytextOnlyTextCTA": "Now with each purchase, you can choose to donate directly towards a dream of a woman who made your knit.",
+        "howshowurlOnlyTextCTA": false,
+        "howlinkOnlyTextCTA": "",
+        "howlinktextOnlyTextCTA": "",
+        "padding_sizeup": 15,
+        "padding_sizedown": 18,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "padding_sizeupd_section": 60,
+        "padding_sizedownd_section": 60,
+        "padding_sizeupm_section": 50,
+        "padding_sizedownm_section": 21,
+        "titledesktop": 500,
+        "titlemobile": 300,
+        "copydesktop": 1050,
+        "copymobile": 300,
+        "sectionID": ""
+      }
+    },
+    "1641296181af74369c": {
+      "type": "static-dreams-fullfilled",
+      "blocks": {
+        "03e16214-f5b1-48df-8c6d-88bf21dbdfc1": {
+          "type": "Accordion",
+          "settings": {
+            "fullfilledname": "MARINA",
+            "fullfilledsummary": "Getting a driver’s license",
+            "fullfilledsummarymain": "<p>Marina lives in a tiny village in Lithuania. The infrastructure to get to their nearest towns is practically non-existent. She always believed that getting a driver’s license would be a complete game changer.</p><p>“I feel bad about constantly asking neighbors”, Marina explained to us. “They all have their routes and day-to-day lives. I actually tried driving a few times. My husband was super patient while teaching me. Sure it was terrifying, but I loved it. I’d love to be independent! Just imagine, whenever I need I could just hop into a car with my kids and go!” </p><p>We're happy to report that Marina not only passed her drivers test (it took 4 attempts) but also purchased her own car! Hell, yeah.</p>",
+            "fullfilledaccordionimage": "shopify://shop_images/Marina-Fulfilled-Dream_848x1074_1aee2011-19ef-4c72-935f-61464e54f626.webp",
+            "fullfilledavatar": "shopify://shop_images/marina_avatar_124x124_63e76526-8194-48c6-932b-418d68a273f6.webp"
+          }
+        },
+        "ee638314-163f-4df6-be76-6bdd8d090afb": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "fullfilledname": "Rūta",
+            "fullfilledsummary": "A trip to Israel with her husband",
+            "fullfilledsummarymain": ""
+          }
+        },
+        "ca18d6a5-d8e5-4c25-a25c-658360d550d4": {
+          "type": "Accordion",
+          "settings": {
+            "fullfilledname": "ALDONA",
+            "fullfilledsummary": "Owning an elliptical trainer",
+            "fullfilledsummarymain": "<p>Aldona loves working out but always struggles during the colder seasons when running outdoors is basically impossible. She dreamt of owning an elliptical machine to keep fit, so when the temperatures outside are freezing, she can exercise safely inside. </p><p>Thanks to you, we've been able to gift Aldona her own elliptical trainer . Now, when she's not knitting, she can squeeze in a quick workout session from the comfort of her home.</p>",
+            "fullfilledaccordionimage": "shopify://shop_images/Aldona-Fulfilled-Dream_848x1074_a0da4b5c-96ef-497a-acce-068ee11b9da0.webp",
+            "fullfilledavatar": "shopify://shop_images/marina_avatar_124x124_39c2d90a-53d3-4e7c-bdc5-dce688feb095.webp"
+          }
+        },
+        "fd4c5cac-c33b-430b-bf0c-7fb4499f5cfe": {
+          "type": "Accordion",
+          "settings": {
+            "fullfilledname": "Nijolė",
+            "fullfilledsummary": "Nutritional education",
+            "fullfilledsummarymain": "<p>We’ve just fulfilled our knitter Nijolė’s dream. For years, she's been dreaming of nutritional education and learning more about how to arrange a healthy diet, as someone with diabetes. <br/><br/>Thanks to our Knitters’ Dream fund, Nijolė has been working with a licensed dietician to plan meals that help her to feel her best. Being able to fulfill these dreams is always an incredible feeling but particularly this time after hearing Nijolė talk about how nice it is that \"others do care\" about her.</p>",
+            "fullfilledaccordionimage": "shopify://shop_images/Nijole-Fulfilled-Dream_848x1074_05123ea6-25f1-4f81-8a1d-86e0769ec3c2.webp",
+            "fullfilledavatar": "shopify://shop_images/avatar_124x124_8ced5221-6d0c-42a1-b143-239b9cc71bac.webp"
+          }
+        },
+        "8bfd61de-e830-45e2-86f9-1efe6fe1c666": {
+          "type": "Accordion",
+          "settings": {
+            "fullfilledname": "Rūta",
+            "fullfilledsummary": "A trip to Cyprus",
+            "fullfilledsummarymain": "<p>Rūta has been fascinated with traveling since she was the kid. The kind of traveling that involves learning about completely different cultures than her own. However, she haven't had a chance to explore further than her local town in rural Lithuania for years now.</p><p><br/>We used our Knitters Dream fund to treat Rūta to a week-long vacation of a lifetime. Rūta picked Cyprus, where she spent time her time exploring local historic sites, taking long walks on the rocks and sipping frappés like a true Cypriot.</p>",
+            "fullfilledaccordionimage": "shopify://shop_images/Knitters_Size_848x1078_7aca41a9-2cb0-43c2-9184-d4be79b6fa9a.jpg",
+            "fullfilledavatar": "shopify://shop_images/The_Knotty_Ones_Post_Templates_brand_colors_su_tekstu.jpg"
+          }
+        },
+        "c75d2d7b-6439-445b-8458-29fa3c8690b3": {
+          "type": "Accordion",
+          "settings": {
+            "fullfilledname": "DANUTĖ",
+            "fullfilledsummary": "Getting a family grill",
+            "fullfilledsummarymain": "<p>Danutė has been dreaming about having her family over for the weekend barbecues, whilst practising another passion of hers — grilling. Well, getting this big red egg checked both the boxes.<br/><br/>Danutė says she already had her first barbecue party, and can't wait to experiment with more recipes. Summer goal? To become the best grill chef in town! Weekends outside, good food & a lovely company — it really is a dream, isn't it?</p>",
+            "fullfilledaccordionimage": "shopify://shop_images/1200x1500_images_4.jpg",
+            "fullfilledavatar": "shopify://shop_images/knitters_icons_200x200_1.jpg"
+          }
+        },
+        "accordion_zRJbmR": {
+          "type": "Accordion",
+          "settings": {
+            "fullfilledname": "SVETLANA",
+            "fullfilledsummary": "Sewing machine",
+            "fullfilledsummarymain": "<p>Svetlana has always been passionate about crafts, whether it was sewing doll clothes as a little girl or knitting big chunky sweaters for her family (and you, guys!). She used to own a sewing machine years ago but never got the chance to replace it after it broke. Now she's dreaming of owning a new sewing machine to sew her own clothes. She has recently become a grandmother again, so we can expect plenty cute mini dresses for her granddaughter too.<br/>Who knows? Maybe Svetlana will launch her own brand and become our direct competition, or maybe we'll just have to do a The Knotty Ones x Svetlana colab together.</p>",
+            "fullfilledaccordionimage": "shopify://shop_images/F94DC492-085A-4BDB-9686-70BBB455DE19.jpg",
+            "fullfilledavatar": "shopify://shop_images/F94DC492-085A-4BDB-9686-70BBB455DE19.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "03e16214-f5b1-48df-8c6d-88bf21dbdfc1",
+        "ee638314-163f-4df6-be76-6bdd8d090afb",
+        "ca18d6a5-d8e5-4c25-a25c-658360d550d4",
+        "fd4c5cac-c33b-430b-bf0c-7fb4499f5cfe",
+        "8bfd61de-e830-45e2-86f9-1efe6fe1c666",
+        "c75d2d7b-6439-445b-8458-29fa3c8690b3",
+        "accordion_zRJbmR"
+      ],
+      "settings": {
+        "fullfilledlayoutpage": "hide-border",
+        "padding_sizeup": 0,
+        "padding_sizedown": 0,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "fullfilledheader": "DREAMS WE'VE FULFILLED SO FAR",
+        "sectionID": "section-3"
+      }
+    },
+    "1653673185ffe972dc": {
+      "type": "static-link",
+      "disabled": true,
+      "settings": {
+        "onlyTextlayout": "only-bottom",
+        "linktext": "MORE FULFILLED DREAMS",
+        "linkurl": "",
+        "thisisbigurl": false,
+        "justheader": false,
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 66,
+        "containerbottom": 64,
+        "containertopmobile": 20,
+        "containerbottommobile": 20
+      }
+    },
+    "1644601539b85edd54": {
+      "type": "static-cta-subscribe",
+      "settings": {
+        "borderlayoutsub": "hide-border",
+        "subbgcolor": "#b4bed6",
+        "subheading": "20% OFF YOUR FIRST ORDER",
+        "subbody": "<p>Good things come to those who subscribe. We don’t spam.<br/>Pinky promise</p>",
+        "maxwidthofcta": 980,
+        "maxwidthofctamobile": 280,
+        "padding_sizeup": 18,
+        "padding_sizedown": 21,
+        "padding_sizeupm": 11,
+        "padding_sizedownm": 8,
+        "containertop_": 62,
+        "containerbottom_": 33,
+        "containertopmobile_": 50,
+        "containerbottommobile_": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "164328289303867b5f",
+    "164053940504080a3b",
+    "1640539487782b1a90",
+    "16484869778d5b371a",
+    "16405394909cd4d5f2",
+    "16405395574d8e78f3",
+    "16474437019a47c39f",
+    "1640612342ff96b6fb",
+    "16492040783e0611ad",
+    "1644598025fec9c18b",
+    "1641296181af74369c",
+    "1653673185ffe972dc",
+    "1644601539b85edd54"
+  ]
+}

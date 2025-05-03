@@ -1,0 +1,41 @@
+{% comment %}
+    Usage:
+    {% render 'product-container-price', product: product %}
+{% endcomment %}
+
+
+{% for product_option in product.options_with_values %}
+    {% assign detectProductType = product_option.name | strip | handleize %}
+{% endfor %}
+
+{% assign getVariant = product.variants[0].option1 %}
+
+{% assign recommended_products = product.metafields.variantproduct.productgroupseasonal.value %}
+{% assign recommended_products_core = product.metafields.variantproduct.productgroup.value %}
+{% assign first_variant_ = product.variants[0].id %}
+
+<div class="product-card-price">
+    <product-price price="{{ product.variants[0].price | money_without_trailing_zeros | strip_html}}"
+                   compared_at="{{ product.variants[0].compare_at_price | money_without_trailing_zeros | strip_html }}"
+                   variant_id="{{ product.variants[0].id }}"
+                   iso_code="{{ localization.country.iso_code }}"
+                   theme="small" ></product-price>
+
+    <product-discount-percentage price="{{ product.variants[0].price | money_without_trailing_zeros | strip_html}}"
+                   compared_at="{{ product.variants[0].compare_at_price | money_without_trailing_zeros | strip_html }}"
+                   variant_id="{{ product.variants[0].id }}"
+                   iso_code="{{ localization.country.iso_code }}"
+                   theme="small" ></product-discount-percentage>
+
+    {% if product.available == false %}
+        <div class="sold-out-at-price">
+            &nbsp;- SOLD OUT
+        </div>
+    {% endif %}
+</div>
+
+<style scoped>
+    .product-card-price {
+        margin-top: 10px;
+    }
+</style>

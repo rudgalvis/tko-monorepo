@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="{{ 'section-main-page.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+
+
+<div class="page-width">
+    <div class="page_title">
+        <h1 style="margin-left:auto; margin-right:auto;" class="page-h1_{{section.id}}">Dev</h1>
+    </div>
+
+    <div class="rte">
+        It's a dev page
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Dev",
+  "tag": "section",
+  "class": "dev-section",
+  "settings": [
+  ]
+}
+{% endschema %}

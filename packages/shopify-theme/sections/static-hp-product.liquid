@@ -1,0 +1,180 @@
+{{ 'component-hp-product.css' | asset_url | stylesheet_tag }}
+
+
+<style>
+
+.product-container:nth-of-type(3n+3) .frame-container{
+  border-right: none;
+  border-left: none;
+
+  }
+
+  .product-container:nth-of-type(3n+1) .frame-container{
+     border-left:none;
+     border-right:1px solid black;;
+
+  }
+
+
+  .frame-container:nth-of-type(3n+2){
+     border-left:none;
+     border-right:1px solid black;
+
+  }
+
+  .product-container:nth-of-type(3) .frame-container{
+     border-left:none;
+     border-right:none;
+
+  }
+
+  .product-container:nth-of-type(1) .frame-container{
+     border-left:none;
+     border-right:1px solid black;
+
+  }
+
+
+  @media (min-width: 768px) and (max-width: 1181px) {
+    .product-container:nth-of-type(3n+3) .frame-container{
+  border-right: none;
+  border-left: none;
+
+  }
+
+  .product-container:nth-of-type(3n+1) .frame-container{
+     border-left:none;
+     border-right:1px solid black;;
+
+  }
+
+
+  .frame-container:nth-of-type(3n+2){
+     border-left:none;
+     border-right:1px solid black;
+
+  }
+
+  .product-container:nth-of-type(3) .frame-container{
+    border-left: none;
+    border-right: 1px solid black;
+
+  }
+
+  .product-container:nth-of-type(1) .frame-container{
+     border-left:none;
+     border-right:1px solid black;
+
+  }
+
+  }
+
+
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    .product-container:nth-of-type(2n+1) .frame-container{
+    border-right:.5px solid black;
+    border-left:none;
+    padding: 0px 5px 0px 6.5px;
+
+    }
+
+    .product-container:nth-of-type(2n+2) .frame-container{
+    border-right:none;
+    padding: 0px 6.5px 0px 5px;
+
+
+    }
+
+  }
+
+
+
+
+</style>
+
+
+<script
+  type="application/json"
+  data-section-type="static-hp-product"
+  data-section-id="{{ section.id }}"
+  data-section-data
+>
+</script>
+{% if section.settings.showproductheader == true %}
+<div class="hp-product-header" id="hp-product-header">
+  <h2>{{ section.settings.productheadertext }}</h2>
+</div>
+{% endif %}
+<div id="ProductGridContainer" class="hp-product-container">
+    <div class="hp-product-content">
+        {% render 'listproduct'
+           productlength : 3,
+           collectionname : section.settings.selectedProduct,
+           bottomText: section.settings.bottomURLtext,
+           bottomURL: section.settings.bottomURL,
+           bottomURLContainer: section.settings.showpfooterheader,
+           countdownCol : settings.countdowncollection
+        %}
+    </div>
+</div>
+
+
+
+
+<script>
+    window.headerJSON = {{ section.settings | json }};
+</script>
+
+
+
+{% schema %}
+{
+
+        "name": "Home Page Collection",
+        "settings" :[
+          {
+            "type": "checkbox",
+            "id": "show_product_secondary_image",
+            "default": true,
+            "label": "Second Image Enabled"
+          },
+          {
+            "type": "collection",
+            "id": "selectedProduct",
+            "label": "Home Page Collection"
+          },
+
+          {
+            "type": "header",
+            "content": "Homepage Collection Options"
+          },
+          {
+            "type": "checkbox",
+            "id": "showproductheader",
+            "default": false,
+            "label": "Show Collection Heading"
+          },
+          {
+            "type": "text",
+            "id": "productheadertext",
+            "label": "Heading or URL Text"
+          },
+          {
+            "type": "url",
+            "id": "bottomURL",
+            "label": "URL"
+          }
+
+
+        ],
+
+        "presets": [
+        {
+          "category": "Collection",
+          "name": "Home Page Collection"
+         }
+      ]
+
+}
+{% endschema %}

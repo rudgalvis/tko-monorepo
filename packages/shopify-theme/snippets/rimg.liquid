@@ -1,0 +1,66 @@
+{% assign imageType = img %}
+{% assign imageRatio = size %}
+{% assign imageAlt = alt %}
+{% assign styleM = maxWidth %}
+{% assign cropImage = crop %}
+
+{% assign preSize = 1920 %}
+
+{% if imgType == product %}
+
+
+ <img loading="lazy"
+  src="{{ imageType | img_url: imageRatio }}"
+
+  alt="{{ imageType.alt | escape }}">
+
+
+{% else %}
+
+
+{% if styleM == nil %}
+
+
+<img loading="lazy"
+  src="{{ imageType | img_url: imageRatio }}"
+  alt="{{ imageType.alt | escape }}">
+
+{% else %}
+
+<img loading="lazy" style="max-width:{{ styleM }}px;" src="{{ imageType | img_url: imageRatio }}" alt="{{ imageAlt }}" srcset="{{ imageType | img_url: '300x' , crop: 'left' }} 300w,
+{{ imageType | img_url: '600x' }} 600w,
+{{ imageType | img_url: '1386x' }} 900w,
+{{ imageType | img_url: '1386x' }} 1440w,
+{{ imageType | img_url: '1386x' }} 1920w"/>
+{% endif %}
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+{%- comment -%}
+<img
+srcset="{%- if imageType.width >= 693 -%}{{ imageType | img_url: '693x' }} 375w,{%- endif -%}
+  {%- if imageType.width >= 750 -%}{{ imageType | img_url: '750x' }} 750w,{%- endif -%}
+  {%- if imageType.width >= 1100 -%}{{ imageType | img_url: '1100x' }} 1100w,{%- endif -%}
+  {%- if imageType.width >= 1500 -%}{{ imageType | img_url: '1500x' }} 1500w,{%- endif -%}
+  {%- if imageType.width >= 1780 -%}{{ imageType | img_url: '1780x' }} 1780w,{%- endif -%}
+  {%- if imageType.width >= 2000 -%}{{ imageType | img_url: '2000x' }} 2000w,{%- endif -%}
+  {%- if imageType.width >= 3000 -%}{{ imageType | img_url: '3000x' }} 3000w,{%- endif -%}
+  {%- if imageType.width >= 3840 -%}{{ imageType | img_url: '3840x' }} 3840w,{%- endif -%}
+  {{ imageType | img_url: '1386x' }} {{ imageType.width }}w"
+sizes="100vw"
+src="{{ imageType | img_url: '1386x' }}"
+loading="lazy"
+alt="{{ imageType.alt | escape }}"
+>
+
+{%- endcomment -%}

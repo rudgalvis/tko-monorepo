@@ -1,0 +1,227 @@
+ 
+
+
+<product-recommendations class="product-recommendations page-width" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4">
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-grid.css' | asset_url | stylesheet_tag }}
+{{ 'section-product-recommendations.css' | asset_url | stylesheet_tag }}
+{{ 'component-hp-product.css' | asset_url | stylesheet_tag }}
+
+
+
+<style>
+
+.spaced-section:last-child {
+    margin-bottom: 0px !important;
+}
+
+.spaced-section:last-child {
+    margin-bottom: calc(11rem + var(--page-width-margin));
+}
+
+.product-container:nth-of-type(3n+3) .frame-container{
+border-right: none;
+border-left: none;
+
+}
+
+.product-container:nth-of-type(3n+1) .frame-container{
+   border-left:none;
+   border-right:1px solid black;
+
+}
+
+.product-container:nth-of-type(3n+2) .frame-container{
+   border-left:none;
+   border-right:1px solid black;
+
+}
+
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .product-container:nth-of-type(2n+1) .frame-container{
+border-right: .5px solid black;;
+border-left: none;
+
+}
+
+.product-container:nth-of-type(2n+2) .frame-container{
+   border-left:none;
+   border-right:none;
+
+}
+}
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+  .product-container:nth-of-type(2n+1) .frame-container{
+border-right: .5px solid black;;
+border-left: none;
+
+}
+
+.product-container:nth-of-type(2n+2) .frame-container{
+   border-left:none;
+   border-right:none;
+
+}
+
+}
+
+</style>
+
+{% assign counterit = 0 %}
+
+  {% if recommendations.performed and recommendations.products_count > 0 %}
+    <h2 class="product-recommendations__heading">{{ section.settings.heading | escape }}</h2>
+
+      <div class="hp-product-container">
+ 
+        <div class="hp-product-content">
+      {% for recommendation in recommendations.products  %}
+
+
+      {% assign dnum = true %}
+      {% for tag in recommendation.tags %}
+        {% if tag contains 'dreamfund' or tag contains 'countdown' %}     
+         {% assign dnum = false %}      
+        {% endif %}
+      {% endfor %}
+      
+      {% if dnum == true %}
+           {% render 'product-card-tko',  product_card_product: recommendation, show_second_image: true  %} 
+           {% assign counterit = counterit | plus: 1 %}
+      {% endif %}
+
+      {% if counterit == 4 %}
+          {%break%}
+      {% endif %}
+
+      {% endfor %}
+      </div>
+      </div>
+
+  {% endif %}
+</product-recommendations>
+
+{% javascript %}
+var loadProductRecommendationsIntoSection = function() {
+
+  var productRecommendationsSection = document.querySelector("product-recommendations");
+  if (productRecommendationsSection === null) { return; }
+
+  var productId = productRecommendationsSection.dataset.productId;
+
+  var limit = productRecommendationsSection.dataset.limit;
+
+  var requestUrl = productRecommendationsSection.dataset.url;
+
+
+
+
+
+  var request = new XMLHttpRequest();
+  request.open("GET", requestUrl);
+  request.onload = function() {
+    if (request.status >= 200 && request.status < 300) {
+      var container = document.createElement("div");
+      container.innerHTML = request.response;
+      productRecommendationsSection.parentElement.innerHTML = container.querySelector("product-recommendations").innerHTML;
+    }
+  };
+  request.send();
+};
+
+document.addEventListener("shopify:section:load", function(event) {
+  if (event.detail.sectionId === "product-recommendations") {
+    loadProductRecommendationsIntoSection();
+  }
+});
+
+loadProductRecommendationsIntoSection();
+{% endjavascript %}
+
+
+{% schema %}
+{
+  "name": "Product Recommendation",
+  "tag": "section",
+  "class": "product-recommendation",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.product-recommendations.settings.paragraph__1.content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "You may also like",
+      "label": "t:sections.product-recommendations.settings.heading.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.product-recommendations.settings.header__2.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.product-recommendations.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.product-recommendations.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.product-recommendations.settings.image_ratio.options__3.label"
+        }
+      ],
+      "default": "adapt",
+      "label": "t:sections.product-recommendations.settings.image_ratio.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:sections.product-recommendations.settings.show_secondary_image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "add_image_padding",
+      "default": false,
+      "label": "t:sections.product-recommendations.settings.add_image_padding.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image_outline",
+      "default": true,
+      "label": "t:sections.product-recommendations.settings.show_image_outline.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:sections.product-recommendations.settings.show_vendor.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "t:sections.product-recommendations.settings.show_rating.label", 
+      "info": "t:sections.product-recommendations.settings.show_rating.info"
+    }
+  ],
+  "presets": [ 
+{
+"category": "Collection",
+"name": "Product Recommendation"
+}
+]
+}
+{% endschema %}

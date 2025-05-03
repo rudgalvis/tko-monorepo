@@ -1,0 +1,31 @@
+{% assign removeSourceSnippet = removeSource %}
+{% assign removeColorsSnippet = removeColors %}
+{% assign pageURLSnippet = pageURLItem %}
+{% assign removeColorURLSnippet = removeColorsURL %}
+{% assign groupColorSnippet = groupName %}
+
+
+
+{%- for value in removeSourceSnippet -%}
+          
+{% assign removeItem = value.label %}
+{% assign removeColor = removeColorsSnippet | split: ',' %} 
+
+
+{% if removeColor contains removeItem %}
+     {% assign trackIt = trackIt | plus : 1 %}  
+     {% if trackIt == 1 %}
+
+       
+
+         <li class="removeButton" data-root="filter.v.option.color" data-items="{{removeColorsSnippet | replace: ' ','+'}}"  data-remove="{{ pageURLSnippet | remove: removeColorURLSnippet }}" class="active-facets__button active-facets__button--light"> 
+            {% if groupColorSnippet != 'Multi'%}
+            <div class="color-circle-up" style="background-color:{{groupColorSnippet}};"></div>
+            {% else %}
+            <div class="color-circle-up" style="background-image:url(https://cdn.shopify.com/s/files/1/0548/6644/4336/files/embroidered-pebble-grey.png?v=1641574855);"></div>
+            
+            {% endif %}
+            <div class="filter-close-img"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/filter-clear-icon.svg?v=1642092965"/></div></li>
+     {% endif %}
+{% endif %}
+{%-endfor-%}  

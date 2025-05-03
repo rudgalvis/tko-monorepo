@@ -1,0 +1,70 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "wrapper": "section#wishlist.wishlist",
+  "sections": {
+    "164492805730d5c01c": {
+      "type": "static-onlytext",
+      "settings": {
+        "onlyTextlayout": "hide-border",
+        "bgOnlyTextCTA": "#eeeeea",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "",
+        "maxwidthoftitle": 20,
+        "maxwidthoftitlemobiled": 20,
+        "bodytextOnlyTextCTA": "Your Wishlist",
+        "fontsizetune": "27px",
+        "maxwidthoftext": 920,
+        "maxwidthoftextmobile": 370,
+        "showurlOnlyTextCTA": false,
+        "linkOnlyTextCTA": "",
+        "linktextOnlyTextCTA": "",
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 20,
+        "containerbottom": 20,
+        "containertopmobile": 20,
+        "containerbottommobile": 20,
+        "sectionID": ""
+      }
+    },
+    "main": {
+      "type": "wishlist-template",
+      "settings": {
+      }
+    },
+    "1643643442760b6a16": {
+      "type": "static-cta-subscribe",
+      "settings": {
+        "borderlayoutsub": "hide-border",
+        "subbgcolor": "#b4bed6",
+        "subheading": "20% OFF YOUR FIRST ORDER",
+        "subbody": "<p>Good things come to those who subscribe. We don’t spam.<br/>Pinky promise</p>",
+        "maxwidthofcta": 980,
+        "maxwidthofctamobile": 280,
+        "padding_sizeup": 18,
+        "padding_sizedown": 21,
+        "padding_sizeupm": 11,
+        "padding_sizedownm": 10,
+        "containertop_": 62,
+        "containerbottom_": 33,
+        "containertopmobile_": 50,
+        "containerbottommobile_": 0
+      }
+    }
+  },
+  "order": [
+    "164492805730d5c01c",
+    "main",
+    "1643643442760b6a16"
+  ]
+}

@@ -1,0 +1,158 @@
+{{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
+
+<div class="contact page-width page-width--narrow contact-form-page">
+<h2 class="title contact-title">Contact Form</h2>
+  {%- form 'contact', id: 'ContactForm' -%}
+ 
+    {%- if form.posted_successfully? -%}
+      <div class="form-status form-status-list form__message" tabindex="-1" autofocus>{% render 'icon-success' %} {{ 'templates.contact.form.post_success' | t }}</div>
+    {%- elsif form.errors -%}
+      <div class="form__message">
+        <h2 class="form-status caption-large" role="alert" tabindex="-1" autofocus>{% render 'icon-error' %} {{ 'templates.contact.form.error_heading' | t }}</h2>
+      </div> 
+      <ul class="form-status-list caption-large" role="list">
+        <li>
+          <a href="#ContactForm-email" class="link">
+            {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+          </a>
+        </li>
+      </ul>
+    {%- endif -%}
+    <input type="hidden" name="contact[email]" value="mkyigitoglu@gmail.com" />
+    <div class="input-cover ">
+      <!--<span class="tko-label">Name</span>-->  
+      <div class="field contact_field">
+        <input class="field__input" autocomplete="name" type="text" id="ContactForm-name" name="contact[{{ 'templates.contact.form.name' | t }}]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="Enter your full name" onfocus="this.placeholder=''" 
+        onblur="this.placeholder='Enter your full name'" >
+       <!-- <label class="field__label" for="ContactForm-name">Enter your full name</label>-->
+      </div>
+      </div>
+      <div class="input-cover ">
+        <div class="input-arrow">&DownArrow;</div>
+       <!-- <span class="tko-label">Select Reason</span>-->  
+      <div class="field customselectform contact_field">
+        <select id="ContactReason-" name="contact[team]" class="field__input input-select">
+          <option value="" disable selected>Select team to contact</option>
+          <option value="customer-support">Customer Support</option>
+          <option value="return">Return</option>
+          <option value="other">Other</option>
+       </select>
+      </div>
+      </div>
+
+      <div class="input-cover ordernumber">
+        <!--<span class="tko-label">Order Number</span> --> 
+        <div class="field contact_field">
+          <input class="field__input" autocomplete="name" type="text" id="ContactForm-ordernumber" name="contact[order-number]"  placeholder="Enter your order number (if applicable)" onfocus="this.placeholder=''" 
+          onblur="this.placeholder='Enter your order number (if applicable)'" >
+         <!-- <label class="field__label" for="ContactForm-name">Enter your order number (if applicable)</label>-->
+        </div>
+        </div>
+
+      <div class="input-cover ">
+        <!--<span class="tko-label">Email</span>  -->
+      <div class="field contact_field">
+        <input
+          autocomplete="email"
+          type="email"
+          id="ContactForm-email"
+          class="field__input"
+          name="contact[email]"
+          spellcheck="false"
+          autocapitalize="off"
+          value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+          aria-required="true"
+          {% if form.errors contains 'email' %}
+            aria-invalid="true"
+            aria-describedby="ContactForm-email-error"
+          {% endif %}
+          placeholder="Enter your email address"
+          onfocus="this.placeholder=''" 
+          onblur="this.placeholder='Enter your email address'"
+        >
+        <!--<label class="field__label" for="ContactForm-email">{{ 'templates.contact.form.email' | t }} <span aria-hidden="true">*</span></label>-->
+        {%- if form.errors contains 'email' -%}
+          <small class="contact__field-error" id="ContactForm-email-error">
+            <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+            <span class="form__message">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</span>
+          </small>
+        {%- endif -%}
+      </div>
+      </div>
+      <div class="input-cover ">
+       <!-- <span class="tko-label">Phone Number</span>  -->
+    <div class="field contact_field">
+      <input type="tel" id="ContactForm-phone" oninput="validateFeeling(this)" class="field__input" autocomplete="tel" name="contact[{{ 'templates.contact.form.phone' | t }}]" pattern="^[0-9-+\s()]*$" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" placeholder="Enter your phone number" onfocus="this.placeholder=''" 
+      onblur="this.placeholder='Enter your phone number'">
+     <!-- <label class="field__label" for="ContactForm-phone">Enter your phone number</label>-->
+    </div>
+    </div>
+    <div class="input-cover ">
+      <!--<span class="tko-label">MESSAGE</span>  -->
+    <div class="field contact_field">
+      <textarea
+        rows="10"
+        id="ContactForm-body"
+        class="text-area field__input tko-textarea"
+        name="contact[{{ 'templates.contact.form.comment' | t }}]"
+        placeholder="Write your message"
+        onfocus="this.placeholder=''" 
+        onblur="this.placeholder='Write your message'"
+      >
+        {{- form.body -}}
+      </textarea>
+     <!-- <label class="form__label field__label" for="ContactForm-body">Write your message</label>-->
+    </div>
+    </div>
+    <div class="contact__button">
+      <button type="submit" class="button">
+        {{ 'templates.contact.form.send' | t }}
+      </button>
+    </div>
+  {%- endform -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.contact-form.name",
+  "tag": "section",
+  "class": "spaced-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Contact form",
+      "label": "Heading"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.contact-form.presets.name"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .contact-form-page{
+    margin-top:133px;
+    padding:0px 11px;
+    margin-bottom: 8.9rem;
+  }
+
+  .contact_field{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .form-status-list li{
+    text-align: center;
+  }
+
+@media (max-width: 812px) {
+  .contact-form-page{
+    margin-top:133px;
+    padding:0px 25px;
+  }
+}
+</style>

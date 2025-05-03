@@ -1,0 +1,14 @@
+{
+  "name": "shopify-theme",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "shopify theme dev --store the-knotty-ones.myshopify.com",
+    "pull": "shopify theme pull --store the-knotty-ones.myshopify.com",
+    "push": "shopify theme push --store the-knotty-ones.myshopify.com"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

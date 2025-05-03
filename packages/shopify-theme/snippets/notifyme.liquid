@@ -1,0 +1,38 @@
+{%- liquid
+  assign auto = open
+  assign variantName = variantName1
+  assign variantID = variantID1
+  assign noVariant = onlydefault
+  assign productTitle = productName
+-%}
+
+<div class="notify_me_form_container_march">
+  <span id="email_error"></span>
+  <p id="success_message">
+    {% if is_archived -%}
+      Unfortunately, this knit is now sold out. Join our community to be the first in line for our next Archive Sale.
+    {% else %}
+      We'll drop you a message when
+      <span id="size_up">
+        {%- if auto == 'autoOpen' -%}
+          {%- if noVariant != true %}{{ variantName }}{% else %}{{ productName }}{% endif -%}
+        {%- endif -%}
+      </span>
+      is back in stock.
+    {% endif %}
+  </p>
+  <div class="notify_me_form_holder_march">
+    <div id="omnisend-embedded-v2-665ebcfe0c5d9134e8050b96" ></div>
+    <div id="{% if is_archived %}notifyme-archive{% else %}notifyme{% endif %}"></div>
+  </div>
+</div>
+
+<style>
+    .notify_me_form_holder_march {
+        width: 100%;
+    }
+
+    #omnisend-embedded-v2-665ebcfe0c5d9134e8050b96 {
+        width: 100%;
+    }
+</style>

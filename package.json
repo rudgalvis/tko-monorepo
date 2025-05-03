@@ -1,0 +1,13 @@
+{
+  "name": "tko-monorepo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "pnpm --filter component-lib package && pnpm --filter tkoxrr build",
+    "start": "pnpm --filter tkoxrr start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,17 @@
+{% comment %}
+
+    render 'product-container-price--value' ,
+
+    required params:
+        variant: variant
+        hidden: true
+{% endcomment %}
+
+{% assign discountValue = variant.compare_at_price | minus: variant.price %}
+
+<span data-color="{{ variant.option1 | handleize }}"
+      data-varid="{{ variant.id }}"
+      {% if hidden %}style="display:none;"{% endif %}
+      class="money {% if discountValue > 0 %}highlight-price{% endif %}">
+    {{ variant.price | money_without_trailing_zeros | strip_html }}
+</span>

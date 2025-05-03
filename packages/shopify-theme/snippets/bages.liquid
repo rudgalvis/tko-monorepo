@@ -1,0 +1,53 @@
+{{ 'bages.css' | asset_url | stylesheet_tag }}
+
+{% assign rfprice = fprice %}
+{% assign rcprice = cprice %}
+{% assign rvavailable = vavailable %}
+
+
+{% if rvavailable == true %}
+    <div class="kto-bages {% if rcprice == nil or rcprice == "" %} hide_badges {% endif %}">
+        <p>ON SALE</p>
+    </div>
+{% endif %}
+
+
+<script>
+
+
+    /*
+     var mdm_badge = new MobileDetect(window.navigator.userAgent);
+     var isMobile_badge = mdm_badge.mobile();
+     var isOS = mdm_badge.os();
+
+         console.log(isOS);
+        if(isOS == 'AndroidOS'){
+            $('.kto-bages').addClass('android_badge');
+            $('.kto-bages-soldout').addClass('android_badge');
+        }
+
+
+    */
+
+</script>
+
+<style>
+
+    @media (max-width: 812px) {
+        .android_badge {
+            padding-top: 2px;
+        }
+    }
+</style>
+
+{%- comment -%}
+<div class="bages">
+      <div class="bage-item onsale {% if rcprice == nil or rcprice == ""  %} hide_badges {% endif %}">
+          <p>on sale</p>
+      </div>
+      <div class="bage-item soldout {% if rvavailable != 0  %} hide_badges {% endif %}">
+        <p>sold out</p>
+    </div>
+</div>
+
+{%- endcomment -%}

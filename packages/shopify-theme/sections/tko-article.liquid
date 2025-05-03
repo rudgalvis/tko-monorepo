@@ -1,0 +1,94 @@
+{{ 'tko-article.css' | asset_url | stylesheet_tag }}
+
+ 
+
+ {% assign article_title = article.title %} 
+{% for article in blog.articles %}
+   {% if article.title == article_title %}
+   {% assign forloop_part = forloop.index0 %} 
+   {% assign forloop_part_control = forloop.index %} 
+   {% endif %}   
+{% endfor %}
+
+
+{{forloop_part}}{{blog.articles_count}}
+
+
+
+<div class="article-main-container">
+      <div class="outside-container">
+        <h1 id="majorText" class="article-title">{{ article.title }}</h1>
+        <div class="share-container">
+            <span>SHARE</span>
+            <ul>
+                <li id="facebook-button"><img  src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/face_book_article.svg?v=1644788898"></li>
+                <li id="twitter-button"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/twitter_article.svg?v=1644788898"></li>
+                <li id="whatsapp-button"><a href="whatsapp://send?text=https://www.theknottyones.com{{ article.url }}" data-action="share/whatsapp/share"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/whatsapp_article.svg?v=1644788898"></a></li>
+            </ul>
+        </div>
+      </div>
+      <div class="mc-container">
+      <div class="mc mc-left">
+          <div class="featured-image-container">
+           
+           <img id="getImgB" src="{{ article.metafields.global.featured-image | img_url: '1968x970' }}" />
+          
+          </div>
+          <div class="article-content-container">
+              {{ article.content }}
+          </div>
+      </div>
+
+      <div class="mc mc-right">
+          <div class="right-side-content">
+
+          {% if forloop_part_control !=  blog.articles_count %}
+
+          {% assign next_number = forloop_part | plus: 1%}
+
+          {% assign next_article_title = blog.articles[next_number].title %}
+          {% assign next_article_url = blog.articles[next_number].url%}
+          {% assign next_article_image = blog.articles[next_number].image%}
+
+          {% else %}
+
+          {% assign next_article_title = blog.articles[0].title %}
+          {% assign next_article_url = blog.articles[0].url%}
+          {% assign next_article_image = blog.articles[0].image%}
+
+          {% endif %}  
+          
+          <div class="next-article-container"  style="background-image:url('{{next_article_image | img_url: '304x304' | crop: 'center' }}')">
+              <div class="nac-content">
+               
+                  <h3 style="color:{{ section.settings.colornext}};">{{ next_article_title }}</h3>
+         
+              </div>
+          </div>
+
+          <a class="btn-darrow btn-monument" href="{{ next_article_url }}">NEXT JOURNAL</a>
+        </div>
+      </div>
+
+    </div>
+
+</div>
+
+
+
+{% schema %}
+{
+    "name": "tko-article",
+    "settings": [
+    {
+        "type": "header",
+        "content": "Next Article Options"
+      },
+      {
+        "id": "colornext",
+        "type": "color",
+        "label": "Select Text Color"
+      }
+    ]
+  }
+{% endschema %}

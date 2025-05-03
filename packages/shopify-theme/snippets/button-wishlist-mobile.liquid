@@ -1,0 +1,86 @@
+{% comment %}
+  Shopify Wishlist
+  Usage:
+    - Markup: {%- render 'button-wishlist', product: product -%}
+    - Place this snippet inside your existing product card snippet
+
+  Parameters:
+    - product: <Shopify product> (required)
+{% endcomment %}
+
+
+
+{% assign producttype = getproduct %} 
+
+{% assign getdimention = dimention %}
+{% assign get_h_width = h_width %}
+{% assign get_h_height = h_height %}
+{% assign color_heart = color %}
+{% assign detectdevice = device %}
+{% assign extraClassIt = getClass %}
+
+
+{%- if producttype.handle != blank  -%}
+  <button type="button" aria-label="Add to wishlist" class="whishlist-btn" button-wishlist data-product-handle="{{ producttype.handle }}">
+    <style scoped>
+      .icon {
+        fill: transparent;
+        stroke: {{color_heart}};
+        transition: fill 0.3s ease;
+        width: 100px;
+         height: 100px;
+      }
+
+      .active .icon {
+        fill: {{color_heart}};
+        stroke: {{color_heart}};
+      }
+
+      {% if detectdevice != 'PDP' %}
+
+      .whishlist-btn{
+          background: transparent;
+          border: none;
+          width: 30px;
+          position: absolute;
+          z-index: 5;
+          right: 25px;
+          top: 29px;
+      }
+      {% else %}
+      .whishlist-btn{
+          background: transparent;
+          border: none;
+          width: 30px;
+          position: absolute;
+          z-index: 5;
+          right: 25px;
+          top: 18px;
+      }
+      {% endif %}
+
+      @media (min-width: 320px) and (max-width: 480px) {
+      .whishlist-btn {
+        background: transparent;
+    border: none;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    z-index: 5;
+    right: -9px;
+    top: -4px;
+}
+.icon {
+        fill: transparent;
+        stroke: {{color_heart}};
+        transition: fill 0.3s ease;
+        width: {{get_h_width}}px;
+         height: {{get_h_height}}px;;
+      }
+      }
+
+      
+    </style>
+    {%- render 'icon-heart-mobile' , dimention_heart:getdimention , extraclass : extraClassIt  -%}
+  </button>
+{%- endif -%}

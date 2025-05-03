@@ -1,0 +1,114 @@
+{{ 'component-main-faq.css' | asset_url | stylesheet_tag }}
+
+<div class="faq-main-container">
+       <div class="faq-content-b fc-left">
+           <div class="fc-sticky-content">
+                <ul>
+                 
+                  {% for link in linklists.faq.links %}
+                  <li><a class="faqd" href="{{ link.url }}">{{ link.title }}</a></li> 
+                  {% endfor %}
+                </ul>
+           </div>
+       </div>
+       <div class="faq-content-b fc-right">
+          <div class="fc-main-content">
+            {% for link in linklists.faq.links %}
+                  {% assign linkcorrection = link.title | handleize %}
+                  <h2 id="{{ link.url | remove:'#' }}" class="faq-main-header">{{link.title}}</h2>
+              <ul class="faq-group">
+                   
+                  
+                   {% for field in page.metafields.faq-item-titles %}
+                   {% assign metacorrection = field[0] | split: '_' | first | handleize %} 
+                   {% assign metacorrectionfirst = field[0] | split: '_' | last  %} 
+                   {% assign metacon = field[0] %} 
+               
+                     {% if linkcorrection == metacorrection %}
+                        <li class="faq-holder" style="order:{{metacorrectionfirst}};">
+                          <h3><span class="faq-arrow">↓</span><a href="javascript:void(0);" data-open="0" >{{field[1]}}</a> </h3>
+                          
+                          {% for fieldm in page.metafields.faq-item-content %}
+                             {% if fieldm[0] == metacon %}
+                             <span class="faq-item-copy">{{fieldm[1]}}</span> 
+                             {% endif %}
+                          {% endfor %}
+                        </li> 
+                     {% endif %}
+                   {% endfor %}
+                  
+              
+              </ul>
+              {% endfor %}
+          </div>
+       </div>
+
+     
+
+</div>
+
+
+
+
+
+
+{% schema %}
+{
+  "name": "main-faq",
+  "tag": "section",
+  "class": "spaced-section border-bottom-true faq-master-container",
+  
+  "settings": [
+  {
+      "type": "header",
+      "content": "Options"
+    },
+    {
+      "type": "select",
+      "id": "faqlayoutdream",
+      "label": "Section Border Options",
+      "default": "top-bottom",
+      "options": [
+        {
+          "value": "top-bottom",
+          "label": "Show Border Top & Bottom"
+        },
+        {
+          "value": "only-top",
+          "label": "Show Border Only Top"
+        },
+        {
+            "value": "only-bottom",
+            "label": "Show Border Only Bottom"
+          },
+        {
+            "value": "hide-border",
+            "label": "Hide Borders"
+          }
+      ]
+    }
+    
+
+    
+    ]
+}
+{% endschema %}
+
+{%- comment -%}
+{% assign faqcontrll = 0 %}
+{% for alt in page.metafields.faq-item-titles %}
+  {% assign nameAlt1 = alt[0] %}
+  {% assign getNum = alt[0] | split : '_' | last %}  
+  {% assign faqcontrll = faqcontrll | plus: 1 %}
+  {% if nameAlt1 == nameAlt2 %}
+
+    {{getNum}}{{faqcontrll}}
+      {% if getNum ==  faqcontrll %} 
+           <p>{{ forloop.index }} {{ alt[0] }}</p><br>
+      {% endif %}
+      {% assign nameAlt2 = alt[0] %} 
+    {% else %}
+       {% assign faqcontrll = 0 %}
+    {% endif %}
+{% endfor %}
+{%- endcomment -%}

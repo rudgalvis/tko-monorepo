@@ -1,0 +1,193 @@
+<section class="kto-main-container">
+    <div class="tko-lines sot-{{section.id}}"
+    {% if section.settings.borderlayout3col == 'top-bottom'%}
+    style="
+          border-top-style:  solid;
+           border-top-color:   black;
+          border-bottom-style: solid;
+          border-bottom-color:  black;
+    ">
+    {% elsif  section.settings.borderlayout3col == 'only-top' %}
+    style="
+    border-top-style:  solid;
+    border-top-color:   black;
+    border-bottom: none;
+    ">
+    {% elsif  section.settings.borderlayout3col == 'only-bottom' %}
+    style="
+    border-top: none;
+    border-bottom-style:  solid;
+    border-bottom-color:   black;
+    ">
+    
+    {% else %}
+    
+    style="
+    border-top: none;
+    border-bottom: none;
+    "> 
+  
+    {% endif %}
+
+    {{ 'component-three-column-section.css' | asset_url | stylesheet_tag }}
+
+    <div class="static-3-col">
+      {% for block in section.blocks %}
+      <div class="s3c-item" data-animation="{{ forloop.index }}">
+         <div class="knitter-image" id="animid-{{ forloop.index }}">
+          {%
+              render 'rimg'
+              img: block.settings.c3colimage,
+              alt: block.settings.c3colimage.alt,
+              size: '700x874',
+            %}  
+      </div>
+      <div class="knitter-info">
+           <h2>{{ block.settings.nameofknitter }}</h2>
+           <p>{{ block.settings.descriptionknitter }}</p>
+      </div>
+     </div>
+      {% endfor %}
+
+  </div>
+  {%- comment -%}
+  <div class="footerlink m-3col">
+    <a href="{{ section.settings.c3colbuturl }}" class="btn-darrow">{{section.settings.c3colbuttext}}</a>
+  </div>
+  {%- endcomment -%}
+    </div>
+    </section>
+
+
+
+{% schema %}
+  
+{
+    "name": "3 Column Layout No.1", 
+    "settings": [
+    {
+      "type": "header",
+      "content": "Layout Options"
+    },
+    {
+      "type": "select",
+      "id": "borderlayout3col",
+      "label": "Section Border Options",
+      "default": "top-bottom",
+      "options": [
+        {
+          "value": "top-bottom",
+          "label": "Show Border Top & Bottom"
+        },
+        {
+          "value": "only-top",
+          "label": "Show Border Only Top"
+        },
+        {
+            "value": "only-bottom",
+            "label": "Show Border Only Bottom"
+          },
+        {
+            "value": "hide-border",
+            "label": "Hide Borders"
+          }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "URL Options"
+    },
+      {
+        "id": "c3colbuttext",
+        "type": "text",
+        "label": "Copy"
+      },
+      {
+        "id": "c3colbuturl",
+        "type": "url",
+        "label": "URL"
+      },
+      
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup_sot",
+        "label":"Top",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedow_sot",
+        "label":"Bottom",
+        "default":20
+      },
+      
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup_sotm",
+        "label":"Top",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedow_sotm",
+        "label":"Bottom",
+        "default":20
+      }
+    ],
+          "max_blocks": 4,
+          "blocks": [
+          {
+               "type": "Image", 
+               "name": "3 Column Selected Image",
+               "settings": [
+               {
+                "type": "image_picker",
+                "id": "c3colimage",
+                "label": "Select Image"
+              },
+              {
+                "type": "text",
+                "id": "nameofknitter",
+                "label": "Enter Knitter's Name"
+              },
+              {
+                "type": "textarea",
+                "id": "descriptionknitter",
+                "label": "Enter Knitter's Description"
+              }
+             ]
+          }
+           ],
+    "presets": [
+{
+"category": "3 Column Layout No.1",
+"name": "3 Column Layout No.1"
+}
+]
+  }
+{% endschema %}
+
+
+<style>
+  .sot-{{ section.id }}{
+    padding: {{section.settings.padding_sizeup_sot}}px 0px {{section.settings.padding_sizedow_sot}}px 0px;
+    border-width: 1px ;
+    
+   }
+   @media (min-width: 320px) and (max-width: 480px) {
+    .sot-{{ section.id }}{
+    padding: {{section.settings.padding_sizeup_sotm}}px 0px {{section.settings.padding_sizedow_sotm}}px 0px;
+    border-width: 0.5px;
+   }
+  
+  
+   }    
+</style>

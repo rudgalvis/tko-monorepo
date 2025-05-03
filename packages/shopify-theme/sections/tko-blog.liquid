@@ -1,0 +1,387 @@
+{{ 'tko-blog.css' | asset_url | stylesheet_tag }}
+
+
+
+
+
+{% assign featuredArticle = section.settings.blogheroimage.title %}
+<section class="kto-main-container">
+    <div class="tko-lines blog-{{section.id}}"
+    {% if section.settings.borderlayoutBlog == 'top-bottom'%}
+    style="
+     border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+    ">
+    {% elsif  section.settings.borderlayoutBlog == 'only-top' %}
+    style="
+    border-top-style:  solid;
+    border-top-color:   black;
+    border-bottom: none;
+    ">
+    {% elsif  section.settings.borderlayoutBlog == 'only-bottom' %}
+    style="
+    border-top: none;
+    border-bottom-style:  solid;
+    border-bottom-color:   black;
+    ">
+    
+    {% else %}
+    
+    style="
+    border-top: none;
+    border-bottom: none;
+    "> 
+  
+    {% endif %}
+
+
+<div class="main-blog-container">
+    <div class="mb-heading-hero">
+      <img class="blog-hero-desktop" src="{{section.settings.heroimageblog | img_url: '1386x621'}}"/>
+      <img class="blog-hero-mobile" src="{{section.settings.heroimageblogmobile | img_url: '347x473'}}"/>
+       <div class="mp-hero-content">
+           <h1 class="page-hero-title-{{section.id}}" style="color:{{ section.settings.h1herocolor}};">{{ section.settings.blogherotitle }}</h1>
+           <a id="blog_hero_button" class=" tko-btn tko-btn-{{ section.settings.blogheroColor }}" href="javascript:void(0);">{{section.settings.blogherobuttoncopy}}</a>
+       </div>
+    </div>
+</div>
+
+</div>
+</section>
+
+{%- if section.settings.blog_show_tags -%}
+<aside>
+
+      <ul>
+        <li>
+          
+          <a href="{{ blog.url }}">ALL</a>
+        
+      </li>
+        {%- for tag in blog.all_tags -%}
+       
+        <li>
+          
+            <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+          
+        </li>
+        {%- endfor -%}
+      </ul>
+    
+  </aside>
+  {%- endif -%}
+
+  {%- paginate blog.articles by 5 -%}
+{%- for article in blog.articles -%}
+{%- if forloop.index == 1  -%}
+
+<section class="heroshero">
+
+    <div class="heroheros-container {% if section.settings.blog_show_tags == false %} heroheros-container-no-border{% endif %}">
+        <div class="hh hh-left">
+            <div class="hh-img-container">
+              <a href="{{ article.url }}">
+                {{ article | img_url: '1200x', scale: 2 | img_tag: article.title }}
+              </a>
+            </div>
+        </div>
+        <div class="hh hh-right">
+
+          {% for tag in article.tags %}
+          <a class="article-tag" href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag | remove: ","  }}</a>
+        {% endfor %}
+                  <h2>{{ article.title }}</h2>
+                  <div class="cl-group">
+                    <p style="max-width:{{ section.settings.maxwidthofsubhero }}px;"> {{ article.excerpt | strip_html }}</p>
+                    <a class="blogatag btn-darrow inside-section" href="{{ article.url }}">READ MORE</a>
+                  </div>
+
+        </div>
+    </div>
+
+</section>
+{%- endif -%}
+{%- endfor -%}
+
+<div class="orj-article-list">
+    {%- for article in blog.articles -%}
+    {%- if forloop.index != 1 -%}
+    <div class="border-blog-container">
+    <div class="ll ll-up">
+       <div class="ll-line">
+           <div class="l-line"></div>
+       </div>
+    </div>  
+    <div class="article-item">
+        <div class="article-img">
+          <a href="{{ article.url }}"> {{ article | img_url: '1200x', scale: 2 | img_tag: article.title }}</a>
+        </div>
+        <div class="article-reach-content">
+              {% assign tagme = 0 %}
+              {% for tag in article.tags %}
+              {% assign tagme = tagme | plus : 1 %}
+                <a class="article-tag" href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag | remove: ","  }}</a>
+               {% endfor %}
+               {% if tagme == 0 %}
+               <a style="visibility: hidden;" class="article-tag" href="">TAG</a>
+               {% endif %}
+            <h2>{{ article.title }}</h2>
+                <a class="blogatag btn-darrow inside-section" href="{{ article.url }}">READ MORE</a>
+        </div>
+    </div>
+    <div class="ll ll-down">
+      <div class="ll-line">
+        <div class="l-line"></div>
+    </div>
+    </div>  
+</div>
+    {%- endif -%}
+{%- endfor -%}
+</div>
+
+
+<div class="pagination-container">
+  <div class="pagination-article">
+   {{ paginate | default_pagination: next: '→', previous: '←' }}
+ </div>  
+</div>
+{%- endpaginate -%}
+
+{%- if section.settings.blog_show_tags -%}
+<script>
+    var mdm_blog = new MobileDetect(window.navigator.userAgent);
+    var isMobile_blog = mdm_blog.mobile();
+
+
+    const queryStringblog = window.location.search;
+    const urlParamsBlog = new URLSearchParams(queryStringblog);
+    const page = urlParamsBlog.get('page');
+
+    if(page != null){
+       var asidedetect = $('aside').offset().top;
+       if(isMobile_blog == null){
+        var heightSide = $('aside').outerHeight() + 13;
+       }
+       else{
+        var heightSide = $('aside').outerHeight()-13;
+       }
+     
+       $('html, body').animate({
+	    	scrollTop: asidedetect - heightSide
+    	});
+    }
+   
+</script>
+{% else %}
+<script>
+      var mdm_blog = new MobileDetect(window.navigator.userAgent);
+    var isMobile_blog = mdm_blog.mobile();
+  const queryStringblog = window.location.search;
+  const urlParamsBlog = new URLSearchParams(queryStringblog);
+  const page = urlParamsBlog.get('page');
+
+  if(page != null){
+     var asidedetect = $('.heroshero').offset();
+     //var heightSide = $('.heroheros-container').outerHeight() + 13;
+     if(isMobile_blog == null){
+     $('html, body').animate({
+      scrollTop: asidedetect.top - 103
+    });
+  }
+  else{
+    $('html, body').animate({
+      scrollTop: asidedetect.top - 54
+    });
+  }
+  }
+
+  $('#blog_hero_button').click(function(){
+  var asidedetect = $('.heroshero').offset();
+     if(isMobile_blog == null){
+     $('html, body').animate({
+      scrollTop: asidedetect.top - 81
+    });
+  }
+  else{
+    $('html, body').animate({
+      scrollTop: asidedetect.top - 51
+    });
+  }
+});
+
+
+ 
+</script>
+{% endif %}
+
+{% schema %}
+{
+    "name": "tko-blog",
+    "tag": "section",
+    "settings": [
+    {
+        "type": "header",
+        "content": "Blog Options"
+      },
+    {
+        "type": "select",
+        "id": "borderlayoutBlog",
+        "label": "Section Border Options",
+        "default": "top-bottom",
+        "options": [
+          {
+            "value": "top-bottom",
+            "label": "Show Border Top & Bottom"
+          },
+          {
+            "value": "only-top",
+            "label": "Show Border Only Top"
+          },
+          {
+              "value": "only-bottom",
+              "label": "Show Border Only Bottom"
+            },
+          {
+              "value": "hide-border",
+              "label": "Hide Borders"
+            }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup",
+        "label":"Line Padding Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedown",
+        "label":"Line Padding Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeupm",
+        "label":"Line Padding Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedownm",
+        "label":"Line Padding Bottom",
+        "default":15
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_tags",
+        "label": "Show tags",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Hero Options"
+      },
+      {
+        "type": "textarea",
+        "id": "blogherotitle",
+        "default": "Text block",
+        "label": "Hero Title"
+      },
+      {
+        "type": "text",
+        "id": "blogherobuttoncopy",
+        "default": "READ MORE",
+        "label": "Button Copy"
+      },
+      {
+        "type": "header",
+        "content": "Title Max. Width Desktop"
+      },
+      {
+        "type":"number",
+        "id":"pageherotitledesktop",
+        "label":"Title Width Desktop",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Title Max. Width Mobile"
+      },
+      {
+        "type":"number",
+        "id":"pageherotitlemobile",
+        "label":"Title Width Mobile",
+        "default":15
+      },
+      {
+        "type": "image_picker",
+        "id": "heroimageblog",
+        "label": "Hero Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "heroimageblogmobile",
+        "label": "Hero Image Mobile",
+        "info": "347 x 473px .jpg recommended"
+      },
+      {
+        "type": "color",
+        "id": "h1herocolor",
+        "label": "Hero Copy Color"
+      },
+      {
+        "type": "select",
+        "id": "blogheroColor",
+        "label": "Button Style",
+        "default": "light",
+        "options": [
+          {
+            "value": "light",
+            "label": "Light"
+          },
+          {
+            "value": "dark",
+            "label": "Dark"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+
+
+<style>
+  .blog-{{section.id}}{
+        padding: {{section.settings.padding_sizeup}}px 0px {{section.settings.padding_sizedown}}px 0px;
+        border-width:1px;
+  }
+
+  .page-hero-title-{{section.id}}{
+    max-width: {{section.settings.pageherotitledesktop}}px;
+  }
+
+
+  
+  @media (max-width: 812px) {
+    .blog-{{section.id}}{
+        padding: {{section.settings.padding_sizeupm}}px 0px {{section.settings.padding_sizedownm}}px 0px;
+        border-width:0.5px;
+  }
+
+  .page-hero-title-{{section.id}}{
+    max-width: {{section.settings.pageherotitlemobile}}px;
+  }
+
+  } 
+</style>

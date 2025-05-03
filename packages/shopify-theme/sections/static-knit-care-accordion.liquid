@@ -1,0 +1,342 @@
+{{ 'component-static-knit-care-accordion.css' | asset_url | stylesheet_tag }}
+
+<section class="kto-main-container">
+    <div class="tko-lines tko-two-column-{{section.id}}"
+    {% if section.settings.accordionlayoutpage == 'top-bottom'%}
+    style="
+   border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+    ">
+    {% elsif  section.settings.accordionlayoutpage == 'only-top' %}
+    style="
+    border-top-style:  solid;
+    border-top-color:   black;
+    border-bottom: none;
+    ">
+    {% elsif  section.settings.accordionlayoutpage == 'only-bottom' %}
+    style="
+    border-top: none;
+    border-bottom-style:  solid;
+    border-bottom-color:   black;
+    ">
+    
+    {% else %}
+    
+    style="
+    border-top: none;
+    border-bottom: none;
+    "> 
+  
+    {% endif %}
+
+
+<div class="knitcare-accordion-container {%if section.settings.thisischild != false %} child-element {% endif %}">
+    <div class="knitcare-accordion-content">
+        
+        <div class="accordion-menu" {%if section.settings.thisischild != false %} style="display:none;"{% endif %}>
+            <ul>
+                {% for link in linklists.knit-care.links %}
+                <li>
+                    <a href="javascript:void(0)" class="accordion-control {% if forloop.index0 == 0 %} active {% endif %}" data-navname="{{ link.title | handleize  }}">{{ link.title }}</a>
+                    <div class="tr-line"></div>
+                </li>
+                {% assign itemcount = forloop.length %}
+                {% if forloop.first ==  true %}
+                    {% assign activetype = link.title  %}
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <ul>
+            {% for block in section.blocks %}
+            <li class="list-knitcare  {% if activetype != block.settings.typeofknit %} hidelist {% endif %} type-{{ block.settings.typeofknit | handleize }}"  data-type="{{ block.settings.typeofknit | handleize }}">
+                   {% if block.settings.knitaccordionbadge == true %}
+                    <div  style="color: {{ block.settings.accopycolor }}; background-color:{{ block.settings.acbgcolor }};" class="accordionbadge">
+                       <a class="knitcare_service" style="color: {{ block.settings.accopycolor }};" href="javascript:void(0);"> {{ block.settings.accordionbadgecopy }}</a>
+                    </div>
+                    {% endif %}
+                    <div class="knitcare-list" data-itemnumber="{{forloop.index}}-{{section.id}}" >
+                      {%- comment -%}
+                         <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/accordion_dot.svg?v=1640277366"/>
+                         {%- endcomment -%}
+                         <h3 class="accordion-heading knitter-arrow" >{{ block.settings.accordionheading}}</h3>
+                    </div>
+                    <div id="accor-{{forloop.index}}-{{section.id}}" class="knitcare-item flex-it">
+                    <div class="knitcare knitcare-left">
+                        <p>{{ block.settings.accordioncopy}}</p>
+                    </div>
+                    <div class="knitcare knitcare-right">
+                        <img src="{{ block.settings.accordionimage | img_url: '684x662' }}"/>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+</div>
+</section>
+
+
+
+{% schema %}
+  
+{
+    "name": "Knit Care Accordion", 
+    "settings": [
+    
+    {
+      "type": "header",
+      "content": "Layout Options"
+    },
+      {
+        "type": "select",
+        "id": "accordionlayoutpage",
+        "label": "Section Border Options",
+        "default": "top-bottom",
+        "options": [
+          {
+            "value": "top-bottom",
+            "label": "Show Border Top & Bottom"
+          },
+          {
+            "value": "only-top",
+            "label": "Show Border Only Top"
+          },
+          {
+              "value": "only-bottom",
+              "label": "Show Border Only Bottom"
+            },
+          {
+              "value": "hide-border",
+              "label": "Hide Borders"
+            }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Knit Care Navigation"
+      },
+      {
+        "id": "selectednav",
+        "type": "link_list",
+        "label": "Select Accordion Menu"
+      },
+      {
+        "type": "header",
+        "content": "Accordion Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "thisischild",
+        "label": "No Navigation",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup",
+        "label":"Line Padding Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedown",
+        "label":"Line Padding Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeupm",
+        "label":"Line Padding Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedownm",
+        "label":"Line Padding Bottom",
+        "default":15
+      }
+      
+      
+      
+      ],
+      "max_blocks": 20,
+      "blocks": [
+      {
+           "type": "Accordion", 
+           "name": "Knit Care Accordion",
+           "settings": [
+           {
+            "type": "header",
+            "content": "Type of Knit"
+          },
+           {
+            "type": "text",
+            "id": "typeofknit",
+            "label": "Enter type of knit"
+          },
+           {
+              "type": "header",
+              "content": "Accordion Item"
+            },
+            {
+              "type": "image_picker",
+              "id": "accordionimage",
+              "label": "Accordion Image"
+            },
+            {
+              "id": "accordionheading",
+              "type": "text",
+              "label": "Accordion Header Copy"
+            },
+           {
+               
+            "type": "textarea",
+            "id": "accordioncopy",
+            "label": "Accordion Body Copy"
+          },
+          {
+            "type": "header",
+            "content": "Accordion Badge"
+          },
+          {
+            "type": "checkbox",
+            "id": "knitaccordionbadge",
+            "label": "Show Badge",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "accordionbadgecopy",
+            "label": "Badge Copy"
+          },
+          {
+            "type": "color",
+            "id": "accopycolor",
+            "label": "Badge Copy Color"
+          },
+          {
+            "type": "color",
+            "id": "acbgcolor",
+            "label": "Badge BG Color"
+          }
+
+         ]
+      }
+       ],
+
+        
+    "presets": [ 
+{
+"category": "Accordion",
+"name": "Knit Care Accordion"
+}
+]
+  }
+{% endschema %}
+
+<style>
+      .knitter-arrow{
+       /* font-family:'Formular';*/
+       font-family: 'Monument Regular';
+        font-size:28px;
+        letter-spacing: -0.43px;
+        color:black;
+        position: relative;
+        z-index: 1;
+    }
+
+    .knitter-arrow::before{
+       /* font-family:'Formular';*/
+       content:'↓';
+       margin-right: 8px;
+    }
+
+    .knitcare-list.active .accordion-heading::before {
+      content:'↑';
+}
+
+            {% if itemcount == 3 %}
+        .accordion-menu ul li{
+            width: 33.3%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        position: relative;
+        /*height: 121px;*/
+        padding: 10px 0px;
+        }
+        .accordion-menu ul li:nth-child(1) .tr-line{
+            left:0px;
+            width:98%;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+        }
+
+        .accordion-menu ul li:nth-child(2) a {
+            border-right: 1px solid black;
+        }
+        .accordion-menu ul li:nth-child(3) a {
+             border-right: none;
+        }
+        .accordion-menu ul li:nth-child(3) .tr-line{
+            right:0px;
+            width:98%;
+        }
+    {% endif %}
+
+    {% if itemcount == 2 %}
+        .accordion-menu ul li{
+            width: 50%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            position: relative;
+            /*height: 121px;*/
+            padding: 10px 0px;
+         }
+        .accordion-menu ul li:nth-child(1) .tr-line{
+            left:0px;
+            width:98%;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+        }
+        .accordion-menu ul li:nth-child(2) .tr-line{
+            right:0px;
+            width:98%;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+        }
+    {% endif %}
+    
+    .tko-two-column-{{section.id}}{
+           padding: {{section.settings.padding_sizeup}}px 0px {{section.settings.padding_sizedown}}px 0px;
+           border-width:1px;
+     }
+   
+   
+   
+   
+     @media (max-width: 812px) {
+       .tko-two-column-{{section.id}}{
+           padding: {{section.settings.padding_sizeupm}}px 0px {{section.settings.padding_sizedownm}}px 0px;
+           border-width:0.5px !important;
+     }
+
+     .knitcare-list.active .accordion-heading::before {
+      content:'↑';
+}
+ 
+     } 
+   </style>

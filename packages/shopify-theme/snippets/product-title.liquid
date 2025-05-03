@@ -1,0 +1,8 @@
+ {% assign detectDotsSeperator = name %}
+  {% if detectDotsSeperator contains ':' %}
+     {% assign productName = name | split: ':' %}
+     {% assign realProductName = productName[0] %}
+     {{realProductName}}
+  {% else %}
+     {{detectDotsSeperator}}
+  {% endif %}

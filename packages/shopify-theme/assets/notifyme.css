@@ -1,0 +1,119 @@
+.notify_me_form_container_march {
+    width: 100%;
+    height: auto;
+    position: relative;
+    background-color: #b4bed6;
+    padding: 17px;
+    flex-direction: column;
+    margin-top: 15px;
+    display: none;
+  }
+  
+  .notify_me_form_container_march p {
+    font-size: 18px;
+    letter-spacing: -0.31px;
+    line-height: 26px;
+    color: #000;
+    margin-block-start: 0em;
+    margin-block-end: 0.4em;
+  }
+  
+  .notify_me_form_holder_march {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    width: 100%;
+    gap: 20px;
+  }
+  
+  .notify_me_form_holder_march input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    font-family: "Monument";
+    font-size: 14px;
+    letter-spacing: -0.34px;
+    color: #000;
+    width: 68%;
+    height: 38px;
+  }
+  
+  .notify_me_btn {
+    font-family: "Monument";
+    font-size: 14px;
+    letter-spacing: -0.34px;
+    color: #000;
+  }
+  
+  .notify_me_form_holder_march input::placeholder {
+    font-family: "Monument";
+    font-size: 14px;
+    letter-spacing: -0.34px;
+    color: #000;
+    width: 68%;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+  }
+  
+  span#email_error {
+    font-family: "Monument";
+    color: black;
+    letter-spacing: normal;
+    font-size: 12px;
+    display: none;
+  }
+  
+  @media (min-width: 320px) and (max-width: 480px) {
+    .notify_me_form_container_march {
+      width: 100%;
+      height: auto;
+      position: fixed;
+      background-color: #b4bed6;
+      padding: 17px;
+      display: flex;
+      flex-direction: column;
+      margin-top: 15px;
+      display: none;
+      bottom: 73px;
+      left: 0px;
+      z-index: 9;
+    }
+  
+    .notify_me_form_container_march p {
+      font-size: 15px;
+      letter-spacing: -0.31px;
+      line-height: 26px;
+      color: #000;
+      margin-block-start: 0em;
+      margin-block-end: 0.4em;
+    }
+  
+    .notify_me_btn {
+      font-family: "Monument";
+      font-size: 12px;
+      letter-spacing: -0.34px;
+      color: #000;
+    }
+  
+    .notify_me_form_holder_march input::placeholder {
+      font-family: "Monument";
+      font-size: 12px;
+    }
+  
+    .notify_me_form_holder_march input {
+      font-size: 12px;
+    }
+  
+    span#email_error {
+      font-family: "Monument";
+      color: black;
+      letter-spacing: normal;
+      font-size: 10px;
+      display: none;
+    }
+  }
+  

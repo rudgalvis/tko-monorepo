@@ -1,0 +1,550 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "about-page",
+      "settings": {}
+    },
+    "16400025067a204b40": {
+      "type": "static-onlytext",
+      "settings": {
+        "onlyTextlayout": "hide-border",
+        "bgOnlyTextCTA": "#eeeeea",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "THE KNOTTY ONES x NOT PERFECT LINEN",
+        "maxwidthoftitle": 500,
+        "maxwidthoftitlemobiled": 500,
+        "bodytextOnlyTextCTA": "Aguonos Dress",
+        "fontsizetune": "30px",
+        "maxwidthoftext": 920,
+        "maxwidthoftextmobile": 250,
+        "showurlOnlyTextCTA": true,
+        "linkOnlyTextCTA": "shopify://products/aguonos-dew-black-linen-dress",
+        "linktextOnlyTextCTA": "SEE IT NOW",
+        "padding_sizeup_sot": 11,
+        "padding_sizedow_sot": 15,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 0,
+        "containertop": 50,
+        "containerbottom": 50,
+        "containertopmobile": 14,
+        "containerbottommobile": 14,
+        "sectionID": ""
+      }
+    },
+    "164001637237a519bf": {
+      "type": "static-mid-text",
+      "disabled": true,
+      "settings": {
+        "onlyTextlayoutmidtext": "only-top",
+        "positionoftext": "centeralign",
+        "paragraphtitle": "JANE DOE",
+        "hed_padding_sec": 1000,
+        "hed_padding_secm": 300,
+        "paragraphtextsub": "“At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.”",
+        "cop_padding_sec": 300,
+        "cop_padding_secm": 200,
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "padding_top_sec": 65,
+        "padding_bottom_sec": 65,
+        "padding_top_secm": 16,
+        "padding_bottom_secm": 16
+      }
+    },
+    "16446108729381799e": {
+      "type": "static-page-navigation",
+      "blocks": {
+        "39729372-50a6-4f7e-9d56-e83b68860ba6": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "THE FOUNDERS",
+            "pnid": "section-1"
+          }
+        },
+        "c097f8d1-c228-47c2-8547-43213a04ed3e": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "CELEBRATING ARTISANS",
+            "pnid": "section-2"
+          }
+        },
+        "01d891b3-53fd-454b-b79f-8c33971bd228": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "BALTIC HERITAGE",
+            "pnid": "section-3"
+          }
+        },
+        "04d27017-820b-447e-81af-b7a9e27f0c36": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "BETTER FOR OUR PLANET",
+            "pnid": "section-4"
+          }
+        },
+        "38402a37-723e-46fe-991e-873704589561": {
+          "type": "Navigation",
+          "settings": {
+            "pntext": "Knitter's Dream Fund",
+            "pnid": "section-5"
+          }
+        }
+      },
+      "block_order": [
+        "39729372-50a6-4f7e-9d56-e83b68860ba6",
+        "c097f8d1-c228-47c2-8547-43213a04ed3e",
+        "01d891b3-53fd-454b-b79f-8c33971bd228",
+        "04d27017-820b-447e-81af-b7a9e27f0c36",
+        "38402a37-723e-46fe-991e-873704589561"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "164001900656e472ca": {
+      "type": "static-two-column-alt3",
+      "settings": {
+        "borderlayouttwoclthreealt": "hide-border",
+        "altsectionlayouttwthree": "image-text",
+        "nopadding": true,
+        "altthreeimage": "shopify://shop_images/1_17473e17-24d2-493a-b8c0-2a8730325c96.jpg",
+        "altheadingclthree": "Not Perfect, Just Right",
+        "h2maxwidthdesktop": 600,
+        "h2maxwidthmobile": 300,
+        "altbodyclthree": "<p>Aguonos (meaning \"poppies\" in English) is a collaboration between The Knotty Ones and Not Perfect Linen — born from a shared passion for natural fibres and timeless craftsmanship.</p><p></p><p>Rooted in slow fashion and a mutual respect for considered design, both brands came together to create something special. Pairing linen’s effortless ease with The Knotty Ones’ signature attention to detail in one piece made to be worn on repeat.</p>",
+        "pmaxwidthdesktop": 900,
+        "pmaxwidthmobile": 480,
+        "padding_sizeup": 28,
+        "padding_sizedown": 18,
+        "padding_sizeupm": 18,
+        "padding_sizedownm": 13,
+        "padding_sizeupm_section": 35,
+        "padding_sizedownm_section": 15,
+        "sectionID": "section-1"
+      }
+    },
+    "164009869053d5286d": {
+      "type": "static-collage",
+      "blocks": {
+        "7ef1be76-87bf-453d-9756-45b12ac5a2b1": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/1-OurStory-Collage_600x_c9b44a49-7a62-43bd-a760-b2e9ae4753f6.webp",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "4e420f4b-3629-41a6-ac7d-503cdcb5f903": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/2-OurStory-Collage_600x_c8c5c929-5ed6-481e-b1ea-94a543020198.webp",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "697b780b-8639-4f4b-b2d8-920182e7b0d0": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": true,
+            "collagevideo": "https://cdn.shopify.com/s/files/1/0548/6644/4336/files/3-OurStory-Collage.mp4?v=1649183522",
+            "caollagecolor": "#eeeeea",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "b24af7a7-0acf-420f-a10f-f4213fbc3862": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/4-OurStory-Collage_600x_0655b011-8549-4284-a639-0017eb1ba93b.webp",
+            "caollagecolor": "#b4bed6",
+            "collagetext": "",
+            "caollagecolortext": "#000000"
+          }
+        },
+        "6f86ff4e-0953-4750-84a6-3a0bccd3ea20": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/5-OurStory-Collage_600x_efe81dfd-d0d7-49c9-8ae9-2d50a6192d47.webp",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "c0ca98b9-f04b-4f53-b363-a9f2fcc83401": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/6-OurStory-Collage_600x_7d9de9fe-8baa-4a56-8235-5d4cd2b54596.webp",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        }
+      },
+      "block_order": [
+        "7ef1be76-87bf-453d-9756-45b12ac5a2b1",
+        "4e420f4b-3629-41a6-ac7d-503cdcb5f903",
+        "697b780b-8639-4f4b-b2d8-920182e7b0d0",
+        "b24af7a7-0acf-420f-a10f-f4213fbc3862",
+        "6f86ff4e-0953-4750-84a6-3a0bccd3ea20",
+        "c0ca98b9-f04b-4f53-b363-a9f2fcc83401"
+      ],
+      "disabled": true,
+      "settings": {
+        "borderlayoutcollage": "only-bottom",
+        "padding_sizeup": 25,
+        "padding_sizedown": 25,
+        "padding_sizeupm": 18,
+        "padding_sizedownm": 18
+      }
+    },
+    "1640096383fb219167": {
+      "type": "static-fullscreen-img-CTA",
+      "disabled": true,
+      "settings": {
+        "borderlayoutCTA": "only-bottom",
+        "fs-image": "shopify://shop_images/OurStory-Full-width-Image-1-Desktop_x761_3395d45c-ba24-4be9-a8ae-786317b648e9.webp",
+        "fs-image-mobile": "shopify://shop_images/OurStory-Full-width-Image-1-Mobile_692x_1f0dd2fd-e84f-4cfc-88d1-a8c91f35e560.webp",
+        "showcontent": false,
+        "fsTitle": "",
+        "fsTitleColor": "",
+        "fsURL": "",
+        "fsBtntitle": "",
+        "ctabuttonColor": "light",
+        "padding_sizeup": 23,
+        "padding_sizedown": 7,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 5
+      }
+    },
+    "1640179165e980a659": {
+      "type": "static-onlytext",
+      "settings": {
+        "onlyTextlayout": "hide-border",
+        "bgOnlyTextCTA": "#b4bed6",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "INSPIRED BY NATURE’S REBIRTH",
+        "maxwidthoftitle": 500,
+        "maxwidthoftitlemobiled": 500,
+        "bodytextOnlyTextCTA": "The silhouette and stitch design were shaped by the natural form of a poppy seed pod — a symbol of new beginnings.",
+        "fontsizetune": "27px",
+        "maxwidthoftext": 1060,
+        "maxwidthoftextmobile": 250,
+        "showurlOnlyTextCTA": true,
+        "linkOnlyTextCTA": "shopify://products/aguonos-black-linen-dress",
+        "linktextOnlyTextCTA": "SEE AGUONOS LINEN DRESS",
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 30,
+        "containerbottom": 49,
+        "containertopmobile": 30,
+        "containerbottommobile": 30,
+        "sectionID": ""
+      }
+    },
+    "1640097600a0caa913": {
+      "type": "static-two-column-text",
+      "disabled": true,
+      "settings": {
+        "borderlayouttwocltext": "hide-border",
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "padding_top_sec": 70,
+        "padding_bottom_sec": 50,
+        "padding_top_secm": 32,
+        "padding_bottom_secm": 25,
+        "twocolheading": "FUN FACT",
+        "hed_padding_sec": 243,
+        "hed_padding_secm": 243,
+        "twocolcopy": "<p>The seemingly unexpected collaboration was born out of the anecdote. Alfredas is wearing beautiful sweaters in his reels, many of them hand-knitted by his late grandmother. His community is always curious about his outfits, so they just got what they asked for — available to purchase, hand-knitted just for them by one of our talented artisans.</p>",
+        "cop_padding_sec": 900,
+        "cop_padding_secm": 480,
+        "sectionID": ""
+      }
+    },
+    "static_link_Qt4DHH": {
+      "type": "static-link",
+      "disabled": true,
+      "settings": {
+        "onlyTextlayout": "hide-border",
+        "linktext": "SEE THE VEST UP CLOSE",
+        "linkurl": "shopify://products/blaivi-vasara-baltic-blue-merino-wool-vest",
+        "thisisbigurl": false,
+        "justheader": false,
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 20,
+        "containerbottom": 20,
+        "containertopmobile": 20,
+        "containerbottommobile": 20
+      }
+    },
+    "1640179754b50f7c90": {
+      "type": "static-fullscreen-img-CTA",
+      "disabled": true,
+      "settings": {
+        "borderlayoutCTA": "only-bottom",
+        "fs-image": "shopify://shop_images/OurStory-Full-width-Image-2-Desktop_x761_260dd8ed-91db-497f-a5dc-c7b807061997.webp",
+        "fs-image-mobile": "shopify://shop_images/OurStory-Full-width-Image-2-Mobile_692x_0f64c1bf-e7ee-460b-abf4-5421a11de3ee.webp",
+        "showcontent": false,
+        "fsTitle": "",
+        "fsTitleColor": "",
+        "fsURL": "",
+        "fsBtntitle": "",
+        "ctabuttonColor": "light",
+        "padding_sizeup": 31,
+        "padding_sizedown": 7,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 5
+      }
+    },
+    "static_collage_WHnFxn": {
+      "type": "static-collage",
+      "blocks": {
+        "collage_HHEBTJ": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/3_c8cbd24d-eff4-427f-b8e2-14ec030ccd9c.jpg",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "collage_iaMfXp": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": true,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/1_b8ef9483-e645-4f5b-a702-34cdcabcc5be.jpg",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "collage_F4fgRn": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/2_82923029-00f0-43b4-9b67-db115b21e685.jpg",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "collage_PFVfBi": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/4_21ae4abb-fdb3-4623-90b7-d528c93b1d65.jpg",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "collage_yLbkH9": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/7_1314fa51-4842-4a06-8105-40038a35ffc9.jpg",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        },
+        "collage_a8a7tq": {
+          "type": "Collage",
+          "settings": {
+            "videocollage": false,
+            "collagevideo": "",
+            "caollageimage": "shopify://shop_images/6_6df57370-ce8a-4ca5-b050-864eba100564.jpg",
+            "caollagecolor": "",
+            "collagetext": "",
+            "caollagecolortext": ""
+          }
+        }
+      },
+      "block_order": [
+        "collage_HHEBTJ",
+        "collage_iaMfXp",
+        "collage_F4fgRn",
+        "collage_PFVfBi",
+        "collage_yLbkH9",
+        "collage_a8a7tq"
+      ],
+      "settings": {
+        "borderlayoutcollage": "hide-border",
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15
+      }
+    },
+    "static_cta_small_text_hhNker": {
+      "type": "static-CTA-small-text",
+      "blocks": {
+        "small_text_title_m8gnei": {
+          "type": "small-text-title",
+          "disabled": true,
+          "settings": {
+            "sttitle": "Text block"
+          }
+        },
+        "small_text_body_tpHpBw": {
+          "type": "small-text-body",
+          "settings": {
+            "stbody": "The linen dress is designed for joy and freedom of movement, with side splits adorned in delicate hand-crocheted “poppy seeds” — a detail that takes over 9 hours (that’s more than a full workday) for an artisan to complete. Wear it on its own or paired with the crocheted outer layer for the full Aguonos look."
+          }
+        }
+      },
+      "block_order": [
+        "small_text_title_m8gnei",
+        "small_text_body_tpHpBw"
+      ],
+      "settings": {
+        "smallTextlayoutmidtext": "hide-border",
+        "maxwidthofsmalltext": 500,
+        "maxwidthofsmalltextm": 480,
+        "maxwidthofsmallbody": 900,
+        "maxwidthofsmallbodym": 480,
+        "padding_sizeup": 5,
+        "padding_sizedown": 5,
+        "padding_sizeupm": 5,
+        "padding_sizedownm": 5,
+        "smallttopdesktop": 5,
+        "smalltbottomdesktop": 5,
+        "smallttopmobile": 10,
+        "smalltbottommobile": 10,
+        "titlealigndesktop": "left",
+        "titlealignmobile": "left",
+        "sectionID": ""
+      }
+    },
+    "static_page_hero_UWFjXN": {
+      "type": "static-page-hero",
+      "blocks": {
+        "title_Em8KGc": {
+          "type": "title",
+          "settings": {
+            "pageherohead": "100% of profits from this limited edition Blaivi Vasara vest will go to Jaunimo Linija (est.  1991), one of the leading youth mental health NGOs in Lithuania. This is just what we like best — our get some give some philosophy reaching out to vast communities.",
+            "herocolor": "#ffffff"
+          }
+        },
+        "button_LdHbHN": {
+          "type": "button",
+          "settings": {
+            "pageherobuttext": "KNIT CARE GUIDE",
+            "herobuttonColor": "light",
+            "herourl": "shopify://pages/knit-care"
+          }
+        }
+      },
+      "block_order": [
+        "title_Em8KGc",
+        "button_LdHbHN"
+      ],
+      "disabled": true,
+      "settings": {
+        "herolayoutpage": "top-bottom",
+        "footer_hero": false,
+        "pageheroimage": "shopify://shop_images/Untitled-design-_7_1386x_27d55876-5578-4ef1-8d05-054bb2f9d1a7.jpg",
+        "pageheroimagemobile": "shopify://shop_images/Untitled-design-_1_-_1_692x_bbb3f572-5452-466f-9b92-10d30d584273.jpg",
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "pageherotitledesktop": 900,
+        "pageherotitlemobile": 300
+      }
+    },
+    "static_two_column_alt3_eQ4Bdj": {
+      "type": "static-two-column-alt3",
+      "settings": {
+        "borderlayouttwoclthreealt": "hide-border",
+        "altsectionlayouttwthree": "text-image",
+        "nopadding": false,
+        "altthreeimage": "shopify://shop_images/Homepage_Square_900x900-2.jpg",
+        "altheadingclthree": "AGUONOS HAND-CROCHETED DRESS",
+        "h2maxwidthdesktop": 480,
+        "h2maxwidthmobile": 480,
+        "altbodyclthree": "<p>This dress is hand-crocheted from organic cotton using couture chain stitches technique and adorned with blooming 3D florals. It takes 43 hours (that's almost 6 business days) from cast on to finish to complete by hand — a true testament to high-end artisanal craftsmanship.</p>",
+        "pmaxwidthdesktop": 480,
+        "pmaxwidthmobile": 350,
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "padding_sizeupm_section": 32,
+        "padding_sizedownm_section": 15,
+        "sectionID": ""
+      }
+    },
+    "static_link_pyM6Ni": {
+      "type": "static-link",
+      "settings": {
+        "onlyTextlayout": "hide-border",
+        "linktext": "SHOP NOW",
+        "linkurl": "shopify://collections/collaborations",
+        "thisisbigurl": true,
+        "justheader": false,
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 20,
+        "containerbottom": 20,
+        "containertopmobile": 20,
+        "containerbottommobile": 20
+      }
+    }
+  },
+  "order": [
+    "main",
+    "16400025067a204b40",
+    "164001637237a519bf",
+    "16446108729381799e",
+    "164001900656e472ca",
+    "164009869053d5286d",
+    "1640096383fb219167",
+    "1640179165e980a659",
+    "1640097600a0caa913",
+    "static_link_Qt4DHH",
+    "1640179754b50f7c90",
+    "static_collage_WHnFxn",
+    "static_cta_small_text_hhNker",
+    "static_page_hero_UWFjXN",
+    "static_two_column_alt3_eQ4Bdj",
+    "static_link_pyM6Ni"
+  ]
+}

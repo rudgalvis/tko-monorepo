@@ -1,0 +1,253 @@
+{{ 'component-dreams-fullfilled.css' | asset_url | stylesheet_tag }}
+
+<section class="kto-main-container" {% if section.settings.sectionID != nil %}id="{{ section.settings.sectionID }}" {% endif %}>
+    <div class="tko-lines flldr-{{section.id}}"
+    {% if section.settings.fullfilledlayoutpage == 'top-bottom'%}
+    style="
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    ">
+    {% elsif  section.settings.fullfilledlayoutpage == 'only-top' %}
+    style="
+        border-top: 1px solid black;
+        border-bottom: 0px solid black;
+    ">
+    {% elsif  section.settings.fullfilledlayoutpage == 'only-bottom' %}
+    style="
+        border-top: 0px solid black;
+        border-bottom: 1px solid black;
+    ">
+    
+    {% else %}
+    
+    style="
+        border-top: 0px solid black;
+        border-bottom: 0px solid black;
+    "> 
+  
+    {% endif %}
+
+<div class="dreams-fullfilled-container">
+    <div class="dreams-fullfilled-content">
+        <div class="dreams-fullfilled-header">
+            <h2>{{ section.settings.fullfilledheader}}</h2>
+        </div>
+ 
+        <ul class="dreams-fullfilled-list">
+          {% for block in section.blocks %}
+            <li data-fullfilleddream="{{forloop.index}}" class="fullfilledli" >
+              <div class="dream-arrow fullfilled-dr">↓</div> 
+                <div class="df-summary">
+                    <div class="dffs dffs-left">
+                        <div class="dffs-avatar">
+                            <img src="{{ block.settings.fullfilledavatar | img_url: '124x124' }}"/>
+                            <div class="dffs-name">
+                                <h2>{{ block.settings.fullfilledname }}</h2>
+                                <p>{{ block.settings.fullfilledsummary }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dffs dffs-block  dffs-right"  id="fullfilleddream-{{forloop.index}}">
+                        <div class="fullfilled-content-summary">
+                        {{ block.settings.fullfilledsummarymain }}
+                        </div>
+                        <div class="fullfilled-img-container">
+                            <img src="{{ block.settings.fullfilledaccordionimage | img_url: '848x1074' }}"/>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+{%- comment -%}
+        <div class="fullfilled-footer">
+          <a href="{{ section.settings.fullfilledfooterurl}}" class="btn-darrow btn-monument">{{ section.settings.fullfilledfootertext }}</a>
+        </div>
+        {%- endcomment -%}
+    </div>
+</div>
+
+
+</div>
+</section>
+
+
+
+{% schema %}
+  
+{
+    "name": "Fullfilled Dreams", 
+    "settings": [
+    {
+      "type": "header",
+      "content": "Line Layout Options"
+    },
+      {
+        "type": "select",
+        "id": "fullfilledlayoutpage",
+        "label": "Section Border Options",
+        "default": "top-bottom",
+        "options": [
+          {
+            "value": "top-bottom",
+            "label": "Show Border Top & Bottom"
+          },
+          {
+            "value": "only-top",
+            "label": "Show Border Only Top"
+          },
+          {
+              "value": "only-bottom",
+              "label": "Show Border Only Bottom"
+            },
+          {
+              "value": "hide-border",
+              "label": "Hide Borders"
+            }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup",
+        "label":"Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedown",
+        "label":"Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeupm",
+        "label":"Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedownm",
+        "label":"Bottom",
+        "default":15
+      },
+     
+      {
+        "id": "fullfilledheader",
+        "type": "text",
+        "label": "Enter Header Copy"
+      },
+      {
+        "type": "header",
+        "content": "Anchor Point Options"
+      },
+      {
+        "id": "sectionID",
+        "type": "text",
+        "label": "Anchor Point"
+      }
+      ],
+      "max_blocks": 10,
+      "blocks": [
+      {
+           "type": "Accordion", 
+           "name": "Fullfilled Dreams",
+           "settings": [
+           {
+              "type": "header",
+              "content": "Accordion Item"
+            },
+            {
+              "id": "fullfilledname",
+              "type": "text",
+              "label": "Heading"
+            },
+           {
+               
+            "type": "textarea",
+            "id": "fullfilledsummary",
+            "label": "Sub-Heading"
+          },
+          {
+               
+            "type": "richtext",
+            "id": "fullfilledsummarymain",
+            "label": "Body"
+          },
+          {
+            "type": "header",
+            "content": "Image Options"
+          },
+            {
+              "type": "image_picker",
+              "id": "fullfilledaccordionimage",
+              "label": "Accordion Image"
+            },
+            
+          {
+            "type": "image_picker",
+            "id": "fullfilledavatar",
+            "label": "Thumbnail"
+          }
+          
+
+         ]
+      }
+       ],
+
+        
+    "presets": [ 
+{
+"category": "Accordion",
+"name": "Fullfilled Dreams"
+}
+]
+  }
+{% endschema %}
+
+<style>
+  .vid-full{
+   width:100%;
+  }
+
+  .vid-large{
+    width:80%;
+  }
+
+  .vid-midium{
+    width:60%;
+
+  }
+
+  .vid-small{
+    width:50%;
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    .vid-full,.vid-large,.vid-midium,.vid-small{
+      width:100%;
+    }
+  }
+
+  
+</style>
+
+
+<style>
+  .flldr-{{section.id}}{
+         padding: {{section.settings.padding_sizeup}}px 0px {{section.settings.padding_sizedown}}px 0px;
+   }
+ 
+   @media (max-width: 812px) {
+     .flldr-{{section.id}}{
+         padding: {{section.settings.padding_sizeupm}}px 0px {{section.settings.padding_sizedownm}}px 0px;
+   }
+   } 
+ </style>

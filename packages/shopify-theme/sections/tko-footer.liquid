@@ -1,0 +1,283 @@
+<section class="kto-main-container">
+    <div class="tko-lines sot-{{section.id}}"
+    {% if section.settings.footerlayout == 'top-bottom'%}
+    style="
+      border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+    ">
+    {% elsif  section.settings.footerlayout == 'only-top' %}
+    style="
+    border-top-style:  solid;
+    border-top-color:   black;
+    border-bottom: none;
+    ">
+    {% elsif  section.settings.footerlayout == 'only-bottom' %}
+    style="
+    border-top: none;
+    border-bottom-style:  solid;
+    border-bottom-color:   black;
+    ">
+    
+    {% else %}
+    
+    style="
+    border-top: none;
+    border-bottom: none;
+    "> 
+  
+    {% endif %}
+
+    {{ 'component-tko-footer.css' | asset_url | stylesheet_tag }}
+
+<footer class="footer tko-footer">
+    <div class="footer-item footer-left">
+        <h2 class="footer-h2">{{ section.settings.tkoabouttext}}</h2>
+        {{ section.settings.tkoaboutcopy }}
+        <div class="climate-logos">
+          <img height="50" src="{{ section.settings.logofooter | img_url: 'x100'}}">
+        </div>
+    </div>
+    <div class="footer-item footer-center">
+        <div class="footer-menu">
+        <h2 class="footer-h2">{{ section.settings.tkosocialtext }}</h2>
+           
+                {% for link in linklists['social-menu'].links %}
+              
+                    <a target="_blank" href="{{ link.url }}">{{ link.title }}</a>
+                
+                {% endfor %}
+           
+        </div>
+        <div class="footer-menu">
+            <h2 class="footer-h2">{{ section.settings.tkofootertext}}</h2>
+              
+                    {% for link in linklists[section.settings.footermenu].links %}
+                  
+                        <a href="{{ link.url }}">{{ link.title }}</a>
+                   
+                    {% endfor %}
+              
+            </div>
+    </div>
+    <div class="footer-item footer-right">
+        <div class="footer-newsletter">
+            <h2 class="footer-h2">{{ section.settings.footernewshead}}</h2>
+            <p>{{ section.settings.footernewscopy }}</p>    
+        </div>
+      <div id="omnisend-embedded-v2-662b9a110c5d9134e804d674"></div>
+      </div>
+        <div class="social-media-icon">
+           <ul>
+                {% for block in section.blocks %}
+                <li>
+                    <a target="blank_" href="{{ block.settings.siiconurl }}">
+                        <img src="{{ block.settings.siicon | img_url: '66x' }}" />
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="mobile-only" style="align-self: center;">
+            {% render 'currency-selector', right: true %}
+        </div>
+    </div>
+</footer>
+
+
+
+</div>
+</section>
+
+
+<div class="footer-sign {% if request.page_type == 'product' %}sticky-footer{% endif %}">
+    <p>{{section.settings.footercopyc}}</p>
+    <div class="payment-badge">
+      {% for type in shop.enabled_payment_types %}
+          {{ type | payment_type_svg_tag: class: 'custom-class' }}
+      {% endfor %}
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Line Layout Options"
+  },
+  {
+    "type": "select",
+    "id": "footerlayout",
+    "label": "Section Border Options",
+    "default": "top-bottom",
+    "options": [
+      {
+        "value": "top-bottom",
+        "label": "Show Border Top & Bottom"
+      },
+      {
+        "value": "only-top",
+        "label": "Show Border Only Top"
+      },
+      {
+          "value": "only-bottom",
+          "label": "Show Border Only Bottom"
+        },
+      {
+          "value": "hide-border",
+          "label": "Hide Borders"
+        }
+    ]
+  },
+  {
+    "type": "header",
+    "content": "Line Padding Options Desktop"
+  },
+  {
+    "type":"number",
+    "id":"padding_sizeup_sot",
+    "label":"Top",
+    "default":20
+  },
+  {
+    "type":"number",
+    "id":"padding_sizedow_sot",
+    "label":"Bottom",
+    "default":20
+  },
+  
+  {
+    "type": "header",
+    "content": "Line Padding Options Mobile"
+  },
+  {
+    "type":"number",
+    "id":"padding_sizeup_sotm",
+    "label":"Top",
+    "default":20
+  },
+  {
+    "type":"number",
+    "id":"padding_sizedow_sotm",
+    "label":"Bottom",
+    "default":20
+  },
+  {
+    "type": "header",
+    "content": "About Options"
+  },
+  {
+    "type": "text",
+    "id": "tkoabouttext",
+    "label": "Footer About Header"
+  },
+  {
+    "type": "richtext",
+    "id": "tkoaboutcopy",
+    "label": "About Copy"
+  },
+  {
+    "type": "header",
+    "content": "Logo"
+  },
+  {
+    "type": "image_picker",
+    "id": "logofooter",
+    "label": "Footer Logo"
+  },
+  {
+    "type": "header",
+    "content": "Footer Social Options"
+  },
+  {
+    "type": "text",
+    "id": "tkosocialtext",
+    "label": "Footer Social Header"
+  },
+  {
+    "type": "link_list",
+    "id": "socialmenu",
+    "label": "Social Menu"
+  },
+  {
+    "type": "text",
+    "id": "tkofootertext",
+    "label": "Footer Menu Header"
+  },
+  {
+    "type": "link_list",
+    "id": "footermenu",
+    "label": "Footer Menu"
+  },
+  {
+    "type": "text",
+    "id": "footernewshead",
+    "label": "Newsletter Header Text"
+  },
+  {
+    "type": "textarea",
+    "id": "footernewscopy",
+    "label": "Newsletter Copy"
+  },
+  {
+    "type": "header",
+    "content": "Footer Copy"
+  },
+  {
+    "type": "text",
+    "id": "footercopyc",
+    "label": "Enter Footer Bottom Copy"
+  }
+
+  ],
+  "max_blocks": 5,
+  "blocks": [
+  {
+       "type": "Icon", 
+       "name": "Social Icon",
+       "settings": [
+       {
+        "type": "image_picker",
+        "id": "siicon",
+        "label": "Social Icon Image",
+        "info": "66 x 66px .png recommended"
+      },
+       {
+        "id": "siiconurl",
+        "type": "url",
+        "label": "Select URL"
+      }
+     ]
+  }
+   ]
+}
+{% endschema %}
+
+
+<style>
+    .sot-{{ section.id }}{
+      padding: {{section.settings.padding_sizeup_sot}}px 0px {{section.settings.padding_sizedow_sot}}px 0px;
+      border-width: 1px ;
+      
+     }
+
+     @media (max-width: 812px){
+      .sticky-footer {
+    margin-bottom: 45px;
+}
+     }
+
+     
+     @media (min-width: 320px) and (max-width: 480px) {
+      .sot-{{ section.id }}{
+      padding: {{section.settings.padding_sizeup_sotm}}px 0px {{section.settings.padding_sizedow_sotm}}px 0px;
+      border-width: 0.5px;
+     }
+    
+    
+     }    
+</style>

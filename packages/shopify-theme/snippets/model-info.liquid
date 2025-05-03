@@ -1,0 +1,43 @@
+{% assign model_name = modelname %}
+{% assign model_container = modelcontainer %}
+
+
+{% for field in model_container %}
+{% if model_name == field[0]%}
+        <div class="modelinfo-button">
+                <a href="javascript:void(0);" class="modelinfo">MODEL INFO</a>
+        </div>
+
+        
+                      
+ {% endif %}  
+ <p>{{field[forloop.index0]}}</p>
+{% endfor %}
+
+<div class="modelinfo-container">
+  
+    <div class="modelinfo-summary">
+        <div class="modelinfo-header">
+
+        </div>
+
+    </div>
+</div>
+
+
+<style>
+    .modelinfo-button {
+    position: absolute;
+    bottom: 11px;
+    left: 11px;
+}
+
+.modelinfo-button a{
+   font-family: "Monument";
+   font-size:12px;
+   color: white;
+   letter-spacing: -0.18px;
+   line-height: 20px; 
+   text-decoration: underline;
+}
+</style>

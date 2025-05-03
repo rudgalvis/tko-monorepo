@@ -1,0 +1,60 @@
+{% schema %}
+{
+  "name": "main-404",
+  "tag" : "section",
+  "class": "main-404"
+  
+}
+{% endschema %}
+
+
+<style type="text/css">
+
+  .main-404{
+    margin-top: 30rem;
+    margin-bottom: 25rem;
+  }
+
+
+  .template-404 .title + * {
+    margin-top: 1rem;
+  }
+
+  .template-404 p{
+    font-family: 'Monument';
+    font-size: 62px;
+    color: black;
+    letter-spacing: -0.95px;
+  }
+
+  .template-404 h1{
+    font-family: 'Monument';
+    font-size: 32px;
+    color: black;
+    letter-spacing: -0.34px;
+  }
+
+  .template-404 a{
+    font-family: 'Monument';
+    padding-top: 12px;
+    height: 52px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .template-404 .title + * {
+      margin-top: 2rem;
+    }
+  }
+</style>
+
+<div class="template-404 page-width page-margin center">
+  <p>
+    {{ 'templates.404.subtext' | t }}
+  </p>
+  <h1 class="title">
+    {{ 'templates.404.title' | t }}
+  </h1>
+  <a href="{{ routes.all_products_collection_url }}" class="button">
+    {{ 'general.continue_shopping' | t }}
+  </a>
+</div>

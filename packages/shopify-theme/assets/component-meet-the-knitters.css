@@ -1,0 +1,548 @@
+.main-meet-the-knitters {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-start;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 29.5px 0px 29.5px 0px;
+    position: relative;
+}
+
+.meet-the-knitters-arrow{
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 20px;
+   display: none;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+}
+
+.mtk-arrow.right_arrow_mtk {
+    padding-right: 15px;
+}
+
+.mtk-arrow.left_arrow_mtk {
+    padding-left: 15px;
+}
+
+
+.forfive {
+    aspect-ratio: 4/5;
+   
+}
+
+.arrow-container {
+    width: 100%;
+    height: 125px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+   
+}
+    .meet-the-knitters-container{
+        width:100%;
+        height: auto;
+        position: relative;
+    }
+
+    .knitter-thumb-name{
+        display:none;
+    }
+
+    .meet-the-knitters-content{
+        width:100%;
+        height: auto;
+        position: relative;  
+    }
+
+    .meet-the-knitters-header{
+        width:100%;
+        height: auto;
+        position: relative;
+        padding-top: 49px;
+        padding-bottom: 71px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; 
+    }
+
+    .meet-the-knitters-header h2{
+        font-family: 'Monument';
+        font-size:22px;
+        color: black;
+        letter-spacing: -0.34px;
+        text-align: center;
+    }
+    .meet-the-knitters-carousel{
+        width: 100%;
+    height: auto;
+    position: relative;
+}
+
+    .mtkc{
+        width: 100%;
+        height: auto;
+        /*padding: 19.5px 0px 19.5px 0px;*/
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-direction: row;
+       /* border-top: 1px solid black;
+        border-bottom: 1px solid black;*/
+    }
+
+
+    .mtkc-line:first-child{
+        margin-top: 0px;
+    }
+
+    .mtkc-line:last-child{
+        margin-bottom: 0px;
+    }
+
+
+    .mtkc-img-container{
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/5;
+    min-width: 421px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    max-width: 421px;
+    }
+
+  .mtkc-img-container img{
+        width: 100%;
+        display:none;
+
+    }
+
+    .mtkc-real-content{
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: start;
+        padding: 31px 27px 0px 71px;
+        /* max-width: 1200px; */
+     
+    }
+
+    .mtkc-real-content h2{
+        font-family: 'Panama';
+    font-size: 62px;
+    color: black;
+    letter-spacing: -0.95px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-bottom: 31px;
+    margin-top: 0px;
+    }
+
+    .mtkc-real-content p{
+        font-family: 'Panama';
+        font-size:28px;
+        color: black;
+        letter-spacing: -0.43px;
+        line-height: 34px;
+        margin-block-start: 0em;
+         margin-block-end: 0em;
+    }
+
+    .mtkc-real-content a{
+        font-family: 'Monument';
+        font-size:22px;
+        color: black;
+        letter-spacing: -0.34px;
+        line-height: 22px;
+        margin-top: 58px;
+    }
+
+    .mtkc-thumb-container{
+        width: auto;
+    height: auto;
+    position: relative;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    max-width: unset;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0px;
+    padding-left: 13px;
+    padding-right: 40px;
+    z-index: 3;
+
+    }
+
+    .selected-line{
+        width:105px;
+        height:105px;
+        border-radius: 50%;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        border:1px solid black;
+        margin: auto;
+        position: absolute;
+        top: -5.6px;
+    left: -5.4px;
+    display:none;
+    }
+
+    .mtkc-line {
+        margin: 7px 0px;
+    position: relative;
+    
+}
+
+.slick-current .selected-line{
+    display:block;
+}
+
+
+
+
+
+
+
+    .meet-the-knitters-footer{
+        width:100%;
+        height:50px;
+        display: flex;
+        align-items: center;
+        justify-content:center;
+        flex-direction:row;
+        margin-bottom: 44px;
+    }
+
+    .meet-the-knitters-footer a{
+ font-size:22px;
+ font-family: 'Monument';
+ letter-spacing:-0.34px;
+  color:black;
+  text-align: center;
+    }
+
+    .mtkc-thumb {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 94px;
+       height: 94px;
+       overflow: hidden;
+       border-radius: 50%;
+}
+
+.mtkc-thumb img{
+    width:100%;
+}
+
+.is-nav-selected > .selected-line {
+  display:block;
+}
+
+@media (max-width: 812px) {
+
+    .main-meet-the-knitters {
+        display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: flex-start;
+    border-top: 0.5px solid black;
+    border-bottom: none;
+    padding: 19.5px 0px 0px 0px;
+}
+
+.meet-the-knitters-arrow{
+display: block;
+}
+
+
+.mtkc-line:first-child{
+        margin-top: 0px;
+    }
+
+    .mtkc-line:last-child{
+        margin-bottom: 0px;
+    }
+
+    .mtkc-line {
+        margin: 0px 0px;
+    position: relative;
+    
+}
+
+
+    .meet-the-knitters-header h2 {
+    font-size: 12px;
+    letter-spacing: -0.19px;
+    line-height: 16px;
+}
+
+.knitter-thumb-name{
+    display: block;
+    font-size: 10px;
+    font-family: 'Monument Regular';
+    color: black;
+    /*text-transform: uppercase;*/
+    letter-spacing: -0.15px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    margin-top: 5px;
+    position: relative;
+    left: -3px;
+}
+
+.meet-the-knitters-header {
+    padding-top: 0px;
+    padding-bottom: 23px;
+}
+
+.mtkc {
+    flex-direction: column;
+    border-top: 0.5px solid black;
+    border-bottom: 0.5px solid black;
+    padding: 12.5px 0px 12.5px 0px;
+}
+
+.mtkc-img-container {
+    width: 100%;
+    min-height:300px;
+}
+
+.mtkc-real-content {
+    width: 100%;
+    padding: 18px 30px 24px 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.mtkc-real-content a {
+    font-family: 'Monument';
+    font-size: 14px;
+    color: black;
+    letter-spacing: -0.34px;
+    line-height: 22px;
+    margin-top: 41px;
+}
+
+.mtkc-real-content h2 {
+    font-size: 28px;
+    letter-spacing: -0.43px;
+    line-height: 17.5px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mtkc-real-content p {
+    font-size: 14px;
+    letter-spacing: -0.22px;
+    line-height: 18px;
+    text-align: center;
+}
+
+.mtkc-thumb {
+
+    width: 44.5px;
+    height: 44.5px;
+    margin-left: 3px;
+    margin-right: 3px;
+
+}
+
+.mtkc-thumb img{
+    width:100%;
+}
+.selected-line {
+    width: 49.5px;
+    height: 49.5px;
+    top: -2.7px;
+    left: 0px;
+
+}
+
+.mtkc-thumb-container {
+    margin-top: 18px;
+    margin-bottom: 0px;
+    padding: 10px 1px;
+    max-width: 307px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.meet-the-knitters-footer a {
+    font-size: 12px;
+    letter-spacing: -0.18px;
+}
+.mtkc-img-container img{
+        width: 100%;
+        display:block;
+
+    }
+
+}
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+.meet-the-knitters-header h2 {
+    font-size: 12px;
+    letter-spacing: -0.19px;
+    line-height: 16px;
+}
+
+.knitter-thumb-name{
+    display: block;
+    font-size: 10px;
+    font-family: 'Monument Regular';
+    color: black;
+    /*text-transform: uppercase;*/
+    letter-spacing: -0.15px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    margin-top: 5px;
+    position: relative;
+    left: -3px;
+}
+
+.meet-the-knitters-header {
+    padding-top: 9px;
+    padding-bottom: 25px;
+}
+
+.mtkc {
+    flex-direction: column;
+    border-top: none;
+    border-bottom:none;
+    padding: 10.5px 0px 10.5px 0px;
+}
+
+.mtkc-img-container {
+    width: 100%;
+    min-height: unset;
+    min-width: unset;
+}
+
+.mtkc-real-content {
+    width: 100%;
+    padding: 18px 30px 24px 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.mtkc-real-content a {
+    font-family: 'Monument';
+    font-size: 14px;
+    color: black;
+    letter-spacing: -0.34px;
+    line-height: 22px;
+    margin-top: 21px;
+}
+
+.mtkc-real-content h2 {
+    font-size: 28px;
+    letter-spacing: -0.43px;
+    line-height: 17.5px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 23px;
+    margin-bottom: 23px;
+}
+
+.mtkc-real-content p {
+    font-size: 14px;
+    letter-spacing: -0.22px;
+    line-height: 18px;
+    text-align: center;
+    max-width: 260px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mtkc-thumb {
+
+    width: 44.5px;
+    height: 44.5px;
+    margin-left: 7px;
+    margin-right: 7px;
+
+}
+
+.mtkc-thumb img{
+    width:100%;
+}
+
+.selected-line {
+    width: 49.5px;
+    height: 49.5px;
+    top: -2.7px;
+    left: 4.5px;
+
+}
+
+.mtkc-thumb-container {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 10px 1px;
+    max-width: 307px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.meet-the-knitters-footer a {
+    font-size: 12px;
+    letter-spacing: -0.18px;
+}
+
+.meet-the-knitters-footer {
+    width: 100%;
+    height: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-bottom: 0px;
+}
+
+.meet-the-knitters-carousel{
+    order:2;
+}
+
+.main-meet-the-knitters {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: flex-start;
+    border-top: 0.5px solid black;
+    border-bottom: 0.5px solid black;
+    padding: 0px 0px 0px 0px;
+}
+
+}

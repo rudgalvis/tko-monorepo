@@ -1,0 +1,184 @@
+.static-3-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 6px;
+    grid-row-gap: 0px;
+ }
+
+.s3c-item img{
+width:100%;
+}
+
+.s3c-item {
+position:relative;
+overflow: hidden;
+}
+
+
+.s3c-item:nth-child(4){
+display:none;
+}
+
+.knitter-image{
+position: relative;
+z-index:5;
+}
+
+.knitter-info{
+position: absolute;
+top: 0px;
+left: 0px;
+z-index: 4;
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 40px;
+justify-content: space-between;
+}
+
+.knitter-info h2 {
+font-size: 62px;
+font-family: 'Panama';
+text-align: center;
+color: black;
+}
+
+.knitter-info p {
+text-align: center;
+font-size: 22px;
+line-height: 28px;
+}
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+.knitter-info {
+padding: 20px;
+justify-content: space-evenly;
+}
+
+.knitter-info h2 {
+font-size: 35px;
+font-family: 'Panama';
+text-align: center;
+color: black;
+margin-block-start: 0em;
+margin-block-end: 0em;
+}
+
+.knitter-info p {
+text-align: center;
+font-size: 16px;
+line-height: 22px;
+}
+
+.static-3-col {
+
+    position: relative;
+z-index: 4;
+ }
+
+}
+
+
+
+@media (max-width: 812px) {
+
+.static-3-col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 3px;
+    grid-row-gap: 0px;
+    position: relative;
+z-index: 4;
+ }
+
+ .s3c-item:nth-child(4){
+display:block;
+position:relative;
+top:-6px;
+}
+
+.s3c-item:nth-child(3){
+display:block;
+position:relative;
+top:-6px;
+}
+
+
+.knitter-info h2 {
+font-size: 24px;
+letter-spacing: -0.2px;
+}
+
+.knitter-info p {
+font-size: 12px;
+letter-spacing: -0.1px;
+line-height: 16px;
+}
+
+.knitter-info{
+padding: 15px;
+}
+
+.footerlink a{
+font-size:14px;
+}
+}
+
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+.static-3-col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 3px;
+    grid-row-gap: 0px;
+    position: relative;
+z-index: 4;
+ }
+
+
+ .s3c-item:nth-child(4){
+display:block;
+position:relative;
+top:-6px;
+}
+
+.s3c-item:nth-child(3){
+position:relative;
+top:-6px;
+}
+.knitter-info h2 {
+font-size: 24px;
+letter-spacing: -0.2px;
+}
+
+.knitter-info p {
+font-size: 12px;
+letter-spacing: -0.1px;
+line-height: 16px;
+}
+
+.knitter-info{
+padding: 15px;
+justify-content: flex-start;
+}
+
+.footerlink a{
+font-size:12px;
+letter-spacing: -0.12px;
+line-height: 12px;
+}
+
+.m-3col{
+height:30px;
+}
+
+
+}

@@ -1,0 +1,26 @@
+{% comment %}
+
+    Props:
+       title: string
+       content: string
+
+    Usage:
+    {%- for block in section.blocks -%}
+        {%- case block.type -%}
+            {%- when 'collapsible_tab' -%}
+                {% render 'collapsible-tab', title: 'string', content: 'string' %}
+
+{% endcomment %}
+
+{% if title and content %}
+    <li class="desc-item" data-open="0">
+        <div class="arrow-title-content">
+            <div class="pdesc-arrow active">
+                <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/pdp_arrows_2.png?v=1646145714"/>
+            </div>
+            <div class="pdesc-title">{{ title }}</div>
+        </div>
+
+        <p>{{ content }}</p>
+    </li>
+{% endif %}

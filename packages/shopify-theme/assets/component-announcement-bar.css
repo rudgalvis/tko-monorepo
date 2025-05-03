@@ -1,0 +1,148 @@
+.tko-announcement-bar{
+    width:100%;
+    height:40px;
+    min-height:40px;
+    background-color:#B4BED6;
+    align-items: center;
+    justify-content: center;
+    transform-origin: top center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.tko-announcement-bar a{
+    font-size:14px;
+    text-align:center;
+    letter-spacing: -0.22px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.but-annou-close{
+    position:absolute;
+    right:10px;
+    top:10px;
+    cursor:pointer;
+    z-index:99;
+}
+
+.annou_grand {
+  width: 100%;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.annou-slider {
+width: 100%;
+height: auto;
+}
+
+.pxs-announcement-bar-text-desktop p{
+    display:inherit;
+    text-align: center;
+    font-size:14px;
+      text-align:center;
+      letter-spacing: -0.22px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: 'Monument';
+      text-transform: uppercase;
+      margin-block-start: 0em;
+  margin-block-end: 0em;
+  }
+
+  .pxs-announcement-bar-text-desktop p a{
+       text-decoration: underline;
+  }
+
+
+  .pxs-announcement-bar-text-mobile p{
+    text-align: center;
+    font-size:8px;
+    font-family: 'Monument';
+      text-transform: uppercase;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-bottom: 6px;
+  letter-spacing: -0.39px;
+
+  }
+
+
+  .pxs-announcement-bar-text-mobile p a{
+    text-decoration: underline;
+    
+  }
+
+  .pxs-announcement-bar-text-mobile{
+    display: none;
+  }
+
+  @media (max-width: 812px) {
+    .pxs-announcement-bar-text-desktop{
+    display:none;
+  }
+
+  .pxs-announcement-bar-text-mobile{
+    display: inherit;
+  }
+
+
+
+  .tko-announcement-bar{
+      height:32px;
+      z-index: 5;
+  }
+
+  .but-annou-close{
+    /*display:none;*/
+    top: 7px;
+  }
+
+  .tko-announcement-bar a{
+      font-size:12px;
+  }
+  }
+
+
+  @media (min-width: 320px) and (max-width: 480px) {
+
+    .pxs-announcement-bar-text-desktop{
+    display:none;
+  }
+
+  .pxs-announcement-bar-text-mobile{
+    display: inherit;
+  }
+
+  .pxs-announcement-bar-text-mobile p{
+     margin-bottom: 0px;;
+  }
+
+
+  .tko-announcement-bar{
+      height:28px !important;
+      min-height: 28px !important;
+      z-index: 5;
+  }
+
+  .but-annou-close{
+   /* display:none;*/
+   top: 4px;
+  }
+
+  .but-annou-close img{
+    /* display: none; */
+    width: 14px;
+}
+
+  .tko-announcement-bar a{
+      font-size:8px;
+  }
+
+ }

@@ -1,0 +1,41 @@
+{% if collection.metafields.my_fields.collection_hero_copy_title != nil or section.settings.collectionherotitle != nil %}
+
+<div class="static-collection-hero-text-container">
+    <h2>{{ section.settings.collectionherotitle }}</h2>
+    {{ section.settings.collectionherocopy}}
+</div>
+
+{% endif %}
+
+{{ 'component-static-collection-hero-text.css' | asset_url | stylesheet_tag }}
+
+{% schema %}
+  
+{
+    "name": "Collection Hero Text", 
+    "settings": [
+    {
+        "type": "header",
+        "content": "Options"
+      },
+      {
+               
+        "type": "text",
+        "id": "collectionherotitle",
+        "label": "Section Header Copy"
+      },
+      {         
+        "type": "richtext",
+        "id": "collectionherocopy",
+        "label": "Section Header Copy"
+      }
+      ],
+        
+    "presets": [ 
+{
+"category": "text",
+"name": "Collection Hero Text"
+}
+]
+  }
+{% endschema %}

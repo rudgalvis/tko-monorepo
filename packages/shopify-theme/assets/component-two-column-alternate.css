@@ -1,0 +1,150 @@
+.two-column-container-alt{
+    width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.two-column-alt{
+    width:50%;
+}
+
+.cl-right-alt{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.alternatedisplay{
+    padding: 20px 55px 38px 55px;
+}
+
+
+.cl-left-alt img{
+     width:100%;
+}
+
+.cl-content-alt{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.cl-left-alt{
+ height: auto;
+ /*max-height: 966px;*/
+}
+
+.topsection-alt h2{
+    font-family:'Panama';
+    font-size: 56px;
+    line-height:70px;
+    color:black;
+    text-align: center;
+    font-weight: 300;
+    margin-block-end: 35px;
+    letter-spacing: -0.95px;
+}
+
+.topsection-alt h3{
+    font-family:'Monument';
+    font-size: 14px;
+    line-height:19px;
+    color:black;
+    text-align: center;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: -0.22px;
+}
+
+@media (min-width: 1600px) and (max-width: 3000px) {
+
+  .cl-right-alt{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+.two-column-container-alt{
+  flex-direction: column;
+}
+
+.two-column-alt{
+    width:100%;
+}
+
+.alternatedisplay{
+    padding: 0px 0px 20px 0px;
+}
+
+.topsection h2{
+    font-size: 40px;
+    margin-block-end: 0px;
+}
+
+.topsection h3{
+    font-size: 10px;
+    margin-block-start: 0px;
+
+}
+
+.topsection-alt {
+margin-bottom: 50px;
+}
+.image-text{
+flex-direction: column;
+}
+
+.text-image{
+flex-direction: column;
+}
+.cl-content-alt p {
+font-size: 24px;
+}
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .two-column-container-alt{
+  flex-direction: column;
+}
+
+.two-column-alt{
+    width:100%;
+}
+
+.cl-content-alt p{
+  font-size: 27px;
+line-height: 32px;
+text-align: center;
+color: black;
+letter-spacing: -0.42px;
+}
+
+.alternatedisplay{
+    padding: 0px 0px 20px 0px;
+}
+
+.topsection-alt h2{
+    font-size: 40px;
+    margin-block-end: 0px;
+}
+
+.topsection-alt h3{
+    font-size: 10px;
+    margin-block-start: 0px;
+
+}
+
+.topsection-alt {
+margin-bottom: 50px;
+}
+
+
+
+}
+

@@ -1,0 +1,321 @@
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-grid.css' | asset_url | stylesheet_tag }}
+{{ 'component-hp-product.css' | asset_url | stylesheet_tag }}
+
+<link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'component-search.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
+  {{ 'component-facets.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+{{ 'component-main-search.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign sort_by = search.sort_by | default: search.default_sort_by
+  assign terms = search.terms | escape
+  assign search_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
+-%}
+
+{%- comment -%}
+  search query
+{%- endcomment -%}
+{%- capture contentForQuerystring -%}{{ content_for_header }}{%- endcapture -%}
+{%- assign pageUrl = contentForQuerystring
+  | split: '"pageurl":"'
+  | last
+  | split: '"'
+  | first
+  | split: 'www.theknottyones.com'
+  | last
+  | replace: '\/', '/'
+  | replace: '%20', ' '
+  | replace: '\u0026', '&'
+  | remove: 'search?q='
+  | remove: '&options%5Bprefix%5D=last'
+  | remove: '/'
+-%}
+
+{%- comment -%}
+  search query
+{%- endcomment -%}
+
+{% assign numPage = 0 %}
+{% assign numArticle = 0 %}
+{% assign numProduct = 0 %}
+{% for item in search.results %}
+  {% if item.object_type == 'product' %}
+    {% assign numProduct = numProduct | plus: 1 %}
+    {% assign colorCount_selected = item.variants[0].option1 | handleize %}
+    {% assign colorCount_selected_push = item.variants[0].option1 %}
+    {% assign colorCount_selected_quantity = 0 %}
+    {% assign isContinue = 0 %}
+
+    {% for variant in item.variants %}
+      {% unless variant.metafields.secomapp.freegifts %}
+        {% unless variant.title contains '(Freegifts)' %}
+          {% assign colorCount = variant.option1 | handleize %}
+
+          {% if colorCount == colorCount_selected %}
+            {% assign colorCount_selected_quantity = colorCount_selected_quantity
+              | plus: item.variants[0].inventory_quantity
+            %}
+            {% if item.variants[0].inventory_policy == 'continue' %}
+              {% assign isContinue = isContinue | plus: 1 %}
+            {% endif %}
+          {% endif %}
+        {% endunless %}
+      {% endunless %}
+    {% endfor %}
+
+    {% assign dnum = true %}
+    {% for tag in item.tags %}
+      {% if tag contains 'dreamfund' or tag contains 'countdown' %}
+        {% assign dnum = false %}
+      {% endif %}
+    {% endfor %}
+
+    {% if dnum == true %}
+      {% if isContinue == 0 and colorCount_selected_quantity == 0 %}
+      {% else %}
+        {% assign numProduct = numProduct | plus: 1 %}
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+  {% if item.object_type == 'page' %}
+    {% assign numPage = numPage | plus: 1 %}
+  {% endif %}
+
+  {% if item.object_type == 'article' %}
+    {% assign numArticle = numArticle | plus: 1 %}
+  {% endif %}
+{% endfor %}
+
+<div class="template-search {% unless search.performed and search.results_count > 0 %} template-search--empty{% endunless %}">
+  <div class="center">
+    {%- if search.performed -%}
+      <h1 class="h2 search-title">{{ 'templates.search.title' | t }}</h1>
+      <p class="search-summary">
+        Your search for '{{ search.terms }}' returned {{ numProduct | plus: numPage | plus: numArticle }} results
+      </p>
+    {%- else -%}
+      <h1 class="h2 search-title">{{ 'general.search.search' | t }}</h1>
+      <p class="search-summary">Your search for 'top' returned {{ search.results_count }} results</p>
+    {%- endif -%}
+
+    {%- comment -%}search tabs{%- endcomment -%}
+
+    <div class="search-menu">
+      <ul>
+        <li>
+          <a
+            href="javascript:void(0)"
+            class="searchtab-control {% if numPage > 0 and numProduct == 0 %}active{% endif %}{%if numPage == 0 %} disable_a{% endif %}"
+            data-tabname="sr-page"
+            >PAGE<span>({{ numPage }})</span></a
+          >
+          <div class="sr-line"></div>
+        </li>
+        <li>
+          <a
+            href="javascript:void(0)"
+            class=" searchtab-control {% if numProduct > 0 %}active{% else %} disable_a{% endif %}"
+            data-tabname="sr-product"
+            >PRODUCT<span>({{ numProduct }})</span></a
+          >
+          <div class="sr-line"></div>
+        </li>
+        <li>
+          <a
+            href="javascript:void(0)"
+            class="searchtab-control {% if numPage == 0 and numProduct == 0 and numArticle > 0 %}active{% endif %}{%if numArticle == 0%} disable_a{% endif %}"
+            data-tabname="sr-blog"
+            >JOURNAL<span>({{ numArticle }})</span></a
+          >
+          <div class="sr-line"></div>
+        </li>
+      </ul>
+    </div>
+    {%- comment -%}search tabs{%- endcomment -%}
+  </div>
+  {%- if search.performed -%}
+    <div class="search-product sr-product {% if numProduct > 0 %}active{%endif%}">
+      {% for item in search.results %}
+        {% if item.object_type == 'product' %}
+          {%- comment -%}
+            ------------------
+            variant -hide -show depends on quantity
+            ------------------
+          {%- endcomment -%}
+
+          {% assign hidden = item.metafields.custom.no_index %}
+
+          {% assign show = true %}
+          {% if product.variants.size <= 1 %}{% assign show = false %}{% endif %}
+          {% if product.available == false %}{% assign show = false %}{% endif %}
+          {% if hidden == true %}           {% assign show = false %}{% endif %}
+
+          {% assign colorCount_selected = item.variants[0].option1 | handleize %}
+          {% assign colorCount_selected_push = item.variants[0].option1 %}
+          {% assign colorCount_selected_quantity = 0 %}
+          {% assign isContinue = 0 %}
+
+          {% for variant in item.variants %}
+            {% unless variant.metafields.secomapp.freegifts %}
+              {% unless variant.title contains '(Freegifts)' %}
+                {% assign colorCount = variant.option1 | handleize %}
+                {% if colorCount == colorCount_selected %}
+                  {% assign colorCount_selected_quantity = colorCount_selected_quantity
+                    | plus: item.variants[0].inventory_quantity
+                  %}
+                  {% if item.variants[0].inventory_policy == 'continue' %}
+                    {% assign isContinue = isContinue | plus: 1 %}
+                  {% endif %}
+                {% endif %}
+              {% endunless %}
+            {% endunless %}
+          {% endfor %}
+
+          {%- comment -%}
+            ------------------
+            variant -hide -show depends on quantity
+            ------------------
+          {%- endcomment -%}
+
+          {% assign dg = true %}
+          {% for tag in item.tags %}
+            {% if tag contains 'dreamfund' or tag contains 'countdown' %}
+              {% assign dg = false %}
+            {% endif %}
+          {% endfor %}
+
+          {% if show %}
+            {% include 'search-product' %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="search-product sr-blog {% if numPage == 0 and numProduct == 0 and numArticle > 0 %}active{% endif %}">
+      {% for item in search.results %}
+        {% if item.object_type == 'article' %}
+          {% include 'search-blog' %}
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="search-product sr-page {% if numPage > 0 and numProduct == 0 %}active{% endif %}">
+      {% for item in search.results %}
+        {% if item.object_type == 'page' %}
+          {% include 'search-page' %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-search.name",
+  "tag": "section",
+  "class": "tko-main-search",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.main-search.settings.header__1.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.main-search.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.main-search.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.main-search.settings.image_ratio.options__3.label"
+        }
+      ],
+      "default": "adapt",
+      "label": "t:sections.main-search.settings.image_ratio.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:sections.main-search.settings.show_secondary_image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "add_image_padding",
+      "default": false,
+      "label": "t:sections.main-search.settings.add_image_padding.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image_outline",
+      "default": true,
+      "label": "t:sections.main-search.settings.show_image_outline.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:sections.main-search.settings.show_vendor.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "t:sections.main-search.settings.show_rating.label",
+      "info": "t:sections.main-search.settings.show_rating.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-collection-product-grid.settings.header__1.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "default": true,
+      "label": "t:sections.main-collection-product-grid.settings.enable_filtering.label",
+      "info": "t:sections.main-collection-product-grid.settings.enable_filtering.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "default": true,
+      "label": "t:sections.main-collection-product-grid.settings.enable_sorting.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "collapse_on_larger_devices",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.collapse_on_larger_devices.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-search.settings.header__2.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "article_show_date",
+      "default": true,
+      "label": "t:sections.main-search.settings.article_show_date.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "article_show_author",
+      "default": false,
+      "label": "t:sections.main-search.settings.article_show_author.label"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,264 @@
+{{ 'component-static-collage.css' | asset_url | stylesheet_tag }}
+
+<section class="kto-main-container">
+    <div class="tko-lines collage-line-{{section.id}}"
+    {% if section.settings.borderlayoutcollage == 'top-bottom'%}
+    style="
+        border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+    ">
+    {% elsif  section.settings.borderlayoutcollage == 'only-top' %}
+    style="
+    border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom: none;
+    ">
+    {% elsif  section.settings.borderlayoutcollage == 'only-bottom' %}
+    style="
+    border-top: none;
+    border-bottom-style:  solid;
+    border-bottom-color:   black;
+    ">
+    
+    {% else %}
+    
+    style="
+    border-top: none;
+    border-bottom: none;
+    ">   
+  
+    {% endif %}
+
+    {% assign firstloopcontrol = 0 %}
+    {% assign secondloopcontrol = 0 %}
+
+<div class="grid-collage-container">
+    <div class="grid-collage-content angry-grid">
+      <div class="grid-system system-1">
+        <div class="tko-grid">
+        
+            {% for block in section.blocks limit: 3%}
+            {% assign firstloopcontrol = firstloopcontrol | plus: 1 %}
+            <div class="item-{{forloop.index}} grid-item"
+                {% if block.settings.caollageimage != nil %}
+                style="background-image:url({{ block.settings.caollageimage | img_url: '600x'}}); background-color:{{ block.settings.caollagecolor}}; --aspect-ratio: 4/5;"
+                {% else %}
+                style="background-color:{{ block.settings.caollagecolor}};" 
+                {% endif %}>
+
+                <div class="obj-1">
+                    {% if block.settings.videocollage != false%}
+                    <div class="video-block">
+                    <video autoplay loop muted playsinline class="tko-video tko-video-collage" width="400">
+                        <source src="{{ block.settings.collagevideo }}" type="video/mp4">
+                    </video>
+                    </div>
+                    {% endif %}
+                    <div class="obj-content">
+                    <p style="color:{{ block.settings.caollagecolortext}};">{{ block.settings.collagetext }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            </div>
+            </div>
+            <div class="grid-system system-1">
+              <div class="tko-grid tko-grid-2">
+            {% for block in section.blocks %}
+       {% if forloop.index > 3 %}
+       {% assign secondloopcontrol = secondloopcontrol | plus: 1 %}
+            <div class="item-{{forloop.index}} grid-item"
+                {% if block.settings.caollageimage != nil %}
+                style="background-image:url({{ block.settings.caollageimage | img_url: '600x'}}); background-color:{{ block.settings.caollagecolor}}; --aspect-ratio: 4/5;"
+                {% else %}
+                style="background-color:{{ block.settings.caollagecolor}};" 
+                {% endif %}>
+
+                <div class="obj-1">
+                    {% if block.settings.videocollage != false%}
+                    <div class="video-block">
+                    <video autoplay loop muted playsinline class="tko-video tko-video-collage" width="400">
+                        <source src="{{ block.settings.collagevideo }}" type="video/mp4">
+                    </video>
+                    </div>
+                    {% endif %}
+                    <div class="obj-content">
+                    <p style="color:{{ block.settings.caollagecolortext}};">{{ block.settings.collagetext }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+          </div>
+    </div>
+</div>
+
+</div>
+</section>
+
+
+
+{% schema %}
+  
+{
+    "name": "Page Collage", 
+    "settings": [
+    {
+      "type": "header",
+      "content": "Line Layout Options"
+    },
+      {
+        "type": "select",
+        "id": "borderlayoutcollage",
+        "label": "Section Border Options",
+        "default": "top-bottom",
+        "options": [
+          {
+            "value": "top-bottom",
+            "label": "Show Border Top & Bottom"
+          },
+          {
+            "value": "only-top",
+            "label": "Show Border Only Top"
+          },
+          {
+              "value": "only-bottom",
+              "label": "Show Border Only Bottom"
+            },
+          {
+              "value": "hide-border",
+              "label": "Hide Borders"
+            }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup",
+        "label":"Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedown",
+        "label":"Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeupm",
+        "label":"Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedownm",
+        "label":"Bottom",
+        "default":15
+      }
+      ],
+        "max_blocks": 6,
+        "blocks": [
+        {
+             "type": "Collage", 
+             "name": "Collage Item",
+             "settings": [
+             {
+                "type": "header",
+                "content": "Collage Background Options"
+              },
+              {
+                "type": "checkbox",
+                "id": "videocollage",
+                "label": "This is a video content",
+                "default": false
+              },
+              {
+                "id": "collagevideo",
+                "type": "text",
+                "label": "Video Link"
+              },
+             {
+                 
+              "type": "image_picker",
+              "id": "caollageimage",
+              "label": "Collage Item BG Image",
+              "info": "4/5 Ratio .jpg recommended"
+            },
+            {
+                "type": "color",
+                "id": "caollagecolor",
+                "label": "Collage Item BG Color"
+            },
+            {
+                "type": "header",
+                "content": "Collage Content Options"
+              },
+              {
+                "id": "collagetext",
+                "type": "textarea",
+                "label": "Link Copy"
+              },
+              {
+                "type": "color",
+                "id": "caollagecolortext",
+                "label": "Collage Copy Color"
+            }
+
+           ]
+        }
+         ],
+    "presets": [ 
+{
+"category": "Page Collage",
+"name": "Page Collage"
+}
+]
+  }
+{% endschema %}
+
+<style>
+  .angry-grid {
+   display: grid; 
+
+   grid-template-rows: 1fr;
+   grid-template-columns: 1fr 1fr;
+   
+   gap: 10px;
+   height: 100%;
+   
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .angry-grid {
+  grid-template-columns: 1fr ;
+  gap: 8px;
+}
+}
+  
+</style>
+
+<style>
+  .collage-line-{{section.id}}{
+        padding: {{section.settings.padding_sizeup}}px 0px {{section.settings.padding_sizedown}}px 0px;
+        border-width:1px;
+  }
+
+  @media (max-width: 812px) {
+    .collage-line-{{section.id}}{
+        padding: {{section.settings.padding_sizeupm}}px 0px {{section.settings.padding_sizedownm}}px 0px;
+        border-width:0.5px;
+  }
+  } 
+</style>

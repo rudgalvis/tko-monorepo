@@ -1,0 +1,44 @@
+{% if localization.available_countries.size > 1 %}
+    <currency-selector
+        {% if bg %}bg="{{ bg }}"{% endif %}
+        {% if right %}right{% endif %}
+        {% if left %}left{% endif %}
+        {% if center %}center{% endif %}
+        {% if bg %}bg="{{ bg }}"{% endif %}
+
+        params='{
+                    "available": [
+                        {
+                            "currency": "EUR",
+                            "symbol": "€",
+                            "country": "LT",
+                            "language": "en"
+                        },
+                        {
+                            "currency": "AUD",
+                            "symbol": "$",
+                            "country": "AU",
+                            "language": "en"
+                        },
+                        {
+                            "currency": "GBP",
+                            "symbol": "£",
+                            "country": "GB",
+                            "language": "en"
+                        },
+                        {
+                            "currency": "USD",
+                            "symbol": "$",
+                            "country": "US",
+                            "language": "en"
+                        }
+                    ],
+                    "active": {
+                        "currency": "{{ localization.country.currency.iso_code }}",
+                        "symbol": "{{ localization.country.currency.symbol }}",
+                        "country": "{{ localization.country.iso_code }}",
+                        "language": "en"
+                    }
+                }'
+    ></currency-selector>
+{% endif %}

@@ -1,0 +1,215 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-all-dreams",
+      "settings": {
+      }
+    },
+    "16477721349fb7789f": {
+      "type": "static-page-hero",
+      "blocks": {
+        "1647772134ff4068b2-0": {
+          "type": "title",
+          "disabled": true,
+          "settings": {
+            "pageherohead": "Lorem Ipsum Dolar Sitamet",
+            "herocolor": "#ffffff"
+          }
+        },
+        "1647772134ff4068b2-1": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "pageherobuttext": "READ MORE",
+            "herobuttonColor": "light",
+            "herourl": ""
+          }
+        }
+      },
+      "block_order": [
+        "1647772134ff4068b2-0",
+        "1647772134ff4068b2-1"
+      ],
+      "settings": {
+        "herolayoutpage": "hide-border",
+        "footer_hero": false,
+        "pageheroimage": "shopify://shop_images/Meet_The_Knitters_Dream_Fund_Mobile_1386x_8f23b906-4f6f-467c-a3aa-3b98bd793764.webp",
+        "pageheroimagemobile": "shopify://shop_images/Meet_The_Knitters_Dream_Fund_Desktop_692x_af4ad1fc-a150-4a6e-afdc-602a8c1f3c0b.webp",
+        "padding_sizeup": 137,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 96,
+        "padding_sizedownm": 12,
+        "pageherotitledesktop": 900,
+        "pageherotitlemobile": 300
+      }
+    },
+    "164777237130782034": {
+      "type": "static-the-dreams-accordion",
+      "blocks": {
+        "e19065a3-3ba9-4858-9040-c9afb205bead": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "accordionheadingdream": "Svetlana",
+            "accordionsubdream": "Sewing course + supplies",
+            "accordioncopydream": "Svetlana's dream is to one day enroll in a sewing course, to take her crafting skills to the next level and to create her own masterpieces. She's been crafting since childhood, when she'd spend a lot of time sewing clothes for her dolls after a friend showed her how. Now, as she has more free time, she really wants to brush up her sewing skills and create some designs using a new sewing machine.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "2a4d7bcd-8cdb-4391-b328-c8894a6ff5e2": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "accordionheadingdream": "Rūta",
+            "accordionsubdream": "A trip to Israel with her husband",
+            "accordioncopydream": "",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "d7146837-c390-4e5a-a571-751df82e82cf": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Knitter_Dream_Fund_424x539_586db514-cefe-4422-a61f-c4e4172fb618.webp",
+            "dreamaccordionthumb": "shopify://shop_images/27_124x124_2_124x124_59ced41d-8cf9-47a1-9834-f98d09d6575d.webp",
+            "accordionheadingdream": "Valentina",
+            "accordionsubdream": "A flat screen TV",
+            "accordioncopydream": "Ms. Valentina has been dreaming of a big, flat screen TV. Like the ones you see in the movies! She explains to us that the one she currently has distorts colors and is the size of  a \"banana box\". And damn, we think she deserves a fancy, flat screen TV! Especially given how much she loves true crime TV series.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "b1d7c562-234d-4ffd-949a-1c3691c8bb7c": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "accordionheadingdream": "Danutė",
+            "accordionsubdream": "A grill and cooking classes",
+            "accordioncopydream": "Danutė's a great chef and loves cooking up a feast for her family. She's always dreamt of being a chef star for her family gatherings from her own yard. We'll be helping her to bring those dreams to life with a grill and cooking classes so she can spend her free time thinking up incredible new recipes and bringing them to life! Maybe one day we'll all get together for a knitters' grill session...",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "f21dad0f-361e-4d96-9b03-e1c88f01ef46": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Knitters-_Size-848x1078_-_2_424x539_5026ff3c-27b6-4893-850a-6875d4d3a926.webp",
+            "dreamaccordionthumb": "shopify://shop_images/27_124x124_3_124x124_dcdbe052-eba8-462e-8fe7-80b6c92dce5a.webp",
+            "accordionheadingdream": "Regina",
+            "accordionsubdream": "A set of new teeth",
+            "accordioncopydream": "Regina’s biggest dream is fixing her teeth: orthodontic visits in Lithuania are super expensive but she hopes she’ll feel less self conscious and more open to dating when she’s happier with them. This is one of our Knitter’s Dreams that we’re hoping to help her fulfill. We’d love to see her beautiful smile more often!",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "c3a730dd-3681-4110-bbcb-8a4e5fc97414": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Ingrida-bio_424x539_d988b53d-33b9-41c8-a7d8-8ec7efe10ff8.webp",
+            "dreamaccordionthumb": "shopify://shop_images/Ingrida-icon_124x124_e267492b-9a8a-4ec0-85cc-8b165a586a49.webp",
+            "accordionheadingdream": "Ingrida",
+            "accordionsubdream": "Coffee machine and barista classes",
+            "accordioncopydream": "Ingrida loves a good cup of coffee and usually grabs hers from the local gas station. She'd love to make it at home and save money, so we're planning on gifting her a coffee making course so her lattes can be as good (or better) than anywhere else outside her home. Ingrida has five children, so she definitely needs a caffeine-fuelled energy boost and deserves some time to relax and enjoy her coffee in peace!",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "9141a61a-ddb6-4795-bbce-78fc296efaba": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "accordionheadingdream": "Angelė",
+            "accordionsubdream": "",
+            "accordioncopydream": "Angelė struggles with health issues and has always dreamt of spending a weekend filled with procedures and physical therapy to learn how to take care of herself in the future. We want to gift her a health-spa package with expert recommendations, doctor-approved procedures and massages, physical therapy and more, so she can learn how best to alleviate her pain and prevent it from getting any worse.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        }
+      },
+      "block_order": [
+        "e19065a3-3ba9-4858-9040-c9afb205bead",
+        "2a4d7bcd-8cdb-4391-b328-c8894a6ff5e2",
+        "d7146837-c390-4e5a-a571-751df82e82cf",
+        "b1d7c562-234d-4ffd-949a-1c3691c8bb7c",
+        "f21dad0f-361e-4d96-9b03-e1c88f01ef46",
+        "c3a730dd-3681-4110-bbcb-8a4e5fc97414",
+        "9141a61a-ddb6-4795-bbce-78fc296efaba"
+      ],
+      "settings": {
+        "accordionlayoutdream": "hide-border",
+        "sectionheading": "All Dreams",
+        "padding_sizeup": 0,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "showheader": true,
+        "notfirst": true,
+        "hidedescription": false,
+        "sectionID": ""
+      }
+    },
+    "1647775481c865e478": {
+      "type": "static-cta-subscribe",
+      "settings": {
+        "borderlayoutsub": "hide-border",
+        "subbgcolor": "#b4bed6",
+        "subheading": "20% OFF YOUR FIRST ORDER",
+        "subbody": "<p>Good things come to those who subscribe. We don’t spam.<br/>Pinky promise</p>",
+        "maxwidthofcta": 900,
+        "maxwidthofctamobile": 280,
+        "padding_sizeup": 18,
+        "padding_sizedown": 21,
+        "padding_sizeupm": 11,
+        "padding_sizedownm": 7,
+        "containertop_": 62,
+        "containerbottom_": 33,
+        "containertopmobile_": 50,
+        "containerbottommobile_": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "16477721349fb7789f",
+    "164777237130782034",
+    "1647775481c865e478"
+  ]
+}

@@ -1,0 +1,225 @@
+{{ 'component-static-fullscreen-img-CTA.css' | asset_url | stylesheet_tag }}
+
+<section class="kto-main-container">
+    <div class="tko-lines fullscreen-cta-{{section.id}}"
+    {% if section.settings.borderlayoutCTA == 'top-bottom'%}
+    style="
+      border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+     
+  
+    ">
+    {% elsif  section.settings.borderlayoutCTA == 'only-top' %} 
+    style="
+    border-top-style:  solid;
+    border-top-color:   black;
+    border-bottom: none;
+
+    ">
+    {% elsif  section.settings.borderlayoutCTA == 'only-bottom' %}
+    style="
+    border-top: none;
+    border-bottom-style:  solid;
+    border-bottom-color:   black;
+     
+    ">
+    
+    {% else %}
+    
+    style="
+    border-top: none;
+    border-bottom: none;
+     
+    "> 
+  
+    {% endif %}
+
+     
+    <div class="fs-img-container">
+      <div class="cta-image-desktop">
+        {%
+            render 'rimg'
+            img: section.settings.fs-image,
+            alt: section.settings.fs-image.alt,
+            size: 'x761',
+          %}  
+        </div>
+        <div class="cta-image-mobile">
+          {%
+              render 'rimg'
+              img: section.settings.fs-image-mobile,
+              alt: section.settings.fs-image-mobile.alt,
+              size: '692x',
+            %}  
+          </div>
+          {% if section.settings.showcontent == true %}
+          <div class="fs-cta-copy">
+              <h2 class="fs-title" style="color:{{ section.settings.fsTitleColor }};">{{section.settings.fsTitle}}</h2>
+              {% assign btnSelectedTheme = section.settings.ctabuttonColor %}
+              <a href="{{section.settings.fsURL}}"  class="tko-btn tko-btn-{{btnSelectedTheme}}">{{section.settings.fsBtntitle}}</a>
+          </div>
+          {% endif %}
+    </div>
+
+
+
+
+
+     </div>
+    </section>
+
+
+ 
+
+{% schema %}
+  
+{
+    "name": "Full Screen Img CTA", 
+    "settings": [
+    {
+      "type": "header",
+      "content": "Layout Options"
+    },
+    {
+      "type": "select",
+      "id": "borderlayoutCTA",
+      "label": "Section Border Options",
+      "default": "top-bottom",
+      "options": [
+        {
+          "value": "top-bottom",
+          "label": "Show Border Top & Bottom"
+        },
+        {
+          "value": "only-top",
+          "label": "Show Border Only Top"
+        },
+        {
+            "value": "only-bottom",
+            "label": "Show Border Only Bottom"
+          },
+        {
+            "value": "hide-border",
+            "label": "Hide Borders"
+          }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Image Options"
+    },
+      {
+        "id": "fs-image",
+        "type": "image_picker",
+        "label": "Desktop Image"
+      },
+      {
+        "id": "fs-image-mobile",
+        "type": "image_picker",
+        "label": "Mobile Image"
+      },
+      {
+        "type": "header",
+        "content": "Content Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "showcontent",
+        "label": "Show Section Content",
+        "default": true
+      },
+      {
+        "id": "fsTitle",
+        "type": "textarea",
+        "label": "Title"
+      },
+      {
+        "id": "fsTitleColor",
+        "type": "color",
+        "label": "Title Color"
+      },
+      {
+        "id": "fsURL",
+        "type": "url",
+        "label": "Button URL"
+      },
+      {
+        "id": "fsBtntitle",
+        "type": "text",
+        "label": "Button Text"
+      },
+      {
+        "type": "select",
+        "id": "ctabuttonColor",
+        "label": "Button Style",
+        "default": "light",
+        "options": [
+          {
+            "value": "light",
+            "label": "Light"
+          },
+          {
+            "value": "dark",
+            "label": "Dark"
+          }
+        ]
+      },
+      
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup",
+        "label":"Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedown",
+        "label":"Bottom",
+        "default":15
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeupm",
+        "label":"Top",
+        "default":15
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedownm",
+        "label":"Bottom",
+        "default":15
+      }
+    ],
+    "presets": [
+{
+"category": "CTA",
+"name": "Full Screen Img CTA"
+}
+]
+  }
+{% endschema %}
+
+
+<style>
+  .fullscreen-cta-{{section.id}}{
+        padding: {{section.settings.padding_sizeup}}px 0px {{section.settings.padding_sizedown}}px 0px;
+        border-width:1px;
+  }
+
+  @media (max-width: 812px) {
+    .fullscreen-cta-{{section.id}}{
+        padding: {{section.settings.padding_sizeupm}}px 0px {{section.settings.padding_sizedownm}}px 0px;
+        border-width:0.5px;
+  }
+  } 
+</style>

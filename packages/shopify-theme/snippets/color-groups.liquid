@@ -1,0 +1,88 @@
+{% assign allcolors = getAllColors %}
+{% assign colors = allcolors | split: ',' %}
+{% assign groupColor = getGroupcolor %}
+{% assign filterValues = filterValue %}
+{% assign filteredColor = filteredColors | split: ',' %}
+
+{% assign HEXcolor2 = 'Black' %}
+
+{% if groupColor != 'Multi'%}
+
+
+
+
+<div class="filter--">
+  <div>
+      <h2>{{filter.label}}</h2>
+     </div>
+  {%- for value in filter.values -%}
+  <input class="filter-product" type="checkbox" name="{{ value.param_name }}"
+  value="{% for value in filterValues %}{% for colorOrder in filteredColor %}{% if forloop.last != true %}{% if  value.label contains colorOrder %}{{value.value | strip}}{{comma}}{%endif%}{%endif%}{% endfor %}{% endfor %}"
+  id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+  {% if value.active %}checked{% endif %}
+  {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+  <label for="html">{{value.label}}</label><br>
+
+
+  {%-endfor-%}
+
+       
+         </div>  
+
+
+  {% else %}
+  {% for singlecolors in filteredColor %}
+
+  {%- for value in filterValues -%}
+   {% if value.label contains singlecolors %}
+  <li class="list-menu__item facets__item">
+
+    <label for="Filter-{{ filter.label | escape }}-{{ forloop.index }}" class="facet-checkbox{% if value.count == 0 and value.active == false %} facet-checkbox--disabled{% endif %}">
+
+
+
+      {% for color in colors %}
+      {% assign getColor2 = color | split : ':' %}
+      {% assign colorCorrect2 = getColor2[0] %}
+
+  
+
+      {% if value.label == colorCorrect2 %}
+      {% assign HEXcolor2 = getColor2[1] %}
+      {% assign detectImage = HEXcolor2 | slice: 0%}
+      {% if detectImage == '#' %}
+       <div class="color-circle-filter" style="background-color:{{HEXcolor2}};"></div>
+      {% else %}
+      {% assign value2 = HEXcolor2 %}
+      {% assign color_swatch_name2 = value2 | handle | append: '.png' %}
+      {% assign color_swatch_image2 = images[color_swatch_name2]  %}
+      <div class="color-circle-filter" style="background-image:url({{ color_swatch_image2 | img_url: '64x64' }});"></div>
+      {% endif %}
+
+      
+      {% endif %}
+  {% endfor %}
+
+   <div class="labal__name">
+      {{ value.label | escape }}
+    </div>
+    
+      
+      <input class="filter-product" type="checkbox"
+        name="{{ value.param_name }}"
+        value="{{ value.value }}"
+        id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+        {% if value.active %}checked{% endif %}
+        {% if value.count == 0 and value.active == false %}disabled{% endif %}
+      >
+
+     
+      <span class="checkmark"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/check-icon.svg?v=1641999123"/></span>
+      
+    </label>
+
+  </li>
+  {% endif %}
+  {%- endfor -%}
+  {% endfor %}
+  {% endif %}

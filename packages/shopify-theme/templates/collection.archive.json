@@ -1,0 +1,117 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "settings": {
+      }
+    },
+    "hero": {
+      "type": "static-collection-hero",
+      "settings": {
+        "collection_hero_image": "{{ collection.metafields.my_fields.collection_hero_image.value }}",
+        "collection_hero_image_mobile": "{{ collection.metafields.my_fields.collection_hero_image_mobile.value }}"
+      }
+    },
+    "herotext": {
+      "type": "static-collection-hero-text",
+      "settings": {
+        "collectionherotitle": "{{ collection.metafields.my_fields.collection_hero_copy_title.value }}",
+        "collectionherocopy": "<p>{{ collection.metafields.my_fields.collection_copy_text | metafield_tag }}</p>"
+      }
+    },
+    "d649f726-f7b1-4bb6-975f-205796ec224b": {
+      "type": "static-cta-subscribe",
+      "settings": {
+        "borderlayoutsub": "top-bottom",
+        "subbgcolor": "#b4bed6",
+        "subheading": "SIGN UP TO ARCHIVE SALE NEWS",
+        "subbody": "<p>Be the first in line when we open the Archive sale doors next time.</p>",
+        "maxwidthofcta": 980,
+        "maxwidthofctamobile": 264,
+        "padding_sizeup": 18,
+        "padding_sizedown": 19,
+        "padding_sizeupm": 11,
+        "padding_sizedownm": 10,
+        "containertop_": 13,
+        "containerbottom_": 15,
+        "containertopmobile_": 20,
+        "containerbottommobile_": 20
+      }
+    },
+    "1650878630353e8f2c": {
+      "type": "selected-archive-product-grid",
+      "disabled": true,
+      "settings": {
+        "products_per_page": 18,
+        "show_secondary_image": true,
+        "enable_filtering": false,
+        "enable_sorting": false,
+        "enable_filters": false,
+        "autoplay_status": true,
+        "muted_status": true,
+        "controller_status": true,
+        "loop_status": true
+      }
+    },
+    "165580077906e05ef1": {
+      "type": "main-collection-product-grid",
+      "disabled": true,
+      "settings": {
+        "products_per_page": 12,
+        "show_secondary_image": true,
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "enable_filters": true,
+        "autoplay_status": true,
+        "muted_status": true,
+        "controller_status": true,
+        "loop_status": true
+      }
+    },
+    "16478092893678cea3": {
+      "type": "static-link",
+      "settings": {
+        "onlyTextlayout": "hide-border",
+        "linktext": "SEE ALL KNITS",
+        "linkurl": "shopify://collections/all",
+        "thisisbigurl": false,
+        "justheader": false,
+        "padding_sizeup_sot": 28,
+        "padding_sizedow_sot": 31,
+        "padding_sizeup_sotm": 48,
+        "padding_sizedow_sotm": 48,
+        "containertop": 20,
+        "containerbottom": 20,
+        "containertopmobile": 20,
+        "containerbottommobile": 20
+      }
+    },
+    "static_collection_hero_text_jWmF69": {
+      "type": "static-collection-hero-text",
+      "disabled": true,
+      "settings": {
+        "collectionherotitle": "",
+        "collectionherocopy": "<p>* Archive sale cannot be combined with other discounts or offers.</p>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "hero",
+    "herotext",
+    "d649f726-f7b1-4bb6-975f-205796ec224b",
+    "1650878630353e8f2c",
+    "165580077906e05ef1",
+    "16478092893678cea3",
+    "static_collection_hero_text_jWmF69"
+  ]
+}

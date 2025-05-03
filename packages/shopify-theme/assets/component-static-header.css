@@ -1,0 +1,1356 @@
+.header-desktop {
+  display: inherit;
+}
+
+.rsm-item {
+  position: relative;
+}
+
+.rsm_cc {
+  position: absolute;
+  bottom: 6px;
+  right: -6px;
+  width: 13px;
+  height: 13px;
+  background: black;
+  border-radius: 50%;
+  font-size: 8px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  font-family: "Monument";
+  padding-top: 0.98px;
+  padding-left: 0.98px;
+}
+
+.mobile-predictive-search {
+  position: fixed;
+  width: 375px;
+  height: 100%;
+  background-color: #eeeee9;
+  left: 100%;
+  top: 0px;
+  z-index: 102;
+}
+
+.mobile-predictive-search-container {
+  height: calc(100vh - 50px);
+  width: 100%;
+  overflow: hidden;
+}
+
+.mob-search-close {
+  position: absolute;
+  right: 25px;
+  top: 30px;
+}
+
+section.main-header {
+  padding: 0px 25px;
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  background: #eeeee9;
+}
+
+.no-announcement {
+  top: 0px !important;
+}
+
+.tko-header-container {
+  width: 100%;
+  height: 85px;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 0px;
+  padding-right: 0px;
+  border-bottom: 1px solid black;
+}
+
+.tko-side {
+  width: 33%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  max-width: 413px;
+}
+
+.tko-side ul {
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  max-width: 560px;
+}
+
+.tko-side ul li a {
+  font-size: 14px;
+  letter-spacing: -0.22px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-transform: uppercase;
+}
+
+.tko-center {
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.tko-right {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tko-rs.rsmiddle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 33%;
+  margin-left: 30px;
+  margin-top: 7px;
+}
+
+.rslast {
+  text-align: center;
+  position: relative;
+  width: 56px;
+  height: auto;
+}
+
+.rslast a {
+  font-size: 14px;
+  letter-spacing: -0.22px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mm-a {
+  font-family: "Monument";
+  font-size: 14px;
+  text-transform: uppercase;
+  color: black;
+  font-weight: 400;
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mm-layout {
+  width: auto;
+  padding: 17px;
+}
+
+.mm-title {
+  font-family: "Panama";
+  font-size: 18px;
+  font-weight: 400;
+  color: black;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mm-layout.mm-featured {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.mm-fe-item img {
+  width: 100%;
+}
+
+.mm-fe-item h3 {
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+}
+
+.mm-main {
+  /*width: 50%;*/
+  width: 51.6%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 530px;
+  justify-content: space-between;
+}
+
+.mm-sub {
+  display: flex;
+  flex-direction: column;
+}
+
+.mm-main-height {
+  /*max-height:400px;*/
+  width: 41%;
+}
+
+a.mm-a {
+  margin-bottom: 0px;
+  line-height: 23px;
+}
+
+.currencie_selector {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start !important;
+  flex-direction: column !important;
+  position: absolute;
+}
+
+.critem {
+  margin-left: -7px;
+  line-height: 20px;
+}
+
+.critem a {
+  line-height: 23px;
+}
+
+.subcurrencyitem {
+  display: none;
+}
+
+.subcurrencyitem__show {
+  display: inherit;
+}
+
+.currency--selector-main {
+  position: relative;
+  width: auto;
+  height: auto;
+  z-index: 2;
+}
+
+.currency-selector {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: -12px;
+  background: #eeeee8;
+  width: 56px;
+
+  padding-bottom: 12px;
+}
+
+.currency--shadow {
+  -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+.currency-selector--item {
+  display: none;
+  margin-left: -8px;
+  height: 20px;
+}
+.pre-search {
+  position: absolute;
+  text-align: right;
+  top: 0px;
+  z-index: 10;
+}
+
+.currency-selector--item a {
+  line-height: 16px;
+}
+
+#predictive-search-results-list {
+  height: unset;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: baseline !important;
+  justify-content: flex-start !important;
+  max-height: 50vh;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding-bottom: 0px;
+}
+.predictive-search__list-item a {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.predictive {
+  position: relative;
+  z-index: 10;
+}
+
+#predictive-search {
+  position: relative;
+}
+
+#predictive-search-results-list li {
+  width: 100%;
+}
+
+#predictive-search-results {
+  position: absolute;
+  background: #eeeee8;
+  width: 350px;
+  z-index: 6;
+  top: 21px;
+  left: -113px;
+  filter: drop-shadow(0px 1px 1.6px rgba(0, 0, 0, 0.5));
+  width: 423px;
+}
+
+.predictive-search__heading {
+  font-family: "Panama";
+  font-size: 18px;
+  text-transform: inherit;
+  letter-spacing: -0.22px;
+  color: black;
+}
+
+predictive-search {
+  position: absolute;
+  display: none;
+}
+
+predictive-search form input {
+  background: transparent;
+  border: none;
+  padding-left: 30px;
+}
+
+predictive-search form input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.ps-threeangle {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  margin-left: -27px;
+  z-index: 5;
+}
+
+.mobile-currency-selector {
+  background: transparent;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: "";
+  font-family: "Monument";
+  color: black;
+  font-size: 15px;
+  letter-spacing: -0.23px;
+  width: 53px;
+  position: relative;
+  z-index: 4;
+  left: -6px;
+}
+
+.full-image-container {
+  width: 100%;
+  height: auto;
+  position: relative;
+  padding: 0px 15px;
+}
+
+.full-image-items {
+  width: 100%;
+  height: auto;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.full-image-item {
+  width: 100%;
+  height: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 430px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.full-image {
+  width: 100%;
+  height: auto;
+  position: relative;
+  max-width: 430px;
+}
+
+.full-image img {
+  width: 100%;
+}
+
+@media (min-width: 1600px) and (max-width: 3000px) {
+  .mm-layout.mm-featured {
+    margin-left: auto;
+  }
+
+  .tko-side {
+    max-width: 716px;
+  }
+
+  .mm-main {
+    flex-direction: row;
+    width: 50%;
+  }
+
+  .mm-main-height {
+    width: 45%;
+  }
+
+  .mobile-currency-selector {
+    background: transparent;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: "";
+    font-family: "Monument";
+    color: black;
+    font-size: 15px;
+    letter-spacing: -0.23px;
+    width: 53px;
+    position: relative;
+    z-index: 4;
+    left: -6px;
+  }
+}
+
+@media (min-width: 1360px) and (max-width: 1599px) {
+  .full-image-item {
+    max-width: 297px;
+  }
+
+  .full-image {
+    max-width: 297px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1181px) {
+  .mobile-predictive-search {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #eeeee9;
+    left: 100%;
+    top: 0px;
+    z-index: 102;
+  }
+}
+
+@media (max-width: 812px) {
+  .mobile-predictive-search {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #eeeee9;
+    left: 100%;
+    top: 0px;
+    z-index: 102;
+  }
+
+  #predictive-search-results {
+    width: 100% !important;
+  }
+
+  .mobile-currency-selector {
+    background: transparent;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: "";
+    font-family: "Monument";
+    color: black;
+    font-size: 15px;
+    letter-spacing: -0.23px;
+    width: 53px;
+    position: relative;
+    z-index: 4;
+    left: -6px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .header-desktop {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid;
+    height: 54px;
+    /* background-color: #eeeee9;*/
+  }
+
+  .basket-search a {
+    margin-left: 10px;
+  }
+
+  .basket-search a img {
+    width: 15px;
+  }
+
+  .mobilenavs {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: -100%;
+    background-color: #b4bed6;
+    z-index: 9;
+    overflow-y: scroll;
+  }
+
+  .mobile-nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 59px 22px 40px 22px;
+    width: 100%;
+  }
+
+  .mobile-nav-container ul li a {
+    font-size: 20px;
+    color: black;
+    font-weight: 400;
+    text-align: left;
+  }
+
+  .mobile-nav-container ul li {
+    border-bottom: 0.5px solid black;
+    height: auto;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    min-height: 67px;
+    justify-content: center;
+  }
+  .mobile-nav-container ul {
+    width: 100%;
+  }
+
+  .mobile-close {
+    position: fixed;
+    right: 24px;
+    top: 32px;
+    display: none;
+  }
+
+  .mobile-close img {
+    width: 20px;
+  }
+
+  .parent_list_nav {
+    display: none;
+  }
+
+  .grand_child_list_nav {
+    display: none;
+  }
+
+  .child-active {
+    display: block;
+  }
+
+  .grandchild-active {
+    display: block;
+  }
+
+  .parent_list_nav li a {
+    font-family: "Panama";
+    font-size: 22px;
+    color: black;
+    text-transform: none;
+  }
+
+  .child_list_nav {
+    border-bottom: none !important;
+    min-height: 35px !important;
+  }
+
+  .grand_child_list_nav li a {
+    font-family: "Monument";
+    font-size: 14px !important;
+    text-transform: uppercase;
+  }
+
+  .grand_child_list_nav li {
+    border-bottom: none !important;
+    min-height: 25px !important;
+  }
+
+  .hasgrandchild {
+    font-size: 22px !important;
+    letter-spacing: -0.34px;
+  }
+
+  ul.grand_child_list_nav {
+    margin: 20px 0px;
+  }
+
+  ul.parent_list_nav.child-active {
+    margin: 20px 0px;
+  }
+
+  .currency-social {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+  }
+
+  .mobile-social a img {
+    width: 33px;
+  }
+
+  .mobile-social a {
+    margin-left: 15px;
+  }
+
+  .mobile-social {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mobile-currency {
+    font-family: "Monument";
+    font-size: 15px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+    position: relative;
+  }
+
+  .mobile-currency img {
+    margin-left: 7px;
+    position: absolute;
+    right: 6px;
+    z-index: 3;
+  }
+
+  .nograndchild {
+    font-family: "Monument" !important;
+    font-size: 14px !important;
+    text-transform: uppercase !important;
+    letter-spacing: -0.22px !important;
+    color: black !important;
+  }
+
+  .mobile_count {
+    position: absolute;
+    bottom: 2px;
+    right: -6px;
+    width: 12px;
+    height: 12px;
+    background: black;
+    border-radius: 50%;
+    font-size: 8px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    font-family: "Monument";
+    padding-top: 1.18px;
+  }
+
+  #open-drawer-mobile {
+    position: relative;
+  }
+
+  #predictive-search-results {
+    position: relative;
+    background: #eeeee8;
+    width: 350px;
+    z-index: 6;
+    top: 26px;
+    left: 0px;
+    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0));
+    width: 100%;
+    max-height: calc(100vh - 260px);
+    overflow-y: scroll;
+  }
+
+  .mobile-predictive-search-container predictive-search form {
+    width: 100%;
+    height: 47px;
+    position: relative;
+  }
+
+  .mobile-predictive-search-container predictive-search {
+    top: 60px;
+    width: 100%;
+    padding: 0px 10px;
+  }
+
+  .ps-threeangle {
+    display: none;
+  }
+
+  #search-mobile {
+    width: 100%;
+    height: 47px;
+    font-family: "Monument";
+    font-size: 20px;
+    letter-spacing: -0.31px;
+    line-height: 20px;
+    color: black;
+    border-bottom: 0.5px solid black;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .search-icon-mobile {
+    position: absolute;
+    top: 13px;
+    right: 32px;
+  }
+
+  .search-icon-mobile img {
+    width: 11px;
+  }
+
+  .mobile-currency-selector {
+    background: transparent;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: "";
+    font-family: "Monument";
+    color: black;
+    font-size: 15px;
+    letter-spacing: -0.23px;
+    position: relative;
+    z-index: 4;
+    left: -6px;
+  }
+}
+
+@media (max-width: 812px) {
+  .header-desktop {
+    display: none;
+  }
+
+  predictive-search form input {
+    background: transparent;
+    border: none;
+    padding-left: 0px;
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 0.5px solid;
+    height: 54px;
+    /* background-color: #eeeee9;*/
+  }
+  .hasgrandchild {
+    font-size: 22px !important;
+    letter-spacing: -0.34px;
+  }
+
+  #predictive-search-results-list {
+    max-height: 100%;
+  }
+
+  .basket-search a {
+    margin-left: 10px;
+  }
+
+  .basket-search a img {
+    width: 15px;
+  }
+
+  .mobilenavs {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: -100%;
+    background-color: #b4bed6;
+    z-index: 9;
+    overflow-y: scroll;
+  }
+
+  .mobile-nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 59px 22px 40px 22px;
+    width: 100%;
+  }
+
+  .mobile-nav-container ul li {
+    border-bottom: 0.5px solid black;
+    height: auto;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    min-height: 67px;
+    justify-content: center;
+  }
+  .mobile-nav-container ul {
+    width: 100%;
+  }
+
+  .mobile-close {
+    position: fixed;
+    right: 24px;
+    top: 32px;
+    display: none;
+  }
+
+  .parent_list_nav {
+    display: none;
+  }
+
+  .grand_child_list_nav {
+    display: none;
+  }
+
+  .child-active {
+    display: block;
+  }
+
+  .grandchild-active {
+    display: block;
+  }
+
+  .parent_list_nav li a {
+    font-family: "Panama";
+    font-size: 22px;
+    color: black;
+    text-transform: none;
+  }
+
+  .child_list_nav {
+    border-bottom: none !important;
+    min-height: 25px !important;
+  }
+
+  .grand_child_list_nav li a {
+    font-family: "Monument";
+    font-size: 14px !important;
+    text-transform: uppercase;
+  }
+
+  .grand_child_list_nav li {
+    border-bottom: none !important;
+    min-height: 26px !important;
+  }
+
+  .hasgrandchild {
+    font-size: 22px !important;
+    letter-spacing: -0.34px;
+  }
+
+  ul.grand_child_list_nav {
+    margin: 20px 0px;
+  }
+
+  ul.parent_list_nav.child-active {
+    margin: 20px 0px;
+  }
+
+  .currency-social {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+  }
+
+  .mobile-social a img {
+    width: 33px;
+  }
+
+  .mobile-social a {
+    margin-left: 15px;
+  }
+
+  .mobile-social {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mobile-currency {
+    font-family: "Monument";
+    font-size: 15px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+    position: relative;
+  }
+
+  .mobile-currency img {
+    margin-left: 7px;
+    position: absolute;
+    right: 6px;
+    z-index: 3;
+  }
+
+  .nograndchild {
+    font-family: "Monument" !important;
+    font-size: 14px !important;
+    text-transform: uppercase !important;
+    letter-spacing: -0.22px !important;
+  }
+
+  .mobile_count {
+    position: absolute;
+    bottom: 2px;
+    right: -6px;
+    width: 12px;
+    height: 12px;
+    background: black;
+    border-radius: 50%;
+    font-size: 8px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    font-family: "Monument";
+    padding-top: 1.18px;
+  }
+
+  #open-drawer-mobile {
+    position: relative;
+  }
+
+  #predictive-search-results {
+    position: relative;
+    background: #eeeee8;
+    width: 350px;
+    z-index: 6;
+    top: 26px;
+    left: 0px;
+    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0));
+    width: 375px;
+    max-height: calc(100vh - 260px);
+    overflow-y: scroll;
+  }
+
+  .mobile-predictive-search-container predictive-search form {
+    width: 100%;
+    height: 47px;
+    position: relative;
+  }
+
+  .mobile-predictive-search-container predictive-search {
+    top: 71px;
+    width: 100%;
+    padding: 0px 25px;
+  }
+
+  .ps-threeangle {
+    display: none;
+  }
+
+  #search-mobile {
+    width: 100%;
+    height: 52px;
+    font-family: "Monument";
+    font-size: 20px;
+    letter-spacing: -0.31px;
+    line-height: 20px;
+    color: black;
+    border-bottom: 0.5px solid black;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .search-icon-mobile {
+    position: absolute;
+    top: 13px;
+    right: 9px;
+  }
+
+  .search-icon-mobile img {
+    width: 11px;
+  }
+
+  .mobile-currency-selector {
+    background: transparent;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: "";
+    font-family: "Monument";
+    color: black;
+    font-size: 15px;
+    letter-spacing: -0.23px;
+    width: 53px;
+    position: relative;
+    z-index: 4;
+    left: -6px;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .header-desktop {
+    display: none;
+  }
+
+  predictive-search form input {
+    background: transparent;
+    border: none;
+    padding-left: 9px;
+  }
+
+  .mob-nav-item {
+    width: 66%;
+  }
+
+  .mni-center {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .mobile-burger-menu {
+    width: 17%;
+    margin-left: 2px;
+  }
+
+  .basket-search {
+    width: 17%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row;
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 0.5px solid;
+    height: 54px;
+    /*background-color: #eeeee9;*/
+  }
+
+  .basket-search a {
+    margin-left: 10px;
+    margin-right: 6px;
+  }
+
+  .basket-search a img {
+    width: 11px;
+  }
+
+  .mobilenavs {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: -100%;
+    background-color: #b4bed6;
+    z-index: 9;
+    overflow-y: scroll;
+  }
+
+  .mobile-nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 59px 22px 40px 22px;
+    width: 100%;
+  }
+
+  .mobile-nav-container ul li a {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    color: black;
+    font-weight: 400;
+    text-align: left;
+    letter-spacing: -0.31px;
+  }
+
+  .mobile-nav-container ul li {
+    border-bottom: 0.5px solid black;
+    height: auto;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    min-height: 67px;
+    justify-content: center;
+  }
+  .mobile-nav-container ul {
+    width: 100%;
+  }
+
+  .mobile-close {
+    position: fixed;
+    right: 24px;
+    top: 32px;
+    display: none;
+  }
+
+  .parent_list_nav {
+    display: none;
+  }
+
+  .grand_child_list_nav {
+    display: none;
+  }
+
+  .child-active {
+    display: block;
+  }
+
+  .grandchild-active {
+    display: block;
+  }
+
+  .parent_list_nav li a {
+    font-family: "Panama";
+    font-size: 22px;
+    color: black;
+    text-transform: none;
+  }
+
+  .child_list_nav {
+    border-bottom: none !important;
+    min-height: 25px !important;
+  }
+
+  .grand_child_list_nav li a {
+    font-family: "Monument";
+    font-size: 14px !important;
+    text-transform: uppercase;
+    letter-spacing: -0.22px;
+  }
+
+  .grand_child_list_nav li {
+    border-bottom: none !important;
+    min-height: 25px !important;
+  }
+
+  ul.grand_child_list_nav {
+    margin: 20px 0px;
+  }
+
+  ul.parent_list_nav.child-active {
+    margin: 20px 0px;
+  }
+
+  .currency-social {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+  }
+
+  .mobile-social a img {
+    width: 33px;
+  }
+
+  .mobile-social a {
+    margin-left: 15px;
+  }
+
+  .mobile-social {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mobile-currency {
+    font-family: "Monument";
+    font-size: 15px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+    position: relative;
+  }
+
+  .mobile-currency img {
+    margin-left: 7px;
+    position: absolute;
+    right: 6px;
+    z-index: 3;
+  }
+
+  .nograndchild {
+    font-family: "Monument" !important;
+    font-size: 14px !important;
+    text-transform: uppercase !important;
+    letter-spacing: -0.22px !important;
+  }
+
+  .mobile_count {
+    position: absolute;
+    bottom: 1.7px;
+    right: -5.6px;
+    width: 12px;
+    height: 12px;
+    background: black;
+    border-radius: 50%;
+    font-size: 8px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    font-family: "Monument";
+    padding-top: 0px;
+  }
+
+  #mobile-search-- {
+    margin-top: 3px;
+  }
+
+  #open-drawer-mobile {
+    position: relative;
+  }
+
+  #predictive-search-results {
+    position: relative;
+    background: #eeeee8;
+    width: 350px;
+    z-index: 6;
+    top: 26px;
+    left: 0px;
+    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0));
+    width: 375px;
+    max-height: calc(100vh - 260px);
+    overflow-y: scroll;
+  }
+
+  .mobile-predictive-search-container predictive-search form {
+    width: 100%;
+    height: 47px;
+    position: relative;
+  }
+
+  .mobile-predictive-search-container predictive-search {
+    top: 71px;
+    width: 100%;
+    padding: 0px 25px;
+  }
+
+  .ps-threeangle {
+    display: none;
+  }
+
+  #search-mobile {
+    width: 100%;
+    height: 52px;
+    font-family: "Monument";
+    font-size: 20px;
+    letter-spacing: -0.31px;
+    line-height: 20px;
+    color: black;
+    border-bottom: 0.5px solid black;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .search-icon-mobile {
+    position: absolute;
+    top: 13px;
+    right: 9px;
+  }
+
+  .search-icon-mobile img {
+    width: 11px;
+  }
+
+  .mobile-currency-selector {
+    background: transparent;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: "";
+    font-family: "Monument";
+    color: black;
+    font-size: 15px;
+    letter-spacing: -0.23px;
+    width: 53px;
+    position: relative;
+    z-index: 4;
+    left: -6px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .mobile-nav-container li.main_list_parent {
+    padding: 20px 0;
+  }
+  img.child-plus-minus {
+    margin-left: 12px;
+    margin-bottom: 3px;
+  }
+
+  .hasgrandchild {
+    font-size: 22px !important;
+    letter-spacing: -0.34px;
+  }
+
+  img.grandchild-plus-minus {
+    margin-left: 8px;
+    margin-bottom: 0px;
+  }
+  .mobile-nav-container ul li a {
+    display: flex;
+    font-size: 20px;
+    color: black;
+    font-weight: 400;
+    text-align: left;
+    letter-spacing: -0.31px;
+  }
+
+  .mobile-nav .basket-search {
+    display: flex;
+    padding-right: 10px;
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "supabase",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "local:stop": "supabase stop",
+    "local:start": "supabase start",
+    "local:reset": "supabase db reset",
+    "local:info": "supabase status"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

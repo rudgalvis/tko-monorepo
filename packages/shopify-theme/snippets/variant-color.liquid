@@ -1,0 +1,40 @@
+{% assign colors = colorsource | split: ',' %}
+{% assign getfor = forsource  | strip %}
+{% assign controlfirst = control1  %}
+{% assign controlsecond = control2  %}
+{% assign trigger = circletriger  %}
+{% assign rrprice = variantPrice  %}
+{% assign ccprice = variantCompare  %}
+
+
+
+
+
+{% assign HEXcolor2 = 'Black' %}
+                        
+                        {% for color in colors %}
+                            {% assign getColorMobile = color | split : ':' %} 
+                            {% assign colorCorrectMobile = getColorMobile[0] %}
+    
+                            {% if getfor == colorCorrectMobile %}
+                            {% assign HEXcolorMobile = getColorMobile[1] %}
+                            {% assign detectImageMobile = HEXcolorMobile | slice: 0%}
+                            {% if detectImageMobile == '#' %}
+                             <div  class="color-circle-filter" style="background-color:{{HEXcolorMobile}};"></div>
+                             <div class="{{trigger}}  {% if controlfirst == controlsecond %} active {% endif %}"></div>
+                            {% else %}
+                            {% assign valueMobile = HEXcolorMobile %}
+                            {% assign color_swatch_name_mobile = valueMobile | handle | append: '.png' %}
+                            {% assign color_swatch_image_mobile = images[color_swatch_name_mobile]  %}
+                            <div class="color-circle-filter" style="background-image:url({{ color_swatch_image_mobile | img_url: '64x64' }});"></div>
+                            <div class="{{trigger}}   {% if controlfirst == controlsecond %} active {% endif %}"></div>
+                            {% endif %}
+    
+                            
+                            {% endif %}
+                        {% endfor %}
+
+
+
+        
+        

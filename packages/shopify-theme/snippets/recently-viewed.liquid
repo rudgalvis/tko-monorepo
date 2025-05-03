@@ -1,0 +1,244 @@
+{{ 'jquery-3.6.0.js' | asset_url | script_tag }}
+
+{{ 'jquery.tmpl.min.js' | asset_url | script_tag }}
+{{ 'jquery.products.min.js' | asset_url | script_tag }}
+
+<div id="recently-viewed-products" class="collection clearfix" style="display:none">
+    <h2>Recently Viewed Products</h2>
+  </div>
+  
+  {% raw %}
+  <script id="recently-viewed-product-template"  type="text/x-jquery-tmpl">
+  <div id="product-${handle}" class="product">
+    <div class="image">
+      <a href="${url}">
+        <img src="${Shopify.Products.resizeImage(featured_image, "medium")}" />
+      </a>
+    </div>
+    <div class="details">
+      <a href="${url}">
+        <span class="title">${title}</span>
+        <span class="price">{{if price_varies}}From {{/if}}${Shopify.formatMoney(price)}</span>
+      </a>
+    </div>
+  </div>
+
+  <div id="product-${handle}"  class="product product-container">
+    <div class="line-cont pl-up">
+        <div class="llc">
+            <div class="product-line"></div>
+        </div>  
+    </div>
+    
+     <div class="frame-container">
+         <div class="productname">
+             <h2>
+                 <a href="{{ product.url }}">
+                     {{ product.title }}
+                 </a>
+            </h2>
+            </div>
+            {% assign getfirstvar = product.selected_or_first_available_variant.option1 %}
+         <div class="mainholder {% if countdowncollection == currentcollection%} nohover {% endif %}">
+           
+        
+    
+           {%- comment -%}counter{%- endcomment -%}
+            {% if countdowncollection == currentcollection %}
+             {% render 'counter' %}  
+             {% endif %}
+    
+           {%- comment -%}counter{%- endcomment -%}
+    
+           {% if countdowncollection != currentcollection %}
+            <div class="buy-button">ADD TO CART</div> 
+            <div class="select-size" data-open="0">
+                SELECT SIZE<span class="btn-larrow-buy">↓</span>
+    
+            </div>   
+            {% endif %}
+            <ul class="variant-holder" data-selectedv = "{{product.selected_or_first_available_variant.option1}}">
+                {% assign getVariant = product.selected_or_first_available_variant.option1 %}
+                {% for variant in product.variants %}
+                    {% assign isAvailable = variant.available %}
+                    {% if isAvailable == true %}
+                        {% if variant.option1 == getVariant %}
+                             <li class="xfg"  data-productColor="{{ variant.option1 }}" data-productID="{{ variant.id }}" data-productavailable="{{variant.available}}">{{ variant.option2 }}
+                                <span style="display:none;" class="money original_price">{{ variant.compare_at_price | money | strip_html }}</span>
+                                <span style="display:none;" class="money show_price">{{ variant.price | money | strip_html }}</span>
+                             </li>
+                        {% else %}
+                              <li class="xfg fg" data-productColor="{{ variant.option1 }}" data-productID="{{ variant.id }}" data-productavailable="{{variant.available}}">{{ variant.option2 }}
+                                <span style="display:none;" class="money original_price">{{ variant.compare_at_price | money | strip_html }}</span>
+                                <span style="display:none;" class="money show_price">{{ variant.price | money | strip_html }}</span>
+                              </li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </ul>    
+         <a {% if countdowncollection != currentcollection %} href="{{ product.url }}" {% else %} href="javascript:void(0);" {% endif %}>
+            <div class="main-image-container">
+                <div class="progreesbar">
+                    <div class="bar"></div>
+                  </div>
+                {% if product.price < product.compare_at_price %}
+                {% render 'bages' %}
+                {% endif %}
+            <div class="productimage">
+                {% if countdowncollection == currentcollection %}
+                   <div class="blur"></div>
+                {% endif %}
+            {%
+                render 'rimg',
+                img: product,
+                size: '996x1100',
+                lazy: true
+              %}
+              {% if section.settings.show_product_secondary_image %}
+              {% assign second_image = product.media[1].preview_image %}
+              {%
+                render 'rimg',
+                img: second_image,
+                size: '996x1100',
+                lazy: true
+              %}
+            {% endif %}
+         </div>
+        </div>
+        </a> 
+    </div>   
+         <div class="buy-container">
+            <div class="product-type">{{ product.type }}</div>
+            <div class="productVarient">
+                {% if countdowncollection != currentcollection %}
+                <div class="price-holder">
+                <div class="productPrice">{{ product.variants[0].price | money }}</div>
+               
+                <span class="sale_price">
+                    {% if product.variants[0].price < product.variants[0].compare_at_price %} {{ product.compare_at_price | money }}{% endif %} 
+                </span>
+               
+            </div>
+            {% endif %}
+                {% assign current_variant_size = product.variants | size %} 
+                <ul>
+                    {% assign color2  = "empty" %}
+                    {% for variant in product.variants %}
+                    {% assign color1 = variant.option1 %}
+                   
+                    {% if color1 != color2 %}
+                    {% if  current_variant_size > 1 %}
+                    <li data-variant='{{ variant.option1 }}'>
+                        {%- assign current_variant = product.selected_or_first_available_variant -%}
+                        <div class="color-schema {% if forloop.first == true %} selected {% endif %}">
+                        {% render 'color-select' 
+                        getvariantcolor : variant.option1 ,
+                        firstimage : variant.metafields.variantImg.img-1 , 
+                        secondimage: variant.metafields.variantImg.img-2, 
+                        variantprice : variant.price,
+                        variantdiscount : variant.compare_at_price,
+                        variantid : variant.id, 
+                        countobject: isCountDownProduct, 
+                        variantlevel : 'first' %}
+                        </div>
+                    </li>
+                    {% else %}
+                    <li data-variant='{{ variant.option1 }}'>
+                        {%- assign current_variant = product.selected_or_first_available_variant -%}
+                        {% render 'color-select' 
+                        getvariantcolor : variant.option1 , 
+                        firstimage : variant.metafields.variantImg.img-1 , 
+                        secondimage:variant.metafields.variantImg.img-2, 
+                        variantprice : variant.price,
+                        variantid : variant.id, 
+                        countobject: isCountDownProduct, 
+                        variantlevel : 'second' %}
+                        
+                        <div class="border-hare selected"></div>
+                    </li>
+                    {% endif %}
+                    {% assign color2 = variant.option1 %}
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+              
+            </div>
+        </div> 
+    </div>
+    <div class="line-cont pl-down">
+        <div class="llc">
+            <div class="product-line"></div>
+        </div>  
+    </div>
+    </div>
+  </script>
+  {% endraw %}
+  
+  <style>
+  
+  /* Some styles to get you started */
+  
+  .collection {
+  clear: both;
+  padding-top: 50px;
+  }
+  
+  .collection .product {
+  float: left;
+  text-align: center;
+  width: 162px; /* 160px + 1px + 1px for the borders on either side */
+  margin: 0 14px 14px 0;
+  padding: 0;
+  position: relative; /* used to display absolutely positioned sale tag */
+  overflow: hidden;
+  }
+  
+  .collection .product.last {
+  margin-right: 0;
+  }
+  
+  .collection .product .image {
+  border: 1px solid #E0E0E0;
+  margin-bottom: 10px;
+  height: 160px;
+  overflow: hidden;
+  }
+  
+  .collection .product .cy {
+  display: block;
+  margin: 0 auto;
+  }
+  
+  .collection .product .image img {
+  max-width: 160px;
+  }
+  
+  .collection .product .title {
+  display: block;
+  line-height: 16px;
+  font-size: 12px;
+  color: #222;
+  font-weight: 700;
+  }
+  
+  .collection .product .price {
+  display: block;
+  line-height: 16px;
+  font-size: 11px;
+  color: #777;
+  font-weight: normal;
+  }
+  
+  /* new clearfix */
+  .clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+  }
+  * html .clearfix             { zoom: 1; } /* IE6 */
+  *:first-child+html .clearfix { zoom: 1; } /* IE7 */
+  
+  </style>

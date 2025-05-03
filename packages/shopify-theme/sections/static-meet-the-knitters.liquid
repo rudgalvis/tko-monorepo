@@ -1,0 +1,257 @@
+<section class="kto-main-container" {% if section.settings.sectionID != nil %}id="{{ section.settings.sectionID }}" {% endif %}>
+    <div class="tko-lines sot-{{section.id}}"
+    {% if section.settings.knitterslayoutpage == 'top-bottom'%}
+    style="
+      border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+    ">
+    {% elsif  section.settings.knitterslayoutpage == 'only-top' %}
+    style="
+    border-top-style:  solid;
+    border-top-color:   black;
+    border-bottom: none;
+    ">
+    {% elsif  section.settings.knitterslayoutpage == 'only-bottom' %}
+    style="
+    border-top: none;
+    border-bottom-style:  solid;
+    border-bottom-color:   black;
+    ">
+    
+    {% else %}
+    
+    style="
+    border-top: none;
+    border-bottom: none;
+    "> 
+  
+    {% endif %}
+
+    {{ 'component-meet-the-knitters.css' | asset_url | stylesheet_tag }}
+
+
+<div class="meet-the-knitters-container">
+    <div class="meet-the-knitters-content">
+        <div class="meet-the-knitters-header">
+            <h2>{{ section.settings.sliderheading }}</h2>
+        </div>
+        <div class="main-meet-the-knitters">
+     
+          <div class="meet-the-knitters-arrow">
+            <div class="forfive"></div>
+            <div class="arrow-container">
+                <div class="mtk-arrow left_arrow_mtk">
+                  <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/left_arrow_slider.svg?v=1644507227">
+                </div>
+                <div class="mtk-arrow right_arrow_mtk">
+                  <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/right_arrow_slider.svg?v=1644507227">
+                </div>
+            </div>
+          </div>
+     
+        <div class="meet-the-knitters-carousel stable" id="trust-slick">
+          
+            {% for block in section.blocks %}
+            <div class="carousel-main-knitters cell{{forloop.index}}">
+            <div class="mtkc mtkc-item">
+                <div class="mtkc-img-container" style="background-image:url({{ block.settings.contentimage | img_url: '420x526'}});">
+                  <img src="{{ block.settings.contentimage | img_url: '420x526'}}" /> 
+                </div>
+                <div class="mtkc-real-content">
+                 
+                    <h2>{{ block.settings.contentheading}}</h2>
+                    <p>{{ block.settings.contentcopy}}</p>
+                    {%- comment -%}
+                    <a href="{{ section.settings.urlfooter }}" class="btn-darrow">{{ section.settings.sliderfooter }}</a>
+                    {%- endcomment -%}
+                </div>
+            </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="mtkc-thumb-container">
+            {% for block in section.blocks  %}
+            <div data-selector=".cell{{forloop.index}}" class="mtkc-line {% if forloop.first == true %} trackerIndex {% endif %}" data-que="{{forloop.index0}}">
+                    <div class="selected-line" {%if forloop.first == true%}style="display:block"{%endif%}></div>
+                    <div class="mtkc-thumb" >
+                        <img src="{{ block.settings.thumbimage | img_url: '99x99'}}"/>
+                    </div>
+                    <div class="knitter-thumb-name">{{ block.settings.contentheading}}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+</div>
+
+</div>
+</section>
+
+
+
+{% schema %}
+  
+{
+    "name": "Meet The Knitters Slider", 
+    "settings": [
+    {
+        "type": "header",
+        "content": "Line Layout Options"
+      },
+      {
+        "type": "select",
+        "id": "knitterslayoutpage",
+        "label": "Section Border Options",
+        "default": "top-bottom",
+        "options": [
+          {
+            "value": "top-bottom",
+            "label": "Show Border Top & Bottom"
+          },
+          {
+            "value": "only-top",
+            "label": "Show Border Only Top"
+          },
+          {
+              "value": "only-bottom",
+              "label": "Show Border Only Bottom"
+            },
+          {
+              "value": "hide-border",
+              "label": "Hide Borders"
+            }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup_sot",
+        "label":"Top",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedow_sot",
+        "label":"Bottom",
+        "default":20
+      },
+      
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup_sotm",
+        "label":"Top",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedow_sotm",
+        "label":"Bottom",
+        "default":20
+      },
+      
+      {
+        "type": "header",
+        "content": "Title Options"
+      },
+      {
+        "id": "sliderheading",
+        "type": "text",
+        "label": "Title"
+      },
+      {
+        "type": "header",
+        "content": "Anchor Point Options"
+      },
+      {
+        "id": "sectionID",
+        "type": "text",
+        "label": "Anchor Point"
+      }
+      
+      ],
+      "max_blocks": 6,
+        "blocks": [
+        {
+             "type": "Slider", 
+             "name": "Knitter Slider Item",
+             "settings": [
+             {
+                "type": "header",
+                "content": "Meet The Knitters Slider"
+              },
+              {
+                "type": "image_picker",
+                "id": "contentimage",
+                "label": "Slider Image"
+              },
+              {
+                "id": "contentheading",
+                "type": "text",
+                "label": "Title"
+              },
+             {
+                 
+              "type": "textarea",
+              "id": "contentcopy",
+              "label": "Body"
+            },
+            {
+                "type": "header",
+                "content": "Thumbnail Options"
+              },
+              {
+                "type": "image_picker",
+                "id": "thumbimage",
+                "label": "Thumbnail Image"
+              }
+
+           ]
+        }
+         ],
+        
+    "presets": [ 
+{
+"category": "Slider",
+"name": "Meet The Knitters Slider"
+}
+]
+  }
+{% endschema %}
+
+<script>
+
+   $('.left_arrow_mtk').click(function(){
+       $('.meet-the-knitters-carousel').flickity('previous');
+   });
+
+   $('.right_arrow_mtk').click(function(){
+       $('.meet-the-knitters-carousel').flickity('next');
+   });
+</script>
+
+
+<style>
+    .sot-{{ section.id }}{
+      padding: {{section.settings.padding_sizeup_sot}}px 0px {{section.settings.padding_sizedow_sot}}px 0px;
+      border-width: 1px ;
+      
+     }
+    
+     @media (min-width: 320px) and (max-width: 480px) {
+      .sot-{{ section.id }}{
+      padding: {{section.settings.padding_sizeup_sotm}}px 0px {{section.settings.padding_sizedow_sotm}}px 0px;
+      border-width: 0.5px;
+     }
+    
+
+     }    
+</style>

@@ -1,0 +1,16 @@
+<div class="search-page-item">
+    <ul>
+        <li>
+            <div class="search-page-container">
+            <h2>
+                <a href="{{ item.url }}">{{ item.title }}</a>
+            </h2>
+            {% assign contentPage = item.content%}
+            {{ contentPage  | strip_html | truncatewords: 42 }}
+            <div class="gotopage-container">
+            <a class="btn-darrow btn-monument" href="{{ item.url }}">GO TO PAGE</a>
+            </div>
+        </div>
+        </li>
+    </ul>
+</div>

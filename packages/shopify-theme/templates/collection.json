@@ -1,0 +1,103 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "settings": {}
+    },
+    "banner": {
+      "type": "main-collection-banner",
+      "blocks": {
+        "b1d64983-ff5a-46f4-8283-b2ecb6dca949": {
+          "type": "Collection",
+          "settings": {
+            "colthumbimg": "shopify://shop_images/6_ca575a9f-155c-4840-b6dd-ff237c8f03d2.png",
+            "colthumbtext": "New Arrivals",
+            "colthumburl": "shopify://collections/new-arrivals"
+          }
+        },
+        "844b2e28-31b8-4080-ba9e-f30308ad5ea8": {
+          "type": "Collection",
+          "settings": {
+            "colthumbimg": "shopify://shop_images/menu_cards_-_ss24_1.png",
+            "colthumbtext": "Best Sellers",
+            "colthumburl": "shopify://collections/best-sellers"
+          }
+        },
+        "bd57781e-ce52-46f5-9644-f91218830e2c": {
+          "type": "Collection",
+          "settings": {
+            "colthumbimg": "shopify://shop_images/5_8be98018-f8c1-4615-855a-c12825bbbfe7.png",
+            "colthumbtext": "Sweaters",
+            "colthumburl": "shopify://collections/sweaters"
+          }
+        },
+        "e54308af-eebc-4dff-a58d-eb3d784f05aa": {
+          "type": "Collection",
+          "settings": {
+            "colthumbimg": "shopify://shop_images/4_bc2407ed-bcf8-4607-b779-30fa9b427b18.png",
+            "colthumbtext": "Cardigans",
+            "colthumburl": "shopify://collections/cardigans"
+          }
+        },
+        "56b23f80-c5bf-45b9-81ca-d9d96c126b1d": {
+          "type": "Collection",
+          "settings": {
+            "colthumbimg": "shopify://shop_images/3_7e9e6bbb-1beb-40b5-9d00-73d4dc25ccf4.png",
+            "colthumbtext": "Dresses",
+            "colthumburl": "shopify://collections/dresses"
+          }
+        }
+      },
+      "block_order": [
+        "b1d64983-ff5a-46f4-8283-b2ecb6dca949",
+        "844b2e28-31b8-4080-ba9e-f30308ad5ea8",
+        "bd57781e-ce52-46f5-9644-f91218830e2c",
+        "e54308af-eebc-4dff-a58d-eb3d784f05aa",
+        "56b23f80-c5bf-45b9-81ca-d9d96c126b1d"
+      ],
+      "settings": {}
+    },
+    "1717768511c13fc46b": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 18,
+        "show_secondary_image": true,
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "enable_filters": true,
+        "autoplay_status": true,
+        "muted_status": true,
+        "controller_status": false,
+        "loop_status": true
+      }
+    },
+    "17177687261f45a6e4": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "banner",
+    "1717768511c13fc46b",
+    "product-grid",
+    "17177687261f45a6e4"
+  ]
+}

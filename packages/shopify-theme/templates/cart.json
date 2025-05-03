@@ -1,0 +1,38 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "cart-items": {
+      "type": "main-cart-items",
+      "blocks": {
+        "a25472e4-0f5c-45e9-ad6a-056b081d8c37": {
+          "type": "subtotal",
+          "settings": {
+          }
+        },
+        "8f96c91a-d206-4d3c-a6a3-53538e608508": {
+          "type": "buttons",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "a25472e4-0f5c-45e9-ad6a-056b081d8c37",
+        "8f96c91a-d206-4d3c-a6a3-53538e608508"
+      ],
+      "settings": {
+        "show_cart_note": false
+      }
+    }
+  },
+  "order": [
+    "cart-items"
+  ]
+}

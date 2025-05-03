@@ -1,0 +1,32 @@
+/* -------------------------------- 
+
+File#: _1_swipe-content
+Title: Swipe Content
+Descr: A Vanilla JavaScript plugin to detect touch interactions
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+/* variables */
+:root {
+  /* colors */
+  --sr5-color-primary-hsl: 250, 84%, 54%;
+  --sr5-color-bg-hsl: 0, 0%, 100%;
+  --sr5-color-contrast-high-hsl: 230, 7%, 23%;
+  --sr5-color-contrast-higher-hsl: 230, 13%, 9%;
+  --sr5-color-contrast-low-hsl: 240, 4%, 65%;
+  --sr5-color-contrast-medium-hsl: 225, 4%, 47%;
+}
+
+/* component */
+.swipe-content {
+  height: 280px;
+  width: 280px;
+  background-color: hsl(var(--sr5-color-contrast-low-hsl));
+  border-radius: 0.25em;
+  cursor: default;
+  transition: background 0.2s;
+}
+.swipe-content:active {
+  background-color: hsl(var(--sr5-color-contrast-medium-hsl));
+}

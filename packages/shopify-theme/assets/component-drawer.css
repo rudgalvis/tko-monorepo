@@ -1,0 +1,752 @@
+.drawer-container{
+    width:100%;
+    max-width:416px;
+    height:100%;
+    min-height: 100%;
+    background-color:#EEEEEA;
+    position: fixed;
+    bottom: 0px;
+    right:-420px;
+    z-index:100;
+    /*
+    -webkit-box-shadow: -4px 0px 4px -3px rgba(0,0,0,0.5);
+-moz-box-shadow: -4px 0px 4px -3px rgba(0,0,0,0.5);
+box-shadow: -4px 0px 4px -3px rgba(0,0,0,0.5);*/
+filter: drop-shadow(0px 1px 1.6px rgba(0,0,0,0.5));
+
+}
+
+.money-changer-drawer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+
+
+.drawer-bottom-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row; 
+}
+
+.color-drawer{ 
+    width: 25px;
+    height: 25px;
+   
+}
+
+.currency-holder-drawer{
+    font-family:'Monument';
+    font-size:14px !important;
+    letter-spacing: -0.34px;
+    line-height:16px;
+    color:black;
+}
+
+.drawer-price{
+    font-family: 'Monument';
+    font-size:14px;
+    line-height:10px;
+    letter-spacing: -0.22px;
+    color:black;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    text-align: right;
+    min-width: 31px;
+}
+
+.drawer-price-container{
+    position: relative;
+    top: 2px;
+}
+
+
+.drawer-content{
+    width:100%;
+    max-width:416px;
+    height:100%;
+    background-color:#EEEEEA;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 54px 25px 0px 25px;
+    position: relative;
+    padding: 54px 25px 20px;
+    position: relative;
+    overflow: scroll;
+}
+
+.drawer-header{
+    width:100%;
+    height:60px;
+    min-height: 60px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+
+}
+
+.drawer-header-item{
+    font-family: "Monument";
+    color:black;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.item-count{
+    font-size:14px;
+    letter-spacing: -0.22px;
+    position: relative;
+    top:-2px;
+}
+
+.item-title{
+    font-size:20px;
+    letter-spacing: -0.31px;
+    line-height:20px;
+}
+
+.drawer-announcement-content{
+    width:100%;
+    height:auto;
+    position: relative;
+    padding-bottom: 0px;
+   border-bottom: 1px solid black;
+   padding:8.5px 0px;
+
+}
+
+.drawer-announcement-content p{
+    font-size:10px;
+    letter-spacing: -0.15px;
+    line-height:13px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
+.drawer-product-container{
+    width:100%;
+    height:auto;
+   
+    border-bottom:1px solid black;
+    display:flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding-top: 15px;
+    padding-bottom: 4px;
+
+}
+
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-moz-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-o-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-ms-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+
+.drawer-content .drawer-product-container:nth-child(0){
+    border-top:1px solid black;
+}
+
+.chavron-price-drawer{
+    position: absolute;
+    right: 9px;
+    top: 4px;
+  z-index: 0;
+}
+
+
+
+.checkout-animation{
+position: absolute;
+margin-top: 3.3px;
+width:22px;
+height: 22px;
+/*display: none;*/
+}
+
+button.co_button {
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+}
+
+.spinner {
+animation: rotator 1.4s linear infinite;
+}
+
+@keyframes rotator {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(270deg);
+    }
+  }
+
+
+  @keyframes dash {
+    0% {
+      stroke-dashoffset: 280;
+    }
+    50% {
+      stroke-dashoffset: 75;
+      transform: rotate(135deg);
+    }
+    100% {
+      stroke-dashoffset: 280;
+      transform: rotate(450deg);
+    }
+  }
+  
+
+button{
+cursor: pointer;
+}
+
+.pathbuy {
+stroke-dasharray: 280;
+stroke-dashoffset: 0;
+transform-origin: center;
+stroke: white;
+animation: dash 1.4s ease-in-out infinite;
+}
+
+.drawer-product-item{
+    width:100%;
+    display:flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.dpi-left{
+    width:30%;
+    position: relative;
+}
+
+a.remove-item-to-basket {
+position: absolute;
+right: 0px;
+}
+
+.dpi-right{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100%;
+    padding: 0 0 11px 27px;
+    position: relative;
+}
+
+.drawer-product-image{
+    width:100%;
+    aspect-ratio: 4/5;
+}
+
+.pro-title{
+    font-family: "Panama";
+    font-size:20px;
+    letter-spacing: -0.31px;
+    color: black;
+    margin-block-start: 0em;
+    margin-block-end: 0.5em;
+  
+}
+
+.pro-donate{
+    font-family: "Panama";
+    font-size:20px;
+    letter-spacing: -0.31px;
+    color: black;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+  
+}
+
+.dpi-detail-container {
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+justify-content: space-between;
+}
+
+.dpi-price-size{
+    width: auto;
+    height: auto;
+    display:flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.dpi-price-size p{
+   font-family:"Monument";
+   color: black;
+   font-size:14px;
+   letter-spacing: -0.22px;
+   -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+   margin-block-start: 0em;
+   margin-block-end: 0em;
+}
+
+.dpi-variant{
+    width:25px;
+    height:25px;
+    border-radius: 50%;
+    background-color:#B5BBFF;
+    display:block !important;
+}
+
+.dpi-action-container{
+    width:46px;
+    height: auto;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    top: 2px;
+}
+
+.dpi-quantity{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction:row;
+
+}
+
+.dpi-quantity a{
+   padding: 4px;
+   font-family:"Monument";
+  /* border:1px solid black;*/
+   /*border-radius: 50%;*/
+  /* width:18px;
+   height:18px;*/
+   align-items:center;
+   font-size:14px;
+   letter-spacing: -0.22px;
+   display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: row;
+line-height:10px;
+}
+
+.quantity-number{
+    font-size:14px;
+    margin-left:5px;
+    margin-right:5px;
+    font-family: "Monument";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 10px;
+    color:black;
+
+}
+
+.dpi-last-price{
+    font-family:'Monument';
+    font-size: 14px;
+    letter-spacing: -0.22px;
+}
+
+.tko-dream-fund-content{
+    width:100%;
+    height:auto;
+    display:flex;
+    flex-direction: row;
+    align-items:flex-start;
+    justify-content: space-between;
+    /*margin-top: 25px;*/
+    padding-top: 25px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid black;
+    
+}
+
+.overflowit{
+    overflow: hidden;
+}
+
+.item-close{
+    cursor: pointer;
+    position: absolute;
+    right: 25px;
+    top: 25px;
+}
+
+.df-left{
+   width:30%;
+   height:auto;
+   position: relative;
+
+}
+
+.df-right{
+   width:70%;
+   height:auto;
+   position: relative;
+}
+
+.donate-show{
+    width:100%;
+    height:auto;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+     margin-bottom: 10px;
+
+}
+
+.donate-show > .show-bottom{
+    height:40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.found-container-drawer {
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    z-index: 3;
+}
+
+.show-selection {
+    width: 100%;
+    position: absolute;
+    height: 100%;
+}
+
+li.found-meta-drawer {
+    font-family: Monument;
+    color: #000;
+    font-size: 14px;
+    background-color: #d8d8d8;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: -.34px;
+    display: none;
+    cursor:pointer;
+}
+
+.show-top{
+    width:100%;
+    height:71px;
+    background:white;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.show-top p{
+    font-size:9px;
+    color:black;
+    text-transform: uppercase;
+    font-family: "Monument";
+    text-align: center;
+    letter-spacing: -0.19px;
+    margin-block-start: 0em;
+   margin-block-end: 0em;
+   line-height:23px;
+}
+
+.show-bottom{
+    width: 100%;
+    height:auto;
+    position: relative;
+    background-color: #D8D8D8;
+}
+
+.product-show-donate{
+    height:107px;
+}
+
+.show-bottom select{
+    border: none;
+    background-color:transparent;
+    color:black;
+    width:100%;
+    height: 41px;
+    text-align: center;
+    font-family: "Monument";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+    position: relative;
+    z-index: 8; 
+}
+
+/*.show-bottom span{
+    position: absolute;
+    right: 12px;
+    top: 5px;
+    z-index: 7;
+}*/
+
+.donate-description{
+width: 100%;
+height: 112px;
+position: relative;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+justify-content: space-between;
+padding: 0px 0px 0px 29px;
+}
+
+.df-title{
+    font-size:14px;
+    color:black;
+    font-family: "Monument";
+    text-align: left;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.22px;
+}
+
+.drawer-announcement-content p {
+    font-size: 14px;
+    letter-spacing: -.22px;
+    line-height: 18px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
+.donate-description p{
+    font-size:14px;
+    color:black;
+    font-family: "Panama";
+    text-align: left;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.22px;
+    line-height: 16px;
+    margin-block-end: 0em;
+    margin-block-start: 0em;
+}
+
+.donate-description button{
+    font-size:14px;
+    border:none;
+    color:black;
+    background-color:#B4BED6;
+    font-family: "Monument";
+    width:100%;
+    height:41px;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.22px;
+}
+
+.dpi-footer{
+    width:100%;
+    position: relative;
+    height:auto;
+    margin-top: 15px;
+    margin-bottom: 50px;
+
+}
+
+.title-price{
+    width:100%;
+    height:auto;
+    display:flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction:row;
+}
+
+.title-price p{
+    font-size:22px;
+    color:black;
+    font-family: "Monument";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.34px;
+    margin-block-start: 1em;
+    margin-block-end: 0.7em;
+}
+
+.dpi-footer button{
+    font-size:14px;
+    border:none;
+    color:white;
+    background-color:black;
+    font-family: "Monument";
+    width:100%;
+    height:41px;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.22px; 
+}
+
+.donate-cont{
+width: 103px;
+height: 52px;
+background-color: #e5e5df;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-bottom: 10px;
+}
+
+.color-circle{
+width:25px;
+height:25px;
+border-radius: 50%;
+background-size: cover;
+/*margin-top: 17px;*/
+}
+
+.product-size-drawer{
+text-transform: uppercase;
+}
+
+.no-spin{
+    display:none;
+}
+
+/*.found-container-drawer{
+    position: relative;
+    z-index: 3;
+}*/
+
+@media (max-width: 812px) {
+
+.drawer-content{
+max-height: calc(100vh - 60px);
+overflow-y: scroll;
+padding: 61px 25px 0px 25px;
+}
+
+.found-container-drawer {
+    top: 0px;
+}
+
+
+.item-close{
+    cursor: pointer;
+    position: absolute;
+    right: 25px;
+    top: 25px;
+}
+
+.show-bottom select{
+    text-align: center;
+    text-align-last: center;
+    -moz-text-align-last: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-indent: 0%;
+}
+
+.drawer-announcement-content{
+
+   border-bottom: .5px solid black;
+
+
+}
+
+.drawer-product-container {
+
+    border-bottom: .5px solid black;
+
+}
+
+.drawer-header{
+    border-bottom: .5px solid black;
+}
+
+.tko-dream-fund-content{
+
+    border-bottom: .5px solid black;
+}
+
+.currency-holder {
+    font-family: 'Monument';
+    font-size: 11px;
+    letter-spacing: -0.17px;
+    line-height: 16px;
+    color: black;
+}
+
+li.found-meta-drawer {
+    
+    font-size: 11px;
+    letter-spacing: -0.17px;
+    height: 40px;
+    z-index: 3;
+}
+
+.currency-holder-drawer {
+    font-family: 'Monument';
+    font-size: 11px !important;
+    letter-spacing: -.17px;
+    color: #000;
+}
+
+.drawer-announcement-content p{
+    font-size:10px;
+    letter-spacing: -0.15px;
+    line-height:13px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
+.chavron-price-drawer {
+    position: absolute;
+    right: 9px;
+    top: 5px;
+    z-index: 0;
+}
+
+
+}

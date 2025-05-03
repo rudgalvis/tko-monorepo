@@ -1,0 +1,122 @@
+{%- if predictive_search.performed -%}
+<div id="predictive-search-results">
+  <h3 id="predictive-search-products" class="tko-predictive-search__heading popular-heading">
+    Popular
+  </h3>
+
+  <ul class="result-container">
+    <li role="option" class="result-item">Delčia Cotton Sweater</li>
+    <li role="option" class="result-item">Pilnatis Cotton Shorts</li>
+    <li role="option" class="result-item">Pieva Cotton Bralette</li>
+    <li role="option" class="result-item">Laumės Merino Wool Sweater</li>
+    <li role="option" class="result-item">Heartbreaker Wool Sweater</li>
+  </ul>
+
+    {%- if predictive_search.resources.products.size > 0 -%}
+      <h3 id="predictive-search-products" class="tko-predictive-search__heading">
+        Products
+      </h3>
+    {%- endif -%}
+
+    <ul id="predictive-search-results-list" class="result-container" role="listbox" aria-labelledby="predictive-search-products">
+        {%- for product in predictive_search.resources.products -%}
+           <li role="option" class="result-item">
+              <div class="ps-product-detail">
+                  <div class="pspd pspd-left">
+                    {%- if product.featured_media != blank -%}
+                    <img class="tko-predictive-search__image"
+                      src="{{ product.featured_media | img_url: '150x' }}"
+                      alt="{{ product.featured_media.alt }}"
+                      width="50"
+                      height="{{ 50 | divided_by: product.featured_media.preview_image.aspect_ratio }}" 
+                    >
+                  {%- endif -%}
+                  </div>
+                  <div class="pspd pspd-right">
+                    {%- if settings.predictive_search_show_vendor -%}
+                    <span class="tko-visually-hidden">Vendor</span>
+                    <div class="tko-predictive-search__item-vendor">{{ product.vendor }}</div>
+                  {%- endif -%}
+                    <span class="tko-predictive-search__item-heading">{{ product.title }}</span>
+                    {%- if settings.predictive_search_show_price -%}
+                    {{ product.price | money }}             
+                    {%- endif -%}
+                  </div>
+              </div>
+           </li>
+        {%- endfor -%}
+        <li class="tko-predictive-search__list-item" role="option">
+            <button class="tko-predictive-search__item" tabindex="-1">
+               Search for “{{ predictive_search.terms }}”
+            </button>
+          </li>
+   </ul>
+
+
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Predictive Search", 
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show-popular",
+      "label": "Show Popular Search",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "announcement_home_only2",
+      "label": "Show on home page only",
+      "default": false
+    },
+    {
+      "id": "announcement_color2",
+      "type": "color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "id": "announcement_background2",
+      "type": "color",
+      "label": "Background color",
+      "default": "#000000"
+    }
+  ],
+    "max_blocks": 3,
+    "blocks": [
+    {
+         "type": "Announcement",
+         "name": "Announcement Items",
+         "settings": [
+         {
+          "id": "announcement_text2",
+          "type": "richtext",
+          "label": "Text",
+          "default": "<p>Call attention to a special discount, feature, or promotion here.</p>"
+        },
+        {
+          "id": "announcement_text_mobile2",
+          "type": "richtext",
+          "label": "Text (mobile)",
+          "default": "<p>Use less text on mobile!</p>"
+        },
+                {
+                  "id": "announcement_link2",
+                  "type": "url",
+                  "label": "Link"
+                },
+                {
+                  "id": "anchor_point",
+                  "type": "checkbox",
+                  "label": "Scroll down to footer",
+                  "default" : false,
+                  "info": "If this box is ticked, the link input area has to be empty."
+                }
+       ]
+    }
+     ]
+}
+{% endschema %}

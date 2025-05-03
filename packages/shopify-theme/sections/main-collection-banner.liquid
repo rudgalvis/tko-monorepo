@@ -1,0 +1,88 @@
+{{ 'component-collection-banner.css' | asset_url | stylesheet_tag }}
+
+<div class="collection-banner-container">
+    <div class="collection-banner-content">
+      <div class="banners-container main-carousel">
+        {% for block in section.blocks %}
+        <div class="banners carousel-cell">
+            <a href="{{ block.settings.colthumburl}}"><img src="{{ block.settings.colthumbimg | img_url: '530x654'}}"/></a>
+          <div class="banners-url">
+            <a class="btn-darrow" href="{{ block.settings.colthumburl}}">{{ block.settings.colthumbtext }}</a>
+          </div>
+        </div>
+        {% endfor %}
+        {% for block in section.blocks %}
+        <div class="banners carousel-cell">
+            <a href="{{ block.settings.colthumburl}}"><img src="{{ block.settings.colthumbimg | img_url: '530x654'}}"/></a>
+          <div class="banners-url">
+            <a class="btn-darrow" href="{{ block.settings.colthumburl}}">{{ block.settings.colthumbtext }}</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="arrows-container">
+          <div class="arrows ar-left">
+            <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/left_arrow_slider.svg?v=1644507227"/>
+          </div>
+          <div class="arrows ar-right">
+            <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/right_arrow_slider.svg?v=1644507227"/>
+          </div>
+      </div>
+    </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Collection Navigation",
+  "class": "spaced-section",
+      "max_blocks": 5,
+      "blocks": [
+      {
+           "type": "Collection", 
+           "name": "Collection Thumbnail",
+           "settings": [
+           {
+              "type": "header",
+              "content": "Collection Thumb Item"
+            },
+            {
+              "type": "image_picker",
+              "id": "colthumbimg",
+              "label": "Collection Image"
+            },
+            {
+              "id": "colthumbtext",
+              "type": "text",
+              "label": "Collection Name"
+            },
+           {
+               
+            "type": "url",
+            "id": "colthumburl",
+            "label": "Select URL"
+          }
+
+         ]
+      }
+       ]
+
+  
+}
+{% endschema %}
+
+
+<script>
+  $(document).ready(function () {
+      $('.collection-banner-container').css('opacity','1'); 
+      $('.banners-container').flickity('resize');
+   });
+
+   $('.ar-left').click(function(){
+       $('.banners-container').flickity('previous');
+   });
+
+   $('.ar-right').click(function(){
+       $('.banners-container').flickity('next');
+   });
+</script>

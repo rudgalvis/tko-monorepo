@@ -1,0 +1,23 @@
+{% comment %}
+
+    render 'product-container-price--value---crossed-out' ,
+
+    required params:
+        variant: variant
+        first_variant: first_variant_
+{% endcomment %}
+
+{% assign discountValue = variant.compare_at_price | minus: variant.price %}
+
+<span data-varid="{{ variant.id }}"
+    class="sale_price money {% if discountValue > 0 %}highlight-price{% endif %}"
+    {% if variant.compare_at_price != nil and variant.id == first_variant %}
+        style="display:block;"
+    {% else %}
+        style="display:none;"
+    {% endif %}
+>
+    {% if variant.price < variant.compare_at_price %}
+        {{ variant.compare_at_price | money_without_trailing_zeros | strip_html }}
+    {% endif %}
+</span>

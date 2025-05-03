@@ -1,0 +1,192 @@
+/* -------------------------------- 
+
+File#: _2_menu-bar
+Title: Menu Bar
+Descr: Application menu with a list of common actions that users can perform
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+/* variables */
+:root {
+  /* colors */
+  --mg0-color-primary-hsl: 250, 84%, 54%;
+  --mg0-color-bg-hsl: 0, 0%, 100%;
+  --mg0-color-contrast-high-hsl: 230, 7%, 23%;
+  --mg0-color-contrast-higher-hsl: 230, 13%, 9%;
+  --mg0-color-contrast-low-hsl: 240, 4%, 65%;
+
+  /* spacing */
+  --mg0-space-2xs: 0.375rem;
+  --mg0-space-xs: 0.5rem;
+
+  /* typography */
+  --mg0-text-xs: 0.694rem;
+}
+
+@media(min-width: 64rem){
+  :root {
+    /* spacing */
+    --mg0-space-2xs: 0.5625rem;
+    --mg0-space-xs: 0.75rem;
+
+    /* typography */
+    --mg0-text-xs: 0.8rem;
+  }
+}
+
+/* icons */
+.mg0-icon {
+  height: var(--mg0-size, 1em);
+  width: var(--mg0-size, 1em);
+  display: inline-block;
+  color: inherit;
+  fill: currentColor;
+  line-height: 1;
+  flex-shrink: 0;
+  max-width: initial;
+}
+
+/* component */
+:root {
+  --menu-bar-button-size: 2.5em;
+  --menu-bar-icon-size: 1em;
+  --menu-bar-horizontal-gap: var(--mg0-space-2xs);
+  --menu-bar-vertical-gap: 4px;
+  --menu-bar-label-size: var(--mg0-text-xs);
+}
+
+.menu-bar {
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.menu-bar__item {
+  position: relative;
+  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--menu-bar-button-size);
+  width: var(--menu-bar-button-size);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.menu-bar__item:not(:last-child) {
+  margin-right: var(--menu-bar-horizontal-gap);
+}
+.menu-bar__item:hover, .menu-bar__item.menu-control--active {
+  background-color: hsla(var(--mg0-color-contrast-higher-hsl), 0.1);
+}
+.menu-bar__item:hover > .menu-bar__icon, .menu-bar__item.menu-control--active > .menu-bar__icon {
+  color: hsl(var(--mg0-color-contrast-higher-hsl));
+}
+.menu-bar__item:hover > .menu-bar__label, .menu-bar__item.menu-control--active > .menu-bar__label {
+  font-family: 'Monument';
+  clip: auto;
+  -webkit-clip-path: none;
+          clip-path: none;
+  height: auto;
+  width: auto;
+}
+.menu-bar__item:focus {
+  outline: none;
+  background-color: hsla(var(--mg0-color-primary-hsl), 0.1);
+}
+.menu-bar__item:active {
+  background-color: hsl(var(--mg0-color-contrast-low-hsl));
+}
+.menu-bar__item:focus:active {
+  background-color: hsla(var(--mg0-color-primary-hsl), 0.2);
+}
+
+.menu-bar__item--trigger {
+  display: none;
+}
+
+.menu-bar__icon {
+  display: block;
+  color: hsl(var(--mg0-color-contrast-high-hsl));
+  font-size: var(--menu-bar-icon-size);
+  transition: color 0.2s;
+}
+
+.menu-bar__label {
+  position: absolute;
+  z-index: 5;
+  clip: rect(1px, 1px, 1px, 1px);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  top: 100%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(var(--menu-bar-vertical-gap));
+          transform: translateX(-50%) translateY(var(--menu-bar-vertical-gap));
+  padding: var(--mg0-space-2xs) var(--mg0-space-xs);
+  color: hsl(var(--mg0-color-bg-hsl));
+  background-color: hsla(var(--mg0-color-contrast-higher-hsl), 0.95);
+  border-radius: 0.25em;
+  font-size: var(--menu-bar-label-size);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.menu-bar--collapsed .menu-bar__item--hide {
+  display: none;
+}
+.menu-bar--collapsed .menu-bar__item--trigger {
+  display: inline-block;
+  display: flex;
+}
+
+.menu-bar {
+  opacity: 0;
+}
+.menu-bar::before {
+  display: none;
+  content: "collapsed";
+}
+
+.menu-bar--loaded {
+  opacity: 1;
+}
+
+@media (min-width: 32rem) {
+  .menu-bar--expanded\@xs::before {
+    content: "expanded";
+  }
+}
+
+@media (min-width: 48rem) {
+  .menu-bar--expanded\@sm::before {
+    content: "expanded";
+  }
+}
+
+@media (min-width: 64rem) {
+  .menu-bar--expanded\@md::before {
+    content: "expanded";
+  }
+}
+
+@media (min-width: 80rem) {
+  .menu-bar--expanded\@lg::before {
+    content: "expanded";
+  }
+}
+
+@media (min-width: 90rem) {
+  .menu-bar--expanded\@xl::before {
+    content: "expanded";
+  }
+}

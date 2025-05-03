@@ -1,0 +1,50 @@
+<div class="static-wishlist-hero">
+    {% if customer %}
+        Visit your <a href="{{ routes.account_url }}">
+        <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/tko-user-icon.svg?v=1633602005"
+             alt="The Knotty Ones User Icon">
+        Account
+    </a>
+        to view order history and more.
+    {% else %}
+        <a href="{{ routes.account_url }}">
+            Login or create an
+            <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/tko-user-icon.svg?v=1633602005"
+                 alt="The Knotty Ones User Icon">
+            Account
+        </a>
+        to save your wishlist.
+    {% endif %}
+</div>
+
+<style>
+    .static-wishlist-hero {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    .static-wishlist-hero a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        gap: .75em;
+    }
+</style>
+
+{% schema %}
+
+{
+  "name": "Wishlist Hero",
+  "settings": [
+  ],
+  "presets": [
+    {
+      "category": "text",
+      "name": "Wishlist Hero"
+    }
+  ]
+}
+{% endschema %}

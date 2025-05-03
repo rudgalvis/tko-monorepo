@@ -1,0 +1,743 @@
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+<!--		-->
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		%sveltekit.head%
+
+		<link rel="apple-touch-icon" href="https://cdn.pushowl.com/images/tr:cm-pad_resize,w-192,h-192,bg-FFFFFF00/the-knotty-ones/default-09d1b119-b2d7-42eb-8522-4b5ae4e2e68e-TheKnottyOneslogov222.png?ik-s=891469a1a1020da47e6595fa8d7d99ad63ff143b"><link rel="manifest" href="blob:https://www.theknottyones.com/8af135a2-dec4-4def-ae97-7a2bdcbd7528"><link type="text/css" rel="stylesheet" href="//foursixty.com/media/styles/embed/slider_v2_5.css">
+
+
+		
+
+
+
+
+
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="theme-color" content="">
+		<link rel="canonical" href="https://www.theknottyones.com/">
+		<link rel="preconnect" href="https://cdn.shopify.com" crossorigin=""><link rel="icon" type="image/png" href="//www.theknottyones.com/cdn/shop/files/favicon_32x32.png?v=1657644256"><link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin=""><title>
+		The Knotty Ones: Sustainable Knitwear Handcrafted by Real Humans
+	</title>
+
+
+		<meta name="description" content="At The Knotty Ones, we believe in shopping less but better. We create quality, sustainable knitwear designed to last, using natural fabrics and ethical practices.">
+
+
+
+
+		<meta property="og:site_name" content="The Knotty Ones">
+		<meta property="og:url" content="https://www.theknottyones.com/">
+		<meta property="og:title" content="The Knotty Ones: Sustainable Knitwear Handcrafted by Real Humans">
+		<meta property="og:type" content="website">
+		<meta property="og:description" content="At The Knotty Ones, we believe in shopping less but better. We create quality, sustainable knitwear designed to last, using natural fabrics and ethical practices."><meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:title" content="The Knotty Ones: Sustainable Knitwear Handcrafted by Real Humans">
+		<meta name="twitter:description" content="At The Knotty Ones, we believe in shopping less but better. We create quality, sustainable knitwear designed to last, using natural fabrics and ethical practices.">
+
+
+		
+		
+		
+		<meta name="google-site-verification" content="Q8OHyfPO99_NrZG7WOSlcinyp2AESGahML5o2obwxQQ">
+		<meta name="google-site-verification" content="Q8OHyfPO99_NrZG7WOSlcinyp2AESGahML5o2obwxQQ">
+		<meta id="shopify-digital-wallet" name="shopify-digital-wallet" content="/12438188/digital_wallets/dialog">
+		<meta name="shopify-checkout-api-token" content="d953ed2996a1216a829cb193fb137b85">
+		<meta id="in-context-paypal-metadata" data-shop-id="12438188" data-venmo-supported="false" data-environment="production" data-locale="en_US" data-paypal-v4="true" data-currency="EUR">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+
+
+		<style id="shopify-accelerated-checkout-cart">
+        #dynamic-checkout-cart {
+            container-type: inline-size;
+            container-name: dcc;
+            width: 100%;
+        }
+
+        .wallet-cart-grid {
+            --wallet-button-height-horizontal: clamp(
+                    25px,
+                    var(
+                            --shopify-accelerated-checkout-button-inline-size,
+                            42px
+                    ),
+                    55px
+            );
+            --wallet-button-height-vertical: clamp(
+                    25px,
+                    var(
+                            --shopify-accelerated-checkout-button-block-size,
+                            54px
+                    ),
+                    55px
+            );
+            --wallet-button-width-horizontal: 150px;
+            --wallet-button-width-vertical: 100%;
+            --wallet-button-border-radius: var(
+                    --shopify-accelerated-checkout-button-border-radius,
+                    4px
+            );
+            --wallet-grid-margin-horizontal: 0 -5px -5px -5px;
+            --wallet-button-container-margin-horizontal: 0 5px 5px;
+            --wallet-button-container-margin-vertical: var(--shopify-accelerated-checkout-row-gap, 8px) 0 0;
+        }
+
+        @keyframes acceleratedCheckoutLoadingSkeleton {
+            50% {opacity: var(--shopify-accelerated-checkout-skeleton-animation-opacity-start, 1);}
+            75% {opacity: var(--shopify-accelerated-checkout-skeleton-animation-opacity-end, 0.5);}
+            100% {opacity: var(--shopify-accelerated-checkout-skeleton-animation-opacity-start, 1);}
+        }
+
+        .wallet-cart-button__skeleton {
+            animation: acceleratedCheckoutLoadingSkeleton var(--shopify-accelerated-checkout-skeleton-animation-duration, 4s) var(--shopify-accelerated-checkout-skeleton-animation-timing-function, ease) infinite;
+            animation-delay: -0.168s;
+            background-color: var(--shopify-accelerated-checkout-skeleton-background-color, #dedede);
+            box-sizing: border-box;
+            text-decoration: none !important;
+        }
+
+        .wallet-cart-grid {
+            margin: var(--wallet-grid-margin-horizontal);
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: var(--shopify-accelerated-checkout-inline-alignment, start);
+            gap: 0 !important;
+        }
+
+        .wallet-cart-grid--skeleton {
+            justify-content: var(--shopify-accelerated-checkout-inline-alignment, inherit);
+        }
+
+        .wallet-cart-button-container {
+            position: relative;
+            margin: var(--wallet-button-container-margin-horizontal);
+        }
+
+        .wallet-cart-button-container,
+        .wallet-cart-button {
+            width: var(--wallet-button-width-horizontal);
+            height: var(--wallet-button-height-horizontal);
+            border-radius: var(--wallet-button-border-radius);
+            list-style-type: none !important;
+            text-align: center;
+            flex-shrink: 0;
+            flex-grow: 0;
+        }
+
+        .additional-checkout-buttons--vertical .wallet-cart-grid {
+            justify-content: start;
+            flex-direction: column;
+            margin: 0;
+        }
+        .additional-checkout-buttons--vertical .wallet-cart-grid .wallet-cart-button-container {
+            width: var(--wallet-button-width-vertical);
+            height: var(--wallet-button-height-vertical);
+            margin: var(--wallet-button-container-margin-vertical);
+        }
+        .additional-checkout-buttons--vertical .wallet-cart-grid .wallet-cart-button-container:first-child {
+            margin-top: 0;
+        }
+        .additional-checkout-buttons--vertical .wallet-cart-grid .wallet-cart-button {
+            width: var(--wallet-button-width-vertical);
+            height: var(--wallet-button-height-vertical);
+        }
+
+        .additional-checkout-buttons--horizontal .wallet-cart-grid .wallet-cart-button-container,
+        .additional-checkout-buttons--horizontal .wallet-cart-grid .wallet-cart-button {
+            width: var(--wallet-button-width-horizontal) !important;
+            height: var(--wallet-button-height-horizontal) !important;
+            border-radius: var(--wallet-button-border-radius) !important;
+        }
+
+        @container dcc (width >= 150px) and (width <= 500px) {
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(1)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(2))) {
+                justify-content: start;
+                flex-direction: column;
+                margin: 0;
+            }
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(1)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(2))) .wallet-cart-button-container {
+                width: var(--wallet-button-width-vertical);
+                height: var(--wallet-button-height-vertical);
+                margin: var(--wallet-button-container-margin-vertical);
+            }
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(1)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(2))) .wallet-cart-button-container:first-child {
+                margin-top: 0;
+            }
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(1)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(2))) .wallet-cart-button {
+                width: var(--wallet-button-width-vertical);
+                height: var(--wallet-button-height-vertical);
+            }
+        }
+
+        @container dcc (width <= 310px) {
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(2)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(3))) {
+                justify-content: start;
+                flex-direction: column;
+                margin: 0;
+            }
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(2)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(3))) .wallet-cart-button-container {
+                width: var(--wallet-button-width-vertical);
+                height: var(--wallet-button-height-vertical);
+                margin: var(--wallet-button-container-margin-vertical);
+            }
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(2)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(3))) .wallet-cart-button-container:first-child {
+                margin-top: 0;
+            }
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(2)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(3))) .wallet-cart-button {
+                width: var(--wallet-button-width-vertical);
+                height: var(--wallet-button-height-vertical);
+            }
+        }
+
+        @container dcc (width <= 470px) {
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(3)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(4))) {
+                justify-content: start;
+                flex-direction: column;
+                margin: 0;
+            }
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(3)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(4))) .wallet-cart-button-container {
+                width: var(--wallet-button-width-vertical);
+                height: var(--wallet-button-height-vertical);
+                margin: var(--wallet-button-container-margin-vertical);
+            }
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(3)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(4))) .wallet-cart-button-container:first-child {
+                margin-top: 0;
+            }
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(3)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(4))) .wallet-cart-button {
+                width: var(--wallet-button-width-vertical);
+                height: var(--wallet-button-height-vertical);
+            }
+        }
+
+        @container dcc (width <= 630px) {
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(4)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(5))) {
+                justify-content: start;
+                flex-direction: column;
+                margin: 0;
+            }
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(4)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(5))) .wallet-cart-button-container {
+                width: var(--wallet-button-width-vertical);
+                height: var(--wallet-button-height-vertical);
+                margin: var(--wallet-button-container-margin-vertical);
+            }
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(4)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(5))) .wallet-cart-button-container:first-child {
+                margin-top: 0;
+            }
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(4)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(5))) .wallet-cart-button {
+                width: var(--wallet-button-width-vertical);
+                height: var(--wallet-button-height-vertical);
+            }
+        }
+
+        @container dcc (width <= 790px) {
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(5)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(6))) {
+                justify-content: start;
+                flex-direction: column;
+                margin: 0;
+            }
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(5)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(6))) .wallet-cart-button-container {
+                width: var(--wallet-button-width-vertical);
+                height: var(--wallet-button-height-vertical);
+                margin: var(--wallet-button-container-margin-vertical);
+            }
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(5)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(6))) .wallet-cart-button-container:first-child {
+                margin-top: 0;
+            }
+            .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(5)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(6))) .wallet-cart-button {
+                width: var(--wallet-button-width-vertical);
+                height: var(--wallet-button-height-vertical);
+            }
+        }
+
+        .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(6)) {
+            justify-content: start;
+            flex-direction: column;
+            margin: 0;
+        }
+        .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(6)) .wallet-cart-button-container {
+            width: var(--wallet-button-width-vertical);
+            height: var(--wallet-button-height-vertical);
+            margin: var(--wallet-button-container-margin-vertical);
+        }
+        .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(6)) .wallet-cart-button-container:first-child {
+            margin-top: 0;
+        }
+        .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(6)) .wallet-cart-button {
+            width: var(--wallet-button-width-vertical);
+            height: var(--wallet-button-height-vertical);
+        }
+
+        @media screen and (max-width: 750px) {
+            .wallet-cart-grid {
+                justify-content: start;
+                flex-direction: column;
+                max-width: none;
+                margin: 0;
+            }
+            .wallet-cart-grid .wallet-cart-button-container {
+                max-width: none;
+                width: var(--wallet-button-width-vertical);
+                height: var(--wallet-button-height-vertical);
+                margin: var(--wallet-button-container-margin-vertical);
+            }
+            .wallet-cart-grid .wallet-cart-button-container:first-child {
+                margin-top: 0;
+            }
+            .wallet-cart-grid .wallet-cart-button {
+                width: var(--wallet-button-width-vertical);
+                height: var(--wallet-button-height-vertical);
+            }
+        }
+
+        @supports (not (container-type: inline-size)) or (not (selector(:has(*)))) {
+            .wallet-cart-grid {
+                justify-content: start;
+                flex-direction: column;
+                margin: 0;
+            }
+            .wallet-cart-button-container {
+                width: var(--wallet-button-width-vertical);
+                height: var(--wallet-button-height-vertical);
+                margin: var(--wallet-button-container-margin-vertical);
+            }
+            .wallet-cart-button-container:first-child {
+                margin-top: 0;
+            }
+            .wallet-cart-grid .wallet-cart-button {
+                width: var(--wallet-button-width-vertical);
+                height: var(--wallet-button-height-vertical);
+            }
+        }
+
+        #shopify-buyer-consent {
+            margin-top: 1em;
+            display: inline-block;
+            width: 100%;
+        }
+
+        #shopify-buyer-consent.hidden {
+            display: none;
+        }
+
+        #shopify-subscription-policy-button {
+            background: none;
+            border: none;
+            padding: 0;
+            text-decoration: underline;
+            font-size: inherit;
+            cursor: pointer;
+        }
+
+        #shopify-subscription-policy-button::before {
+            box-shadow: none;
+        }
+
+		</style>
+
+		<style id="shopify-accelerated-checkout-cart-grid-with-margin-top">.additional-checkout-buttons--vertical .wallet-cart-grid .wallet-cart-button-container:first-child {
+        margin-top: 8px;
+    }
+
+
+    @container dcc (width >= 150px) and (width <= 500px) {
+        .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(1)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(2))) .wallet-cart-button-container:first-child {
+            margin-top: 8px;
+        }
+    }
+
+    @container dcc (width <= 310px) {
+        .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(2)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(3))) .wallet-cart-button-container:first-child {
+            margin-top: 8px;
+        }
+    }
+
+    @container dcc (width <= 470px) {
+        .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(3)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(4))) .wallet-cart-button-container:first-child {
+            margin-top: 8px;
+        }
+    }
+
+    @container dcc (width <= 630px) {
+        .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(4)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(5))) .wallet-cart-button-container:first-child {
+            margin-top: 8px;
+        }
+    }
+
+    @container dcc (width <= 790px) {
+        .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(5)).wallet-cart-grid:not(:has(>.wallet-cart-button-container:nth-of-type(6))) .wallet-cart-button-container:first-child {
+            margin-top: 8px;
+        }
+    }
+
+    .wallet-cart-grid:has(>.wallet-cart-button-container:nth-of-type(6)) .wallet-cart-button-container:first-child {
+        margin-top: 8px;
+    }
+
+    @media screen and (max-width: 750px) {
+        .wallet-cart-grid .wallet-cart-button-container:first-child {
+            margin-top: 8px;
+        }
+    }
+
+    @supports (not (container-type: inline-size)) or (not (selector(:has(*)))) {
+        .wallet-cart-button-container:first-child {
+            margin-top: 8px;
+        }
+    }
+		</style>
+		
+		
+
+
+
+
+		<style>
+
+
+        #CybotCookiebotDialogHeader {
+            display: none !important;
+        }
+
+        #CookiebotWidget-widgetContent {
+            background-color: var(--gradient-background)!important;
+        }
+
+        #CybotCookiebotDialogFooter .CybotCookiebotDialogBodyButton {
+            border-width: 1px !important;
+            border-radius: 0 !important;
+            font-family: 'Monument', sans-serif !important;
+            text-transform: uppercase!important;
+            background: black!important;
+            color: white!important;
+            font-weight: 400!important;
+        }
+
+        #CybotCookiebotDialogBodyEdgeMoreDetailsLink {
+            color: black !important;
+        }
+
+        #CybotCookiebotDialog {
+            font-family: 'Panama', sans-serif!important;
+        }
+
+        #CookiebotWidget .CookiebotWidget-body .CookiebotWidget-main-logo {
+            display: none!important;
+        }
+
+        #CybotCookiebotDialogNav .CybotCookiebotDialogNavItemLink.CybotCookiebotDialogActive {
+            color: black !important;
+            border-bottom-color: black!important;
+        }
+
+        #CookiebotWidget #CookiebotWidget-buttons #CookiebotWidget-btn-change {
+            background-color: #000000!important;
+            border-color: #000000!important;
+        }
+
+        #CookiebotWidget #CookiebotWidget-buttons #CookiebotWidget-btn-withdraw {
+            border-color: black!important;
+            background-color: var(--gradient-background)!important;
+        }
+
+        #CookiebotWidget #CookiebotWidget-buttons button {
+            border-radius: 0px!important;
+            border-width: 1px!important;
+        }
+
+        #CookiebotWidget .CookiebotWidget-body .CookiebotWidget-consents-list li.CookiebotWidget-approved svg {
+            fill: #000000!important;
+        }
+
+        #CookiebotWidget .CookiebotWidget-consent-details button {
+            color: black!important;
+        }
+
+        #CybotCookiebotDialogNav .CybotCookiebotDialogNavItemLink,
+        #CybotCookiebotDialog label,
+        #CybotCookiebotDialogBodyEdgeMoreDetailsLink{
+            font-family: 'Monument', sans-serif !important;
+            font-weight: 400!important;
+        }
+
+        #CybotCookiebotDialogFooter #CybotCookiebotDialogBodyLevelButtonCustomize .CybotCookiebotDialogArrow {
+            border-color: white!important;
+        }
+
+        #CybotCookiebotDialog #CybotCookiebotDialogBodyContentText a, #CybotCookiebotDialog #CybotCookiebotDialogBodyLevelButtonIABHeaderViewPartnersLink, #CybotCookiebotDialog #CybotCookiebotDialogDetailBulkConsentList dt a, #CybotCookiebotDialog #CybotCookiebotDialogDetailFooter a, #CybotCookiebotDialog .CybotCookiebotDialogBodyLevelButtonIABDescription a, #CybotCookiebotDialog .CybotCookiebotDialogDetailBodyContentCookieLink, #CybotCookiebotDialogDetailBodyContentTextAbout a {
+            color: black!important;
+        }
+		</style>
+
+		<style data-shopify="">
+        @font-face {
+            font-family: Assistant;
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+            src: url("//www.theknottyones.com/cdn/fonts/assistant/assistant_n4.bcd3d09dcb631dec5544b8fb7b154ff234a44630.woff2?h1=dGhla25vdHR5b25lcy5jb20&h2=dGhlLWtub3R0eS1vbmVzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&hmac=ee02b99f62ca461a1e76b7714207916fd34909df70498685432f591411fdef51") format("woff2"),
+            url("//www.theknottyones.com/cdn/fonts/assistant/assistant_n4.a2d012304becc2a26f1ded1acc136fcab85c9afd.woff?h1=dGhla25vdHR5b25lcy5jb20&h2=dGhlLWtub3R0eS1vbmVzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&hmac=fb9f22d368d945db87d572bfcfc4a8ff0fe1c87350e24eff61d8ee85502e5c3b") format("woff");
+        }
+
+        @font-face {
+            font-family: Assistant;
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+            src: url("//www.theknottyones.com/cdn/fonts/assistant/assistant_n7.3335c7bdaddf2501ddab87cdbd9be98f3870e10d.woff2?h1=dGhla25vdHR5b25lcy5jb20&h2=dGhlLWtub3R0eS1vbmVzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&hmac=6d8b0872a812f7bf41c04004a045327b3f9637921cdc3bde3cdc21a6aac35fb5") format("woff2"),
+            url("//www.theknottyones.com/cdn/fonts/assistant/assistant_n7.7c85f5c5cc1555de92cc7ef2790ee3cffe5237f5.woff?h1=dGhla25vdHR5b25lcy5jb20&h2=dGhlLWtub3R0eS1vbmVzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&hmac=bb5cc63b40b8b9c6b8c7c948652e7d59a938fda3add1b655142c814f1f656789") format("woff");
+        }
+
+
+
+        @font-face {
+            font-family: Assistant;
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+            src: url("//www.theknottyones.com/cdn/fonts/assistant/assistant_n4.bcd3d09dcb631dec5544b8fb7b154ff234a44630.woff2?h1=dGhla25vdHR5b25lcy5jb20&h2=dGhlLWtub3R0eS1vbmVzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&hmac=ee02b99f62ca461a1e76b7714207916fd34909df70498685432f591411fdef51") format("woff2"),
+            url("//www.theknottyones.com/cdn/fonts/assistant/assistant_n4.a2d012304becc2a26f1ded1acc136fcab85c9afd.woff?h1=dGhla25vdHR5b25lcy5jb20&h2=dGhlLWtub3R0eS1vbmVzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&hmac=fb9f22d368d945db87d572bfcfc4a8ff0fe1c87350e24eff61d8ee85502e5c3b") format("woff");
+        }
+
+
+        :root {
+            --font-body-family: Assistant, sans-serif;
+            --font-body-style: normal;
+            --font-body-weight: 400;
+
+            --font-heading-family: Assistant, sans-serif;
+            --font-heading-style: normal;
+            --font-heading-weight: 400;
+
+            --font-body-scale: 1.0;
+            --font-heading-scale: 1.0;
+
+            --color-base-text: 18, 18, 18;
+            --color-base-background-1: 238, 238, 234;
+            --color-base-background-2: 243, 243, 243;
+            --color-base-solid-button-labels: 255, 255, 255;
+            --color-base-outline-button-labels: 18, 18, 18;
+            --color-base-accent-1: 18, 18, 18;
+            --color-base-accent-2: 51, 79, 180;
+            --payment-terms-background-color: #EEEEEA;
+
+            --gradient-base-background-1: #EEEEEA;
+            --gradient-base-background-2: #F3F3F3;
+            --gradient-base-accent-1: #121212;
+            --gradient-base-accent-2: #334FB4;
+
+            --page-width: 160rem;
+            --page-width-margin: 2rem;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit;
+        }
+
+        html {
+            box-sizing: border-box;
+            font-size: calc(var(--font-body-scale) * 62.5%);
+            height: 100%;
+        }
+
+        body {
+            display: grid;
+            grid-template-rows: auto auto 1fr auto;
+            grid-template-columns: 100%;
+            /* min-height: 100%;*/
+            margin: 0;
+            font-size: 1.5rem;
+            letter-spacing: 0.06rem;
+            line-height: calc(1 + 0.8 / var(--font-body-scale));
+            font-family: var(--font-body-family);
+            font-style: var(--font-body-style);
+            font-weight: var(--font-body-weight);
+        }
+
+        @media screen and (min-width: 750px) {
+            body {
+                font-size: 1.6rem;
+            }
+        }
+		</style>
+		<link href="//www.theknottyones.com/cdn/shop/t/64/assets/jquery.fancybox.min.css?v=19278034316635137701730144517" rel="stylesheet" type="text/css" media="all">
+		<link href="//www.theknottyones.com/cdn/shop/t/64/assets/jquery.fancybox.min.css?v=19278034316635137701730144517" rel="stylesheet" type="text/css" media="all">
+		<link href="//www.theknottyones.com/cdn/shop/t/64/assets/base.css?v=69020928847727943621730144500" rel="stylesheet" type="text/css" media="all">
+		<link href="//www.theknottyones.com/cdn/shop/t/64/assets/utils.css?v=150026619806135607681730144524" rel="stylesheet" type="text/css" media="all">
+		<link href="//www.theknottyones.com/cdn/shop/t/64/assets/typography.css?v=25208994799430198551730144531" rel="stylesheet" type="text/css" media="all">
+		<link href="//www.theknottyones.com/cdn/shop/t/64/assets/styles.css?v=6592939082472950461730144522" rel="stylesheet" type="text/css" media="all">
+		<link href="//www.theknottyones.com/cdn/shop/t/64/assets/application.css?v=26370000440791078041730144497" rel="stylesheet" type="text/css" media="all">
+		<link href="//www.theknottyones.com/cdn/shop/t/64/assets/flickity.min.css?v=12404722746677358661730144515" rel="stylesheet" type="text/css" media="all">
+
+
+
+		<link href="//www.theknottyones.com/cdn/shop/t/64/assets/marquee.css?v=179484756652254575371730144519" rel="stylesheet" type="text/css" media="all">
+		<link rel="preload" as="font" href="//www.theknottyones.com/cdn/fonts/assistant/assistant_n4.bcd3d09dcb631dec5544b8fb7b154ff234a44630.woff2?h1=dGhla25vdHR5b25lcy5jb20&amp;h2=dGhlLWtub3R0eS1vbmVzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&amp;hmac=ee02b99f62ca461a1e76b7714207916fd34909df70498685432f591411fdef51" type="font/woff2" crossorigin="">
+		<link rel="preload" as="font" href="//www.theknottyones.com/cdn/fonts/assistant/assistant_n4.bcd3d09dcb631dec5544b8fb7b154ff234a44630.woff2?h1=dGhla25vdHR5b25lcy5jb20&amp;h2=dGhlLWtub3R0eS1vbmVzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&amp;hmac=ee02b99f62ca461a1e76b7714207916fd34909df70498685432f591411fdef51" type="font/woff2" crossorigin=""><link rel="stylesheet" href="//www.theknottyones.com/cdn/shop/t/64/assets/component-predictive-search.css?v=154793842476375605061730144504" media="all" onload="this.media='all'">
+
+
+
+
+
+
+
+
+
+
+		<!-- giftbox-script -->
+		
+		<!-- / giftbox-script -->
+
+		
+
+		<link rel="stylesheet" href="https://d21yesh77pw85v.cloudfront.net/static/css/cart.css">
+
+
+
+		
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+
+		<link href="//www.theknottyones.com/cdn/shop/t/64/assets/sca.freegift.css?v=43694233310401270911730144525" rel="stylesheet" type="text/css" media="all">
+		
+		
+		
+
+		
+
+		
+
+		
+
+
+		<!-- BEGIN app block: shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507 -->
+
+
+
+
+
+
+
+
+
+
+
+
+		
+		
+
+
+
+
+
+
+		
+
+
+
+		<!-- END app app block --><!-- BEGIN app block: shopify://apps/best-currency-converter/blocks/doubly/267afa86-a419-4d5b-a61b-556038e7294d -->
+
+
+		
+
+
+		<!-- inline styles -->
+		<style>
+
+        .layered-currency-switcher{width:auto;float:right;padding:0 0 0 50px;margin:0px;}.layered-currency-switcher li{display:block;float:left;font-size:15px;margin:0px;}.layered-currency-switcher li button.currency-switcher-btn{width:auto;height:auto;margin-bottom:0px;background:#fff;font-family:Arial!important;line-height:18px;border:1px solid #dadada;border-radius:25px;color:#9a9a9a;float:left;font-weight:700;margin-left:-46px;min-width:90px;position:relative;text-align:center;text-decoration:none;padding:10px 11px 10px 49px}.price-on-hover,.price-on-hover-wrapper{font-size:15px!important;line-height:25px!important}.layered-currency-switcher li button.currency-switcher-btn:focus{outline:0;-webkit-outline:none;-moz-outline:none;-o-outline:none}.layered-currency-switcher li button.currency-switcher-btn:hover{background:#ddf6cf;border-color:#a9d092;color:#89b171}.layered-currency-switcher li button.currency-switcher-btn span{display:none}.layered-currency-switcher li button.currency-switcher-btn:first-child{border-radius:25px}.layered-currency-switcher li button.currency-switcher-btn.selected{background:#de4c39;border-color:#de4c39;color:#fff;z-index:99;padding-left:23px!important;padding-right:23px!important}.layered-currency-switcher li button.currency-switcher-btn.selected span{display:inline-block}.doubly,.money{position:relative; font-weight:inherit !important; font-size:inherit !important;text-decoration:inherit !important;}.price-on-hover-wrapper{position:absolute;left:-50%;text-align:center;width:200%;top:110%;z-index:100000000}.price-on-hover{background:#333;border-color:#FFF!important;padding:2px 5px 3px;font-weight:400;border-radius:5px;font-family:Helvetica Neue,Arial;color:#fff;border:0}.price-on-hover:after{content:\"\";position:absolute;left:50%;margin-left:-4px;margin-top:-2px;width:0;height:0;border-bottom:solid 4px #333;border-left:solid 4px transparent;border-right:solid 4px transparent}.doubly-message{margin:5px 0}.doubly-wrapper{float:right}.doubly-float{position:fixed;bottom:10px;left:10px;right:auto;z-index:100000;}select.currency-switcher{margin:0px; position:relative; top:auto;}.price-on-hover { background-color: #333333 !important; color: #FFFFFF !important; } .price-on-hover:after { border-bottom-color: #333333 !important;} .doubly-message { background-color: #333333 !important; color: #FFFFFF !important; border-radius:5px; padding:3px 10px; }
+		</style>
+
+		
+
+
+
+		<!-- END app app block --><!-- BEGIN app block: shopify://apps/yotpo-product-photo-reviews/blocks/settings/eb7dfd7d-db44-4334-bc49-c893b51b36cf -->
+
+
+		
+
+
+
+
+		<!-- END app app block -->
+		<link href="https://monorail-edge.shopifysvc.com" rel="dns-prefetch">
+		
+		  
+		
+		
+		
+		
+		<style type="text/css" id="CookieConsentStateDisplayStyles">.cookieconsent-optin,.cookieconsent-optin-preferences,.cookieconsent-optin-statistics,.cookieconsent-optin-marketing{display:block;display:initial;}.cookieconsent-optout-preferences,.cookieconsent-optout-statistics,.cookieconsent-optout-marketing,.cookieconsent-optout{display:none;}</style><style id="kl-custom-fonts">
+      @import 'https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap';
+
+      @font-face {
+          font-family: 'Monument Grotesk';
+          src: url(https://cdn.shopify.com/s/files/1/1243/8188/files/ABCMonumentGrotesk-Medium.woff?v=1636383320);
+          font-weight: 500;
+          font-style: normal;
+          font-display: swap;
+      }
+      @font-face {
+          font-family: 'MonumentGrotesk';
+          src: url(https://cdn.shopify.com/s/files/1/0548/6644/4336/files/ABCMonumentGrotesk-Medium.woff2?v=1633599092);
+          font-weight: 400;
+          font-style: normal;
+          font-display: swap;
+      }
+      @font-face {
+          font-family: 'Panama Regular';
+          src: url(https://cdn.shopify.com/s/files/1/1243/8188/files/PanamaRegular_1.woff?v=1636383207);
+          font-weight: 400;
+          font-style: normal;
+          font-display: swap;
+      }
+      @font-face {
+          font-family: 'PanamaRegular';
+          src: url(https://cdn.shopify.com/s/files/1/0548/6644/4336/files/PanamaRegular.woff?v=1633599092);
+          font-weight: 200;
+          font-style: normal;
+          font-display: swap;
+      }
+	</style><style>.yotpo-widget-empty-placeholder { display: block!important; }</style><link type="text/css" rel="stylesheet" href="//staticw2.yotpo.com/5QEruTvuomIGzg7Q4mrywQweQHmwMtHxQzvUOGgW/widget.css?widget_version=2024-09-30_12-52-23"><link rel="dns-prefetch preconnect" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/polyfills.BVWgFUkR.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/app.vlk0BXC7.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/OnePage.D5GD5N3w.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/DeliveryMethodSelectorSection.miKR1ut4.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/useUnauthenticatedErrorModal.D6Lyf9tg.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/LegacyVaultedShippingMethods.FbptU8La.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/Rollup.4y8yxsBh.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/SubscriptionPriceBreakdown.B2qC2S98.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/MarketsProDisclaimer.BLdwqKM1.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/ShopPayLogo.DQEYsJeF.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/index.6y0RAb_1.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/PickupPointCarrierLogo.JYM_FGl3.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/hooks.BhOC1oON.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/VaultedPayment.DonyP8sh.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/useIsOriginatedFromShop.PmHWCPbq.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/useShowShopPayOptin.B_zj1yOf.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/Section.CBBtQ7mC.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/useGooglePaySdk.CJAgrU8f.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/ShopPayLoginLoader.Bpw9NQYp.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/publishMessage.CbPFfXao.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/PayButtonSection.CjUS16Da.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/RageClickCapture.CTsE8yze.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/context.BOoUlvL6.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/DutyOptions.RWcnWNqQ.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/useAmazonContact.DCn2aTXz.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/StockProblemsLineItemList.7KdnRwIH.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/component-ShopPayVerificationSwitch.E6qCGjPB.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="script" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/index.dMGwgt8R.js" crossorigin=""><link rel="prefetch" fetchpriority="low" as="style" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/app.whj6cDzT.css" crossorigin=""><link rel="prefetch" fetchpriority="low" as="style" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/OnePage.BL1uXB7_.css" crossorigin=""><link rel="prefetch" fetchpriority="low" as="style" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/DeliveryMethodSelectorSection.DNerkzQV.css" crossorigin=""><link rel="prefetch" fetchpriority="low" as="style" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/Rollup.o9Mx-fKL.css" crossorigin=""><link rel="prefetch" fetchpriority="low" as="style" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/SubscriptionPriceBreakdown.Bqs0s4oM.css" crossorigin=""><link rel="prefetch" fetchpriority="low" as="style" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/ShopPayLogo.D_HPU8Dh.css" crossorigin=""><link rel="prefetch" fetchpriority="low" as="style" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/PickupPointCarrierLogo.C0wRU6wV.css" crossorigin=""><link rel="prefetch" fetchpriority="low" as="style" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/VaultedPayment.BO3829nT.css" crossorigin=""><link rel="prefetch" fetchpriority="low" as="style" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/Section.sQehCocD.css" crossorigin=""><link rel="prefetch" fetchpriority="low" as="style" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/ShopPayLoginLoader.CjGSo8kt.css" crossorigin=""><link rel="prefetch" fetchpriority="low" as="style" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/PayButtonSection.DF7trkKf.css" crossorigin=""><link rel="prefetch" fetchpriority="low" as="style" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/RageClickCapture.DnkQ4tsk.css" crossorigin=""><link rel="prefetch" fetchpriority="low" as="style" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/DutyOptions.Bd1Z60K2.css" crossorigin=""><link rel="prefetch" fetchpriority="low" as="style" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/useAmazonContact.D-Ox6Dnf.css" crossorigin=""><link rel="prefetch" fetchpriority="low" as="style" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/StockProblemsLineItemList.CxdIQKjw.css" crossorigin=""><link rel="prefetch" fetchpriority="low" as="style" href="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/ShopPayVerificationSwitch.DVQdwG9J.css" crossorigin="">
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div>%sveltekit.body%</div>
+
+
+	</body>
+</html>

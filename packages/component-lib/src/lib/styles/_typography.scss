@@ -1,0 +1,9 @@
+@mixin title {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -.22px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-transform: uppercase;
+    font-family: Monument, sans-serif;
+}

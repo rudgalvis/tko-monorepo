@@ -1,0 +1,4 @@
+packages: [
+  "packages/component-lib",
+  "packages/tkoxrr",
+]

@@ -1,0 +1,181 @@
+
+
+.banners-container {
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: inline-block;
+   
+}
+
+.collection-banner-container{
+    width:100%;
+    height: auto;
+    position: relative;
+    margin-top: 200px;
+    padding: 0px 18px;
+    margin-bottom: 48px;
+    opacity:0;
+  }
+
+  .collection-banner-content{
+    width:100%;
+    height: auto;
+    position: relative;
+  }
+
+
+
+
+  .banners {
+    width: 20%;
+    height: auto;
+    position: relative;
+    padding: 0px 7px;
+    min-width:264px;
+}
+
+
+
+
+  .banners img{
+    width:100%;
+  }
+
+  .banners-url{
+    width:100%;
+    height: auto;
+    position: relative;
+    margin-top:4px;
+    left: 0px;
+  }
+
+  .banners-url a{
+     font-size:14px;
+     font-family: 'Monument';
+     color: black;
+     letter-spacing: -0.22px;
+     line-height:23px;
+     text-align: left;
+     text-transform: uppercase;
+  }
+
+  .arrows-container {
+    width: 100%;
+    height: 26px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 11px;
+    position: absolute;
+    top: 50%;
+    margin-top: -44px;
+    display:none;
+}
+
+.arrows{
+  cursor: pointer;
+}
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .collection-banner-container{
+
+margin-top: 104px;
+padding: 0px 6px;
+margin-bottom: unset;
+}
+
+
+.banner-container:after {
+    content: '';
+  }
+
+
+.banners {
+width: 20%;
+height: auto;
+position: relative;
+padding: 0px 5px;
+}
+.banners-url a{
+ font-size:10px;
+ color: black;
+ letter-spacing: -0.15px;
+
+}
+
+button.collection-arrow-button.slide-arrow.next-arrow.slick-arrow {
+position: absolute;
+z-index: 3;
+top: 34%;
+right: 4px;
+background: transparent;
+border: none;
+}
+
+button.collection-arrow-button.slide-arrow.prev-arrow.slick-arrow {
+position: absolute;
+z-index: 3;
+top: 34%;
+left: 4px;
+background: transparent;
+border: none;
+}
+
+.banners-url{
+margin-top:10px;
+}
+  }
+  @media (min-width: 320px) and (max-width: 480px) {
+    .collection-banner-container{
+
+    margin-top: 96px;
+    padding: 0px 3px 0px 2px;
+    margin-bottom: unset;
+
+  }
+
+  .arrows-container {
+
+    display:flex;
+}
+
+  .banner-container:after {
+    content: '';
+  }
+
+  .banners {
+    width: 50%;
+    height: auto;
+    position: relative;
+    padding: 0px 4.3px;
+    min-width: 166px;
+}
+.banners-url a{
+     font-size:10px;
+     color: black;
+     letter-spacing: -0.15px;
+
+  }
+
+  button.collection-arrow-button.slide-arrow.next-arrow.slick-arrow {
+    position: absolute;
+    z-index: 3;
+    top: 34%;
+    right: 5px;
+    background: transparent;
+    border: none;
+}
+
+button.collection-arrow-button.slide-arrow.prev-arrow.slick-arrow {
+    position: absolute;
+    z-index: 3;
+    top: 34%;
+    left: 5px;
+    background: transparent;
+    border: none;
+}
+
+  .banners-url{
+margin-top:2px;
+  }
+  }

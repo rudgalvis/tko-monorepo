@@ -1,0 +1,81 @@
+{{ 'component-page-navigation.css' | asset_url | stylesheet_tag }}
+
+
+<div class="pn-main page-navigation">
+    <div class="line-second sl-top">
+        <div class="line-child"></div>
+    </div>    
+<ul class="page-nav-master">
+    {% for block in section.blocks %}
+    <li class="myclass">
+        <div class="nav-line nav-line-up">
+            <div class="nav-line-item-bottom"></div>
+        </div>
+        <div class="section-nav" id="sec-{{forloop.index}}">
+            <a id="{{block.settings.pnid}}-button"  href="javascript:void(0);">{{block.settings.pntext}}</a>
+        </div>
+        <div class="nav-line nav-line-down">
+            <div class="nav-line-item"></div>
+        </div>
+    </li>
+    {% endfor %}
+    
+
+</ul>
+<div class="pn-line-container">
+    <div class="pn-child"></div>
+</div>
+
+<div class="line-second">
+     <div class="line-child"></div>
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+{% schema %}
+
+{
+    "name": "Mobile Page Navigation",
+    "tag": "section",
+    "class": "ghost-container",
+    "max_blocks": 5,
+      "blocks": [
+      {
+           "type": "Navigation", 
+           "name": "Page Navigation Item",
+           "settings": [
+           {
+              "type": "header",
+              "content": "page Navigation Options"
+            },
+            {
+              "type": "text",
+              "id": "pntext",
+              "label": "Page Navigation Text"
+            },
+            {
+              "id": "pnid",
+              "type": "text",
+              "label": "ID of section"
+            }
+
+         ]
+      }
+       ],
+    "presets": [
+{
+"category": "Navigation",
+"name": "Mobile Page Navigation"
+}
+]
+  }
+{% endschema %}

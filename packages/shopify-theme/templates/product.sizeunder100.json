@@ -1,0 +1,189 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "f8181322-8841-4907-9b04-35e6f9531d91": {
+          "type": "title",
+          "settings": {
+          }
+        },
+        "59c483cf-2d6f-4b16-933e-a23e9bfcbe14": {
+          "type": "price",
+          "settings": {
+          }
+        },
+        "2d5074d0-c588-438a-8659-0de70bfa2304": {
+          "type": "variant_picker",
+          "settings": {
+          }
+        },
+        "b3134b66-e6f2-4c2a-bcff-4f35a2e067ef": {
+          "type": "size",
+          "settings": {
+          }
+        },
+        "2a721da1-8f5c-4b01-98ac-85268692cc8c": {
+          "type": "information",
+          "settings": {
+            "specialfeatures": "{{ product.metafields.my_fields.special_information.value }}"
+          }
+        },
+        "ba6ed021-9ae1-4e9d-b952-bde6ecd90047": {
+          "type": "description",
+          "settings": {
+          }
+        },
+        "83dd1570-eee2-456a-911a-487f63b4e9a8": {
+          "type": "collapse",
+          "settings": {
+          }
+        },
+        "721a196d-7aaf-4498-b490-c0f63d75d68d": {
+          "type": "collapsible_tab",
+          "settings": {
+            "collapse_order": "first",
+            "heading": "MATERIAL & CARE",
+            "content": "<p>{{ product.metafields.my_fields.material_care | metafield_tag }}</p>",
+            "page": ""
+          }
+        },
+        "9ef58ed0-9b28-41a4-83d2-7b92736607a2": {
+          "type": "collapsible_tab",
+          "settings": {
+            "collapse_order": "second",
+            "heading": "SHIPPING & FREE EXCHANGES",
+            "content": "<p>{{ product.metafields.my_fields.free_shipping_returns | metafield_tag }}</p>",
+            "page": ""
+          }
+        },
+        "158ccb6d-3a71-4702-a177-c1cdbf6a0f22": {
+          "type": "collapsible_tab",
+          "settings": {
+            "collapse_order": "third",
+            "heading": "SUSTAINABILITY",
+            "content": "<p>{{ product.metafields.my_fields.sustainability | metafield_tag }}</p>",
+            "page": ""
+          }
+        },
+        "077b1518-c976-4dff-b67a-f3051c8536a3": {
+          "type": "setsaveme",
+          "settings": {
+            "setsaveproduct": "{{ product.metafields.my_fields.set_save.value }}",
+            "setsavetitle": "{{ block.settings.setsaveproduct.metafields.my_fields.set_save_title.value }}"
+          }
+        }
+      },
+      "block_order": [
+        "f8181322-8841-4907-9b04-35e6f9531d91",
+        "59c483cf-2d6f-4b16-933e-a23e9bfcbe14",
+        "2d5074d0-c588-438a-8659-0de70bfa2304",
+        "b3134b66-e6f2-4c2a-bcff-4f35a2e067ef",
+        "2a721da1-8f5c-4b01-98ac-85268692cc8c",
+        "ba6ed021-9ae1-4e9d-b952-bde6ecd90047",
+        "83dd1570-eee2-456a-911a-487f63b4e9a8",
+        "721a196d-7aaf-4498-b490-c0f63d75d68d",
+        "9ef58ed0-9b28-41a4-83d2-7b92736607a2",
+        "158ccb6d-3a71-4702-a177-c1cdbf6a0f22",
+        "077b1518-c976-4dff-b67a-f3051c8536a3"
+      ],
+      "settings": {
+        "bid_header": "{{ product.metafields.my_fields.between_image_title.value }}",
+        "bid_content": "<p>{{ product.metafields.my_fields.between_image_content | metafield_tag }}</p>",
+        "knitter_comment_img": "{{ product.metafields.my_fields.knitter_avatar.value }}",
+        "knitter_name": "{{ product.metafields.my_fields.knitter_name.value }}",
+        "knitter_comment": "<p>{{ product.metafields.my_fields.knitter_comment | metafield_tag }}</p>"
+      }
+    },
+    "165756797417588c66": {
+      "type": "static-two-column-text",
+      "settings": {
+        "borderlayouttwocltext": "only-top",
+        "padding_sizeup": 0,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 6,
+        "padding_sizedownm": 0,
+        "padding_top_sec": 80,
+        "padding_bottom_sec": 58,
+        "padding_top_secm": 45,
+        "padding_bottom_secm": 32,
+        "twocolheading": "{{ product.metafields.my_fields.btf_info_title.value }}",
+        "hed_padding_sec": 300,
+        "hed_padding_secm": 262,
+        "twocolcopy": "<p>{{ product.metafields.my_fields.btf_info_content.value }}</p>",
+        "cop_padding_sec": 1024,
+        "cop_padding_secm": 280,
+        "sectionID": ""
+      }
+    },
+    "1657568058ee15c954": {
+      "type": "static-product-collage",
+      "settings": {
+        "borderlayoutcollage": "only-bottom",
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15
+      }
+    },
+    "1657568808e7ae2f39": {
+      "type": "foursixty-pdp",
+      "settings": {
+        "onlyTextlayout": "hide-border",
+        "pdp_insta_title": "The Knotty Ones IRL",
+        "padding_sizeup_sot": 0,
+        "padding_sizedow_sot": 5,
+        "padding_sizeup_sotm": 0,
+        "padding_sizedow_sotm": 0
+      }
+    },
+    "1657568074bcf24771": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You may also like",
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "add_image_padding": false,
+        "show_image_outline": true,
+        "show_vendor": false,
+        "show_rating": false
+      }
+    },
+    "1657568113a91a52ce": {
+      "type": "static-cta-subscribe",
+      "settings": {
+        "borderlayoutsub": "hide-border",
+        "subbgcolor": "#b4bed6",
+        "subheading": "10% OFF YOUR FIRST ORDER",
+        "subbody": "<p>Good things come to those who subscribe. We don’t spam.<br/>Pinky promise</p>",
+        "maxwidthofcta": 980,
+        "maxwidthofctamobile": 280,
+        "padding_sizeup": 20,
+        "padding_sizedown": 19,
+        "padding_sizeupm": 33,
+        "padding_sizedownm": 15,
+        "containertop_": 20,
+        "containerbottom_": 20,
+        "containertopmobile_": 20,
+        "containerbottommobile_": 20
+      }
+    }
+  },
+  "order": [
+    "main",
+    "165756797417588c66",
+    "1657568058ee15c954",
+    "1657568808e7ae2f39",
+    "1657568074bcf24771",
+    "1657568113a91a52ce"
+  ]
+}

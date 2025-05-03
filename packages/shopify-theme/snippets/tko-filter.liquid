@@ -1,0 +1,179 @@
+{{ 'tko-filter.css' | asset_url | stylesheet_tag }}
+{% assign colors = settings.colorswatch | split: ',' %}
+
+{% assign HEXcolor2 = 'Black' %}
+
+
+
+<div class="tko-filter-conteiner">
+  <div class="tko-filter-content">
+     
+    <div class="tko-filter-items">
+        <div id="filter-switcher" class="filters-open">
+          <a class="btn-larrow" href="javascript:void(0);">FILTERS</a>
+        </div>
+
+       
+
+        {%- for filter in collection.filters -%}
+        {%- for filter_value in filter.active_values -%}
+        {% if filter.label == "Color"%} 
+        <a class="active-filters__remove-filter" href="{{ filter_value.url_to_remove }}">
+          {% for color in colors %}
+                          {% assign getColor5 = color | split : ':' %}
+                          {% assign colorCorrect5 = getColor5[0] %}
+  
+                          {% if filter_value.label == colorCorrect5 %}
+                          {% assign HEXcolor5 = getColor5[1] %}
+                          {% assign detectImage5 = HEXcolor5 | slice: 0%}
+                          {% if detectImage5 == '#' %}
+                           <div class="color-circle-filter" style="background-color:{{HEXcolor5}};"></div>
+                          {% else %}
+                          {% assign value5 = HEXcolor5 %}
+                          {% assign color_swatch_name5 = value5 | handle | append: '.png' %}
+                          {% assign color_swatch_image5 = images[color_swatch_name5]  %}
+                          <div class="color-circle-filter" style="background-image:url({{ color_swatch_image5 | img_url: '64x64' }});"></div>
+                          {% endif %}
+  
+                          
+                          {% endif %}
+                      {% endfor %}
+         
+         
+         
+          <div class="filter-close-img"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/filter-clear-icon.svg?v=1642092965"/></div>
+        </a>
+        {% else %}
+        <a class="active-filters__remove-filter" href="{{ filter_value.url_to_remove }}"> {{ filter_value.label }}
+          <div class="filter-close-img not-image"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/filter-clear-icon.svg?v=1642092965"/></div>
+        </a>
+        {% endif %}
+      {%- endfor -%}
+      {%- endfor -%}
+
+
+      <div class="filters-open filter-open-sortby">
+        <a class="btn-larrow" href="javascript:void(0);">SORT BY</a>
+      </div>
+
+    </div>
+</div>
+</div>    
+
+
+<div class="tko-filter-conteiner-up">
+  <div class="ps-threeangle-up">
+    <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/predictivesearchthreeangle.svg?v=1639156945" alt="The Knotty Ones Predictive Search">
+  </div>
+  <div class="tko-filter-content-up">
+
+
+
+     <form class="filter-form"> 
+      <div class="seperater___filter">
+      {%- for filter in collection.filters -%}
+         <div class="filter-real___container">
+         <div class="filter-header">
+          {{ filter.label }}
+         </div>
+
+         {%- case filter.type -%}
+
+              {%- when 'list' -%}
+             
+              <div class="filter-list-container">
+                {%- for filter_value in filter.values -%}
+                     
+                      <div class="filter-list">
+
+                        {% for color in colors %}
+                          {% assign getColor2 = color | split : ':' %}
+                          {% assign colorCorrect2 = getColor2[0] %}
+  
+                          {% if filter_value.label == colorCorrect2 %}
+                          {% assign HEXcolor2 = getColor2[1] %}
+                          {% assign detectImage = HEXcolor2 | slice: 0%}
+                          {% if detectImage == '#' %}
+                           <div class="color-circle-up" style="background-color:{{HEXcolor2}};"></div>
+                          {% else %}
+                          {% assign value2 = HEXcolor2 %}
+                          {% assign color_swatch_name2 = value2 | handle | append: '.png' %}
+                          {% assign color_swatch_image2 = images[color_swatch_name2]  %}
+                          <div class="color-circle-up" style="background-image:url({{ color_swatch_image2 | img_url: '64x64' }});"></div>
+                          {% endif %}
+  
+                          
+                          {% endif %}
+                      {% endfor %}
+
+                      {% if filter.label == "Color"%} 
+
+                      <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
+                      {{ filter_value.label }}
+                      <input class="input-filter {{filter.label  | downcase }}-filter filter-input-control" type="checkbox"
+                      name="{{ filter_value.param_name }}"
+                      value="{{ filter_value.value }}"
+                      id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                      {% if filter_value.active -%}checked{%- endif %}
+                      {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
+                    >
+                     <span class="checkmark"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/check-icon.svg?v=1641999123"/></span>
+                     </label>
+
+                     {% else %}
+
+                     <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
+                 
+                      {{ filter_value.label }}
+                  
+                      
+                  <input type="checkbox"
+                    name="{{ filter_value.param_name }}"
+                    value="{{ filter_value.value }}"
+                    class="input-filter {{filter.label  | downcase }}-filter  filter-input-control"
+                    id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                    {% if filter_value.active -%}checked{%- endif %}
+                    {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
+                  >
+                  <span class="checkmark"><img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/check-icon.svg?v=1641999123"/></span>
+                </label>
+
+                      {% endif %}
+
+                         
+                      </div>
+
+                {%- endfor -%}
+              </div>
+          
+         {%- endcase -%}
+         
+        </div>
+      {%- endfor -%}
+    </div> 
+    <div class="footer-filter">
+
+      <div class="clear-filter">
+        <a href="{{ collection.url }}?sort_by={{ collection.sort_by }}" class="active-filters__clear">Clear</a>
+        </div>
+
+      <div class="filter-group-display__submit">
+        <button class="btn-darrow" type="submit" value="Apply">Apply</button>
+      </div>
+
+     
+
+    </div>
+     
+     </form>
+
+
+  
+  </div>
+ 
+</div>
+
+
+
+
+ 

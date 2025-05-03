@@ -1,0 +1,269 @@
+{{ 'component-static-onlytext-alt.css' | asset_url | stylesheet_tag }}
+
+<section class="kto-main-container" {% if section.settings.sectionID != nil %}id="{{ section.settings.sectionID }}" {% endif %}>
+  <div class="tko-lines sot-alt-{{section.id}}"
+  {% if section.settings.onlyTextlayout_ == 'top-bottom'%}
+  style="
+      border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+     
+      
+  ">
+  {% elsif  section.settings.onlyTextlayout_ == 'only-top' %}
+  style="
+  border-top-style:  solid;
+  border-top-color:   black;
+  border-bottom: none;
+   
+  ">
+  {% elsif  section.settings.onlyTextlayout_ == 'only-bottom' %}
+  style="
+  border-top: none;
+  border-bottom-style:  solid;
+  border-bottom-color:   black;
+    
+  ">
+  
+  {% else %}
+  
+  style="
+  border-top: none;
+  border-bottom: none;
+    
+  "> 
+
+  {% endif %}
+
+<div class="cta-text-container- cta-text-{{ section.settings.testgh_ }} container-padding-{{section.id}}"  style="background-color:{{section.settings.bgOnlyTextCTA}};">
+    <div class="cta-text-content-">
+        {% if section.settings.headingOnlyTextCTA_ != "" %}
+        <h2 class="{{ section.settings.headermaxwidth_ }} mxwidth-header-{{section.id}}">{{ section.settings.headingOnlyTextCTA_ }}</h2>
+        {% endif %}
+        <p class="mxwidth-{{section.id}}">{{ section.settings.bodytextOnlyTextCTA_ }}</p>
+        {% if section.settings.showurlOnlyTextCTA_ == true %}
+        <a href="{{ section.settings.linkOnlyTextCTA_ }}" class="btn-darrow inside-section-">{{section.settings.linktextOnlyTextCTA_}}</a>
+        {% endif %}
+    </div>
+</div>
+
+</div>
+</section>
+{% assign desktopheight = section.settings.testgh- %}
+
+<style>
+      .sot-alt--{{ section.id }}{
+        padding: {{section.settings.padding_sizeup_sot}}px 0px {{section.settings.padding_sizedow_sot}}px 0px;
+        border-width:1px;
+       }
+       .mxwidth-{{section.id}}{
+        max-width: {{section.settings.maxwidthoftext_}}px;
+       }
+       .mxwidth-header-{{section.id}}{
+        max-width: {{section.settings.maxwidthoftitle_}}px;   
+       }
+       .container-padding-{{section.id}}{
+         padding:{{section.settings.containertop_}}px 0px {{section.settings.containerbottom_}}px 0px;   
+       }
+       @media (min-width: 320px) and (max-width: 480px) {
+        .sot-alt-{{ section.id }}{
+        padding: {{section.settings.padding_sizeup_sotm}}px 0px {{section.settings.padding_sizedow_sotm}}px 0px;
+        border-width:0.5px;
+       }
+       .mxwidth-{{section.id}}{
+        max-width: {{section.settings.maxwidthoftextmobile_}}px;
+       }
+       .mxwidth-header-{{section.id}}{
+        max-width: {{section.settings.maxwidthoftitlemobiled_}}px;   
+       }
+       .container-padding-{{section.id}}{
+        padding:{{section.settings.containertopmobile_}}px 0px {{section.settings.containerbottommobile_}}px 0px;     
+       }
+       }    
+  </style>
+
+
+
+{% schema %}
+
+{
+    "name": "Only Text Section No.2", 
+    "class" : "static-only-text-alternate", 
+    "settings": [
+    {
+      "type": "header",
+      "content": "Line Layout Options"
+    },
+    {
+        "type": "select",
+        "id": "onlyTextlayout_",
+        "label": "Section Border Options",
+        "default": "top-bottom",
+        "options": [
+          {
+            "value": "top-bottom",
+            "label": "Show Border Top & Bottom"
+          },
+          {
+            "value": "only-top",
+            "label": "Show Border Only Top"
+          },
+          {
+              "value": "only-bottom",
+              "label": "Show Border Only Bottom"
+            },
+          {
+              "value": "hide-border",
+              "label": "Hide Borders"
+            }
+        ]
+      },
+      {
+      "type": "header",
+      "content": "Title Options"
+    },  
+      {
+        "id": "headingOnlyTextCTA_",
+        "type": "text",
+        "label": "Only Text CTA Header"
+      },
+      {
+        "type":"number",
+        "id":"maxwidthoftitle_",
+        "label":"Maximum Title Width Desktop",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"maxwidthoftitlemobiled_",
+        "label":"Maximum Title Width Mobile",
+        "default":20
+      },
+      {
+      "type": "header",
+      "content": "Body Options"
+    },  
+      {
+        "id": "bodytextOnlyTextCTA_",
+        "type": "textarea",
+        "label": "Body Copy"
+      },
+      {
+        "type":"number",
+        "id":"maxwidthoftext_",
+        "label":"Copy Width Desktop",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"maxwidthoftextmobile_",
+        "label":"Copy Width Mobile",
+        "default":20
+      },
+      {
+      "type": "header",
+      "content": "URL Options"
+    },  
+      {
+        "type": "checkbox",
+        "id": "showurlOnlyTextCTA_",
+        "label": "Enable link",
+        "default": false
+      },
+      {
+        "id": "linkOnlyTextCTA_",
+        "type": "url",
+        "label": "URL"
+      },
+      {
+        "id": "linktextOnlyTextCTA_",
+        "type": "text",
+        "label": "URL Copy"
+      },
+      
+      {
+        "type": "header",
+        "content": "Line Padding Options Desktop"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup_sot",
+        "label":"Top",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedow_sot",
+        "label":"Bottom",
+        "default":20
+      },
+      
+      {
+        "type": "header",
+        "content": "Line Padding Options Mobile"
+      },
+      {
+        "type":"number",
+        "id":"padding_sizeup_sotm",
+        "label":"Top",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"padding_sizedow_sotm",
+        "label":"Bottom",
+        "default":20
+      },
+      
+      {
+        "type": "header",
+        "content": "Container Desktop Padding"
+      },
+      {
+        "type":"number",
+        "id":"containertop_",
+        "label":"Top",
+        "default":20
+      },
+      {
+        "type":"number",
+        "id":"containerbottom_",
+        "label":"Bottom",
+        "default":20
+      }, 
+      {
+        "type": "header",
+        "content": "Container Mobile Padding"
+      },
+      {
+        "type":"number",
+        "id":"containertopmobile_",
+        "label":"Top",
+        "default":20
+      },
+     
+      {
+        "type":"number",
+        "id":"containerbottommobile_",
+        "label":"Bottom",
+        "default":20
+      },
+      {
+        "type": "header",
+        "content": "Anchor Point Options"
+      },
+      {
+        "id": "sectionID",
+        "type": "text",
+        "label": "Anchor Point"
+      }
+    ],
+    "presets": [
+{
+"category": "Only Text Section No.2",
+"name": "Only Text Section No.2"
+}
+]
+  }
+{% endschema %}

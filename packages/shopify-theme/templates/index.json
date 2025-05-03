@@ -1,0 +1,676 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "163431162472dd1865": {
+      "type": "static-slider",
+      "blocks": {
+        "29690200-f0ed-4565-ae99-b2158de61cc4": {
+          "type": "Slider",
+          "disabled": true,
+          "settings": {
+            "slide-image": "shopify://shop_images/Homepage_-_Desktop-2_a126056e-6cbb-49ea-8560-770747d48948.jpg",
+            "slide-image-mobile": "shopify://shop_images/Homepage_-_Mobile_f88e1328-9bc5-4c90-b472-db96e6aab0e5.jpg",
+            "slide-text": "New spring arrivals are here",
+            "button-text": "SHOP NOW",
+            "button-link": "shopify://collections/new-arrivals",
+            "slide-text-color": "#ffffff"
+          }
+        },
+        "9e54d3d6-c2af-4269-accc-86b80bee5446": {
+          "type": "Slider",
+          "settings": {
+            "slide-image": "shopify://shop_images/Homepage_-_Desktop_569faf63-0ee2-4565-b7cc-0c28ccc5e5f7.jpg",
+            "slide-image-mobile": "shopify://shop_images/Homepage_-_Mobile_474610ba-cd25-44eb-a85f-369a4eee633c.jpg",
+            "slide-text": "Spring sale: 20% off all knits",
+            "button-text": "SHOP NOW",
+            "button-link": "shopify://collections/spring-sale",
+            "slide-text-color": "#ffffff"
+          }
+        },
+        "0e9ae8b2-9428-43ec-b04c-dddf10ea1b00": {
+          "type": "Slider",
+          "disabled": true,
+          "settings": {
+            "slide-image": "shopify://shop_images/Collection_-_Desktop_3516f562-415a-4c4f-b5f1-843aa7b5fa37.jpg",
+            "slide-image-mobile": "shopify://shop_images/Homepage_-_Mobile_0fbfd4b2-2f36-46d2-aafc-d6bd61705ad3.jpg",
+            "slide-text": "Artisan-Made Winter Layers",
+            "button-text": "SHOP KNITS",
+            "button-link": "shopify://collections/all",
+            "slide-text-color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "29690200-f0ed-4565-ae99-b2158de61cc4",
+        "9e54d3d6-c2af-4269-accc-86b80bee5446",
+        "0e9ae8b2-9428-43ec-b04c-dddf10ea1b00"
+      ],
+      "settings": {
+        "slider-dot-color": "#ffffff",
+        "dothsenable": false,
+        "slider_width_desktop": 900,
+        "slider_width_mobile": 221
+      }
+    },
+    "163431224162cac58f": {
+      "type": "static-onlytext",
+      "settings": {
+        "onlyTextlayout": "only-top",
+        "bgOnlyTextCTA": "#eeeeea",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "Close-knit sisterhood",
+        "maxwidthoftitle": 300,
+        "maxwidthoftitlemobiled": 200,
+        "bodytextOnlyTextCTA": "We make beautiful knitwear honoring heritage craftsmanship",
+        "fontsizetune": "27px",
+        "maxwidthoftext": 750,
+        "maxwidthoftextmobile": 300,
+        "showurlOnlyTextCTA": false,
+        "linkOnlyTextCTA": "",
+        "linktextOnlyTextCTA": "",
+        "padding_sizeup_sot": 26,
+        "padding_sizedow_sot": 15,
+        "padding_sizeup_sotm": 15,
+        "padding_sizedow_sotm": 67,
+        "containertop": 60,
+        "containerbottom": 100,
+        "containertopmobile": 20,
+        "containerbottommobile": 12,
+        "sectionID": ""
+      }
+    },
+    "1634918258b848ff3a": {
+      "type": "static-collection-link-section",
+      "blocks": {
+        "1f57a130-5678-4299-b440-0f20c59634c1": {
+          "type": "collection",
+          "settings": {
+            "selcollection": "sweaters"
+          }
+        },
+        "8589bb6a-494f-442b-8486-e4fe54072ceb": {
+          "type": "collection",
+          "settings": {
+            "selcollection": "cardigans"
+          }
+        },
+        "848bb87d-c790-4046-9543-86a46b642b13": {
+          "type": "collection",
+          "settings": {
+            "selcollection": "dresses"
+          }
+        },
+        "c8ae8666-1ce3-4e00-8cdf-d13b0e2b09f1": {
+          "type": "collection",
+          "settings": {
+            "selcollection": "accesories"
+          }
+        }
+      },
+      "block_order": [
+        "1f57a130-5678-4299-b440-0f20c59634c1",
+        "8589bb6a-494f-442b-8486-e4fe54072ceb",
+        "848bb87d-c790-4046-9543-86a46b642b13",
+        "c8ae8666-1ce3-4e00-8cdf-d13b0e2b09f1"
+      ],
+      "settings": {
+        "lineNumber": "1"
+      }
+    },
+    "163758180555d34f3c": {
+      "type": "static-slide-text",
+      "blocks": {
+        "3c815eda-9a8c-4579-b38d-e47ccb7cbda3": {
+          "type": "List",
+          "settings": {
+            "urllisttext2": "Ethically made in Lithuania",
+            "urllisturl2": "shopify://pages/the-idea"
+          }
+        },
+        "3345af00-f56e-4aa6-ab4e-b735f1a65c6d": {
+          "type": "List",
+          "settings": {
+            "urllisttext2": "Free worldwide shipping",
+            "urllisturl2": ""
+          }
+        },
+        "c1488aaa-b584-41e5-9868-0f600395a9dc": {
+          "type": "List",
+          "settings": {
+            "urllisttext2": "Taxes & duties included",
+            "urllisturl2": "shopify://pages/sustainability"
+          }
+        },
+        "9b0319b5-13b4-4a0c-9aea-521bd21b6093": {
+          "type": "List",
+          "settings": {
+            "urllisttext2": "Supporting female artisans",
+            "urllisturl2": "shopify://pages/the-idea"
+          }
+        },
+        "235eacdd-fce6-4752-8b80-dbf15b079601": {
+          "type": "List",
+          "disabled": true,
+          "settings": {
+            "urllisttext2": "Climate neutral",
+            "urllisturl2": "shopify://pages/sustainability"
+          }
+        },
+        "7c37548b-bc38-479e-a9e2-d94cba33c8ad": {
+          "type": "List",
+          "disabled": true,
+          "settings": {
+            "urllisttext2": "Female founded",
+            "urllisturl2": "shopify://pages/about"
+          }
+        }
+      },
+      "block_order": [
+        "3c815eda-9a8c-4579-b38d-e47ccb7cbda3",
+        "3345af00-f56e-4aa6-ab4e-b735f1a65c6d",
+        "c1488aaa-b584-41e5-9868-0f600395a9dc",
+        "9b0319b5-13b4-4a0c-9aea-521bd21b6093",
+        "235eacdd-fce6-4752-8b80-dbf15b079601",
+        "7c37548b-bc38-479e-a9e2-d94cba33c8ad"
+      ],
+      "settings": {
+        "slidetextlayout": "hide-border",
+        "stopslide": false
+      }
+    },
+    "1634312997cd1a9ecc": {
+      "type": "static-hp-product",
+      "settings": {
+        "show_product_secondary_image": true,
+        "selectedProduct": "homepage",
+        "showproductheader": false,
+        "productheadertext": "",
+        "bottomURL": "shopify://collections/all"
+      }
+    },
+    "16479497105534c601": {
+      "type": "static-link",
+      "settings": {
+        "onlyTextlayout": "hide-border",
+        "linktext": "SEE ALL KNITS",
+        "linkurl": "shopify://collections/all",
+        "thisisbigurl": true,
+        "justheader": false,
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 24,
+        "padding_sizedow_sotm": 4,
+        "containertop": 62,
+        "containerbottom": 39,
+        "containertopmobile": 0,
+        "containerbottommobile": 20
+      }
+    },
+    "static_two_column_BWirn3": {
+      "type": "static-two-column",
+      "disabled": true,
+      "settings": {
+        "borderlayouttwocl": "only-top",
+        "textposition": "space-between",
+        "sectionlayouttwocl": "image-text",
+        "headingcl": "NEW DROP: Skraistas cropped cardigan",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 440,
+        "h2maxwidthmobile": 280,
+        "bodycl": "Three styling options. One effortless knit. Crafted from silk and mulesing-free certified mohair blend, finished with vintage buttons, Skraistas Cropped cardigan is sheer, soft, and endlessly wearable. Limited April drop of 30 pieces only.",
+        "pmaxwidthdesktop": 440,
+        "pmaxwidthmobile": 280,
+        "cl-image": "shopify://shop_images/Homepage_Square_900x900_93c1ee1e-1bd9-4434-93a6-6a5aa7296b33.jpg",
+        "padding_sizeupm_section": 15,
+        "padding_sizedownm_section": 15,
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "showurlcl": true,
+        "linkTextcl": "SHOP NOW",
+        "linkclUrl": "shopify://products/skraistas-dew-silk-mohair-cropped-cardigan",
+        "sectionID": ""
+      }
+    },
+    "static_two_column_RRztMx": {
+      "type": "static-two-column",
+      "settings": {
+        "borderlayouttwocl": "top-bottom",
+        "textposition": "space-between",
+        "sectionlayouttwocl": "image-text",
+        "headingcl": "THE KNOTTY ONES x NOT PERFECT LINEN",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 440,
+        "h2maxwidthmobile": 280,
+        "bodycl": "Aguonos (Eng.\"poppies\") Dress is a collaboration born from a shared passion for natural fibres and timeless craftsmanship.",
+        "pmaxwidthdesktop": 440,
+        "pmaxwidthmobile": 280,
+        "cl-image": "shopify://shop_images/1_17473e17-24d2-493a-b8c0-2a8730325c96.jpg",
+        "padding_sizeupm_section": 15,
+        "padding_sizedownm_section": 15,
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "showurlcl": true,
+        "linkTextcl": "FIND OUT MORE",
+        "linkclUrl": "shopify://pages/the-knotty-ones-x-not-perfect-linen",
+        "sectionID": ""
+      }
+    },
+    "1634559204e2be8fc2": {
+      "type": "static-trust-slider",
+      "blocks": {
+        "557e1915-76ac-42eb-8021-8bd6b20faf32": {
+          "type": "Slider",
+          "settings": {
+            "itpcopy": "\"Empowering women in their craft, making them feel valued and supported – and not just the bra-way of support – but with real living wages, which are seldom paid, The Knotty Ones revolutionize the fashion industry in their own way.\""
+          }
+        },
+        "c4cbe28a-bfaf-4615-ae34-c4d4d7dfe4fc": {
+          "type": "Slider",
+          "settings": {
+            "itpcopy": "\"Luxurious, chunky knits are its speciality, and you’re safe in the knowledge that each item is lovingly handmade, which sounds like real feel-good fashion to us.”"
+          }
+        },
+        "04ef092d-9c26-4054-b952-460dcd7505f0": {
+          "type": "Slider",
+          "settings": {
+            "itpcopy": "\"Only natural fibers, cool, timeless designs, fair wages, women supporting women – what’s not to like?\""
+          }
+        }
+      },
+      "block_order": [
+        "557e1915-76ac-42eb-8021-8bd6b20faf32",
+        "c4cbe28a-bfaf-4615-ae34-c4d4d7dfe4fc",
+        "04ef092d-9c26-4054-b952-460dcd7505f0"
+      ],
+      "settings": {
+        "borderlayout": "top-bottom",
+        "showcarousel": false,
+        "showthumbnail": true,
+        "itpbgcolor": "#b4bed6",
+        "itpheading": "In The Press",
+        "itplogo1": "shopify://shop_images/TKO-logo_desktop116x1800px_2_x116_8f92838f-7c50-4e56-939b-070eeadabb6f.webp",
+        "itplogo2": "shopify://shop_images/Image_from_iOS_1_x374_58f90a9a-2746-407b-ae75-7a12175f01ce.webp",
+        "padding_sizeup": 28,
+        "padding_sizedown": 28,
+        "padding_sizeupm": 9,
+        "padding_sizedownm": 9,
+        "padding_sizeupsectiondesktop": 40,
+        "padding_sizedownsectiondesktop": 90,
+        "padding_sizeupsectionmobile": 18,
+        "padding_sizedownsectionmobile": 45
+      }
+    },
+    "static_two_column_CDMabw": {
+      "type": "static-two-column",
+      "settings": {
+        "borderlayouttwocl": "only-bottom",
+        "textposition": "space-between",
+        "sectionlayouttwocl": "text-image",
+        "headingcl": "NEW IN: SKRAISTAS CROPPED CARDIGAN",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 440,
+        "h2maxwidthmobile": 280,
+        "bodycl": "Our most versatile knit yet made from silk-mohair yarn. Designed to be worn three ways: tied at the front, tied at the back, or left loose and effortless.",
+        "pmaxwidthdesktop": 440,
+        "pmaxwidthmobile": 280,
+        "cl-image": "shopify://shop_images/Homepage_Square_900x900-3.jpg",
+        "padding_sizeupm_section": 15,
+        "padding_sizedownm_section": 15,
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "showurlcl": true,
+        "linkTextcl": "SHOP NOW",
+        "linkclUrl": "shopify://products/skraistas-lilac-silk-mohair-cropped-cardigan",
+        "sectionID": ""
+      }
+    },
+    "163481622598749a4b": {
+      "type": "static-fullscreen-img-CTA",
+      "disabled": true,
+      "settings": {
+        "borderlayoutCTA": "only-bottom",
+        "showcontent": true,
+        "fsTitle": "Archive sale",
+        "fsTitleColor": "#ffffff",
+        "fsURL": "shopify://collections",
+        "fsBtntitle": "LAST CHANCE TO SHOP",
+        "ctabuttonColor": "light",
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15
+      }
+    },
+    "1717769143b2e15dbb": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "1634817555c231ca73": {
+      "type": "static-onlytext",
+      "settings": {
+        "onlyTextlayout": "hide-border",
+        "bgOnlyTextCTA": "#eeeeea",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "Making positive impact in rural communities",
+        "maxwidthoftitle": 600,
+        "maxwidthoftitlemobiled": 182,
+        "bodytextOnlyTextCTA": "We employ female artisans in rural Lithuania, giving them a living wage, financial independence and a voice in their communities.",
+        "fontsizetune": "27px",
+        "maxwidthoftext": 1140,
+        "maxwidthoftextmobile": 298,
+        "showurlOnlyTextCTA": false,
+        "linkOnlyTextCTA": "",
+        "linktextOnlyTextCTA": "",
+        "padding_sizeup_sot": 13,
+        "padding_sizedow_sot": 64,
+        "padding_sizeup_sotm": 15,
+        "padding_sizedow_sotm": 15,
+        "containertop": 30,
+        "containerbottom": 0,
+        "containertopmobile": 20,
+        "containerbottommobile": 21,
+        "sectionID": ""
+      }
+    },
+    "1634819082d1787d39": {
+      "type": "static-three-column-section",
+      "blocks": {
+        "af03a630-8238-4ee0-ab57-bb3f7fa57627": {
+          "type": "Image",
+          "settings": {
+            "c3colimage": "shopify://shop_images/Homepage-Danute_700x874_0f1ae4ce-3042-449c-8ccb-f43c5b29120d.webp",
+            "nameofknitter": "Danutė",
+            "descriptionknitter": "Danutė considers knitting her own personal form of meditation. Knitting is one thing that makes her truly happy; that and her three Persian cats."
+          }
+        },
+        "5214f13a-f736-4004-8811-01cffaf7a446": {
+          "type": "Image",
+          "settings": {
+            "c3colimage": "shopify://shop_images/Homepage-Virginija_700x874_d0378e3b-9eff-4954-8519-59a7d382364d.webp",
+            "nameofknitter": "Virginija",
+            "descriptionknitter": "No one knows our Laumės, Preila and Milda knits better than Virginija. As our Quality Control Manager, she checks each garment before it’s posted to you."
+          }
+        },
+        "f9f6b262-6ec1-4f59-82a3-e412a493dafd": {
+          "type": "Image",
+          "settings": {
+            "c3colimage": "shopify://shop_images/Homepage-Ingrida_700x874_7ae9a8a8-7167-4fcd-a411-9d7026e834aa.webp",
+            "nameofknitter": "Ingrida",
+            "descriptionknitter": "She's an early bird who typically wakes up at 4am, just to get some peace and quiet (in her words) before her five children, including 2 pairs of twins, wake up."
+          }
+        },
+        "802ee833-f68f-4d72-8e13-fbdf4eece32f": {
+          "type": "Image",
+          "settings": {
+            "c3colimage": "shopify://shop_images/Homepage-Viljeta_700x874_6417286f-2836-442a-b9da-1344a39115cd.webp",
+            "nameofknitter": "Vilijeta",
+            "descriptionknitter": "Vilijeta is one of our most skillful knitters. When she’s not knitting, Vilijeta also works as the director of Birštonas museum in a small resort town."
+          }
+        }
+      },
+      "block_order": [
+        "af03a630-8238-4ee0-ab57-bb3f7fa57627",
+        "5214f13a-f736-4004-8811-01cffaf7a446",
+        "f9f6b262-6ec1-4f59-82a3-e412a493dafd",
+        "802ee833-f68f-4d72-8e13-fbdf4eece32f"
+      ],
+      "settings": {
+        "borderlayout3col": "hide-border",
+        "c3colbuttext": "MEET THE KNITTERS",
+        "c3colbuturl": "shopify://pages/the-idea",
+        "padding_sizeup_sot": 9,
+        "padding_sizedow_sot": 9,
+        "padding_sizeup_sotm": 24,
+        "padding_sizedow_sotm": 0
+      }
+    },
+    "1647956006718b0089": {
+      "type": "static-link",
+      "settings": {
+        "onlyTextlayout": "only-bottom",
+        "linktext": "MEET THE KNITTERS",
+        "linkurl": "shopify://pages/the-idea",
+        "thisisbigurl": true,
+        "justheader": false,
+        "padding_sizeup_sot": 21,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 9,
+        "padding_sizedow_sotm": 3,
+        "containertop": 10,
+        "containerbottom": 40,
+        "containertopmobile": 0,
+        "containerbottommobile": 20
+      }
+    },
+    "1634828381dc33fcb4": {
+      "type": "static-onlytext",
+      "settings": {
+        "onlyTextlayout": "hide-border",
+        "bgOnlyTextCTA": "#eeeeea",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "natural yarns only",
+        "maxwidthoftitle": 600,
+        "maxwidthoftitlemobiled": 200,
+        "bodytextOnlyTextCTA": "We take sustainability seriously. \nOur female-founded factories use 100% natural yarns, which are not only great for your wardrobe, but also for the planet.",
+        "fontsizetune": "27px",
+        "maxwidthoftext": 1000,
+        "maxwidthoftextmobile": 290,
+        "showurlOnlyTextCTA": true,
+        "linkOnlyTextCTA": "shopify://pages/sustainability",
+        "linktextOnlyTextCTA": "READ MORE",
+        "padding_sizeup_sot": 15,
+        "padding_sizedow_sot": 48,
+        "padding_sizeup_sotm": 26,
+        "padding_sizedow_sotm": 26,
+        "containertop": 30,
+        "containerbottom": 17,
+        "containertopmobile": 20,
+        "containerbottommobile": 45,
+        "sectionID": ""
+      }
+    },
+    "1634828385d66a479d": {
+      "type": "static-two-column",
+      "disabled": true,
+      "settings": {
+        "borderlayouttwocl": "hide-border",
+        "textposition": "space-between",
+        "sectionlayouttwocl": "image-text",
+        "headingcl": "HOW TO CARE FOR YOUR KNIT?",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 15,
+        "h2maxwidthmobile": 15,
+        "bodycl": "One of the many reasons we love wool and wool garments is that they are resilient and have the potential for a long, hard-wearing, and useful life. Thus, we’d like to share with you some of the best practices we’ve discovered for caring for your handknits.",
+        "pmaxwidthdesktop": 15,
+        "pmaxwidthmobile": 15,
+        "padding_sizeupm_section": 15,
+        "padding_sizedownm_section": 15,
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "showurlcl": true,
+        "linkTextcl": "KNIT CARE GUIDE",
+        "linkclUrl": "shopify://pages/knit-care",
+        "sectionID": ""
+      }
+    },
+    "1635168495ecf65d5c": {
+      "type": "static-two-column-alternate",
+      "settings": {
+        "borderlayouttwoclalt": "only-top",
+        "altsectionlayouttwocl": "text-image",
+        "clalt-image": "shopify://shop_images/Vejavaikis2.jpg",
+        "altheadingcl": "Vėjavaikis",
+        "maxwidthoftitle": 300,
+        "maxwidthoftitlemobiled": 300,
+        "altheadingclsub": "Lithuanian noun    [  ’vey-yeah-vay-kiss’  ]",
+        "maxwidthof2title": 300,
+        "maxwidthof2titlemobiled": 300,
+        "altbodycl": "Literally translates to ‘a child of wind’ \nand is used to describe someone who’s \nwild-spirited, effortless, nonchalant.",
+        "maxwidthoftext": 500,
+        "maxwidthoftextmobile": 270,
+        "altshowurlcl": false,
+        "altlinkTextcl": "",
+        "altlinkclUrl": "",
+        "sectionID": "",
+        "padding_sizeup_sot": 12,
+        "padding_sizedow_sot": 7,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 5
+      }
+    },
+    "static_trust_slider_fxM6Gr": {
+      "type": "static-trust-slider",
+      "disabled": true,
+      "settings": {
+        "borderlayout": "hide-border",
+        "showcarousel": true,
+        "showthumbnail": true,
+        "itpbgcolor": "#b4bed6",
+        "itpheading": "We are stocked at",
+        "itplogo1": "shopify://shop_images/retailer_logo_wall_f96c85ed-3a3a-4f8c-8353-949d38f38f9f.png",
+        "itplogo2": "shopify://shop_images/retailer_logo_wall_mobile.png",
+        "padding_sizeup": 28,
+        "padding_sizedown": 28,
+        "padding_sizeupm": 9,
+        "padding_sizedownm": 4,
+        "padding_sizeupsectiondesktop": 40,
+        "padding_sizedownsectiondesktop": 90,
+        "padding_sizeupsectionmobile": 18,
+        "padding_sizedownsectionmobile": 18
+      }
+    },
+    "static_two_column_Pa6NN8": {
+      "type": "static-two-column",
+      "settings": {
+        "borderlayouttwocl": "hide-border",
+        "textposition": "space-between",
+        "sectionlayouttwocl": "image-text",
+        "headingcl": "COME SAY HI IN PERSON AT OUR SHOWROOM IN VILNIUS, LITHUANIA",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 440,
+        "h2maxwidthmobile": 280,
+        "bodycl": "Cool stuff here: our new spring knits, bestsellers, online exchanges and returns, styling tips.",
+        "pmaxwidthdesktop": 600,
+        "pmaxwidthmobile": 400,
+        "cl-image": "shopify://shop_images/Homepage_Square_900x900_7db1d9a6-cd38-4044-b4dc-d6ad977730e4.jpg",
+        "padding_sizeupm_section": 15,
+        "padding_sizedownm_section": 15,
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "showurlcl": true,
+        "linkTextcl": "HOW TO GET THERE",
+        "linkclUrl": "shopify://pages/vilnius-showroom",
+        "sectionID": ""
+      }
+    },
+    "1635174300442e79c2": {
+      "type": "static-cta-subscribe",
+      "disabled": true,
+      "settings": {
+        "borderlayoutsub": "hide-border",
+        "subbgcolor": "#b4bed6",
+        "subheading": "GET EARLY ACCESS TO ARCHIVE SALE",
+        "subbody": "<p>Our bi-annual archive sale kicks off February 10th, but only early access subscribers get first dibs. Sign up now.</p>",
+        "maxwidthofcta": 980,
+        "maxwidthofctamobile": 280,
+        "padding_sizeup": 18,
+        "padding_sizedown": 19,
+        "padding_sizeupm": 11,
+        "padding_sizedownm": 10,
+        "containertop_": 62,
+        "containerbottom_": 33,
+        "containertopmobile_": 50,
+        "containerbottommobile_": 0
+      }
+    },
+    "1657026851b9d7dff3": {
+      "type": "foursixty-fp",
+      "settings": {
+        "onlyTextlayout": "only-top",
+        "padding_sizeup_sot": 14,
+        "padding_sizedow_sot": 23,
+        "padding_sizeup_sotm": 5,
+        "padding_sizedow_sotm": 5
+      }
+    },
+    "61596d23-13de-4e60-9861-989fe7fd1717": {
+      "type": "static-two-column",
+      "disabled": true,
+      "settings": {
+        "borderlayouttwocl": "top-bottom",
+        "textposition": "flex-start",
+        "sectionlayouttwocl": "image-text",
+        "headingcl": "INTRODUCING GIVE SOME, GET SOME",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 15,
+        "h2maxwidthmobile": 15,
+        "bodycl": "We do Black Friday a little differently. Sure, you still get a discount (20% off sitewide, excluding accessories and knit care items) but we also donate an extra 20% of profits as direct tips to your knitter. A living wage is a given at The Knotty Ones but a little extra thanks goes a long way, too. Why? Black Friday is fun for everyone - but not (usually) for garment workers. So ours is a Black Friday sale, but it’s one that benefits the women behind your clothes, too.",
+        "pmaxwidthdesktop": 60,
+        "pmaxwidthmobile": 15,
+        "padding_sizeupm_section": 15,
+        "padding_sizedownm_section": 15,
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "showurlcl": false,
+        "linkTextcl": "",
+        "linkclUrl": "",
+        "sectionID": ""
+      }
+    },
+    "171776887215bfe0fc": {
+      "type": "apps",
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "163431162472dd1865",
+    "163431224162cac58f",
+    "1634918258b848ff3a",
+    "163758180555d34f3c",
+    "1634312997cd1a9ecc",
+    "16479497105534c601",
+    "static_two_column_BWirn3",
+    "static_two_column_RRztMx",
+    "1634559204e2be8fc2",
+    "static_two_column_CDMabw",
+    "163481622598749a4b",
+    "1717769143b2e15dbb",
+    "1634817555c231ca73",
+    "1634819082d1787d39",
+    "1647956006718b0089",
+    "1634828381dc33fcb4",
+    "1634828385d66a479d",
+    "1635168495ecf65d5c",
+    "static_trust_slider_fxM6Gr",
+    "static_two_column_Pa6NN8",
+    "1635174300442e79c2",
+    "1657026851b9d7dff3",
+    "61596d23-13de-4e60-9861-989fe7fd1717",
+    "171776887215bfe0fc"
+  ]
+}

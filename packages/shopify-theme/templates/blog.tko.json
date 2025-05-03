@@ -1,0 +1,55 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "tko-blog",
+      "settings": {
+        "borderlayoutBlog": "top-bottom",
+        "padding_sizeup": 20,
+        "padding_sizedown": 17,
+        "padding_sizeupm": 18,
+        "padding_sizedownm": 9,
+        "blog_show_tags": false,
+        "blogherotitle": "Knotty talks with wild-spirited women",
+        "blogherobuttoncopy": "READ MORE",
+        "pageherotitledesktop": 600,
+        "pageherotitlemobile": 300,
+        "heroimageblog": "shopify://shop_images/journal_hero_1386x621_243e88f5-6d80-4e0c-871b-2ce957b064e5.webp",
+        "heroimageblogmobile": "shopify://shop_images/mobile-blog-hero_347x473_653e29e9-1b56-420d-b1c4-4018d10d9597.webp",
+        "h1herocolor": "#ffffff",
+        "blogheroColor": "light"
+      }
+    },
+    "163965606696739bff": {
+      "type": "static-cta-subscribe",
+      "settings": {
+        "borderlayoutsub": "only-top",
+        "subbgcolor": "#b4bed6",
+        "subheading": "10% OFF YOUR FIRST ORDER",
+        "subbody": "<p>Good things come to those who subscribe. We don’t spam.<br/>Pinky promise</p>",
+        "maxwidthofcta": 980,
+        "maxwidthofctamobile": 280,
+        "padding_sizeup": 18,
+        "padding_sizedown": 21,
+        "padding_sizeupm": 11,
+        "padding_sizedownm": 10,
+        "containertop_": 62,
+        "containerbottom_": 33,
+        "containertopmobile_": 50,
+        "containerbottommobile_": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "163965606696739bff"
+  ]
+}

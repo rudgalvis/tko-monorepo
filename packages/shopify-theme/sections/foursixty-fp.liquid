@@ -1,0 +1,218 @@
+<section class="kto-main-container">
+    <div class="tko-lines sot-{{section.id}} {{section.settings.onlyTextlayout}}"
+    {% if section.settings.onlyTextlayout == 'top-bottom'%}
+    style="
+        border-top-style:  solid;
+        border-top-color:   black;
+        border-bottom-style: solid;
+        border-bottom-color:  black;
+       
+        
+    ">
+    {% elsif  section.settings.onlyTextlayout == 'only-top' %}
+    style="
+        border-top-style:  solid;
+        border-top-color:   black;
+        border-bottom: none;
+     
+    ">
+    {% elsif  section.settings.onlyTextlayout == 'only-bottom' %}
+    style="
+        border-top: none;
+        border-bottom-style:  solid;
+        border-bottom-color:   black;
+      
+    ">
+    
+    {% else %}
+    
+    style="
+        border-top: none;
+        border-bottom: none;
+      
+    "> 
+  
+    {% endif %}
+
+
+
+<div class="foursixty-section">
+
+
+  
+<script src="//foursixty.com/media/scripts/fs.slider.v2.5.js" 
+        data-feed-id="the-knotty-ones_1" 
+        data-defer-image-loading="true"
+        data-theme="slider_v2_5" 
+        data-money-format="€<%=amount%>"
+        ></script>
+
+
+  
+  
+
+<style>
+.fs-has-links::after { padding:8px 12px; border:1px solid rgba(246,246,247,1); color:rgba(246,246,247,1); content:"shop now" } .fs-has-links:hover:after { background-color:rgba(176,190,178,0.8); color:rgba(0,0,0,0.83) } .fs-wrapper { height: auto } .fs-entry-container { height: 0 !important; width: 25%!important; padding-top:25%!important } .fs-wrapper div.fs-text-container .fs-entry-title, div.fs-detail-title { font-family:"DIN Neuzeit Grotesk", sans-serif; font-style:normal; font-weight:normal; font-size:12px } div.fs-text-container .fs-entry-date, div.fs-detail-container .fs-post-info, div.fs-wrapper div.fs-has-links::after, .fs-text-product, .fs-overlink-text { font-family:"DIN Neuzeit Grotesk", sans-serif; font-style:normal; font-weight:normal; font-size:11px } .fs-slider-next-button, .fs-slider-prev-button { opacity: 1; background-color: transparent; } .fs-wrapper div.fs-text-container * { color:rgba(246,246,247,1) } .fs-wrapper div.fs-text-container { background-color:rgba(3,3,3,0.23); margin:0px } div.fs-entry-date { display:none } div.fs-service-icon { display:none } div.fs-entry-title { display:none } .fs-wrapper div.fs-timeline-entry { margin:5px }
+.fs-wrapper div.fs-entry-container { height: 0; width: 20%; padding-top: 20%; }
+.fs-post-info { font-size: 10px !important; }
+.fs-outer { padding-top: 20px; }  
+.foursixty-section { padding-top: 0px; padding-bottom: 0px; text-align: center; padding-left:0px; padding-right:0px;}
+.fs-add-to-cart-enabled .fs-view a, .fs-add-to-cart-enabled .fs-view a:link { font-size: 12px;  font-weight: 400;}
+.fs-shopify-add-cart.fs-shopify-add-cart-container { font-family: "Monument"; max-width: 110px; font-size: 11px; letter-spacing:-0.12px; font-weight: 400 !important; padding: 12px 15px; color: #fff; background-color: #000; }
+.fs-button-bar .fs-buy-button, .fs-option-label {font-family: "Monument"; font-size: 13px; letter-spacing:-0.12px; color: #fff; background-color: #000; border:none; padding:9px 25px !important;}
+.fs-top { padding: 0 0px; text-align: center; }  
+.fs-top h2 { background-color: #eeeeea; margin-top: 0px; width: 100%; text-transform: uppercase; font-size: 1.25em; margin-block-start: 0em; margin-block-end: 0em; }
+hr { border-top: 0.25px solid #aaa; }     
+.fs-bottom h2 { background-color: #eeeeea; margin-top: -20px; width: 130pt; font-size: 1.25em; float: right; text-transform: uppercase; 
+  
+
+
+}
+  
+    .fs__footer{
+      width:100%;
+      padding-left:42px;
+      padding-top: 15px;
+
+  }
+
+   .fs__footer p{
+      font-family: 'Monument';
+     font-size:14px;
+     letter-spacing: -0.22px;
+     color:black;
+     text-transform: uppercase;
+  }
+
+  .fs__footer span{
+      font-family: 'Formular';
+      margin-left:8px;
+      margin-right:8px;
+  }
+
+  .fs-slider-next-button {
+
+z-index: 9 !important;
+
+}
+
+ 
+@media only screen and (max-width: 768px) {
+  .fs-timeline { max-width: calc(100% - 0px); margin: auto; }
+        .fs-slider-next-button, .fs-slider-prev-button { opacity: 1 !important; display: flex !important; position:absolute; z-index: 9 !important;}
+        .fs-wrapper div.fs-entry-container { height: 0; width: 50% !important; padding-top: 50% !important; }
+       .foursixty-section { padding-bottom: 0px; }
+     .fs__footer p{
+     font-size:12px;
+     letter-spacing: -0.18px;
+       text-align:center;
+
+  }
+
+  .fs__footer{
+      padding-left:0px;
+      padding-top: 0px;
+
+  }
+       }
+</style>
+  </div>
+      
+      <div class="fs__footer">
+        <p>follow    <span>→</span>   @theknottyones</p>
+      </div>    
+      
+       </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Foursixty Page Slider",
+    "settings": [
+{
+          "type": "header",
+          "content": "Layout Options"
+        },
+        {
+          "type": "select",
+          "id": "onlyTextlayout",
+          "label": "Section Border Options",
+          "default": "top-bottom",
+          "options": [
+            {
+              "value": "top-bottom",
+              "label": "Show Border Top & Bottom"
+            },
+            {
+              "value": "only-top",
+              "label": "Show Border Only Top"
+            },
+            {
+                "value": "only-bottom",
+                "label": "Show Border Only Bottom"
+              },
+            {
+                "value": "hide-border",
+                "label": "Hide Borders"
+              }
+          ]
+        },
+{
+            "type": "header",
+            "content": "Line Padding Options Desktop"
+          },
+          {
+            "type":"number",
+            "id":"padding_sizeup_sot",
+            "label":"Top",
+            "default":20
+          },
+          {
+            "type":"number",
+            "id":"padding_sizedow_sot",
+            "label":"Bottom",
+            "default":20
+          },
+          
+          {
+            "type": "header",
+            "content": "Line Padding Options Mobile"
+          },
+          {
+            "type":"number",
+            "id":"padding_sizeup_sotm",
+            "label":"Top",
+            "default":20
+          },
+          {
+            "type":"number",
+            "id":"padding_sizedow_sotm",
+            "label":"Bottom",
+            "default":20
+          }
+    ],
+    "presets": [{
+        "name": "Front Page Slider",
+        "category": "Foursixty"
+    }]
+  }
+{% endschema %}
+
+<style>
+
+    .sot-{{ section.id }}{
+      padding: {{section.settings.padding_sizeup_sot}}px 0px {{section.settings.padding_sizedow_sot}}px 0px;
+      border-width: 1px ;
+      
+     }
+  
+
+     @media (min-width: 320px) and (max-width: 480px) {
+      .sot-{{ section.id }}{
+      padding: {{section.settings.padding_sizeup_sotm}}px 0px {{section.settings.padding_sizedow_sotm}}px 0px;
+      border-width: 0.5px;
+     }
+    
+ 
+     }    
+</style>

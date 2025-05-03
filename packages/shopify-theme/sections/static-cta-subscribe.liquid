@@ -1,0 +1,237 @@
+<section class="kto-main-container">
+  <div class="tko-lines subscribe-line-{{section.id}}"
+  {% if section.settings.borderlayoutsub == 'top-bottom'%} 
+  style="
+      border-top-style:  solid;
+      border-top-color:   black;
+      border-bottom-style: solid;
+      border-bottom-color:  black;
+  ">
+  {% elsif  section.settings.borderlayoutsub == 'only-top' %}
+  style="
+  border-top-style:  solid;
+  border-top-color:   black;
+  border-bottom: none;
+   
+  ">
+  {% elsif  section.settings.borderlayoutsub == 'only-bottom' %}
+  style="
+  border-top: none;
+  border-bottom-style:  solid;
+  border-bottom-color:   black;
+     
+  ">
+  
+  {% else %}
+  
+  style="
+  border-top: none;
+  border-bottom: none
+    
+  "> 
+
+  {% endif %}
+
+
+  {{ 'component-cta-subscribe.css' | asset_url | stylesheet_tag }}
+
+
+  <div class="cta-sub-container cta-sub-{{section.id}}" style="background-color:{{ section.settings.subbgcolor}};">
+       <div class="cta-sub-content paragraph-{{section.id}}" >
+           <h2>{{section.settings.subheading}}</h2>
+           {{ section.settings.subbody }}
+            <div class="form-container">
+               <div id="omnisend-embedded-v2-66ed14e8dc2f3b86c6ee188c"></div>
+               
+            </div>  
+       </div>
+  </div>
+
+  </div>
+  </section>
+
+
+
+{% schema %}
+
+{
+  "name": "Email Subscription",  
+  "settings": [
+  {
+    "type": "header",
+    "content": "Line Layout Options"
+  },
+  {
+    "type": "select",
+    "id": "borderlayoutsub",
+    "label": "Section Border Options",
+    "default": "top-bottom",
+    "options": [
+      {
+        "value": "top-bottom",
+        "label": "Show Border Top & Bottom"
+      },
+      {
+        "value": "only-top",
+        "label": "Show Border Only Top"
+      },
+      {
+          "value": "only-bottom",
+          "label": "Show Border Only Bottom"
+        },
+      {
+          "value": "hide-border",
+          "label": "Hide Borders"
+        }
+    ]
+  },
+  {
+    "type": "header",
+    "content": "Color Options"
+  },
+  {
+      "id": "subbgcolor",
+      "type": "color",
+      "label": "Select Body Color",
+      "default" :"#ffffff"
+    },
+
+    {
+      "id": "subheading",
+      "type": "text",
+      "label": "Title"
+    },
+    {
+      "id": "subbody",
+      "type": "richtext",
+      "label": "Body"
+    },
+    {
+      "type": "header",
+      "content": "Max. Body Copy Width"
+    },
+    {
+      "type":"number",
+      "id":"maxwidthofcta",
+      "label":"Desktop",
+      "default":15
+    },
+    {
+      "type":"number",
+      "id":"maxwidthofctamobile",
+      "label":"Mobile",
+      "default":15
+    },
+    
+    
+    {
+      "type": "header",
+      "content": "Line Padding Options Desktop"
+    },
+    {
+      "type":"number",
+      "id":"padding_sizeup",
+      "label":"Top",
+      "default":15
+    },
+    {
+      "type":"number",
+      "id":"padding_sizedown",
+      "label":"Bottom",
+      "default":15
+    },
+    {
+      "type": "header",
+      "content": "Line Padding Options Mobile"
+    },
+    {
+      "type":"number",
+      "id":"padding_sizeupm",
+      "label":"Top",
+      "default":15
+    },
+    {
+      "type":"number",
+      "id":"padding_sizedownm",
+      "label":"Bottom",
+      "default":15
+    },
+    {
+      "type": "header",
+      "content": "Container Padding Desktop"
+    },
+    {
+      "type":"number",
+      "id":"containertop_",
+      "label":"Top",
+      "default":20
+    },
+    {
+      "type":"number",
+      "id":"containerbottom_",
+      "label":"Bottom",
+      "default":20
+    },
+   
+    
+    {
+      "type": "header",
+      "content": "Container Padding Mobile"
+    },
+    {
+      "type":"number",
+      "id":"containertopmobile_",
+      "label":"Top",
+      "default":20
+    },
+   
+    {
+      "type":"number",
+      "id":"containerbottommobile_",
+      "label":"Bottom",
+      "default":20
+    }
+  ],
+  "presets": [
+{
+"category": "Email",
+"name": "Email Subscription"
+}
+]
+}
+{% endschema %}
+
+<style>
+
+.paragraph-{{section.id}} p{
+    max-width:{{section.settings.maxwidthofcta}}px;
+}
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .paragraph-{{section.id}} p{
+    max-width:{{section.settings.maxwidthofctamobile}}px;
+}
+
+}
+
+  .subscribe-line-{{section.id}}{
+        padding: {{section.settings.padding_sizeup}}px 0px {{section.settings.padding_sizedown}}px 0px;
+        border-width: 1px ;
+  }
+
+  .cta-sub-{{section.id}}{
+         padding:{{section.settings.containertop_}}px 0px {{section.settings.containerbottom_}}px 0px;   
+       }
+
+  @media (max-width: 812px) {
+    .subscribe-line-{{section.id}}{
+        padding: {{section.settings.padding_sizeupm}}px 0px {{section.settings.padding_sizedownm}}px 0px;
+        border-width: 0.5px;
+  }
+
+  .cta-sub-{{section.id}}{
+        padding:{{section.settings.containertopmobile_}}px 0px {{section.settings.containerbottommobile_}}px 0px;     
+       }
+  } 
+</style>

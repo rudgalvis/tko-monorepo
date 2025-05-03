@@ -1,0 +1,91 @@
+{% assign videoAnable = videostatus %}
+{% assign videoURL = urlstatus  %}
+{% assign videoPoster = posterstatus %}
+{% assign videoAutoplay = autoplaystatus %}
+{% assign videoMuted = mutestatus %}
+{% assign videoController = controlstatus %}
+{% assign videoLoop = loopstatus %}
+
+
+{% if videoAnable == true %}
+
+
+{%- if results.products_count == results.all_products_count -%}
+
+<video-colelction class="video-container collection-video">
+    <div class="line-cont pl-up" style="display:none;">
+        <div class="llc">
+            <div class="product-line"></div>
+        </div>  
+    </div>
+
+    <div class="video-frame-container frame-video">
+        <div class="productname video-p-name">
+            <h2>
+                <a href="">
+                  &nbsp; 
+                </a>
+           </h2>
+           </div>
+       <div class="video-wrapper">
+        {% if videoAutoplay == false  %}
+            {% if videoController == false  %}
+        <div class="play-icon-collection" id="collection-video-icon">
+            <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/video_play_icon.svg?v=1640010861">
+        </div>
+           {% endif %}
+        {% endif %}
+
+       
+
+        <video id="collection-video" width="320" playsinline muted autoplay preload loop>
+
+            <source src="{{ videoURL }}" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="buy-container video-con">
+        <div class="product-type">&nbsp; </div>
+        <div class="productVarient">
+            
+            <div class="price-holder">
+            <div class="productPrice"></div>
+           
+            <span class="sale_price">
+                &nbsp; 
+            </span>
+           
+        </div>
+       
+            <ul>
+               
+                <li>
+                   
+                    <div class="color-schema">
+                        &nbsp; 
+                    </div>
+                </li>
+             
+               
+            </ul>
+          
+        </div>
+    </div> 
+    </div>
+
+    <div class="line-cont pl-down">
+        <div class="llc">
+            <div class="product-line"></div>
+        </div>  
+    </div>
+
+</video-colelction >  
+
+
+
+
+
+
+{%- endif -%}
+
+{% endif %}
