@@ -18,3 +18,13 @@ services:
     restart: unless-stopped
     ports:
       - 51000:3000
+  varnish:
+    container_name: a16t-cache
+    image: varnish:stable
+    ports:
+      - "50000:80"  # Expose Varnish on port 80
+    volumes:
+      - ./packages/automatic-discount-cache/default.vcl:/etc/varnish/default.vcl:ro
+    environment:
+      - VARNISH_SIZE=2G  # Cache size
+    command: -p default_ttl=3600 -p default_grace=3600

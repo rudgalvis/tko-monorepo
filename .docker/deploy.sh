@@ -1,8 +1,13 @@
 #!/bin/bash
 
+# Exit on any error
+set -e
+
+# Run docker compose
 docker compose -f ./.docker/docker-compose.yml up -d --build --force-recreate
 
-cd ./packages/automatic-discount-cache
+# Capture the exit code
+exit_code=$?
 
-chmod +x ./deploy.sh
-./deploy.sh
+# Exit with the same code
+exit $exit_code
