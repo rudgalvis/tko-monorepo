@@ -17,7 +17,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /home/ci-bot/TKO-monorepo
+            cd /home/ci-bot/tko-monorepo
             git pull
             chmod +x ./.docker/deploy.sh
             ./.docker/deploy.sh
