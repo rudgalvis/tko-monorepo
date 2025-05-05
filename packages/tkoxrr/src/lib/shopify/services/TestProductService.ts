@@ -5,42 +5,44 @@ import { ProductVariantInventoryPolicy } from '$lib/shopify/types/ProductVariant
 export class TestProductService {
 	// Use this as configured starting point
 	public readonly TEST_PRODUCT_VARIANT_DETAILS = [
+		// Max 5 variants. Shopify limitation. Do not reconfigure, might break tests
 		{
-			title: 'In stock, not selling out of stock',
-			quantity: 5,
-			policy: ProductVariantInventoryPolicy.DENY,
-		},
-		{
-			title: 'In stock, selling out of stock',
+			title: 'In stock, pre-order-able',
 			quantity: 5,
 			policy: ProductVariantInventoryPolicy.CONTINUE,
 			maximumPreSale: 5,
 			expectedDate: '2024 04 04',
 		},
 		{
-			title: 'Out of stock, selling out of stock',
+			title: 'Out of stock, pre-order-able',
 			quantity: -2,
 			policy: ProductVariantInventoryPolicy.CONTINUE,
 			maximumPreSale: 5,
 			expectedDate: '2024 04 04',
 		},
 		{
-			title: 'Out of stock, not selling out of stock',
+			title: 'Out of stock, pre-order-able, no limit',
+			quantity: -2,
+			policy: ProductVariantInventoryPolicy.CONTINUE,
+			maximumPreSale: undefined, // Deliberately omitting maximumPreSale to test handling of missing data
+			expectedDate: '2024 04 04',
+		},
+		{
+			title: 'Out of stock, pre-order-able, no expected date',
 			quantity: -2,
 			policy: ProductVariantInventoryPolicy.CONTINUE,
 			maximumPreSale: 5,
+			expectedDate: undefined, // Deliberately omitting expectedDate to test handling of missing data
 		},
 	]
-	private readonly TEST_PRODUCT_TITLE = 'Delčia: Lemon Cotton Sweater'
+	public readonly TEST_PRODUCT_TITLE = 'Delčia: Lemon Cotton Sweater'
 
-	private productsRepository: ProductsRepository
-	private locationsRepository: LocationsRepository
-	private testProductId: string = ''
+	private testProductId: string | undefined = undefined
 
-	constructor() {
-		this.productsRepository = new ProductsRepository()
-		this.locationsRepository = new LocationsRepository()
-	}
+	constructor(
+		private productsRepository = new ProductsRepository(),
+		private locationsRepository = new LocationsRepository()
+	) {}
 
 	convertTitleToHandle(title: string): string {
 		if (!title) return ''
@@ -87,15 +89,22 @@ export class TestProductService {
 
 	async deleteProduct() {
 		if (!this.testProductId) {
-			if (!(await this.findProduct())?.id) throw new Error('Test product to delete was not found')
+			const product = await this.findProduct();
+			if (!product) {
+				throw new Error('Test product to delete was not found');
+			}
+			this.testProductId = product.id;
 		}
 
 		const deleteProduct = await this.productsRepository.deleteProduct(this.testProductId)
 
 		if (!deleteProduct) return false
 
+		this.testProductId = undefined
+
 		return true
 	}
+
 	async createProduct() {
 		if (await this.findProduct()) {
 			await this.deleteProduct()

@@ -24,6 +24,11 @@ export const orderLineItemsToOrderLineInventories = async (
 
 	return inventoryDetails.map((e) => ({
 		...e,
+		// Important: Order processing sequence
+		// 1. When an order is placed, product quantities are immediately decremented
+		// 2. This parsing logic runs after those quantity updates
+		// 3. To accurately calculate inventory impact, we need to use
+		//    the pre-order state (before quantities were decremented)
 		inventoryQuantity: e.inventoryQuantity + e.orderedQuantity,
 	}))
 }

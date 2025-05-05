@@ -10,3 +10,13 @@ test('Test variant', async () => {
 
 	console.log(r)
 })
+
+test('Test colors', async () => {
+	const productsRepository = new ProductsRepository()
+
+	const r = await productsRepository.getProductByHandle({
+		handle: 'delcia'
+})
+
+	console.log(r)
+})

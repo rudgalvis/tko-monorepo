@@ -1,31 +1,29 @@
 // src/lib/shopify/registerWebhook.ts
-import { makeShopifyApi } from '$lib/shopify/make-api';
-import { webhookSubscriptionCreate } from '$lib/shopify/mutations/webhookSubscriptionCreate';
-import { webhookSubscriptionDelete } from '$lib/shopify/mutations/webhookSubscriptionDelete';
-import { webhookSubscription } from '$lib/shopify/queries/webhookSubscription';
-import { webhookSubscriptionsCount } from '$lib/shopify/queries/webhookSubscriptionsCount';
-import { WEBHOOK_LISTENER_BASE_URL } from '$env/static/private';
-
-// TODO: fix functions names
+import { WEBHOOK_LISTENER_BASE_URL } from '$env/static/private'
+import { makeShopifyApi } from '$lib/shopify/make-api'
+import { webhookSubscriptionCreate } from '$lib/shopify/mutations/webhookSubscriptionCreate'
+import { webhookSubscriptionDelete } from '$lib/shopify/mutations/webhookSubscriptionDelete'
+import { webhookSubscription } from '$lib/shopify/queries/webhookSubscription'
+import { webhookSubscriptionsCount } from '$lib/shopify/queries/webhookSubscriptionsCount'
 
 export async function registerShopifyWebhook() {
 	try {
-		const { client } = makeShopifyApi();
+		const { client } = makeShopifyApi()
 		const {
-			data: { webhookSubscriptionCreate: b }
+			data: { webhookSubscriptionCreate: b },
 		} = await client.request(webhookSubscriptionCreate, {
 			variables: {
 				topic: 'ORDERS_CREATE',
 				webhookSubscription: {
 					callbackUrl: `${WEBHOOK_LISTENER_BASE_URL}/api/webhooks`,
-					format: 'JSON'
-				}
-			}
-		});
+					format: 'JSON',
+				},
+			},
+		})
 
-		console.log(b);
+		console.log(b)
 	} catch (error) {
-		console.error('Failed to register webhook:', error);
+		console.error('Failed to register webhook:', error)
 	}
 }
 

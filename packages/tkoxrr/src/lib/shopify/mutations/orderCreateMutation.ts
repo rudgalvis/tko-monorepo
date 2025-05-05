@@ -52,7 +52,7 @@ type TaxLine = {
 	title: string;
 };
 
-type LineItem = {
+export type OrderInputLineItem = {
 	variantId: string;
 	quantity: number;
 };
@@ -88,7 +88,7 @@ type Order = {
 	};
 	customer?: OrderCreateCustomerInput;
 	currency: string;
-	lineItems: LineItem[];
+	lineItems: OrderInputLineItem[];
 	transactions: Transaction[];
 	fulfillmentStatus?: string;
 };

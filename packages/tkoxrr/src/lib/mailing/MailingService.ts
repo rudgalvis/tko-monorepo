@@ -1,4 +1,4 @@
-import { MAIL_FROM_EMAIL } from '$env/static/private'
+import { MAILGUN_DOMAIN, MAIL_REPLY_TO, MAILGUN_FROM_USER, MAIL_FROM_NAME } from '$env/static/private'
 import { Mailgun, type SendMailStatus } from '$lib/mailing/Mailgun'
 import PreOrderEmailTemplate from '$lib/mailing/templates/PreOrderEmailTemplate.svelte'
 import type { OrderLineInventoryAnalyzed } from '$lib/types/OrderLineInventoryAnalyzed'
@@ -16,7 +16,7 @@ export type PreorderNotificationResponse = {
 }
 
 export class MailingService {
-	private readonly FROM = `The Knotty Ones <${MAIL_FROM_EMAIL}>`
+	private readonly FROM = `${MAIL_FROM_NAME} <${MAILGUN_FROM_USER}@${MAILGUN_DOMAIN}>`
 
 	constructor(private mailer = new Mailgun()) {}
 
@@ -36,8 +36,8 @@ export class MailingService {
 			html: body,
 			from: this.FROM,
 			to: [email],
-			subject: 'Items Preordered',
-			replyTo: 'hello@theknottyones.com',
+			subject: 'Thank you for your pre-order – here’s your shipping update',
+			replyTo: MAIL_REPLY_TO,
 			tag: 'preorder',
 		})
 	}

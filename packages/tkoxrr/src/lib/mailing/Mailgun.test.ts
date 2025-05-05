@@ -1,20 +1,20 @@
-import { MAIL_FROM_EMAIL, MAIL_FROM_NAME } from '$env/static/private';
-import { Mailgun } from '$lib/mailing/Mailgun';
-import { test } from 'vitest';
+import { MAIL_FROM_NAME, MAILGUN_DOMAIN, MAILGUN_FROM_USER } from '$env/static/private'
+import { Mailgun } from '$lib/mailing/Mailgun'
+import { test } from 'vitest'
 
 test('Mailgun service', async () => {
-	const mailgun = new Mailgun();
+	const mailgun = new Mailgun()
 
 	try {
 		const r = await mailgun.sendMail({
-			from: `${MAIL_FROM_NAME} <${MAIL_FROM_EMAIL}>`,
+			from: `${MAIL_FROM_NAME} <${MAILGUN_FROM_USER}@${MAILGUN_DOMAIN}>`,
 			to: ['rokasr788@gmail.com', 'rokas@rudgalvis.com'],
 			subject: 'Test',
-			html: 'Test'
-		});
+			html: 'Test',
+		})
 
-		console.log(r);
+		console.log(r)
 	} catch (error) {
-		console.log(error);
+		console.log(error)
 	}
-});
+})

@@ -45,7 +45,7 @@ export class OrderService {
 	) {
 		return preorderNotificationResponses.reduce((acc, { forItem, mailingStatus }) => {
 			const messageId = mailingStatus.meta?.id
-			const emailComment = [`✉️ Pre-order email sent to for ${forItem}`, messageId]
+			const emailComment = [`✉️ Pre-order email sent for ${forItem}`, messageId]
 				.filter(Boolean)
 				.join('\n')
 

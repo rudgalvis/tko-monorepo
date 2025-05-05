@@ -1,5 +1,5 @@
 import { error, json, type RequestHandler } from '@sveltejs/kit';
-import { getProductDiscount } from 'component-lib';
+import { getAutomaticDiscount } from 'component-lib';
 
 const handler: RequestHandler = async ({ params }) => {
 	const { variant_id, iso_country } = params;
@@ -7,7 +7,7 @@ const handler: RequestHandler = async ({ params }) => {
 	if (!variant_id) throw error(400, { message: 'Variant ID is required' });
 	if (!iso_country) throw error(400, { message: 'Country code is required' });
 
-	return json({ amount: await getProductDiscount(iso_country, +variant_id) });
+	return json({ amount: await getAutomaticDiscount(iso_country, +variant_id) });
 };
 
 export const POST: RequestHandler = handler;

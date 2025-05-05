@@ -9,7 +9,7 @@ export class TestOrderService {
 		public locationsRepository = new LocationsRepository()
 	) {}
 
-	async createOrder(lineItems: { quantity: number; variantId: string }[], productId: string) {
+	async createOrder(lineItems: { quantity: number; variantId: string }[]) {
 		const currencyCode = await this.orderRepository.getCurrencyCode();
 		const locations = await this.locationsRepository.getLocations();
 

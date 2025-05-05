@@ -2,6 +2,8 @@
     {% render 'pdp-price', product: product, pageQuerystring:pageQuerystring %}
 {% endcomment %}
 
+{% render 'dump', value: pageQuerystring %}
+
 {% for variant in product.variants %}
     {% assign color1y = variant.option1 %}
     {% assign gg = color1y | handleize %}
@@ -21,6 +23,11 @@
                compared_at="{{ compared_at | money_without_trailing_zeros }}"
                iso_code="{{ localization.country.iso_code }}"
                variant_id="{{ variantId }}">
+    {% if product.compare_at_price > product.price %}
+        <s aria-label="Original price">{{ product.compare_at_price | money }}</s>
+    {% endif %}
+
+    <strong aria-label="Current price">{{ product.price | money }}</strong>
 </product-price>
 
 <style>
@@ -30,5 +37,4 @@
             margin-top: -6px;
         }
     }
-
 </style>

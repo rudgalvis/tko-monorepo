@@ -1,6 +1,6 @@
 import type { OrdersCreateWebhookBody } from '$lib/shopify/types/webhooks-payload/orders-create-webhook-body'
-import { analyzeOrderLineInventories } from '$lib/utils/analyze-order-line-inventories'
-import { orderLineItemsToOrderLineInventories } from '$lib/utils/transformers/order/line-items-to-inventory-details'
+import { analyzeOrderLineInventories } from '$lib/utils/transformers/order/analyze-order-line-inventories'
+import { orderLineItemsToOrderLineInventories } from '$lib/utils/transformers/order/line-items-to-inventories'
 
 export type ProductVariantIdentifier = {
 	productId: string

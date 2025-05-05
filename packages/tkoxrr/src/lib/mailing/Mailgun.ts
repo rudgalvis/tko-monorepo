@@ -65,7 +65,7 @@ export class Mailgun {
 				success: false,
 			}
 		} catch (e) {
-			console.log(e)
+			console.log(e, `Failed to send email with key\n${MAILGUN_API_KEY}\nfrom ${from}`)
 
 			throw new Error('Failed to send email')
 		}

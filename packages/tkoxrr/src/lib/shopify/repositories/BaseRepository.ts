@@ -1,25 +1,23 @@
-import { makeShopifyApi } from '$lib/shopify/make-api';
-import { orderCreateMutation } from '$lib/shopify/mutations/orderCreateMutation';
-import { currencyQuery, type CurrencyReturn } from '$lib/shopify/queries/currencyQuery';
-import { locationsQuery } from '$lib/shopify/queries/locationsQuery';
-import { GraphqlClient } from '@shopify/shopify-api';
+import { makeShopifyApi } from '$lib/shopify/make-api'
+import { currencyQuery, type CurrencyReturn } from '$lib/shopify/queries/currencyQuery'
+import { GraphqlClient } from '@shopify/shopify-api'
 
 export class BaseRepository {
-	public client: GraphqlClient;
+	public client: GraphqlClient
 
 	constructor() {
-		const { client: c } = makeShopifyApi();
+		const { client: c } = makeShopifyApi()
 
-		this.client = c;
+		this.client = c
 	}
 
 	async getCurrencyCode() {
-		const { data, errors } = await this.client.request<CurrencyReturn>(currencyQuery);
+		const { data, errors } = await this.client.request<CurrencyReturn>(currencyQuery)
 
-		if (errors) console.error(errors);
+		if (errors) console.error(errors)
 
-		if (!data) return null;
+		if (!data) return null
 
-		return data.shop.currencyCode;
+		return data.shop.currencyCode
 	}
 }

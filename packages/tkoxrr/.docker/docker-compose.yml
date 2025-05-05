@@ -14,7 +14,7 @@ services:
       - TZ=Europe/Vilnius
     # Points to a file with the sensitive environment variables
     env_file:
-      - ../.env
+      - ../.env.example
     restart: unless-stopped
     ports:
       - 59000:3000

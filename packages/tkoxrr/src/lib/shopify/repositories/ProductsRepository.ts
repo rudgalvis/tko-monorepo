@@ -153,6 +153,14 @@ export class ProductsRepository extends BaseRepository {
 
 		if (!data) return null
 
+		const { userErrors } = data.productDelete
+
+		if(userErrors) {
+			userErrors.forEach((error) => {
+				throw new Error(`when deleting ${id}. ${error.message}`)
+			})
+		}
+
 		return data.productDelete
 	}
 

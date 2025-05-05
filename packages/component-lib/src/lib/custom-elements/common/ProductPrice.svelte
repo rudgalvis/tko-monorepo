@@ -3,25 +3,35 @@
 <script lang="ts">
 	import { getAutomaticDiscount } from '$lib/api/rrxtko.api.js';
 	import {
-		type FormattedPrice,
 		priceFormatter,
 		subtractCurrencyStrings
 	} from '$lib/utils/formatters/price-formatter.js';
+	import { removeNonComponentChildren } from '$lib/utils/dom/remove-non-component-children.js';
 
-	export let price: string = '';
-	export let compared_at: string | undefined = undefined;
-	export let iso_code: string | undefined = undefined;
-	export let variant_id: string | undefined = undefined;
-	export let theme: 'small' | 'big' = 'big';
+	const {
+		theme = 'big',
+		price,
+		compared_at,
+		iso_code,
+		variant_id
+	} = $props<{
+		price: string;
+		compared_at?: string;
+		iso_code?: string;
+		variant_id?: string;
+		theme?: 'small' | 'big';
+	}>();
 
-	let a: string = price,
-		b: string | undefined = compared_at;
+	// Default values can be set through props.theme.init('big') etc if needed
+	let a = $state(price);
+	let b = $state(compared_at);
 
-	$: a = price;
-	$: b = compared_at;
+	$effect(() => {
+		a = price;
+		b = compared_at;
+	});
 
-	let p: FormattedPrice;
-	$: p = priceFormatter(a, b);
+	const p = $derived(priceFormatter(a, b));
 
 	const tryApplyingAutomaticDiscount = async () => {
 		if (!iso_code) return;
@@ -37,12 +47,24 @@
 		b = formatted;
 	};
 
-	$: if (iso_code && variant_id && price && (compared_at || !compared_at)) {
-		tryApplyingAutomaticDiscount();
-	}
+	$effect(() => {
+		console.log('dump', { ... theme });
+	});
+
+	$effect(() => {
+		if (
+			iso_code &&
+			variant_id &&
+			price &&
+			(compared_at || !compared_at)
+		) {
+			tryApplyingAutomaticDiscount();
+		}
+	});
 </script>
 
 <div
+		use:removeNonComponentChildren
 	class="pdp-price"
 	class:has-discount={p.compared_at}
 	class:small={theme === 'small'}

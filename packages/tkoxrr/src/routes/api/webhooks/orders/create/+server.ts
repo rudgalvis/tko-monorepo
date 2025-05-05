@@ -2,12 +2,17 @@ import { MailingService } from '$lib/mailing/MailingService'
 import { OrderService } from '$lib/shopify/services/OrderService'
 import { ProductService } from '$lib/shopify/services/Product.service'
 import type { OrdersCreateWebhookBody } from '$lib/shopify/types/webhooks-payload/orders-create-webhook-body'
+import { writeFile } from '$lib/utils/files/write-file'
 import { parseOrderWebhook } from '$lib/utils/transformers/order/parse-order-webhook'
 import { json } from '@sveltejs/kit'
-import fs from 'fs'
 import type { RequestHandler } from './$types'
 
-const LOG_INTO_FILE = true
+const LOG_INTO_FILE = false
+const VERBOSE = true
+
+// TEST_MODE: When enabled, only process orders from specific test customer emails
+const TEST_MODE = true
+const TEST_CUSTOMERS = ['rokas@rudgalvis.com', 'kriste@theknottyones.com', 'indretko@gmail.com']
 
 const handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => {
 	const mailingService = new MailingService()
@@ -23,6 +28,11 @@ const handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => {
 			orderLineInventories,
 			orderLineInventoriesAnalyzed,
 		} = await parseOrderWebhook(webhookData)
+
+		if (TEST_MODE) {
+			// This prevents accidental processing of real customer orders during development/testing
+			if (!TEST_CUSTOMERS.includes(customerEmail)) return
+		}
 
 		// Disabling pre-order for items
 		const disableSellingOutOfStockPromises = itemsToPausePreorder.map(
@@ -54,24 +64,25 @@ const handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => {
 			orderLineInventories,
 		})
 
-		// TODO: add logging
+		if (VERBOSE) console.log(`Preorder of ${customerEmail} was handled (order ID: ${orderId})`)
 	} catch (e) {
 		console.log('Webhook handling failed', e)
 	}
 }
 
-export const POST: RequestHandler = async ({ params, request }) => {
+export const POST: RequestHandler = async ({ request }) => {
 	const webhookData = await request.json()
 
 	// For development purposes
 	if (LOG_INTO_FILE)
-		fs.writeFileSync('test-data/webhook-payload/orders_create.json', JSON.stringify(webhookData))
+		writeFile('test-data/webhook-payload', `orders_create.json`, JSON.stringify(webhookData))
 
 	try {
 		await handlePreOrders(webhookData)
 
 		return json({ success: true })
 	} catch (error) {
+		console.log(error)
 		return json({ error: 'Internal server error' }, { status: 500 })
 	}
 }
