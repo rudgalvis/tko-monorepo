@@ -6,7 +6,7 @@ set -e
 export BUILDKIT_PROGRESS=plain
 
 # Run docker compose
-docker compose -f ./.docker/docker-compose.yml up -d --force-recreate
+docker compose -f ./.docker/docker-compose.yml up -d --build --force-recreate
 
 # Capture the exit code
 exit_code=$?

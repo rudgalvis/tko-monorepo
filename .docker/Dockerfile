@@ -26,6 +26,9 @@ RUN pnpm install --frozen-lockfile
 # Copy the rest of the application code
 COPY . .
 
+# Explicitly run pnpm install again after copying all files to fix: 1. `Cannot find module '/app/packages/ui/node_modules/@sveltejs/kit/svelte-kit.js'`
+RUN pnpm install --frozen-lockfile
+
 # Build the application
 RUN pnpm build
 
