@@ -4,12 +4,15 @@
 
 	const { Story } = defineMeta({
 		title: 'custom-elements/pdp/pre-order/<pre-order-strip>',
-		component: PreOrderStrip,
-		args: {
-			handle: 'delcia-lemon-cotton-sweater',
-			variantId: 49342086119772
-		}
+		component: PreOrderStrip
 	});
 </script>
 
-<Story name="Default" />
+<Story
+	name="Fetch"
+	args={{
+		handle: 'delcia-lemon-cotton-sweater',
+		variantId: 49342086119772
+	}}
+/>
+<Story name="Print" args={{ message: 'Pre-order message' }} />

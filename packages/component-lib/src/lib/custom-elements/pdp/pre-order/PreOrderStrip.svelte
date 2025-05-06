@@ -3,6 +3,7 @@
 <script lang="ts">
 	import '$lib/styles/tailwind.css';
 	import { storefrontApi } from '$lib/api/storefront-api.js';
+	import { removeNonComponentChildren } from '$lib/utils/dom/remove-non-component-children.js';
 	import { fly } from 'svelte/transition';
 
 	export let handle: string | undefined = undefined;
@@ -24,7 +25,7 @@
 	$: console.log('dump', message);
 </script>
 
-<div class="min-h-[42px]">
+<div class="min-h-[42px]" use:removeNonComponentChildren>
 	{#if message}
 		<div
 			transition:fly={{ y: 6, duration: 300 }}

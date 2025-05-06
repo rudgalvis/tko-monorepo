@@ -1,0 +1,16 @@
+{% comment %}If all variants are pre-orderable, show strip right away{% endcomment %}
+{% assign all_variants_preorderable = true %}
+{% assign message = product.first_available_variant.metafields.preorder.preordercontent %}
+
+{% for variant in product.variants %}
+    {% unless variant.metafields.preorder.preordercontent %}
+        {% assign all_variants_preorderable = false %}
+        {% assign message = '' %}
+        {% break %}
+    {% endunless %}
+{% endfor %}
+
+<pre-order-strip
+        message="{{ message }}"
+        handle="{{ product.handle }}">
+</pre-order-strip>

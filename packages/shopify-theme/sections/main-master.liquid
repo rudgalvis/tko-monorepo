@@ -491,8 +491,7 @@ Mobile Slider
                             {% endif %}
                             {%- endcomment -%}
 
-
-                            <pre-order-strip message="{{ product.first_available_variant.metafields.preorder.preordercontent }}" handle="{{ product.handle }}"></pre-order-strip>
+                            {% render '1ib-pre-order-strip' %}
 
                             {% comment %}<div id="preorderholder"{% endcomment %}
                                  {% comment %}class="pre-order-holder {% if product.tags contains 'pre-order' %} preorder__show_on_desktop {% endif %}">{% endcomment %}
