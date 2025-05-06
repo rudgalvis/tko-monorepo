@@ -19,37 +19,37 @@ COPY pnpm-*.yaml ./
 COPY package.json ./
 
 # Component-lib builder
-FROM base-builder AS component-lib-builder
+FROM base-builder AS ui-builder
 
-# Copy component-lib package.json
-COPY packages/component-lib/package.json ./packages/component-lib/package.json
+# Copy ui package.json
+COPY packages/ui/package.json ./packages/ui/package.json
 
 # Install dependencies
-RUN pnpm install --frozen-lockfile --filter component-lib...
+RUN pnpm install --frozen-lockfile --filter ui...
 
-# Copy component-lib source files
-COPY packages/component-lib ./packages/component-lib
+# Copy ui source files
+COPY packages/ui ./packages/ui
 
-# Build component-lib
-RUN pnpm --filter component-lib package
+# Build ui
+RUN pnpm --filter ui package
 
 # TKOXRR builder
-FROM base-builder AS tkoxrr-builder
+FROM base-builder AS shopify-nexus-builder
 
-# Copy component-lib build output first since it's a dependency
-COPY --from=component-lib-builder /app/packages/component-lib ./packages/component-lib
+# Copy ui build output first since it's a dependency
+COPY --from=ui-builder /app/packages/ui ./packages/ui
 
-# Copy tkoxrr package.json
-COPY packages/tkoxrr/package.json ./packages/tkoxrr/package.json
+# Copy shopify-nexus package.json
+COPY packages/shopify-nexus/package.json ./packages/shopify-nexus/package.json
 
-# Install dependencies including the local component-lib
-RUN pnpm install --frozen-lockfile --filter tkoxrr...
+# Install dependencies including the local ui
+RUN pnpm install --frozen-lockfile --filter shopify-nexus...
 
-# Copy tkoxrr source files
-COPY packages/tkoxrr ./packages/tkoxrr
+# Copy shopify-nexus source files
+COPY packages/shopify-nexus ./packages/shopify-nexus
 
-# Build tkoxrr
-RUN pnpm --filter tkoxrr build
+# Build shopify-nexus
+RUN pnpm --filter shopify-nexus build
 
 # Production stage
 FROM node:23-slim
@@ -63,20 +63,20 @@ WORKDIR /app
 RUN groupadd -r appgroup && useradd -r -g appgroup appuser
 
 # Copy necessary files from builder
-COPY --from=tkoxrr-builder /app/package.json ./
-COPY --from=tkoxrr-builder /app/pnpm-*.yaml ./
+COPY --from=shopify-nexus-builder /app/package.json ./
+COPY --from=shopify-nexus-builder /app/pnpm-*.yaml ./
 
 # Copy only production dependencies
 RUN pnpm install --prod --frozen-lockfile
 
 # Copy built packages
-COPY --from=component-lib-builder /app/packages/component-lib/dist ./packages/component-lib/dist
-COPY --from=tkoxrr-builder /app/packages/tkoxrr/build ./packages/tkoxrr
+COPY --from=ui-builder /app/packages/ui/dist ./packages/ui/dist
+COPY --from=shopify-nexus-builder /app/packages/shopify-nexus/build ./packages/shopify-nexus
 
 # Set ownership to non-root user
 RUN chown -R appuser:appgroup /app
 
 USER appuser
 
-# Start the tkoxrr application
-CMD ["pnpm", "--filter", "tkoxrr", "start"]
+# Start the shopify-nexus application
+CMD ["pnpm", "--filter", "shopify-nexus", "start"]

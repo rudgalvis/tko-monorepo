@@ -1,4 +1,5 @@
 packages: [
-  "packages/component-lib",
-  "packages/tkoxrr",
+  "packages/shopify-nexus",
+  "packages/storefront-api",
+  "packages/ui",
 ]

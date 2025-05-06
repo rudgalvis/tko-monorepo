@@ -714,6 +714,19 @@ Mobile Slider
                                                                 {% endif %}
 
                                                             {% endfor %}
+
+                                                            {% comment %}If all variants are pre-orderable, show strip right away{% endcomment %}
+                                                            {% assign all_variants_preorderable = true %}
+                                                            {% assign pre_order_message = product.first_available_variant.metafields.preorder.preordercontent %}
+
+                                                            {% for variant in product.variants %}
+                                                                {% unless variant.metafields.preorder.preordercontent %}
+                                                                    {% assign all_variants_preorderable = false %}
+                                                                    {% assign pre_order_message = '' %}
+                                                                    {% break %}
+                                                                {% endunless %}
+                                                            {% endfor %}
+
                                                             <input class="color-changer
                                 {% if product.available != false and product.tags contains 'pre-order' %}
 
@@ -732,7 +745,7 @@ Mobile Slider
                                 {% endif %}"
 
                                                                    type="radio"
-                                                                   data-preorder-content="{{ product.first_available_variant.metafields.preorder.preordercontent }}"
+                                                                   data-preorder-content="{{ pre_order_message }}"
                                                                    data-rprice="{{ product.variants[0].price | money_without_trailing_zeros | strip_html }}"
                                                                    data-cprice="{% if product.variants[0].compare_at_price != nil %}{{ product.variants[0].compare_at_price | money_without_trailing_zeros | strip_html }}{% else %}nodiscount{% endif %}"
                                                                    data-fistID="{{ product.variants[0].id }}"
@@ -913,6 +926,18 @@ Mobile Slider
 
                                                             {% endfor %}
 
+                                                            {% comment %}If all variants are pre-orderable, show strip right away{% endcomment %}
+                                                            {% assign all_variants_preorderable = true %}
+                                                            {% assign pre_order_message = product.first_available_variant.metafields.preorder.preordercontent %}
+
+                                                            {% for variant in product.variants %}
+                                                                {% unless variant.metafields.preorder.preordercontent %}
+                                                                    {% assign all_variants_preorderable = false %}
+                                                                    {% assign pre_order_message = '' %}
+                                                                    {% break %}
+                                                                {% endunless %}
+                                                            {% endfor %}
+
 
                                                             <input class="color-changer seasonal
                                 {% if product.available != false and product.tags contains 'pre-order' %}
@@ -932,7 +957,7 @@ Mobile Slider
                                 {% endif %}"
 
                                                                    type="radio"
-                                                                   data-preorder-content="{{ product.first_available_variant.metafields.preorder.preordercontent }}"
+                                                                   data-preorder-content="{{ pre_order_message }}"
                                                                    data-rprice="{{ product.variants[0].price | money_without_trailing_zeros | strip_html }}"
                                                                    data-cprice="{% if product.variants[0].compare_at_price != nil %}{{ product.variants[0].compare_at_price | money_without_trailing_zeros | strip_html }}{% else %}nodiscount{% endif %}"
                                                                    data-fistID="{{ product.variants[0].id }}"

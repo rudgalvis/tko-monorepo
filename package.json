@@ -7,7 +7,14 @@
     "build": "pnpm --filter component-lib package && pnpm --filter tkoxrr build",
     "start": "pnpm --filter tkoxrr start"
   },
-  "keywords": [],
+  "keywords": [
+    
+  ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
 }
