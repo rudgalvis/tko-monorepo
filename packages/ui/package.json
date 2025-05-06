@@ -1,5 +1,5 @@
 {
-  "name": "@tko/ui",
+  "name": "ui",
   "version": "0.0.1",
   "scripts": {
     "dev": "vite dev --config vite.config.js",

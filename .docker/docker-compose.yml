@@ -1,8 +1,8 @@
 services:
   external:
-    container_name: rrxtko
+    container_name: shopify-nexus
     # The name of the image that will be created when building this container
-    image: external-website
+    image: shopify-nexus
     build:
       context: ./../
       dockerfile: ./.docker/Dockerfile
@@ -24,7 +24,7 @@ services:
     ports:
       - "50000:80"  # Expose Varnish on port 80
     volumes:
-      - ./packages/automatic-discount-cache/default.vcl:/etc/varnish/default.vcl:ro
+      - ../packages/automatic-discount-cache/default.vcl:/etc/varnish/default.vcl:ro
     environment:
       - VARNISH_SIZE=2G  # Cache size
     command: -p default_ttl=3600 -p default_grace=3600

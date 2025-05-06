@@ -1,7 +1,6 @@
 import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { sass } from "svelte-preprocess";
-import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import path from 'path';
 

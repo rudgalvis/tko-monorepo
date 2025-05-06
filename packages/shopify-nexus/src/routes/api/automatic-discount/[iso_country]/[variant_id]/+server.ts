@@ -1,5 +1,5 @@
 import { error, json, type RequestHandler } from '@sveltejs/kit';
-import { getAutomaticDiscount } from 'component-lib';
+import { getAutomaticDiscount } from '@tko/ui';
 
 const handler: RequestHandler = async ({ params }) => {
 	const { variant_id, iso_country } = params;

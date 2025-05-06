@@ -4,17 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "pnpm --filter component-lib package && pnpm --filter tkoxrr build",
-    "start": "pnpm --filter tkoxrr start"
+    "build": "pnpm --filter ui package && pnpm --filter shopify-nexus build",
+    "start": "pnpm --filter shopify-nexus start"
   },
-  "keywords": [
-    
-  ],
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild"
+    ],
+    "allowedBuildScripts": [
+      "svelte-preprocess"
     ]
-  }
+  },
+  "packageManager": "pnpm@10.10.0"
 }

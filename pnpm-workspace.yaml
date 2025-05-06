@@ -1,5 +1,5 @@
 packages: [
+  "packages/ui",
   "packages/shopify-nexus",
   "packages/storefront-api",
-  "packages/ui",
 ]

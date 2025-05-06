@@ -3,6 +3,8 @@
 # Exit on any error
 set -e
 
+export BUILDKIT_PROGRESS=plain
+
 # Run docker compose
 docker compose -f ./.docker/docker-compose.yml up -d --build --force-recreate
 

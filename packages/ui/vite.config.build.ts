@@ -3,9 +3,9 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { sveltePreprocess } from 'svelte-preprocess';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { viteSingleFile } from 'vite-plugin-singlefile';
-//@ts-ignore
+//@ts-expect-error ...
 import tailwindcss from '@tailwindcss/vite';
-//@ts-ignore
+//@ts-expect-error ...
 import path from 'path';
 
 export default defineConfig({

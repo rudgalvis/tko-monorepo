@@ -8,76 +8,7 @@ importers:
 
   .: {}
 
-  packages/api:
-    devDependencies:
-      '@eslint/compat':
-        specifier: ^1.2.5
-        version: 1.2.8(eslint@9.24.0(jiti@2.4.2))
-      '@eslint/js':
-        specifier: ^9.18.0
-        version: 9.24.0
-      '@sveltejs/adapter-auto':
-        specifier: ^6.0.0
-        version: 6.0.0(@sveltejs/kit@2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.27.0)(vite@6.3.0(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(sass@1.86.3)))(svelte@5.27.0)(vite@6.3.0(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(sass@1.86.3)))
-      '@sveltejs/kit':
-        specifier: ^2.16.0
-        version: 2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.27.0)(vite@6.3.0(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(sass@1.86.3)))(svelte@5.27.0)(vite@6.3.0(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(sass@1.86.3))
-      '@sveltejs/package':
-        specifier: ^2.0.0
-        version: 2.3.11(svelte@5.27.0)(typescript@5.8.3)
-      '@sveltejs/vite-plugin-svelte':
-        specifier: ^5.0.0
-        version: 5.0.3(svelte@5.27.0)(vite@6.3.0(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(sass@1.86.3))
-      '@testing-library/jest-dom':
-        specifier: ^6.6.3
-        version: 6.6.3
-      '@testing-library/svelte':
-        specifier: ^5.2.4
-        version: 5.2.7(svelte@5.27.0)(vite@6.3.0(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(sass@1.86.3))(vitest@3.1.1)
-      eslint:
-        specifier: ^9.18.0
-        version: 9.24.0(jiti@2.4.2)
-      eslint-config-prettier:
-        specifier: ^10.0.1
-        version: 10.1.2(eslint@9.24.0(jiti@2.4.2))
-      eslint-plugin-svelte:
-        specifier: ^3.0.0
-        version: 3.5.1(eslint@9.24.0(jiti@2.4.2))(svelte@5.27.0)
-      globals:
-        specifier: ^16.0.0
-        version: 16.0.0
-      jsdom:
-        specifier: ^26.0.0
-        version: 26.1.0
-      prettier:
-        specifier: ^3.4.2
-        version: 3.5.3
-      prettier-plugin-svelte:
-        specifier: ^3.3.3
-        version: 3.3.3(prettier@3.5.3)(svelte@5.27.0)
-      publint:
-        specifier: ^0.3.2
-        version: 0.3.12
-      svelte:
-        specifier: ^5.0.0
-        version: 5.27.0
-      svelte-check:
-        specifier: ^4.0.0
-        version: 4.1.6(picomatch@4.0.2)(svelte@5.27.0)(typescript@5.8.3)
-      typescript:
-        specifier: ^5.0.0
-        version: 5.8.3
-      typescript-eslint:
-        specifier: ^8.20.0
-        version: 8.30.1(eslint@9.24.0(jiti@2.4.2))(typescript@5.8.3)
-      vite:
-        specifier: ^6.2.6
-        version: 6.3.0(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(sass@1.86.3)
-      vitest:
-        specifier: ^3.0.0
-        version: 3.1.1(@types/node@22.14.1)(@vitest/browser@3.1.1)(jiti@2.4.2)(jsdom@26.1.0)(lightningcss@1.29.2)(sass@1.86.3)
-
-  packages/tkoxrr:
+  packages/shopify-nexus:
     dependencies:
       '@shopify/shopify-api':
         specifier: ^11.9.0
@@ -212,6 +143,75 @@ importers:
       vitest:
         specifier: ^3.0.0
         version: 3.1.1(@types/node@22.14.1)(@vitest/browser@3.1.1)(jiti@2.4.2)(jsdom@25.0.1)(lightningcss@1.29.2)(sass@1.86.3)
+
+  packages/storefront-api:
+    devDependencies:
+      '@eslint/compat':
+        specifier: ^1.2.5
+        version: 1.2.8(eslint@9.24.0(jiti@2.4.2))
+      '@eslint/js':
+        specifier: ^9.18.0
+        version: 9.24.0
+      '@sveltejs/adapter-auto':
+        specifier: ^6.0.0
+        version: 6.0.0(@sveltejs/kit@2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.27.0)(vite@6.3.0(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(sass@1.86.3)))(svelte@5.27.0)(vite@6.3.0(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(sass@1.86.3)))
+      '@sveltejs/kit':
+        specifier: ^2.16.0
+        version: 2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.27.0)(vite@6.3.0(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(sass@1.86.3)))(svelte@5.27.0)(vite@6.3.0(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(sass@1.86.3))
+      '@sveltejs/package':
+        specifier: ^2.0.0
+        version: 2.3.11(svelte@5.27.0)(typescript@5.8.3)
+      '@sveltejs/vite-plugin-svelte':
+        specifier: ^5.0.0
+        version: 5.0.3(svelte@5.27.0)(vite@6.3.0(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(sass@1.86.3))
+      '@testing-library/jest-dom':
+        specifier: ^6.6.3
+        version: 6.6.3
+      '@testing-library/svelte':
+        specifier: ^5.2.4
+        version: 5.2.7(svelte@5.27.0)(vite@6.3.0(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(sass@1.86.3))(vitest@3.1.1)
+      eslint:
+        specifier: ^9.18.0
+        version: 9.24.0(jiti@2.4.2)
+      eslint-config-prettier:
+        specifier: ^10.0.1
+        version: 10.1.2(eslint@9.24.0(jiti@2.4.2))
+      eslint-plugin-svelte:
+        specifier: ^3.0.0
+        version: 3.5.1(eslint@9.24.0(jiti@2.4.2))(svelte@5.27.0)
+      globals:
+        specifier: ^16.0.0
+        version: 16.0.0
+      jsdom:
+        specifier: ^26.0.0
+        version: 26.1.0
+      prettier:
+        specifier: ^3.4.2
+        version: 3.5.3
+      prettier-plugin-svelte:
+        specifier: ^3.3.3
+        version: 3.3.3(prettier@3.5.3)(svelte@5.27.0)
+      publint:
+        specifier: ^0.3.2
+        version: 0.3.12
+      svelte:
+        specifier: ^5.0.0
+        version: 5.27.0
+      svelte-check:
+        specifier: ^4.0.0
+        version: 4.1.6(picomatch@4.0.2)(svelte@5.27.0)(typescript@5.8.3)
+      typescript:
+        specifier: ^5.0.0
+        version: 5.8.3
+      typescript-eslint:
+        specifier: ^8.20.0
+        version: 8.30.1(eslint@9.24.0(jiti@2.4.2))(typescript@5.8.3)
+      vite:
+        specifier: ^6.2.6
+        version: 6.3.0(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(sass@1.86.3)
+      vitest:
+        specifier: ^3.0.0
+        version: 3.1.1(@types/node@22.14.1)(@vitest/browser@3.1.1)(jiti@2.4.2)(jsdom@26.1.0)(lightningcss@1.29.2)(sass@1.86.3)
 
   packages/ui:
     dependencies:
@@ -5021,7 +5021,7 @@ snapshots:
       svelte: 5.27.0
     optionalDependencies:
       vite: 6.3.0(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(sass@1.86.3)
-      vitest: 3.1.1(@types/node@22.14.1)(@vitest/browser@3.1.1)(jiti@2.4.2)(jsdom@26.1.0)(lightningcss@1.29.2)(sass@1.86.3)
+      vitest: 3.1.1(@types/node@22.14.1)(@vitest/browser@3.1.1)(jiti@2.4.2)(jsdom@25.0.1)(lightningcss@1.29.2)(sass@1.86.3)
 
   '@testing-library/user-event@14.5.2(@testing-library/dom@10.4.0)':
     dependencies:
@@ -5152,7 +5152,7 @@ snapshots:
       magic-string: 0.30.17
       sirv: 3.0.1
       tinyrainbow: 2.0.0
-      vitest: 3.1.1(@types/node@22.14.1)(@vitest/browser@3.1.1)(jiti@2.4.2)(jsdom@26.1.0)(lightningcss@1.29.2)(sass@1.86.3)
+      vitest: 3.1.1(@types/node@22.14.1)(@vitest/browser@3.1.1)(jiti@2.4.2)(jsdom@25.0.1)(lightningcss@1.29.2)(sass@1.86.3)
       ws: 8.18.1
     optionalDependencies:
       playwright: 1.51.1
