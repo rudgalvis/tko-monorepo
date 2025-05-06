@@ -14,11 +14,10 @@
       "blocks": {
         "29690200-f0ed-4565-ae99-b2158de61cc4": {
           "type": "Slider",
-          "disabled": true,
           "settings": {
             "slide-image": "shopify://shop_images/Homepage_-_Desktop-2_a126056e-6cbb-49ea-8560-770747d48948.jpg",
             "slide-image-mobile": "shopify://shop_images/Homepage_-_Mobile_f88e1328-9bc5-4c90-b472-db96e6aab0e5.jpg",
-            "slide-text": "New spring arrivals are here",
+            "slide-text": "Elevated knitwear for warmer days",
             "button-text": "SHOP NOW",
             "button-link": "shopify://collections/new-arrivals",
             "slide-text-color": "#ffffff"
@@ -26,6 +25,7 @@
         },
         "9e54d3d6-c2af-4269-accc-86b80bee5446": {
           "type": "Slider",
+          "disabled": true,
           "settings": {
             "slide-image": "shopify://shop_images/Homepage_-_Desktop_569faf63-0ee2-4565-b7cc-0c28ccc5e5f7.jpg",
             "slide-image-mobile": "shopify://shop_images/Homepage_-_Mobile_474610ba-cd25-44eb-a85f-369a4eee633c.jpg",
