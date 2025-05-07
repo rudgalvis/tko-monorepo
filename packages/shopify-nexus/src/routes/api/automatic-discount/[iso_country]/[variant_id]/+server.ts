@@ -1,5 +1,5 @@
 import { error, json, type RequestHandler } from '@sveltejs/kit'
-import { StorefrontApi } from 'api'
+import { StorefrontApi } from 'storefront-api'
 
 const handler: RequestHandler = async ({ params }) => {
 	const { variant_id, iso_country } = params
