@@ -7,6 +7,7 @@
 		priceFormatter,
 		subtractCurrencyStrings
 	} from '$lib/utils/formatters/price-formatter.js';
+	import { NexusApi } from "storefront-api";
 
 	type PriceStrCouple = {
 		price: string;
@@ -89,7 +90,9 @@
 	const tryApplyingAutomaticDiscount = async ({
 		price: orgPrice
 	}: PriceStrCouple): Promise<PriceStrCouple> => {
-		const { amount } = await getAutomaticDiscount(market, +variant_id);
+		const nexusApi = new NexusApi();
+
+		const { amount } = await nexusApi.getAutomaticDiscount(market, +variant_id);
 
 		if (!amount || amount === 0) return {
 			price: orgPrice,
