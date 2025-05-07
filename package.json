@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:common": "pnpm --filter \"@tko/common-utils\" build",
-    "build:api": "pnpm --filter \"@tko/storefront-api\" build",
-    "build:ui": "pnpm --filter \"@tko/ui\" build",
-    "build:nexus": "pnpm --filter \"@tko/shopify-nexus\" build",
+    "build:common": "pnpm --filter common-utils build",
+    "build:api": "pnpm --filter storefront-api build",
+    "build:ui": "pnpm --filter ui build",
+    "build:nexus": "pnpm --filter shopify-nexus build",
     "build": "pnpm build:common && pnpm build:api && pnpm build:ui && pnpm build:nexus",
     "start": "pnpm --filter shopify-nexus start"
   },
