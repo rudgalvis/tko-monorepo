@@ -4,21 +4,6 @@
 	export const meta = {
 		title: 'custom-elements/price/<product-price>',
 		component: ProductPrice,
-		parameters: {
-			toolbar: {
-				// Add custom toolbar items
-				items: [
-					{
-						title: 'Custom Action',
-						onClick: () => {
-							// Your custom JavaScript code here
-							console.log('Custom action executed!');
-							// You can add any JavaScript functionality here
-						}
-					}
-				]
-			}
-		}
 	};
 </script>
 

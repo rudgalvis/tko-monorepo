@@ -43,6 +43,7 @@
     "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-typescript": "^12.1.1",
+    "@storybook/addon-actions": "^8.6.12",
     "@storybook/addon-essentials": "^8.5.2",
     "@storybook/addon-interactions": "^8.5.2",
     "@storybook/addon-svelte-csf": "^5.0.0-next.23",
@@ -85,8 +86,8 @@
     "@tailwindcss/vite": "^4.1.4",
     "dotenv": "^16.4.7",
     "sass": "^1.82.0",
-    "swiper": "^11.1.14",
     "storefront-api": "workspace:*",
+    "swiper": "^11.1.14",
     "tailwindcss": "^4.1.4"
   },
   "eslintConfig": {

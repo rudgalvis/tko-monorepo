@@ -1,6 +1,18 @@
-import { writable } from "svelte/store";
+import { NexusApi } from 'storefront-api';
+import { writable } from 'svelte/store';
 
-export const displayCurrency = writable<string>()
-export const marketCurrency = writable<string>()
+const nexusApi = new NexusApi();
+
+export const displayCurrency = writable<string>();
+export const marketCurrency = writable<string>('EUR');
+export const currencyRates = writable<Record<string, number> | null>(null);
+
+marketCurrency.subscribe(async (v) =>
+	currencyRates.set(await nexusApi.getCurrencyRates(v))
+);
+
+currencyRates.subscribe((rates) => {
+	console.log({ rates });
+});
 
 // TODO: make persistant

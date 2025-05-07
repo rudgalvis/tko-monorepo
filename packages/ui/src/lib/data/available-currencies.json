@@ -1,0 +1,6 @@
+[
+	{ "currency": "EUR", "symbol": "€" },
+	{ "currency": "AUD", "symbol": "$" },
+	{ "currency": "GBP", "symbol": "£" },
+	{ "currency": "USD", "symbol": "$" }
+]

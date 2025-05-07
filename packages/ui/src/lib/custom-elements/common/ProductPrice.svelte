@@ -1,10 +1,11 @@
 <svelte:options customElement={{ tag: 'product-price', shadow: 'none' }} />
 
 <script lang="ts">
-	import { displayCurrency, marketCurrency } from "$lib/store/currency.js";
+	import { displayCurrency, marketCurrency } from '$lib/store/currency.js';
 	import { removeNonComponentChildren } from '$lib/utils/dom/remove-non-component-children.js';
 	import { subtractCurrencyStrings } from '$lib/utils/formatters/price-formatter.js';
 	import { NexusApi } from 'storefront-api';
+	import { onMount } from "svelte";
 
 	type PriceStrCouple = {
 		price: string;
@@ -16,14 +17,18 @@
 		price: inputPrice,
 		compared_at: inputComparedAt,
 		iso_code: market,
-		variant_id
+		variant_id,
+		devCurrency
 	} = $props<{
 		price: string; // 10€, €10
 		compared_at?: string; // 10€, €10, nodiscount
 		iso_code?: string; // LT, AU, ...
 		variant_id?: string; // numeric
 		theme?: 'small' | 'big';
+		devCurrency: 'EUR' | 'AUD' | 'GBP' | 'USD'; // For storybook usage
 	}>();
+
+	const nexusApi = new NexusApi();
 
 	const normalized = $state<PriceStrCouple>({
 		price: inputPrice,
@@ -34,6 +39,11 @@
 		price: inputPrice,
 		comparedAt: inputPrice
 	});
+
+	// DEV ONLY
+	$effect(() => {
+		displayCurrency.set(devCurrency);
+	})
 
 	// Normalize input
 	$effect(() => {
@@ -81,16 +91,27 @@
 
 	// Apply display currency changes
 	$effect(() => {
-		console.log({$marketCurrency, $displayCurrency})
+		// Fetch currency rates
+
+
+		console.log({ $marketCurrency, $displayCurrency });
+	});
+
+	onMount(() => {
+		fetchCurrencyRates()
 	})
+
+	const fetchCurrencyRates = async () => {
+		const r = await nexusApi.getCurrencyRates($marketCurrency)
+
+		console.log(r)
+	}
 
 	const calculateAutomaticDiscount = async ({
 		price: orgPrice
 	}: PriceStrCouple): Promise<PriceStrCouple> => {
 		if (!market) throw new Error('market is required');
 		if (!variant_id) throw new Error('market is required');
-
-		const nexusApi = new NexusApi();
 
 		const { amount } = await nexusApi.getAutomaticDiscount(market, +variant_id);
 
@@ -107,51 +128,6 @@
 			comparedAt: orgPrice
 		};
 	};
-
-	//	$effect(() => {
-	//		console.log('dump', { ...theme });
-	//	});
-
-	//	$effect(() => {
-	//		if (
-	//			market &&
-	//			variant_id &&
-	//			inputPrice &&
-	//			(inputComparedAt || !market) // Just to trigger the effect
-	//		) {
-	//			tryApplyingAutomaticDiscount();
-	//		}
-	//	});
-
-	//	let formattedPrice = $derived(p.price);
-	//	let formattedComparedAt = $derived(p.compared_at);
-
-	//	const convertToCurrency = (
-	//		price: string,
-	//		compared_at: string | undefined,
-	//		marketCurrency: string,
-	//		displayCurrency: string
-	//	) => {
-	//		const from = marketCurrency;
-	//		const to = displayCurrency || from;
-	//
-	////		format(p.price, p.compared_at)
-	//
-	//		const { value: priceVal } = parseCurrencyString(p.price);
-	//
-	//		formattedPrice = Intl.NumberFormat('en-US', {style: 'currency', currency: to}).format(priceVal);
-	//
-	//		if(p.compared_at) {
-	//			const {value: comparedAtVal} = parseCurrencyString(p.compared_at);
-	//			compared_at = Intl.NumberFormat('en-US', {style: 'currency', currency: to}).format(comparedAtVal);
-	//		}
-	//
-	//		return price;
-	//	};
-	//
-	//	$effect(() => {
-	//		convertToCurrency(p.price, p.compared_at, $marketCurrency, $displayCurrency);
-	//	});
 </script>
 
 <div

@@ -62,6 +62,7 @@
 		"svelte"
 	],
 	"dependencies": {
+		"@everapi/freecurrencyapi-js": "^1.0.1",
 		"@shopify/storefront-api-client": "^1.0.7"
 	}
 }
