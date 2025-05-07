@@ -3,7 +3,22 @@
 
 	export const meta = {
 		title: 'custom-elements/price/<product-price>',
-		component: ProductPrice
+		component: ProductPrice,
+		parameters: {
+			toolbar: {
+				// Add custom toolbar items
+				items: [
+					{
+						title: 'Custom Action',
+						onClick: () => {
+							// Your custom JavaScript code here
+							console.log('Custom action executed!');
+							// You can add any JavaScript functionality here
+						}
+					}
+				]
+			}
+		}
 	};
 </script>
 
@@ -48,6 +63,6 @@
 		iso_code: 'LT',
 		variant_id: '54204479766876',
 		compared_at: 'nodiscount',
-		price: '€300.00',
+		price: '€300.00'
 	}}
 />

@@ -1,13 +1,10 @@
 <svelte:options customElement={{ tag: 'product-price', shadow: 'none' }} />
 
 <script lang="ts">
-	import { getAutomaticDiscount } from '$lib/api/rrxtko.api.js';
+	import { displayCurrency, marketCurrency } from "$lib/store/currency.js";
 	import { removeNonComponentChildren } from '$lib/utils/dom/remove-non-component-children.js';
-	import {
-		priceFormatter,
-		subtractCurrencyStrings
-	} from '$lib/utils/formatters/price-formatter.js';
-	import { NexusApi } from "storefront-api";
+	import { subtractCurrencyStrings } from '$lib/utils/formatters/price-formatter.js';
+	import { NexusApi } from 'storefront-api';
 
 	type PriceStrCouple = {
 		price: string;
@@ -23,8 +20,8 @@
 	} = $props<{
 		price: string; // 10€, €10
 		compared_at?: string; // 10€, €10, nodiscount
-		iso_code?: string;
-		variant_id?: string;
+		iso_code?: string; // LT, AU, ...
+		variant_id?: string; // numeric
 		theme?: 'small' | 'big';
 	}>();
 
@@ -63,41 +60,45 @@
 
 	// Apply automatic discount if possible
 	$effect(() => {
+		// Hold normalized values even if discount would not be applied
+		autoDiscountApplied.price = normalized.price;
+		autoDiscountApplied.comparedAt = normalized.comparedAt;
+
 		if (!market) return;
 		if (!variant_id) return;
 		if (!normalized.price) return;
 		if (normalized.comparedAt) return; // Only check if no regular compared at is present
 
-		tryApplyingAutomaticDiscount({ ...normalized }).then(({ price, comparedAt }) => {
-			autoDiscountApplied.price = price;
-			autoDiscountApplied.comparedAt = comparedAt;
-		});
+		try {
+			calculateAutomaticDiscount({ ...normalized }).then(({ price, comparedAt }) => {
+				autoDiscountApplied.price = price;
+				autoDiscountApplied.comparedAt = comparedAt;
+			});
+		} catch (e) {
+			console.error(e);
+		}
 	});
 
 	// Apply display currency changes
-
-	// Default values can be set through props.theme.init('big') etc if needed
-	let a = $state(inputPrice);
-	let b = $state(inputComparedAt);
-
 	$effect(() => {
-		a = inputPrice;
-		b = inputComparedAt;
-	});
+		console.log({$marketCurrency, $displayCurrency})
+	})
 
-	const p = $derived(priceFormatter(a, b));
-
-	const tryApplyingAutomaticDiscount = async ({
+	const calculateAutomaticDiscount = async ({
 		price: orgPrice
 	}: PriceStrCouple): Promise<PriceStrCouple> => {
+		if (!market) throw new Error('market is required');
+		if (!variant_id) throw new Error('market is required');
+
 		const nexusApi = new NexusApi();
 
 		const { amount } = await nexusApi.getAutomaticDiscount(market, +variant_id);
 
-		if (!amount || amount === 0) return {
-			price: orgPrice,
-			comparedAt: undefined
-		};
+		if (!amount || amount === 0)
+			return {
+				price: orgPrice,
+				comparedAt: undefined
+			};
 
 		const { formatted: newPrice } = subtractCurrencyStrings(orgPrice, amount);
 
@@ -156,16 +157,16 @@
 <div
 	use:removeNonComponentChildren
 	class="pdp-price"
-	class:has-discount={p.compared_at && p.compared_at !== p.price}
+	class:has-discount={autoDiscountApplied.comparedAt}
 	class:small={theme === 'small'}
 	class:big={theme === 'big'}
 >
-	{#if p.compared_at && p.compared_at !== p.price}
+	{#if autoDiscountApplied.comparedAt}
 		<div class="pdp-price--compared-at">
-			{p.compared_at}
+			{autoDiscountApplied.comparedAt}
 		</div>
 	{/if}
-	<div class="pdp-price--price">{p.price}</div>
+	<div class="pdp-price--price">{autoDiscountApplied.price}</div>
 </div>
 
 <style lang="scss">
