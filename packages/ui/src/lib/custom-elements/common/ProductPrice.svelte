@@ -1,9 +1,13 @@
 <svelte:options customElement={{ tag: 'product-price', shadow: 'none' }} />
 
 <script lang="ts">
+	import { fade } from 'svelte/transition';
 	import { currencyRates, displayCurrency, marketCurrency } from '$lib/store/currency.js';
 	import { removeNonComponentChildren } from '$lib/utils/dom/remove-non-component-children.js';
-	import { parseCurrencyString, subtractCurrencyStrings } from '$lib/utils/formatters/price-formatter.js';
+	import {
+		parseCurrencyString,
+		subtractCurrencyStrings
+	} from '$lib/utils/formatters/price-formatter.js';
 	import { NexusApi } from 'storefront-api';
 
 	type PriceStrCouple = {
@@ -151,20 +155,23 @@
 	};
 </script>
 
-<div
-	use:removeNonComponentChildren
-	class="pdp-price"
-	class:has-discount={final.comparedAt}
-	class:small={theme === 'small'}
-	class:big={theme === 'big'}
->
-	{#if final.comparedAt}
-		<div class="pdp-price--compared-at">
-			{final.comparedAt}
-		</div>
-	{/if}
-	<div class="pdp-price--price">{final.price}</div>
-</div>
+{#if final.price !== '-1'}
+	<div
+		in:fade={{ delay: 200, duration: 50 }}
+		use:removeNonComponentChildren
+		class="pdp-price"
+		class:has-discount={final.comparedAt}
+		class:small={theme === 'small'}
+		class:big={theme === 'big'}
+	>
+		{#if final.comparedAt}
+			<div class="pdp-price--compared-at">
+				{final.comparedAt}
+			</div>
+		{/if}
+		<div class="pdp-price--price">{final.price}</div>
+	</div>
+{/if}
 
 <style lang="scss">
 	.pdp-price {

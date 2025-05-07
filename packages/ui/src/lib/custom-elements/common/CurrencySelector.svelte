@@ -50,10 +50,10 @@
 		if (!params) return console.warn('DUMP no params found');
 
 		try {
-			const { available: _available, active: _active } = JSON.parse(params);
+			const { available: _available } = JSON.parse(params);
 
 			available = _available;
-			active = _active;
+			active = _available.find((option: LocalizationOption) => option.currency === $displayCurrency);
 		} catch (e) {
 			console.error(e);
 		}
