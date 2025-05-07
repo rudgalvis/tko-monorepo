@@ -103,16 +103,16 @@ export const calculateDiscountPercentage = (a: string, b: string | undefined) =>
 };
 
 export const priceFormatter = (price: string, compared_at: string | undefined): FormattedPrice => {
-	let result: {
+	const result: {
 		price: string;
 		compared_at: string | undefined;
 	} = {
 		price: '',
-		compared_at: undefined
+		comparedAt: undefined
 	};
 
-	let { value: a } = parseCurrencyString(price);
-	let { value: b } = compared_at ? parseCurrencyString(compared_at) : { value: undefined };
+	const { value: a } = parseCurrencyString(price);
+	const { value: b } = compared_at ? parseCurrencyString(compared_at) : { value: undefined };
 
 	if (a && b) {
 		if (isNaN(b)) {

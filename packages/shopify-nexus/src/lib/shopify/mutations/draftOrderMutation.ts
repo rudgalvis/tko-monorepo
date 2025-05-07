@@ -39,3 +39,8 @@ mutation createTestDraftOrder($variantId: ID!) {
   }
 }
 `;
+
+export type DraftOrderInput = {
+    variantId: string; // ID! in GraphQL maps to string in TypeScript
+};
+

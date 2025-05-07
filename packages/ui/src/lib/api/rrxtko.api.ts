@@ -1,4 +1,4 @@
-const BASE_URL = 'https://rrxtko.tko.rudgalvis.com/api';
+const BASE_URL = 'http://172.20.10.6:5173/api';
 
 const API_ROUTES = {
 	GET_AUTOMATIC_DISCOUNT: (isoCode: string, variantId: number) =>

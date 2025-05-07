@@ -7,7 +7,9 @@
     "build": "pnpm --filter ui package && pnpm --filter shopify-nexus build",
     "start": "pnpm --filter shopify-nexus start"
   },
-  "keywords": [],
+  "keywords": [
+    
+  ],
   "author": "",
   "license": "ISC",
   "pnpm": {

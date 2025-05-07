@@ -2,98 +2,152 @@
 
 <script lang="ts">
 	import { getAutomaticDiscount } from '$lib/api/rrxtko.api.js';
-	import { displayCurrency, marketCurrency } from '$lib/store/currency.js';
 	import { removeNonComponentChildren } from '$lib/utils/dom/remove-non-component-children.js';
 	import {
-		parseCurrencyString,
 		priceFormatter,
 		subtractCurrencyStrings
 	} from '$lib/utils/formatters/price-formatter.js';
 
+	type PriceStrCouple = {
+		price: string;
+		comparedAt?: string;
+	};
+
 	const {
 		theme = 'big',
-		price,
-		compared_at,
-		iso_code,
+		price: inputPrice,
+		compared_at: inputComparedAt,
+		iso_code: market,
 		variant_id
 	} = $props<{
-		price: string;
-		compared_at?: string;
+		price: string; // 10€, €10
+		compared_at?: string; // 10€, €10, nodiscount
 		iso_code?: string;
 		variant_id?: string;
 		theme?: 'small' | 'big';
 	}>();
 
+	const normalized = $state<PriceStrCouple>({
+		price: inputPrice,
+		comparedAt: inputComparedAt
+	});
+
+	const autoDiscountApplied = $state<PriceStrCouple>({
+		price: inputPrice,
+		comparedAt: inputPrice
+	});
+
+	// Normalize input
+	$effect(() => {
+		// Step 1: Create temporary values to batch our changes
+		// This prevents infinite loop by preparing values before state updates
+		let newPrice = inputPrice;
+		let newComparedAt = inputComparedAt;
+
+		// Step 2: Normalize 'nodiscount' value coming from legacy code
+		if (newComparedAt === 'nodiscount') {
+			newComparedAt = undefined;
+		}
+
+		// Step 4: Fix faulty input by swapping values
+		// (when price is less than compared_at)
+		if (newPrice < newComparedAt) {
+			[newPrice, newComparedAt] = [newComparedAt, newPrice];
+		}
+
+		// Final step: Update state once with all our changes
+		normalized.price = newPrice;
+		normalized.comparedAt = newComparedAt;
+	});
+
+	// Apply automatic discount if possible
+	$effect(() => {
+		if (!market) return;
+		if (!variant_id) return;
+		if (!normalized.price) return;
+		if (normalized.comparedAt) return; // Only check if no regular compared at is present
+
+		tryApplyingAutomaticDiscount({ ...normalized }).then(({ price, comparedAt }) => {
+			autoDiscountApplied.price = price;
+			autoDiscountApplied.comparedAt = comparedAt;
+		});
+	});
+
+	// Apply display currency changes
+
 	// Default values can be set through props.theme.init('big') etc if needed
-	let a = $state(price);
-	let b = $state(compared_at);
+	let a = $state(inputPrice);
+	let b = $state(inputComparedAt);
 
 	$effect(() => {
-		a = price;
-		b = compared_at;
+		a = inputPrice;
+		b = inputComparedAt;
 	});
 
 	const p = $derived(priceFormatter(a, b));
 
-	const tryApplyingAutomaticDiscount = async () => {
-		if (!iso_code) return;
-		if (!variant_id) return;
-		if (compared_at && compared_at !== 'nodiscount') return;
+	const tryApplyingAutomaticDiscount = async ({
+		price: orgPrice
+	}: PriceStrCouple): Promise<PriceStrCouple> => {
+		const { amount } = await getAutomaticDiscount(market, +variant_id);
 
-		const { amount } = await getAutomaticDiscount(iso_code, +variant_id);
+		if (!amount || amount === 0) return {
+			price: orgPrice,
+			comparedAt: undefined
+		};
 
-		if (!amount) return;
+		const { formatted: newPrice } = subtractCurrencyStrings(orgPrice, amount);
 
-		const { formatted: formatedComparedAt } = subtractCurrencyStrings(price, amount);
-		a = price;
-
-		if (price !== formatedComparedAt) b = formatedComparedAt;
+		return {
+			price: newPrice,
+			comparedAt: orgPrice
+		};
 	};
 
-	$effect(() => {
-		console.log('dump', { ...theme });
-	});
+	//	$effect(() => {
+	//		console.log('dump', { ...theme });
+	//	});
 
-	$effect(() => {
-		if (
-			iso_code &&
-			variant_id &&
-			price &&
-			(compared_at || !compared_at) // Just to trigger the effect
-		) {
-			tryApplyingAutomaticDiscount();
-		}
-	});
+	//	$effect(() => {
+	//		if (
+	//			market &&
+	//			variant_id &&
+	//			inputPrice &&
+	//			(inputComparedAt || !market) // Just to trigger the effect
+	//		) {
+	//			tryApplyingAutomaticDiscount();
+	//		}
+	//	});
 
-	let formattedPrice = $derived(p.price);
-	let formattedComparedAt = $derived(p.compared_at);
+	//	let formattedPrice = $derived(p.price);
+	//	let formattedComparedAt = $derived(p.compared_at);
 
-//	const convertToCurrency = (
-//		price: string,
-//		compared_at: string | undefined,
-//		marketCurrency: string,
-//		displayCurrency: string
-//	) => {
-//		const from = marketCurrency;
-//		const to = displayCurrency || from;
-//
-////		format(p.price, p.compared_at)
-//
-//		const { value: priceVal } = parseCurrencyString(p.price);
-//
-//		formattedPrice = Intl.NumberFormat('en-US', {style: 'currency', currency: to}).format(priceVal);
-//
-//		if(p.compared_at) {
-//			const {value: comparedAtVal} = parseCurrencyString(p.compared_at);
-//			compared_at = Intl.NumberFormat('en-US', {style: 'currency', currency: to}).format(comparedAtVal);
-//		}
-//
-//		return price;
-//	};
-//
-//	$effect(() => {
-//		convertToCurrency(p.price, p.compared_at, $marketCurrency, $displayCurrency);
-//	});
+	//	const convertToCurrency = (
+	//		price: string,
+	//		compared_at: string | undefined,
+	//		marketCurrency: string,
+	//		displayCurrency: string
+	//	) => {
+	//		const from = marketCurrency;
+	//		const to = displayCurrency || from;
+	//
+	////		format(p.price, p.compared_at)
+	//
+	//		const { value: priceVal } = parseCurrencyString(p.price);
+	//
+	//		formattedPrice = Intl.NumberFormat('en-US', {style: 'currency', currency: to}).format(priceVal);
+	//
+	//		if(p.compared_at) {
+	//			const {value: comparedAtVal} = parseCurrencyString(p.compared_at);
+	//			compared_at = Intl.NumberFormat('en-US', {style: 'currency', currency: to}).format(comparedAtVal);
+	//		}
+	//
+	//		return price;
+	//	};
+	//
+	//	$effect(() => {
+	//		convertToCurrency(p.price, p.compared_at, $marketCurrency, $displayCurrency);
+	//	});
 </script>
 
 <div

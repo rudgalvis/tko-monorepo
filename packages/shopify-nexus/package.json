@@ -63,7 +63,8 @@
 	},
 	"dependencies": {
 		"@shopify/shopify-api": "^11.9.0",
-		"@tko/ui": "workspace:*",
+		"ui": "workspace:*",
+		"api": "workspace:*",
 		"form-data": "^4.0.2",
 		"mailgun.js": "^12.0.1"
 	}
