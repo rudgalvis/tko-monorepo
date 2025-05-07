@@ -108,7 +108,7 @@ export const priceFormatter = (price: string, compared_at: string | undefined): 
 		compared_at: string | undefined;
 	} = {
 		price: '',
-		comparedAt: undefined
+		compared_at: undefined
 	};
 
 	const { value: a } = parseCurrencyString(price);

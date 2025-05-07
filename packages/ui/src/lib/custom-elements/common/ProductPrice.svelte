@@ -1,11 +1,14 @@
 <svelte:options customElement={{ tag: 'product-price', shadow: 'none' }} />
 
 <script lang="ts">
-	import { displayCurrency, marketCurrency } from '$lib/store/currency.js';
+	import { currencyRates, displayCurrency, marketCurrency } from '$lib/store/currency.js';
 	import { removeNonComponentChildren } from '$lib/utils/dom/remove-non-component-children.js';
-	import { subtractCurrencyStrings } from '$lib/utils/formatters/price-formatter.js';
+	import {
+		parseCurrencyString,
+		subtractCurrencyStrings
+	} from '$lib/utils/formatters/price-formatter.js';
 	import { NexusApi } from 'storefront-api';
-	import { onMount } from "svelte";
+	import { onMount } from 'svelte';
 
 	type PriceStrCouple = {
 		price: string;
@@ -40,10 +43,15 @@
 		comparedAt: inputPrice
 	});
 
+	const final = $state<PriceStrCouple>({
+		price: inputPrice,
+		comparedAt: inputPrice
+	});
+
 	// DEV ONLY
 	$effect(() => {
-		displayCurrency.set(devCurrency);
-	})
+		if (devCurrency) displayCurrency.set(devCurrency);
+	});
 
 	// Normalize input
 	$effect(() => {
@@ -91,21 +99,31 @@
 
 	// Apply display currency changes
 	$effect(() => {
-		// Fetch currency rates
+		final.price = autoDiscountApplied.price;
+		final.comparedAt = autoDiscountApplied.comparedAt;
 
+		if ($marketCurrency === $displayCurrency) return;
 
-		console.log({ $marketCurrency, $displayCurrency });
+		if (!$currencyRates) return console.error('currencyRates is not set');
+
+		const formatter = new Intl.NumberFormat(undefined, {
+			style: 'currency',
+			currency: $displayCurrency, // 'EUR', 'USD', etc.
+			currencySign: 'standard',
+			currencyDisplay: 'narrowSymbol',
+		});
+
+		const rate = $currencyRates[$displayCurrency];
+
+		// Get numerical value and apply rate
+		const { value: price } = parseCurrencyString(autoDiscountApplied.price);
+		final.price = formatter.format(price * rate);
+
+		if (autoDiscountApplied.comparedAt) {
+			const { value: comparedAt } = parseCurrencyString(autoDiscountApplied.comparedAt);
+			final.comparedAt = formatter.format(comparedAt * rate);
+		}
 	});
-
-	onMount(() => {
-		fetchCurrencyRates()
-	})
-
-	const fetchCurrencyRates = async () => {
-		const r = await nexusApi.getCurrencyRates($marketCurrency)
-
-		console.log(r)
-	}
 
 	const calculateAutomaticDiscount = async ({
 		price: orgPrice
@@ -133,16 +151,16 @@
 <div
 	use:removeNonComponentChildren
 	class="pdp-price"
-	class:has-discount={autoDiscountApplied.comparedAt}
+	class:has-discount={final.comparedAt}
 	class:small={theme === 'small'}
 	class:big={theme === 'big'}
 >
-	{#if autoDiscountApplied.comparedAt}
+	{#if final.comparedAt}
 		<div class="pdp-price--compared-at">
-			{autoDiscountApplied.comparedAt}
+			{final.comparedAt}
 		</div>
 	{/if}
-	<div class="pdp-price--price">{autoDiscountApplied.price}</div>
+	<div class="pdp-price--price">{final.price}</div>
 </div>
 
 <style lang="scss">
