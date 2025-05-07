@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "pnpm -r build",
     "start": "pnpm --filter shopify-nexus start"
   },
   "keywords": [
