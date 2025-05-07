@@ -2,11 +2,13 @@
 
 <script lang="ts">
 	import { getAutomaticDiscount } from '$lib/api/rrxtko.api.js';
+	import { displayCurrency, marketCurrency } from '$lib/store/currency.js';
+	import { removeNonComponentChildren } from '$lib/utils/dom/remove-non-component-children.js';
 	import {
+		parseCurrencyString,
 		priceFormatter,
 		subtractCurrencyStrings
 	} from '$lib/utils/formatters/price-formatter.js';
-	import { removeNonComponentChildren } from '$lib/utils/dom/remove-non-component-children.js';
 
 	const {
 		theme = 'big',
@@ -42,13 +44,14 @@
 
 		if (!amount) return;
 
-		const { formatted } = subtractCurrencyStrings(price, amount);
+		const { formatted: formatedComparedAt } = subtractCurrencyStrings(price, amount);
 		a = price;
-		b = formatted;
+
+		if (price !== formatedComparedAt) b = formatedComparedAt;
 	};
 
 	$effect(() => {
-		console.log('dump', { ... theme });
+		console.log('dump', { ...theme });
 	});
 
 	$effect(() => {
@@ -56,26 +59,56 @@
 			iso_code &&
 			variant_id &&
 			price &&
-			(compared_at || !compared_at)
+			(compared_at || !compared_at) // Just to trigger the effect
 		) {
 			tryApplyingAutomaticDiscount();
 		}
 	});
+
+	let formattedPrice = $derived(p.price);
+	let formattedComparedAt = $derived(p.compared_at);
+
+//	const convertToCurrency = (
+//		price: string,
+//		compared_at: string | undefined,
+//		marketCurrency: string,
+//		displayCurrency: string
+//	) => {
+//		const from = marketCurrency;
+//		const to = displayCurrency || from;
+//
+////		format(p.price, p.compared_at)
+//
+//		const { value: priceVal } = parseCurrencyString(p.price);
+//
+//		formattedPrice = Intl.NumberFormat('en-US', {style: 'currency', currency: to}).format(priceVal);
+//
+//		if(p.compared_at) {
+//			const {value: comparedAtVal} = parseCurrencyString(p.compared_at);
+//			compared_at = Intl.NumberFormat('en-US', {style: 'currency', currency: to}).format(comparedAtVal);
+//		}
+//
+//		return price;
+//	};
+//
+//	$effect(() => {
+//		convertToCurrency(p.price, p.compared_at, $marketCurrency, $displayCurrency);
+//	});
 </script>
 
 <div
-		use:removeNonComponentChildren
+	use:removeNonComponentChildren
 	class="pdp-price"
-	class:has-discount={p.compared_at}
+	class:has-discount={p.compared_at && p.compared_at !== p.price}
 	class:small={theme === 'small'}
 	class:big={theme === 'big'}
 >
-	{#if p.compared_at}
+	{#if p.compared_at && p.compared_at !== p.price}
 		<div class="pdp-price--compared-at">
 			{p.compared_at}
 		</div>
 	{/if}
-	<div class="pdp-price--price" class:highlight={p.compared_at}>{p.price}</div>
+	<div class="pdp-price--price">{p.price}</div>
 </div>
 
 <style lang="scss">

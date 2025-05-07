@@ -3,7 +3,7 @@ export type FormattedPrice = {
 	compared_at: string | undefined;
 };
 
-function parseCurrencyString(priceString: string, newValue: number | undefined = undefined) {
+export function parseCurrencyString(priceString: string, newValue: number | undefined = undefined) {
 	if (!priceString && priceString !== '') {
 		return {
 			formatted: '',

@@ -46,7 +46,7 @@
 	}
 </script>
 
-{#if discountPercentage}
+{#if discountPercentage && +discountPercentage > 0}
 	<div
 		class="discount-percentage"
 		class:has-discount={p.compared_at && p.compared_at !== p.price}

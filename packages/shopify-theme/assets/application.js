@@ -4,7 +4,44 @@ if ("ontouchstart" in document.documentElement) {
   document.body.classList.add("hover-device");
 }
 
+
+const init = async () => {
+  if(!window.UI) {
+    await new Promise(resolve => setTimeout(resolve, 25));
+    return init();
+  }
+
+  window.UI.stores.marketCurrency.set(window.Shopify.currency.active);
+}
+
+async function changeCurrency(newCurrency) {
+  try {
+    const response = await fetch('/cart/update', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        currency: newCurrency,
+        sections: 'cart-items,cart-footer' // Add your cart sections if needed
+      })
+    });
+
+    if (response.ok) {
+      // Refresh the page to update all prices
+      window.location.reload();
+    }
+  } catch (error) {
+    console.error('Error changing currency:', error);
+  }
+}
+
+window['changeCurrency'] = changeCurrency
+
+
 const componentLibRelay = () => {
+
+
   const VERBOSE = true
 
   // Extend console log for easier debugging
@@ -41,4 +78,5 @@ const componentLibRelay = () => {
   listen();
 };
 
+init()
 componentLibRelay();

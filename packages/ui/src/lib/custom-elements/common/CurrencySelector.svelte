@@ -1,7 +1,8 @@
 <svelte:options customElement="currency-selector" />
 
 <script lang="ts">
-	import { setLocale } from '$lib/localization/set-locale.js';
+	import { setMarket } from "$lib/localization/set-market.js";
+	import { displayCurrency } from "$lib/store/currency.js";
 	import type { LocalizationOption } from '$lib/types/LocalizationOption.js';
 	import { onMount } from 'svelte';
 	import { sineIn, expoOut } from 'svelte/easing';
@@ -19,7 +20,7 @@
 			duration,
 			easing,
 			css: (t: number) => `
-        transform: 
+        transform:
           scale(${scale + (1 - scale) * t})
           translateY(${(1 - t) * y}px);
         opacity: ${t};
@@ -41,7 +42,8 @@
 		active = option;
 		isOpen = false;
 
-		setLocale({ country: option.country.toLowerCase(), language: 'en' });
+		setMarket({ country: option.country.toLowerCase(), language: 'en' });
+		//displayCurrency.set(option.currency)
 	};
 
 	onMount(() => {

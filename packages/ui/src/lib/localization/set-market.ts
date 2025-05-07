@@ -1,4 +1,4 @@
-export const setLocale = ({ country, language }: { country: string; language: string }) => {
+export const setMarket = ({ country, language }: { country: string; language: string }) => {
 	const formId = crypto.randomUUID();
 	const formHtml = `
     <form id="${formId}" action="/localization" method="POST" hidden>
