@@ -3,12 +3,8 @@
 <script lang="ts">
 	import { currencyRates, displayCurrency, marketCurrency } from '$lib/store/currency.js';
 	import { removeNonComponentChildren } from '$lib/utils/dom/remove-non-component-children.js';
-	import {
-		parseCurrencyString,
-		subtractCurrencyStrings
-	} from '$lib/utils/formatters/price-formatter.js';
+	import { parseCurrencyString, subtractCurrencyStrings } from '$lib/utils/formatters/price-formatter.js';
 	import { NexusApi } from 'storefront-api';
-	import { onMount } from 'svelte';
 
 	type PriceStrCouple = {
 		price: string;
@@ -44,8 +40,8 @@
 	});
 
 	const final = $state<PriceStrCouple>({
-		price: inputPrice,
-		comparedAt: inputPrice
+		price: '-1',
+		comparedAt: undefined
 	});
 
 	// DEV ONLY
@@ -99,29 +95,36 @@
 
 	// Apply display currency changes
 	$effect(() => {
-		final.price = autoDiscountApplied.price;
-		final.comparedAt = autoDiscountApplied.comparedAt;
-
-		if ($marketCurrency === $displayCurrency) return;
-
-		if (!$currencyRates) return console.error('currencyRates is not set');
-
 		const formatter = new Intl.NumberFormat(undefined, {
 			style: 'currency',
 			currency: $displayCurrency, // 'EUR', 'USD', etc.
 			currencySign: 'standard',
 			currencyDisplay: 'narrowSymbol',
+			minimumFractionDigits: 0,
+			maximumFractionDigits: 0
 		});
+
+		final.price = formatter.format(parseCurrencyString(autoDiscountApplied.price).value);
+
+		if (autoDiscountApplied.comparedAt) {
+			final.comparedAt = formatter.format(
+				parseCurrencyString(autoDiscountApplied.comparedAt).value
+			);
+		}
+
+		if ($marketCurrency === $displayCurrency) return;
+
+		if (!$currencyRates) return console.error('currencyRates is not set');
 
 		const rate = $currencyRates[$displayCurrency];
 
 		// Get numerical value and apply rate
 		const { value: price } = parseCurrencyString(autoDiscountApplied.price);
-		final.price = formatter.format(price * rate);
+		final.price = formatter.format(Math.round(price * rate));
 
 		if (autoDiscountApplied.comparedAt) {
 			const { value: comparedAt } = parseCurrencyString(autoDiscountApplied.comparedAt);
-			final.comparedAt = formatter.format(comparedAt * rate);
+			final.comparedAt = formatter.format(Math.round(comparedAt * rate));
 		}
 	});
 

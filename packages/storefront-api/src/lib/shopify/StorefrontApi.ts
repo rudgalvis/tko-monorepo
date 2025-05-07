@@ -20,7 +20,7 @@ export class StorefrontApi extends BaseRepository {
 
 		if(!cart) throw Error('Failed to create cart');
 
-		return cart.lines.nodes[0].discountAllocations[0].discountedAmount.amount;
+		return cart.lines.nodes[0].discountAllocations[0]?.discountedAmount.amount || 0;
 	}
 
 	async getPreOrderMessage(productHandle: string, variantId?: number) {

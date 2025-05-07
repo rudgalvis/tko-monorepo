@@ -1,13 +1,13 @@
 <svelte:options customElement="product-discount-percentage" />
 
 <script lang="ts">
-	import { getAutomaticDiscount } from '$lib/api/rrxtko.api.js';
 	import {
 		calculateDiscountPercentage,
 		type FormattedPrice,
 		priceFormatter,
 		subtractCurrencyStrings
 	} from '$lib/utils/formatters/price-formatter.js';
+	import { NexusApi } from "storefront-api";
 
 	export let price: string = '';
 	export let compared_at: string | undefined = undefined;
@@ -17,6 +17,8 @@
 
 	let a: string = price,
 		b: string | undefined = compared_at;
+
+	const nexusApi = new NexusApi();
 
 	$: a = price;
 	$: b = compared_at;
@@ -32,7 +34,7 @@
 		if (!variant_id) return;
 		if (compared_at && compared_at !== 'nodiscount') return;
 
-		const { amount } = await getAutomaticDiscount(iso_code, +variant_id);
+		const { amount } = await nexusApi.getAutomaticDiscount(iso_code, +variant_id);
 
 		if (!amount) return;
 

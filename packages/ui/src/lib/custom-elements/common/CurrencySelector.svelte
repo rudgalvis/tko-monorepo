@@ -42,8 +42,8 @@
 		active = option;
 		isOpen = false;
 
-		setMarket({ country: option.country.toLowerCase(), language: 'en' });
-		//displayCurrency.set(option.currency)
+//		setMarket({ country: option.country.toLowerCase(), language: 'en' });
+		displayCurrency.set(option.currency)
 	};
 
 	onMount(() => {
