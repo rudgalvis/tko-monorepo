@@ -1,5 +1,5 @@
 {
-	"name": "api",
+	"name": "common-utils",
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",
@@ -60,8 +60,5 @@
 	},
 	"keywords": [
 		"svelte"
-	],
-	"dependencies": {
-		"@shopify/storefront-api-client": "^1.0.7"
-	}
+	]
 }
