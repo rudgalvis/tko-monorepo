@@ -1,6 +1,6 @@
 packages: [
   "packages/common-utils",
+  "packages/storefront-api",
   "packages/ui",
   "packages/shopify-nexus",
-  "packages/storefront-api",
 ]
