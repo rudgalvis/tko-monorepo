@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "vite dev --config vite.config.js",
     "storybook": "storybook dev -p 6006 --ci",
-    "build": "npm run prepack",
+    "build": "vite build && npm run prepack",
     "build-for-theme": "vite build --config vite.config.build.js --mode production",
     "rollup": "npx rollup -c",
     "preview": "vite preview",
