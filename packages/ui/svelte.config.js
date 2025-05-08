@@ -26,6 +26,9 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			$styles:  'src/lib/styles'
+		},
+		env: {
+			dir: '../..'
 		}
 	},
 

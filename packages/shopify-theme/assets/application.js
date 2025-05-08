@@ -4,6 +4,20 @@ if ("ontouchstart" in document.documentElement) {
   document.body.classList.add("hover-device");
 }
 
+const VERBOSE = true
+
+// Extend console log for easier debugging
+const c = {
+  log: (...args) => {
+    console.log("dump", ...args);
+  },
+  verbose: (...args) => {
+    if (!VERBOSE) return;
+
+    console.log("dump", ...args);
+  }
+}
+
 
 const init = async () => {
   if(!window.UI) {
@@ -12,6 +26,7 @@ const init = async () => {
   }
 
   window.UI.stores.marketCurrency.set(window.Shopify.currency.active);
+  window.UI.stores.displayCurrency.set(window.Shopify.currency.active);
 }
 
 async function changeCurrency(newCurrency) {

@@ -87,6 +87,7 @@
     "dotenv": "^16.4.7",
     "sass": "^1.82.0",
     "storefront-api": "workspace:*",
+    "common-utils": "workspace:*",
     "swiper": "^11.1.14",
     "tailwindcss": "^4.1.4"
   },

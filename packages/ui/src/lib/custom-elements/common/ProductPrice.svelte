@@ -21,14 +21,16 @@
 		compared_at: inputComparedAt,
 		iso_code: market,
 		variant_id,
-		devCurrency
+		DEV_currency,
+		DEV_market
 	} = $props<{
 		price: string; // 10€, €10
 		compared_at?: string; // 10€, €10, nodiscount
 		iso_code?: string; // LT, AU, ...
 		variant_id?: string; // numeric
 		theme?: 'small' | 'big';
-		devCurrency: 'EUR' | 'AUD' | 'GBP' | 'USD'; // For storybook usage
+		DEV_currency: 'EUR' | 'AUD' | 'GBP' | 'USD'; // For storybook usage
+		DEV_market: 'EUR' | 'AUD' | 'GBP' | 'USD'; // For storybook usage
 	}>();
 
 	const nexusApi = new NexusApi();
@@ -50,7 +52,8 @@
 
 	// DEV ONLY
 	$effect(() => {
-		if (devCurrency) displayCurrency.set(devCurrency);
+		if (DEV_currency) displayCurrency.set(DEV_currency);
+		if (DEV_market) marketCurrency.set(DEV_market);
 	});
 
 	// Normalize input
@@ -99,6 +102,12 @@
 
 	// Apply display currency changes
 	$effect(() => {
+		if(!$displayCurrency) return
+
+		// Validate currency rates are available
+		if (!$currencyRates) return
+
+		// Create a formatter for the display currency
 		const formatter = new Intl.NumberFormat(undefined, {
 			style: 'currency',
 			currency: $displayCurrency, // 'EUR', 'USD', etc.
@@ -108,24 +117,27 @@
 			maximumFractionDigits: 0
 		});
 
-		final.price = formatter.format(parseCurrencyString(autoDiscountApplied.price).value);
+		// Format the price based on the selected display currency
+		const { value: price } = parseCurrencyString(autoDiscountApplied.price);
+		final.price = formatter.format(price);
 
+		// Format compared at price if it exists
 		if (autoDiscountApplied.comparedAt) {
-			final.comparedAt = formatter.format(
-				parseCurrencyString(autoDiscountApplied.comparedAt).value
-			);
+			const { value: comparedAt } = parseCurrencyString(autoDiscountApplied.comparedAt);
+			final.comparedAt = formatter.format(comparedAt);
 		}
 
+		// No conversion needed if currencies match
 		if ($marketCurrency === $displayCurrency) return;
 
-		if (!$currencyRates) return console.error('currencyRates is not set');
 
+		// Get a conversion rate and apply to prices
 		const rate = $currencyRates[$displayCurrency];
 
-		// Get numerical value and apply rate
-		const { value: price } = parseCurrencyString(autoDiscountApplied.price);
+		// Apply conversion to price
 		final.price = formatter.format(Math.round(price * rate));
 
+		// Apply conversion to compare at price if it exists
 		if (autoDiscountApplied.comparedAt) {
 			const { value: comparedAt } = parseCurrencyString(autoDiscountApplied.comparedAt);
 			final.comparedAt = formatter.format(Math.round(comparedAt * rate));
@@ -155,9 +167,9 @@
 	};
 </script>
 
-{#if final.price !== '-1'}
+{#if $marketCurrency && final.price !== '-1'}
 	<div
-		in:fade={{ delay: 200, duration: 50 }}
+		in:fade={{ delay: 350, duration: 50 }}
 		use:removeNonComponentChildren
 		class="pdp-price"
 		class:has-discount={final.comparedAt}

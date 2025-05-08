@@ -13,7 +13,7 @@ Thumbs.db
 
 # Env
 .env.production
-.env.*
+.env*
 !.env.example
 !.env.test
 

@@ -33,7 +33,7 @@ function envPublicPlugin(publicEnv) {
 
 export default defineConfig(({ mode }) => {
 	// Load env file based on `mode`
-	const env = loadEnv(mode, process.cwd(), '');
+	const env = loadEnv(mode,  path.resolve(process.cwd(), '../..'), '');
 
 	// Filter out PUBLIC_ prefixed env variables
 	const publicEnv = Object.entries(env).reduce((acc, [key, val]) => {

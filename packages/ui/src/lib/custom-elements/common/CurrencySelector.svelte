@@ -1,11 +1,9 @@
 <svelte:options customElement="currency-selector" />
 
 <script lang="ts">
-	import { setMarket } from "$lib/localization/set-market.js";
 	import { displayCurrency } from "$lib/store/currency.js";
 	import type { LocalizationOption } from '$lib/types/LocalizationOption.js';
-	import { onMount } from 'svelte';
-	import { sineIn, expoOut } from 'svelte/easing';
+	import { expoOut, sineIn } from 'svelte/easing';
 
 	function flyScale(
 		node: HTMLElement,
@@ -37,27 +35,26 @@
 	export let bg: string = '#eeeeea';
 
 	let isOpen = false;
+	let initialised = false
 
 	const handleSelect = (option: LocalizationOption) => {
-		active = option;
 		isOpen = false;
-
-//		setMarket({ country: option.country.toLowerCase(), language: 'en' });
+		active = option;
 		displayCurrency.set(option.currency)
 	};
 
-	onMount(() => {
-		if (!params) return console.warn('DUMP no params found');
+	$: if(!initialised && params && $displayCurrency) {
+		initialised = true
 
 		try {
-			const { available: _available } = JSON.parse(params);
+			const {available: a} = JSON.parse(params);
+			available = a;
 
-			available = _available;
-			active = _available.find((option: LocalizationOption) => option.currency === $displayCurrency);
+			active = a.find((option: LocalizationOption) => option.currency === $displayCurrency);
 		} catch (e) {
-			console.error(e);
+			console.error('UI', e);
 		}
-	});
+	}
 </script>
 
 <div class="wrapper">

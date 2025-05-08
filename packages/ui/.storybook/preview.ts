@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/svelte';
+import { marketCurrency } from '../src/lib/store/currency';
 
 const preview: Preview = {
 	parameters: {
