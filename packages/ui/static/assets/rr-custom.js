@@ -10794,7 +10794,7 @@ function CurrencySelector(r, e) {
   }
   let o = prop(e, "params", 12, void 0), l = prop(e, "available", 28, () => []), c = prop(e, "active", 12, void 0), u = prop(e, "left", 12, !0), d = prop(e, "center", 12, !1), f = prop(e, "right", 12, !1), h = prop(e, "bg", 12, "#eeeeea"), _ = /* @__PURE__ */ mutable_source(!1), g = /* @__PURE__ */ mutable_source(!1);
   const v = (E) => {
-    c(E), set(_, !1), displayCurrency.set(E.currency);
+    set(_, !1), c(E), displayCurrency.set(E.currency);
   };
   legacy_pre_effect(
     () => (get$2(g), deep_read_state(o()), i()),
@@ -10997,7 +10997,7 @@ function ProductPrice(r, e) {
     h() && displayCurrency.set(h()), _() && marketCurrency.set(_());
   }), user_effect(() => {
     let S = c(), E = u();
-    E === "nodiscount" && (E = void 0), S < E && ([S, E] = [E, S]), get$2(v).price = S, get$2(v).comparedAt = E;
+    E === "nodiscount" && (E = void 0), S > E && ([S, E] = [E, S]), get$2(v).price = S, get$2(v).comparedAt = E;
   }), user_effect(() => {
     if (get$2(w).price = get$2(v).price, get$2(w).comparedAt = get$2(v).comparedAt, !!d() && f() && get$2(v).price && !get$2(v).comparedAt)
       try {
