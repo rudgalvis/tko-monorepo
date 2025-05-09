@@ -3108,7 +3108,7 @@ px
 .size___wrapper {
     position: fixed;
     width: 100%;
-    bottom: -200px;
+    /*bottom: -200px;*/
     background: #eeeee9;
     left: 0px;
     border: none;
