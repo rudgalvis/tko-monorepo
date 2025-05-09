@@ -70,7 +70,7 @@
 
 		// Step 4: Fix faulty input by swapping values
 		// (when price is less than compared_at)
-		if (newPrice < newComparedAt) {
+		if (newPrice > newComparedAt) {
 			[newPrice, newComparedAt] = [newComparedAt, newPrice];
 		}
 
