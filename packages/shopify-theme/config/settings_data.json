@@ -350,11 +350,6 @@
         "disabled": false,
         "settings": {}
       },
-      "5439026248262864547": {
-        "type": "shopify://apps/preorder-globo/blocks/app-embed/e547a0ad-8212-4bcc-b02f-761faa9b8af2",
-        "disabled": true,
-        "settings": {}
-      },
       "16387799423947206774": {
         "type": "shopify://apps/ecf-contact-form-builder/blocks/cs-app-block/f801eb98-c038-452f-9400-11754de52b77",
         "disabled": false,
@@ -364,6 +359,11 @@
       },
       "855628211100114053": {
         "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
+        "disabled": true,
+        "settings": {}
+      },
+      "5439026248262864547": {
+        "type": "shopify://apps/preorder-globo/blocks/app-embed/e547a0ad-8212-4bcc-b02f-761faa9b8af2",
         "disabled": true,
         "settings": {}
       }
