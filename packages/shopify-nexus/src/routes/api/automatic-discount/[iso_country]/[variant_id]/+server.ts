@@ -9,9 +9,21 @@ const handler: RequestHandler = async ({ params }) => {
 
 	const storefrontApi = new StorefrontApi()
 
-	return json({
-		amount: await storefrontApi.getAutomaticDiscountForVariant(iso_country, +variant_id),
-	})
+	try {
+		return json({
+			amount: await storefrontApi.getAutomaticDiscountForVariant(iso_country, +variant_id),
+		})
+	} catch (e: unknown) {
+		if (e instanceof Error) {
+			console.log(e.message)
+
+			if (/merchandise .*? does not exist/.test(e.message)) {
+				throw error(404, { message: 'Merchandise not found' })
+			}
+		}
+	}
+
+	throw error(500, { message: 'Internal error...' })
 }
 
 export const POST: RequestHandler = handler

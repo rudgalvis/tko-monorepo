@@ -3434,8 +3434,6 @@ $(document).ready(function () {
     json.popularproduct.product.push(obj);
   }
 
-  console.log(json);
-
   function delay(fn, ms) {
     let timer = 0;
     return function (...args) {

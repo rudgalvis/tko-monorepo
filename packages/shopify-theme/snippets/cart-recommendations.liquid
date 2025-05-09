@@ -111,8 +111,6 @@ and render it inside a specified wrapper
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = html;
 
-        console.log({html})
-
         // Extract and remove script tags
         const scripts = tempDiv.querySelectorAll('script');
         scripts.forEach(script => {

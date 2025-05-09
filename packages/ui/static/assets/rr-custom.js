@@ -10997,7 +10997,7 @@ function ProductPrice(r, e) {
     h() && displayCurrency.set(h()), _() && marketCurrency.set(_());
   }), user_effect(() => {
     let S = c(), E = u();
-    E === "nodiscount" && (E = void 0), S > E && ([S, E] = [E, S]), get$2(v).price = S, get$2(v).comparedAt = E;
+    (E === "nodiscount" || !E) && (E = void 0), S > E && ([S, E] = [E, S]), get$2(v).price = S, get$2(v).comparedAt = E;
   }), user_effect(() => {
     if (get$2(w).price = get$2(v).price, get$2(w).comparedAt = get$2(v).comparedAt, !!d() && f() && get$2(v).price && !get$2(v).comparedAt)
       try {
@@ -11423,9 +11423,7 @@ function PreOrderStrip(r, e) {
     () => {
       t() && s() && n();
     }
-  ), legacy_pre_effect(() => deep_read_state(i()), () => {
-    console.log("dump", i());
-  }), legacy_pre_effect_reset(), init();
+  ), legacy_pre_effect_reset(), init();
   var o = root(), l = child(o);
   {
     var c = (u) => {

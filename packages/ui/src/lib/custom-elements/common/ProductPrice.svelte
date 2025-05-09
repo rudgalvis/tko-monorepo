@@ -64,7 +64,7 @@
 		let newComparedAt = inputComparedAt;
 
 		// Step 2: Normalize 'nodiscount' value coming from legacy code
-		if (newComparedAt === 'nodiscount') {
+		if (newComparedAt === 'nodiscount' || !newComparedAt) {
 			newComparedAt = undefined;
 		}
 

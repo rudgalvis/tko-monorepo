@@ -1054,12 +1054,11 @@
         const observer = new MutationObserver((mutationsList) => {
             for (const mutation of mutationsList) {
                 if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-                    console.trace('Style changed:', targetNode.style.cssText);
+                    // console.trace('Style changed:', targetNode.style.cssText);
                 }
             }
         });
 
-        console.log('IM HERE')
         observer.observe(targetNode, { attributes: true, attributeFilter: ['style'] });
     } else {
         console.error('Element with .header-mobile not found.');

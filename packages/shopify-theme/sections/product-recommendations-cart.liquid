@@ -24,7 +24,11 @@ and rendered inside some element
     let wrapper;
 
     const onMount = async () => {
-        await waitFowSwiper()
+        try {
+            await waitFowSwiper()
+        } catch (e) {
+            return console.warn(e)
+        }
 
         wrapper = document.getElementById('product-recommendations-cart')
         if (!wrapper) throw new Error('Could not found wrapper element')

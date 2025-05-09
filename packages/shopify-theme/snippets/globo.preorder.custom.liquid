@@ -3,7 +3,7 @@
       document.querySelector('.product_form').classList.add('product_form_visible');
       document.querySelector('.product_form').querySelector('.gpoVariantSelector').value = document.querySelector('a.size-selection.active').getAttribute('data-variant-id');
   }
-  console.log(document.querySelectorAll('.size-holder li'))
+
   document.querySelectorAll('.size-holder li').forEach(el => {
       el.addEventListener('click', function(el){
         document.querySelector('.product_form').querySelector('.gpoVariantSelector').value = document.querySelector('a.size-selection.active').getAttribute('data-variant-id');

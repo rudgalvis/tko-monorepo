@@ -241,12 +241,9 @@
     gbCountry = $('#announcementbarsecond').attr('data-uk').split(',');
     ltCountry = $('#announcementbarsecond').attr('data-lt').split(',');
 
-    console.log(euCountry);
-
     var detectCountry;
     jQuery.get('/browsing_context_suggestions.json', (d) => {
       detectCountry = d.detected_values.country.handle;
-      console.log(detectCountry);
 
       var getCountry;
 

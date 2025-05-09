@@ -21,8 +21,6 @@
 	};
 
 	$: if (handle && variantId) fetchMessage();
-
-	$: console.log('dump', message);
 </script>
 
 <div class="min-h-[42px]" use:removeNonComponentChildren>
