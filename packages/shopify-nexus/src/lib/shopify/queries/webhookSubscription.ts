@@ -1,5 +1,5 @@
 export const webhookSubscription = `query {
-  webhookSubscriptions(first: 2) {
+  webhookSubscriptions(first: 10) {
     edges {
       node {
         id
@@ -21,3 +21,23 @@ export const webhookSubscription = `query {
     }
   }
 }`;
+
+export type WebhookNode = {
+	id: string; // Or number, depending on your GraphQL schema
+	topic: string;
+	endpoint: {
+		__typename: 'WebhookHttpEndpoint' | 'WebhookEventBridgeEndpoint' | 'WebhookPubSubEndpoint';
+		callbackUrl?: string; // Present if __typename is 'WebhookHttpEndpoint'
+		arn?: string; // Present if __typename is 'WebhookEventBridgeEndpoint'
+		pubSubProject?: string; // Present if __typename is 'WebhookPubSubEndpoint'
+		pubSubTopic?: string; // Present if __typename is 'WebhookPubSubEndpoint'
+	};
+};
+
+export type WebhookSubscriptionReturn = {
+	webhookSubscriptions: {
+		edges: Array<{
+			node: WebhookNode
+		}>;
+	};
+};

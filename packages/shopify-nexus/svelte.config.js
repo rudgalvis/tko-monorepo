@@ -14,6 +14,9 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			'@/*': './path/to/lib/*'
+		},
+		env: {
+			dir: '../..'
 		}
 	}
 };
