@@ -2460,9 +2460,34 @@ class NexusApi {
     }
   }
 }
-const nexusApi = new NexusApi(), displayCurrency = persistentWritable("displayCurrency", null), marketCurrency = persistentWritable("marketCurrency", null), currencyRates = writable(null);
+const availableCurrencies = [
+  {
+    currency: "EUR",
+    symbol: "€"
+  },
+  {
+    currency: "AUD",
+    symbol: "$"
+  },
+  {
+    currency: "GBP",
+    symbol: "£"
+  },
+  {
+    currency: "USD",
+    symbol: "$"
+  }
+], nexusApi = new NexusApi(), displayCurrency = persistentWritable("displayCurrency", null), marketCurrency = persistentWritable("marketCurrency", null), currencyRates = writable(null), whitelistedCurrencies = availableCurrencies.map((r) => r.currency), defaultCurrency = "EUR";
+displayCurrency.subscribe((r) => {
+  if (r && !whitelistedCurrencies.includes(r))
+    return displayCurrency.set(defaultCurrency);
+});
 marketCurrency.subscribe(async (r) => {
-  r && currencyRates.set(await nexusApi.getCurrencyRates(r));
+  if (r) {
+    if (!whitelistedCurrencies.includes(r))
+      return marketCurrency.set(defaultCurrency);
+    currencyRates.set(await nexusApi.getCurrencyRates(r));
+  }
 });
 const BASE_URL = "http://172.20.10.6:5173/api", API_ROUTES = {
   GET_AUTOMATIC_DISCOUNT: (r, e) => `automatic-discount/${r}/${e}`

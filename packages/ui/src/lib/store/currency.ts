@@ -9,11 +9,22 @@ export const displayCurrency = persistentWritable<string | null>('displayCurrenc
 export const marketCurrency = persistentWritable<string | null>('marketCurrency', null);
 export const currencyRates = writable<Record<string, number> | null>(null);
 
+const whitelistedCurrencies = availableCurrencies.map(e => e.currency);
+const defaultCurrency = 'EUR'
+
+displayCurrency.subscribe((v) => {
+	if(!v) return
+
+	if(!whitelistedCurrencies.includes(v)) {
+		return displayCurrency.set(defaultCurrency)
+	}
+})
+
 marketCurrency.subscribe(async (v) => {
 	if(!v) return
 
-	if(!availableCurrencies.find(e => e.currency === v)) {
-		return marketCurrency.set('EUR')
+	if(!whitelistedCurrencies.includes(v)) {
+		return marketCurrency.set(defaultCurrency)
 	}
 
 	currencyRates.set(await nexusApi.getCurrencyRates(v));

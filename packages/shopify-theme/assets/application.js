@@ -29,31 +29,6 @@ const init = async () => {
   window.UI.stores.displayCurrency.set(window.Shopify.currency.active);
 }
 
-async function changeCurrency(newCurrency) {
-  try {
-    const response = await fetch('/cart/update', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        currency: newCurrency,
-        sections: 'cart-items,cart-footer' // Add your cart sections if needed
-      })
-    });
-
-    if (response.ok) {
-      // Refresh the page to update all prices
-      window.location.reload();
-    }
-  } catch (error) {
-    console.error('Error changing currency:', error);
-  }
-}
-
-window['changeCurrency'] = changeCurrency
-
-
 const componentLibRelay = () => {
 
 
