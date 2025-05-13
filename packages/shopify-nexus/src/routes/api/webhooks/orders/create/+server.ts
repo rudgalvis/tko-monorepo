@@ -15,7 +15,7 @@ const TEST_MODE = true
 const TEST_CUSTOMERS = ['rokas@rudgalvis.com', 'kriste@theknottyones.com', 'indretko@gmail.com']
 
 const handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => {
-	if(VERBOSE) console.log(`Handling Pre-order webhook.`)
+	if (VERBOSE) console.log(`Handling Pre-order webhook.`)
 
 	const mailingService = new MailingService()
 	const productService = new ProductService()
@@ -33,6 +33,7 @@ const handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => {
 
 		if (TEST_MODE) {
 			// This prevents accidental processing of real customer orders during development/testing
+			if (VERBOSE) console.log(`Test mode enabled. ${customerEmail} is not a test customer.`)
 			if (!TEST_CUSTOMERS.includes(customerEmail)) return
 		}
 

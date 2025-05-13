@@ -22,12 +22,12 @@ export async function POST(event) {
 		]
 
 		if (!shopifyDomain) {
-			if(VERBOSE) console.log('No shop domain')
+			if (VERBOSE) console.log('No shop domain')
 			return new Response('No shop domain', { status: 401 })
 		}
 
 		if (!whiteListedDomains.includes(shopifyDomain)) {
-			if(VERBOSE) console.log('Not a whitelisted domain')
+			if (VERBOSE) console.log('Not a whitelisted domain')
 			return new Response('Not a whitelisted domain', { status: 401 })
 		}
 
@@ -35,7 +35,7 @@ export async function POST(event) {
 		const verified = verifyWebhook(rawBody, hmacHeader, SHOPIFY_API_SECRET)
 
 		if (!verified) {
-			if(VERBOSE) console.log('Invalid webhook signature')
+			if (VERBOSE) console.log('Invalid webhook signature')
 			return new Response('Invalid webhook signature', { status: 401 })
 		}
 
@@ -46,11 +46,11 @@ export async function POST(event) {
 		const topic = request.headers.get('x-shopify-topic')
 
 		if (topic) {
-			if(VERBOSE) console.log(`Topic ${topic} received.`)
+			if (VERBOSE) console.log(`Topic ${topic} received.`)
 			return await proxy(event, topic, webhookData)
 		}
 
-		if(VERBOSE) console.log(`Exit without proxying to a topic.`)
+		if (VERBOSE) console.log(`Exit without proxying to a topic.`)
 
 		return json({ success: true })
 	} catch (error) {
@@ -59,7 +59,7 @@ export async function POST(event) {
 	}
 }
 
-async function proxy(event: RequestEvent, topic: string, webhookData: any) {
+async function proxy(event: RequestEvent, topic: string, webhookData: any): Promise<Response> {
 	try {
 		const response = await event.fetch(`/api/webhooks/${topic}`, {
 			method: 'POST',
@@ -73,7 +73,7 @@ async function proxy(event: RequestEvent, topic: string, webhookData: any) {
 			throw new Error(`HTTP error! status: ${response.status}, ${response.statusText}`)
 		}
 
-		return await response.json()
+		return response
 	} catch (error) {
 		console.error(`Failed to proxy webhook ${topic}:`, error)
 		throw error
