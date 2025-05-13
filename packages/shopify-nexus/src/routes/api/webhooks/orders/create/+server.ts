@@ -12,7 +12,7 @@ const VERBOSE = true
 
 // TEST_MODE: When enabled, only process orders from specific test customer emails
 const TEST_MODE = true
-const TEST_CUSTOMERS = ['rokas@rudgalvis.com', 'kriste@theknottyones.com', 'indretko@gmail.com']
+const TEST_CUSTOMERS = ['rokas@rudgalvis.com', 'rokasr788@gmail.com', 'kriste@theknottyones.com', 'indretko@gmail.com']
 
 const handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => {
 	if (VERBOSE) console.log(`Handling Pre-order webhook.`)
