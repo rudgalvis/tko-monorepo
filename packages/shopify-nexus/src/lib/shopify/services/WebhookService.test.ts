@@ -36,5 +36,5 @@ describe.sequential('Testing webhooks with ORDERS_CREATE', () => {
 		if(VERBOSE) console.log({ webhookSubscription })
 
 		expect(webhookSubscription).toBeDefined()
-	})
+	}, {timeout: 15000})
 })

@@ -14,7 +14,7 @@ services:
       - TZ=Europe/Vilnius
     # Points to a file with the sensitive environment variables
     env_file:
-      - ../packages/shopify-nexus/.env---
+      - ../.env
     restart: unless-stopped
     ports:
       - 51000:3000

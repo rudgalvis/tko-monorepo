@@ -11,9 +11,9 @@ export class TestOrderService {
 
 	async createOrder(lineItems: { quantity: number; variantId: string }[]) {
 		const currencyCode = await this.orderRepository.getCurrencyCode();
-		const locations = await this.locationsRepository.getLocations();
+		const [location] = await this.locationsRepository.getLocations() || [];
 
-		if (!locations || !locations[1]) throw new Error('Locations not found');
+		if (!location) throw new Error('Locations not found');
 
 		if (!currencyCode) throw new Error('Currency code not found');
 
@@ -35,7 +35,7 @@ export class TestOrderService {
 						gateway: 'manual',
 						kind: 'SALE',
 						status: 'SUCCESS',
-						locationId: locations[1].id,
+						locationId: location.id,
 						amountSet: {
 							shopMoney: {
 								amount: 100,

@@ -35,7 +35,7 @@ export class TestProductService {
 			expectedDate: undefined, // Deliberately omitting expectedDate to test handling of missing data
 		},
 	]
-	public readonly TEST_PRODUCT_TITLE = 'Delčia: Lemon Cotton Sweater'
+	public readonly TEST_PRODUCT_TITLE = 'Delčia: Lemon Cotton Sweater - TEST PRODUCT'
 
 	private testProductId: string | undefined = undefined
 
@@ -153,7 +153,7 @@ export class TestProductService {
 					inventoryPolicy: e.policy,
 					inventoryQuantities: {
 						availableQuantity: e.quantity,
-						locationId: locations[1].id,
+						locationId: locations[0].id,
 					},
 					metafields: [maximumPreSaleMetafield, expectedDateMetafield],
 					optionValues: [

@@ -40,6 +40,7 @@ describe.sequential('Test product management test suite', () => {
 			expect(await testProductServices.deleteProduct()).toBeTruthy()
 			const testProduct = await testProductServices.findProduct()
 			expect(testProduct).toBeUndefined()
+
 			if (VERBOSE) console.log('Product deleted successfully')
 		})
 	})
