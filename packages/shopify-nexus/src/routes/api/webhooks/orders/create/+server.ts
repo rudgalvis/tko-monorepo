@@ -33,8 +33,13 @@ const handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => {
 
 		if (TEST_MODE) {
 			// This prevents accidental processing of real customer orders during development/testing
-			if (VERBOSE) console.log(`Test mode enabled. ${customerEmail} is not a test customer.`)
-			if (!TEST_CUSTOMERS.includes(customerEmail)) return
+			if (!TEST_CUSTOMERS.includes(customerEmail)) {
+				if (VERBOSE) console.log(`Test mode enabled. ${customerEmail} is not a test customer.`)
+
+				return
+			}
+
+			if (VERBOSE) console.log(`Test mode enabled. Processing test customer: ${customerEmail}`)
 		}
 
 		// Disabling pre-order for items
