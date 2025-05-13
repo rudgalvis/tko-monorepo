@@ -21,15 +21,21 @@ export async function POST(event) {
 			'theknottyones.com',
 		]
 
-		if (!shopifyDomain) return new Response('No shop domain', { status: 401 })
+		if (!shopifyDomain) {
+			if(VERBOSE) console.log('No shop domain')
+			return new Response('No shop domain', { status: 401 })
+		}
 
-		if (!whiteListedDomains.includes(shopifyDomain))
+		if (!whiteListedDomains.includes(shopifyDomain)) {
+			if(VERBOSE) console.log('Not a whitelisted domain')
 			return new Response('Not a whitelisted domain', { status: 401 })
+		}
 
 		// Verify webhook authenticity
 		const verified = verifyWebhook(rawBody, hmacHeader, SHOPIFY_API_SECRET)
 
 		if (!verified) {
+			if(VERBOSE) console.log('Invalid webhook signature')
 			return new Response('Invalid webhook signature', { status: 401 })
 		}
 
