@@ -45,15 +45,14 @@ WORKDIR /app
 # Create a non-root user
 RUN groupadd -r appgroup && useradd -r -g appgroup appuser
 
-# Copy necessary files from builder
-COPY --from=builder /app/package.json ./
-COPY --from=builder /app/pnpm-*.yaml ./
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/packages ./packages
+# Copy necessary files from builder with ownership set during copy
+# This eliminates the need for the slow recursive chown
+COPY --from=builder --chown=appuser:appgroup /app/package.json ./
+COPY --from=builder --chown=appuser:appgroup /app/pnpm-*.yaml ./
 
-
-# Set ownership to non-root user
-RUN chown -R appuser:appgroup /app
+# Copy node_modules and packages with correct ownership
+COPY --from=builder --chown=appuser:appgroup /app/node_modules ./node_modules
+COPY --from=builder --chown=appuser:appgroup /app/packages ./packages
 
 USER appuser
 

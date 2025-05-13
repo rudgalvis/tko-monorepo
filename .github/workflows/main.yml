@@ -21,7 +21,8 @@ jobs:
             git pull
             chmod +x ./.docker/deploy.sh
             ./.docker/deploy.sh
-      - name: Clean up Docker
+      - name: Release server space
         run: |
           # Remove dangling images only (safer)
           docker image prune -f
+          docker builder prune -f
