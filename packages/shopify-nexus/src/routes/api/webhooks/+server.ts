@@ -45,7 +45,12 @@ export async function POST(event) {
 		// Handle the webhook based on the topic
 		const topic = request.headers.get('x-shopify-topic')
 
-		if (topic) await proxy(event, topic, webhookData)
+		if (topic) {
+			if(VERBOSE) console.log(`Topic ${topic} received.`)
+			return await proxy(event, topic, webhookData)
+		}
+
+		if(VERBOSE) console.log(`Exit without proxying to a topic.`)
 
 		return json({ success: true })
 	} catch (error) {

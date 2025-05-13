@@ -1,3 +1,4 @@
+import { PUBLIC_NEXUS_BASE_URL } from '$env/static/public'
 import { TestOrderService } from '$lib/shopify/services/TestOrderService'
 import { TestProductService } from '$lib/shopify/services/TestProductService'
 import { describe, expect, test } from 'vitest'
@@ -37,6 +38,6 @@ describe.sequential('Should setup test product and perform test order', () => {
 
 		expect(r).toBeTruthy()
 
-		console.log('Order created. Shopify should hit the webhook in a moment.')
+		console.log(`Order created. Shopify should hit ${PUBLIC_NEXUS_BASE_URL} webhook in a moment.`)
 	})
 })

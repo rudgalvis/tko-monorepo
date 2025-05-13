@@ -15,6 +15,8 @@ const TEST_MODE = true
 const TEST_CUSTOMERS = ['rokas@rudgalvis.com', 'kriste@theknottyones.com', 'indretko@gmail.com']
 
 const handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => {
+	if(VERBOSE) console.log(`Handling Pre-order webhook.`)
+
 	const mailingService = new MailingService()
 	const productService = new ProductService()
 	const orderService = new OrderService()

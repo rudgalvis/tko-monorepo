@@ -15,8 +15,6 @@ const handler: RequestHandler = async ({ params }) => {
 		})
 	} catch (e: unknown) {
 		if (e instanceof Error) {
-			console.log(e.message)
-
 			if (/merchandise .*? does not exist/.test(e.message)) {
 				throw error(404, { message: 'Merchandise not found' })
 			}
