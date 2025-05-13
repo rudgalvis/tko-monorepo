@@ -3,7 +3,11 @@ import type { RequestEvent } from '@sveltejs/kit'
 import crypto from 'crypto'
 import { SHOPIFY_API_SECRET } from '$env/static/private'
 
+const VERBOSE = true
+
 export async function POST(event) {
+	if (VERBOSE) console.log('Webhook is hitting API.')
+
 	try {
 		const { request } = event
 
