@@ -1,5 +1,5 @@
 {% comment %}
-    {% render 'pdp-price', product: product, pageQuerystring:pageQuerystring %}
+    {% render '1lib-pdp-price', product: product, pageQuerystring:pageQuerystring %}
 {% endcomment %}
 
 {% for variant in product.variants %}
@@ -14,10 +14,11 @@
     {% endif %}
 {% endfor %}
 
-<product-price price="{{ price | money_without_trailing_zeros }}"
+<product-price price="{{ price | money_without_trailing_zeros | strip_html }}"
                compared_at="{{ compared_at | money_without_trailing_zeros }}"
                iso_code="{{ localization.country.iso_code }}"
-               variant_id="{{ variantId }}">
+               variant_id="{{ variantId }}"
+               discount_position="newlineOnMobile">
     {% if product.compare_at_price > product.price %}
         <s aria-label="Original price" style="opacity: 0;">{{ product.compare_at_price | money }}</s>
     {% endif %}

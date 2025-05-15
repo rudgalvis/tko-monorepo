@@ -21,7 +21,7 @@ describe.sequential('Should setup test product and perform test order', () => {
 		// As if adding to cart here
 		const lineItems = [
 			{
-				quantity: 30,
+				quantity: 1,
 				variantId: variants[0].id,
 				productId,
 				requiresShipping: true,

@@ -359,11 +359,6 @@ p{
 
 }
 
-
-
-
-
-
 h1, h2, h3, h4{
     color: {{ settings.headingColor }};
     font-family: 'Monument';
@@ -372,19 +367,19 @@ h1, h2, h3, h4{
 }
 
 h1{
-    font-size:{{ settings.h1FontSize }}px;
+    font-size:{{ settings.h1FontSize | default: 16 }}px;
 }
 
 h2{
-    font-size:{{ settings.h2FontSize }}px;
+    font-size:{{ settings.h2FontSize | default: 14 }}px;
 }
 
 h3{
-    font-size:{{ settings.h3FontSize }}px;
+    font-size:{{ settings.h3FontSize | default: 12 }}px;
 }
 
 h4{
-    font-size:{{ settings.h4FontSize }}px;
+    font-size:{{ settings.h4FontSize | default: 10 }}px;
 }
 
 ul{

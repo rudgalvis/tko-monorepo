@@ -471,7 +471,8 @@ Mobile Slider
                             </p>
                         {%- when 'price' -%}
                             <div class="price___adjustment  {% if product.tags contains 'pre-order' %} price_adjustment_pre__order {% endif %}">
-                                {% render 'pdp-price', product: product, pageQuerystring: pageQuerystring %}
+                                {% render '1lib-pdp-price', product: product, pageQuerystring: pageQuerystring %}
+
 
                                 <div class="split-container">
                                     <p>All import taxes and duties are <b>included</b>.</p>
