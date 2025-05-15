@@ -38,6 +38,8 @@
 
     {% render 'meta-tags' %}
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
     {{ 'jquery-3.6.0.js' | asset_url | script_tag }}
     {{ 'mobile-detect.min.js' | asset_url | script_tag }}
@@ -336,5 +338,17 @@
     {%- include 'bss-b2b-js' -%}
 {%- endif %}
 {% render 'globo.preorder.custom' %}
+
+
+<script type="text/javascript">
+    rivets.formatters.currency = {
+        read: function(value) {
+            return Math.round((value / 100)).toFixed(2)
+        },
+        publish: function(value) {
+            return Math.round(parseFloat(value) * 100)
+        }
+    }
+</script>
 </body>
 </html>

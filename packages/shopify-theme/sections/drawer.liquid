@@ -53,6 +53,8 @@ Create Json for product variant color or image
 {% endfor %}
 '></div>
 
+
+
 {%- comment -%}
 ----------------------------------------------
 Create Json for product variant color or image
@@ -110,8 +112,6 @@ Create Json for product variant color or image
                             --------------------------------------------------------
                             <p rv-text="item.product_type"></p>
                             {%- endcomment -%}
-
-
                         </div>
                         <div class="drawer-bottom-container">
                             <div class="color-drawer" style="cursor: pointer" onclick="location.href=this.getAttribute('data-url')" rv-data-url="item.url">
@@ -137,8 +137,20 @@ Create Json for product variant color or image
                             </div>
 
                             <div class="drawer-price-container">
-                                <p class="drawer-price" rv-html="item.line_price | money Currency.currentCurrency ">
-                                    120€</p>
+                                <p class="drawer-price">
+                                    <product-price rv-price="item.line_price | currency"
+                                                   rv-compared_at="item.price | currency"
+                                                   iso_code="{{ localization.country.iso_code }}"
+                                                   rv-variant_id="item.variant_id"
+                                                   theme="small"
+                                                   discount_position="hidden">
+                                        {% if product.compare_at_price > product.price %}
+                                            <s aria-label="Original price" style="opacity: 0;">{{ product.compare_at_price | money }}</s>
+                                        {% endif %}
+
+                                        <strong aria-label="Current price" style="opacity: 0;">{{ product.price | money }}</strong>
+                                    </product-price>
+                                </p>
                             </div>
                         </div>
 
@@ -213,7 +225,19 @@ Create Json for product variant color or image
 
             <div class="title-price">
                 <p>TOTAL</p>
-                <p rv-html="cart.total_price | money Currency.currentCurrency ">480€</p>
+                <p legacy-rv-html="cart.total_price | currency | money Currency.currentCurrency ">
+                    <product-price rv-price="cart.total_price | currency"
+                                   rv-compared_at="cart.original_total_price | currency"
+                                   iso_code="{{ localization.country.iso_code }}"
+                                   theme="medium"
+                                   discount_position="hidden">
+                        {% if product.compare_at_price > product.price %}
+                            <s aria-label="Original price" style="opacity: 0;">{{ product.compare_at_price | money }}</s>
+                        {% endif %}
+
+                        <strong aria-label="Current price" style="opacity: 0;">{{ product.price | money }}</strong>
+                    </product-price>
+                </p>
             </div>
             <span class="co-wrapper" rv-show="cart.total_price | gt 0">
              <form action="/cart" method="post">
@@ -228,6 +252,8 @@ Create Json for product variant color or image
         </div>
 
     </div>
+
+    {% render 'dump', value: cart %}
 
     <div rv-show="cart.item_count | lt 1">
         <span colspan="5">You don't have any items in your cart.</span>

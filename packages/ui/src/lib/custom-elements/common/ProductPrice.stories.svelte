@@ -3,7 +3,7 @@
 
 	export const meta = {
 		title: 'custom-elements/price/<product-price>',
-		component: ProductPrice,
+		component: ProductPrice
 	};
 </script>
 
@@ -49,6 +49,7 @@
 		variant_id: '54204479766876',
 		compared_at: 'nodiscount',
 		price: '€300.00',
-
+		DEV_currency: 'EUR',
+		DEV_market: 'EUR'
 	}}
 />

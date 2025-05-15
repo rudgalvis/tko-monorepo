@@ -6,13 +6,28 @@
     {% assign color = variant.option1 %}
     {% assign colorSlug = color | handleize %}
 
-    {% if pageQuerystring == colorSlug %}
+    {% if pageQuerystring == colorSlug and variant.available %}
         {% assign variantId = variant.id %}
         {% assign price = variant.price %}
         {% assign compared_at = variant.compare_at_price %}
         {% break %}
     {% endif %}
 {% endfor %}
+
+{% comment %}In case could not match with initial run, most likly because no variant was available{% endcomment %}
+{% unless variantId > 0 %}
+    {% for variant in product.variants %}
+        {% assign color = variant.option1 %}
+        {% assign colorSlug = color | handleize %}
+
+        {% if pageQuerystring == colorSlug %}
+            {% assign variantId = variant.id %}
+            {% assign price = variant.price %}
+            {% assign compared_at = variant.compare_at_price %}
+            {% break %}
+        {% endif %}
+    {% endfor %}
+{% endunless %}
 
 <product-price price="{{ price | money_without_trailing_zeros | strip_html }}"
                compared_at="{{ compared_at | money_without_trailing_zeros }}"

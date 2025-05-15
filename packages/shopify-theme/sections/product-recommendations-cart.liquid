@@ -40,10 +40,10 @@ and rendered inside some element
             direction: 'horizontal',
             allowTouchMove: false,
             spaceBetween: 0,
-            pagination: {
-                el: '.swiper-pagination',
-                type: 'bullets',
-            },
+            // pagination: {
+            //     el: '.swiper-pagination',
+            //     type: 'bullets',
+            // },
         })
 
         if (!swiper) throw new Error('Swiper not loaded')
@@ -95,7 +95,6 @@ and rendered inside some element
 
 <style>
     .product-recommendations-cart {
-        opacity: 0;
         /*transform: translateX(100%);*/
         transition: opacity 1s ease, transform 1s ease;
     }
