@@ -2477,7 +2477,7 @@ const availableCurrencies = [
     currency: "USD",
     symbol: "$"
   }
-], nexusApi = new NexusApi(), displayCurrency = persistentWritable("displayCurrency", null), marketCurrency = persistentWritable("marketCurrency", null), currencyRates = writable(null), whitelistedCurrencies = availableCurrencies.map((r) => r.currency), defaultCurrency = "EUR";
+], nexusApi = new NexusApi(), DISPLAY_CURRENCY_MEMORY_KEY = "displayCurrency", MARKET_CURRENCY_MEMORY_KEY = "marketCurrency", displayCurrency = persistentWritable(DISPLAY_CURRENCY_MEMORY_KEY, null), marketCurrency = persistentWritable(MARKET_CURRENCY_MEMORY_KEY, null), currencyRates = writable(null), whitelistedCurrencies = availableCurrencies.map((r) => r.currency), defaultCurrency = "EUR";
 displayCurrency.subscribe((r) => {
   if (r && !whitelistedCurrencies.includes(r))
     return displayCurrency.set(defaultCurrency);
@@ -2489,7 +2489,8 @@ marketCurrency.subscribe(async (r) => {
     currencyRates.set(await nexusApi.getCurrencyRates(r));
   }
 });
-const BASE_URL = "http://172.20.10.6:5173/api", API_ROUTES = {
+const setMarketFromUrl = () => {
+}, BASE_URL = "http://172.20.10.6:5173/api", API_ROUTES = {
   GET_AUTOMATIC_DISCOUNT: (r, e) => `automatic-discount/${r}/${e}`
 }, getAutomaticDiscount = async (r, e) => {
   const t = await fetch(
@@ -10819,20 +10820,19 @@ function CurrencySelector(r, e) {
   }
   let o = prop(e, "params", 12, void 0), l = prop(e, "available", 28, () => []), c = prop(e, "active", 12, void 0), d = prop(e, "left", 12, !0), u = prop(e, "center", 12, !1), f = prop(e, "right", 12, !1), h = prop(e, "bg", 12, "#eeeeea"), _ = /* @__PURE__ */ mutable_source(!1), g = /* @__PURE__ */ mutable_source(!1);
   const v = (T) => {
-    set(_, !1), c(T), displayCurrency.set(T.currency);
+    set(_, !1), set(g, !0), c(T), displayCurrency.set(T.currency);
   };
   legacy_pre_effect(
-    () => (get$2(g), deep_read_state(o()), i()),
+    () => (deep_read_state(o()), i(), get$2(g)),
     () => {
-      if (!get$2(g) && o() && i()) {
-        set(g, !0);
+      if (o() && i())
         try {
           const { available: T } = JSON.parse(o());
           l(T), c(T.find((k) => k.currency === i()));
         } catch (T) {
           console.error("UI", T);
         }
-      }
+      else get$2(g) && set(g, !1);
     }
   ), legacy_pre_effect_reset(), init();
   var w = root$1(), m = child(w);
@@ -11553,6 +11553,9 @@ if (typeof window < "u") {
     stores: {
       displayCurrency,
       marketCurrency
+    },
+    actions: {
+      setMarketFromUrl
     }
   };
   window.getAutomaticDiscount = getAutomaticDiscount, window.UI = r;

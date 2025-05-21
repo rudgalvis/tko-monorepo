@@ -5,8 +5,11 @@ import availableCurrencies from '$lib/data/available-currencies.json' with { typ
 
 const nexusApi = new NexusApi();
 
-export const displayCurrency = persistentWritable<string | null>('displayCurrency', null);
-export const marketCurrency = persistentWritable<string | null>('marketCurrency', null);
+const DISPLAY_CURRENCY_MEMORY_KEY = 'displayCurrency';
+const MARKET_CURRENCY_MEMORY_KEY = 'marketCurrency';
+
+export const displayCurrency = persistentWritable<string | null>(DISPLAY_CURRENCY_MEMORY_KEY, null);
+export const marketCurrency = persistentWritable<string | null>(MARKET_CURRENCY_MEMORY_KEY, null);
 export const currencyRates = writable<Record<string, number> | null>(null);
 
 const whitelistedCurrencies = availableCurrencies.map(e => e.currency);
@@ -29,3 +32,10 @@ marketCurrency.subscribe(async (v) => {
 
 	currencyRates.set(await nexusApi.getCurrencyRates(v));
 });
+
+export const resetDisplayCurrencyMemory = () => {
+	localStorage.removeItem(DISPLAY_CURRENCY_MEMORY_KEY);
+}
+export const resetMarketCurrencyMemory = () => {
+	localStorage.removeItem(MARKET_CURRENCY_MEMORY_KEY);
+}

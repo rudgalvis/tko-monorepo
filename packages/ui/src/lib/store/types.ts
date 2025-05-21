@@ -1,6 +1,8 @@
-import type { Writable } from "svelte/store";
+import type { Writable } from 'svelte/store';
 
 export interface ExposedStores {
-    displayCurrency: Writable<string>
-    marketCurrency: Writable<string>;
+	displayCurrency: Writable<string>;
+	marketCurrency: Writable<string>;
+}
+export interface ExposedActions {
 }

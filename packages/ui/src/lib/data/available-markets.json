@@ -1,6 +1,6 @@
 [
-	{ "currency": "EUR", "symbol": "€", "country": "LT", "language": "en" },
-	{ "currency": "AUD", "symbol": "$", "country": "AU", "language": "en" },
-	{ "currency": "GBP", "symbol": "£", "country": "GB", "language": "en" },
-	{ "currency": "USD", "symbol": "$", "country": "US", "language": "en" }
+	{ "currency": "EUR", "symbol": "€", "country": "LT" },
+	{ "currency": "AUD", "symbol": "$", "country": "AU" },
+	{ "currency": "GBP", "symbol": "£", "country": "GB" },
+	{ "currency": "USD", "symbol": "$", "country": "US" }
 ]

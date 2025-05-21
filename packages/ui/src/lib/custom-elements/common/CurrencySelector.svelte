@@ -35,17 +35,16 @@
 	export let bg: string = '#eeeeea';
 
 	let isOpen = false;
-	let initialised = false
+	let isSelectTriggered = false;
 
 	const handleSelect = (option: LocalizationOption) => {
 		isOpen = false;
+		isSelectTriggered = true;
 		active = option;
 		displayCurrency.set(option.currency)
 	};
 
-	$: if(!initialised && params && $displayCurrency) {
-		initialised = true
-
+	$: if(params && $displayCurrency) {
 		try {
 			const {available: a} = JSON.parse(params);
 			available = a;
@@ -54,6 +53,9 @@
 		} catch (e) {
 			console.error('UI', e);
 		}
+	} else if(isSelectTriggered) {
+		// Reset the flag after the reactive block has been skipped
+		isSelectTriggered = false
 	}
 </script>
 
