@@ -87,44 +87,6 @@
         "sectionID": ""
       }
     },
-    "1634918258b848ff3a": {
-      "type": "static-collection-link-section",
-      "blocks": {
-        "1f57a130-5678-4299-b440-0f20c59634c1": {
-          "type": "collection",
-          "settings": {
-            "selcollection": "sweaters"
-          }
-        },
-        "8589bb6a-494f-442b-8486-e4fe54072ceb": {
-          "type": "collection",
-          "settings": {
-            "selcollection": "cardigans"
-          }
-        },
-        "848bb87d-c790-4046-9543-86a46b642b13": {
-          "type": "collection",
-          "settings": {
-            "selcollection": "dresses"
-          }
-        },
-        "c8ae8666-1ce3-4e00-8cdf-d13b0e2b09f1": {
-          "type": "collection",
-          "settings": {
-            "selcollection": "accesories"
-          }
-        }
-      },
-      "block_order": [
-        "1f57a130-5678-4299-b440-0f20c59634c1",
-        "8589bb6a-494f-442b-8486-e4fe54072ceb",
-        "848bb87d-c790-4046-9543-86a46b642b13",
-        "c8ae8666-1ce3-4e00-8cdf-d13b0e2b09f1"
-      ],
-      "settings": {
-        "lineNumber": "1"
-      }
-    },
     "163758180555d34f3c": {
       "type": "static-slide-text",
       "blocks": {
@@ -184,6 +146,44 @@
       "settings": {
         "slidetextlayout": "hide-border",
         "stopslide": false
+      }
+    },
+    "1634918258b848ff3a": {
+      "type": "static-collection-link-section",
+      "blocks": {
+        "1f57a130-5678-4299-b440-0f20c59634c1": {
+          "type": "collection",
+          "settings": {
+            "selcollection": "sweaters"
+          }
+        },
+        "8589bb6a-494f-442b-8486-e4fe54072ceb": {
+          "type": "collection",
+          "settings": {
+            "selcollection": "cardigans"
+          }
+        },
+        "848bb87d-c790-4046-9543-86a46b642b13": {
+          "type": "collection",
+          "settings": {
+            "selcollection": "dresses"
+          }
+        },
+        "c8ae8666-1ce3-4e00-8cdf-d13b0e2b09f1": {
+          "type": "collection",
+          "settings": {
+            "selcollection": "accesories"
+          }
+        }
+      },
+      "block_order": [
+        "1f57a130-5678-4299-b440-0f20c59634c1",
+        "8589bb6a-494f-442b-8486-e4fe54072ceb",
+        "848bb87d-c790-4046-9543-86a46b642b13",
+        "c8ae8666-1ce3-4e00-8cdf-d13b0e2b09f1"
+      ],
+      "settings": {
+        "lineNumber": "1"
       }
     },
     "1634312997cd1a9ecc": {
@@ -247,14 +247,14 @@
         "borderlayouttwocl": "top-bottom",
         "textposition": "space-between",
         "sectionlayouttwocl": "image-text",
-        "headingcl": "THE KNOTTY ONES x NOT PERFECT LINEN",
+        "headingcl": "TAKE 25% OFF SUMMER BEST SELLER",
         "showtitletwo": true,
         "h2maxwidthdesktop": 440,
         "h2maxwidthmobile": 280,
-        "bodycl": "Aguonos (Eng.\"poppies\") Dress is a collaboration born from a shared passion for natural fibres and timeless craftsmanship.",
+        "bodycl": "You’ve been waiting, we’ve been knitting. Delčia Sweater in Lemon is finally here, and as a thank-you for your patience, she’s 25% off for a limited time.",
         "pmaxwidthdesktop": 440,
         "pmaxwidthmobile": 280,
-        "cl-image": "shopify://shop_images/1_17473e17-24d2-493a-b8c0-2a8730325c96.jpg",
+        "cl-image": "shopify://shop_images/DELCIA_LEMON_1_-_VIDEO_1080_x_1080_px.jpg",
         "padding_sizeupm_section": 15,
         "padding_sizedownm_section": 15,
         "padding_sizeup": 15,
@@ -262,8 +262,8 @@
         "padding_sizeupm": 15,
         "padding_sizedownm": 15,
         "showurlcl": true,
-        "linkTextcl": "FIND OUT MORE",
-        "linkclUrl": "shopify://pages/the-knotty-ones-x-not-perfect-linen",
+        "linkTextcl": "SHOP NOW",
+        "linkclUrl": "shopify://products/delcia-lemon-cotton-sweater",
         "sectionID": ""
       }
     },
@@ -585,12 +585,11 @@
     },
     "1635174300442e79c2": {
       "type": "static-cta-subscribe",
-      "disabled": true,
       "settings": {
         "borderlayoutsub": "hide-border",
         "subbgcolor": "#b4bed6",
-        "subheading": "GET EARLY ACCESS TO ARCHIVE SALE",
-        "subbody": "<p>Our bi-annual archive sale kicks off February 10th, but only early access subscribers get first dibs. Sign up now.</p>",
+        "subheading": "GET EARLY ACCESS TO COMMUNITY SALE",
+        "subbody": "<p>Our bi-annual community sale kicks off March 26th, but only early access subscribers get first dibs. Sign up now.</p>",
         "maxwidthofcta": 980,
         "maxwidthofctamobile": 280,
         "padding_sizeup": 18,
@@ -650,11 +649,11 @@
   "order": [
     "163431162472dd1865",
     "163431224162cac58f",
-    "1634918258b848ff3a",
     "163758180555d34f3c",
     "1634312997cd1a9ecc",
-    "16479497105534c601",
+    "1634918258b848ff3a",
     "static_two_column_BWirn3",
+    "16479497105534c601",
     "static_two_column_RRztMx",
     "1634559204e2be8fc2",
     "static_two_column_CDMabw",

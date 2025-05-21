@@ -22,7 +22,7 @@
         "headingOnlyTextCTA": "SECRET SAMPLE SALE:  SHOP PERFECTLY IMPERFECT KNITS",
         "maxwidthoftitle": 700,
         "maxwidthoftitlemobiled": 250,
-        "bodytextOnlyTextCTA": "Deadstock? We don’t know her. \nJoin our community to get instant access to the secret sample sale of ever-so-slightly imperfect knits and one-of-a-kind production samples at a reduced price. Doors are now open.",
+        "bodytextOnlyTextCTA": "Deadstock? We don’t know her. \nJoin our community to get access to the secret sample sale of ever-so-slightly imperfect knits and one-of-a-kind production samples at a reduced price. Doors open May 26th.",
         "fontsizetune": "27px",
         "maxwidthoftext": 1200,
         "maxwidthoftextmobile": 320,
@@ -152,7 +152,7 @@
       "settings": {
         "borderlayoutsub": "hide-border",
         "subbgcolor": "#b4bed6",
-        "subheading": "INSTANT ACCESS THIS WAY",
+        "subheading": "BE THE FIRST IN LINE",
         "subbody": "<p>Stock is limited so you'll want to act fast.</p>",
         "maxwidthofcta": 980,
         "maxwidthofctamobile": 300,
