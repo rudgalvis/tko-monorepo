@@ -2489,8 +2489,7 @@ marketCurrency.subscribe(async (r) => {
     currencyRates.set(await nexusApi.getCurrencyRates(r));
   }
 });
-const setMarketFromUrl = () => {
-}, BASE_URL = "http://172.20.10.6:5173/api", API_ROUTES = {
+const BASE_URL = "http://172.20.10.6:5173/api", API_ROUTES = {
   GET_AUTOMATIC_DISCOUNT: (r, e) => `automatic-discount/${r}/${e}`
 }, getAutomaticDiscount = async (r, e) => {
   const t = await fetch(
@@ -11553,9 +11552,6 @@ if (typeof window < "u") {
     stores: {
       displayCurrency,
       marketCurrency
-    },
-    actions: {
-      setMarketFromUrl
     }
   };
   window.getAutomaticDiscount = getAutomaticDiscount, window.UI = r;
