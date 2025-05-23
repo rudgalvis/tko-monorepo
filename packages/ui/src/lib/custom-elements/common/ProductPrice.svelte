@@ -29,10 +29,10 @@
 		compared_at?: string; // 10€, €10, nodiscount
 		iso_code?: string; // LT, AU, ...
 		variant_id?: string; // numeric
-		theme?: 'small' | 'medium' | 'big';
+		theme?: 'small' | 'small-vivid' | 'medium' | 'big';
 		discount_position?: 'inline' | 'newline' | 'newlineOnMobile' | 'hidden';
-		DEV_currency: 'EUR' | 'AUD' | 'GBP' | 'USD'; // For storybook usage
-		DEV_market: 'EUR' | 'AUD' | 'GBP' | 'USD'; // For storybook usage
+		DEV_currency?: 'EUR' | 'AUD' | 'GBP' | 'USD'; // For storybook usage
+		DEV_market?: 'EUR' | 'AUD' | 'GBP' | 'USD'; // For storybook usage
 	}>();
 
 	const nexusApi = new NexusApi();
@@ -73,6 +73,15 @@
 		}
 
 		// Step 3: Fix faulty input by swapping values
+		// (when the price is lower than compared_at)
+		if (
+				comparedAt &&
+				parseCurrencyString(price).value === parseCurrencyString(comparedAt).value
+		) {
+			comparedAt = undefined;
+		}
+
+		// Step 4: Fix faulty input by swapping values
 		// (when the price is lower than compared_at)
 		if (
 			comparedAt &&
@@ -211,7 +220,8 @@
 		use:removeNonComponentChildren
 		class="product-price"
 		class:product-price---has-discount={final.comparedAt}
-		class:product-price---small={theme === 'small'}
+		class:product-price---small={theme === 'small' || theme === 'small-vivid'}
+		class:product-price---vivid={theme === 'small-vivid'}
 		class:product-price---medium={theme === 'medium'}
 		class:product-price---big={theme === 'big'}
 		class:product-price---discount-inline={discount_position === 'inline'}
@@ -319,6 +329,10 @@
 			color: rgb(124, 124, 124);
 			justify-content: center;
 
+			&.product-price---vivid {
+				color: rgb(0, 0, 0);
+			}
+
 			@media screen and (max-width: 1024px) {
 				font-size: 12px;
 				gap: 4px;
@@ -352,7 +366,7 @@
 
 		&---medium {
 			@include bigStyles();
-			font-size: 30px;
+			font-size: 23px;
 		}
 		&---big {
 			@include bigStyles();

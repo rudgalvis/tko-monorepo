@@ -148,6 +148,16 @@
         "stopslide": false
       }
     },
+    "1634312997cd1a9ecc": {
+      "type": "static-hp-product",
+      "settings": {
+        "show_product_secondary_image": true,
+        "selectedProduct": "homepage",
+        "showproductheader": false,
+        "productheadertext": "",
+        "bottomURL": "shopify://collections/all"
+      }
+    },
     "1634918258b848ff3a": {
       "type": "static-collection-link-section",
       "blocks": {
@@ -186,34 +196,6 @@
         "lineNumber": "1"
       }
     },
-    "1634312997cd1a9ecc": {
-      "type": "static-hp-product",
-      "settings": {
-        "show_product_secondary_image": true,
-        "selectedProduct": "homepage",
-        "showproductheader": false,
-        "productheadertext": "",
-        "bottomURL": "shopify://collections/all"
-      }
-    },
-    "16479497105534c601": {
-      "type": "static-link",
-      "settings": {
-        "onlyTextlayout": "hide-border",
-        "linktext": "SEE ALL KNITS",
-        "linkurl": "shopify://collections/all",
-        "thisisbigurl": true,
-        "justheader": false,
-        "padding_sizeup_sot": 20,
-        "padding_sizedow_sot": 20,
-        "padding_sizeup_sotm": 24,
-        "padding_sizedow_sotm": 4,
-        "containertop": 62,
-        "containerbottom": 39,
-        "containertopmobile": 0,
-        "containerbottommobile": 20
-      }
-    },
     "static_two_column_BWirn3": {
       "type": "static-two-column",
       "disabled": true,
@@ -239,6 +221,24 @@
         "linkTextcl": "SHOP NOW",
         "linkclUrl": "shopify://products/skraistas-dew-silk-mohair-cropped-cardigan",
         "sectionID": ""
+      }
+    },
+    "16479497105534c601": {
+      "type": "static-link",
+      "settings": {
+        "onlyTextlayout": "hide-border",
+        "linktext": "SEE ALL KNITS",
+        "linkurl": "shopify://collections/all",
+        "thisisbigurl": true,
+        "justheader": false,
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 24,
+        "padding_sizedow_sotm": 4,
+        "containertop": 62,
+        "containerbottom": 39,
+        "containertopmobile": 0,
+        "containerbottommobile": 20
       }
     },
     "static_two_column_RRztMx": {
@@ -589,7 +589,7 @@
         "borderlayoutsub": "hide-border",
         "subbgcolor": "#b4bed6",
         "subheading": "GET EARLY ACCESS TO COMMUNITY SALE",
-        "subbody": "<p>Our bi-annual community sale kicks off March 26th, but only early access subscribers get first dibs. Sign up now.</p>",
+        "subbody": "<p>Our bi-annual community sale kicks off May 26th, but only early access subscribers get first dibs. Sign up now.</p>",
         "maxwidthofcta": 980,
         "maxwidthofctamobile": 280,
         "padding_sizeup": 18,

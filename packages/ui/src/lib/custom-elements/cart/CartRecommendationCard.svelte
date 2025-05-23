@@ -1,6 +1,7 @@
 <svelte:options customElement="cart-recommendation-card" />
 
 <script lang="ts">
+	import ProductPrice from "$lib/custom-elements/common/ProductPrice.svelte";
 	import CartRecommendationsCardHeadline from './CartRecommendationsCardHeadline.svelte';
 
 	export let id: string | undefined = undefined;
@@ -42,7 +43,8 @@
 
 			<h3 on:click={toItem}>{title}</h3>
 			<div class="tuple text-green-600">
-				<p class="price" class:stroke={isFreeGiftQualified}>{price}</p>
+				<ProductPrice price={price.toString()} theme="small-vivid"/>
+<!--				<p class="price" class:stroke={isFreeGiftQualified}>{price}</p>-->
 			</div>
 
 			<div class="ctas-buttons">
