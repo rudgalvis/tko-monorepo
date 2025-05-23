@@ -15,6 +15,18 @@ export const initiateCurrencies = () => {
 		marketCurrency.set(cart_currency)
 	}
 
+	// For display currencies we want to use the one stored in memory
+	// Unless changed via ?country=xx parameter
+	// Check for explicit country preference in the URL
+	const urlParams = new URLSearchParams(window.location.search);
+	const countryCode = urlParams.get('country');
+
+	if(countryCode) {
+		displayCurrency.set(countryToCurrency(countryCode as AvailableMarketsCountryCode))
+
+		return
+	}
+
 	// Check if the preference was already set
 	const $displayCurrency = get(displayCurrency)
 

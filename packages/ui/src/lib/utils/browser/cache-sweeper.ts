@@ -2,7 +2,7 @@ import { isIosSafari } from '$lib/utils/predicates/is-ios-safari.js';
 import { isShopifyOnWindow } from '$lib/utils/predicates/is-shopify-on-window.js';
 
 // User must have this in his local storage for it not to be cleared again
-const SWEEP_DATE = '2025-05-23-v1'
+const SWEEP_DATE = '2025-05-23-v2'
 const SWEEP_DATE_KEY = 'storage_cleared_at'
 
 const sweep = () => {
