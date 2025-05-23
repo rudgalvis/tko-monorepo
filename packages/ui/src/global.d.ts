@@ -1,9 +1,9 @@
 // src/global.d.ts
-import type { ExposedActions, ExposedStores } from '$lib/store/types.js';
+import type { ExposedActions, ExposedStores, WindowShopify } from '$lib/store/types.js';
 
 declare global {
 	interface Window {
-		Shopify: unknown;
+		Shopify: WindowShopify;
 		UI: {
 			stores: ExposedStores;
 			actions: ExposedActions;
@@ -12,6 +12,7 @@ declare global {
 			addItem: (id: string, quantity: number) => void;
 			// Add other methods and properties of CartJS as needed
 		};
+		getAutomaticDiscount: (isoCode: string, variantId: number) => Promise<any>
 	}
 }
 

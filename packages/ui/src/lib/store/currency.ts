@@ -5,37 +5,38 @@ import availableCurrencies from '$lib/data/available-currencies.json' with { typ
 
 const nexusApi = new NexusApi();
 
-const DISPLAY_CURRENCY_MEMORY_KEY = 'displayCurrency';
-const MARKET_CURRENCY_MEMORY_KEY = 'marketCurrency';
+const DISPLAY_CURRENCY_KEY = 'displayCurrency';
+const MARKET_CURRENCY_KEY = 'marketCurrency';
+const DEFAULT_CURRENCY = 'EUR';
+const whitelistedCurrencies = availableCurrencies.map((e) => e.currency);
 
-export const displayCurrency = persistentWritable<string | null>(DISPLAY_CURRENCY_MEMORY_KEY, null);
-export const marketCurrency = persistentWritable<string | null>(MARKET_CURRENCY_MEMORY_KEY, null);
+/* Stores */
+export const displayCurrency = persistentWritable<string | null>(DISPLAY_CURRENCY_KEY, null);
+export const marketCurrency = persistentWritable<string | null>(MARKET_CURRENCY_KEY, null);
 export const currencyRates = writable<Record<string, number> | null>(null);
 
-const whitelistedCurrencies = availableCurrencies.map(e => e.currency);
-const defaultCurrency = 'EUR'
+/* Actions */
+export const resetDisplayCurrencyMemory = () => localStorage.removeItem(DISPLAY_CURRENCY_KEY);
+export const resetMarketCurrencyMemory = () => localStorage.removeItem(MARKET_CURRENCY_KEY);
+
+/* Effects */
 
 displayCurrency.subscribe((v) => {
-	if(!v) return
+	// Fallback to default if not allowlisted
+	if (!v) return;
 
-	if(!whitelistedCurrencies.includes(v)) {
-		return displayCurrency.set(defaultCurrency)
+	if (!whitelistedCurrencies.includes(v)) {
+		return displayCurrency.set(DEFAULT_CURRENCY);
 	}
-})
+});
 
 marketCurrency.subscribe(async (v) => {
-	if(!v) return
+	// Fallback to default if not allowlisted
+	if (!v) return;
 
-	if(!whitelistedCurrencies.includes(v)) {
-		return marketCurrency.set(defaultCurrency)
+	if (!whitelistedCurrencies.includes(v)) {
+		return marketCurrency.set(DEFAULT_CURRENCY);
 	}
 
 	currencyRates.set(await nexusApi.getCurrencyRates(v));
 });
-
-export const resetDisplayCurrencyMemory = () => {
-	localStorage.removeItem(DISPLAY_CURRENCY_MEMORY_KEY);
-}
-export const resetMarketCurrencyMemory = () => {
-	localStorage.removeItem(MARKET_CURRENCY_MEMORY_KEY);
-}

@@ -3366,6 +3366,11 @@ $(".size-switcher").click(function () {
 $(document).on("touchstart click", ".co-wrapper", function (event) {
   $("#checkout-text").html("PLEASE WAIT...");
   $(this).find("button").css("background-color", "grey");
+
+  setTimeout(() => {
+    $("#checkout-text").html("CHECKOUT");
+    $(this).find("button").css("background-color", "black");
+  }, 5000);
 });
 
 $("#mobile-nav-search").on("click", function (event) {

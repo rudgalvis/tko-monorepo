@@ -49,6 +49,8 @@
             const productContainer = badgeContainer.closest('.product-container')
             const discount = productContainer.querySelector('product-discount-percentage')
 
+            if(!discount) return
+
             let attempt = 0, val = null
             while(attempt < 10 && !val) {
                 await new Promise(resolve => setTimeout(resolve, 200))

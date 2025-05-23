@@ -1,14 +1,13 @@
 import { resetDisplayCurrencyMemory, resetMarketCurrencyMemory } from '$lib/store/currency.js';
-
-export type AvailableMarketsCountryCodes = 'lt' | 'au' | 'gb' | 'us';
-export type AvailableMarketsLanguageCodes = 'en';
+import type { AvailableMarketsCountryCode } from '$lib/types/AvailableMarketsCountryCode.js';
+import type { AvailableMarketsLanguageCode } from '$lib/types/AvailableMarketsLanguageCode.js';
 
 export const setMarket = ({
 	country_code,
 	language_code = 'en'
 }: {
-	country_code: AvailableMarketsCountryCodes;
-	language_code?: AvailableMarketsLanguageCodes;
+	country_code: AvailableMarketsCountryCode;
+	language_code?: AvailableMarketsLanguageCode;
 }) => {
 	const formId = crypto.randomUUID();
 	const formHtml = `

@@ -7,7 +7,7 @@
     position: fixed;
     bottom: 0px;
     right:-420px;
-    z-index:100;
+    z-index:1001;
     /*
     -webkit-box-shadow: -4px 0px 4px -3px rgba(0,0,0,0.5);
 -moz-box-shadow: -4px 0px 4px -3px rgba(0,0,0,0.5);

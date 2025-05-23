@@ -1,20 +1,22 @@
+
 import { displayCurrency, marketCurrency } from '$lib/store/currency.js';
 import { getAutomaticDiscount } from './api/rrxtko.api.js';
+import { main } from '$lib/main.js';
 
 /* Communication layer */
 if (typeof window !== 'undefined') {
-	const UI = {
+	window['UI'] = {
 		stores: {
 			displayCurrency,
 			marketCurrency
-		}
+		},
+		actions: {}
 	};
 
-	//@ts-ignore
 	window['getAutomaticDiscount'] = getAutomaticDiscount;
-
-	window['UI'] = UI;
 }
+
+main()
 
 /* Custom elements */
 export { default as CartRecommendationCard } from './custom-elements/cart/CartRecommendationCard.svelte';

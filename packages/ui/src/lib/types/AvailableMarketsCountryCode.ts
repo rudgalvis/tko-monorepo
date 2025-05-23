@@ -1,0 +1,1 @@
+export type AvailableMarketsCountryCode = 'lt' | 'au' | 'gb' | 'us';
