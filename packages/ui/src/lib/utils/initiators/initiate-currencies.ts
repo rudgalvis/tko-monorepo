@@ -1,31 +1,34 @@
 import { displayCurrency, marketCurrency } from '$lib/store/currency.js';
 import type { AvailableMarketsCountryCode } from '$lib/types/AvailableMarketsCountryCode.js';
+import { getCookie } from '$lib/utils/browser/get-cookie.js';
 import { isShopifyOnWindow } from '$lib/utils/predicates/is-shopify-on-window.js';
 import { countryToCurrency } from '$lib/utils/transformers/country-to-currency.js';
 import { get } from 'svelte/store';
 
 export const initiateCurrencies = () => {
-	console.log('test')
 	if(!isShopifyOnWindow()) return
 
-	// Check for explicit country preference in the URL
-	const urlParams = new URLSearchParams(window.location.search);
-	const countryCode = urlParams.get('country');
+	// Extract market information from cookies
+	const cart_currency = getCookie('cart_currency') as AvailableMarketsCountryCode
 
-	if(countryCode) {
-		displayCurrency.set(countryToCurrency(countryCode as AvailableMarketsCountryCode))
-		marketCurrency.set(countryToCurrency(countryCode as AvailableMarketsCountryCode))
+	if(cart_currency) {
+		marketCurrency.set(cart_currency)
+	}
 
+	// Check if the preference was already set
+	const $displayCurrency = get(displayCurrency)
+
+	// If so, leave it as is
+	if($displayCurrency) return
+
+	// Otherwise, extract localization information from cookies
+	const localization = getCookie('localization') as AvailableMarketsCountryCode
+
+	if(localization) {
+		displayCurrency.set(countryToCurrency(localization))
 		return
 	}
 
-	// No explicit country preference was found in the URL, check for a preference in the store
-	const $displayCurrency = get(displayCurrency)
-	const $marketCurrency = get(marketCurrency)
-
-	// No preference was found for display currency, set it to the active Shopify currency
-	if(!$displayCurrency) displayCurrency.set(window.Shopify.currency.active);
-
-	// Market currency was not yet initialized, set it to the active Shopify currency
-	if(!$marketCurrency) displayCurrency.set(window.Shopify.currency.active);
+	// Or fallback to market currency
+	displayCurrency.set(cart_currency);
 }

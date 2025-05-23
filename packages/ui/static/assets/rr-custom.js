@@ -2523,7 +2523,21 @@ const BASE_URL = "http://172.20.10.6:5173/api", API_ROUTES = {
   const r = localStorage.getItem(SWEEP_DATE_KEY);
   return !r || r !== SWEEP_DATE;
 }, cacheSweeper = () => {
-  isShopifyOnWindow() && isSweepRequired() && isIosSafari() && (alert(window.Shopify.country), alert("sweeping"), sweep(), flagSweepComplete());
+  isShopifyOnWindow() && isSweepRequired() && isIosSafari() && (sweep(), flagSweepComplete());
+}, getCookie = (r, e = null) => {
+  if (!r.trim() || typeof document > "u" || !document.cookie)
+    return e;
+  try {
+    const s = `; ${document.cookie}`.split(`; ${r}=`);
+    if (s.length === 2) {
+      const i = s.pop();
+      if (i)
+        return decodeURIComponent(i.split(";")[0]);
+    }
+    return e;
+  } catch (t) {
+    return console.error(`Error getting cookie "${r}":`, t), e;
+  }
 }, availableMarkets = [
   {
     currency: "EUR",
@@ -2549,14 +2563,15 @@ const BASE_URL = "http://172.20.10.6:5173/api", API_ROUTES = {
   const e = availableMarkets.find((t) => t.country.toLowerCase() === r.toLowerCase());
   return e ? e.currency : "EUR";
 }, initiateCurrencies = () => {
-  if (console.log("test"), !isShopifyOnWindow()) return;
-  const e = new URLSearchParams(window.location.search).get("country");
-  if (e) {
-    displayCurrency.set(countryToCurrency(e)), marketCurrency.set(countryToCurrency(e));
+  if (!isShopifyOnWindow()) return;
+  const r = getCookie("cart_currency");
+  if (r && marketCurrency.set(r), get$1(displayCurrency)) return;
+  const t = getCookie("localization");
+  if (t) {
+    displayCurrency.set(countryToCurrency(t));
     return;
   }
-  const t = get$1(displayCurrency), s = get$1(marketCurrency);
-  t || displayCurrency.set(window.Shopify.currency.active), s || displayCurrency.set(window.Shopify.currency.active);
+  displayCurrency.set(r);
 }, main = () => {
   cacheSweeper(), initiateCurrencies();
 }, PUBLIC_VERSION = "5";
@@ -2773,8 +2788,8 @@ function ProductPrice(r, e) {
       var C = child(b);
       {
         var O = (R) => {
-          var P = root_2$2(), D = child(P, !0);
-          reset(P), template_effect(() => set_text(D, get$2(w).comparedAt)), append(R, P);
+          var I = root_2$2(), D = child(I, !0);
+          reset(I), template_effect(() => set_text(D, get$2(w).comparedAt)), append(R, I);
         };
         if_block(C, (R) => {
           get$2(w).comparedAt && R(O);
@@ -2782,13 +2797,13 @@ function ProductPrice(r, e) {
       }
       var N = sibling(C, 2), M = child(N, !0);
       reset(N);
-      var I = sibling(N, 2);
+      var P = sibling(N, 2);
       {
         var L = (R) => {
-          var P = root_3$2(), D = child(P);
-          reset(P), template_effect(() => set_text(D, `-${get$2(y) ?? ""}% off`)), append(R, P);
+          var I = root_3$2(), D = child(I);
+          reset(I), template_effect(() => set_text(D, `-${get$2(y) ?? ""}% off`)), append(R, I);
         };
-        if_block(I, (R) => {
+        if_block(P, (R) => {
           get$2(y) && f() !== "hidden" && R(L);
         });
       }
@@ -8916,15 +8931,15 @@ function updateSlides() {
         if (O && ($.style.transform = "none"), N && ($.style.webkitTransform = "none"), t.roundLengths)
           S = r.isHorizontal() ? elementOuterSize($, "width") : elementOuterSize($, "height");
         else {
-          const M = e(C, "width"), I = e(C, "padding-left"), L = e(C, "padding-right"), R = e(C, "margin-left"), P = e(C, "margin-right"), D = C.getPropertyValue("box-sizing");
+          const M = e(C, "width"), P = e(C, "padding-left"), L = e(C, "padding-right"), R = e(C, "margin-left"), I = e(C, "margin-right"), D = C.getPropertyValue("box-sizing");
           if (D && D === "border-box")
-            S = M + R + P;
+            S = M + R + I;
           else {
             const {
               clientWidth: z,
               offsetWidth: q
             } = $;
-            S = M + I + L + R + P + (q - z);
+            S = M + P + L + R + I + (q - z);
           }
         }
         O && ($.style.transform = O), N && ($.style.webkitTransform = N), t.roundLengths && (S = Math.floor(S));
@@ -9655,58 +9670,58 @@ function loopFix(r) {
   u.length < v + y || d.params.effect === "cards" && u.length < v + y * 2 ? showWarning("Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters") : T && _.grid.fill === "row" && showWarning("Swiper Loop Warning: Loop mode is not compatible with grid.fill = `row`");
   const E = [], k = [], A = T ? Math.ceil(u.length / _.grid.rows) : u.length, S = o && A - m < v && !g;
   let x = S ? m : d.activeIndex;
-  typeof n > "u" ? n = d.getSlideIndex(u.find((I) => I.classList.contains(_.slideActiveClass))) : x = n;
+  typeof n > "u" ? n = d.getSlideIndex(u.find((P) => P.classList.contains(_.slideActiveClass))) : x = n;
   const b = s === "next" || !s, $ = s === "prev" || !s;
   let C = 0, O = 0;
   const M = (T ? u[n].column : n) + (g && typeof i > "u" ? -v / 2 + 0.5 : 0);
   if (M < y) {
     C = Math.max(y - M, w);
-    for (let I = 0; I < y - M; I += 1) {
-      const L = I - Math.floor(I / A) * A;
+    for (let P = 0; P < y - M; P += 1) {
+      const L = P - Math.floor(P / A) * A;
       if (T) {
         const R = A - L - 1;
-        for (let P = u.length - 1; P >= 0; P -= 1)
-          u[P].column === R && E.push(P);
+        for (let I = u.length - 1; I >= 0; I -= 1)
+          u[I].column === R && E.push(I);
       } else
         E.push(A - L - 1);
     }
   } else if (M + v > A - y) {
     O = Math.max(M - (A - y * 2), w), S && (O = Math.max(O, v - A + m + 1));
-    for (let I = 0; I < O; I += 1) {
-      const L = I - Math.floor(I / A) * A;
-      T ? u.forEach((R, P) => {
-        R.column === L && k.push(P);
+    for (let P = 0; P < O; P += 1) {
+      const L = P - Math.floor(P / A) * A;
+      T ? u.forEach((R, I) => {
+        R.column === L && k.push(I);
       }) : k.push(L);
     }
   }
   if (d.__preventObserver__ = !0, requestAnimationFrame(() => {
     d.__preventObserver__ = !1;
-  }), d.params.effect === "cards" && u.length < v + y * 2 && (k.includes(n) && k.splice(k.indexOf(n), 1), E.includes(n) && E.splice(E.indexOf(n), 1)), $ && E.forEach((I) => {
-    u[I].swiperLoopMoveDOM = !0, p.prepend(u[I]), u[I].swiperLoopMoveDOM = !1;
-  }), b && k.forEach((I) => {
-    u[I].swiperLoopMoveDOM = !0, p.append(u[I]), u[I].swiperLoopMoveDOM = !1;
-  }), d.recalcSlides(), _.slidesPerView === "auto" ? d.updateSlides() : T && (E.length > 0 && $ || k.length > 0 && b) && d.slides.forEach((I, L) => {
-    d.grid.updateSlide(L, I, d.slides);
+  }), d.params.effect === "cards" && u.length < v + y * 2 && (k.includes(n) && k.splice(k.indexOf(n), 1), E.includes(n) && E.splice(E.indexOf(n), 1)), $ && E.forEach((P) => {
+    u[P].swiperLoopMoveDOM = !0, p.prepend(u[P]), u[P].swiperLoopMoveDOM = !1;
+  }), b && k.forEach((P) => {
+    u[P].swiperLoopMoveDOM = !0, p.append(u[P]), u[P].swiperLoopMoveDOM = !1;
+  }), d.recalcSlides(), _.slidesPerView === "auto" ? d.updateSlides() : T && (E.length > 0 && $ || k.length > 0 && b) && d.slides.forEach((P, L) => {
+    d.grid.updateSlide(L, P, d.slides);
   }), _.watchSlidesProgress && d.updateSlidesOffset(), t) {
     if (E.length > 0 && $) {
       if (typeof e > "u") {
-        const I = d.slidesGrid[x], R = d.slidesGrid[x + C] - I;
+        const P = d.slidesGrid[x], R = d.slidesGrid[x + C] - P;
         c ? d.setTranslate(d.translate - R) : (d.slideTo(x + Math.ceil(C), 0, !1, !0), i && (d.touchEventsData.startTranslate = d.touchEventsData.startTranslate - R, d.touchEventsData.currentTranslate = d.touchEventsData.currentTranslate - R));
       } else if (i) {
-        const I = T ? E.length / _.grid.rows : E.length;
-        d.slideTo(d.activeIndex + I, 0, !1, !0), d.touchEventsData.currentTranslate = d.translate;
+        const P = T ? E.length / _.grid.rows : E.length;
+        d.slideTo(d.activeIndex + P, 0, !1, !0), d.touchEventsData.currentTranslate = d.translate;
       }
     } else if (k.length > 0 && b)
       if (typeof e > "u") {
-        const I = d.slidesGrid[x], R = d.slidesGrid[x - O] - I;
+        const P = d.slidesGrid[x], R = d.slidesGrid[x - O] - P;
         c ? d.setTranslate(d.translate - R) : (d.slideTo(x - O, 0, !1, !0), i && (d.touchEventsData.startTranslate = d.touchEventsData.startTranslate - R, d.touchEventsData.currentTranslate = d.touchEventsData.currentTranslate - R));
       } else {
-        const I = T ? k.length / _.grid.rows : k.length;
-        d.slideTo(d.activeIndex - I, 0, !1, !0);
+        const P = T ? k.length / _.grid.rows : k.length;
+        d.slideTo(d.activeIndex - P, 0, !1, !0);
       }
   }
   if (d.allowSlidePrev = f, d.allowSlideNext = h, d.controller && d.controller.control && !l) {
-    const I = {
+    const P = {
       slideRealIndex: e,
       direction: s,
       setTranslate: i,
@@ -9715,11 +9730,11 @@ function loopFix(r) {
     };
     Array.isArray(d.controller.control) ? d.controller.control.forEach((L) => {
       !L.destroyed && L.params.loop && L.loopFix({
-        ...I,
+        ...P,
         slideTo: L.params.slidesPerView === _.slidesPerView ? t : !1
       });
     }) : d.controller.control instanceof d.constructor && d.controller.control.params.loop && d.controller.control.loopFix({
-      ...I,
+      ...P,
       slideTo: d.controller.control.params.slidesPerView === _.slidesPerView ? t : !1
     });
   }
@@ -10948,9 +10963,9 @@ function KnittersAccordionItem(r, e) {
   let t = prop(e, "name", 12, void 0), s = prop(e, "id", 12, void 0), i = prop(e, "description", 12, void 0), n = prop(e, "photo", 12, void 0), o = prop(e, "avatar", 12, void 0), l = !1, c = /* @__PURE__ */ mutable_source(!1), d = /* @__PURE__ */ mutable_source(!1), u = /* @__PURE__ */ mutable_source(), f = /* @__PURE__ */ mutable_source();
   const h = () => {
     set(c, !get$2(c));
-  }, p = (P = 150) => {
+  }, p = (I = 150) => {
     if (!get$2(f)) return;
-    const z = get$2(f).getBoundingClientRect().top + window.pageYOffset - P;
+    const z = get$2(f).getBoundingClientRect().top + window.pageYOffset - I;
     window.scrollTo({ top: z, behavior: "smooth" });
   }, _ = () => {
     set(d, !1), get$2(u) && (window.innerWidth >= 1024 && p(114), window.innerWidth < 1024 && p(52), mutate(u, get$2(u).style.maxHeight = "inherit"), get$2(u).removeEventListener("transitionend", _));
@@ -10965,7 +10980,7 @@ function KnittersAccordionItem(r, e) {
     }), l || (l = !0);
   }, v = () => {
   }, w = () => {
-    const P = new URLSearchParams(window.location.search), { knitter: D } = Object.fromEntries(P.entries());
+    const I = new URLSearchParams(window.location.search), { knitter: D } = Object.fromEntries(I.entries());
     D === s() && set(c, !0);
   };
   onMount(() => {
@@ -10988,10 +11003,10 @@ function KnittersAccordionItem(r, e) {
   var N = child(C, !0);
   reset(C);
   var M = sibling(C, 2);
-  let I;
+  let P;
   var L = sibling(M, 2);
   {
-    var R = (P) => {
+    var R = (I) => {
       var D = root_1$4();
       let z;
       var q = child(D);
@@ -11018,15 +11033,15 @@ function KnittersAccordionItem(r, e) {
           })
         ],
         derived_safe_equal
-      ), append(P, D);
+      ), append(I, D);
     };
-    if_block(L, (P) => {
-      s() && P(R);
+    if_block(L, (I) => {
+      s() && I(R);
     });
   }
-  return reset($), bind_this($, (P) => set(u, P), () => get$2(u)), reset(y), bind_this(y, (P) => set(f, P), () => get$2(f)), template_effect(
-    (P, D, z) => {
-      set_attribute(E, "src", o()), set_attribute(E, "alt", `Small picture of ${t() ?? ""}`), set_text(A, t()), x = set_class(S, 1, "arrow svelte-pbk1c8", null, x, P), O = set_class(C, 1, "svelte-pbk1c8", null, O, D), set_text(N, i()), I = set_class(M, 1, "photo svelte-pbk1c8", null, I, z), set_attribute(M, "src", n()), set_attribute(M, "alt", `Picture of ${t() ?? ""}`);
+  return reset($), bind_this($, (I) => set(u, I), () => get$2(u)), reset(y), bind_this(y, (I) => set(f, I), () => get$2(f)), template_effect(
+    (I, D, z) => {
+      set_attribute(E, "src", o()), set_attribute(E, "alt", `Small picture of ${t() ?? ""}`), set_text(A, t()), x = set_class(S, 1, "arrow svelte-pbk1c8", null, x, I), O = set_class(C, 1, "svelte-pbk1c8", null, O, D), set_text(N, i()), P = set_class(M, 1, "photo svelte-pbk1c8", null, P, z), set_attribute(M, "src", n()), set_attribute(M, "alt", `Picture of ${t() ?? ""}`);
     },
     [
       () => ({ "arrow---down": get$2(c) }),
@@ -11044,32 +11059,32 @@ function KnittersAccordionItem(r, e) {
     get name() {
       return t();
     },
-    set name(P) {
-      t(P), flushSync();
+    set name(I) {
+      t(I), flushSync();
     },
     get id() {
       return s();
     },
-    set id(P) {
-      s(P), flushSync();
+    set id(I) {
+      s(I), flushSync();
     },
     get description() {
       return i();
     },
-    set description(P) {
-      i(P), flushSync();
+    set description(I) {
+      i(I), flushSync();
     },
     get photo() {
       return n();
     },
-    set photo(P) {
-      n(P), flushSync();
+    set photo(I) {
+      n(I), flushSync();
     },
     get avatar() {
       return o();
     },
-    set avatar(P) {
-      o(P), flushSync();
+    set avatar(I) {
+      o(I), flushSync();
     }
   });
 }

@@ -53,10 +53,6 @@ export const cacheSweeper = () => {
 	if (!isSweepRequired()) return
 
 	if (isIosSafari()) {
-		alert(window.Shopify.country);
-
-		alert('sweeping')
-
 		sweep();
 		flagSweepComplete()
 	}
