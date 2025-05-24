@@ -1,7 +1,10 @@
 import { Elysia } from "elysia";
 
 const app = new Elysia()
-  .get("/ping", () => "pong")
+  .get("/ping", () => ({
+    success: true,
+    message: "pong",
+  }))
   .get("/ping-varnish", async ({ set }) => {
     const process = Bun.spawn(["bash", "-c", "varnishadm status"], {
       stdout: "pipe",
@@ -10,20 +13,21 @@ const app = new Elysia()
 
     const output = await new Response(process.stdout).text();
 
-    if (output) return "pong";
+    if (output)
+      return {
+        success: true,
+        message: "pong",
+      };
 
     set.status = 400;
 
     return { error: "Varnish not playing", code: "PING_ERROR" };
   })
   .get("/clear", async () => {
-    const process = Bun.spawn(
-      ["bash", "-c", 'varnishadm "ban req.url ~ ."'],
-      {
-        stdout: "pipe",
-        stderr: "pipe",
-      },
-    );
+    const process = Bun.spawn(["bash", "-c", 'varnishadm "ban req.url ~ ."'], {
+      stdout: "pipe",
+      stderr: "pipe",
+    });
 
     const output = await new Response(process.stdout).text();
 

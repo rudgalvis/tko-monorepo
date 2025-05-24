@@ -1,6 +1,9 @@
 <svelte:options customElement={{ tag: 'product-price', shadow: 'none' }} />
 
 <script lang="ts">
+	import type { PriceStrCouple } from '$lib/types/PriceStrCouple.js';
+	import { calculateDiscountPercentage } from '$lib/utils/price/calculate-discount-percentage.js';
+	import { normalizePriceInput } from '$lib/utils/price/normalize-price-input.js';
 	import { fade } from 'svelte/transition';
 	import { currencyRates, displayCurrency, marketCurrency } from '$lib/store/currency.js';
 	import { removeNonComponentChildren } from '$lib/utils/dom/remove-non-component-children.js';
@@ -9,11 +12,6 @@
 		subtractCurrencyStrings
 	} from '$lib/utils/formatters/price-formatter.js';
 	import { NexusApi } from 'storefront-api';
-
-	type PriceStrCouple = {
-		price: string;
-		comparedAt?: string;
-	};
 
 	const {
 		theme = 'big',
@@ -37,22 +35,18 @@
 
 	const nexusApi = new NexusApi();
 
-	const normalized = $state<PriceStrCouple>({
-		price: inputPrice,
-		comparedAt: inputComparedAt
-	});
-
-	const autoDiscountApplied = $state<PriceStrCouple>({
-		price: inputPrice,
-		comparedAt: inputPrice
-	});
-
-	const final = $state<PriceStrCouple>({
+	const emptyPrice = {
 		price: '-1',
 		comparedAt: undefined
-	});
+	};
 
-	let discountPercentage = $state<number | null>(null);
+	const normalizedPrice: PriceStrCouple = $derived.by(() =>
+		normalizePriceInput(inputPrice, inputComparedAt)
+	);
+	const autoDiscountedPrice = $state<PriceStrCouple>(emptyPrice);
+	const finalPrice = $state<PriceStrCouple>(emptyPrice);
+
+	let discountPercentage = $derived.by(() => calculateDiscountPercentage(finalPrice));
 
 	// DEV ONLY
 	$effect(() => {
@@ -60,56 +54,21 @@
 		if (DEV_market) marketCurrency.set(DEV_market);
 	});
 
-	// Normalize input
-	$effect(() => {
-		// Step 1: Create temporary values to batch our changes
-		// This prevents infinite loop by preparing values before state updates
-		let price = inputPrice;
-		let comparedAt = inputComparedAt;
-
-		// Step 2: Normalize 'nodiscount' value coming from legacy code
-		if (comparedAt === 'nodiscount' || !comparedAt) {
-			comparedAt = undefined;
-		}
-
-		// Step 3: Fix faulty input by swapping values
-		// (when the price is lower than compared_at)
-		if (
-				comparedAt &&
-				parseCurrencyString(price).value === parseCurrencyString(comparedAt).value
-		) {
-			comparedAt = undefined;
-		}
-
-		// Step 4: Fix faulty input by swapping values
-		// (when the price is lower than compared_at)
-		if (
-			comparedAt &&
-			parseCurrencyString(price).value > parseCurrencyString(comparedAt).value
-		) {
-			[price, comparedAt] = [comparedAt, price];
-		}
-
-		// Final step: Update state once with all our changes
-		normalized.price = price;
-		normalized.comparedAt = comparedAt;
-	});
-
 	// Apply automatic discount if possible
 	$effect(() => {
-		// Hold normalized values even if a discount would not be applied
-		autoDiscountApplied.price = normalized.price;
-		autoDiscountApplied.comparedAt = normalized.comparedAt;
+		// Take and hold the latest normalized values even if a discount would not be applied
+		autoDiscountedPrice.price = normalizedPrice.price;
+		autoDiscountedPrice.comparedAt = normalizedPrice.comparedAt;
 
 		if (!market) return;
 		if (!variant_id) return;
-		if (!normalized.price) return;
-		if (normalized.comparedAt) return; // Only check if no regular compared at is present
+		if (!normalizedPrice.price) return;
+		if (normalizedPrice.comparedAt) return; // Only check if no regular compared at is present
 
 		try {
-			calculateAutomaticDiscount({ ...normalized }).then(({ price, comparedAt }) => {
-				autoDiscountApplied.price = price;
-				autoDiscountApplied.comparedAt = comparedAt;
+			calculateAutomaticDiscount({ ...normalizedPrice }).then(({ price, comparedAt }) => {
+				autoDiscountedPrice.price = price;
+				autoDiscountedPrice.comparedAt = comparedAt;
 			});
 		} catch (e) {
 			console.error(e);
@@ -119,8 +78,6 @@
 	// Apply display currency changes
 	$effect(() => {
 		if (!$displayCurrency) return;
-
-		// Validate currency rates are available
 		if (!$currencyRates) return;
 
 		// Create a formatter for the display currency
@@ -134,15 +91,15 @@
 		});
 
 		// Format the price based on the selected display currency
-		const { value: price } = parseCurrencyString(autoDiscountApplied.price);
-		final.price = formatter.format(price);
+		const { value: price } = parseCurrencyString(autoDiscountedPrice.price);
+		finalPrice.price = formatter.format(price);
 
 		// Format compared at price if it exists
-		if (autoDiscountApplied.comparedAt) {
-			const { value: comparedAt } = parseCurrencyString(autoDiscountApplied.comparedAt);
-			final.comparedAt = formatter.format(comparedAt);
+		if (autoDiscountedPrice.comparedAt) {
+			const { value: comparedAt } = parseCurrencyString(autoDiscountedPrice.comparedAt);
+			finalPrice.comparedAt = formatter.format(comparedAt);
 		} else {
-			final.comparedAt = undefined;
+			finalPrice.comparedAt = undefined;
 		}
 
 		// No conversion needed if currencies match
@@ -152,43 +109,15 @@
 		const rate = $currencyRates[$displayCurrency];
 
 		// Apply conversion to price
-		final.price = formatter.format(Math.round(price * rate));
+		finalPrice.price = formatter.format(Math.round(price * rate));
 
 		// Apply conversion to compare at price if it exists
-		if (autoDiscountApplied.comparedAt) {
-			const { value: comparedAt } = parseCurrencyString(autoDiscountApplied.comparedAt);
-			final.comparedAt = formatter.format(Math.round(comparedAt * rate));
+		if (autoDiscountedPrice.comparedAt) {
+			const { value: comparedAt } = parseCurrencyString(autoDiscountedPrice.comparedAt);
+			finalPrice.comparedAt = formatter.format(Math.round(comparedAt * rate));
 		} else {
-			final.comparedAt = undefined;
+			finalPrice.comparedAt = undefined;
 		}
-	});
-
-	// Calculate discount percentage
-	$effect(() => {
-		// Exit early if we don't have both prices
-		if (!final.price || !final.comparedAt) {
-			discountPercentage = null;
-			return;
-		}
-
-		const { value: price } = parseCurrencyString(final.price);
-		const { value: comparedAt } = parseCurrencyString(final.comparedAt);
-
-		// Exit if either price couldn't be parsed properly
-		if (!price || !comparedAt) {
-			discountPercentage = null;
-			return;
-		}
-
-		// Calculate the discount amount (absolute difference)
-		const discountAmount = Math.abs(comparedAt - price);
-
-		// Calculate percentage based on the original price (comparedAt)
-		// This is the standard way to calculate discount percentages in retail
-		const percentage = Math.round((discountAmount / comparedAt) * 100);
-
-		// Only show a discount if there actually is one
-		discountPercentage = percentage > 0 ? percentage : null;
 	});
 
 	const calculateAutomaticDiscount = async ({
@@ -214,12 +143,12 @@
 	};
 </script>
 
-{#if $marketCurrency && final.price !== '-1'}
+{#if $marketCurrency && finalPrice.price !== '-1'}
 	<div
 		in:fade={{ delay: 350, duration: 50 }}
 		use:removeNonComponentChildren
 		class="product-price"
-		class:product-price---has-discount={final.comparedAt}
+		class:product-price---has-discount={finalPrice.comparedAt}
 		class:product-price---small={theme === 'small' || theme === 'small-vivid'}
 		class:product-price---vivid={theme === 'small-vivid'}
 		class:product-price---medium={theme === 'medium'}
@@ -228,12 +157,12 @@
 		class:product-price---discount-newline={discount_position === 'newline'}
 		class:product-price---discount-newline-on-mobile={discount_position === 'newlineOnMobile'}
 	>
-		{#if final.comparedAt}
+		{#if finalPrice.comparedAt}
 			<div class="product-price--compared-at">
-				{final.comparedAt}
+				{finalPrice.comparedAt}
 			</div>
 		{/if}
-		<div class="product-price--price">{final.price}</div>
+		<div class="product-price--price">{finalPrice.price}</div>
 
 		{#if discountPercentage && discount_position !== 'hidden'}
 			<div class="product-price--discount">
