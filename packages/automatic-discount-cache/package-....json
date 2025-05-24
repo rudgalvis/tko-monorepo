@@ -1,0 +1,10 @@
+{
+  "name": "a16t-cache",
+  "version": "1.0.0",
+  "description": "Varnish Automatic Cache",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
