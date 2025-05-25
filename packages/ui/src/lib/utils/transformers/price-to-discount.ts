@@ -1,7 +1,7 @@
-import type { PriceStrCouple } from '$lib/types/PriceStrCouple.js';
+import type { PriceWithSymbol } from '$lib/types/PriceWithSymbol.js';
 import { parseCurrencyString } from '$lib/utils/formatters/price-formatter.js';
 
-export const calculateDiscountPercentage = ({price: inputPrice, comparedAt: inputComparedAt}: PriceStrCouple) => {
+export const priceToDiscount = ({price: inputPrice, comparedAt: inputComparedAt}: PriceWithSymbol) => {
 	// Exit early if we don't have both prices
 	if (!inputPrice || !inputComparedAt) {
 		return null
@@ -23,5 +23,5 @@ export const calculateDiscountPercentage = ({price: inputPrice, comparedAt: inpu
 	const percentage = Math.round((discountAmount / comparedAt) * 100);
 
 	// Only show a discount if there actually is one
-	return percentage > 0 ? percentage : null;
+	return percentage > 0 ? percentage : 0;
 }

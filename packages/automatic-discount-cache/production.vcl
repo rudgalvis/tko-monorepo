@@ -16,7 +16,7 @@ sub vcl_recv {
     }
 
     # Optional: Strip cookies for certain paths if they don't affect the API response
-    if (req.url ~ "^/api/public/") {
+    if (req.url ~ "^/nexusApi/public/") {
         unset req.http.cookie;
     }
 

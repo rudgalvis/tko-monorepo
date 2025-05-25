@@ -5,7 +5,7 @@
 		calculateDiscountPercentage,
 		type FormattedPrice,
 		priceFormatter,
-		subtractCurrencyStrings
+		subtractFromPriceWithSymbol
 	} from '$lib/utils/formatters/price-formatter.js';
 	import { NexusApi } from "storefront-api";
 
@@ -38,7 +38,7 @@
 
 		if (!amount) return;
 
-		const { formatted } = subtractCurrencyStrings(price, amount);
+		const { formatted } = subtractFromPriceWithSymbol(price, amount);
 		a = price;
 		b = formatted;
 	};

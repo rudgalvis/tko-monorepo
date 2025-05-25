@@ -2,7 +2,7 @@
 	import type { LocalizationOption } from '$lib/types/LocalizationOption.js';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import CurrencySelector from '$lib/custom-elements/common/CurrencySelector.svelte';
-	import availableMarkets from '$lib/data/available-markets.json' assert { type: 'json' };
+	import availableMarkets from '$lib/data/available-markets.json' with { type: 'json' };
 
 	const { Story } = defineMeta({
 		title: 'custom-elements/<currency-selector>',

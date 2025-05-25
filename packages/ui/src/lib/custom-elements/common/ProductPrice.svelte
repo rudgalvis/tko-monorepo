@@ -1,25 +1,41 @@
 <svelte:options customElement={{ tag: 'product-price', shadow: 'none' }} />
 
 <script lang="ts">
-	import type { PriceStrCouple } from '$lib/types/PriceStrCouple.js';
-	import { calculateDiscountPercentage } from '$lib/utils/price/calculate-discount-percentage.js';
-	import { normalizePriceInput } from '$lib/utils/price/normalize-price-input.js';
-	import { fade } from 'svelte/transition';
+	/**
+	 * This is a price wrapper that will handle price logic
+	 * 1. Robust input handling
+	 * 2. Applying regular discount
+	 * 3. Applying automatic discount
+	 * 4. Applying frontend currency changes
+	 * */
+
+	import CartItemPrice from '$lib/components/price/CartItemPrice.svelte';
+	import CartTotalPrice from '$lib/components/price/CartTotalPrice.svelte';
+	import CollectionItemPrice from '$lib/components/price/CollectionItemPrice.svelte';
+	import ProductDetailsPagePrice from '$lib/components/price/ProductDetailsPagePrice.svelte';
+	import SearchCardPrice from '$lib/components/price/SearchCardPrice.svelte';
 	import { currencyRates, displayCurrency, marketCurrency } from '$lib/store/currency.js';
+	import type { PriceWithSymbol as Price } from '$lib/types/PriceWithSymbol.js';
 	import { removeNonComponentChildren } from '$lib/utils/dom/remove-non-component-children.js';
-	import {
-		parseCurrencyString,
-		subtractCurrencyStrings
-	} from '$lib/utils/formatters/price-formatter.js';
+	import { normalizePrice } from '$lib/utils/formatters/normalize-price.js';
+	import { parseCurrencyString, subtractFromPriceWithSymbol } from '$lib/utils/formatters/price-formatter.js';
 	import { NexusApi } from 'storefront-api';
+	import { fade } from 'svelte/transition';
+
+	type AvailableTypes =
+		| 'ProductDetailsPagePrice'
+		| 'CollectionItemPrice'
+		| 'CartTotalPrice'
+		| 'CartItemPrice'
+		| 'SearchCardPrice';
 
 	const {
-		theme = 'big',
-		price: inputPrice,
-		compared_at: inputComparedAt,
+		price: _price,
+		compared_at: _comparedAt,
 		iso_code: market,
-		discount_position = 'inline',
 		variant_id,
+		product_id,
+		type = 'ProductDetailsPagePrice',
 		DEV_currency,
 		DEV_market
 	} = $props<{
@@ -27,46 +43,42 @@
 		compared_at?: string; // 10€, €10, nodiscount
 		iso_code?: string; // LT, AU, ...
 		variant_id?: string; // numeric
-		theme?: 'small' | 'small-vivid' | 'medium' | 'big';
-		discount_position?: 'inline' | 'newline' | 'newlineOnMobile' | 'hidden';
+		product_id?: string; // numeric
+		type?: AvailableTypes; // Maps to a UI component to use
 		DEV_currency?: 'EUR' | 'AUD' | 'GBP' | 'USD'; // For storybook usage
 		DEV_market?: 'EUR' | 'AUD' | 'GBP' | 'USD'; // For storybook usage
 	}>();
 
 	const nexusApi = new NexusApi();
-
-	const emptyPrice = {
+	const EMPTY_PRICE_OBJECT = {
 		price: '-1',
 		comparedAt: undefined
 	};
 
-	const normalizedPrice: PriceStrCouple = $derived.by(() =>
-		normalizePriceInput(inputPrice, inputComparedAt)
-	);
-	const autoDiscountedPrice = $state<PriceStrCouple>(emptyPrice);
-	const finalPrice = $state<PriceStrCouple>(emptyPrice);
+	// Step 1. Normalize input
+	const normalizedPrice: Price = $derived.by(() => normalizePrice(_price, _comparedAt));
 
-	let discountPercentage = $derived.by(() => calculateDiscountPercentage(finalPrice));
+	// Step 2. Apply automatic discount, otherwise hold normalized values
+	const autoDiscountedPrice = $state<Price>(EMPTY_PRICE_OBJECT);
 
-	// DEV ONLY
-	$effect(() => {
-		if (DEV_currency) displayCurrency.set(DEV_currency);
-		if (DEV_market) marketCurrency.set(DEV_market);
-	});
+	// Step 3. Apply frontend currency changes, otherwise hold autoDiscountedPrice values
+	const finalPrice = $state<Price>(EMPTY_PRICE_OBJECT);
 
-	// Apply automatic discount if possible
+	/**
+	 * Apply automatic discount if possible
+	 * */
 	$effect(() => {
 		// Take and hold the latest normalized values even if a discount would not be applied
 		autoDiscountedPrice.price = normalizedPrice.price;
 		autoDiscountedPrice.comparedAt = normalizedPrice.comparedAt;
 
 		if (!market) return;
-		if (!variant_id) return;
+		if (!variant_id && !product_id) return;
 		if (!normalizedPrice.price) return;
 		if (normalizedPrice.comparedAt) return; // Only check if no regular compared at is present
 
 		try {
-			calculateAutomaticDiscount({ ...normalizedPrice }).then(({ price, comparedAt }) => {
+			calculateDiscountedPricing({ ...normalizedPrice }).then(({ price, comparedAt }) => {
 				autoDiscountedPrice.price = price;
 				autoDiscountedPrice.comparedAt = comparedAt;
 			});
@@ -75,7 +87,9 @@
 		}
 	});
 
-	// Apply display currency changes
+	/**
+	 * Apply display currency changes
+	 * */
 	$effect(() => {
 		if (!$displayCurrency) return;
 		if (!$currencyRates) return;
@@ -120,13 +134,19 @@
 		}
 	});
 
-	const calculateAutomaticDiscount = async ({
-		price: orgPrice
-	}: PriceStrCouple): Promise<PriceStrCouple> => {
-		if (!market) throw new Error('market is required');
-		if (!variant_id) throw new Error('market is required');
+	const calculateDiscountedPricing = async ({ price: orgPrice }: Price) => {
+		if (!market) throw new Error('Market is required');
 
-		const { amount } = await nexusApi.getAutomaticDiscount(market, +variant_id);
+		if (!variant_id && !product_id)
+			throw new Error('Either variant or product id is required is required');
+
+		// We have two different strategies depending on which id was provided
+		const getterByVariant = nexusApi.getVariantAutomaticDiscount.bind(nexusApi);
+		const getterByProduct = nexusApi.getProductAutomaticDiscount.bind(nexusApi);
+
+		const getDiscount = variant_id ? getterByVariant : getterByProduct;
+
+		const { amount } = await getDiscount(market, +product_id);
 
 		if (!amount || amount === 0)
 			return {
@@ -134,193 +154,42 @@
 				comparedAt: undefined
 			};
 
-		const { formatted: newPrice } = subtractCurrencyStrings(orgPrice, amount);
+		const { formatted: newPrice } = subtractFromPriceWithSymbol(orgPrice, amount);
 
 		return {
 			price: newPrice,
 			comparedAt: orgPrice
 		};
 	};
+
+	// DEV ONLY
+	$effect(() => {
+		if (DEV_currency) displayCurrency.set(DEV_currency);
+		if (DEV_market) marketCurrency.set(DEV_market);
+	});
+
+	const PriceUi = $derived.by(() => {
+		switch (type) {
+			case 'CartItemPrice':
+				return CartItemPrice;
+			case 'CollectionItemPrice':
+				return CollectionItemPrice;
+			case 'CartTotalPrice':
+				return CartTotalPrice;
+			case 'SearchCardPrice':
+				return SearchCardPrice;
+			case 'ProductDetailsPagePrice':
+				return ProductDetailsPagePrice;
+			default:
+				return ProductDetailsPagePrice;
+		}
+	});
 </script>
 
-{#if $marketCurrency && finalPrice.price !== '-1'}
-	<div
-		in:fade={{ delay: 350, duration: 50 }}
-		use:removeNonComponentChildren
-		class="product-price"
-		class:product-price---has-discount={finalPrice.comparedAt}
-		class:product-price---small={theme === 'small' || theme === 'small-vivid'}
-		class:product-price---vivid={theme === 'small-vivid'}
-		class:product-price---medium={theme === 'medium'}
-		class:product-price---big={theme === 'big'}
-		class:product-price---discount-inline={discount_position === 'inline'}
-		class:product-price---discount-newline={discount_position === 'newline'}
-		class:product-price---discount-newline-on-mobile={discount_position === 'newlineOnMobile'}
-	>
-		{#if finalPrice.comparedAt}
-			<div class="product-price--compared-at">
-				{finalPrice.comparedAt}
-			</div>
-		{/if}
-		<div class="product-price--price">{finalPrice.price}</div>
-
-		{#if discountPercentage && discount_position !== 'hidden'}
-			<div class="product-price--discount">
-				-{discountPercentage}% off
-			</div>
-		{/if}
-	</div>
-{/if}
-
-<style lang="scss">
-	@mixin newLineDiscount {
-		flex-wrap: wrap;
-
-		@media screen and (max-width: 1024px) {
-			gap: 0 8px;
-		}
-
-		.product-price--discount {
-			width: 100%;
-
-			&:before {
-				display: none;
-			}
-		}
-	}
-
-	@mixin inlineDiscount {
-		.product-price--discount {
-			&:before {
-				display: block;
-				margin-right: 8px;
-				height: 60%;
-				background-color: rgba(0, 0, 0, 0.1);
-			}
-		}
-	}
-
-	@mixin bigStyles {
-		gap: 0 16px;
-		font-size: 42px;
-		color: #000;
-
-		@media screen and (max-width: 1024px) {
-			font-size: 20px;
-			gap: 4px 8px;
-		}
-
-		&.product-price---discount-inline {
-			@include inlineDiscount;
-
-			.product-price--discount:before {
-				margin-right: 12px;
-			}
-		}
-
-		&.product-price---discount-newline {
-			@include newLineDiscount;
-
-			@media screen and (max-width: 1024px) {
-				.product-price--discount {
-					margin-top: -3px;
-					font-size: 70%;
-				}
-			}
-		}
-
-		&.product-price---discount-newline-on-mobile {
-			@include inlineDiscount;
-
-			.product-price--discount:before {
-				margin-right: 12px;
-			}
-
-			@media screen and (max-width: 1024px) {
-				@include newLineDiscount;
-
-				.product-price--discount {
-					margin-top: -3px;
-					font-size: 70%;
-				}
-			}
-		}
-	}
-
-	.product-price {
-		font-family: 'Monument', sans-serif;
-		display: flex;
-
-		&---small {
-			gap: 0 8px;
-			font-size: 16px;
-			letter-spacing: -0.22px;
-			color: rgb(124, 124, 124);
-			justify-content: center;
-
-			&.product-price---vivid {
-				color: rgb(0, 0, 0);
-			}
-
-			@media screen and (max-width: 1024px) {
-				font-size: 12px;
-				gap: 4px;
-			}
-
-			&.product-price---discount-inline {
-				@include inlineDiscount;
-			}
-
-			&.product-price---discount-newline {
-				@include newLineDiscount;
-
-				.product-price--discount {
-					justify-content: center;
-				}
-			}
-
-			&.product-price---discount-newline-on-mobile {
-				@include inlineDiscount;
-
-				@media screen and (max-width: 1024px) {
-					@include newLineDiscount;
-					gap: 0 8px;
-
-					.product-price--discount {
-						justify-content: center;
-					}
-				}
-			}
-		}
-
-		&---medium {
-			@include bigStyles();
-			font-size: 23px;
-		}
-		&---big {
-			@include bigStyles();
-		}
-
-		&---has-discount {
-			.product-price--price {
-				color: rgb(210, 25, 16);
-			}
-		}
-
-		&--compared-at {
-			text-decoration: line-through;
-		}
-
-		&--discount {
-			color: rgb(210, 25, 16);
-			display: flex;
-			align-items: center;
-
-			&:before {
-				content: '';
-				background-color: rgba(0, 0, 0, 0.1);
-				width: 1px;
-			}
-		}
-	}
-</style>
+<div use:removeNonComponentChildren>
+	{#if $marketCurrency && finalPrice.price !== '-1'}
+		<div in:fade={{ delay: 350, duration: 50 }}>
+			<PriceUi {...finalPrice} />
+		</div>
+	{/if}
+</div>

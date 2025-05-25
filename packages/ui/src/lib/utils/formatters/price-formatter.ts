@@ -84,7 +84,7 @@ export function parseCurrencyString(priceString: string, newValue: number | unde
 	};
 }
 
-export const subtractCurrencyStrings = (a: string, b: string) => {
+export const subtractFromPriceWithSymbol = (a: string, b: string) => {
 	const { value: aVal } = parseCurrencyString(a);
 	const { value: bVal } = parseCurrencyString(b);
 
