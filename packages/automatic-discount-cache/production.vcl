@@ -11,7 +11,7 @@ backend default {
 
 sub vcl_recv {
     # We want to pass (not cache) if the URL does NOT contain either "automatic-discount" OR "currency-rates"
-    if (req.url !~ "(automatic-discount|currency-rates)") {
+    if (req.url !~ "(automatic-discount|currency-rates|regional-variant-price)") {
         return (pass);
     }
 

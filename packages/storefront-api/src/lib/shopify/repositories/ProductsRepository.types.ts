@@ -1,5 +1,19 @@
-export type AvailableVariants = {
+export type Variant = {
 	id: string;
 	title: string;
-	availableForSale: true;
+}
+
+export type VariantAvailability = Variant & {
+	availableForSale: boolean;
+};
+
+export type VariantPrice = VariantAvailability & {
+	price: {
+		amount: number;
+		currencyCode: string;
+	};
+	compareAtPrice: {
+		amount: number;
+		currencyCode: string;
+	} | null;
 };
