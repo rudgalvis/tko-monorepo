@@ -1,4 +1,4 @@
-export const getProductVariantsQuery = `
+export const getProductVariantsByHandleQuery = `
 query getProductVariants($handle: String!) {
   productByHandle(handle: $handle) {
     id

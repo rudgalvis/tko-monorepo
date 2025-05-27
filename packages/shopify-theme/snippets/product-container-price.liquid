@@ -23,10 +23,9 @@
 <div class="product-card-price">
     <product-price price="{{ product.variants[0].price | money_without_trailing_zeros | strip_html}}"
                    compared_at="{{ product.variants[0].compare_at_price | money_without_trailing_zeros | strip_html }}"
-                   variant_id="{{ product.variants[0].id }}"
+                   product_id="{{ product.id }}"
                    iso_code="{{ localization.country.iso_code }}"
-                   theme="small"
-                   discount_position="{% if isSoldOut %}hidden{% else %}newline{% endif %}"></product-price>
+                   type="CollectionItemPrice"></product-price>
 
     {% if isSoldOut %}
         <div class="sold-out-at-price">

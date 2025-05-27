@@ -136,13 +136,13 @@ predictive-search[loading] .predictive-search__results-list:first-child {
   margin: 0;
 }
 
-.predictive-search__item .price {
+.predictive-search__item .price-ui {
   color: rgba(var(--color-foreground), 0.7);
   font-size: 1.2rem;
 }
 
 .predictive-search__item-vendor + .predictive-search__item-heading,
-.predictive-search .price { 
+.predictive-search .price-ui {
   margin-top: 0.5rem;
 }
 

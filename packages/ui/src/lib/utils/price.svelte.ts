@@ -1,6 +1,6 @@
 import {
 	parseCurrencyString,
-	subtractCurrencyStrings
+	subtractFromPriceWithSymbol
 } from '$lib/utils/formatters/price-formatter.js';
 import { NexusApi } from 'storefront-api';
 
@@ -197,7 +197,7 @@ export const processPrice = ({
 				comparedAt: undefined
 			};
 
-		const { formatted: newPrice } = subtractCurrencyStrings(orgPrice, amount);
+		const { formatted: newPrice } = subtractFromPriceWithSymbol(orgPrice, amount);
 
 		return {
 			price: newPrice,

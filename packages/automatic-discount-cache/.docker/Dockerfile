@@ -8,7 +8,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-WORKDIR /api
+WORKDIR /nexusApi
 
 # Moving package files first
 COPY ./bun.lock ./bun.lock
@@ -26,7 +26,7 @@ RUN /usr/local/bin/bun run build
 # Start Bun app in background and varnish as main process
 RUN echo '#!/bin/bash\n\
 # Start Bun app in background\n\
-cd /api && /usr/local/bin/bun run start &\n\
+cd /nexusApi && /usr/local/bin/bun run start &\n\
 \n\
 # Start Varnish as main process\n\
 exec varnishd -F -f /etc/varnish/default.vcl -s malloc,${VARNISH_SIZE:-256m} -a :80 "$@"' > /start.sh && \

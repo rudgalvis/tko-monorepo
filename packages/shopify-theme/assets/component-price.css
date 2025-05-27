@@ -1,4 +1,4 @@
-.price {
+.price-ui {
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -9,7 +9,7 @@
   color: rgb(var(--color-foreground));
 }
 
-.price.price--unavailable {
+.price-ui.price--unavailable {
   visibility: hidden;
 }
 
@@ -17,16 +17,16 @@
   justify-content: flex-end;
 }
 
-.price .price-item {
+.price-ui .price-item {
   margin: 0 1rem 0 0;
 }
 
-.price:not(.price--show-badge) .price-item--last:last-of-type {
+.price-ui:not(.price--show-badge) .price-item--last:last-of-type {
   margin: 0;
 }
 
 @media screen and (min-width: 750px) {
-  .price {
+  .price-ui {
     margin-bottom: 0;
   }
 }
@@ -50,8 +50,8 @@
 
 .price__sale,
 .price__availability,
-.price .price__badge-sale,
-.price .price__badge-sold-out,
+.price-ui .price__badge-sale,
+.price-ui .price__badge-sold-out,
 .price--on-sale .price__regular,
 .price--on-sale .price__availability {
   display: none;

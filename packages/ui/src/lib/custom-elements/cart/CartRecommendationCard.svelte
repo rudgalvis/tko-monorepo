@@ -43,7 +43,7 @@
 
 			<h3 on:click={toItem}>{title}</h3>
 			<div class="tuple text-green-600">
-				<ProductPrice price={price.toString()} theme="small-vivid"/>
+				<ProductPrice price={price.toString()} type="CartItemPrice" variant_id={id}/>
 <!--				<p class="price" class:stroke={isFreeGiftQualified}>{price}</p>-->
 			</div>
 
@@ -186,7 +186,7 @@
 	}
 
 	h4,
-	.price {
+	.price-ui {
 		margin: 0 0 10px;
 		text-transform: uppercase;
 		font-weight: 500;
@@ -198,7 +198,7 @@
 		-moz-osx-font-smoothing: grayscale;
 	}
 
-	.price {
+	.price-ui {
 		margin-bottom: 10px;
 	}
 

@@ -436,16 +436,16 @@ h2.product__type {
   padding: 0 1rem;
 }
 
-.product .price {
+.product .price-ui {
   align-items: flex-start;
 }
 
-.product .price .badge {
+.product .price-ui .badge {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
-.product .price dl {
+.product .price-ui dl {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
@@ -532,7 +532,7 @@ h2.product__type {
   padding-right: 0;
 }
 
-.product--no-media .price {
+.product--no-media .price-ui {
   justify-content: center;
 }
 

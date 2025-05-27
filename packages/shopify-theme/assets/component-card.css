@@ -175,7 +175,7 @@
   color: rgb(var(--color-foreground));
 }
 
-.card-information__wrapper > .price {
+.card-information__wrapper > .price-ui {
   color: rgb(var(--color-foreground));
 }
 

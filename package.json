@@ -9,7 +9,9 @@
     "build:ui": "pnpm --filter ui build",
     "build:nexus": "pnpm --filter shopify-nexus build",
     "build": "pnpm build:common && pnpm build:api && pnpm build:ui && pnpm build:nexus",
-    "start": "pnpm --filter shopify-nexus start"
+    "start": "pnpm --filter shopify-nexus start",
+    "prepack:api": "pnpm --filter storefront-api prepack",
+    "build:liquid": "pnpm --filter ui build-for-theme"
   },
   "keywords": [
     

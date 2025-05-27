@@ -179,4 +179,11 @@ export class ProductsRepository extends BaseRepository {
 
 		return true
 	}
+
+	/**
+	 * Applies automatic discounts
+	 * */
+	async getFinalVariantPrice() {
+
+	}
 }
