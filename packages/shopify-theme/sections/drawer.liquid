@@ -142,8 +142,7 @@ Create Json for product variant color or image
                                                    rv-compared_at="item.price | currency"
                                                    iso_code="{{ localization.country.iso_code }}"
                                                    rv-variant_id="item.variant_id"
-                                                   theme="small-vivid"
-                                                   discount_position="hidden">
+                                                   type="CartItemPrice">
                                         {% if product.compare_at_price > product.price %}
                                             <s aria-label="Original price" style="opacity: 0;">{{ product.compare_at_price | money }}</s>
                                         {% endif %}
@@ -229,8 +228,7 @@ Create Json for product variant color or image
                     <product-price rv-price="cart.total_price | currency"
                                    rv-compared_at="cart.original_total_price | currency"
                                    iso_code="{{ localization.country.iso_code }}"
-                                   theme="medium"
-                                   discount_position="hidden">
+                                   type="CartTotalPrice">
                         {% if product.compare_at_price > product.price %}
                             <s aria-label="Original price" style="opacity: 0;">{{ product.compare_at_price | money }}</s>
                         {% endif %}

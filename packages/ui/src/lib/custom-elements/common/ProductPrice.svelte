@@ -18,7 +18,10 @@
 	import type { PriceWithSymbol as Price } from '$lib/types/PriceWithSymbol.js';
 	import { removeNonComponentChildren } from '$lib/utils/dom/remove-non-component-children.js';
 	import { normalizePrice } from '$lib/utils/formatters/normalize-price.js';
-	import { parseCurrencyString, subtractFromPriceWithSymbol } from '$lib/utils/formatters/price-formatter.js';
+	import {
+		parseCurrencyString,
+		subtractFromPriceWithSymbol
+	} from '$lib/utils/formatters/price-formatter.js';
 	import { NexusApi } from 'storefront-api';
 	import { fade } from 'svelte/transition';
 
@@ -144,9 +147,11 @@
 		const getterByVariant = nexusApi.getVariantAutomaticDiscount.bind(nexusApi);
 		const getterByProduct = nexusApi.getProductAutomaticDiscount.bind(nexusApi);
 
-		const getDiscount = variant_id ? getterByVariant : getterByProduct;
+		const getDiscount = variant_id
+			? () => getterByVariant(market, +variant_id)
+			: () => getterByProduct(market, +product_id);
 
-		const { amount } = await getDiscount(market, +product_id);
+		const { amount } = await getDiscount();
 
 		if (!amount || amount === 0)
 			return {

@@ -17,6 +17,7 @@
 <product-price price="{{ price | money_without_trailing_zeros }}"
                compared_at="{{ compared_at | money_without_trailing_zeros }}"
                iso_code="{{ localization.country.iso_code }}"
+               type="CollectionItemPrice"
                variant_id="{{ variantId }}">
     {% if product.compare_at_price > product.price %}
         <s aria-label="Original price" style="opacity: 0;">{{ product.compare_at_price | money }}</s>

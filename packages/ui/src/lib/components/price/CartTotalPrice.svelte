@@ -4,32 +4,35 @@
     const { price, comparedAt } = $props<{} & PriceWithSymbol>();
 </script>
 
-<div>
+<div class="price-ui">
     {#if comparedAt}
-        <s>{comparedAt}</s>
+        <s class="price-ui--value">{comparedAt}</s>
     {/if}
 
-    <p class:red={!!comparedAt}>{price}</p>
+    <p class:red={!!comparedAt} class="price-ui--value">{price}</p>
 </div>
 
 <style lang="scss">
-    div {
-        font-family: 'Monument', sans-serif;
-        font-size: 22px;
-        color: black;
-
+    .price-ui {
         display: flex;
         gap: 0 8px;
 
         @media screen and (max-width: 1024px) {
-            font-size: 12px;
-
             gap: 4px;
         }
     }
 
-    p {
+    .price-ui--value {
+        font-family: 'Monument', sans-serif;
+        font-size: 22px;
+        color: black;
+        line-height: 1.2em;
+
         margin: 0;
+
+        @media screen and (max-width: 1024px) {
+            font-size: 12px;
+        }
     }
 
     .red {

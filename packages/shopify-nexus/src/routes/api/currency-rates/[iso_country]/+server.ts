@@ -3,9 +3,9 @@ import { error, json, type RequestHandler } from "@sveltejs/kit";
 import { CurrencyRatesApi } from "storefront-api";
 
 export const GET: RequestHandler = async ({params}) => {
-    const { base_market } = params
+    const { iso_country} = params
 
-    if(!base_market) throw error(400, { message: 'Base market is required' })
+    if(!iso_country) throw error(400, { message: 'Market is required' })
 
     const currencyRatesApi = new CurrencyRatesApi(FREECURRENCYAPI_KEY)
 
@@ -17,7 +17,7 @@ export const GET: RequestHandler = async ({params}) => {
     ]
 
     try {
-        const rates = await currencyRatesApi.getRates(base_market, currencies)
+        const rates = await currencyRatesApi.getRates(iso_country, currencies)
 
         return json(rates)
     } catch (e) {

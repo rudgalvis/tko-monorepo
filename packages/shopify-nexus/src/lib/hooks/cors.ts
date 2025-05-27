@@ -5,6 +5,7 @@ const ALLOWED_ORIGINS = [
 	'http://localhost:6006',
 	'http://localhost:3000',
 	'http://localhost:5173',
+	'https://www.theknottyones.com',
 ];
 
 // You can also use environment variables
