@@ -19,7 +19,7 @@ COPY pnpm-*.yaml ./
 COPY package.json ./
 COPY packages/common-utils/package.json ./packages/common-utils/package.json
 COPY packages/shopify-nexus/package.json ./packages/shopify-nexus/package.json
-COPY packages/storefront-api/package.json ./packages/storefront-nexusApi/package.json
+COPY packages/storefront-api/package.json ./packages/storefront-api/package.json
 COPY packages/ui/package.json ./packages/ui/package.json
 
 # Install dependencies
