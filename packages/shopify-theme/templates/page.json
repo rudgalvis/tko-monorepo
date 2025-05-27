@@ -9,13 +9,129 @@
  */
 {
   "sections": {
+    "static_slider_CR7LwY": {
+      "type": "static-slider",
+      "name": "Main Slider",
+      "settings": {
+        "slider-dot-color": "#ffffff",
+        "dothsenable": true,
+        "slider_width_desktop": 20,
+        "slider_width_mobile": 20
+      }
+    },
+    "static_two_column_mdeHcN": {
+      "type": "static-two-column",
+      "name": "2 Column Layout No.1",
+      "settings": {
+        "borderlayouttwocl": "top-bottom",
+        "textposition": "space-between",
+        "sectionlayouttwocl": "image-text",
+        "headingcl": "SECRET SAMPLE SALE:  SHOP PERFECTLY IMPERFECT KNITS",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 459,
+        "h2maxwidthmobile": 300,
+        "bodycl": "Deadstock? We don’t know her.\nOur secret sample sale is now live — featuring ever-so-slightly imperfect knits and one-of-a-kind production samples at a reduced price.",
+        "pmaxwidthdesktop": 900,
+        "pmaxwidthmobile": 300,
+        "cl-image": "shopify://shop_images/1_b2ab0644-9a7f-43e4-9da7-52582453c76b.jpg",
+        "padding_sizeupm_section": 20,
+        "padding_sizedownm_section": -1,
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 27,
+        "padding_sizedownm": 10,
+        "showurlcl": false,
+        "linkTextcl": "https://docs.google.com/spreadsheets/d/1yMbopGY8u01YminqNAiJSJMmV-xwqSHRk85E4Krwa8s/edit?gid=0#gid=0",
+        "linkclUrl": "",
+        "sectionID": ""
+      }
+    },
+    "static_link_Pz3hyX": {
+      "type": "static-link",
+      "name": "Link Section",
+      "settings": {
+        "onlyTextlayout": "top-bottom",
+        "linktext": "GO TO OUR SECRET SAMPLE SALE!",
+        "linkurl": "https://docs.google.com/spreadsheets/d/1yMbopGY8u01YminqNAiJSJMmV-xwqSHRk85E4Krwa8s/edit?gid=0#gid=0",
+        "thisisbigurl": false,
+        "justheader": false,
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 20,
+        "containerbottom": 20,
+        "containertopmobile": 20,
+        "containerbottommobile": 20
+      }
+    },
+    "static_two_column_alt3_WBLbDp": {
+      "type": "static-two-column-alt3",
+      "disabled": true,
+      "name": "2 Column Layout No.3",
+      "settings": {
+        "borderlayouttwoclthreealt": "top-bottom",
+        "altsectionlayouttwthree": "image-text",
+        "nopadding": false,
+        "altthreeimage": "shopify://shop_images/4_dc289a74-c812-486d-b1a4-9c824b53ebbe.jpg",
+        "altheadingclthree": "SECRET SAMPLE SALE:  SHOP PERFECTLY IMPERFECT KNITS",
+        "h2maxwidthdesktop": 446,
+        "h2maxwidthmobile": 300,
+        "altbodyclthree": "<p>Deadstock? We don’t know her.<br/>Our secret sample sale is now live — featuring ever-so-slightly imperfect knits and one-of-a-kind production samples at a reduced price.</p>",
+        "pmaxwidthdesktop": 900,
+        "pmaxwidthmobile": 288,
+        "padding_sizeup": 20,
+        "padding_sizedown": 12,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "padding_sizeupm_section": 27,
+        "padding_sizedownm_section": 0,
+        "sectionID": ""
+      }
+    },
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
+        "headertextalignment": "center"
+      }
+    },
+    "static_onlytext_7LFWq9": {
+      "type": "static-onlytext",
+      "disabled": true,
+      "name": "Only Text Section No.1",
+      "settings": {
+        "onlyTextlayout": "top-bottom",
+        "bgOnlyTextCTA": "#EEEEEA",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "SECRET SAMPLE SALE:  SHOP PERFECTLY IMPERFECT KNITS",
+        "maxwidthoftitle": 700,
+        "maxwidthoftitlemobiled": 250,
+        "bodytextOnlyTextCTA": "Deadstock? We don’t know her.\nOur secret sample sale is now live — featuring ever-so-slightly imperfect knits and one-of-a-kind production samples at a reduced price.",
+        "fontsizetune": "27px",
+        "maxwidthoftext": 1200,
+        "maxwidthoftextmobile": 1200,
+        "showurlOnlyTextCTA": false,
+        "linkOnlyTextCTA": "",
+        "linktextOnlyTextCTA": "",
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 20,
+        "containerbottom": 20,
+        "containertopmobile": 20,
+        "containerbottommobile": 20,
+        "sectionID": ""
       }
     }
   },
   "order": [
-    "main"
+    "static_slider_CR7LwY",
+    "static_two_column_mdeHcN",
+    "static_link_Pz3hyX",
+    "static_two_column_alt3_WBLbDp",
+    "main",
+    "static_onlytext_7LFWq9"
   ]
 }

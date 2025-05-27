@@ -585,6 +585,7 @@
     },
     "1635174300442e79c2": {
       "type": "static-cta-subscribe",
+      "disabled": true,
       "settings": {
         "borderlayoutsub": "hide-border",
         "subbgcolor": "#b4bed6",
