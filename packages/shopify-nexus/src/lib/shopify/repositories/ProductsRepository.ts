@@ -32,12 +32,17 @@ import {
 	type ProductVariantInventoryDetailsResponse,
 } from '$lib/shopify/queries/getProductVariantInventoryDetailsQuery'
 import {
+	getVariantPriceByIdQuery,
+	type GetVariantPriceByIdResponse,
+} from '$lib/shopify/queries/getVariantPriceByIdQuery'
+import {
 	productByHandleQuery,
 	type ProductByHandleReturn,
 	type ProductByHandleVars,
 } from '$lib/shopify/queries/productByHandleQuery'
 import { BaseRepository } from '$lib/shopify/repositories/BaseRepository'
 import { ProductVariantInventoryPolicy } from '$lib/shopify/types/enums/ProductVariantInventoryPolicy'
+import type { VariantPrice } from 'storefront-api'
 
 export class ProductsRepository extends BaseRepository {
 	async createProduct(variables: ProductCreateInput) {
@@ -162,6 +167,42 @@ export class ProductsRepository extends BaseRepository {
 		}
 
 		return data.productDelete
+	}
+
+	async getVariantPrice(countryCode: string, variantGid: string): Promise<VariantPrice> {
+		const { data, errors } = await this.client.request<GetVariantPriceByIdResponse>(
+			getVariantPriceByIdQuery,
+			{
+				variables: {
+					id: variantGid,
+					country: countryCode
+				}
+			}
+		);
+
+		if (errors) {
+			console.error(errors);
+		}
+
+		if (!data)
+			throw new Error(`Failed to get variant price by variant id: ${variantGid}`);
+
+		if (!data.node)
+			throw new Error(`Variant not found: ${variantGid}`);
+
+		return {
+			...data.node,
+			price: {
+				...data.node.contextualPricing.price,
+				amount: +data.node.contextualPricing.price.amount
+			},
+			compareAtPrice: data.node.contextualPricing.compareAtPrice
+				? {
+					...data.node.contextualPricing.compareAtPrice,
+					amount: +data.node.contextualPricing.compareAtPrice.amount
+				}
+				: null
+		};
 	}
 
 	async disableSellOutOfStock({ productId, variantId }: { productId: string; variantId: string }) {

@@ -1,5 +1,5 @@
+import { ProductService } from '$lib/shopify/services/Product.service'
 import { error, json, type RequestHandler } from '@sveltejs/kit'
-import { StorefrontApi } from 'storefront-api'
 
 export const GET: RequestHandler = async ({ params }) => {
 	const { variant_id, iso_country } = params
@@ -8,10 +8,10 @@ export const GET: RequestHandler = async ({ params }) => {
 	if (!iso_country) throw error(400, { message: 'Country code is required' })
 
 
-	const storefrontApi = new StorefrontApi()
+	const productService = new ProductService()
 
 	try {
-		const price = await storefrontApi.getFinalVariantPrice(iso_country, +variant_id)
+		const price = await productService.getFinalVariantPrice(iso_country, +variant_id)
 
 		return json(price)
 	} catch (e) {
