@@ -25,14 +25,11 @@
     .price-ui--value {
         font-family: 'Monument', sans-serif;
         font-size: 22px;
+        line-height: 19px;
         color: black;
-        line-height: 1.2em;
 
         margin: 0;
 
-        @media screen and (max-width: 1024px) {
-            font-size: 12px;
-        }
     }
 
     .red {

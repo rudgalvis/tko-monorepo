@@ -26,6 +26,7 @@ export { default as CurrencySelector } from './custom-elements/common/CurrencySe
 export { default as ProductPrice } from './custom-elements/common/ProductPrice.svelte';
 export { default as ProductDiscountPercentage } from './custom-elements/common/ProductDiscountPercentage.svelte';
 export { default as PreOrderStrip } from './custom-elements/pdp/pre-order/PreOrderStrip.svelte';
+export { default as AnnouncementBarRelay } from './custom-elements/common/AnnouncementBarRelay.svelte';
 
 /* Regular exports */
 export { getAutomaticDiscount };

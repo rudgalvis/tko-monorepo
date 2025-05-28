@@ -1,0 +1,41 @@
+
+{% if localization.country.iso_code == 'GB' %}
+    {% render '1lib-regional-announcement', blocks: section.blocks%}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement GB",
+  "max_blocks": 5,
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "desktop_message",
+          "label": "Desktop Notice Message",
+          "info": "Single line rich text for desktop display in GB market only."
+        },
+        {
+          "type": "richtext",
+          "id": "mobile_message",
+          "label": "Mobile Notice Message",
+          "info": "Single line rich text for mobile display in GB market only."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Market Notice",
+      "blocks": [
+        {
+          "type": "message"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

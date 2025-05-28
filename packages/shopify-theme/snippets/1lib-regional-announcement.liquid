@@ -1,0 +1,51 @@
+{% assign dataStr = '' %}
+{% for block in blocks %}
+    {% capture block_data %}{"desktopMessage":"{{ block.settings.desktop_message }}","mobileMessage": "{{ block.settings.mobile_message }}"}{% endcapture %}
+
+    {% if forloop.first %}
+        {% assign dataStr = '[' | append: block_data %}
+    {% else %}
+        {% assign dataStr = dataStr | append: ',' | append: block_data %}
+    {% endif %}
+
+    {% if forloop.last %}
+        {% assign dataStr = dataStr | append: ']' %}
+    {% endif %}
+{% endfor %}
+
+<announcement-bar-relay dataStr='{{ dataStr }}'>
+    <section class="regional-announcement announcement-{{ localization.country.iso_code }}" role="banner" aria-label="{{ localization.country.iso_code }} Market Announcements">
+        {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+                {% case block.type %}
+                    {% when 'message' %}
+                        <article class="announcement-message" {{ block.shopify_attributes }}>
+                            {% if block.settings.desktop_message != blank or block.settings.mobile_message != blank %}
+
+                                {% if block.settings.desktop_message != blank %}
+                                    <div class="announcement-desktop" aria-hidden="false">
+                                        {{ block.settings.desktop_message }}
+                                    </div>
+                                {% endif %}
+
+                                {% if block.settings.mobile_message != blank %}
+                                    <div class="announcement-mobile" aria-hidden="false">
+                                        {{ block.settings.desktop_message }}
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        </article>
+                {% endcase %}
+            {% endfor %}
+        {% endif %}
+    </section>
+</announcement-bar-relay>
+
+<style>
+    .regional-announcement {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        pointer-events: none;
+    }
+</style>

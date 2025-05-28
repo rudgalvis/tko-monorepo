@@ -222,8 +222,16 @@
 {% if settings.show_countdown_timer %}
     {% section 'countdown-timer' %}
 {% endif %}
-{% section 'static-announcementbar' %}
+
+
+{% section '1ib-announcement-us' %}
+{% section '1ib-announcement-gb' %}
+{% section '1ib-announcement-lt' %}
+{% section '1ib-announcement-au' %}
+{% section '1ib-announcement-other' %}
+
 {% section 'static-header' %}
+
 <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
     {{ content_for_layout }}
 </main>

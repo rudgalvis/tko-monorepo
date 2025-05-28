@@ -1,0 +1,41 @@
+{% assign excluded_countries = 'LT,US,GB,AU' | split: ',' %}
+{% unless excluded_countries contains localization.country.iso_code %}
+    {% render '1lib-regional-announcement', blocks: section.blocks %}
+{% endunless %}
+
+{% schema %}
+{
+  "name": "Announcement Other",
+  "max_blocks": 5,
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "desktop_message",
+          "label": "Desktop Notice Message",
+          "info": "Single line rich text for desktop display in all the other markets."
+        },
+        {
+          "type": "richtext",
+          "id": "mobile_message",
+          "label": "Mobile Notice Message",
+          "info": "Single line rich text for mobile display in all the other markets"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Market Notice",
+      "blocks": [
+        {
+          "type": "message"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
