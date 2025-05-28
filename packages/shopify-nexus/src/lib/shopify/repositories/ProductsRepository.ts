@@ -175,7 +175,7 @@ export class ProductsRepository extends BaseRepository {
 			{
 				variables: {
 					id: variantGid,
-					country: countryCode
+					country: countryCode.toUpperCase()
 				}
 			}
 		);

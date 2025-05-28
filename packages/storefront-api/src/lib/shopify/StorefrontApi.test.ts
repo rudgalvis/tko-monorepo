@@ -23,10 +23,3 @@ test('Test automatic product discount', async () => {
 
 	console.log(a);
 });
-
-test('Test getting final variant price', async () => {
-	const storefrontApi = new StorefrontApi()
-	const a = await storefrontApi.getFinalVariantPrice('LT', 42965242544371);
-
-	console.log(a)
-})

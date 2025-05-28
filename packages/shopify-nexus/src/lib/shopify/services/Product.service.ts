@@ -1,7 +1,8 @@
 import { ProductsRepository } from '$lib/shopify/repositories/ProductsRepository'
+import { DiscountType } from '$lib/shopify/types/enums/DiscountType'
 import { ProductVariantInventoryPolicy } from '$lib/shopify/types/enums/ProductVariantInventoryPolicy'
+import type { FinalVariantPrice } from '$lib/shopify/types/FinalVariantPrice'
 import { generateVariantGid } from 'common-utils'
-import { DiscountType, type FinalVariantPrice } from 'storefront-api'
 import { StorefrontApi } from 'storefront-api'
 
 export class ProductService {
