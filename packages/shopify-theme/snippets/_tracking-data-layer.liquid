@@ -649,6 +649,9 @@
                     'items': [
                         // Loop through each product in the collection and define its details for tracking
                         {% for product in collection.products %}
+                        {%- comment %}<locksmith:a40f>{% endcomment -%}
+                          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, subject_parent: collection, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                        {%- comment %}</locksmith:a40f>{% endcomment -%}
                         {
                             'product_id': {{ product.id | json }},
                             'variant_id': {{ product.selected_or_first_available_variant.id | json }},

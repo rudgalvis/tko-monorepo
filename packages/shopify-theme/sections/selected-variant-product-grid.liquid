@@ -187,7 +187,14 @@ border-left: none;
 
 
 
+{%- comment %}<locksmith:34d7>{% endcomment -%}
+  {%- assign locksmith_c559_forloop__size = 0 %}{% for product in collection.products %}{% capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, subject_parent: collection, variable: 'transparent' %}{% endcapture %}{% if var == 'true' %}{% assign locksmith_c559_forloop__size = locksmith_c559_forloop__size | plus: 1 %}{% endif %}{% endfor %}{% assign locksmith_c559_forloop__index = nil -%}
+{%- comment %}</locksmith:34d7>{% endcomment -%}
 {% for product in collection.products %}
+
+{%- comment %}<locksmith:2749>{% endcomment -%}
+  {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, subject_parent: collection, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% if locksmith_c559_forloop__index == nil %}{% assign locksmith_c559_forloop__index = 1 %}{% assign locksmith_c559_forloop__index0 = 0 %}{% else %}{% assign locksmith_c559_forloop__index = locksmith_c559_forloop__index | plus: 1 %}{% assign locksmith_c559_forloop__index0 = locksmith_c559_forloop__index0 | plus: 1 %}{% endif %}{% if locksmith_c559_forloop__index == 1 %}{% assign locksmith_c559_forloop__first = true %}{% else %}{% assign locksmith_c559_forloop__first = false %}{% endif %}{% if locksmith_c559_forloop__index == locksmith_c559_forloop__size %}{% assign locksmith_c559_forloop__last = true %}{% else %}{% assign locksmith_c559_forloop__last = false %}{% endif %}{% assign locksmith_c559_forloop__rindex = locksmith_c559_forloop__size | minus: locksmith_c559_forloop__index | minus: 1 %}{% assign locksmith_c559_forloop__rindex0 = locksmith_c559_forloop__size | minus: locksmith_c559_forloop__index0 | minus: 1 %}{% else %}{% continue %}{% endif -%}
+{%- comment %}</locksmith:2749>{% endcomment -%}
 
 {% assign productUrltr = product.url %}
 
@@ -326,6 +333,10 @@ border-left: none;
 
             {% for product in recommended_products_core  %}
 
+            {%- comment %}<locksmith:9c70>{% endcomment -%}
+              {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+            {%- comment %}</locksmith:9c70>{% endcomment -%}
+
             {% for variant in product.variants %}
 
                 {% assign isAvailable = variant.available %}
@@ -393,6 +404,10 @@ border-left: none;
                -------------------------------------------------
                {%- endcomment -%}
           {% for product in recommended_products  %}
+
+            {%- comment %}<locksmith:dbf5>{% endcomment -%}
+              {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+            {%- comment %}</locksmith:dbf5>{% endcomment -%}
 
             {% for variant in product.variants %}
 
@@ -520,6 +535,9 @@ border-left: none;
 
  {%- comment -%}seasonal_colors{%- endcomment -%}
  {% for product in recommended_products_core  %}
+ {%- comment %}<locksmith:6bf5>{% endcomment -%}
+   {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+ {%- comment %}</locksmith:6bf5>{% endcomment -%}
  {% assign productbitURL = product.url %}
                {%- comment -%}
                ------------------
@@ -595,6 +613,9 @@ seasonal_colors
 
 
               {% for product in recommended_products  %}
+              {%- comment %}<locksmith:08e3>{% endcomment -%}
+                {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+              {%- comment %}</locksmith:08e3>{% endcomment -%}
               {% assign productbitURL = product.url %}
               {%- comment -%}
               ------------------
@@ -681,7 +702,7 @@ seasonal_colors
               ------------------
               {%- endcomment -%}
 
-      {% if forloop.index == 3 and collection.metafields.my_fields.collection_video != nil and videoExist == true %}
+      {% if locksmith_c559_forloop__index == 3 and collection.metafields.my_fields.collection_video != nil and videoExist == true %}
           {% render 'collection-video',
           videostatus: videoExist,
           urlstatus: videoURL ,
@@ -703,7 +724,7 @@ seasonal_colors
 
 
 {% endif %}
-{% assign paginationControl = forloop.index %}
+{% assign paginationControl = locksmith_c559_forloop__index %}
 {% endfor %}
 
 

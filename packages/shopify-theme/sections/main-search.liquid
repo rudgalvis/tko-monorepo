@@ -47,6 +47,9 @@
 {% assign numArticle = 0 %}
 {% assign numProduct = 0 %}
 {% for item in search.results %}
+  {%- comment %}<locksmith:91a3>{% endcomment -%}
+    {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: item, subject_parent: search, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+  {%- comment %}</locksmith:91a3>{% endcomment -%}
   {% if item.object_type == 'product' %}
     {% assign numProduct = numProduct | plus: 1 %}
     {% assign colorCount_selected = item.variants[0].option1 | handleize %}
@@ -145,6 +148,9 @@
   {%- if search.performed -%}
     <div class="search-product sr-product {% if numProduct > 0 %}active{%endif%}">
       {% for item in search.results %}
+        {%- comment %}<locksmith:d23b>{% endcomment -%}
+          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: item, subject_parent: search, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+        {%- comment %}</locksmith:d23b>{% endcomment -%}
         {% if item.object_type == 'product' %}
           {%- comment -%}
             ------------------
@@ -201,6 +207,9 @@
     </div>
     <div class="search-product sr-blog {% if numPage == 0 and numProduct == 0 and numArticle > 0 %}active{% endif %}">
       {% for item in search.results %}
+        {%- comment %}<locksmith:8cc9>{% endcomment -%}
+          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: item, subject_parent: search, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+        {%- comment %}</locksmith:8cc9>{% endcomment -%}
         {% if item.object_type == 'article' %}
           {% include 'search-blog' %}
         {% endif %}
@@ -208,6 +217,9 @@
     </div>
     <div class="search-product sr-page {% if numPage > 0 and numProduct == 0 %}active{% endif %}">
       {% for item in search.results %}
+        {%- comment %}<locksmith:e4b2>{% endcomment -%}
+          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: item, subject_parent: search, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+        {%- comment %}</locksmith:e4b2>{% endcomment -%}
         {% if item.object_type == 'page' %}
           {% include 'search-page' %}
         {% endif %}

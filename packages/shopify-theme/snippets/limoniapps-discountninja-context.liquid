@@ -11,6 +11,9 @@ Do not modify or remove this snippet, this snippet can be overwritten when the a
   {%- if collection and discountninjacollection == nil -%}{%- assign discountninjacollection = collection -%}{%- endif -%}   
   {%- if discountninjacollection -%}
       {%- for collectionProduct in discountninjacollection.products limit: 200 -%}
+          {%- comment %}<locksmith:76b8>{% endcomment -%}
+            {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: collectionProduct, subject_parent: discountninjacollection, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+          {%- comment %}</locksmith:76b8>{% endcomment -%}
           window.discountNinjaContext.CollectionProducts.push({ Collections: "{{collectionProduct.collections | map: 'handle' | join: ',' | escape | default: '[[--NONE--]]' }}", CollectionIds: "{{collectionProduct.collections | map: 'id' | join: ',' }}", Available: {{ collectionProduct.available }}, Handle: "{{ collectionProduct.handle }}", Price: {{ collectionProduct.price_max | default: 0 }}, CompareAtPrice: {{ collectionProduct.compare_at_price_max | default: 0 }}, PriceVaries: {{ collectionProduct.price_varies | default: false }}, PriceMin: {{ collectionProduct.price_min | default: 0 }}, Tags: "{{ collectionProduct.tags | join: ', ' | escape | default: '[[--NONE--]]' }}" });
       {%- endfor -%}
   {%- endif -%}

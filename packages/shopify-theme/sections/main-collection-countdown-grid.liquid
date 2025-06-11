@@ -183,7 +183,16 @@
 
 
 
+                {%- comment %}<locksmith:a901>{% endcomment -%}
+                  {%- assign locksmith_83a8_forloop__size = 0 %}{% for product in collection.products %}{% capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, subject_parent: collection, variable: 'transparent' %}{% endcapture %}{% if var == 'true' %}{% assign locksmith_83a8_forloop__size = locksmith_83a8_forloop__size | plus: 1 %}{% endif %}{% endfor %}{% assign locksmith_83a8_forloop__index = nil -%}
+                {%- comment %}</locksmith:a901>{% endcomment -%}
                 {% for product in collection.products %}
+
+
+
+                    {%- comment %}<locksmith:d268>{% endcomment -%}
+                      {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, subject_parent: collection, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% if locksmith_83a8_forloop__index == nil %}{% assign locksmith_83a8_forloop__index = 1 %}{% assign locksmith_83a8_forloop__index0 = 0 %}{% else %}{% assign locksmith_83a8_forloop__index = locksmith_83a8_forloop__index | plus: 1 %}{% assign locksmith_83a8_forloop__index0 = locksmith_83a8_forloop__index0 | plus: 1 %}{% endif %}{% if locksmith_83a8_forloop__index == 1 %}{% assign locksmith_83a8_forloop__first = true %}{% else %}{% assign locksmith_83a8_forloop__first = false %}{% endif %}{% if locksmith_83a8_forloop__index == locksmith_83a8_forloop__size %}{% assign locksmith_83a8_forloop__last = true %}{% else %}{% assign locksmith_83a8_forloop__last = false %}{% endif %}{% assign locksmith_83a8_forloop__rindex = locksmith_83a8_forloop__size | minus: locksmith_83a8_forloop__index | minus: 1 %}{% assign locksmith_83a8_forloop__rindex0 = locksmith_83a8_forloop__size | minus: locksmith_83a8_forloop__index0 | minus: 1 %}{% else %}{% continue %}{% endif -%}
+                    {%- comment %}</locksmith:d268>{% endcomment -%}
 
 
 
@@ -359,6 +368,10 @@
 
                                             {% for product in recommended_products_core %}
 
+                                                {%- comment %}<locksmith:c000>{% endcomment -%}
+                                                  {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                                                {%- comment %}</locksmith:c000>{% endcomment -%}
+
                                                 {% for variant in product.variants %}
 
                                                     {% assign isAvailable = variant.available %}
@@ -456,6 +469,10 @@
                                              -------------------------------------------------
                                              {%- endcomment -%}
                                             {% for product in recommended_products %}
+
+                                                {%- comment %}<locksmith:7647>{% endcomment -%}
+                                                  {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                                                {%- comment %}</locksmith:7647>{% endcomment -%}
 
                                                 {% for variant in product.variants %}
 
@@ -615,6 +632,12 @@
 
 
 
+                                                    {%- comment %}<locksmith:069f>{% endcomment -%}
+                                                      {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                                                    {%- comment %}</locksmith:069f>{% endcomment -%}
+
+
+
                                                     {% assign productOpen = false %}
 
                                                     {% assign date1 = product.metafields.counter.datetime | date: "%s" %}
@@ -698,6 +721,9 @@
 
 
                                                 {% for product in recommended_products %}
+                                                    {%- comment %}<locksmith:b2fa>{% endcomment -%}
+                                                      {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                                                    {%- comment %}</locksmith:b2fa>{% endcomment -%}
                                                     {% assign productbitURL = product.url %}
                                                     {%- comment -%}
                                                     ------------------
@@ -930,6 +956,10 @@
 
                                             {% for product in recommended_products_core %}
 
+                                                {%- comment %}<locksmith:0671>{% endcomment -%}
+                                                  {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                                                {%- comment %}</locksmith:0671>{% endcomment -%}
+
                                                 {% for variant in product.variants %}
 
                                                     {% assign isAvailable = variant.available %}
@@ -1027,6 +1057,10 @@
                                              -------------------------------------------------
                                              {%- endcomment -%}
                                             {% for product in recommended_products %}
+
+                                                {%- comment %}<locksmith:2132>{% endcomment -%}
+                                                  {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                                                {%- comment %}</locksmith:2132>{% endcomment -%}
 
                                                 {% for variant in product.variants %}
 
@@ -1350,7 +1384,7 @@
                         ------------------
                         {%- endcomment -%}
 
-                        {% if forloop.index == 3 and collection.metafields.my_fields.collection_video != nil and videoExist == true %}
+                        {% if locksmith_83a8_forloop__index == 3 and collection.metafields.my_fields.collection_video != nil and videoExist == true %}
                             {% render 'collection-video',
                                     videostatus: videoExist,
                                     urlstatus: videoURL,
@@ -1373,7 +1407,7 @@
 
 
                     {% endif %}
-                    {% assign paginationControl = forloop.index %}
+                    {% assign paginationControl = locksmith_83a8_forloop__index %}
                 {% endfor %}
 
 

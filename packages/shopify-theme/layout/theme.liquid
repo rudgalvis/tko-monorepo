@@ -1,6 +1,11 @@
+{%- comment %}<locksmith:4827>{% endcomment -%}
+  {%- include 'locksmith' -%}
+{%- comment %}</locksmith:4827>{% endcomment -%}
+
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
 <head>
+    {{ locksmith_initializations }}
     {% render '_tracking-cookiebot-head' %}
     {% render 'rr-custom-scripts' %}
 
@@ -33,7 +38,10 @@
     </title>
 
     {% if page_description %}
-        <meta name="description" content="{{ page_description | escape }}">
+        {%- comment %}<locksmith:3a8c>{% endcomment -%}
+          {%- capture var %}{% render 'locksmith-variables', variable: 'transparent', hiding_scope: 'resource' %}{% endcapture %}{% if var == 'true' %}<meta name="description" content="{{ page_description | escape }}">{% endif -%}
+          {%- comment %}original: <meta name="description" content="{{ page_description | escape }}">{%- endcomment %}
+        {%- comment %}</locksmith:3a8c>{% endcomment -%}
     {% endif %}
 
     {% render 'meta-tags' %}
@@ -225,7 +233,7 @@
 {% section 'static-announcementbar' %}
 {% section 'static-header' %}
 <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
-    {{ content_for_layout }}
+    {{ content_for_layout }}{{ locksmith_content_for_layout_addenda }}
 </main>
 {% section 'drawer' %}
 {% section 'tko-footer' %}

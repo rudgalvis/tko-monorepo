@@ -84,6 +84,11 @@ border-left: none;
       {% for recommendation in recommendations.products  %}
 
 
+      {%- comment %}<locksmith:203f>{% endcomment -%}
+        {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: recommendation, subject_parent: recommendations, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+      {%- comment %}</locksmith:203f>{% endcomment -%}
+
+
       {% assign dnum = true %}
       {% for tag in recommendation.tags %}
         {% if tag contains 'dreamfund' or tag contains 'countdown' %}     

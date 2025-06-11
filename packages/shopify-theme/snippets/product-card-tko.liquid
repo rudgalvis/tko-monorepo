@@ -70,6 +70,10 @@
     
                 {% for product in recommended_products_core  %} 
     
+                {%- comment %}<locksmith:889e>{% endcomment -%}
+                  {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                {%- comment %}</locksmith:889e>{% endcomment -%} 
+    
                 {% for variant in product.variants %}
             
                     {% assign isAvailable = variant.available %}
@@ -137,6 +141,10 @@
                    -------------------------------------------------
                    {%- endcomment -%} 
               {% for product in recommended_products  %} 
+    
+                {%- comment %}<locksmith:45a1>{% endcomment -%}
+                  {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                {%- comment %}</locksmith:45a1>{% endcomment -%} 
     
                 {% for variant in product.variants %}
             
@@ -261,6 +269,9 @@
 
 
                    {% for product in recommended_products_core  %} 
+                        {%- comment %}<locksmith:0c8f>{% endcomment -%}
+                          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                        {%- comment %}</locksmith:0c8f>{% endcomment -%} 
                         {% for variant in product.variants %}
                              {% if getVariant == variant.option1 and variant.id == first_variant_%}                     
                              <span data-color="{{variant.option1 | handleize}}" data-varid="{{variant.id}}" class="money">{{ variant.price | money_without_trailing_zeros | strip_html }}</span>
@@ -271,6 +282,9 @@
                    {% endfor %}
    
                    {% for product in recommended_products  %} 
+                        {%- comment %}<locksmith:ce6c>{% endcomment -%}
+                          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                        {%- comment %}</locksmith:ce6c>{% endcomment -%} 
                         {% for variant in product.variants %}
                         {% if getVariant == variant.option1 and variant.id == first_variant_%}   
                         <span data-color="{{variant.option1 | handleize}}" data-varid="{{variant.id}}" class="money">{{ variant.price | money_without_trailing_zeros | strip_html }}</span>    
@@ -309,6 +323,9 @@
    
    
                  {% for product in recommended_products_core  %} 
+                        {%- comment %}<locksmith:96c1>{% endcomment -%}
+                          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                        {%- comment %}</locksmith:96c1>{% endcomment -%} 
                         {% for variant in product.variants %}
                              <span data-varid="{{variant.id}}" class="sale_price money"  {% if variant.compare_at_price != nil and variant.id == first_variant_ %}style="display:block;" {% else %}style="display:none;"{%endif%}>
                                {% if variant.price < variant.compare_at_price %}
@@ -318,6 +335,9 @@
                         {% endfor %}  
                  {% endfor %} 
                  {% for product in recommended_products  %} 
+                        {%- comment %}<locksmith:3c6b>{% endcomment -%}
+                          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                        {%- comment %}</locksmith:3c6b>{% endcomment -%} 
                         {% for variant in product.variants %}
                              <span data-varid="{{variant.id}}" class="sale_price money"  {% if variant.compare_at_price != nil and variant.id == first_variant_ %}style="display:block;" {% else %}style="display:none;"{%endif%}>
                                {% if variant.price < variant.compare_at_price %}
@@ -346,6 +366,9 @@
         
         {%- comment -%}seasonal_colors{%- endcomment -%}
         {% for product in recommended_products_core  %}  
+        {%- comment %}<locksmith:5309>{% endcomment -%}
+          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+        {%- comment %}</locksmith:5309>{% endcomment -%}  
         {% assign productbitURL = product.url %}
                    {%- comment -%}
                    ------------------
@@ -410,6 +433,9 @@
         
         
                   {% for product in recommended_products  %}  
+                  {%- comment %}<locksmith:44ca>{% endcomment -%}
+                    {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                  {%- comment %}</locksmith:44ca>{% endcomment -%}  
                   {% assign productbitURL = product.url %}
                   {%- comment -%}
                   ------------------

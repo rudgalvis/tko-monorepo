@@ -20,6 +20,9 @@
 
     <ul id="predictive-search-results-list" class="result-container" role="listbox" aria-labelledby="predictive-search-products">
         {%- for product in predictive_search.resources.products -%}
+           {%- comment %}<locksmith:0ae1>{% endcomment -%}
+             {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, subject_parent: predictive_search.resources, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+           {%- comment %}</locksmith:0ae1>{% endcomment -%}
            <li role="option" class="result-item">
               <div class="ps-product-detail">
                   <div class="pspd pspd-left">

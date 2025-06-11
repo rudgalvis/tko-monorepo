@@ -32,6 +32,9 @@
         <ul class="parent">
           {% assign getMenu = section.settings.menu %}
           {% for link in linklists[getMenu].links limit: 3 %}
+            {%- comment %}<locksmith:dad2>{% endcomment -%}
+              {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: linklists[getMenu], variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+            {%- comment %}</locksmith:dad2>{% endcomment -%}
             <li class="subi">
               {% assign getLinkTitle = link.title | handleize %}
 
@@ -54,6 +57,9 @@
                       <div class="mega-menu">
                         <div class="mm-main mm-main-height">
                           {% for child_link in link.links %}
+                            {%- comment %}<locksmith:9d90>{% endcomment -%}
+                              {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: child_link, subject_parent: link, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                            {%- comment %}</locksmith:9d90>{% endcomment -%}
                             {% if child_link.links.size == 0 %}
                               <div class="alignmentdiv">
                                 <div class="mm-layout mn-layout">
@@ -81,6 +87,9 @@
                                 <div class="mm-sub">
                                   {% if child_link.links.size > 0 %}
                                     {% for grandchild_link in child_link.links %}
+                                      {%- comment %}<locksmith:263f>{% endcomment -%}
+                                        {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: grandchild_link, subject_parent: child_link, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                                      {%- comment %}</locksmith:263f>{% endcomment -%}
                                       {% assign getLinkTitle = grandchild_link.title | handleize %}
 
                                       <a
@@ -280,6 +289,9 @@
           <ul class="parent">
             {% assign getMenu = section.settings.menu %}
             {% for link in linklists[getMenu].links limit: 1 offset: 3 %}
+              {%- comment %}<locksmith:5fae>{% endcomment -%}
+                {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: linklists[getMenu], variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+              {%- comment %}</locksmith:5fae>{% endcomment -%}
               <li class="subi">
                 {% assign getLinkTitle = link.title | handleize %}
 
@@ -302,6 +314,9 @@
                         <div class="mega-menu">
                           <div class="mm-main mm-main-height">
                             {% for child_link in link.links %}
+                              {%- comment %}<locksmith:1c91>{% endcomment -%}
+                                {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: child_link, subject_parent: link, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                              {%- comment %}</locksmith:1c91>{% endcomment -%}
                               {% if child_link.links.size == 0 %}
                                 <div class="alignmentdiv">
                                   <div class="mm-layout mn-layout">
@@ -329,6 +344,9 @@
                                   <div class="mm-sub">
                                     {% if child_link.links.size > 0 %}
                                       {% for grandchild_link in child_link.links %}
+                                        {%- comment %}<locksmith:95d0>{% endcomment -%}
+                                          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: grandchild_link, subject_parent: child_link, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                                        {%- comment %}</locksmith:95d0>{% endcomment -%}
                                         {% assign getLinkTitle = grandchild_link.title | handleize %}
 
                                         <a
@@ -609,7 +627,13 @@
     <div class="mobile-nav-container">
       <ul class="main_list_nav">
         <li class="main_list_parent"><a href="javascript:void(0);" id="mobile-nav-search">SEARCH</a></li>
+        {%- comment %}<locksmith:26a3>{% endcomment -%}
+          {%- assign locksmith_69d7_forloop__size = 0 %}{% for link in linklists[getMenu].links %}{% capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: linklists[getMenu], variable: 'transparent' %}{% endcapture %}{% if var == 'true' %}{% assign locksmith_69d7_forloop__size = locksmith_69d7_forloop__size | plus: 1 %}{% endif %}{% endfor %}{% assign locksmith_69d7_forloop__index = nil -%}
+        {%- comment %}</locksmith:26a3>{% endcomment -%}
         {% for link in linklists[getMenu].links %}
+          {%- comment %}<locksmith:aa6d>{% endcomment -%}
+            {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: linklists[getMenu], variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% if locksmith_69d7_forloop__index == nil %}{% assign locksmith_69d7_forloop__index = 1 %}{% assign locksmith_69d7_forloop__index0 = 0 %}{% else %}{% assign locksmith_69d7_forloop__index = locksmith_69d7_forloop__index | plus: 1 %}{% assign locksmith_69d7_forloop__index0 = locksmith_69d7_forloop__index0 | plus: 1 %}{% endif %}{% if locksmith_69d7_forloop__index == 1 %}{% assign locksmith_69d7_forloop__first = true %}{% else %}{% assign locksmith_69d7_forloop__first = false %}{% endif %}{% if locksmith_69d7_forloop__index == locksmith_69d7_forloop__size %}{% assign locksmith_69d7_forloop__last = true %}{% else %}{% assign locksmith_69d7_forloop__last = false %}{% endif %}{% assign locksmith_69d7_forloop__rindex = locksmith_69d7_forloop__size | minus: locksmith_69d7_forloop__index | minus: 1 %}{% assign locksmith_69d7_forloop__rindex0 = locksmith_69d7_forloop__size | minus: locksmith_69d7_forloop__index0 | minus: 1 %}{% else %}{% continue %}{% endif -%}
+          {%- comment %}</locksmith:aa6d>{% endcomment -%}
           {% assign getLinkTitle = link.title | handleize %}
           <li class="main_list_parent">
             {% if link.links.size > 0 %}
@@ -629,7 +653,13 @@
                   src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/plus_minus.svg?v=1636976618"
               ></a>
               <ul class="parent_list_nav">
+                {%- comment %}<locksmith:198c>{% endcomment -%}
+                  {%- assign locksmith_14e1_forloop__size = 0 %}{% for child_link in link.links %}{% capture var %}{% render 'locksmith-variables', scope: 'subject', subject: child_link, subject_parent: link, variable: 'transparent' %}{% endcapture %}{% if var == 'true' %}{% assign locksmith_14e1_forloop__size = locksmith_14e1_forloop__size | plus: 1 %}{% endif %}{% endfor %}{% assign locksmith_14e1_forloop__index = nil -%}
+                {%- comment %}</locksmith:198c>{% endcomment -%}
                 {% for child_link in link.links %}
+                  {%- comment %}<locksmith:f7b7>{% endcomment -%}
+                    {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: child_link, subject_parent: link, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% if locksmith_14e1_forloop__index == nil %}{% assign locksmith_14e1_forloop__index = 1 %}{% assign locksmith_14e1_forloop__index0 = 0 %}{% else %}{% assign locksmith_14e1_forloop__index = locksmith_14e1_forloop__index | plus: 1 %}{% assign locksmith_14e1_forloop__index0 = locksmith_14e1_forloop__index0 | plus: 1 %}{% endif %}{% if locksmith_14e1_forloop__index == 1 %}{% assign locksmith_14e1_forloop__first = true %}{% else %}{% assign locksmith_14e1_forloop__first = false %}{% endif %}{% if locksmith_14e1_forloop__index == locksmith_14e1_forloop__size %}{% assign locksmith_14e1_forloop__last = true %}{% else %}{% assign locksmith_14e1_forloop__last = false %}{% endif %}{% assign locksmith_14e1_forloop__rindex = locksmith_14e1_forloop__size | minus: locksmith_14e1_forloop__index | minus: 1 %}{% assign locksmith_14e1_forloop__rindex0 = locksmith_14e1_forloop__size | minus: locksmith_14e1_forloop__index0 | minus: 1 %}{% else %}{% continue %}{% endif -%}
+                  {%- comment %}</locksmith:f7b7>{% endcomment -%}
                   <li class="child_list_nav">
                     {% if child_link.links.size == 0 %}
                       {% assign getLinkTitle = child_link.links.title | handleize %}
@@ -668,6 +698,9 @@
                         ></a>
                         <ul class="grand_child_list_nav {% if forloop.index == 1  %} grandchild-active {% endif %} ">
                           {% for grandchild_link in child_link.links %}
+                            {%- comment %}<locksmith:1b6e>{% endcomment -%}
+                              {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: grandchild_link, subject_parent: child_link, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                            {%- comment %}</locksmith:1b6e>{% endcomment -%}
                             {% assign getLinkTitle = grandchild_link.title | handleize %}
                             <li>
                               <a

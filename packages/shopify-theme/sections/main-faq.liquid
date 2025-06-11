@@ -6,6 +6,9 @@
                 <ul>
                  
                   {% for link in linklists.faq.links %}
+                  {%- comment %}<locksmith:e9f0>{% endcomment -%}
+                    {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: linklists.faq, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                  {%- comment %}</locksmith:e9f0>{% endcomment -%}
                   <li><a class="faqd" href="{{ link.url }}">{{ link.title }}</a></li> 
                   {% endfor %}
                 </ul>
@@ -14,6 +17,9 @@
        <div class="faq-content-b fc-right">
           <div class="fc-main-content">
             {% for link in linklists.faq.links %}
+                  {%- comment %}<locksmith:f571>{% endcomment -%}
+                    {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: linklists.faq, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                  {%- comment %}</locksmith:f571>{% endcomment -%}
                   {% assign linkcorrection = link.title | handleize %}
                   <h2 id="{{ link.url | remove:'#' }}" class="faq-main-header">{{link.title}}</h2>
               <ul class="faq-group">

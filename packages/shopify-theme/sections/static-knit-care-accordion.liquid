@@ -37,13 +37,19 @@
         
         <div class="accordion-menu" {%if section.settings.thisischild != false %} style="display:none;"{% endif %}>
             <ul>
+                {%- comment %}<locksmith:c216>{% endcomment -%}
+                  {%- assign locksmith_e2d8_forloop__size = 0 %}{% for link in linklists.knit-care.links %}{% capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: linklists.knit-care, variable: 'transparent' %}{% endcapture %}{% if var == 'true' %}{% assign locksmith_e2d8_forloop__size = locksmith_e2d8_forloop__size | plus: 1 %}{% endif %}{% endfor %}{% assign locksmith_e2d8_forloop__index = nil -%}
+                {%- comment %}</locksmith:c216>{% endcomment -%}
                 {% for link in linklists.knit-care.links %}
+                {%- comment %}<locksmith:2629>{% endcomment -%}
+                  {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: linklists.knit-care, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% if locksmith_e2d8_forloop__index == nil %}{% assign locksmith_e2d8_forloop__index = 1 %}{% assign locksmith_e2d8_forloop__index0 = 0 %}{% else %}{% assign locksmith_e2d8_forloop__index = locksmith_e2d8_forloop__index | plus: 1 %}{% assign locksmith_e2d8_forloop__index0 = locksmith_e2d8_forloop__index0 | plus: 1 %}{% endif %}{% if locksmith_e2d8_forloop__index == 1 %}{% assign locksmith_e2d8_forloop__first = true %}{% else %}{% assign locksmith_e2d8_forloop__first = false %}{% endif %}{% if locksmith_e2d8_forloop__index == locksmith_e2d8_forloop__size %}{% assign locksmith_e2d8_forloop__last = true %}{% else %}{% assign locksmith_e2d8_forloop__last = false %}{% endif %}{% assign locksmith_e2d8_forloop__rindex = locksmith_e2d8_forloop__size | minus: locksmith_e2d8_forloop__index | minus: 1 %}{% assign locksmith_e2d8_forloop__rindex0 = locksmith_e2d8_forloop__size | minus: locksmith_e2d8_forloop__index0 | minus: 1 %}{% else %}{% continue %}{% endif -%}
+                {%- comment %}</locksmith:2629>{% endcomment -%}
                 <li>
-                    <a href="javascript:void(0)" class="accordion-control {% if forloop.index0 == 0 %} active {% endif %}" data-navname="{{ link.title | handleize  }}">{{ link.title }}</a>
+                    <a href="javascript:void(0)" class="accordion-control {% if locksmith_e2d8_forloop__index0 == 0 %} active {% endif %}" data-navname="{{ link.title | handleize  }}">{{ link.title }}</a>
                     <div class="tr-line"></div>
                 </li>
                 {% assign itemcount = forloop.length %}
-                {% if forloop.first ==  true %}
+                {% if locksmith_e2d8_forloop__first ==  true %}
                     {% assign activetype = link.title  %}
                 {% endif %}
                 {% endfor %}

@@ -530,9 +530,15 @@ Mobile Slider
                       {% assign currentProductColorthis = product.variants[0].option1 | handleize %}
                   
                           {% assign recommended_products =  product.metafields.variantproduct.productgroup.value %}
+                          {%- comment %}<locksmith:c436>{% endcomment -%}
+                            {%- assign locksmith_8987_forloop__size = 0 %}{% for product in recommended_products  %}{% capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == 'true' %}{% assign locksmith_8987_forloop__size = locksmith_8987_forloop__size | plus: 1 %}{% endif %}{% endfor %}{% assign locksmith_8987_forloop__index = nil -%}
+                          {%- comment %}</locksmith:c436>{% endcomment -%}
                           {% for product in recommended_products  %}  
+                          {%- comment %}<locksmith:c70b>{% endcomment -%}
+                            {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% if locksmith_8987_forloop__index == nil %}{% assign locksmith_8987_forloop__index = 1 %}{% assign locksmith_8987_forloop__index0 = 0 %}{% else %}{% assign locksmith_8987_forloop__index = locksmith_8987_forloop__index | plus: 1 %}{% assign locksmith_8987_forloop__index0 = locksmith_8987_forloop__index0 | plus: 1 %}{% endif %}{% if locksmith_8987_forloop__index == 1 %}{% assign locksmith_8987_forloop__first = true %}{% else %}{% assign locksmith_8987_forloop__first = false %}{% endif %}{% if locksmith_8987_forloop__index == locksmith_8987_forloop__size %}{% assign locksmith_8987_forloop__last = true %}{% else %}{% assign locksmith_8987_forloop__last = false %}{% endif %}{% assign locksmith_8987_forloop__rindex = locksmith_8987_forloop__size | minus: locksmith_8987_forloop__index | minus: 1 %}{% assign locksmith_8987_forloop__rindex0 = locksmith_8987_forloop__size | minus: locksmith_8987_forloop__index0 | minus: 1 %}{% else %}{% continue %}{% endif -%}
+                          {%- comment %}</locksmith:c70b>{% endcomment -%}  
                           {% assign currentProductColorthem = product.variants[0].option1 | handleize %}
-                          <label class="color-changer-wrap" for="{{ product.variants[0].id }}-{{ product.variants[0].option1 | handleize }}-{{ forloop.index0 }}">
+                          <label class="color-changer-wrap" for="{{ product.variants[0].id }}-{{ product.variants[0].option1 | handleize }}-{{ locksmith_8987_forloop__index0 }}">
                               {% if control == true %}
                               {% render 'variant-color' , 
                               colorsource : settings.colorswatch,
@@ -693,9 +699,15 @@ Mobile Slider
 
                   
 
+                          {%- comment %}<locksmith:b3af>{% endcomment -%}
+                            {%- assign locksmith_b7ff_forloop__size = 0 %}{% for product in recommended_products  %}{% capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == 'true' %}{% assign locksmith_b7ff_forloop__size = locksmith_b7ff_forloop__size | plus: 1 %}{% endif %}{% endfor %}{% assign locksmith_b7ff_forloop__index = nil -%}
+                          {%- comment %}</locksmith:b3af>{% endcomment -%}
                           {% for product in recommended_products  %}  
+                          {%- comment %}<locksmith:5467>{% endcomment -%}
+                            {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% if locksmith_b7ff_forloop__index == nil %}{% assign locksmith_b7ff_forloop__index = 1 %}{% assign locksmith_b7ff_forloop__index0 = 0 %}{% else %}{% assign locksmith_b7ff_forloop__index = locksmith_b7ff_forloop__index | plus: 1 %}{% assign locksmith_b7ff_forloop__index0 = locksmith_b7ff_forloop__index0 | plus: 1 %}{% endif %}{% if locksmith_b7ff_forloop__index == 1 %}{% assign locksmith_b7ff_forloop__first = true %}{% else %}{% assign locksmith_b7ff_forloop__first = false %}{% endif %}{% if locksmith_b7ff_forloop__index == locksmith_b7ff_forloop__size %}{% assign locksmith_b7ff_forloop__last = true %}{% else %}{% assign locksmith_b7ff_forloop__last = false %}{% endif %}{% assign locksmith_b7ff_forloop__rindex = locksmith_b7ff_forloop__size | minus: locksmith_b7ff_forloop__index | minus: 1 %}{% assign locksmith_b7ff_forloop__rindex0 = locksmith_b7ff_forloop__size | minus: locksmith_b7ff_forloop__index0 | minus: 1 %}{% else %}{% continue %}{% endif -%}
+                          {%- comment %}</locksmith:5467>{% endcomment -%}  
                           {% assign currentProductColorthem = product.variants[0].option1 | handleize %}
-                          <label class="color-changer-wrap" for="{{ product.variants[0].id }}-{{ product.variants[0].option1 | handleize }}-{{ forloop.index0 }}">
+                          <label class="color-changer-wrap" for="{{ product.variants[0].id }}-{{ product.variants[0].option1 | handleize }}-{{ locksmith_b7ff_forloop__index0 }}">
                               {% if control == true %}
                               {% render 'variant-color' , 
                               colorsource : settings.colorswatch,
@@ -1112,12 +1124,18 @@ Mobile Slider
     
         {% assign recommended_products =  getProduct.metafields.variantproduct.productgroup.value %}
         {% assign currentProductColorthis = getProduct.variants[0].option1 | handleize %}
+        {%- comment %}<locksmith:60a4>{% endcomment -%}
+          {%- assign locksmith_79c7_forloop__size = 0 %}{% for product in recommended_products  %}{% capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == 'true' %}{% assign locksmith_79c7_forloop__size = locksmith_79c7_forloop__size | plus: 1 %}{% endif %}{% endfor %}{% assign locksmith_79c7_forloop__index = nil -%}
+        {%- comment %}</locksmith:60a4>{% endcomment -%}
         {% for product in recommended_products  %} 
+        {%- comment %}<locksmith:4594>{% endcomment -%}
+          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% if locksmith_79c7_forloop__index == nil %}{% assign locksmith_79c7_forloop__index = 1 %}{% assign locksmith_79c7_forloop__index0 = 0 %}{% else %}{% assign locksmith_79c7_forloop__index = locksmith_79c7_forloop__index | plus: 1 %}{% assign locksmith_79c7_forloop__index0 = locksmith_79c7_forloop__index0 | plus: 1 %}{% endif %}{% if locksmith_79c7_forloop__index == 1 %}{% assign locksmith_79c7_forloop__first = true %}{% else %}{% assign locksmith_79c7_forloop__first = false %}{% endif %}{% if locksmith_79c7_forloop__index == locksmith_79c7_forloop__size %}{% assign locksmith_79c7_forloop__last = true %}{% else %}{% assign locksmith_79c7_forloop__last = false %}{% endif %}{% assign locksmith_79c7_forloop__rindex = locksmith_79c7_forloop__size | minus: locksmith_79c7_forloop__index | minus: 1 %}{% assign locksmith_79c7_forloop__rindex0 = locksmith_79c7_forloop__size | minus: locksmith_79c7_forloop__index0 | minus: 1 %}{% else %}{% continue %}{% endif -%}
+        {%- comment %}</locksmith:4594>{% endcomment -%} 
         {% assign currentProductColorthem = product.variants[0].option1 | handleize %}
         {% assign recommended_products_image =  recommended_products.media[0].preview_image %}
 
                {%if product.variants[0].metafields.colortype.seasonal != true%}
-               <label class="color-changer-wrap" for="{{ product.variants[0].id }}-{{ option | handleize }}-{{ forloop.index0 }}">
+               <label class="color-changer-wrap" for="{{ product.variants[0].id }}-{{ option | handleize }}-{{ locksmith_79c7_forloop__index0 }}">
 
                 {% render 'variant-color' , 
                             colorsource : settings.colorswatch,
@@ -1160,12 +1178,18 @@ Mobile Slider
       </div>
       <div class="setsave___colors">
         {% assign recommended_products =  getProduct.metafields.variantproduct.productgroupseasonal.value %}
+        {%- comment %}<locksmith:574c>{% endcomment -%}
+          {%- assign locksmith_1c22_forloop__size = 0 %}{% for product in recommended_products  %}{% capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == 'true' %}{% assign locksmith_1c22_forloop__size = locksmith_1c22_forloop__size | plus: 1 %}{% endif %}{% endfor %}{% assign locksmith_1c22_forloop__index = nil -%}
+        {%- comment %}</locksmith:574c>{% endcomment -%}
         {% for product in recommended_products  %} 
+        {%- comment %}<locksmith:ca8a>{% endcomment -%}
+          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% if locksmith_1c22_forloop__index == nil %}{% assign locksmith_1c22_forloop__index = 1 %}{% assign locksmith_1c22_forloop__index0 = 0 %}{% else %}{% assign locksmith_1c22_forloop__index = locksmith_1c22_forloop__index | plus: 1 %}{% assign locksmith_1c22_forloop__index0 = locksmith_1c22_forloop__index0 | plus: 1 %}{% endif %}{% if locksmith_1c22_forloop__index == 1 %}{% assign locksmith_1c22_forloop__first = true %}{% else %}{% assign locksmith_1c22_forloop__first = false %}{% endif %}{% if locksmith_1c22_forloop__index == locksmith_1c22_forloop__size %}{% assign locksmith_1c22_forloop__last = true %}{% else %}{% assign locksmith_1c22_forloop__last = false %}{% endif %}{% assign locksmith_1c22_forloop__rindex = locksmith_1c22_forloop__size | minus: locksmith_1c22_forloop__index | minus: 1 %}{% assign locksmith_1c22_forloop__rindex0 = locksmith_1c22_forloop__size | minus: locksmith_1c22_forloop__index0 | minus: 1 %}{% else %}{% continue %}{% endif -%}
+        {%- comment %}</locksmith:ca8a>{% endcomment -%} 
         {% assign currentProductColorthem = product.variants[0].option1 | handleize %}
         {% assign recommended_products_image =  recommended_products.media[0].preview_image   %}
 
                {%if product.variants[0].metafields.colortype.seasonal == true %}
-               <label class="color-changer-wrap" for="{{ product.variants[0].id }}-{{ option | handleize }}-{{ forloop.index0 }}">
+               <label class="color-changer-wrap" for="{{ product.variants[0].id }}-{{ option | handleize }}-{{ locksmith_1c22_forloop__index0 }}">
 
                 {% render 'variant-color' , 
                             colorsource : settings.colorswatch,
@@ -1237,6 +1261,10 @@ Mobile Slider
        {% assign current_productd =  getProduct.variants[0].option1 | handleize %}
        {% for product in recommended_products  %} 
 
+      {%- comment %}<locksmith:3ef8>{% endcomment -%}
+        {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+      {%- comment %}</locksmith:3ef8>{% endcomment -%} 
+
       {% assign loopColor = product.variants[0].option1 | handleize %} 
 
        <ul class="size-holder-setsave {{product.variants[0].option1 | handleize}}  {% if sizeofsizesetsave == 'One Size' or autoSizeAdd == true %}one-size-holder-setsave{%endif%} {% if loopColor == current_productd %} active {% endif %}">
@@ -1270,6 +1298,9 @@ Mobile Slider
        </ul>
        {% endfor %}
        {% for product in recommended_products_core  %} 
+       {%- comment %}<locksmith:02df>{% endcomment -%}
+         {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+       {%- comment %}</locksmith:02df>{% endcomment -%} 
        {% assign loopColor = product.variants[0].option1 | handleize %} 
        <ul class="size-holder-setsave {{product.variants[0].option1 | handleize}}  {% if sizeofsizesetsave == 'One Size' or autoSizeAdd == true %}one-size-holder-setsave{%endif%} {% if loopColor == current_productd %} active {% endif %}">
        

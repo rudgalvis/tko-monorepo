@@ -585,12 +585,11 @@
     },
     "1635174300442e79c2": {
       "type": "static-cta-subscribe",
-      "disabled": true,
       "settings": {
         "borderlayoutsub": "hide-border",
         "subbgcolor": "#b4bed6",
-        "subheading": "GET EARLY ACCESS TO COMMUNITY SALE",
-        "subbody": "<p>Our bi-annual community sale kicks off May 26th, but only early access subscribers get first dibs. Sign up now.</p>",
+        "subheading": "GOOD THINGS COME TO THOSE WHO SUBSCRIBE",
+        "subbody": "<p>Think, early access to new drops, community-only sales and first dibs on archive pieces. We don't spam, pinky promise.</p>",
         "maxwidthofcta": 980,
         "maxwidthofctamobile": 280,
         "padding_sizeup": 18,
