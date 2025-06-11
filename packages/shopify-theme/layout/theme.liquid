@@ -196,6 +196,9 @@
 </head>
 
 <body class="gradient" data-iso-code="{{ localization.country.iso_code }}">
+
+{% render '1ib-dev-market-details' %}
+
 <div style="display: none">pinterest-site-verification=1fdf9fda4fcd2d6ad7869c321ee94d7f</div>
 
 {% comment %}{% render 'tko-customer' %}{% endcomment %}
@@ -346,7 +349,6 @@
     {%- include 'bss-b2b-js' -%}
 {%- endif %}
 {% render 'globo.preorder.custom' %}
-
 
 <script type="text/javascript">
     rivets.formatters.currency = {

@@ -138,8 +138,8 @@ Create Json for product variant color or image
 
                             <div class="drawer-price-container">
                                 <p class="drawer-price">
-                                    <product-price rv-price="item.line_price | currency"
-                                                   rv-compared_at="item.price | currency"
+                                    <product-price rv-price="item.final_line_price | currency"
+                                                   rv-compared_at="item.original_line_price | currency"
                                                    iso_code="{{ localization.country.iso_code }}"
                                                    rv-variant_id="item.variant_id"
                                                    type="CartItemPrice">

@@ -2523,7 +2523,7 @@ const persistentWritable = (r, e) => {
   return isBrowser$1 && s.subscribe((i) => {
     localStorage.setItem(r, JSON.stringify(i));
   }), s;
-}, PUBLIC_ENV = "PRODUCTION", PUBLIC_NEXUS_BASE_URL = "https://shopify-nexus.tko.rudgalvis.com";
+}, PUBLIC_NEXUS_BASE_URL = "https://shopify-nexus.tko.rudgalvis.com";
 class NexusApi {
   constructor() {
     M(this, "BASE_URL", PUBLIC_NEXUS_BASE_URL);
@@ -2534,7 +2534,6 @@ class NexusApi {
       GET_PRODUCT_AUTOMATIC_DISCOUNT: (e, t) => `automatic-discount/product/${e}/${t}`,
       GET_CURRENCY_RATES: (e) => `currency-rates/${e}`
     });
-    console.log({ PUBLIC_ENV });
   }
   async getVariantAutomaticDiscount(e, t) {
     try {
@@ -2590,7 +2589,7 @@ const availableCurrencies = [
     currency: "USD",
     symbol: "$"
   }
-], nexusApi = new NexusApi(), DISPLAY_CURRENCY_KEY = "displayCurrency", MARKET_CURRENCY_KEY = "marketCurrency", DEFAULT_CURRENCY = "EUR", whitelistedCurrencies = availableCurrencies.map((r) => r.currency), displayCurrency = persistentWritable(DISPLAY_CURRENCY_KEY, null), marketCurrency = persistentWritable(MARKET_CURRENCY_KEY, null), currencyRates = writable(null);
+], nexusApi = new NexusApi(), DISPLAY_CURRENCY_KEY = "displayCurrency", MARKET_CURRENCY_KEY = "marketCurrency", LOCALIZATION = "localization", DEFAULT_CURRENCY = "EUR", whitelistedCurrencies = availableCurrencies.map((r) => r.currency), displayCurrency = persistentWritable(DISPLAY_CURRENCY_KEY, null), marketCurrency = persistentWritable(MARKET_CURRENCY_KEY, null), localization = persistentWritable(LOCALIZATION, null), currencyRates = writable(null);
 displayCurrency.subscribe((r) => {
   if (r && !whitelistedCurrencies.includes(r))
     return displayCurrency.set(DEFAULT_CURRENCY);
@@ -2677,28 +2676,33 @@ const BASE_URL = "http://172.20.10.6:5173/api", API_ROUTES = {
   return e ? e.currency : "EUR";
 }, initiateCurrencies = () => {
   if (!isShopifyOnWindow()) return;
-  const r = getCookie("cart_currency");
-  r && marketCurrency.set(r);
-  const t = new URLSearchParams(window.location.search).get("country");
-  if (t) {
-    displayCurrency.set(countryToCurrency(t));
+  const r = {
+    marketCurrency: get$1(marketCurrency),
+    displayCurrency: get$1(displayCurrency),
+    localization: get$1(localization)
+  }, e = {
+    cart_currency: getCookie("cart_currency"),
+    localization: getCookie("localization")
+  };
+  if (e.cart_currency && !r.marketCurrency) {
+    marketCurrency.set(e.cart_currency), displayCurrency.set(e.cart_currency), localization.set(e.localization);
     return;
   }
-  if (get$1(displayCurrency)) return;
-  const i = getCookie("localization");
+  r.localization || localization.set(e.localization);
+  const t = new URL(window.location.href), i = new URLSearchParams(window.location.search).get("country");
   if (i) {
-    displayCurrency.set(countryToCurrency(i));
+    displayCurrency.set(countryToCurrency(i)), localization.set(i), marketCurrency.set(countryToCurrency(i)), t.searchParams.delete("country"), window.history.replaceState({}, "", t.toString());
     return;
   }
-  displayCurrency.set(r);
+  r.localization && e.localization !== r.localization && (t.searchParams.set("country", r.localization), window.location.href = t.toString());
 }, main = () => {
   cacheSweeper(), initiateCurrencies();
 }, PUBLIC_VERSION = "5";
 var Y;
 typeof window < "u" && ((Y = window.__svelte ?? (window.__svelte = {})).v ?? (Y.v = /* @__PURE__ */ new Set())).add(PUBLIC_VERSION);
 enable_legacy_mode_flag();
-var root_1$a = /* @__PURE__ */ template('<s class="price-ui--value svelte-11u6xdw"> </s>'), root$h = /* @__PURE__ */ template('<div class="price-ui svelte-11u6xdw"><!> <p> </p></div>');
-const $$css$h = {
+var root_1$b = /* @__PURE__ */ template('<s class="price-ui--value svelte-11u6xdw"> </s>'), root$h = /* @__PURE__ */ template('<div class="price-ui svelte-11u6xdw"><!> <p> </p></div>');
+const $$css$i = {
   hash: "svelte-11u6xdw",
   code: `.price-ui.svelte-11u6xdw {display:flex;gap:0 8px;}
 @media screen and (max-width: 1024px) {.price-ui.svelte-11u6xdw {gap:4px;}
@@ -2707,12 +2711,12 @@ const $$css$h = {
 }.red.svelte-11u6xdw {color:rgb(210, 25, 16);}`
 };
 function CartItemPrice(r, e) {
-  push(e, !0), append_styles(r, $$css$h);
+  push(e, !0), append_styles(r, $$css$i);
   const t = prop(e, "price", 7), s = prop(e, "comparedAt", 7);
   var i = root$h(), n = child(i);
   {
     var o = (d) => {
-      var f = root_1$a(), h = child(f, !0);
+      var f = root_1$b(), h = child(f, !0);
       reset(f), template_effect(() => set_text(h, s())), append(d, f);
     };
     if_block(n, (d) => {
@@ -2743,8 +2747,8 @@ function CartItemPrice(r, e) {
   });
 }
 create_custom_element(CartItemPrice, { price: {}, comparedAt: {} }, [], [], !0);
-var root_1$9 = /* @__PURE__ */ template('<s class="price-ui--value svelte-dtw9bx"> </s>'), root$g = /* @__PURE__ */ template('<div class="price-ui svelte-dtw9bx"><!> <p> </p></div>');
-const $$css$g = {
+var root_1$a = /* @__PURE__ */ template('<s class="price-ui--value svelte-dtw9bx"> </s>'), root$g = /* @__PURE__ */ template('<div class="price-ui svelte-dtw9bx"><!> <p> </p></div>');
+const $$css$h = {
   hash: "svelte-dtw9bx",
   code: `.price-ui.svelte-dtw9bx {display:flex;gap:0 8px;}
 @media screen and (max-width: 1024px) {.price-ui.svelte-dtw9bx {gap:4px;}
@@ -2753,12 +2757,12 @@ const $$css$g = {
 }.red.svelte-dtw9bx {color:rgb(210, 25, 16);}`
 };
 function CartTotalPrice(r, e) {
-  push(e, !0), append_styles(r, $$css$g);
+  push(e, !0), append_styles(r, $$css$h);
   const t = prop(e, "price", 7), s = prop(e, "comparedAt", 7);
   var i = root$g(), n = child(i);
   {
     var o = (d) => {
-      var f = root_1$9(), h = child(f, !0);
+      var f = root_1$a(), h = child(f, !0);
       reset(f), template_effect(() => set_text(h, s())), append(d, f);
     };
     if_block(n, (d) => {
@@ -2852,8 +2856,8 @@ const subtractFromPriceWithSymbol = (r, e) => {
   const i = Math.abs(s - t), n = Math.round(i / s * 100);
   return n > 0 ? n : 0;
 };
-var root_1$8 = /* @__PURE__ */ template('<s class="price-ui--value svelte-ykoa38"> </s>'), root_2$3 = /* @__PURE__ */ template('<p class="price-ui--value percentage svelte-ykoa38"><small class="red svelte-ykoa38"> </small></p>'), root$f = /* @__PURE__ */ template('<div class="price-ui svelte-ykoa38"><!> <p> </p> <!></div>');
-const $$css$f = {
+var root_1$9 = /* @__PURE__ */ template('<s class="price-ui--value svelte-ykoa38"> </s>'), root_2$3 = /* @__PURE__ */ template('<p class="price-ui--value percentage svelte-ykoa38"><small class="red svelte-ykoa38"> </small></p>'), root$f = /* @__PURE__ */ template('<div class="price-ui svelte-ykoa38"><!> <p> </p> <!></div>');
+const $$css$g = {
   hash: "svelte-ykoa38",
   code: `.price-ui.svelte-ykoa38 {display:flex;flex-wrap:wrap;justify-content:center;gap:0 8px;}
 @media screen and (max-width: 1024px) {.price-ui.svelte-ykoa38 {gap:4px;}
@@ -2862,7 +2866,7 @@ const $$css$f = {
 }small.svelte-ykoa38 {font-size:100%;}.red.svelte-ykoa38 {color:rgb(210, 25, 16);}.percentage.svelte-ykoa38 {width:100%;text-align:center;}`
 };
 function CollectionItemPrice(r, e) {
-  push(e, !0), append_styles(r, $$css$f);
+  push(e, !0), append_styles(r, $$css$g);
   const t = prop(e, "price", 7), s = prop(e, "comparedAt", 7), i = /* @__PURE__ */ user_derived(() => priceToDiscount({
     price: t(),
     comparedAt: s()
@@ -2870,7 +2874,7 @@ function CollectionItemPrice(r, e) {
   var n = root$f(), o = child(n);
   {
     var l = (p) => {
-      var _ = root_1$8(), g = child(_, !0);
+      var _ = root_1$9(), g = child(_, !0);
       reset(_), template_effect(() => set_text(g, s())), append(p, _);
     };
     if_block(o, (p) => {
@@ -2912,8 +2916,8 @@ function CollectionItemPrice(r, e) {
   });
 }
 create_custom_element(CollectionItemPrice, { price: {}, comparedAt: {} }, [], [], !0);
-var root_1$7 = /* @__PURE__ */ template('<s class="price-ui--value svelte-a7dbjs"> </s>'), root_2$2 = /* @__PURE__ */ template('<p class="price-ui--value percentage svelte-a7dbjs"><small class="red svelte-a7dbjs"> </small></p>'), root$e = /* @__PURE__ */ template('<div class="price-ui svelte-a7dbjs"><!> <p> </p> <!></div>');
-const $$css$e = {
+var root_1$8 = /* @__PURE__ */ template('<s class="price-ui--value svelte-a7dbjs"> </s>'), root_2$2 = /* @__PURE__ */ template('<p class="price-ui--value percentage svelte-a7dbjs"><small class="red svelte-a7dbjs"> </small></p>'), root$e = /* @__PURE__ */ template('<div class="price-ui svelte-a7dbjs"><!> <p> </p> <!></div>');
+const $$css$f = {
   hash: "svelte-a7dbjs",
   code: `.price-ui.svelte-a7dbjs {display:flex;gap:0 16px;}
 @media screen and (max-width: 1024px) {.price-ui.svelte-a7dbjs {gap:0px 8px;flex-wrap:wrap;}
@@ -2925,7 +2929,7 @@ const $$css$e = {
 }`
 };
 function ProductDetailsPagePrice(r, e) {
-  push(e, !0), append_styles(r, $$css$e);
+  push(e, !0), append_styles(r, $$css$f);
   const t = prop(e, "price", 7), s = prop(e, "comparedAt", 7), i = /* @__PURE__ */ user_derived(() => priceToDiscount({
     price: t(),
     comparedAt: s()
@@ -2933,7 +2937,7 @@ function ProductDetailsPagePrice(r, e) {
   var n = root$e(), o = child(n);
   {
     var l = (p) => {
-      var _ = root_1$7(), g = child(_, !0);
+      var _ = root_1$8(), g = child(_, !0);
       reset(_), template_effect(() => set_text(g, s())), append(p, _);
     };
     if_block(o, (p) => {
@@ -3019,7 +3023,7 @@ function fly(r, { delay: e = 0, duration: t = 400, easing: s = cubic_out, x: i =
 			opacity: ${c - d * v}`
   };
 }
-var root_1$6 = /* @__PURE__ */ template("<div><!></div>"), root$d = /* @__PURE__ */ template("<div><!></div>");
+var root_1$7 = /* @__PURE__ */ template("<div><!></div>"), root$d = /* @__PURE__ */ template("<div><!></div>");
 function ProductPrice(r, e) {
   push(e, !0);
   const [t, s] = setup_stores(), i = () => store_get(displayCurrency, "$displayCurrency", t), n = () => store_get(currencyRates, "$currencyRates", t), o = () => store_get(marketCurrency, "$marketCurrency", t), l = prop(e, "price", 7), c = prop(e, "compared_at", 7), u = prop(e, "iso_code", 7), d = prop(e, "variant_id", 7), f = prop(e, "product_id", 7), h = prop(e, "type", 7, "ProductDetailsPagePrice"), p = prop(e, "DEV_currency", 7), _ = prop(e, "DEV_market", 7), g = new NexusApi(), v = { price: "-1", comparedAt: void 0 }, m = /* @__PURE__ */ user_derived(() => normalizePrice(l(), c())), y = /* @__PURE__ */ state(proxy(v)), w = /* @__PURE__ */ state(proxy(v));
@@ -3044,25 +3048,25 @@ function ProductPrice(r, e) {
       maximumFractionDigits: 0
     }), { value: A } = parseCurrencyString(get$2(y).price);
     if (get$2(w).price = b.format(A), get$2(y).comparedAt) {
-      const { value: I } = parseCurrencyString(get$2(y).comparedAt);
-      get$2(w).comparedAt = b.format(I);
+      const { value: P } = parseCurrencyString(get$2(y).comparedAt);
+      get$2(w).comparedAt = b.format(P);
     } else
       get$2(w).comparedAt = void 0;
     if (o() === i()) return;
     const k = n()[i()];
     if (get$2(w).price = b.format(Math.round(A * k)), get$2(y).comparedAt) {
-      const { value: I } = parseCurrencyString(get$2(y).comparedAt);
-      get$2(w).comparedAt = b.format(Math.round(I * k));
+      const { value: P } = parseCurrencyString(get$2(y).comparedAt);
+      get$2(w).comparedAt = b.format(Math.round(P * k));
     } else
       get$2(w).comparedAt = void 0;
   });
   const T = async ({ price: b }) => {
     if (!u()) throw new Error("Market is required");
     if (!d() && !f()) throw new Error("Either variant or product id is required is required");
-    const A = g.getVariantAutomaticDiscount.bind(g), k = g.getProductAutomaticDiscount.bind(g), I = d() ? () => A(u(), +d()) : () => k(u(), +f()), { amount: R } = await I();
+    const A = g.getVariantAutomaticDiscount.bind(g), k = g.getProductAutomaticDiscount.bind(g), P = d() ? () => A(u(), +d()) : () => k(u(), +f()), { amount: R } = await P();
     if (!R || R === 0) return { price: b, comparedAt: void 0 };
-    const { formatted: D } = subtractFromPriceWithSymbol(b, R);
-    return { price: D, comparedAt: b };
+    const { formatted: N } = subtractFromPriceWithSymbol(b, R);
+    return { price: N, comparedAt: b };
   };
   user_effect(() => {
     p() && displayCurrency.set(p()), _() && marketCurrency.set(_());
@@ -3086,9 +3090,9 @@ function ProductPrice(r, e) {
   var $ = root$d(), x = child($);
   {
     var S = (b) => {
-      var A = root_1$6(), k = child(A);
-      component(k, () => get$2(E), (I, R) => {
-        R(I, spread_props(() => get$2(w)));
+      var A = root_1$7(), k = child(A);
+      component(k, () => get$2(E), (P, R) => {
+        R(P, spread_props(() => get$2(w)));
       }), reset(A), transition$1(1, A, () => fade, () => ({ delay: 350, duration: 50 })), append(b, A);
     };
     if_block(x, (b) => {
@@ -3164,8 +3168,8 @@ customElements.define("product-price", create_custom_element(
   [],
   !1
 ));
-var root_1$5 = /* @__PURE__ */ template('<article class="card svelte-1qhpxg8"><img class="svelte-1qhpxg8"> <div class="content svelte-1qhpxg8"><h3 class="svelte-1qhpxg8"> </h3> <div class="tuple text-green-600 svelte-1qhpxg8"><!></div> <div class="ctas-buttons svelte-1qhpxg8"><a style="transform: rotate(180deg)"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" class="svelte-1qhpxg8"><path d="M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z"></path></svg></a> <a class="cta svelte-1qhpxg8"><span>Add to cart</span></a>    <a><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" class="svelte-1qhpxg8"><path d="M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z"></path></svg></a></div></div></article>');
-const $$css$d = {
+var root_1$6 = /* @__PURE__ */ template('<article class="card svelte-1qhpxg8"><img class="svelte-1qhpxg8"> <div class="content svelte-1qhpxg8"><h3 class="svelte-1qhpxg8"> </h3> <div class="tuple text-green-600 svelte-1qhpxg8"><!></div> <div class="ctas-buttons svelte-1qhpxg8"><a style="transform: rotate(180deg)"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" class="svelte-1qhpxg8"><path d="M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z"></path></svg></a> <a class="cta svelte-1qhpxg8"><span>Add to cart</span></a>    <a><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" class="svelte-1qhpxg8"><path d="M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z"></path></svg></a></div></div></article>');
+const $$css$e = {
   hash: "svelte-1qhpxg8",
   code: `/* Colors */
 /**
@@ -3178,7 +3182,7 @@ const $$css$d = {
 a.svelte-1qhpxg8:nth-child(3) {aspect-ratio:1/1;flex-shrink:1;width:auto;}a.svelte-1qhpxg8 svg:where(.svelte-1qhpxg8) {width:16px;}.content.svelte-1qhpxg8 {width:70%;display:flex;flex-direction:column;}h3.svelte-1qhpxg8 {margin:0;margin-bottom:10px;font-weight:100;min-height:32px;font-size:16px;color:#000;font-family:Panama, sans-serif;text-align:left;cursor:pointer;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;letter-spacing:-0.22px;line-height:16px;}.tuple.svelte-1qhpxg8 {display:flex;justify-content:space-between;align-items:start;flex-grow:1;}img.svelte-1qhpxg8 {display:block;width:30%;object-fit:cover;aspect-ratio:4/5;cursor:pointer;}`
 };
 function CartRecommendationCard($$anchor, $$props) {
-  push($$props, !1), append_styles($$anchor, $$css$d);
+  push($$props, !1), append_styles($$anchor, $$css$e);
   let id = prop($$props, "id", 12, void 0), title = prop($$props, "title", 12, void 0), featured_image = prop($$props, "featured_image", 12, void 0), price = prop($$props, "price", 12, void 0), url = prop($$props, "url", 12, void 0), onPrevious = prop($$props, "onPrevious", 12, ""), onNext = prop($$props, "onNext", 12, ""), spend_goal = prop($$props, "spend_goal", 12, 1), already_spent = prop($$props, "already_spent", 12, 2);
   const addToCart = () => {
     if (!window.CartJS) return console.error("Trying to add item, but CartJS is not accessible");
@@ -3191,7 +3195,7 @@ function CartRecommendationCard($$anchor, $$props) {
   var fragment = comment(), node = first_child(fragment);
   {
     var consequent = ($$anchor) => {
-      var article = root_1$5(), img = child(article), div = sibling(img, 2), h3 = child(div), text = child(h3, !0);
+      var article = root_1$6(), img = child(article), div = sibling(img, 2), h3 = child(div), text = child(h3, !0);
       reset(h3);
       var div_1 = sibling(h3, 2), node_1 = child(div_1);
       const expression = /* @__PURE__ */ derived_safe_equal(() => price().toString());
@@ -8594,18 +8598,18 @@ const createClient = (r, e, t) => new SupabaseClient(r, e, t), supabase = create
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZuYWVpamR1bXNlaWFvYWJ2dm1jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc0Njc5MDgsImV4cCI6MjA1MzA0MzkwOH0.AKnUpUDBfog2rDv9_jFwTXxNb_R5c9WtK2n0jn18bG4"
 );
 var root$c = /* @__PURE__ */ template('<h6 class="caption svelte-l7at5k"><!></h6>');
-const $$css$c = {
+const $$css$d = {
   hash: "svelte-l7at5k",
   code: ".caption.svelte-l7at5k {font-size:12px;font-family:'Monument Regular', sans-serif;text-transform:uppercase;letter-spacing:-0.24px;margin:12px 0;}"
 };
 function CaptionType(r, e) {
-  append_styles(r, $$css$c);
+  append_styles(r, $$css$d);
   var t = root$c(), s = child(t);
   slot(s, e, "default", {}), reset(t), append(r, t);
 }
 create_custom_element(CaptionType, {}, ["default"], [], !0);
 var root$b = /* @__PURE__ */ template('<h2 class="svelte-tzgj7f"><!></h2>');
-const $$css$b = {
+const $$css$c = {
   hash: "svelte-tzgj7f",
   code: `h2.svelte-tzgj7f {font-size:18px;letter-spacing:-0.34px;text-transform:uppercase;color:#000;font-family:Monument, sans-serif;
 
@@ -8613,13 +8617,13 @@ const $$css$b = {
 		}}`
 };
 function TitleType(r, e) {
-  append_styles(r, $$css$b);
+  append_styles(r, $$css$c);
   var t = root$b(), s = child(t);
   slot(s, e, "default", {}), reset(t), append(r, t);
 }
 create_custom_element(TitleType, {}, ["default"], [], !0);
 var root$a = /* @__PURE__ */ template('<div class="review svelte-174em9x"><div class="header svelte-174em9x"><h6 class="svelte-174em9x"> </h6> <p class="date svelte-174em9x"> </p></div> <p class="svelte-174em9x"> </p></div>');
-const $$css$a = {
+const $$css$b = {
   hash: "svelte-174em9x",
   code: `.review.svelte-174em9x {display:flex;flex-direction:column;gap:4px;}p.svelte-174em9x {font-family:Monument Regular;font-size:16px;color:rgba(0, 0, 0, 0.7019607843);letter-spacing:-0.25px;line-height:26px;margin:0;}h6.svelte-174em9x,
 .date.svelte-174em9x {font-size:12px;font-family:Monument, sans-serif;color:#000;letter-spacing:-0.18px;text-transform:uppercase;margin:0;}.date.svelte-174em9x {opacity:0.6;}.header.svelte-174em9x {display:flex;align-items:center;gap:8px;justify-content:space-between;}
@@ -8627,7 +8631,7 @@ const $$css$a = {
 }`
 };
 function KnitterReviewItem(r, e) {
-  push(e, !1), append_styles(r, $$css$a);
+  push(e, !1), append_styles(r, $$css$b);
   let t = prop(e, "review", 12);
   init();
   var s = root$a(), i = child(s), n = child(i), o = child(n, !0);
@@ -8654,12 +8658,12 @@ function KnitterReviewItem(r, e) {
 }
 create_custom_element(KnitterReviewItem, { review: {} }, [], [], !0);
 var root$9 = /* @__PURE__ */ template('<section class="svelte-1s1jo0"></section>');
-const $$css$9 = {
+const $$css$a = {
   hash: "svelte-1s1jo0",
   code: "section.svelte-1s1jo0 {background:rgba(0, 0, 0, 0.02);width:100%;aspect-ratio:16/9;margin:20px 0;}"
 };
 function KnitterReviewsListSkeleton(r) {
-  append_styles(r, $$css$9);
+  append_styles(r, $$css$a);
   var e = root$9();
   append(r, e);
 }
@@ -9196,22 +9200,22 @@ function updateSlides() {
     if (d[b] && (A = d[b]), x && r.grid.updateSlide(b, A, d), !(d[b] && elementStyle(A, "display") === "none")) {
       if (t.slidesPerView === "auto") {
         C && (d[b].style[r.getDirectionLabel("width")] = "");
-        const k = getComputedStyle(A), I = A.style.transform, R = A.style.webkitTransform;
-        if (I && (A.style.transform = "none"), R && (A.style.webkitTransform = "none"), t.roundLengths)
+        const k = getComputedStyle(A), P = A.style.transform, R = A.style.webkitTransform;
+        if (P && (A.style.transform = "none"), R && (A.style.webkitTransform = "none"), t.roundLengths)
           S = r.isHorizontal() ? elementOuterSize(A, "width") : elementOuterSize(A, "height");
         else {
-          const D = e(k, "width"), P = e(k, "padding-left"), N = e(k, "padding-right"), L = e(k, "margin-left"), O = e(k, "margin-right"), F = k.getPropertyValue("box-sizing");
+          const N = e(k, "width"), I = e(k, "padding-left"), L = e(k, "padding-right"), D = e(k, "margin-left"), O = e(k, "margin-right"), F = k.getPropertyValue("box-sizing");
           if (F && F === "border-box")
-            S = D + L + O;
+            S = N + D + O;
           else {
             const {
-              clientWidth: q,
-              offsetWidth: z
+              clientWidth: z,
+              offsetWidth: q
             } = A;
-            S = D + P + N + L + O + (z - q);
+            S = N + I + L + D + O + (q - z);
           }
         }
-        I && (A.style.transform = I), R && (A.style.webkitTransform = R), t.roundLengths && (S = Math.floor(S));
+        P && (A.style.transform = P), R && (A.style.webkitTransform = R), t.roundLengths && (S = Math.floor(S));
       } else
         S = (n - (t.slidesPerView - 1) * w) / t.slidesPerView, t.roundLengths && (S = Math.floor(S)), d[b] && (d[b].style[r.getDirectionLabel("width")] = `${S}px`);
       d[b] && (d[b].swiperSlideSize = S), _.push(S), t.centeredSlides ? (T = T + S / 2 + E / 2 + w, E === 0 && b !== 0 && (T = T - n / 2 - w), b === 0 && (T = T - n / 2 - w), Math.abs(T) < 1 / 1e3 && (T = 0), t.roundLengths && (T = Math.floor(T)), $ % t.slidesPerGroup === 0 && h.push(T), p.push(T)) : (t.roundLengths && (T = Math.floor(T)), ($ - Math.min(r.params.slidesPerGroupSkip, $)) % r.params.slidesPerGroup === 0 && h.push(T), p.push(T), T = T + S + w), r.virtualSize += S + w, E = S, $ += 1;
@@ -9229,7 +9233,7 @@ function updateSlides() {
     const b = _[0] + w;
     if (t.slidesPerGroup > 1) {
       const A = Math.ceil((r.virtual.slidesBefore + r.virtual.slidesAfter) / t.slidesPerGroup), k = b * t.slidesPerGroup;
-      for (let I = 0; I < A; I += 1)
+      for (let P = 0; P < A; P += 1)
         h.push(h[h.length - 1] + k);
     }
     for (let A = 0; A < r.virtual.slidesBefore + r.virtual.slidesAfter; A += 1)
@@ -9257,10 +9261,10 @@ function updateSlides() {
     const A = (t.slidesOffsetBefore || 0) + (t.slidesOffsetAfter || 0);
     if (b + A < n) {
       const k = (n - b - A) / 2;
-      h.forEach((I, R) => {
-        h[R] = I - k;
-      }), p.forEach((I, R) => {
-        p[R] = I + k;
+      h.forEach((P, R) => {
+        h[R] = P - k;
+      }), p.forEach((P, R) => {
+        p[R] = P + k;
       });
     }
   }
@@ -9939,71 +9943,71 @@ function loopFix(r) {
   d.length < m + w || u.params.effect === "cards" && d.length < m + w * 2 ? showWarning("Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters") : T && _.grid.fill === "row" && showWarning("Swiper Loop Warning: Loop mode is not compatible with grid.fill = `row`");
   const E = [], $ = [], x = T ? Math.ceil(d.length / _.grid.rows) : d.length, S = o && x - v < m && !g;
   let C = S ? v : u.activeIndex;
-  typeof n > "u" ? n = u.getSlideIndex(d.find((P) => P.classList.contains(_.slideActiveClass))) : C = n;
+  typeof n > "u" ? n = u.getSlideIndex(d.find((I) => I.classList.contains(_.slideActiveClass))) : C = n;
   const b = s === "next" || !s, A = s === "prev" || !s;
-  let k = 0, I = 0;
-  const D = (T ? d[n].column : n) + (g && typeof i > "u" ? -m / 2 + 0.5 : 0);
-  if (D < w) {
-    k = Math.max(w - D, y);
-    for (let P = 0; P < w - D; P += 1) {
-      const N = P - Math.floor(P / x) * x;
+  let k = 0, P = 0;
+  const N = (T ? d[n].column : n) + (g && typeof i > "u" ? -m / 2 + 0.5 : 0);
+  if (N < w) {
+    k = Math.max(w - N, y);
+    for (let I = 0; I < w - N; I += 1) {
+      const L = I - Math.floor(I / x) * x;
       if (T) {
-        const L = x - N - 1;
+        const D = x - L - 1;
         for (let O = d.length - 1; O >= 0; O -= 1)
-          d[O].column === L && E.push(O);
+          d[O].column === D && E.push(O);
       } else
-        E.push(x - N - 1);
+        E.push(x - L - 1);
     }
-  } else if (D + m > x - w) {
-    I = Math.max(D - (x - w * 2), y), S && (I = Math.max(I, m - x + v + 1));
-    for (let P = 0; P < I; P += 1) {
-      const N = P - Math.floor(P / x) * x;
-      T ? d.forEach((L, O) => {
-        L.column === N && $.push(O);
-      }) : $.push(N);
+  } else if (N + m > x - w) {
+    P = Math.max(N - (x - w * 2), y), S && (P = Math.max(P, m - x + v + 1));
+    for (let I = 0; I < P; I += 1) {
+      const L = I - Math.floor(I / x) * x;
+      T ? d.forEach((D, O) => {
+        D.column === L && $.push(O);
+      }) : $.push(L);
     }
   }
   if (u.__preventObserver__ = !0, requestAnimationFrame(() => {
     u.__preventObserver__ = !1;
-  }), u.params.effect === "cards" && d.length < m + w * 2 && ($.includes(n) && $.splice($.indexOf(n), 1), E.includes(n) && E.splice(E.indexOf(n), 1)), A && E.forEach((P) => {
-    d[P].swiperLoopMoveDOM = !0, p.prepend(d[P]), d[P].swiperLoopMoveDOM = !1;
-  }), b && $.forEach((P) => {
-    d[P].swiperLoopMoveDOM = !0, p.append(d[P]), d[P].swiperLoopMoveDOM = !1;
-  }), u.recalcSlides(), _.slidesPerView === "auto" ? u.updateSlides() : T && (E.length > 0 && A || $.length > 0 && b) && u.slides.forEach((P, N) => {
-    u.grid.updateSlide(N, P, u.slides);
+  }), u.params.effect === "cards" && d.length < m + w * 2 && ($.includes(n) && $.splice($.indexOf(n), 1), E.includes(n) && E.splice(E.indexOf(n), 1)), A && E.forEach((I) => {
+    d[I].swiperLoopMoveDOM = !0, p.prepend(d[I]), d[I].swiperLoopMoveDOM = !1;
+  }), b && $.forEach((I) => {
+    d[I].swiperLoopMoveDOM = !0, p.append(d[I]), d[I].swiperLoopMoveDOM = !1;
+  }), u.recalcSlides(), _.slidesPerView === "auto" ? u.updateSlides() : T && (E.length > 0 && A || $.length > 0 && b) && u.slides.forEach((I, L) => {
+    u.grid.updateSlide(L, I, u.slides);
   }), _.watchSlidesProgress && u.updateSlidesOffset(), t) {
     if (E.length > 0 && A) {
       if (typeof e > "u") {
-        const P = u.slidesGrid[C], L = u.slidesGrid[C + k] - P;
-        c ? u.setTranslate(u.translate - L) : (u.slideTo(C + Math.ceil(k), 0, !1, !0), i && (u.touchEventsData.startTranslate = u.touchEventsData.startTranslate - L, u.touchEventsData.currentTranslate = u.touchEventsData.currentTranslate - L));
+        const I = u.slidesGrid[C], D = u.slidesGrid[C + k] - I;
+        c ? u.setTranslate(u.translate - D) : (u.slideTo(C + Math.ceil(k), 0, !1, !0), i && (u.touchEventsData.startTranslate = u.touchEventsData.startTranslate - D, u.touchEventsData.currentTranslate = u.touchEventsData.currentTranslate - D));
       } else if (i) {
-        const P = T ? E.length / _.grid.rows : E.length;
-        u.slideTo(u.activeIndex + P, 0, !1, !0), u.touchEventsData.currentTranslate = u.translate;
+        const I = T ? E.length / _.grid.rows : E.length;
+        u.slideTo(u.activeIndex + I, 0, !1, !0), u.touchEventsData.currentTranslate = u.translate;
       }
     } else if ($.length > 0 && b)
       if (typeof e > "u") {
-        const P = u.slidesGrid[C], L = u.slidesGrid[C - I] - P;
-        c ? u.setTranslate(u.translate - L) : (u.slideTo(C - I, 0, !1, !0), i && (u.touchEventsData.startTranslate = u.touchEventsData.startTranslate - L, u.touchEventsData.currentTranslate = u.touchEventsData.currentTranslate - L));
+        const I = u.slidesGrid[C], D = u.slidesGrid[C - P] - I;
+        c ? u.setTranslate(u.translate - D) : (u.slideTo(C - P, 0, !1, !0), i && (u.touchEventsData.startTranslate = u.touchEventsData.startTranslate - D, u.touchEventsData.currentTranslate = u.touchEventsData.currentTranslate - D));
       } else {
-        const P = T ? $.length / _.grid.rows : $.length;
-        u.slideTo(u.activeIndex - P, 0, !1, !0);
+        const I = T ? $.length / _.grid.rows : $.length;
+        u.slideTo(u.activeIndex - I, 0, !1, !0);
       }
   }
   if (u.allowSlidePrev = f, u.allowSlideNext = h, u.controller && u.controller.control && !l) {
-    const P = {
+    const I = {
       slideRealIndex: e,
       direction: s,
       setTranslate: i,
       activeSlideIndex: n,
       byController: !0
     };
-    Array.isArray(u.controller.control) ? u.controller.control.forEach((N) => {
-      !N.destroyed && N.params.loop && N.loopFix({
-        ...P,
-        slideTo: N.params.slidesPerView === _.slidesPerView ? t : !1
+    Array.isArray(u.controller.control) ? u.controller.control.forEach((L) => {
+      !L.destroyed && L.params.loop && L.loopFix({
+        ...I,
+        slideTo: L.params.slidesPerView === _.slidesPerView ? t : !1
       });
     }) : u.controller.control instanceof u.constructor && u.controller.control.params.loop && u.controller.control.loopFix({
-      ...P,
+      ...I,
       slideTo: u.controller.control.params.slidesPerView === _.slidesPerView ? t : !1
     });
   }
@@ -10978,7 +10982,7 @@ Object.keys(prototypes).forEach((r) => {
 });
 Swiper.use([Resize, Observer]);
 var root_4 = /* @__PURE__ */ template('<p class="svelte-t4awvj">No messages yet. Be first one to leave a feedback.</p>'), root_6$1 = /* @__PURE__ */ template('<figure class="svelte-t4awvj"><!></figure>'), root_5 = /* @__PURE__ */ template('<section class="svelte-t4awvj"></section>'), root$8 = /* @__PURE__ */ template("<!> <!>", 1);
-const $$css$8 = {
+const $$css$9 = {
   hash: "svelte-t4awvj",
   code: `figure.svelte-t4awvj {border-bottom:1px solid black;margin:12px 0;padding:0 0 12px 0;}
 @media screen and (min-width: 1024px) {figure.svelte-t4awvj {margin:24px 0;padding:0 0 24px 0;}
@@ -10987,7 +10991,7 @@ const $$css$8 = {
 }p.svelte-t4awvj {font-family:Monument Regular, sans-serif;opacity:0.5;margin-bottom:32px;}`
 };
 function KnitterReviewsList(r, e) {
-  push(e, !1), append_styles(r, $$css$8);
+  push(e, !1), append_styles(r, $$css$9);
   let t = prop(e, "id", 12, void 0), s = prop(e, "isFetchBlock", 12, !1), i = /* @__PURE__ */ mutable_source([]), n = /* @__PURE__ */ mutable_source(!1), o = /* @__PURE__ */ mutable_source(!1);
   const l = async () => {
     if (!t()) return console.error("No id provided");
@@ -11059,12 +11063,12 @@ function KnitterReviewsList(r, e) {
 }
 create_custom_element(KnitterReviewsList, { id: {}, isFetchBlock: {} }, [], [], !0);
 var root$7 = /* @__PURE__ */ template("<button><!></button>");
-const $$css$7 = {
+const $$css$8 = {
   hash: "svelte-ph9rtg",
   code: "button.svelte-ph9rtg {width:178px;height:52px;background:#018849;cursor:pointer;border:none;color:#fff;font-family:Monument, sans-serif;font-size:16px;letter-spacing:-0.25px;text-transform:uppercase;display:flex;align-items:center;word-break:keep-all;white-space:nowrap;justify-content:center;}.w-full.svelte-ph9rtg {width:100%;}.disabled.svelte-ph9rtg {opacity:0.5;cursor:default;}"
 };
 function Button(r, e) {
-  push(e, !1), append_styles(r, $$css$7);
+  push(e, !1), append_styles(r, $$css$8);
   let t = prop(e, "fullWidth", 12, !1), s = prop(e, "disabled", 12, !1), i = prop(e, "type", 12, "button");
   var n = root$7();
   let o;
@@ -11103,14 +11107,14 @@ function Button(r, e) {
 }
 create_custom_element(Button, { fullWidth: {}, disabled: {}, type: {} }, ["default"], [], !0);
 var root_3$1 = /* @__PURE__ */ template('<p class="error svelte-xo5t5q">There was an error submitting your message. Please try again later.</p>'), root_2$1 = /* @__PURE__ */ template('<form action="" class="svelte-xo5t5q"><textarea name="" id="" cols="30" rows="10 " placeholder="Enter your feedback here..." class="svelte-xo5t5q"></textarea> <div class="cta svelte-xo5t5q"><input type="text" placeholder="Enter your name..." class="svelte-xo5t5q"> <!> <!></div></form>'), root_6 = /* @__PURE__ */ template('<p class="success svelte-xo5t5q">Review submitted successfully!</p>'), root$6 = /* @__PURE__ */ template("<!> <!>", 1);
-const $$css$6 = {
+const $$css$7 = {
   hash: "svelte-xo5t5q",
   code: `input.svelte-xo5t5q {border:none;padding:6px 16px;border-bottom:1px solid black;width:100%;font-size:16px;margin:12px 0;box-sizing:border-box;background:transparent;color:black;}input.svelte-xo5t5q:focus {outline:none;}p.svelte-xo5t5q {font-family:"Monument Regular", sans-serif;padding:8px 16px;}p.success.svelte-xo5t5q {background:#b0beb2;}p.error.svelte-xo5t5q {background:#f6a3a3;}textarea.svelte-xo5t5q {width:100%;aspect-ratio:4/1;border:1px solid black;box-sizing:border-box;resize:none;background:transparent;padding:12px 16px;font-family:"Monument Regular", sans-serif;font-size:16px;color:black;}textarea.svelte-xo5t5q:focus {outline:none;}
 @media screen and (min-width: 1024px) {textarea.svelte-xo5t5q {aspect-ratio:8/1;font-size:16px;}
 }form.svelte-xo5t5q {display:flex;flex-direction:column;align-items:flex-end;gap:12px;}.cta.svelte-xo5t5q {width:100%;gap:12px;display:grid;grid-template-columns:1fr;grid-template-rows:auto auto;}`
 };
 function KnitterReviewForm(r, e) {
-  push(e, !1), append_styles(r, $$css$6);
+  push(e, !1), append_styles(r, $$css$7);
   let t = prop(e, "id", 12, void 0), s = /* @__PURE__ */ mutable_source(""), i = /* @__PURE__ */ mutable_source(""), n = /* @__PURE__ */ mutable_source("idle");
   const o = createEventDispatcher(), l = async () => {
     const { error: p } = await supabase.from("knitter_reviews").insert([
@@ -11194,7 +11198,7 @@ function KnitterReviewForm(r, e) {
 }
 create_custom_element(KnitterReviewForm, { id: {} }, [], [], !0);
 var root$5 = /* @__PURE__ */ template('<p class="svelte-7fo9ce">↑</p>');
-const $$css$5 = {
+const $$css$6 = {
   hash: "svelte-7fo9ce",
   code: `p.svelte-7fo9ce {margin:0;font-family:Monument, sans-serif;letter-spacing:-0.43px;color:#000;}
 @media (max-width: 812px) {p.svelte-7fo9ce {letter-spacing:-0.18px;}
@@ -11203,13 +11207,13 @@ const $$css$5 = {
 }`
 };
 function ArrowIcon(r) {
-  append_styles(r, $$css$5);
+  append_styles(r, $$css$6);
   var e = root$5();
   append(r, e);
 }
 create_custom_element(ArrowIcon, {}, [], [], !0);
-var root_1$4 = /* @__PURE__ */ template("<div><!> <!></div>"), root$4 = /* @__PURE__ */ template('<div class="accordion svelte-pbk1c8"><div class="header grid svelte-pbk1c8"><img class="avatar svelte-pbk1c8"> <h3 class="svelte-pbk1c8"> </h3> <div><!></div></div> <div class="content grid svelte-pbk1c8"><p> </p> <img> <!></div></div>');
-const $$css$4 = {
+var root_1$5 = /* @__PURE__ */ template("<div><!> <!></div>"), root$4 = /* @__PURE__ */ template('<div class="accordion svelte-pbk1c8"><div class="header grid svelte-pbk1c8"><img class="avatar svelte-pbk1c8"> <h3 class="svelte-pbk1c8"> </h3> <div><!></div></div> <div class="content grid svelte-pbk1c8"><p> </p> <img> <!></div></div>');
+const $$css$5 = {
   hash: "svelte-pbk1c8",
   code: `.accordion.svelte-pbk1c8 {display:flex;flex-direction:column;border-bottom:1px solid black;}.fade-in.svelte-pbk1c8 {opacity:1;transition:opacity 0.3s 0.3s linear;}.fade-out.svelte-pbk1c8 {opacity:0;transition:opacity 0.2s ease;}.grid.svelte-pbk1c8 {display:grid;grid-template-columns:65px 1fr 40px;align-items:center;gap:25px;}
 @media screen and (min-width: 1024px) {.grid.svelte-pbk1c8 {gap:40px;grid-template-columns:124px 5fr 3fr 40px;}
@@ -11228,14 +11232,14 @@ const $$css$4 = {
 }.photo.svelte-pbk1c8 {grid-area:photo;width:100%;transform:translateZ(1px);}.reviews.svelte-pbk1c8 {grid-area:reviews;margin-bottom:32px;}`
 };
 function KnittersAccordionItem(r, e) {
-  push(e, !1), append_styles(r, $$css$4);
+  push(e, !1), append_styles(r, $$css$5);
   let t = prop(e, "name", 12, void 0), s = prop(e, "id", 12, void 0), i = prop(e, "description", 12, void 0), n = prop(e, "photo", 12, void 0), o = prop(e, "avatar", 12, void 0), l = !1, c = /* @__PURE__ */ mutable_source(!1), u = /* @__PURE__ */ mutable_source(!1), d = /* @__PURE__ */ mutable_source(), f = /* @__PURE__ */ mutable_source();
   const h = () => {
     set(c, !get$2(c));
   }, p = (O = 150) => {
     if (!get$2(f)) return;
-    const q = get$2(f).getBoundingClientRect().top + window.pageYOffset - O;
-    window.scrollTo({ top: q, behavior: "smooth" });
+    const z = get$2(f).getBoundingClientRect().top + window.pageYOffset - O;
+    window.scrollTo({ top: z, behavior: "smooth" });
   }, _ = () => {
     set(u, !1), get$2(d) && (window.innerWidth >= 1024 && p(114), window.innerWidth < 1024 && p(52), mutate(d, get$2(d).style.maxHeight = "inherit"), get$2(d).removeEventListener("transitionend", _));
   }, g = () => {
@@ -11268,19 +11272,19 @@ function KnittersAccordionItem(r, e) {
   var b = child(S);
   ArrowIcon(b), reset(S), reset(T);
   var A = sibling(T, 2), k = child(A);
-  let I;
+  let P;
   var R = child(k, !0);
   reset(k);
-  var D = sibling(k, 2);
-  let P;
-  var N = sibling(D, 2);
+  var N = sibling(k, 2);
+  let I;
+  var L = sibling(N, 2);
   {
-    var L = (O) => {
-      var F = root_1$4();
-      let q;
-      var z = child(F);
+    var D = (O) => {
+      var F = root_1$5();
+      let z;
+      var q = child(F);
       const J = /* @__PURE__ */ derived_safe_equal(() => !get$2(c) || get$2(u));
-      KnitterReviewsList(z, {
+      KnitterReviewsList(q, {
         get id() {
           return s();
         },
@@ -11288,13 +11292,13 @@ function KnittersAccordionItem(r, e) {
           return get$2(J);
         }
       });
-      var X = sibling(z, 2);
+      var X = sibling(q, 2);
       KnitterReviewForm(X, {
         get id() {
           return s();
         }
       }), reset(F), template_effect(
-        (Q) => q = set_class(F, 1, "reviews svelte-pbk1c8", null, q, Q),
+        (Q) => z = set_class(F, 1, "reviews svelte-pbk1c8", null, z, Q),
         [
           () => ({
             "fade-in": get$2(c),
@@ -11304,13 +11308,13 @@ function KnittersAccordionItem(r, e) {
         derived_safe_equal
       ), append(O, F);
     };
-    if_block(N, (O) => {
-      s() && O(L);
+    if_block(L, (O) => {
+      s() && O(D);
     });
   }
   return reset(A), bind_this(A, (O) => set(d, O), () => get$2(d)), reset(w), bind_this(w, (O) => set(f, O), () => get$2(f)), template_effect(
-    (O, F, q) => {
-      set_attribute(E, "src", o()), set_attribute(E, "alt", `Small picture of ${t() ?? ""}`), set_text(x, t()), C = set_class(S, 1, "arrow svelte-pbk1c8", null, C, O), I = set_class(k, 1, "svelte-pbk1c8", null, I, F), set_text(R, i()), P = set_class(D, 1, "photo svelte-pbk1c8", null, P, q), set_attribute(D, "src", n()), set_attribute(D, "alt", `Picture of ${t() ?? ""}`);
+    (O, F, z) => {
+      set_attribute(E, "src", o()), set_attribute(E, "alt", `Small picture of ${t() ?? ""}`), set_text(x, t()), C = set_class(S, 1, "arrow svelte-pbk1c8", null, C, O), P = set_class(k, 1, "svelte-pbk1c8", null, P, F), set_text(R, i()), I = set_class(N, 1, "photo svelte-pbk1c8", null, I, z), set_attribute(N, "src", n()), set_attribute(N, "alt", `Picture of ${t() ?? ""}`);
     },
     [
       () => ({ "arrow---down": get$2(c) }),
@@ -11371,7 +11375,7 @@ customElements.define("knitter-accordion-item", create_custom_element(
   !0
 ));
 var root$3 = /* @__PURE__ */ template('<div class="svelte-1sgbr3w"><!></div>');
-const $$css$3 = {
+const $$css$4 = {
   hash: "svelte-1sgbr3w",
   code: `div.svelte-1sgbr3w {padding:0 8px;
 
@@ -11379,13 +11383,13 @@ const $$css$3 = {
 		}}`
 };
 function ContentWrapper(r, e) {
-  append_styles(r, $$css$3);
+  append_styles(r, $$css$4);
   var t = root$3(), s = child(t);
   slot(s, e, "default", {}), reset(t), append(r, t);
 }
 create_custom_element(ContentWrapper, {}, ["default"], [], !0);
-var root_1$3 = /* @__PURE__ */ template('<section class="title-section svelte-emjvyd"><h2 class="svelte-emjvyd">All Knitters</h2></section> <section class="list svelte-emjvyd"><!></section>', 1), root$2 = /* @__PURE__ */ template("<div><!></div>");
-const $$css$2 = {
+var root_1$4 = /* @__PURE__ */ template('<section class="title-section svelte-emjvyd"><h2 class="svelte-emjvyd">All Knitters</h2></section> <section class="list svelte-emjvyd"><!></section>', 1), root$2 = /* @__PURE__ */ template("<div><!></div>");
+const $$css$3 = {
   hash: "svelte-emjvyd",
   code: `h2.svelte-emjvyd {font-size:28px;letter-spacing:-0.43px;line-height:18px;font-weight:300;margin:0;}
 @media screen and (min-width: 1024px) {h2.svelte-emjvyd {font-family:Panama, sans-serif;font-size:62px;letter-spacing:-0.95px;line-height:70px;color:#000;}
@@ -11394,7 +11398,7 @@ const $$css$2 = {
 }.list.svelte-emjvyd {display:flex;flex-direction:column;}`
 };
 function KnittersAccordion(r, e) {
-  push(e, !1), append_styles(r, $$css$2);
+  push(e, !1), append_styles(r, $$css$3);
   let t = /* @__PURE__ */ mutable_source("");
   onMount(() => {
     const o = new URLSearchParams(window.location.search), { knitter: l } = Object.fromEntries(o.entries());
@@ -11410,7 +11414,7 @@ function KnittersAccordion(r, e) {
   var i = root$2(), n = child(i);
   ContentWrapper(n, {
     children: (o, l) => {
-      var c = root_1$3(), u = sibling(first_child(c), 2), d = child(u);
+      var c = root_1$4(), u = sibling(first_child(c), 2), d = child(u);
       slot(d, e, "default", {}), reset(u), append(o, c);
     },
     $$slots: { default: !0 }
@@ -11424,13 +11428,13 @@ function sineIn(r) {
   const e = Math.cos(r * Math.PI * 0.5);
   return Math.abs(e) < 1e-14 ? 1 : 1 - e;
 }
-var root_1$2 = /* @__PURE__ */ template('<button class="main svelte-ymfpde"> </button>'), root_3 = /* @__PURE__ */ template('<li role="menuitem"><button class="menuitem svelte-ymfpde"> </button></li>'), root_2 = /* @__PURE__ */ template('<ul role="menu" class="svelte-ymfpde"></ul>'), root$1 = /* @__PURE__ */ template('<div class="wrapper svelte-ymfpde"><!> <div><!></div></div>');
-const $$css$1 = {
+var root_1$3 = /* @__PURE__ */ template('<button class="main svelte-ymfpde"> </button>'), root_3 = /* @__PURE__ */ template('<li role="menuitem"><button class="menuitem svelte-ymfpde"> </button></li>'), root_2 = /* @__PURE__ */ template('<ul role="menu" class="svelte-ymfpde"></ul>'), root$1 = /* @__PURE__ */ template('<div class="wrapper svelte-ymfpde"><!> <div><!></div></div>');
+const $$css$2 = {
   hash: "svelte-ymfpde",
   code: ".wrapper.svelte-ymfpde {display:inline-flex;position:relative;}button.main.svelte-ymfpde {background:transparent;padding:8px 16px;border:none;cursor:pointer;width:max-content;font-weight:600;}.dropdown.svelte-ymfpde {position:absolute;top:100%;margin-top:8px;}.dropdown.left.svelte-ymfpde {left:0;}.dropdown.center.svelte-ymfpde {left:50%;transform:translateX(-50%);}.dropdown.right.svelte-ymfpde {right:0;}ul.svelte-ymfpde {list-style:none;padding:0 0;width:max-content;margin:0;border:1px solid rgba(0, 0, 0, 0.01);}button.menuitem.svelte-ymfpde {background:transparent;border:none;padding:8px 16px;transition:background-color 0.3s ease;cursor:pointer;font-weight:600;}button.menuitem.svelte-ymfpde:hover {background:rgba(0, 0, 0, 0.05);}"
 };
 function CurrencySelector(r, e) {
-  push(e, !1), append_styles(r, $$css$1);
+  push(e, !1), append_styles(r, $$css$2);
   const [t, s] = setup_stores(), i = () => store_get(displayCurrency, "$displayCurrency", t);
   function n(S, {
     y: C = 100,
@@ -11442,11 +11446,11 @@ function CurrencySelector(r, e) {
     return {
       duration: A,
       easing: k,
-      css: (I) => `
+      css: (P) => `
         transform:
-          scale(${b + (1 - b) * I})
-          translateY(${(1 - I) * C}px);
-        opacity: ${I};
+          scale(${b + (1 - b) * P})
+          translateY(${(1 - P) * C}px);
+        opacity: ${P};
       `
     };
   }
@@ -11470,7 +11474,7 @@ function CurrencySelector(r, e) {
   var v = root$1(), m = child(v);
   {
     var y = (S) => {
-      var C = root_1$2(), b = child(C);
+      var C = root_1$3(), b = child(C);
       reset(C), template_effect(() => set_text(b, `${c().symbol ?? ""} ${c().currency ?? ""}`)), event("click", C, () => set(p, !get$2(p))), append(S, C);
     };
     if_block(m, (S) => {
@@ -11484,9 +11488,9 @@ function CurrencySelector(r, e) {
     var $ = (S) => {
       var C = root_2();
       each(C, 5, l, index, (b, A) => {
-        var k = root_3(), I = child(k), R = child(I);
-        reset(I), reset(k), template_effect(() => set_text(R, `${get$2(A).symbol ?? ""}
-							${get$2(A).currency ?? ""}`)), event("click", I, () => g(get$2(A))), append(b, k);
+        var k = root_3(), P = child(k), R = child(P);
+        reset(P), reset(k), template_effect(() => set_text(R, `${get$2(A).symbol ?? ""}
+							${get$2(A).currency ?? ""}`)), event("click", P, () => g(get$2(A))), append(b, k);
       }), reset(C), template_effect(() => set_style(C, `background: ${h()}`)), transition$1(3, C, () => n, () => ({
         y: -16,
         scale: 0.95,
@@ -11570,8 +11574,8 @@ customElements.define("currency-selector", create_custom_element(
   [],
   !0
 ));
-var root_1$1 = /* @__PURE__ */ template("<div> </div>");
-const $$css = {
+var root_1$2 = /* @__PURE__ */ template("<div> </div>");
+const $$css$1 = {
   hash: "svelte-163f7ne",
   code: `.discount-percentage.svelte-163f7ne {font-family:"Monument", sans-serif;color:rgb(210, 25, 16);}.discount-percentage.small.svelte-163f7ne {gap:8px;font-size:16px;letter-spacing:-0.22px;}
 @media screen and (max-width: 1024px) {.discount-percentage.small.svelte-163f7ne {font-size:12px;gap:4px;}
@@ -11580,7 +11584,7 @@ const $$css = {
 }`
 };
 function ProductDiscountPercentage(r, e) {
-  push(e, !1), append_styles(r, $$css);
+  push(e, !1), append_styles(r, $$css$1);
   let t = prop(e, "price", 12, ""), s = prop(e, "compared_at", 12, void 0), i = prop(e, "iso_code", 12, void 0), n = prop(e, "variant_id", 12, void 0), o = prop(e, "theme", 12, "big"), l = /* @__PURE__ */ mutable_source(t()), c = /* @__PURE__ */ mutable_source(s());
   const u = new NexusApi();
   let d = /* @__PURE__ */ mutable_source(), f = prop(e, "discountPercentage", 12);
@@ -11608,7 +11612,7 @@ function ProductDiscountPercentage(r, e) {
   var p = comment(), _ = first_child(p);
   {
     var g = (v) => {
-      var m = root_1$1();
+      var m = root_1$2();
       let y;
       var w = child(m);
       reset(m), template_effect(
@@ -11842,7 +11846,7 @@ query getProductVariants($handle: String!) {
     }
   };
 };
-var root_1 = /* @__PURE__ */ template(`<div class="bg-blue font-sans
+var root_1$1 = /* @__PURE__ */ template(`<div class="bg-blue font-sans
 						fixed z-10 bottom-[73px] left-0 right-0 text-[10px]
 						sm:static sm:text-[14px] tracking-[-0.34px] sm:min-h-[42px] p-[10px] text-black
 							"> </div>`), root = /* @__PURE__ */ template('<div class="min-h-[42px]"><!></div>');
@@ -11865,7 +11869,7 @@ function PreOrderStrip(r, e) {
   var o = root(), l = child(o);
   {
     var c = (u) => {
-      var d = root_1(), f = child(d, !0);
+      var d = root_1$1(), f = child(d, !0);
       reset(d), template_effect(() => set_text(f, i())), transition$1(3, d, () => fly, () => ({ y: 6, duration: 300 })), append(u, d);
     };
     if_block(l, (u) => {
@@ -11894,6 +11898,52 @@ function PreOrderStrip(r, e) {
   });
 }
 customElements.define("pre-order-strip", create_custom_element(PreOrderStrip, { handle: {}, variantId: {}, message: {} }, [], [], !1));
+var root_1 = /* @__PURE__ */ template('<table class="svelte-1dtzky1"><tbody><tr><td>cookies</td><td>cart_currency</td><td> </td></tr><tr><td>cookies</td><td>localization</td><td> </td></tr><tr><td>localStorage</td><td>displayCurrency</td><td> </td></tr><tr><td>localStorage</td><td>marketCurrency</td><td> </td></tr><tr><td>localStorage</td><td>localization</td><td> </td></tr></tbody></table>');
+const $$css = {
+  hash: "svelte-1dtzky1",
+  code: "table.svelte-1dtzky1 {position:fixed;top:8px;left:8px;z-index:10000;background:black;color:white;padding:5px;font-size:12px;}"
+};
+function DevMarketDetails(r, e) {
+  push(e, !0), append_styles(r, $$css);
+  const [t, s] = setup_stores(), i = () => store_get(displayCurrency, "$displayCurrency", t), n = () => store_get(marketCurrency, "$marketCurrency", t), o = () => store_get(localization, "$localization", t), l = prop(e, "show", 7, !1);
+  var c = comment(), u = first_child(c);
+  {
+    var d = (h) => {
+      var p = root_1(), _ = child(p), g = child(_), v = sibling(child(g), 2), m = child(v, !0);
+      reset(v), reset(g);
+      var y = sibling(g), w = sibling(child(y), 2), T = child(w, !0);
+      reset(w), reset(y);
+      var E = sibling(y), $ = sibling(child(E), 2), x = child($, !0);
+      reset($), reset(E);
+      var S = sibling(E), C = sibling(child(S), 2), b = child(C, !0);
+      reset(C), reset(S);
+      var A = sibling(S), k = sibling(child(A), 2), P = child(k, !0);
+      reset(k), reset(A), reset(_), reset(p), template_effect(
+        (R, N) => {
+          set_text(m, R), set_text(T, N), set_text(x, i()), set_text(b, n()), set_text(P, o());
+        },
+        [
+          () => getCookie("cart_currency"),
+          () => getCookie("localization")
+        ]
+      ), append(h, p);
+    };
+    if_block(u, (h) => {
+      l() && h(d);
+    });
+  }
+  append(r, c);
+  var f = pop({
+    get show() {
+      return l();
+    },
+    set show(h = !1) {
+      l(h), flushSync();
+    }
+  });
+  return s(), f;
+}
+customElements.define("dev-market-details", create_custom_element(DevMarketDetails, { show: {} }, [], [], !0));
 typeof window < "u" && (window.UI = {
   stores: {
     displayCurrency,
@@ -11914,6 +11964,7 @@ const browser$1 = /* @__PURE__ */ getDefaultExportFromCjs(browser), browser$2 = 
 export {
   CartRecommendationCard,
   CurrencySelector,
+  DevMarketDetails,
   KnittersAccordion,
   KnittersAccordionItem,
   PreOrderStrip,

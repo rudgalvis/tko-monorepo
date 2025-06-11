@@ -2,7 +2,6 @@
 
 <script lang="ts">
 	import ProductPrice from "$lib/custom-elements/common/ProductPrice.svelte";
-	import CartRecommendationsCardHeadline from './CartRecommendationsCardHeadline.svelte';
 
 	export let id: string | undefined = undefined;
 	export let title: string | undefined = undefined;

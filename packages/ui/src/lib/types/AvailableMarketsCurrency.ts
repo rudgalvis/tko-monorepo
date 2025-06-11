@@ -1,0 +1,1 @@
+export type AvailableMarketsCurrency = 'EUR' | 'USD' | 'AUD' | 'GPB';

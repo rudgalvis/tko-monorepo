@@ -7,12 +7,14 @@ const nexusApi = new NexusApi();
 
 const DISPLAY_CURRENCY_KEY = 'displayCurrency';
 const MARKET_CURRENCY_KEY = 'marketCurrency';
+const LOCALIZATION = 'localization';
 const DEFAULT_CURRENCY = 'EUR';
 const whitelistedCurrencies = availableCurrencies.map((e) => e.currency);
 
 /* Stores */
 export const displayCurrency = persistentWritable<string | null>(DISPLAY_CURRENCY_KEY, null);
 export const marketCurrency = persistentWritable<string | null>(MARKET_CURRENCY_KEY, null);
+export const localization = persistentWritable<string | null>(LOCALIZATION, null);
 export const currencyRates = writable<Record<string, number> | null>(null);
 
 /* Actions */
