@@ -198,19 +198,18 @@
     },
     "static_two_column_BWirn3": {
       "type": "static-two-column",
-      "disabled": true,
       "settings": {
         "borderlayouttwocl": "only-top",
         "textposition": "space-between",
         "sectionlayouttwocl": "image-text",
-        "headingcl": "NEW DROP: Skraistas cropped cardigan",
+        "headingcl": "THE LILAC EDIT: 20% OFF",
         "showtitletwo": true,
         "h2maxwidthdesktop": 440,
         "h2maxwidthmobile": 280,
-        "bodycl": "Three styling options. One effortless knit. Crafted from silk and mulesing-free certified mohair blend, finished with vintage buttons, Skraistas Cropped cardigan is sheer, soft, and endlessly wearable. Limited April drop of 30 pieces only.",
+        "bodycl": "This season’s most coveted shade, reimagined in summer-ready knits. For a limited time, enjoy special offers on bestselling lilac pieces starting at 20% off (or more!).",
         "pmaxwidthdesktop": 440,
         "pmaxwidthmobile": 280,
-        "cl-image": "shopify://shop_images/Homepage_Square_900x900_93c1ee1e-1bd9-4434-93a6-6a5aa7296b33.jpg",
+        "cl-image": "shopify://shop_images/Homepage_Square_900x900_870da088-f0d9-49ab-ad07-327ef5eb04d5.jpg",
         "padding_sizeupm_section": 15,
         "padding_sizedownm_section": 15,
         "padding_sizeup": 15,
@@ -219,7 +218,7 @@
         "padding_sizedownm": 15,
         "showurlcl": true,
         "linkTextcl": "SHOP NOW",
-        "linkclUrl": "shopify://products/skraistas-dew-silk-mohair-cropped-cardigan",
+        "linkclUrl": "shopify://collections/lilac-edit",
         "sectionID": ""
       }
     },
@@ -243,6 +242,7 @@
     },
     "static_two_column_RRztMx": {
       "type": "static-two-column",
+      "disabled": true,
       "settings": {
         "borderlayouttwocl": "top-bottom",
         "textposition": "space-between",
