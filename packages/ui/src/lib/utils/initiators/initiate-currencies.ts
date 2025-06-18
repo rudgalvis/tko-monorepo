@@ -54,7 +54,7 @@ export const initiateCurrencies = () => {
 
 	// Restore our internal state if external changes detected
 	// Happens when user changes market in checkout, causing mismatch
-	if (storage.localization && cookies.localization !== storage.localization) {
+	if (storage.localization && cookies.localization.toLowerCase() !== storage.localization.toLowerCase()) {
 		url.searchParams.set('country', storage.localization);
 		window.location.href = url.toString();
 	}

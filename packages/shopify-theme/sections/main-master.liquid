@@ -1365,20 +1365,20 @@ Mobile Slider
                                                 {% assign content = block.settings.content %}
 
                                                 {% comment %}V2 content is not set, render hardcoded legacy values{% endcomment %}
-                                                {% if block.settings.content == "" or block.settings.content == null %}
-                                                    {% case block.settings.collapse_order %}
-                                                        {%- when 'first' -%}
-                                                            {% assign content = product.metafields.my_fields.material_care.value %}
-                                                        {%- when 'second' -%}
-                                                            {% assign content = product.metafields.my_fields.free_shipping_returns.value %}
-                                                        {%- when 'third' -%}
-                                                            {% assign content = product.metafields.my_fields.sustainability.value %}
-                                                    {% endcase %}
+                                                {% comment %}{% if block.settings.content == "" or block.settings.content == null %}{% endcomment %}
+                                                    {% comment %}{% case block.settings.collapse_order %}{% endcomment %}
+                                                        {% comment %}{%- when 'first' -%}{% endcomment %}
+                                                            {% comment %}{% assign content = product.metafields.my_fields.material_care.value %}{% endcomment %}
+                                                        {% comment %}{%- when 'second' -%}{% endcomment %}
+                                                            {% comment %}{% assign content = product.metafields.my_fields.free_shipping_returns.value %}{% endcomment %}
+                                                        {% comment %}{%- when 'third' -%}{% endcomment %}
+                                                            {% comment %}{% assign content = product.metafields.my_fields.sustainability.value %}{% endcomment %}
+                                                    {% comment %}{% endcase %}{% endcomment %}
+                                                {% comment %}{% endif %}{% endcomment %}
 
+                                                {% unless content == "" or block.settings.content == null %}
                                                     {% render 'collapsible-tab', content: content, title: title %}
-                                                {% else %}
-                                                    {% render 'collapsible-tab', content: content, title: title %}
-                                                {% endif %}
+                                                {% endunless %}
                                         {%- endcase -%}
                                     {%- endfor -%}
                                 </ul>

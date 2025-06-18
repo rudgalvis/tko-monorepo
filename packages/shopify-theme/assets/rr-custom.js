@@ -2694,7 +2694,7 @@ const BASE_URL = "http://172.20.10.6:5173/api", API_ROUTES = {
     displayCurrency.set(countryToCurrency(i)), localization.set(i), marketCurrency.set(countryToCurrency(i)), t.searchParams.delete("country"), window.history.replaceState({}, "", t.toString());
     return;
   }
-  r.localization && e.localization !== r.localization && (t.searchParams.set("country", r.localization), window.location.href = t.toString());
+  r.localization && e.localization.toLowerCase() !== r.localization.toLowerCase() && (t.searchParams.set("country", r.localization), window.location.href = t.toString());
 }, main = () => {
   cacheSweeper(), initiateCurrencies();
 }, PUBLIC_VERSION = "5";
