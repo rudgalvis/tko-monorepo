@@ -79,10 +79,6 @@
 
           {% for product in recommended_products_core  %} 
 
-          {%- comment %}<locksmith:22e8>{% endcomment -%}
-            {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
-          {%- comment %}</locksmith:22e8>{% endcomment -%} 
-
           {% for variant in product.variants %}
       
               {% assign isAvailable = variant.available %}
@@ -150,10 +146,6 @@
              -------------------------------------------------
              {%- endcomment -%} 
         {% for product in recommended_products  %} 
-
-          {%- comment %}<locksmith:6622>{% endcomment -%}
-            {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
-          {%- comment %}</locksmith:6622>{% endcomment -%} 
 
           {% for variant in product.variants %}
       
@@ -287,9 +279,6 @@
 
  {%- comment -%}seasonal_colors{%- endcomment -%}
  {% for product in recommended_products_core  %}  
- {%- comment %}<locksmith:f28e>{% endcomment -%}
-   {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
- {%- comment %}</locksmith:f28e>{% endcomment -%}  
  {% assign productbitURL = product.url %}
                {%- comment -%}
                ------------------
@@ -353,9 +342,6 @@ seasonal_colors
 
 
               {% for product in recommended_products  %}  
-              {%- comment %}<locksmith:7f8c>{% endcomment -%}
-                {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
-              {%- comment %}</locksmith:7f8c>{% endcomment -%}  
               {% assign productbitURL = product.url %}
               {%- comment -%}
               ------------------

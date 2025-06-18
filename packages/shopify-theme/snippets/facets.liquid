@@ -81,20 +81,14 @@
     
                 </div>
 
-              {%- comment %}<locksmith:cd32>{% endcomment -%}
-                {%- assign locksmith_0b26_forloop__size = 0 %}{%- for link in linklists['filter-collection'].links -%}{% capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: linklists.filter-collection, variable: 'transparent' %}{% endcapture %}{% if var == 'true' %}{% assign locksmith_0b26_forloop__size = locksmith_0b26_forloop__size | plus: 1 %}{% endif %}{% endfor %}{% assign locksmith_0b26_forloop__index = nil -%}
-              {%- comment %}</locksmith:cd32>{% endcomment -%}
               {%- for link in linklists['filter-collection'].links -%}
-                {%- comment %}<locksmith:c285>{% endcomment -%}
-                  {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: linklists.filter-collection, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% if locksmith_0b26_forloop__index == nil %}{% assign locksmith_0b26_forloop__index = 1 %}{% assign locksmith_0b26_forloop__index0 = 0 %}{% else %}{% assign locksmith_0b26_forloop__index = locksmith_0b26_forloop__index | plus: 1 %}{% assign locksmith_0b26_forloop__index0 = locksmith_0b26_forloop__index0 | plus: 1 %}{% endif %}{% if locksmith_0b26_forloop__index == 1 %}{% assign locksmith_0b26_forloop__first = true %}{% else %}{% assign locksmith_0b26_forloop__first = false %}{% endif %}{% if locksmith_0b26_forloop__index == locksmith_0b26_forloop__size %}{% assign locksmith_0b26_forloop__last = true %}{% else %}{% assign locksmith_0b26_forloop__last = false %}{% endif %}{% assign locksmith_0b26_forloop__rindex = locksmith_0b26_forloop__size | minus: locksmith_0b26_forloop__index | minus: 1 %}{% assign locksmith_0b26_forloop__rindex0 = locksmith_0b26_forloop__size | minus: locksmith_0b26_forloop__index0 | minus: 1 %}{% else %}{% continue %}{% endif -%}
-                {%- comment %}</locksmith:c285>{% endcomment -%}
                 {% assign collectionprop = link.title %}
                  <li class="list-menu__item facets__item">
-                  <label for="Filter-{{ collectionprop | handleize  }}-{{ locksmith_0b26_forloop__index }}" class="facet-checkbox">
+                  <label for="Filter-{{ collectionprop | handleize  }}-{{ forloop.index }}" class="facet-checkbox">
                     <a class="categoryurl" type="checkbox" 
                     href="javascript:void(0)"
                     data-homeofurl="{{ collectionprop | handleize }}"
-                    id="Filter-{{ collectionprop | handleize }}-{{ locksmith_0b26_forloop__index }}"
+                    id="Filter-{{ collectionprop | handleize }}-{{ forloop.index }}"
                   >
     
                   {{ link.title }}

@@ -19,14 +19,7 @@
 {% endif %}
 
 
-{%- comment %}<locksmith:22e1>{% endcomment -%}
-  {%- assign locksmith_b73c_forloop__size = 0 %}{% for product in collections[collectionN].products %}{% capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, subject_parent: collections[collectionN], variable: 'transparent' %}{% endcapture %}{% if var == 'true' %}{% assign locksmith_b73c_forloop__size = locksmith_b73c_forloop__size | plus: 1 %}{% endif %}{% endfor %}{% assign locksmith_b73c_forloop__index = nil -%}
-{%- comment %}</locksmith:22e1>{% endcomment -%}
 {% for product in collections[collectionN].products %}
-
-{%- comment %}<locksmith:5f42>{% endcomment -%}
-  {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, subject_parent: collections[collectionN], variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% if locksmith_b73c_forloop__index == nil %}{% assign locksmith_b73c_forloop__index = 1 %}{% assign locksmith_b73c_forloop__index0 = 0 %}{% else %}{% assign locksmith_b73c_forloop__index = locksmith_b73c_forloop__index | plus: 1 %}{% assign locksmith_b73c_forloop__index0 = locksmith_b73c_forloop__index0 | plus: 1 %}{% endif %}{% if locksmith_b73c_forloop__index == 1 %}{% assign locksmith_b73c_forloop__first = true %}{% else %}{% assign locksmith_b73c_forloop__first = false %}{% endif %}{% if locksmith_b73c_forloop__index == locksmith_b73c_forloop__size %}{% assign locksmith_b73c_forloop__last = true %}{% else %}{% assign locksmith_b73c_forloop__last = false %}{% endif %}{% assign locksmith_b73c_forloop__rindex = locksmith_b73c_forloop__size | minus: locksmith_b73c_forloop__index | minus: 1 %}{% assign locksmith_b73c_forloop__rindex0 = locksmith_b73c_forloop__size | minus: locksmith_b73c_forloop__index0 | minus: 1 %}{% else %}{% continue %}{% endif -%}
-{%- comment %}</locksmith:5f42>{% endcomment -%}
 
 {% assign productUrltr = product.url %}
 
@@ -44,7 +37,7 @@
     
      <div class="productname">
          <h2>
-             <a href="{{ product.url }}?variant={{product.variants[locksmith_b73c_forloop__index0].option1 | handleize }}">
+             <a href="{{ product.url }}?variant={{product.variants[forloop.index0].option1 | handleize }}">
                  {%- render 'product-title', name: product.title -%}
              </a>
         </h2>
@@ -111,10 +104,6 @@
                 {% assign recommended_products_core =  product.metafields.variantproduct.productgroup.value %}
     
                 {% for product in recommended_products_core  %} 
-    
-                {%- comment %}<locksmith:8e31>{% endcomment -%}
-                  {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
-                {%- comment %}</locksmith:8e31>{% endcomment -%} 
     
                 {% for variant in product.variants %}
             
@@ -183,10 +172,6 @@
                    -------------------------------------------------
                    {%- endcomment -%} 
               {% for product in recommended_products  %} 
-    
-                {%- comment %}<locksmith:594c>{% endcomment -%}
-                  {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
-                {%- comment %}</locksmith:594c>{% endcomment -%} 
     
                 {% for variant in product.variants %}
             
@@ -416,9 +401,6 @@
 
 {%- comment -%}seasonal_colors{%- endcomment -%}
 {% for product in recommended_products_core  %}  
-{%- comment %}<locksmith:709e>{% endcomment -%}
-  {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
-{%- comment %}</locksmith:709e>{% endcomment -%}  
 {% assign productbitURL = product.url %}
            {%- comment -%}
            ------------------
@@ -481,9 +463,6 @@ seasonal_colors
 
 
           {% for product in recommended_products  %}  
-          {%- comment %}<locksmith:f4bd>{% endcomment -%}
-            {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
-          {%- comment %}</locksmith:f4bd>{% endcomment -%}  
           {% assign productbitURL = product.url %}
           {%- comment -%}
           ------------------

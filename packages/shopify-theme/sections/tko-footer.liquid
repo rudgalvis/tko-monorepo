@@ -45,10 +45,6 @@
            
                 {% for link in linklists['social-menu'].links %}
               
-                    {%- comment %}<locksmith:1c91>{% endcomment -%}
-                      {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: linklists.social-menu, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
-                    {%- comment %}</locksmith:1c91>{% endcomment -%}
-              
                     <a target="_blank" href="{{ link.url }}">{{ link.title }}</a>
                 
                 {% endfor %}
@@ -58,10 +54,6 @@
             <h2 class="footer-h2">{{ section.settings.tkofootertext}}</h2>
               
                     {% for link in linklists[section.settings.footermenu].links %}
-                  
-                        {%- comment %}<locksmith:5834>{% endcomment -%}
-                          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: linklists[section.settings.footermenu], variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
-                        {%- comment %}</locksmith:5834>{% endcomment -%}
                   
                         <a href="{{ link.url }}">{{ link.title }}</a>
                    

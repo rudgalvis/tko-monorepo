@@ -412,11 +412,5 @@
         "accept_sms_checkbox_label": "Send me SMS with news and offers"
       }
     }
-  },
-  "locksmith": {
-    "forms": {
-      "submit_button_text": "Continue",
-      "loading_text": "One moment..."
-    }
   }
 }

@@ -418,11 +418,5 @@
       "copy_code_success": "Kód byl úspěšně zkopírován",
       "print_gift_card": "Vytisknout"
     }
-  },
-  "locksmith": {
-    "forms": {
-      "submit_button_text": "Continue",
-      "loading_text": "One moment..."
-    }
   }
 }

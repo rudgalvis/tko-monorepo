@@ -85,6 +85,15 @@
             "page": ""
           }
         },
+        "collapsible_tab_Lnqi9V": {
+          "type": "collapsible_tab",
+          "settings": {
+            "collapse_order": "first",
+            "heading": "CUSTOMIZATIONS",
+            "content": "{{ product.metafields.custom.customisation | metafield_tag }}",
+            "page": ""
+          }
+        },
         "collapsible_tab_cfcBjF": {
           "type": "collapsible_tab",
           "disabled": true,
@@ -115,6 +124,7 @@
         "ed32e24b-274f-4072-a580-527e308ded6d",
         "c7e7f97d-bb19-4d00-981e-dd03893a5c9f",
         "64f0bf9c-b5d7-4235-9496-1af7e578d79c",
+        "collapsible_tab_Lnqi9V",
         "collapsible_tab_cfcBjF",
         "4488487c-6c3b-4726-b3c8-a7e33bdd90d8"
       ],

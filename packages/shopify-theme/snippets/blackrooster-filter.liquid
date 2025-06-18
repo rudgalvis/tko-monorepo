@@ -314,23 +314,17 @@
 
 
 
-    {%- comment %}<locksmith:f25e>{% endcomment -%}
-      {%- assign locksmith_1517_forloop__size = 0 %}{%- for link in linklists['filter-collection'].links -%}{% capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: linklists.filter-collection, variable: 'transparent' %}{% endcapture %}{% if var == 'true' %}{% assign locksmith_1517_forloop__size = locksmith_1517_forloop__size | plus: 1 %}{% endif %}{% endfor %}{% assign locksmith_1517_forloop__index = nil -%}
-    {%- comment %}</locksmith:f25e>{% endcomment -%}
     {%- for link in linklists['filter-collection'].links -%}
-                  {%- comment %}<locksmith:9880>{% endcomment -%}
-                    {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: linklists.filter-collection, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% if locksmith_1517_forloop__index == nil %}{% assign locksmith_1517_forloop__index = 1 %}{% assign locksmith_1517_forloop__index0 = 0 %}{% else %}{% assign locksmith_1517_forloop__index = locksmith_1517_forloop__index | plus: 1 %}{% assign locksmith_1517_forloop__index0 = locksmith_1517_forloop__index0 | plus: 1 %}{% endif %}{% if locksmith_1517_forloop__index == 1 %}{% assign locksmith_1517_forloop__first = true %}{% else %}{% assign locksmith_1517_forloop__first = false %}{% endif %}{% if locksmith_1517_forloop__index == locksmith_1517_forloop__size %}{% assign locksmith_1517_forloop__last = true %}{% else %}{% assign locksmith_1517_forloop__last = false %}{% endif %}{% assign locksmith_1517_forloop__rindex = locksmith_1517_forloop__size | minus: locksmith_1517_forloop__index | minus: 1 %}{% assign locksmith_1517_forloop__rindex0 = locksmith_1517_forloop__size | minus: locksmith_1517_forloop__index0 | minus: 1 %}{% else %}{% continue %}{% endif -%}
-                  {%- comment %}</locksmith:9880>{% endcomment -%}
                   {% assign collectionprop = link.title %}
                    <li class="list-menu__item facets__item">
                    {% assign getLinkofFilter = link.title | handleize %}  
                    {% if whichCollection == getLinkofFilter %}  
 
-                    <label for="Filter-{{ collectionprop | handleize  }}-{{ locksmith_1517_forloop__index }}" class="facet-checkbox">
+                    <label for="Filter-{{ collectionprop | handleize  }}-{{ forloop.index }}" class="facet-checkbox">
                       <a class="categoryurl disbale_filter_url" type="checkbox" 
                       href="javascript:void(0)"
                       data-homeofurl="{{ link.url | handleize | replace: 'collections-' }}"
-                      id="Filter-{{ collectionprop | handleize }}-{{ locksmith_1517_forloop__index }}"
+                      id="Filter-{{ collectionprop | handleize }}-{{ forloop.index }}"
                     >
       
                     {{ link.title }}
@@ -339,11 +333,11 @@
 
                     {% else %}
 
-                    <label for="Filter-{{ collectionprop | handleize  }}-{{ locksmith_1517_forloop__index }}" class="facet-checkbox">
+                    <label for="Filter-{{ collectionprop | handleize  }}-{{ forloop.index }}" class="facet-checkbox">
                       <a class="categoryurl" type="checkbox" 
                       href="javascript:void(0)"
                       data-homeofurl="{{ link.url | handleize | replace: 'collections-' }}"
-                      id="Filter-{{ collectionprop | handleize }}-{{ locksmith_1517_forloop__index }}"
+                      id="Filter-{{ collectionprop | handleize }}-{{ forloop.index }}"
                     >
                     {{ link.title }}
                     </a>

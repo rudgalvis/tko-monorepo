@@ -63,9 +63,6 @@ Please add following code in theme.liquid almost at the end, BEFORE the line {% 
     };
     window.saso.product_collections = []
     {% for c in product.collections %}
-    {%- comment %}<locksmith:7b2e>{% endcomment -%}
-      {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: c, subject_parent: product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
-    {%- comment %}</locksmith:7b2e>{% endcomment -%}
     window.saso.product_collections.push({{c.id}})
     {% endfor %}
 
@@ -84,9 +81,6 @@ Please add following code in theme.liquid almost at the end, BEFORE the line {% 
     {% for item in cart.items %}
     	window.saso.cart_collections["v{{item.variant_id}}"] = []
         {% for c in item.product.collections %}
-        {%- comment %}<locksmith:082f>{% endcomment -%}
-          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: c, subject_parent: item.product, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
-        {%- comment %}</locksmith:082f>{% endcomment -%}
         window.saso.cart_collections["v{{item.variant_id}}"].push({{c.id}})
         {% endfor %}
     {% endfor %}

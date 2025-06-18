@@ -59,9 +59,6 @@ and rendered inside some element
         <div class="swiper">
             <div class="swiper-wrapper">
                 {%- for product in recommendations.products -%}
-                    {%- comment %}<locksmith:ea0a>{% endcomment -%}
-                      {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, subject_parent: recommendations, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
-                    {%- comment %}</locksmith:ea0a>{% endcomment -%}
                     {% comment %}Exclude donation recomendation as it's already in cart{% endcomment %}
                     {% unless product.title == "For The Dream Fund" %}
                         <div class="swiper-slide" style="padding-right: 25px;">
