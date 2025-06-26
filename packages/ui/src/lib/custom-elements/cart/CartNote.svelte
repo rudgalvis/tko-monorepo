@@ -54,8 +54,6 @@
 	{#if isNoteShowing}
 		<textarea oninput={onChange} class="cart-note" placeholder="Leave a note about your order"
 		></textarea>
-	{:else}
-		Empty cart no note needed
 	{/if}
 {/if}
 

@@ -11986,15 +11986,12 @@ function CartNote(r, e) {
     var d = (f) => {
       var h = comment(), p = first_child(h);
       {
-        var _ = (v) => {
-          var m = root_2();
-          m.__input = [onChange, l], append(v, m);
-        }, g = (v) => {
-          var m = text("Empty cart no note needed");
-          append(v, m);
+        var _ = (g) => {
+          var v = root_2();
+          v.__input = [onChange, l], append(g, v);
         };
-        if_block(p, (v) => {
-          get$2(s) ? v(_) : v(g, !1);
+        if_block(p, (g) => {
+          get$2(s) && g(_);
         });
       }
       append(f, h);
