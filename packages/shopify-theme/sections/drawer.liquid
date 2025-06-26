@@ -222,6 +222,10 @@ Create Json for product variant color or image
                 <div class="cart-recommendations"></div>
             </div>
 
+            <div style="margin: 16px 0 0; background: #eeeeea">
+                <cart-note rv-isCartEmpty="cart.item_count | lt 1"></cart-note>
+            </div>
+
             <div class="title-price">
                 <p>TOTAL</p>
                 <p legacy-rv-html="cart.total_price | currency | money Currency.currentCurrency ">

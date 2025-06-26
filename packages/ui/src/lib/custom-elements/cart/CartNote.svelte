@@ -5,7 +5,7 @@
 
 	const isNoteShowing = $derived(isCartEmpty === 'false');
 
-	const STAGING_ONLY = true;
+	const STAGING_ONLY = false; // Requires staging local storage to be set to true to show
 	const staging = localStorage.getItem('staging') === 'true';
 	const stagingValidation = $derived((STAGING_ONLY && staging) || !STAGING_ONLY);
 
