@@ -216,10 +216,13 @@ Create Json for product variant color or image
                 </div>
             </div>
         {% endif %}
-
         <div class="dpi-footer">
-            <div style="margin: 10px -25px 0 0;">
-                <div class="cart-recommendations"></div>
+            {% comment %}<div style="margin: 10px -25px 0 0;">{% endcomment %}
+                {% comment %}<div class="cart-recommendations"></div>{% endcomment %}
+            {% comment %}</div>{% endcomment %}
+
+            <div style="margin: -16px 0 0; background: #eeeeea">
+                <cart-note rv-isCartEmpty="cart.item_count | lt 1"></cart-note>
             </div>
 
             <div class="title-price">

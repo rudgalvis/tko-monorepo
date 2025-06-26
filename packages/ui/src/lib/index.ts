@@ -27,6 +27,7 @@ export { default as ProductPrice } from './custom-elements/common/ProductPrice.s
 export { default as ProductDiscountPercentage } from './custom-elements/common/ProductDiscountPercentage.svelte';
 export { default as PreOrderStrip } from './custom-elements/pdp/pre-order/PreOrderStrip.svelte';
 export { default as DevMarketDetails } from './custom-elements/dev/DevMarketDetails.svelte';
+export { default as CartNote } from './custom-elements/cart/CartNote.svelte';
 
 /* Regular exports */
 export { getAutomaticDiscount };
