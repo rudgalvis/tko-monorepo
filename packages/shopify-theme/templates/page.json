@@ -11,6 +11,7 @@
   "sections": {
     "static_slider_CR7LwY": {
       "type": "static-slider",
+      "disabled": true,
       "name": "Main Slider",
       "settings": {
         "slider-dot-color": "#ffffff",
@@ -21,6 +22,7 @@
     },
     "static_two_column_mdeHcN": {
       "type": "static-two-column",
+      "disabled": true,
       "name": "2 Column Layout No.1",
       "settings": {
         "borderlayouttwocl": "top-bottom",
@@ -48,6 +50,7 @@
     },
     "static_link_Pz3hyX": {
       "type": "static-link",
+      "disabled": true,
       "name": "Link Section",
       "settings": {
         "onlyTextlayout": "top-bottom",
@@ -91,7 +94,6 @@
     },
     "main": {
       "type": "main-page",
-      "disabled": true,
       "settings": {
         "headertextalignment": "center"
       }
@@ -102,7 +104,7 @@
       "name": "Only Text Section No.1",
       "settings": {
         "onlyTextlayout": "top-bottom",
-        "bgOnlyTextCTA": "#EEEEEA",
+        "bgOnlyTextCTA": "#eeeeea",
         "colorOnlyTextCTA": "#000000",
         "headingOnlyTextCTA": "SECRET SAMPLE SALE:  SHOP PERFECTLY IMPERFECT KNITS",
         "maxwidthoftitle": 700,

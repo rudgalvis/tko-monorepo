@@ -14,6 +14,7 @@
       "blocks": {
         "29690200-f0ed-4565-ae99-b2158de61cc4": {
           "type": "Slider",
+          "disabled": true,
           "settings": {
             "slide-image": "shopify://shop_images/Homepage_-_Desktop-2_a126056e-6cbb-49ea-8560-770747d48948.jpg",
             "slide-image-mobile": "shopify://shop_images/Homepage_-_Mobile_f88e1328-9bc5-4c90-b472-db96e6aab0e5.jpg",
@@ -25,13 +26,12 @@
         },
         "9e54d3d6-c2af-4269-accc-86b80bee5446": {
           "type": "Slider",
-          "disabled": true,
           "settings": {
             "slide-image": "shopify://shop_images/Homepage_-_Desktop_569faf63-0ee2-4565-b7cc-0c28ccc5e5f7.jpg",
             "slide-image-mobile": "shopify://shop_images/Homepage_-_Mobile_474610ba-cd25-44eb-a85f-369a4eee633c.jpg",
-            "slide-text": "Spring sale: 20% off all knits",
+            "slide-text": "Summer sale: 20% off all knits",
             "button-text": "SHOP NOW",
-            "button-link": "shopify://collections/spring-sale",
+            "button-link": "shopify://collections/summer-sale",
             "slide-text-color": "#ffffff"
           }
         },
@@ -196,8 +196,35 @@
         "lineNumber": "1"
       }
     },
+    "static_two_column_CDMabw": {
+      "type": "static-two-column",
+      "settings": {
+        "borderlayouttwocl": "only-bottom",
+        "textposition": "space-between",
+        "sectionlayouttwocl": "text-image",
+        "headingcl": "THE CROCHET EDIT",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 440,
+        "h2maxwidthmobile": 280,
+        "bodycl": "Rooted in Lithuanian heritage, these designs draw inspiration from folk costumes across our home country, reimagined in modern silhouettes you’ll wear on repeat.",
+        "pmaxwidthdesktop": 440,
+        "pmaxwidthmobile": 280,
+        "cl-image": "shopify://shop_images/Homepage_Square_900x900-2_5c324a2c-b59e-4ee4-abf1-8139d05853b8.jpg",
+        "padding_sizeupm_section": 15,
+        "padding_sizedownm_section": 15,
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "showurlcl": true,
+        "linkTextcl": "SHOP NOW",
+        "linkclUrl": "shopify://collections/crochet",
+        "sectionID": ""
+      }
+    },
     "static_two_column_BWirn3": {
       "type": "static-two-column",
+      "disabled": true,
       "settings": {
         "borderlayouttwocl": "only-top",
         "textposition": "space-between",
@@ -310,32 +337,6 @@
         "padding_sizedownsectiondesktop": 90,
         "padding_sizeupsectionmobile": 18,
         "padding_sizedownsectionmobile": 45
-      }
-    },
-    "static_two_column_CDMabw": {
-      "type": "static-two-column",
-      "settings": {
-        "borderlayouttwocl": "only-bottom",
-        "textposition": "space-between",
-        "sectionlayouttwocl": "text-image",
-        "headingcl": "NEW IN: Šatrija + Drebulė SET",
-        "showtitletwo": true,
-        "h2maxwidthdesktop": 440,
-        "h2maxwidthmobile": 280,
-        "bodycl": "Warm-weather knitwear at its best. Crafted from upcycled cotton, this set is ready for every summer plan you’ve got.",
-        "pmaxwidthdesktop": 440,
-        "pmaxwidthmobile": 280,
-        "cl-image": "shopify://shop_images/Homepage_Square_900x900_2cb6b5d1-cdf5-4db5-af54-dfc009245bfb.jpg",
-        "padding_sizeupm_section": 15,
-        "padding_sizedownm_section": 15,
-        "padding_sizeup": 15,
-        "padding_sizedown": 15,
-        "padding_sizeupm": 15,
-        "padding_sizedownm": 15,
-        "showurlcl": true,
-        "linkTextcl": "SHOP NOW",
-        "linkclUrl": "shopify://products/satrija-black-cotton-wrap-skirt",
-        "sectionID": ""
       }
     },
     "163481622598749a4b": {
@@ -652,11 +653,11 @@
     "163758180555d34f3c",
     "1634312997cd1a9ecc",
     "1634918258b848ff3a",
+    "static_two_column_CDMabw",
     "static_two_column_BWirn3",
     "16479497105534c601",
     "static_two_column_RRztMx",
     "1634559204e2be8fc2",
-    "static_two_column_CDMabw",
     "163481622598749a4b",
     "1717769143b2e15dbb",
     "1634817555c231ca73",
