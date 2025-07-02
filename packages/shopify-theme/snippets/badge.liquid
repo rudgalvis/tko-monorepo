@@ -47,19 +47,18 @@
             if(hasSale) return
 
             const productContainer = badgeContainer.closest('.product-container')
-            const discount = productContainer.querySelector('product-discount-percentage')
+            let discount
 
-            if(!discount) return
 
-            let attempt = 0, val = null
-            while(attempt < 10 && !val) {
-                await new Promise(resolve => setTimeout(resolve, 200))
+            let attempt = 0
+            while(attempt < 10 && !discount) {
+                await new Promise(resolve => setTimeout(resolve, 100))
 
                 attempt++
-                val = +discount.discountPercentage
+                discount = productContainer.querySelector('.price-ui--value.percentage')
             }
 
-            if(val) {
+            if(discount) {
                 let prefab = document.querySelector('[data-badge-on-sale-prefab]')
                 prefab = prefab.cloneNode(true)
                 prefab.style.display = 'block'
@@ -107,6 +106,11 @@
 
     .badge-v2---on-sale {
         background-color: #B0BEB2;
+    }
+
+    .badge-v2---customizable {
+        background-color: #010203;
+        color: rgba(255, 255, 255, 0.9);
     }
 
     @media screen and (max-width: 767px) {
