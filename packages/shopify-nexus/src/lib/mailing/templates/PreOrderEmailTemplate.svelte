@@ -6,7 +6,7 @@
 
 	export let customerName: string = ''
 	export let productTitle: string = ''
-	export let orderId: string = '1454532'
+	export let orderId: string = ''
 	export let estimatedShippingDate: string = ''
 </script>
 
@@ -33,7 +33,7 @@
 										/>
 									</a>
 								</td>
-								<td style="text-align: right; color: #999;"><TextCaption>PRE-ORDER #{orderId}</TextCaption></td>
+								<td style="text-align: right; color: #999;">{#if orderId}<TextCaption>PRE-ORDER #{orderId}</TextCaption>{/if}</td>
 							</tr>
 						</tbody>
 					</table>

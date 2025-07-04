@@ -22,6 +22,7 @@ export const parseOrderWebhook = async (webhookData: OrdersCreateWebhookBody) =>
 		customerName: webhookData.customer?.first_name || '',
 		itemsToPausePreorder,
 		orderId: webhookData.id,
+		orderNumber: webhookData.order_number,
 		orderLineInventories,
 		orderLineInventoriesAnalyzed,
 	}

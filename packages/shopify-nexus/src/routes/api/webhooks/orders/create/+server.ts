@@ -31,6 +31,7 @@ const handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => {
 			customerName,
 			itemsToPausePreorder,
 			orderId,
+			orderNumber,
 			orderLineInventories,
 			orderLineInventoriesAnalyzed,
 		} = await parseOrderWebhook(webhookData)
@@ -63,7 +64,7 @@ const handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => {
 		// Sending pre-order emails
 		const preorderEmailPromises = mailingService.sendPreorderNotifications({
 			orderLineInventoriesAnalyzed,
-			orderId: orderId.toString(),
+			orderId: orderNumber.toString(),
 			customerName,
 			customerEmail,
 		})

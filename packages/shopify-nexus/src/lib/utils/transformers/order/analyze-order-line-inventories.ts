@@ -37,7 +37,7 @@ export const analyzeOrderLineInventories = (
 		}
 
 		// We are selling out of stock and above the limit
-		if (newInventory < 0 && Math.abs(newInventory) > maximumPreSale) {
+		if (newInventory < 0 && Math.abs(newInventory) >= maximumPreSale) {
 			let allowedToPreorder = maximumPreSale
 
 			// Some was already pre-ordered
