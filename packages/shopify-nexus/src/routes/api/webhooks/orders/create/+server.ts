@@ -1,3 +1,4 @@
+import { PUBLIC_ENV } from '$env/static/public'
 import { MailingService } from '$lib/mailing/MailingService'
 import { OrderService } from '$lib/shopify/services/OrderService'
 import { ProductService } from '$lib/shopify/services/Product.service'
@@ -97,7 +98,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	const webhookData = await request.json()
 
 	// For development purposes
-	if (LOG_INTO_FILE) writeFile('test-data/webhook-payload', `orders_create.json`, webhookData)
+	if (LOG_INTO_FILE && PUBLIC_ENV !== 'PRODUCTION') writeFile('test-data/webhook-payload', `orders_create.json`, webhookData)
 
 	try {
 		await handlePreOrders(webhookData)
