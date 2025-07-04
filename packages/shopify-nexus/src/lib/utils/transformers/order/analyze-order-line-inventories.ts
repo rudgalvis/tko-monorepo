@@ -14,7 +14,8 @@ export const analyzeOrderLineInventories = (
 			maximumPreSale: _maximumPreSale,
 			orderedQuantity,
 			product,
-			title,
+//			title,
+			name
 		} = orderedItem
 		const hadSome = inventoryQuantity > 0
 		const maximumPreSale = (_maximumPreSale && +_maximumPreSale.value) || 9999999
@@ -70,7 +71,7 @@ export const analyzeOrderLineInventories = (
 			preOrders,
 			product,
 			regulars,
-			title,
+			title: name,
 			triggerStopPreOrders,
 		}
 	})

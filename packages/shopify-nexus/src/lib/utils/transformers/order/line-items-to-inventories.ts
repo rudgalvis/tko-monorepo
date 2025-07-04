@@ -15,14 +15,18 @@ export const orderLineItemsToOrderLineInventories = async (
 
 	if (!productVariants) return []
 
-	const quantities = orderLineItem.map(({ quantity, variant_id }) => ({
+	const quantities = orderLineItem.map(({ quantity, variant_id, name }) => ({
 		id: gidGenerator(ObjectsGIDS.PRODUCT_VARIANT, variant_id),
 		orderedQuantity: quantity,
 	}))
 
-	const inventoryDetails = mergeObjects(productVariants, quantities, 'id') as OrderLineInventory[]
+	const name = orderLineItem.map(({ name, variant_id }) => ({
+		id: gidGenerator(ObjectsGIDS.PRODUCT_VARIANT, variant_id),
+		name,
+	}))
 
-	return inventoryDetails.map((e) => ({
+	const inventoryDetails = mergeObjects(productVariants, quantities, 'id') as OrderLineInventory[]
+	inventoryDetails.map((e) => ({
 		...e,
 		// Important: Order processing sequence
 		// 1. When an order is placed, product quantities are immediately decremented
@@ -31,4 +35,6 @@ export const orderLineItemsToOrderLineInventories = async (
 		//    the pre-order state (before quantities were decremented)
 		inventoryQuantity: e.inventoryQuantity + e.orderedQuantity,
 	}))
+
+	return mergeObjects(inventoryDetails, name, 'id') as OrderLineInventory[]
 }

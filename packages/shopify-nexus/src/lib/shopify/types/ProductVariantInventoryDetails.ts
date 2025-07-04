@@ -12,6 +12,7 @@ export type ProductVariantInventoryDetails = {
 	inventoryItem: { id: string }
 	expectedDate: ExpectedDate
 	maximumPreSale: MaximumPreSale
+	name: string // Product title + variant title
 }
 
 export type ExpectedDate = {

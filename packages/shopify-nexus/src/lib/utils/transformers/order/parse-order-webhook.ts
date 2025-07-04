@@ -10,6 +10,7 @@ export type ProductVariantIdentifier = {
 export const parseOrderWebhook = async (webhookData: OrdersCreateWebhookBody) => {
 	if (!webhookData.line_items) throw new Error('No line items found')
 
+
 	const orderLineInventories = await orderLineItemsToOrderLineInventories(webhookData.line_items)
 	const orderLineInventoriesAnalyzed = analyzeOrderLineInventories(orderLineInventories)
 

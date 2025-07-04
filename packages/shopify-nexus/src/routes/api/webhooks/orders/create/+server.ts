@@ -8,7 +8,7 @@ import { parseOrderWebhook } from '$lib/utils/transformers/order/parse-order-web
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
 
-const LOG_INTO_FILE = false
+const LOG_INTO_FILE = true
 const VERBOSE = true
 
 // TEST_MODE: When enabled, only process orders from specific test customer emails

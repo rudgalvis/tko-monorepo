@@ -66,7 +66,7 @@ export class MailingService {
 	}): Promise<PreorderNotificationResponse>[] {
 		const preorderItems = orderLineInventoriesAnalyzed.filter((item) => item.preOrders > 0)
 
-		const uniquePreorderProducts = [...new Set(preorderItems.map(({ product }) => product.title))]
+		const uniquePreorderProducts = [...new Set(preorderItems.map(({ title }) => title))]
 
 		return uniquePreorderProducts.map(async (productTitle) => {
 			const item = preorderItems.find(({ product }) => product.title === productTitle)

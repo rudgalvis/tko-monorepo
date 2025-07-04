@@ -16,7 +16,7 @@ export class OrderService {
 	async addComment(orderId: number, comment: string) {
 		const original = await this.orderRepository.readNote(orderId)
 
-		const timestamp = `🕐 ${new Date().toLocaleString()}`
+		const timestamp = `🤖 RRXTO 🕐 ${new Date().toLocaleString('LT')}`
 		const commentParts = [timestamp, comment, original].filter(Boolean)
 
 		const formattedComment = commentParts.join('\n\n')
@@ -45,7 +45,7 @@ export class OrderService {
 	) {
 		return preorderNotificationResponses.reduce((acc, { forItem, mailingStatus }) => {
 			const messageId = mailingStatus.meta?.id
-			const emailComment = [`✉️ Pre-order email sent for ${forItem}`, messageId]
+			const emailComment = [`✉️ Pre-order email sent for ${forItem} item.`, messageId]
 				.filter(Boolean)
 				.join('\n')
 
