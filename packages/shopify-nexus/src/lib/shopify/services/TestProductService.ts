@@ -15,9 +15,9 @@ export class TestProductService {
 		},
 		{
 			title: 'Out of stock, pre-order-able',
-			quantity: -2,
+			quantity: 0,
 			policy: ProductVariantInventoryPolicy.CONTINUE,
-			maximumPreSale: 5,
+			maximumPreSale: 3,
 			expectedDate: '2024 04 04',
 		},
 		{

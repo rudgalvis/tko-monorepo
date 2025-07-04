@@ -9,6 +9,7 @@ test('MailingService', async () => {
 	await mailingService.sendSingleItemPreorderMail('rokas@rudgalvis.com', {
 		customerName: 'Rokas',
 		productTitle: 'Delcia Lemon',
+		orderId: '123123',
 		estimatedShippingDate: '2024 04 04',
 	})
 })
@@ -23,12 +24,13 @@ test('Test creating pre order notification', async () => {
 	try {
 		const webhookData = JSON.parse(data)
 
-		const { orderLineInventoriesAnalyzed, customerName, customerEmail } =
+		const { orderLineInventoriesAnalyzed, customerName, orderId, customerEmail } =
 			await parseOrderWebhook(webhookData)
 
 		mailingService.sendPreorderNotifications({
 			orderLineInventoriesAnalyzed,
 			customerName,
+			orderId: orderId.toString(),
 			customerEmail,
 		})
 	} catch (e) {

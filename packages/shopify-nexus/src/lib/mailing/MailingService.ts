@@ -1,4 +1,9 @@
-import { MAILGUN_DOMAIN, MAIL_REPLY_TO, MAILGUN_FROM_USER, MAIL_FROM_NAME } from '$env/static/private'
+import {
+	MAILGUN_DOMAIN,
+	MAIL_REPLY_TO,
+	MAILGUN_FROM_USER,
+	MAIL_FROM_NAME,
+} from '$env/static/private'
 import { Mailgun, type SendMailStatus } from '$lib/mailing/Mailgun'
 import PreOrderEmailTemplate from '$lib/mailing/templates/PreOrderEmailTemplate.svelte'
 import type { OrderLineInventoryAnalyzed } from '$lib/types/OrderLineInventoryAnalyzed'
@@ -7,6 +12,7 @@ import { render } from 'svelte/server'
 export type PreorderMailItem = {
 	customerName: string
 	productTitle: string
+	orderId: string
 	estimatedShippingDate?: string
 }
 
@@ -22,14 +28,19 @@ export class MailingService {
 
 	async sendSingleItemPreorderMail(
 		email: string,
-		{ customerName, productTitle, estimatedShippingDate = 'yet to be determined' }: PreorderMailItem
+		{
+			customerName,
+			productTitle,
+			orderId,
+			estimatedShippingDate = 'yet to be determined',
+		}: PreorderMailItem
 	) {
 		// Adjusting for better email readability.
 		// "Delčia: Lemon Cotton Sweater" -> "Delčia Lemon Cotton Sweater"
 		productTitle = productTitle.replaceAll(':', '')
 
 		const { body } = render(PreOrderEmailTemplate, {
-			props: { customerName, productTitle, estimatedShippingDate },
+			props: { customerName, productTitle, orderId, estimatedShippingDate },
 		})
 
 		return await this.mailer.sendMail({
@@ -45,10 +56,12 @@ export class MailingService {
 	sendPreorderNotifications({
 		orderLineInventoriesAnalyzed,
 		customerName,
+		orderId,
 		customerEmail,
 	}: {
 		orderLineInventoriesAnalyzed: OrderLineInventoryAnalyzed[]
 		customerName: string
+		orderId: string
 		customerEmail: string
 	}): Promise<PreorderNotificationResponse>[] {
 		const preorderItems = orderLineInventoriesAnalyzed.filter((item) => item.preOrders > 0)
@@ -62,6 +75,7 @@ export class MailingService {
 				mailingStatus: await this.sendSingleItemPreorderMail(customerEmail, {
 					customerName,
 					productTitle,
+					orderId,
 					estimatedShippingDate: item?.expectedDate.value,
 				}),
 				forItem: productTitle,

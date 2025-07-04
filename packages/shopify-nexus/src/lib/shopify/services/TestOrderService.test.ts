@@ -19,7 +19,7 @@ describe.sequential('Should setup test product and perform test order', () => {
 		// 3 Out of stock, pre-order-able, no expected date
 
 		// As if adding to cart here
-		const lineItems = [
+		const r1 = await testOrderService.createOrder([
 			{
 				quantity: 1,
 				variantId: variants[0].id,
@@ -27,16 +27,14 @@ describe.sequential('Should setup test product and perform test order', () => {
 				requiresShipping: true,
 			},
 			{
-				quantity: 1,
+				quantity: 2,
 				variantId: variants[1].id,
 				productId,
 				requiresShipping: true,
 			},
-		]
+		])
 
-		const r = await testOrderService.createOrder(lineItems)
-
-		expect(r).toBeTruthy()
+		expect(r1).toBeTruthy()
 
 		console.log(`Order created. Shopify should hit ${PUBLIC_NEXUS_BASE_URL} webhook in a moment.`)
 	})

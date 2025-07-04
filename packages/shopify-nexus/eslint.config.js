@@ -29,6 +29,6 @@ export default ts.config(
 			parserOptions: {
 				parser: ts.parser
 			}
-		}
+		},
 	}
 );
