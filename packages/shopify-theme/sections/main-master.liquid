@@ -7,6 +7,10 @@
 {{ 'notifyme.css' | asset_url | stylesheet_tag }}
 
 
+<script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+
 <link rel="stylesheet" href="{{ 'component-card.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-product-grid.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -448,10 +452,18 @@ Mobile Slider
                  class="product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
                 {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
+                <div>
+                    {% render 'standard-add-to-cart',
+                            product:product,
+                            product_form_id: product_form_id,
+                            section: section
+                    %}
+                </div>
+
+
+
                 {%- for block in section.blocks -%}
                     {%- case block.type -%}
-
-
                         {%- when 'title' -%}
                             <div class="mobile___adjustment">
                             <div class="mobile___price_holder">
