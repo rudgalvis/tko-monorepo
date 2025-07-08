@@ -1,7 +1,7 @@
 <script>
   window.GloboPreorderParams = window.GloboPreorderParams || {};
  window.GloboPreorderParams.selectors = window.GloboPreorderParams.selectors || {};
- window.GloboPreorderParams.selectors.productAddToCartBtn = [".product-buy-button-active"];
+ window.GloboPreorderParams.selectors.productAddToCartBtn = [".product-form__submit.button.button--full-width.button--primary"];
   if(document.querySelector('a.size-selection.active')){
       document.querySelector('.product-form').classList.add('product_form_visible');
       if(document.querySelector('.product-form').querySelector('.gpoVariantSelector'))
