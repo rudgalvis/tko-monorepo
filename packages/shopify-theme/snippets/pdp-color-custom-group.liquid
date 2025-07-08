@@ -1,0 +1,202 @@
+<div class="colortype">
+
+
+    <div class="f-small">Custom Colors:</div>
+
+    <span id="selectedColorSeasonal" class="selected-color">
+                            {% if seasonalColorName != nil %}
+                                {% if control == false %}
+                                    {{ product.variants[0].option1 | capitalize }}
+                                {% else %}
+                                    {% assign colorName = seasonalColorName %}
+                                    {% if colorName contains '-' %}
+                                        {% assign colorNameArray = colorName | split: '-' %}
+                                        {% assign firstWord = colorNameArray[0] | capitalize %}
+                                        {% assign secondWord = colorNameArray[1] | capitalize %}
+                                        {% assign thirdWord = colorNameArray[2] | capitalize %}
+                                        {% assign fourthWord = colorNameArray[3] | capitalize %}
+                                        {% assign fifthWord = colorNameArray[4] | capitalize %}
+                                        {% capture fullWord %}{{ firstWord }} {{ secondWord }} {{ thirdWord }} {{ fourthWord }} {{ fifthWord }}{% endcapture %}
+                                        {{ fullWord }}
+                                    {% else %}
+                                        {{ seasonalColorName | capitalize }}
+                                    {% endif %}
+
+                                {% endif %}
+                            {% endif %}
+                          </span>
+
+</div>
+
+
+<div class="colorvariants-holder">
+    {% assign currentProductColorthis = product.variants[0].option1 | handleize %}
+
+
+    {% for product in recommended_products %}
+        {% assign currentProductColorthem = product.variants[0].option1 | handleize %}
+
+        <label class="color-changer-wrap"
+               for="{{ product.variants[0].id }}-{{ product.variants[0].option1 | handleize }}-{{ forloop.index0 }}"
+               data-available="{{ product.available }}">
+            {% if control == true %}
+                {% render 'variant-color',
+                        colorsource: settings.colorswatch,
+                        forsource: product.variants[0].option1,
+                        control1: pageQuerystring,
+                        control2: currentProductColorthem,
+                        circletriger: 'empty-circle'
+
+                %}
+            {% else %}
+                {% render 'variant-color',
+                        colorsource: settings.colorswatch,
+                        forsource: product.variants[0].option1 | handleize,
+                        control1: currentProductColorthis,
+                        control2: currentProductColorthem,
+                        circletriger: 'empty-circle'
+
+                %}
+            {% endif %}
+
+
+
+            {%- comment -%}getModelinfo{%- endcomment -%}
+
+
+            {% assign variantColorGet = product.variants[0].option1 %}
+
+            {% for fields in product.variants[0].metafields.variantModelInfo %}
+                {% assign imageOrderModel = fields[0] | split: '/' %}
+                {% assign imageOrderWeist = fields[1] %}
+
+
+
+
+                {% assign imageOrder = imageOrderModel[0] %}
+                {% assign imageWeist = imageOrderWeist.value | remove: 'cm' | strip %}
+                {% assign imageInfo = imageOrderWeist.value %}
+                {% assign imageIn = imageOrderWeist.value %}
+                {% assign imageGender = imageOrderWeist.value %}
+
+
+
+
+                {% unless modeldata contains imageOrder %}
+                    {% assign modeldata = imageOrder | append: ',' | append: modeldata %}
+                {% endunless %}
+
+
+                {% if fields[0] contains 'Man' %}
+                    {% assign modeldataGender = imageGender | append: ',' | append: modeldataGender %}
+                {% endif %}
+
+
+                {% if fields[0] contains 'Waist' %}
+                    {% assign modeldataWeist = imageWeist | append: ',' | append: modeldataWeist %}
+                {% endif %}
+
+                {% if fields[0] contains 'Hips' %}
+                    {% assign modeldataHips = imageWeist | append: ',' | append: modeldataHips %}
+                {% endif %}
+
+                {% if fields[0] contains 'Bust' %}
+                    {% assign modeldataBust = imageWeist | append: ',' | append: modeldataBust %}
+                {% endif %}
+
+                {% if imageOrderModel[1] == 'Modelname' %}
+                    {% assign modeldatacm = imageInfo | append: ',' | append: modeldatacm %}
+                {% endif %}
+
+                {% if imageOrderModel[1] == 'Modelnameinch' %}
+                    {% assign modeldatain = imageIn | append: ',' | append: modeldatain %}
+                {% endif %}
+
+
+
+
+            {% endfor %}
+
+
+
+            {%- comment -%}getModelinfo{%- endcomment -%}
+            {% for variant in product.variants %}
+                {% assign activeNotifyme = true %}
+                {% if variant.metafields.custom.disablenotifyme == true %}
+                    {% assign activeNotifyme = false %}
+                    {% break %}
+                {% else %}
+                    {% assign activeNotifyme = true %}
+                {% endif %}
+
+            {% endfor %}
+
+            {% comment %}If all variants are pre-orderable, show strip right away{% endcomment %}
+            {% assign all_variants_preorderable = true %}
+            {% assign pre_order_message = product.first_available_variant.metafields.preorder.preordercontent %}
+
+            {% for variant in product.variants %}
+                {% unless variant.metafields.preorder.preordercontent %}
+                    {% assign all_variants_preorderable = false %}
+                    {% assign pre_order_message = '' %}
+                    {% break %}
+                {% endunless %}
+            {% endfor %}
+
+
+            <input class="color-changer seasonal
+                                {% if product.available != false and product.tags contains 'pre-order' %}
+
+                                 no-stock
+
+                                {% elsif product.available == false and activeNotifyme == false %}
+                                 sold_out
+                                {% endif %}
+
+                                {% if sizeofsize == 'One Size' and activeNotifyme == true and product.available == false %}
+                                one-size-product notify_me_btn
+                                {% elsif sizeofsize == 'One Size' and product.available == true %}
+                                one-size-product
+                                {% else %}
+
+                                {% endif %}"
+
+                   type="radio"
+                   data-preorder-content="{{ pre_order_message }}"
+                   data-rprice="{{ product.variants[0].price | money_without_trailing_zeros | strip_html }}"
+                   data-cprice="{% if product.variants[0].compare_at_price != nil %}{{ product.variants[0].compare_at_price | money_without_trailing_zeros | strip_html }}{% else %}nodiscount{% endif %}"
+                   data-fistID="{{ product.variants[0].id }}"
+                   id="{{ product.variants[0].id }}-{{ product.variants[0].option1 | handleize | strip }}-{{ }}"
+                   name="color"
+                   value="{{ product.variants[0].option1 | handleize | strip }}"
+                   data-colorShow="{{ product.variants[0].option1 | strip }}"
+                   data-order="--{{ product.variants[0].option1 | handleize | strip }}"
+                   form="product-form-{{ variant.id }}"
+                   data-modelinfo="{{ modeldata | remove: 'img-' }}"
+                   data-waist='{{ modeldataWeist }}'
+                   data-gender='{{ modeldataGender }}'
+                   data-hips='{{ modeldataHips }}'
+                   data-bust='{{ modeldataBust }}'
+                   data-heading='{{ section.settings.bid_header | strip_html | replace: '"', '”' | replace: "'", "’" }}'
+                   data-content='{{ section.settings.bid_content | strip_html | replace: '"', '”' | replace: "'", "’" }}'
+                   data-modelcm="{{ modeldatacm | replace: '"', '”' | replace: "'", "’" }}"
+                   data-modelin="{{ modeldatain | replace: '"', '”' | replace: "'", "’" }}"
+                   data-preorder="{{ product.metafields.preorder.preordercontent | replace: '"', '”' | replace: "'", "’" }}"
+                   data-images=' {% for media in product.media %}{% case media.media_type %}{% when 'image' %}{{ media | img_url: '550x' }},{% when 'video' %}{{ media.sources[1].url }},{% endcase %}{% endfor %}'
+                    {% if option == first_variant %}{% endif %}>
+        </label>
+
+
+
+        {% assign modeldata = '' %}
+        {% assign modeldataWeist = '' %}
+        {% assign modeldataHips = '' %}
+        {% assign modeldataBust = '' %}
+        {% assign modeldatacm = '' %}
+        {% assign modeldatain = '' %}
+        {% assign modeldataGender = '' %}
+
+
+    {% endfor %}
+
+</div>

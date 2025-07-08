@@ -24,5 +24,6 @@ jobs:
       - name: Release server space
         run: |
           # Remove dangling images only (safer)
+          # docker system prune -a -f
           docker image prune -f
           docker builder prune -f
