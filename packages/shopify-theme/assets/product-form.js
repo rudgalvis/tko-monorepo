@@ -15,17 +15,17 @@ if (!customElements.get('product-form')) {
       if (submitButton.classList.contains('loading')) return; 
 
       this.handleErrorMessage();
-      this.cartNotification.setActiveElement(document.activeElement);
+      this.cartNotification?.setActiveElement(document.activeElement);
 
       submitButton.setAttribute('aria-disabled', true);
       submitButton.classList.add('loading');
-      this.querySelector('.loading-overlay__spinner').classList.remove('hidden');
+      this.querySelector('.loading-overlay__spinner')?.classList.remove('hidden');
 
       const config = fetchConfig('javascript');
       config.headers['X-Requested-With'] = 'XMLHttpRequest';
       config.body = JSON.stringify({
         ...JSON.parse(serializeForm(this.form)),
-        sections: this.cartNotification.getSectionsToRender().map((section) => section.id),
+        sections: this.cartNotification?.getSectionsToRender().map((section) => section.id),
         sections_url: window.location.pathname
       });
 
@@ -37,7 +37,8 @@ if (!customElements.get('product-form')) {
             return;
           }
 
-          this.cartNotification.renderContents(response);
+          CartJS.getCart()
+          this.cartNotification?.renderContents(response);
         })
         .catch((e) => {
           console.error(e);
@@ -45,7 +46,7 @@ if (!customElements.get('product-form')) {
         .finally(() => {
           submitButton.classList.remove('loading');
           submitButton.removeAttribute('aria-disabled');
-          this.querySelector('.loading-overlay__spinner').classList.add('hidden');
+          this.querySelector('.loading-overlay__spinner')?.classList.add('hidden');
         });
     }
 
