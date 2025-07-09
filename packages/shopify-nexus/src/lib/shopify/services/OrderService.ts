@@ -37,6 +37,8 @@ export class OrderService {
 			.filter(Boolean) // removes all falsy values
 			.join('\n')
 
+		if(!comment) return
+
 		return this.addComment(orderId, comment)
 	}
 

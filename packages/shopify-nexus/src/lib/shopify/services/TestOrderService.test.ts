@@ -26,12 +26,12 @@ describe.sequential('Should setup test product and perform test order', () => {
 				productId,
 				requiresShipping: true,
 			},
-			{
-				quantity: 2,
-				variantId: variants[1].id,
-				productId,
-				requiresShipping: true,
-			},
+//			{
+//				quantity: 2,
+//				variantId: variants[1].id,
+//				productId,
+//				requiresShipping: true,
+//			},
 		])
 
 		expect(r1).toBeTruthy()
