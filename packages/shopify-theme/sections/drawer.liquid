@@ -271,7 +271,7 @@ Create Json for product variant color or image
                 </p>
             </div>
 
-            <div class="all-discounts">
+            <div class="all-discounts" rv-show="discounts | gt 0">
                 <p>Discounts applied:</p>
                 <div class="all-discounts--value">
                     <span>-</span><product-price rv-price="discounts | currency"
