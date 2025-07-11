@@ -1505,8 +1505,8 @@ function reconcile(r, e, t, s, i, n, o) {
   if (d !== null || f !== void 0) {
     for (var S = f === void 0 ? [] : array_from(f); d !== null; )
       d.e.f & INERT || S.push(d), d = d.next;
-    var C = S.length;
-    if (C > 0) {
+    var k = S.length;
+    if (k > 0) {
       var b = l === 0 ? t : null;
       pause_effects(e, S, b, c);
     }
@@ -1838,16 +1838,16 @@ function animate(r, e, t, s, i) {
           w.push(S), T || (T = S.overflow === "hidden");
         }
       T && (r.style.overflow = "hidden"), _ = () => {
-        var C = (
+        var k = (
           /** @type {number} */
           /** @type {globalThis.Animation} */
           g.currentTime
         );
-        return v + m * f(C / y);
+        return v + m * f(k / y);
       }, d && loop$1(() => {
         if (g.playState !== "running") return !1;
-        var C = _();
-        return d(C, 1 - C), !0;
+        var k = _();
+        return d(k, 1 - k), !0;
       });
     }
     g = r.animate(w, { duration: y, fill: "forwards" }), g.onfinish = () => {
@@ -2129,9 +2129,9 @@ function prop(r, e, t, s) {
   });
   return o && get$2(E), i || (E.equals = safe_equals), function(x, S) {
     if (arguments.length > 0) {
-      const C = S ? get$2(E) : n && o ? proxy(x) : x;
-      if (!E.equals(C)) {
-        if (w = !0, set(T, C), _ && h !== void 0 && (h = C), has_destroyed_component_ctx(E))
+      const k = S ? get$2(E) : n && o ? proxy(x) : x;
+      if (!E.equals(k)) {
+        if (w = !0, set(T, k), _ && h !== void 0 && (h = k), has_destroyed_component_ctx(E))
           return x;
         untrack(() => get$2(E));
       }
@@ -2529,6 +2529,99 @@ const persistentWritable = (r, e) => {
   return isBrowser$1 && s.subscribe((i) => {
     localStorage.setItem(r, JSON.stringify(i));
   }), s;
+}, cartItemToPreorderCartItem = (r) => {
+  var c, u, d;
+  const e = r.final_price, t = r.quantity, s = (u = (c = r == null ? void 0 : r.selling_plan_allocation) == null ? void 0 : c.selling_plan) == null ? void 0 : u.checkout_charge;
+  let i = (d = r == null ? void 0 : r.selling_plan_allocation) == null ? void 0 : d.checkout_charge_amount;
+  if (!i && s)
+    switch (s.value_type) {
+      case "percentage":
+        i = r.selling_plan_allocation.price * (s.value / 100);
+        break;
+      case "fixed_amount":
+        i = s.value;
+        break;
+    }
+  let n = !0, o;
+  i || (n = !1), i && e <= i && (n = !1), i && (i = Math.min(e, i)), n && (o = e - i);
+  const l = {
+    checkout_price: i * t,
+    remaining_price: (o || 0) * t
+  };
+  return {
+    original_price: r.original_price * t,
+    final_price: e * t,
+    pre_oder_price: n ? l : void 0
+  };
+}, createCartDrawerFooterRivet = () => {
+  const e = document.getElementById("total-price-drawer-footer"), t = {
+    total: 0,
+    totalOriginal: 0,
+    discounts: 0,
+    items: 0,
+    updateTotals: function() {
+      if (!window.CartJS) return;
+      console.log("dump", window.CartJS.cart);
+      let s = 0;
+      window.CartJS.cart.items.forEach((i) => {
+        const { pre_oder_price: n, final_price: o } = cartItemToPreorderCartItem(i);
+        if (!n || !n.checkout_price)
+          return s += o;
+        s += n.checkout_price;
+      }), this.total = s, this.totalOriginal = window.CartJS.cart.original_total_price, this.discounts = window.CartJS.cart.total_discount, this.items = window.CartJS.cart.item_count;
+    }
+  };
+  window.rivets.bind(e, t), document.addEventListener("cart:fix-1-applied", () => {
+    t.updateTotals();
+  }), t.updateTotals();
+}, mainFooter = () => {
+  console.log("dump", "mainfooter"), createCartDrawerFooterRivet();
+}, isIosSafari = () => {
+  if (typeof window > "u" || !window.navigator)
+    return !1;
+  const r = window.navigator.userAgent, e = /iPad|iPhone|iPod/.test(r) || navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1, t = /Safari/.test(r) && !/Chrome/.test(r) && !/CriOS/.test(r) && !/FxiOS/.test(r);
+  return e && t;
+}, isShopifyOnWindow = () => typeof window.Shopify < "u", SWEEP_DATE = "2025-05-23-v2", SWEEP_DATE_KEY = "storage_cleared_at", sweep = () => {
+  const r = [SWEEP_DATE_KEY];
+  Object.keys(localStorage).forEach((t) => {
+    r.includes(t) || localStorage.removeItem(t);
+  }), sessionStorage.clear();
+  const e = document.cookie.split(";");
+  for (let t = 0; t < e.length; t++) {
+    const s = e[t], i = s.indexOf("="), n = i > -1 ? s.substring(0, i).trim() : s.trim();
+    document.cookie = n + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+  }
+  window.location.reload();
+}, flagSweepComplete = () => {
+  localStorage.setItem(SWEEP_DATE_KEY, SWEEP_DATE);
+}, isSweepRequired = () => {
+  const r = localStorage.getItem(SWEEP_DATE_KEY);
+  return !r || r !== SWEEP_DATE;
+}, cacheSweeper = () => {
+  isShopifyOnWindow() && isSweepRequired() && isIosSafari() && (sweep(), flagSweepComplete());
+}, dump = (...r) => console.log("dump", ...r), wait = (r) => new Promise((e) => setTimeout(e, r)), enforceCartCalculationConsistency = async () => {
+  await wait(1e3), console.log("dump", "test 2");
+  const r = () => {
+    dump("regular cart update");
+    const { CartJS: i } = window;
+    i && i.cart.items.length !== 0 && i.updateItem(1, i.cart.items[0].quantity);
+  }, e = () => {
+    dump("cart update, and dispatching cart:fix-1-applied"), document.dispatchEvent(new Event("cart:fix-1-applied"));
+  };
+  let t = !1;
+  document.addEventListener("cart:before-update-item", () => {
+    t = !0;
+  });
+  let s;
+  document.addEventListener("cart:request-complete", () => {
+    clearTimeout(s), s = setTimeout(() => {
+      if (t) {
+        t = !1, e();
+        return;
+      }
+      r();
+    }, 100);
+  });
 }, PUBLIC_NEXUS_BASE_URL = "https://shopify-nexus.tko.rudgalvis.com";
 class NexusApi {
   constructor() {
@@ -2607,42 +2700,7 @@ marketCurrency.subscribe(async (r) => {
     currencyRates.set(await nexusApi.getCurrencyRates(r));
   }
 });
-const BASE_URL = "http://172.20.10.6:5173/api", API_ROUTES = {
-  GET_AUTOMATIC_DISCOUNT: (r, e) => `automatic-discount/${r}/${e}`
-}, getAutomaticDiscount = async (r, e) => {
-  const t = await fetch(
-    `${BASE_URL}/${API_ROUTES.GET_AUTOMATIC_DISCOUNT(r, e)}`,
-    { method: "GET" }
-  );
-  try {
-    return await t.json();
-  } catch (s) {
-    console.error(s);
-  }
-}, isIosSafari = () => {
-  if (typeof window > "u" || !window.navigator)
-    return !1;
-  const r = window.navigator.userAgent, e = /iPad|iPhone|iPod/.test(r) || navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1, t = /Safari/.test(r) && !/Chrome/.test(r) && !/CriOS/.test(r) && !/FxiOS/.test(r);
-  return e && t;
-}, isShopifyOnWindow = () => typeof window.Shopify < "u", SWEEP_DATE = "2025-05-23-v2", SWEEP_DATE_KEY = "storage_cleared_at", sweep = () => {
-  const r = [SWEEP_DATE_KEY];
-  Object.keys(localStorage).forEach((t) => {
-    r.includes(t) || localStorage.removeItem(t);
-  }), sessionStorage.clear();
-  const e = document.cookie.split(";");
-  for (let t = 0; t < e.length; t++) {
-    const s = e[t], i = s.indexOf("="), n = i > -1 ? s.substring(0, i).trim() : s.trim();
-    document.cookie = n + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
-  }
-  window.location.reload();
-}, flagSweepComplete = () => {
-  localStorage.setItem(SWEEP_DATE_KEY, SWEEP_DATE);
-}, isSweepRequired = () => {
-  const r = localStorage.getItem(SWEEP_DATE_KEY);
-  return !r || r !== SWEEP_DATE;
-}, cacheSweeper = () => {
-  isShopifyOnWindow() && isSweepRequired() && isIosSafari() && (sweep(), flagSweepComplete());
-}, getCookie = (r, e = null) => {
+const getCookie = (r, e = null) => {
   if (!r.trim() || typeof document > "u" || !document.cookie)
     return e;
   try {
@@ -2701,8 +2759,20 @@ const BASE_URL = "http://172.20.10.6:5173/api", API_ROUTES = {
     return;
   }
   r.localization && e.localization.toLowerCase() !== r.localization.toLowerCase() && (t.searchParams.set("country", r.localization), window.location.href = t.toString());
-}, main = () => {
-  cacheSweeper(), initiateCurrencies();
+}, mainHead = () => {
+  cacheSweeper(), initiateCurrencies(), enforceCartCalculationConsistency();
+}, BASE_URL = "http://172.20.10.6:5173/api", API_ROUTES = {
+  GET_AUTOMATIC_DISCOUNT: (r, e) => `automatic-discount/${r}/${e}`
+}, getAutomaticDiscount = async (r, e) => {
+  const t = await fetch(
+    `${BASE_URL}/${API_ROUTES.GET_AUTOMATIC_DISCOUNT(r, e)}`,
+    { method: "GET" }
+  );
+  try {
+    return await t.json();
+  } catch (s) {
+    console.error(s);
+  }
 }, PUBLIC_VERSION = "5";
 var Y;
 typeof window < "u" && ((Y = window.__svelte ?? (window.__svelte = {})).v ?? (Y.v = /* @__PURE__ */ new Set())).add(PUBLIC_VERSION);
@@ -3059,20 +3129,20 @@ function ProductPrice(r, e) {
     } else
       get$2(w).comparedAt = void 0;
     if (o() === i()) return;
-    const k = n()[i()];
-    if (get$2(w).price = b.format(Math.round($ * k)), get$2(y).comparedAt) {
+    const C = n()[i()];
+    if (get$2(w).price = b.format(Math.round($ * C)), get$2(y).comparedAt) {
       const { value: P } = parseCurrencyString(get$2(y).comparedAt);
-      get$2(w).comparedAt = b.format(Math.round(P * k));
+      get$2(w).comparedAt = b.format(Math.round(P * C));
     } else
       get$2(w).comparedAt = void 0;
   });
   const T = async ({ price: b }) => {
     if (!u()) throw new Error("Market is required");
     if (!d() && !f()) throw new Error("Either variant or product id is required is required");
-    const $ = g.getVariantAutomaticDiscount.bind(g), k = g.getProductAutomaticDiscount.bind(g), P = d() ? () => $(u(), +d()) : () => k(u(), +f()), { amount: R } = await P();
+    const $ = g.getVariantAutomaticDiscount.bind(g), C = g.getProductAutomaticDiscount.bind(g), P = d() ? () => $(u(), +d()) : () => C(u(), +f()), { amount: R } = await P();
     if (!R || R === 0) return { price: b, comparedAt: void 0 };
-    const { formatted: L } = subtractFromPriceWithSymbol(b, R);
-    return { price: L, comparedAt: b };
+    const { formatted: N } = subtractFromPriceWithSymbol(b, R);
+    return { price: N, comparedAt: b };
   };
   user_effect(() => {
     p() && displayCurrency.set(p()), _() && marketCurrency.set(_());
@@ -3096,8 +3166,8 @@ function ProductPrice(r, e) {
   var A = root$d(), x = child(A);
   {
     var S = (b) => {
-      var $ = root_1$7(), k = child($);
-      component(k, () => get$2(E), (P, R) => {
+      var $ = root_1$7(), C = child($);
+      component(C, () => get$2(E), (P, R) => {
         R(P, spread_props(() => get$2(w)));
       }), reset($), transition$1(1, $, () => fade, () => ({ delay: 350, duration: 50 })), append(b, $);
     };
@@ -3106,7 +3176,7 @@ function ProductPrice(r, e) {
     });
   }
   reset(A), action(A, (b) => removeNonComponentChildren == null ? void 0 : removeNonComponentChildren(b)), append(r, A);
-  var C = pop({
+  var k = pop({
     get price() {
       return l();
     },
@@ -3156,7 +3226,7 @@ function ProductPrice(r, e) {
       _(b), flushSync();
     }
   });
-  return s(), C;
+  return s(), k;
 }
 customElements.define("product-price", create_custom_element(
   ProductPrice,
@@ -9199,26 +9269,26 @@ function updateSlides() {
   const x = t.grid && t.grid.rows > 1 && r.grid;
   x ? r.grid.initSlides(d) : r.grid && r.grid.unsetSlides();
   let S;
-  const C = t.slidesPerView === "auto" && t.breakpoints && Object.keys(t.breakpoints).filter((b) => typeof t.breakpoints[b].slidesPerView < "u").length > 0;
+  const k = t.slidesPerView === "auto" && t.breakpoints && Object.keys(t.breakpoints).filter((b) => typeof t.breakpoints[b].slidesPerView < "u").length > 0;
   for (let b = 0; b < f; b += 1) {
     S = 0;
     let $;
     if (d[b] && ($ = d[b]), x && r.grid.updateSlide(b, $, d), !(d[b] && elementStyle($, "display") === "none")) {
       if (t.slidesPerView === "auto") {
-        C && (d[b].style[r.getDirectionLabel("width")] = "");
-        const k = getComputedStyle($), P = $.style.transform, R = $.style.webkitTransform;
+        k && (d[b].style[r.getDirectionLabel("width")] = "");
+        const C = getComputedStyle($), P = $.style.transform, R = $.style.webkitTransform;
         if (P && ($.style.transform = "none"), R && ($.style.webkitTransform = "none"), t.roundLengths)
           S = r.isHorizontal() ? elementOuterSize($, "width") : elementOuterSize($, "height");
         else {
-          const L = e(k, "width"), I = e(k, "padding-left"), N = e(k, "padding-right"), D = e(k, "margin-left"), O = e(k, "margin-right"), F = k.getPropertyValue("box-sizing");
+          const N = e(C, "width"), I = e(C, "padding-left"), L = e(C, "padding-right"), D = e(C, "margin-left"), O = e(C, "margin-right"), F = C.getPropertyValue("box-sizing");
           if (F && F === "border-box")
-            S = L + D + O;
+            S = N + D + O;
           else {
             const {
-              clientWidth: z,
-              offsetWidth: q
+              clientWidth: q,
+              offsetWidth: z
             } = $;
-            S = L + I + N + D + O + (q - z);
+            S = N + I + L + D + O + (z - q);
           }
         }
         P && ($.style.transform = P), R && ($.style.webkitTransform = R), t.roundLengths && (S = Math.floor(S));
@@ -9230,47 +9300,47 @@ function updateSlides() {
   if (r.virtualSize = Math.max(r.virtualSize, n) + v, o && l && (t.effect === "slide" || t.effect === "coverflow") && (s.style.width = `${r.virtualSize + w}px`), t.setWrapperSize && (s.style[r.getDirectionLabel("width")] = `${r.virtualSize + w}px`), x && r.grid.updateWrapperSize(S, h), !t.centeredSlides) {
     const b = [];
     for (let $ = 0; $ < h.length; $ += 1) {
-      let k = h[$];
-      t.roundLengths && (k = Math.floor(k)), h[$] <= r.virtualSize - n && b.push(k);
+      let C = h[$];
+      t.roundLengths && (C = Math.floor(C)), h[$] <= r.virtualSize - n && b.push(C);
     }
     h = b, Math.floor(r.virtualSize - n) - Math.floor(h[h.length - 1]) > 1 && h.push(r.virtualSize - n);
   }
   if (c && t.loop) {
     const b = _[0] + w;
     if (t.slidesPerGroup > 1) {
-      const $ = Math.ceil((r.virtual.slidesBefore + r.virtual.slidesAfter) / t.slidesPerGroup), k = b * t.slidesPerGroup;
+      const $ = Math.ceil((r.virtual.slidesBefore + r.virtual.slidesAfter) / t.slidesPerGroup), C = b * t.slidesPerGroup;
       for (let P = 0; P < $; P += 1)
-        h.push(h[h.length - 1] + k);
+        h.push(h[h.length - 1] + C);
     }
     for (let $ = 0; $ < r.virtual.slidesBefore + r.virtual.slidesAfter; $ += 1)
       t.slidesPerGroup === 1 && h.push(h[h.length - 1] + b), p.push(p[p.length - 1] + b), r.virtualSize += b;
   }
   if (h.length === 0 && (h = [0]), w !== 0) {
     const b = r.isHorizontal() && o ? "marginLeft" : r.getDirectionLabel("marginRight");
-    d.filter(($, k) => !t.cssMode || t.loop ? !0 : k !== d.length - 1).forEach(($) => {
+    d.filter(($, C) => !t.cssMode || t.loop ? !0 : C !== d.length - 1).forEach(($) => {
       $.style[b] = `${w}px`;
     });
   }
   if (t.centeredSlides && t.centeredSlidesBounds) {
     let b = 0;
-    _.forEach((k) => {
-      b += k + (w || 0);
+    _.forEach((C) => {
+      b += C + (w || 0);
     }), b -= w;
     const $ = b > n ? b - n : 0;
-    h = h.map((k) => k <= 0 ? -g : k > $ ? $ + v : k);
+    h = h.map((C) => C <= 0 ? -g : C > $ ? $ + v : C);
   }
   if (t.centerInsufficientSlides) {
     let b = 0;
-    _.forEach((k) => {
-      b += k + (w || 0);
+    _.forEach((C) => {
+      b += C + (w || 0);
     }), b -= w;
     const $ = (t.slidesOffsetBefore || 0) + (t.slidesOffsetAfter || 0);
     if (b + $ < n) {
-      const k = (n - b - $) / 2;
+      const C = (n - b - $) / 2;
       h.forEach((P, R) => {
-        h[R] = P - k;
+        h[R] = P - C;
       }), p.forEach((P, R) => {
-        p[R] = P + k;
+        p[R] = P + C;
       });
     }
   }
@@ -9282,7 +9352,7 @@ function updateSlides() {
   }), t.centeredSlides && t.cssMode && !t.centeredSlidesBounds) {
     setCSSProperty(s, "--swiper-centered-offset-before", `${-h[0]}px`), setCSSProperty(s, "--swiper-centered-offset-after", `${r.size / 2 - _[_.length - 1] / 2}px`);
     const b = -r.snapGrid[0], $ = -r.slidesGrid[0];
-    r.snapGrid = r.snapGrid.map((k) => k + b), r.slidesGrid = r.slidesGrid.map((k) => k + $);
+    r.snapGrid = r.snapGrid.map((C) => C + b), r.slidesGrid = r.slidesGrid.map((C) => C + $);
   }
   if (f !== u && r.emit("slidesLengthChange"), h.length !== m && (r.params.watchOverflow && r.checkOverflow(), r.emit("snapGridLengthChange")), p.length !== y && r.emit("slidesGridLengthChange"), t.watchSlidesProgress && r.updateSlidesOffset(), r.emit("slidesUpdated"), !c && !t.cssMode && (t.effect === "slide" || t.effect === "fade")) {
     const b = `${t.containerModifierClass}backface-hidden`, $ = r.el.classList.contains(b);
@@ -9680,8 +9750,8 @@ function slideTo(r, e, t, s, i) {
   const m = -c[v];
   if (l.normalizeSlideIndex)
     for (let x = 0; x < u.length; x += 1) {
-      const S = -Math.floor(m * 100), C = Math.floor(u[x] * 100), b = Math.floor(u[x + 1] * 100);
-      typeof u[x + 1] < "u" ? S >= C && S < b - (b - C) / 2 ? o = x : S >= C && S < b && (o = x + 1) : S >= C && (o = x);
+      const S = -Math.floor(m * 100), k = Math.floor(u[x] * 100), b = Math.floor(u[x + 1] * 100);
+      typeof u[x + 1] < "u" ? S >= k && S < b - (b - k) / 2 ? o = x : S >= k && S < b && (o = x + 1) : S >= k && (o = x);
     }
   if (n.initialized && o !== f && (!n.allowSlideNext && (h ? m > n.translate && m > n.minTranslate() : m < n.translate && m < n.minTranslate()) || !n.allowSlidePrev && m > n.translate && m > n.maxTranslate() && (f || 0) !== o))
     return !1;
@@ -9948,29 +10018,29 @@ function loopFix(r) {
   const T = u.grid && _.grid && _.grid.rows > 1;
   d.length < m + w || u.params.effect === "cards" && d.length < m + w * 2 ? showWarning("Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters") : T && _.grid.fill === "row" && showWarning("Swiper Loop Warning: Loop mode is not compatible with grid.fill = `row`");
   const E = [], A = [], x = T ? Math.ceil(d.length / _.grid.rows) : d.length, S = o && x - v < m && !g;
-  let C = S ? v : u.activeIndex;
-  typeof n > "u" ? n = u.getSlideIndex(d.find((I) => I.classList.contains(_.slideActiveClass))) : C = n;
+  let k = S ? v : u.activeIndex;
+  typeof n > "u" ? n = u.getSlideIndex(d.find((I) => I.classList.contains(_.slideActiveClass))) : k = n;
   const b = s === "next" || !s, $ = s === "prev" || !s;
-  let k = 0, P = 0;
-  const L = (T ? d[n].column : n) + (g && typeof i > "u" ? -m / 2 + 0.5 : 0);
-  if (L < w) {
-    k = Math.max(w - L, y);
-    for (let I = 0; I < w - L; I += 1) {
-      const N = I - Math.floor(I / x) * x;
+  let C = 0, P = 0;
+  const N = (T ? d[n].column : n) + (g && typeof i > "u" ? -m / 2 + 0.5 : 0);
+  if (N < w) {
+    C = Math.max(w - N, y);
+    for (let I = 0; I < w - N; I += 1) {
+      const L = I - Math.floor(I / x) * x;
       if (T) {
-        const D = x - N - 1;
+        const D = x - L - 1;
         for (let O = d.length - 1; O >= 0; O -= 1)
           d[O].column === D && E.push(O);
       } else
-        E.push(x - N - 1);
+        E.push(x - L - 1);
     }
-  } else if (L + m > x - w) {
-    P = Math.max(L - (x - w * 2), y), S && (P = Math.max(P, m - x + v + 1));
+  } else if (N + m > x - w) {
+    P = Math.max(N - (x - w * 2), y), S && (P = Math.max(P, m - x + v + 1));
     for (let I = 0; I < P; I += 1) {
-      const N = I - Math.floor(I / x) * x;
+      const L = I - Math.floor(I / x) * x;
       T ? d.forEach((D, O) => {
-        D.column === N && A.push(O);
-      }) : A.push(N);
+        D.column === L && A.push(O);
+      }) : A.push(L);
     }
   }
   if (u.__preventObserver__ = !0, requestAnimationFrame(() => {
@@ -9979,21 +10049,21 @@ function loopFix(r) {
     d[I].swiperLoopMoveDOM = !0, p.prepend(d[I]), d[I].swiperLoopMoveDOM = !1;
   }), b && A.forEach((I) => {
     d[I].swiperLoopMoveDOM = !0, p.append(d[I]), d[I].swiperLoopMoveDOM = !1;
-  }), u.recalcSlides(), _.slidesPerView === "auto" ? u.updateSlides() : T && (E.length > 0 && $ || A.length > 0 && b) && u.slides.forEach((I, N) => {
-    u.grid.updateSlide(N, I, u.slides);
+  }), u.recalcSlides(), _.slidesPerView === "auto" ? u.updateSlides() : T && (E.length > 0 && $ || A.length > 0 && b) && u.slides.forEach((I, L) => {
+    u.grid.updateSlide(L, I, u.slides);
   }), _.watchSlidesProgress && u.updateSlidesOffset(), t) {
     if (E.length > 0 && $) {
       if (typeof e > "u") {
-        const I = u.slidesGrid[C], D = u.slidesGrid[C + k] - I;
-        c ? u.setTranslate(u.translate - D) : (u.slideTo(C + Math.ceil(k), 0, !1, !0), i && (u.touchEventsData.startTranslate = u.touchEventsData.startTranslate - D, u.touchEventsData.currentTranslate = u.touchEventsData.currentTranslate - D));
+        const I = u.slidesGrid[k], D = u.slidesGrid[k + C] - I;
+        c ? u.setTranslate(u.translate - D) : (u.slideTo(k + Math.ceil(C), 0, !1, !0), i && (u.touchEventsData.startTranslate = u.touchEventsData.startTranslate - D, u.touchEventsData.currentTranslate = u.touchEventsData.currentTranslate - D));
       } else if (i) {
         const I = T ? E.length / _.grid.rows : E.length;
         u.slideTo(u.activeIndex + I, 0, !1, !0), u.touchEventsData.currentTranslate = u.translate;
       }
     } else if (A.length > 0 && b)
       if (typeof e > "u") {
-        const I = u.slidesGrid[C], D = u.slidesGrid[C - P] - I;
-        c ? u.setTranslate(u.translate - D) : (u.slideTo(C - P, 0, !1, !0), i && (u.touchEventsData.startTranslate = u.touchEventsData.startTranslate - D, u.touchEventsData.currentTranslate = u.touchEventsData.currentTranslate - D));
+        const I = u.slidesGrid[k], D = u.slidesGrid[k - P] - I;
+        c ? u.setTranslate(u.translate - D) : (u.slideTo(k - P, 0, !1, !0), i && (u.touchEventsData.startTranslate = u.touchEventsData.startTranslate - D, u.touchEventsData.currentTranslate = u.touchEventsData.currentTranslate - D));
       } else {
         const I = T ? A.length / _.grid.rows : A.length;
         u.slideTo(u.activeIndex - I, 0, !1, !0);
@@ -10007,10 +10077,10 @@ function loopFix(r) {
       activeSlideIndex: n,
       byController: !0
     };
-    Array.isArray(u.controller.control) ? u.controller.control.forEach((N) => {
-      !N.destroyed && N.params.loop && N.loopFix({
+    Array.isArray(u.controller.control) ? u.controller.control.forEach((L) => {
+      !L.destroyed && L.params.loop && L.loopFix({
         ...I,
-        slideTo: N.params.slidesPerView === _.slidesPerView ? t : !1
+        slideTo: L.params.slidesPerView === _.slidesPerView ? t : !1
       });
     }) : u.controller.control instanceof u.constructor && u.controller.control.params.loop && u.controller.control.loopFix({
       ...I,
@@ -11244,8 +11314,8 @@ function KnittersAccordionItem(r, e) {
     set(c, !get$2(c));
   }, p = (O = 150) => {
     if (!get$2(f)) return;
-    const z = get$2(f).getBoundingClientRect().top + window.pageYOffset - O;
-    window.scrollTo({ top: z, behavior: "smooth" });
+    const q = get$2(f).getBoundingClientRect().top + window.pageYOffset - O;
+    window.scrollTo({ top: q, behavior: "smooth" });
   }, _ = () => {
     set(u, !1), get$2(d) && (window.innerWidth >= 1024 && p(114), window.innerWidth < 1024 && p(52), mutate(d, get$2(d).style.maxHeight = "inherit"), get$2(d).removeEventListener("transitionend", _));
   }, g = () => {
@@ -11274,23 +11344,23 @@ function KnittersAccordionItem(r, e) {
   var T = child(w), E = child(T), A = sibling(E, 2), x = child(A, !0);
   reset(A);
   var S = sibling(A, 2);
-  let C;
+  let k;
   var b = child(S);
   ArrowIcon(b), reset(S), reset(T);
-  var $ = sibling(T, 2), k = child($);
+  var $ = sibling(T, 2), C = child($);
   let P;
-  var R = child(k, !0);
-  reset(k);
-  var L = sibling(k, 2);
+  var R = child(C, !0);
+  reset(C);
+  var N = sibling(C, 2);
   let I;
-  var N = sibling(L, 2);
+  var L = sibling(N, 2);
   {
     var D = (O) => {
       var F = root_1$5();
-      let z;
-      var q = child(F);
+      let q;
+      var z = child(F);
       const J = /* @__PURE__ */ derived_safe_equal(() => !get$2(c) || get$2(u));
-      KnitterReviewsList(q, {
+      KnitterReviewsList(z, {
         get id() {
           return s();
         },
@@ -11298,13 +11368,13 @@ function KnittersAccordionItem(r, e) {
           return get$2(J);
         }
       });
-      var X = sibling(q, 2);
+      var X = sibling(z, 2);
       KnitterReviewForm(X, {
         get id() {
           return s();
         }
       }), reset(F), template_effect(
-        (Q) => z = set_class(F, 1, "reviews svelte-pbk1c8", null, z, Q),
+        (Q) => q = set_class(F, 1, "reviews svelte-pbk1c8", null, q, Q),
         [
           () => ({
             "fade-in": get$2(c),
@@ -11314,13 +11384,13 @@ function KnittersAccordionItem(r, e) {
         derived_safe_equal
       ), append(O, F);
     };
-    if_block(N, (O) => {
+    if_block(L, (O) => {
       s() && O(D);
     });
   }
   return reset($), bind_this($, (O) => set(d, O), () => get$2(d)), reset(w), bind_this(w, (O) => set(f, O), () => get$2(f)), template_effect(
-    (O, F, z) => {
-      set_attribute(E, "src", o()), set_attribute(E, "alt", `Small picture of ${t() ?? ""}`), set_text(x, t()), C = set_class(S, 1, "arrow svelte-pbk1c8", null, C, O), P = set_class(k, 1, "svelte-pbk1c8", null, P, F), set_text(R, i()), I = set_class(L, 1, "photo svelte-pbk1c8", null, I, z), set_attribute(L, "src", n()), set_attribute(L, "alt", `Picture of ${t() ?? ""}`);
+    (O, F, q) => {
+      set_attribute(E, "src", o()), set_attribute(E, "alt", `Small picture of ${t() ?? ""}`), set_text(x, t()), k = set_class(S, 1, "arrow svelte-pbk1c8", null, k, O), P = set_class(C, 1, "svelte-pbk1c8", null, P, F), set_text(R, i()), I = set_class(N, 1, "photo svelte-pbk1c8", null, I, q), set_attribute(N, "src", n()), set_attribute(N, "alt", `Picture of ${t() ?? ""}`);
     },
     [
       () => ({ "arrow---down": get$2(c) }),
@@ -11443,19 +11513,19 @@ function CurrencySelector(r, e) {
   push(e, !1), append_styles(r, $$css$3);
   const [t, s] = setup_stores(), i = () => store_get(displayCurrency, "$displayCurrency", t);
   function n(S, {
-    y: C = 100,
+    y: k = 100,
     scale: b = 0.5,
     duration: $ = 300,
-    easing: k = sineIn
+    easing: C = sineIn
     // Try different easing functions
   }) {
     return {
       duration: $,
-      easing: k,
+      easing: C,
       css: (P) => `
         transform:
           scale(${b + (1 - b) * P})
-          translateY(${(1 - P) * C}px);
+          translateY(${(1 - P) * k}px);
         opacity: ${P};
       `
     };
@@ -11470,7 +11540,7 @@ function CurrencySelector(r, e) {
       if (o() && i())
         try {
           const { available: S } = JSON.parse(o());
-          l(S), c(S.find((C) => C.currency === i()));
+          l(S), c(S.find((k) => k.currency === i()));
         } catch (S) {
           console.error("UI", S);
         }
@@ -11480,8 +11550,8 @@ function CurrencySelector(r, e) {
   var v = root$1(), m = child(v);
   {
     var y = (S) => {
-      var C = root_1$3(), b = child(C);
-      reset(C), template_effect(() => set_text(b, `${c().symbol ?? ""} ${c().currency ?? ""}`)), event("click", C, () => set(p, !get$2(p))), append(S, C);
+      var k = root_1$3(), b = child(k);
+      reset(k), template_effect(() => set_text(b, `${c().symbol ?? ""} ${c().currency ?? ""}`)), event("click", k, () => set(p, !get$2(p))), append(S, k);
     };
     if_block(m, (S) => {
       c() && S(y);
@@ -11492,17 +11562,17 @@ function CurrencySelector(r, e) {
   var E = child(w);
   {
     var A = (S) => {
-      var C = root_2$1();
-      each(C, 5, l, index, (b, $) => {
-        var k = root_3(), P = child(k), R = child(P);
-        reset(P), reset(k), template_effect(() => set_text(R, `${get$2($).symbol ?? ""}
-							${get$2($).currency ?? ""}`)), event("click", P, () => g(get$2($))), append(b, k);
-      }), reset(C), template_effect(() => set_style(C, `background: ${h()}`)), transition$1(3, C, () => n, () => ({
+      var k = root_2$1();
+      each(k, 5, l, index, (b, $) => {
+        var C = root_3(), P = child(C), R = child(P);
+        reset(P), reset(C), template_effect(() => set_text(R, `${get$2($).symbol ?? ""}
+							${get$2($).currency ?? ""}`)), event("click", P, () => g(get$2($))), append(b, C);
+      }), reset(k), template_effect(() => set_style(k, `background: ${h()}`)), transition$1(3, k, () => n, () => ({
         y: -16,
         scale: 0.95,
         duration: 250,
         easing: expoOut
-      })), append(S, C);
+      })), append(S, k);
     };
     if_block(E, (S) => {
       get$2(p) && S(A);
@@ -11921,12 +11991,12 @@ function DevMarketDetails(r, e) {
       reset(w), reset(y);
       var E = sibling(y), A = sibling(child(E), 2), x = child(A, !0);
       reset(A), reset(E);
-      var S = sibling(E), C = sibling(child(S), 2), b = child(C, !0);
-      reset(C), reset(S);
-      var $ = sibling(S), k = sibling(child($), 2), P = child(k, !0);
-      reset(k), reset($), reset(_), reset(p), template_effect(
-        (R, L) => {
-          set_text(m, R), set_text(T, L), set_text(x, i()), set_text(b, n()), set_text(P, o());
+      var S = sibling(E), k = sibling(child(S), 2), b = child(k, !0);
+      reset(k), reset(S);
+      var $ = sibling(S), C = sibling(child($), 2), P = child(C, !0);
+      reset(C), reset($), reset(_), reset(p), template_effect(
+        (R, N) => {
+          set_text(m, R), set_text(T, N), set_text(x, i()), set_text(b, n()), set_text(P, o());
         },
         [
           () => getCookie("cart_currency"),
@@ -12017,8 +12087,8 @@ typeof window < "u" && (window.UI = {
     marketCurrency
   },
   actions: {}
-}, window.getAutomaticDiscount = getAutomaticDiscount);
-main();
+}, window.footerScripts = mainFooter, window.getAutomaticDiscount = getAutomaticDiscount, window.cartItemToPreorderCartItem = cartItemToPreorderCartItem);
+mainHead();
 var browser = function() {
   throw new Error(
     "ws does not work in the browser. Browser clients must use the native WebSocket object"

@@ -1,7 +1,8 @@
-
+import { mainFooter } from '$lib/main-footer.js';
+import { mainHead } from '$lib/main-head.js';
 import { displayCurrency, marketCurrency } from '$lib/store/currency.js';
+import { cartItemToPreorderCartItem } from 'common-utils';
 import { getAutomaticDiscount } from './api/rrxtko.api.js';
-import { main } from '$lib/main.js';
 
 /* Communication layer */
 if (typeof window !== 'undefined') {
@@ -13,10 +14,12 @@ if (typeof window !== 'undefined') {
 		actions: {}
 	};
 
+	window['footerScripts'] = mainFooter;
 	window['getAutomaticDiscount'] = getAutomaticDiscount;
+	window['cartItemToPreorderCartItem'] = cartItemToPreorderCartItem;
 }
 
-main()
+mainHead();
 
 /* Custom elements */
 export { default as CartRecommendationCard } from './custom-elements/cart/CartRecommendationCard.svelte';
