@@ -11,9 +11,8 @@ test('Test', async () => {
 		const webhookData = JSON.parse(data)
 
 		const r = await parseOrderWebhook(webhookData)
-//		console.log(r)
+		console.log(r)
 	} catch (e) {
 		console.error(e)
 	}
-
 })

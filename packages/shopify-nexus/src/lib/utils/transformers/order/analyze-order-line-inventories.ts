@@ -1,6 +1,6 @@
 import { ProductVariantInventoryPolicy } from '$lib/shopify/types/ProductVariantInventoryPolicy'
-import type { OrderLineInventoryAnalyzed } from '$lib/types/OrderLineInventoryAnalyzed'
 import type { OrderLineInventory } from '$lib/types/OrderLineInventory'
+import type { OrderLineInventoryAnalyzed } from '$lib/types/OrderLineInventoryAnalyzed'
 
 export const analyzeOrderLineInventories = (
 	orderedItems: OrderLineInventory[]
@@ -14,11 +14,15 @@ export const analyzeOrderLineInventories = (
 			maximumPreSale: _maximumPreSale,
 			orderedQuantity,
 			product,
-//			title,
-			name
+			//			title,
+			name,
 		} = orderedItem
 		const hadSome = inventoryQuantity > 0
-		const maximumPreSale = (_maximumPreSale && +_maximumPreSale.value) || 9999999
+		let maximumPreSale = _maximumPreSale && +_maximumPreSale.value
+		if (!maximumPreSale) {
+			if (inventoryPolicy === ProductVariantInventoryPolicy.DENY) maximumPreSale = 0
+			else maximumPreSale = 99999
+		}
 
 		let regulars = 0,
 			preOrders = 0,
@@ -33,7 +37,7 @@ export const analyzeOrderLineInventories = (
 			preOrders = orderedQuantity - inventoryQuantity
 		} else if (newInventory < 0) {
 			preOrders = orderedQuantity
-		} else if (newInventory > 0) {
+		} else if (newInventory >= 0) {
 			regulars = orderedQuantity
 		}
 
@@ -60,9 +64,14 @@ export const analyzeOrderLineInventories = (
 			preOrders = 0
 		}
 
+		// Do not disable pre-ordering if already disabled
+		if (triggerStopPreOrders && inventoryPolicy === ProductVariantInventoryPolicy.DENY) {
+			triggerStopPreOrders = false
+		}
+
 		// Disabling cancels because such feature is not implemented
-		preOrders += cancels
-		cancels = 0
+		//		preOrders += cancels // Not moving cancels to pre-orders so that pre-order email would not be sent
+		//		cancels = 0
 
 		return {
 			cancels,

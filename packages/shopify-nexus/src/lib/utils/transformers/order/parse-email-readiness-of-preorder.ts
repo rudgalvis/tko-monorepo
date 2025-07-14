@@ -24,7 +24,7 @@ export const parseEmailReadinessOfPreorder = (
 				errorMessage: 'Item not found in analyzed webhook data',
 			}
 
-			if (!item.expectedDate.value) {
+			if (!item.expectedDate?.value) {
 				return {
 					productTitle: productTitle,
 					ready: false,
