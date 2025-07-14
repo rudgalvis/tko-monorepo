@@ -10,7 +10,8 @@ test('Test', async () => {
 	try {
 		const webhookData = JSON.parse(data)
 
-		console.log(await parseOrderWebhook(webhookData))
+		const r = await parseOrderWebhook(webhookData)
+//		console.log(r)
 	} catch (e) {
 		console.error(e)
 	}

@@ -31,7 +31,7 @@ export class TestOrderService {
 				currency: currencyCode,
 				customer: {
 					toUpsert: {
-						email: 'rokasr788@gmail.com',
+						email: 'rokas@rudgalvis.com',
 						firstName: 'Rokas',
 					},
 				},
@@ -43,7 +43,7 @@ export class TestOrderService {
 						locationId: location.id,
 						amountSet: {
 							shopMoney: {
-								amount: 100,
+								amount: 1,
 								currencyCode: currencyCode,
 							},
 						},

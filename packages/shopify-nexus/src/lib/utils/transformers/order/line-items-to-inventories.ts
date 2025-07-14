@@ -25,8 +25,8 @@ export const orderLineItemsToOrderLineInventories = async (
 		name,
 	}))
 
-	const inventoryDetails = mergeObjects(productVariants, quantities, 'id') as OrderLineInventory[]
-	inventoryDetails.map((e) => ({
+	let inventoryDetails = mergeObjects(productVariants, quantities, 'id') as OrderLineInventory[]
+	inventoryDetails = inventoryDetails.map((e) => ({
 		...e,
 		// Important: Order processing sequence
 		// 1. When an order is placed, product quantities are immediately decremented

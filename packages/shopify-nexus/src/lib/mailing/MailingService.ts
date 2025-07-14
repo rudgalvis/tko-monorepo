@@ -53,6 +53,31 @@ export class MailingService {
 		})
 	}
 
+	parseEmailReadyPreorders(orderLineInventoriesAnalyzed: OrderLineInventoryAnalyzed[]) {
+		const preorderItems = orderLineInventoriesAnalyzed.filter((item) => item.preOrders > 0)
+
+		const uniquePreorderProducts = [...new Set(preorderItems.map(({ title }) => title))]
+
+		return uniquePreorderProducts
+			.map((productTitle) => {
+				const item = preorderItems.find(({ title }) => title === productTitle)
+
+				if (!item) return undefined
+				if (!item.expectedDate.value) {
+					console.error(
+						`Expected date for ${productTitle} is not set. Preorder email will not be sent`
+					)
+					return undefined
+				}
+
+				return {
+					productTitle,
+					estimatedShippingDate: item.expectedDate.value,
+				}
+			})
+			.filter((e) => !!e)
+	}
+
 	sendPreorderNotifications({
 		orderLineInventoriesAnalyzed,
 		customerName,
@@ -64,19 +89,15 @@ export class MailingService {
 		orderId: string
 		customerEmail: string
 	}): Promise<PreorderNotificationResponse>[] {
-		const preorderItems = orderLineInventoriesAnalyzed.filter((item) => item.preOrders > 0)
+		const emailReadyPreorders = this.parseEmailReadyPreorders(orderLineInventoriesAnalyzed)
 
-		const uniquePreorderProducts = [...new Set(preorderItems.map(({ title }) => title))]
-
-		return uniquePreorderProducts.map(async (productTitle) => {
-			const item = preorderItems.find(({ product }) => product.title === productTitle)
-
+		return emailReadyPreorders.map(async ({ productTitle, estimatedShippingDate }) => {
 			return {
 				mailingStatus: await this.sendSingleItemPreorderMail(customerEmail, {
 					customerName,
 					productTitle,
 					orderId,
-					estimatedShippingDate: item?.expectedDate.value,
+					estimatedShippingDate,
 				}),
 				forItem: productTitle,
 			}

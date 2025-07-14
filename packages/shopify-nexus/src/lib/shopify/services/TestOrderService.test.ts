@@ -1,6 +1,7 @@
 import { PUBLIC_NEXUS_BASE_URL } from '$env/static/public'
 import { TestOrderService } from '$lib/shopify/services/TestOrderService'
 import { TestProductService } from '$lib/shopify/services/TestProductService'
+import { generateVariantGid, generateProductGid } from 'common-utils'
 import { describe, expect, test } from 'vitest'
 
 describe.sequential('Should setup test product and perform test order', () => {
@@ -20,18 +21,42 @@ describe.sequential('Should setup test product and perform test order', () => {
 
 		// As if adding to cart here
 		const r1 = await testOrderService.createOrder([
+//			{
+//				quantity: 1,
+//				variantId: generateVariantGid(54022808371548),
+//				productId: generateProductGid(14898086445404),
+//				requiresShipping: true,
+//			},
+//			{
+//				quantity: 1,
+//				variantId: generateVariantGid(54022679527772),
+//				productId: generateProductGid(14898059247964),
+//				requiresShipping: true,
+//			},
+//			{
+//				quantity: 1,
+//				variantId: generateVariantGid(54022855590236),
+//				productId: generateProductGid(14898098078044),
+//				requiresShipping: true,
+//			},
+//			{
+//				quantity: 1,
+//				variantId: generateVariantGid(54262064283996),
+//				productId: generateProductGid(14948388864348),
+//				requiresShipping: true,
+//			},
+//			{
+//				quantity: 1,
+//				variantId: generateVariantGid(54926550466908),
+//				productId: generateProductGid(15097088737628),
+//				requiresShipping: true,
+//			},
 			{
-				quantity: 1,
-				variantId: variants[0].id,
+				quantity: 2,
+				variantId: variants[1].id,
 				productId,
 				requiresShipping: true,
 			},
-//			{
-//				quantity: 2,
-//				variantId: variants[1].id,
-//				productId,
-//				requiresShipping: true,
-//			},
 		])
 
 		expect(r1).toBeTruthy()
