@@ -1,12 +1,12 @@
 import {
-	MAILGUN_DOMAIN,
-	MAIL_REPLY_TO,
-	MAILGUN_FROM_USER,
 	MAIL_FROM_NAME,
+	MAIL_REPLY_TO,
+	MAILGUN_DOMAIN,
+	MAILGUN_FROM_USER,
 } from '$env/static/private'
 import { Mailgun, type SendMailStatus } from '$lib/mailing/Mailgun'
 import PreOrderEmailTemplate from '$lib/mailing/templates/PreOrderEmailTemplate.svelte'
-import type { OrderLineInventoryAnalyzed } from '$lib/types/OrderLineInventoryAnalyzed'
+import type { PreorderEmailAnalyzed } from '$lib/utils/transformers/order/parse-email-readiness-of-preorder'
 import { render } from 'svelte/server'
 
 export type PreorderMailItem = {
@@ -53,54 +53,29 @@ export class MailingService {
 		})
 	}
 
-	parseEmailReadyPreorders(orderLineInventoriesAnalyzed: OrderLineInventoryAnalyzed[]) {
-		const preorderItems = orderLineInventoriesAnalyzed.filter((item) => item.preOrders > 0)
-
-		const uniquePreorderProducts = [...new Set(preorderItems.map(({ title }) => title))]
-
-		return uniquePreorderProducts
-			.map((productTitle) => {
-				const item = preorderItems.find(({ title }) => title === productTitle)
-
-				if (!item) return undefined
-				if (!item.expectedDate.value) {
-					console.error(
-						`Expected date for ${productTitle} is not set. Preorder email will not be sent`
-					)
-					return undefined
-				}
-
-				return {
-					productTitle,
-					estimatedShippingDate: item.expectedDate.value,
-				}
-			})
-			.filter((e) => !!e)
-	}
-
 	sendPreorderNotifications({
-		orderLineInventoriesAnalyzed,
+		preorderEmailsAnalyzed,
 		customerName,
 		orderId,
 		customerEmail,
 	}: {
-		orderLineInventoriesAnalyzed: OrderLineInventoryAnalyzed[]
+		preorderEmailsAnalyzed: PreorderEmailAnalyzed[]
 		customerName: string
 		orderId: string
 		customerEmail: string
 	}): Promise<PreorderNotificationResponse>[] {
-		const emailReadyPreorders = this.parseEmailReadyPreorders(orderLineInventoriesAnalyzed)
-
-		return emailReadyPreorders.map(async ({ productTitle, estimatedShippingDate }) => {
-			return {
-				mailingStatus: await this.sendSingleItemPreorderMail(customerEmail, {
-					customerName,
-					productTitle,
-					orderId,
-					estimatedShippingDate,
-				}),
-				forItem: productTitle,
-			}
-		})
+		return preorderEmailsAnalyzed
+			.filter(({ ready }) => ready)
+			.map(async ({ productTitle, estimatedShippingDate }) => {
+				return {
+					mailingStatus: await this.sendSingleItemPreorderMail(customerEmail, {
+						customerName,
+						productTitle,
+						orderId,
+						estimatedShippingDate,
+					}),
+					forItem: productTitle,
+				}
+			})
 	}
 }

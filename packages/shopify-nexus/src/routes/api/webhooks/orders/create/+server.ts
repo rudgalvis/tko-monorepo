@@ -34,7 +34,7 @@ export const handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => {
 			orderId,
 			orderNumber,
 			orderLineInventories,
-			orderLineInventoriesAnalyzed,
+			preorderEmailsAnalyzed,
 		} = await parseOrderWebhook(webhookData)
 
 		if (VERBOSE) logger.info(`<${orderId}> Handling Pre-order webhook.`)
@@ -57,6 +57,15 @@ export const handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => {
 				logger.info(`<${orderId}> Will pause Pre-order for ${e.variantId}`)
 			)
 
+		if (VERBOSE)
+			preorderEmailsAnalyzed.forEach(({ productTitle, ready, errorMessage }) => {
+				if (ready) logger.info(`<${orderId}> Will send pre-order email about "${productTitle}"`)
+				if (!ready)
+					logger.info(
+						`<${orderId}> Unable to send pre-order email about "${productTitle}". Reason: ${errorMessage}`
+					)
+			})
+
 		// Disabling pre-order for items
 		const disableSellingOutOfStockPromises = itemsToPausePreorder.map(
 			productService.disableSellOutOfStock.bind(productService)
@@ -64,7 +73,7 @@ export const handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => {
 
 		// Sending pre-order emails
 		const preorderEmailPromises = mailingService.sendPreorderNotifications({
-			orderLineInventoriesAnalyzed,
+			preorderEmailsAnalyzed,
 			orderId: orderNumber.toString(),
 			customerName,
 			customerEmail,
@@ -98,7 +107,8 @@ export const POST: RequestHandler = async ({ request }) => {
 	const webhookData = await request.json()
 
 	// For development purposes
-	if (LOG_INTO_FILE && PUBLIC_ENV !== 'PRODUCTION') writeFile('test-data/webhook-payload', `orders_create.json`, webhookData)
+	if (LOG_INTO_FILE && PUBLIC_ENV !== 'PRODUCTION')
+		writeFile('test-data/webhook-payload', `orders_create.json`, webhookData)
 
 	try {
 		await handlePreOrders(webhookData)

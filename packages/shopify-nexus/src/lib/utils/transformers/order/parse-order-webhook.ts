@@ -1,6 +1,7 @@
 import type { OrdersCreateWebhookBody } from '$lib/shopify/types/webhooks-payload/orders-create-webhook-body'
 import { analyzeOrderLineInventories } from '$lib/utils/transformers/order/analyze-order-line-inventories'
 import { orderLineItemsToOrderLineInventories } from '$lib/utils/transformers/order/line-items-to-inventories'
+import { parseEmailReadinessOfPreorder } from '$lib/utils/transformers/order/parse-email-readiness-of-preorder'
 
 export type ProductVariantIdentifier = {
 	productId: string
@@ -10,9 +11,9 @@ export type ProductVariantIdentifier = {
 export const parseOrderWebhook = async (webhookData: OrdersCreateWebhookBody) => {
 	if (!webhookData.line_items) throw new Error('No line items found')
 
-
 	const orderLineInventories = await orderLineItemsToOrderLineInventories(webhookData.line_items)
 	const orderLineInventoriesAnalyzed = analyzeOrderLineInventories(orderLineInventories)
+	const preorderEmailsAnalyzed = parseEmailReadinessOfPreorder(orderLineInventoriesAnalyzed)
 
 	const itemsToPausePreorder: ProductVariantIdentifier[] = orderLineInventoriesAnalyzed
 		.filter(({ triggerStopPreOrders }) => !!triggerStopPreOrders)
@@ -26,5 +27,6 @@ export const parseOrderWebhook = async (webhookData: OrdersCreateWebhookBody) =>
 		orderNumber: webhookData.order_number,
 		orderLineInventories,
 		orderLineInventoriesAnalyzed,
+		preorderEmailsAnalyzed
 	}
 }
