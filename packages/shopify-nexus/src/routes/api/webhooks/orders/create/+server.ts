@@ -99,7 +99,7 @@ export const handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => {
 
 		if (VERBOSE) logger.info(`<${orderId}> Handling Complete. (order ID: ${orderId})`)
 	} catch (e) {
-		logger.info('<${orderId}> Webhook handling failed', e)
+		logger.info(`Webhook handling failed`, e)
 	}
 }
 

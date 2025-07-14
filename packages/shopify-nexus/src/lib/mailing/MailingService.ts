@@ -67,6 +67,17 @@ export class MailingService {
 		return preorderEmailsAnalyzed
 			.filter(({ ready }) => ready)
 			.map(async ({ productTitle, estimatedShippingDate }) => {
+				if(!customerEmail) {
+					console.log(`<${orderId}> Unable to send pre-order email about "${productTitle}". Reason: No customer email provided.`)
+
+					return {
+						mailingStatus: {
+							success: false,
+						},
+						forItem: productTitle,
+					}
+				}
+
 				return {
 					mailingStatus: await this.sendSingleItemPreorderMail(customerEmail, {
 						customerName,
