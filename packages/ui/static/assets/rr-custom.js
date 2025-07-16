@@ -11950,10 +11950,6 @@ function DevMarketDetails(r, e) {
   return s(), f;
 }
 customElements.define("dev-market-details", create_custom_element(DevMarketDetails, { show: {} }, [], [], !0));
-function onChange(r, e) {
-  const s = r.target.value;
-  e(s);
-}
 var root_2 = /* @__PURE__ */ template('<textarea class="cart-note svelte-ji2lc2" placeholder="Leave a note about your order"></textarea>');
 const $$css = {
   hash: "svelte-ji2lc2",
@@ -11964,48 +11960,62 @@ function CartNote(r, e) {
   const t = prop(e, "isCartEmpty", 7), s = /* @__PURE__ */ user_derived(() => t() === "false");
   localStorage.getItem("staging");
   const i = /* @__PURE__ */ user_derived(() => !0);
-  function n(f, h) {
-    let p;
-    return (..._) => {
-      clearTimeout(p), p = setTimeout(() => f.apply(this, _), h);
+  function n(_, g) {
+    let v;
+    return (...m) => {
+      clearTimeout(v), v = setTimeout(() => _.apply(this, m), g);
     };
   }
-  const l = n((f) => {
+  const l = n((_) => {
     fetch("/cart/update.js", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ note: f })
-    }).then((h) => h.json()).then((h) => {
-      console.log("Cart note updated:", h);
-    }).catch((h) => {
-      console.error("Error:", h);
+      body: JSON.stringify({ note: _ })
+    }).then((g) => g.json()).then((g) => {
+      console.log("Cart note updated:", g);
+    }).catch((g) => {
+      console.error("Error:", g);
     });
   }, 500);
-  var c = comment(), u = first_child(c);
+  function c(_) {
+    const v = _.target.value;
+    l(v);
+  }
+  let u = /* @__PURE__ */ state("");
+  const d = () => {
+    const { cart: _ } = window.CartJS || {};
+    if (!_) return;
+    const { note: g } = _;
+    g && set(u, g, !0);
+  };
+  onMount(() => (d(), globalThis.$(document).on("cart.ready", d), () => {
+    globalThis.$(document).off("cart.ready", d);
+  }));
+  var f = comment(), h = first_child(f);
   {
-    var d = (f) => {
-      var h = comment(), p = first_child(h);
+    var p = (_) => {
+      var g = comment(), v = first_child(g);
       {
-        var _ = (g) => {
-          var v = root_2();
-          v.__input = [onChange, l], append(g, v);
+        var m = (y) => {
+          var w = root_2();
+          remove_textarea_child(w), w.__input = c, bind_value(w, () => get$2(u), (T) => set(u, T)), append(y, w);
         };
-        if_block(p, (g) => {
-          get$2(s) && g(_);
+        if_block(v, (y) => {
+          get$2(s) && y(m);
         });
       }
-      append(f, h);
+      append(_, g);
     };
-    if_block(u, (f) => {
-      get$2(i) && f(d);
+    if_block(h, (_) => {
+      get$2(i) && _(p);
     });
   }
-  return append(r, c), pop({
+  return append(r, f), pop({
     get isCartEmpty() {
       return t();
     },
-    set isCartEmpty(f) {
-      t(f), flushSync();
+    set isCartEmpty(_) {
+      t(_), flushSync();
     }
   });
 }

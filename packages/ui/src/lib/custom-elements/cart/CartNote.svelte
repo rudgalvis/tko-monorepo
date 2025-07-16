@@ -1,6 +1,8 @@
 <svelte:options customElement={{ tag: 'cart-note', shadow: 'none' }} />
 
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	const { isCartEmpty } = $props<{ isCartEmpty: string }>();
 
 	const isNoteShowing = $derived(isCartEmpty === 'false');
@@ -48,11 +50,41 @@
 		const note = target.value;
 		debouncedUpdateCartNote(note);
 	}
+
+	let note = $state('');
+
+	const parseCartJSForNote = () => {
+		const { cart } = window.CartJS || {};
+
+		if (!cart) return;
+
+		const { note: _note } = cart as { note?: string };
+
+		if (!_note) return;
+
+		note = _note;
+	};
+
+	onMount(() => {
+		parseCartJSForNote()
+
+		// Add event listeners for jQuery-triggered events
+		globalThis.$(document).on('cart.ready', parseCartJSForNote);
+
+		// Cleanup function
+		return () => {
+			globalThis.$(document).off('cart.ready', parseCartJSForNote);
+		};
+	});
 </script>
 
 {#if stagingValidation}
 	{#if isNoteShowing}
-		<textarea oninput={onChange} class="cart-note" placeholder="Leave a note about your order"
+		<textarea
+			oninput={onChange}
+			bind:value={note}
+			class="cart-note"
+			placeholder="Leave a note about your order"
 		></textarea>
 	{/if}
 {/if}
