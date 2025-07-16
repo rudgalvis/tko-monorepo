@@ -21,7 +21,7 @@ const TEST_CUSTOMERS = [
 	'indre.tko@gmail.com',
 ]
 
-export const handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => {
+export const _handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => {
 	const mailingService = new MailingService()
 	const productService = new ProductService()
 	const orderService = new OrderService()
@@ -111,7 +111,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		writeFile('test-data/webhook-payload', `orders_create.json`, webhookData)
 
 	try {
-		await handlePreOrders(webhookData)
+		await _handlePreOrders(webhookData)
 
 		return json({ success: true })
 	} catch (error) {
