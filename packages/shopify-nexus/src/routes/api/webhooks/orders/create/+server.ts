@@ -9,7 +9,7 @@ import { parseOrderWebhook } from '$lib/utils/transformers/order/parse-order-web
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
 
-const LOG_INTO_FILE = false
+const LOG_INTO_FILE = true
 const VERBOSE = true
 
 // TEST_MODE: When enabled, only process orders from specific test customer emails
@@ -37,32 +37,32 @@ export const _handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => 
 			preorderEmailsAnalyzed,
 		} = await parseOrderWebhook(webhookData)
 
-		if (VERBOSE) logger.info(`<${orderId}> Handling Pre-order webhook.`)
+		if (VERBOSE) logger.info(`<#${orderNumber}> Handling Order/Create webhook.`)
 
 		if (TEST_MODE) {
 			// This prevents accidental processing of real customer orders during development/testing
 			if (!TEST_CUSTOMERS.includes(customerEmail)) {
 				if (VERBOSE)
-					logger.info(`<${orderId}> Test mode enabled. ${customerEmail} is not a test customer.`)
+					logger.info(`<#${orderNumber}> Test mode enabled. ${customerEmail} is not a test customer.`)
 
 				return
 			}
 
 			if (VERBOSE)
-				logger.info(`<${orderId}> Test mode enabled. Processing test customer: ${customerEmail}`)
+				logger.info(`<#${orderNumber}> Test mode enabled. Processing test customer: ${customerEmail}`)
 		}
 
 		if (VERBOSE)
 			itemsToPausePreorder.forEach((e) =>
-				logger.info(`<${orderId}> Will pause Pre-order for ${e.variantId}`)
+				logger.info(`<#${orderNumber}> Will pause Pre-order for ${e.variantId}`)
 			)
 
 		if (VERBOSE)
 			preorderEmailsAnalyzed.forEach(({ productTitle, ready, errorMessage }) => {
-				if (ready) logger.info(`<${orderId}> Will send pre-order email about "${productTitle}"`)
+				if (ready) logger.info(`<#${orderNumber}> Will send pre-order email about "${productTitle}"`)
 				if (!ready)
 					logger.info(
-						`<${orderId}> Unable to send pre-order email about "${productTitle}". Reason: ${errorMessage}`
+						`<#${orderNumber}> Unable to send pre-order email about "${productTitle}". Reason: ${errorMessage}`
 					)
 			})
 
@@ -97,7 +97,7 @@ export const _handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => 
 			orderLineInventories,
 		})
 
-		if (VERBOSE) logger.info(`<${orderId}> Handling Complete. (order ID: ${orderId})`)
+		if (VERBOSE) logger.info(`<#${orderNumber}> Handling Complete. (order ID: #${orderNumber})`)
 	} catch (e) {
 		logger.info(`Webhook handling failed`, e)
 	}
