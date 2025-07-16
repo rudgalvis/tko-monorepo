@@ -196,6 +196,95 @@
         "lineNumber": "1"
       }
     },
+    "16479497105534c601": {
+      "type": "static-link",
+      "settings": {
+        "onlyTextlayout": "hide-border",
+        "linktext": "SEE ALL KNITS",
+        "linkurl": "shopify://collections/all",
+        "thisisbigurl": true,
+        "justheader": false,
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 24,
+        "padding_sizedow_sotm": 4,
+        "containertop": 62,
+        "containerbottom": 39,
+        "containertopmobile": 0,
+        "containerbottommobile": 20
+      }
+    },
+    "static_two_column_RRztMx": {
+      "type": "static-two-column",
+      "settings": {
+        "borderlayouttwocl": "top-bottom",
+        "textposition": "space-between",
+        "sectionlayouttwocl": "image-text",
+        "headingcl": "NEW IN: TOM CARDIGAN IN TAUPE",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 440,
+        "h2maxwidthmobile": 280,
+        "bodycl": "We may have just found the perfect shade for our bestselling cardigan. Same timeless, artisan-made knit. Same archive price. Now in a fresh, seasonless neutral that plays nice with your whole wardrobe.",
+        "pmaxwidthdesktop": 440,
+        "pmaxwidthmobile": 280,
+        "cl-image": "shopify://shop_images/Homepage_Square_900x900-2_33ac6a50-3dc7-43e4-9e8a-57442868d10e.jpg",
+        "padding_sizeupm_section": 15,
+        "padding_sizedownm_section": 15,
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "showurlcl": true,
+        "linkTextcl": "SHOP NOW",
+        "linkclUrl": "shopify://products/tom-taupe-cotton-cardigan",
+        "sectionID": ""
+      }
+    },
+    "1634559204e2be8fc2": {
+      "type": "static-trust-slider",
+      "blocks": {
+        "557e1915-76ac-42eb-8021-8bd6b20faf32": {
+          "type": "Slider",
+          "settings": {
+            "itpcopy": "\"Empowering women in their craft, making them feel valued and supported – and not just the bra-way of support – but with real living wages, which are seldom paid, The Knotty Ones revolutionize the fashion industry in their own way.\""
+          }
+        },
+        "c4cbe28a-bfaf-4615-ae34-c4d4d7dfe4fc": {
+          "type": "Slider",
+          "settings": {
+            "itpcopy": "\"Luxurious, chunky knits are its speciality, and you’re safe in the knowledge that each item is lovingly handmade, which sounds like real feel-good fashion to us.”"
+          }
+        },
+        "04ef092d-9c26-4054-b952-460dcd7505f0": {
+          "type": "Slider",
+          "settings": {
+            "itpcopy": "\"Only natural fibers, cool, timeless designs, fair wages, women supporting women – what’s not to like?\""
+          }
+        }
+      },
+      "block_order": [
+        "557e1915-76ac-42eb-8021-8bd6b20faf32",
+        "c4cbe28a-bfaf-4615-ae34-c4d4d7dfe4fc",
+        "04ef092d-9c26-4054-b952-460dcd7505f0"
+      ],
+      "settings": {
+        "borderlayout": "top-bottom",
+        "showcarousel": false,
+        "showthumbnail": true,
+        "itpbgcolor": "#b4bed6",
+        "itpheading": "In The Press",
+        "itplogo1": "shopify://shop_images/TKO-logo_desktop116x1800px_2_x116_8f92838f-7c50-4e56-939b-070eeadabb6f.webp",
+        "itplogo2": "shopify://shop_images/Image_from_iOS_1_x374_58f90a9a-2746-407b-ae75-7a12175f01ce.webp",
+        "padding_sizeup": 28,
+        "padding_sizedown": 28,
+        "padding_sizeupm": 9,
+        "padding_sizedownm": 9,
+        "padding_sizeupsectiondesktop": 40,
+        "padding_sizedownsectiondesktop": 90,
+        "padding_sizeupsectionmobile": 18,
+        "padding_sizedownsectionmobile": 45
+      }
+    },
     "static_two_column_CDMabw": {
       "type": "static-two-column",
       "settings": {
@@ -247,96 +336,6 @@
         "linkTextcl": "SHOP NOW",
         "linkclUrl": "shopify://collections/lilac-edit",
         "sectionID": ""
-      }
-    },
-    "16479497105534c601": {
-      "type": "static-link",
-      "settings": {
-        "onlyTextlayout": "hide-border",
-        "linktext": "SEE ALL KNITS",
-        "linkurl": "shopify://collections/all",
-        "thisisbigurl": true,
-        "justheader": false,
-        "padding_sizeup_sot": 20,
-        "padding_sizedow_sot": 20,
-        "padding_sizeup_sotm": 24,
-        "padding_sizedow_sotm": 4,
-        "containertop": 62,
-        "containerbottom": 39,
-        "containertopmobile": 0,
-        "containerbottommobile": 20
-      }
-    },
-    "static_two_column_RRztMx": {
-      "type": "static-two-column",
-      "disabled": true,
-      "settings": {
-        "borderlayouttwocl": "top-bottom",
-        "textposition": "space-between",
-        "sectionlayouttwocl": "image-text",
-        "headingcl": "TAKE 25% OFF SUMMER BEST SELLER",
-        "showtitletwo": true,
-        "h2maxwidthdesktop": 440,
-        "h2maxwidthmobile": 280,
-        "bodycl": "You’ve been waiting, we’ve been knitting. Delčia Sweater in Lemon is finally here, and as a thank-you for your patience, she’s 25% off for a limited time.",
-        "pmaxwidthdesktop": 440,
-        "pmaxwidthmobile": 280,
-        "cl-image": "shopify://shop_images/DELCIA_LEMON_1_-_VIDEO_1080_x_1080_px.jpg",
-        "padding_sizeupm_section": 15,
-        "padding_sizedownm_section": 15,
-        "padding_sizeup": 15,
-        "padding_sizedown": 15,
-        "padding_sizeupm": 15,
-        "padding_sizedownm": 15,
-        "showurlcl": true,
-        "linkTextcl": "SHOP NOW",
-        "linkclUrl": "shopify://products/delcia-lemon-cotton-sweater",
-        "sectionID": ""
-      }
-    },
-    "1634559204e2be8fc2": {
-      "type": "static-trust-slider",
-      "blocks": {
-        "557e1915-76ac-42eb-8021-8bd6b20faf32": {
-          "type": "Slider",
-          "settings": {
-            "itpcopy": "\"Empowering women in their craft, making them feel valued and supported – and not just the bra-way of support – but with real living wages, which are seldom paid, The Knotty Ones revolutionize the fashion industry in their own way.\""
-          }
-        },
-        "c4cbe28a-bfaf-4615-ae34-c4d4d7dfe4fc": {
-          "type": "Slider",
-          "settings": {
-            "itpcopy": "\"Luxurious, chunky knits are its speciality, and you’re safe in the knowledge that each item is lovingly handmade, which sounds like real feel-good fashion to us.”"
-          }
-        },
-        "04ef092d-9c26-4054-b952-460dcd7505f0": {
-          "type": "Slider",
-          "settings": {
-            "itpcopy": "\"Only natural fibers, cool, timeless designs, fair wages, women supporting women – what’s not to like?\""
-          }
-        }
-      },
-      "block_order": [
-        "557e1915-76ac-42eb-8021-8bd6b20faf32",
-        "c4cbe28a-bfaf-4615-ae34-c4d4d7dfe4fc",
-        "04ef092d-9c26-4054-b952-460dcd7505f0"
-      ],
-      "settings": {
-        "borderlayout": "top-bottom",
-        "showcarousel": false,
-        "showthumbnail": true,
-        "itpbgcolor": "#b4bed6",
-        "itpheading": "In The Press",
-        "itplogo1": "shopify://shop_images/TKO-logo_desktop116x1800px_2_x116_8f92838f-7c50-4e56-939b-070eeadabb6f.webp",
-        "itplogo2": "shopify://shop_images/Image_from_iOS_1_x374_58f90a9a-2746-407b-ae75-7a12175f01ce.webp",
-        "padding_sizeup": 28,
-        "padding_sizedown": 28,
-        "padding_sizeupm": 9,
-        "padding_sizedownm": 9,
-        "padding_sizeupsectiondesktop": 40,
-        "padding_sizedownsectiondesktop": 90,
-        "padding_sizeupsectionmobile": 18,
-        "padding_sizedownsectionmobile": 45
       }
     },
     "163481622598749a4b": {
@@ -653,11 +652,11 @@
     "163758180555d34f3c",
     "1634312997cd1a9ecc",
     "1634918258b848ff3a",
-    "static_two_column_CDMabw",
-    "static_two_column_BWirn3",
     "16479497105534c601",
     "static_two_column_RRztMx",
     "1634559204e2be8fc2",
+    "static_two_column_CDMabw",
+    "static_two_column_BWirn3",
     "163481622598749a4b",
     "1717769143b2e15dbb",
     "1634817555c231ca73",
