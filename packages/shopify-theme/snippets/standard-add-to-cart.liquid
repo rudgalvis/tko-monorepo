@@ -12,15 +12,19 @@
 {% render 'buy-buttons',
         product: product,
         product_form_id: product_form_id,
-        section_id: section.id
+        section_id: section.id,
+        show_pickup_availability: false
 %}
 
 <p>installements</p>
 {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
-{%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
-    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-    {{ form | payment_terms }}
-{%- endform -%}
+
+{% comment %}test{% endcomment %}
+{% comment %}{%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}{% endcomment %}
+    {% comment %}best{% endcomment %}
+    {% comment %}<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">{% endcomment %}
+    {% comment %}{{ form | payment_terms }}{% endcomment %}
+{% comment %}{%- endform -%}{% endcomment %}
 
 ---- END Shopify standard product_form END ----
 

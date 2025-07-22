@@ -13,11 +13,9 @@ export const createCartDrawerFooterRivet = () => {
 		updateTotals: function () {
 			if (!window.CartJS) return;
 
-			console.log('dump', window.CartJS.cart)
-
 			let result = 0;
 
-			window.CartJS.cart.items.forEach((item) => {
+			window.CartJS.cart.items?.forEach((item) => {
 				const { pre_oder_price, final_price } = cartItemToPreorderCartItem(item);
 
 				if (!pre_oder_price || !pre_oder_price.checkout_price)

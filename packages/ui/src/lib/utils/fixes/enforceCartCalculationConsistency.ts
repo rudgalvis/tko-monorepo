@@ -5,7 +5,6 @@ const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 // totals and things like that. That's a nasty fix for this working with CartJS
 export const enforceCartCalculationConsistency = async () => {
 	await wait(1000)
-	console.log('dump', 'test 2')
 
 	// Regular cart updates break the calculations of the cart
 	// We want to trigger cart update when this happens

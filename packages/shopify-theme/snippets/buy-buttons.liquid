@@ -60,6 +60,44 @@
                     {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
                 {%- endif -%}
 
+                {% comment %}Variant sizes{% endcomment %}
+                <div>
+                    {% comment %} Debug the metafield values {% endcomment %}
+
+                    {% assign recommended_products = product.metafields.variantproduct.productgroupseasonal.value | default: empty %}
+                    {% assign recommended_products_core = product.metafields.variantproduct.productgroup.value | default: empty %}
+                    {% assign color_variants = product.metafields.custom.color_variant.value | default: empty %}
+
+                    {% if color_variants != blank %}
+                        {% render 'color-select-2', color_variants: color_variants, active: product.selected_or_first_available_variant  %}
+                    {% else %}
+                        {% render 'color-select-2', color_variants: recommended_products, active: product.selected_or_first_available_variant  %}
+                        {% render 'color-select-2', color_variants: recommended_products_core, active: product.selected_or_first_available_variant  %}
+                    {% endif %}
+
+                    Size color
+                    {% comment %}{% for item in recommended_products %}{% endcomment %}
+                        {% comment %}{% render 'dump', value: item %}{% endcomment %}
+                        {% comment %}<a href="{{ item.url }}"><img src="{{ item.images[0] | product_img_url: '128x128' }}" alt="img"></a>{% endcomment %}
+                    {% comment %}{% endfor %}{% endcomment %}
+                    {% comment %}{% for item in recommended_products %}{% endcomment %}
+                        {% comment %}{% render 'dump', value: item %}{% endcomment %}
+                        {% comment %}<a href="{{ item.url }}"><img src="{{ item.images[0] | product_img_url: '128x128' }}" alt="img"></a>{% endcomment %}
+                    {% comment %}{% endfor %}{% endcomment %}
+                    {% comment %}{% for item in color_variants %}{% endcomment %}
+                        {% comment %}{% render 'dump', value: item %}{% endcomment %}
+                        {% comment %}<a href="{{ item.url }}"><img src="{{ item.images[0] | product_img_url: '128x128' }}" alt="img"></a>{% endcomment %}
+                    {% comment %}{% endfor %}{% endcomment %}
+
+
+                    <br>
+
+                    Size select
+                    {% for variant in product.variants %}
+                        <a href="{{ product.url }}?variant={{ variant.id }}">{{ variant.option2 }}</a>
+                    {% endfor %}
+                </div>
+
                 <div class="product-form__buttons">
                     {%- liquid
                         assign check_against_inventory = true
@@ -88,7 +126,7 @@
               {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
                   {{ 'products.product.sold_out' | t }}
               {%- else -%}
-                  {{ 'products.product.add_to_cart' | t }}
+                  Buy for {{ product.selected_or_first_available_variant.price | money }}
               {%- endif -%}
             </span>
                         {%- render 'loading-spinner' -%}
@@ -149,3 +187,40 @@
         <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 </div>
+
+<style>
+    .product-form__submit {
+        height: 56px;
+        width: 100%;
+
+        font-family: Monument, sans-serif;
+        font-weight: 500;
+        font-style: Light;
+        font-size: 24px;
+        leading-trim: NONE;
+        line-height: 100%;
+        letter-spacing: 0%;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .product-form__buttons button {
+        background: rgba(1, 136, 73, 1)!important;
+        border: 1px solid rgba(1, 136, 73, 1)!important;
+    }
+
+    .gPreorderBtn {
+        background: rgba(1, 136, 73, 1)!important;
+        border: 1px solid rgba(1, 136, 73, 1)!important;
+        font-family: Monument, sans-serif;
+        font-weight: 500;
+        font-style: Light;
+        font-size: 24px;
+        leading-trim: NONE;
+        line-height: 100%;
+        letter-spacing: 0%;
+        text-align: center;
+        vertical-align: middle;
+
+    }
+</style>

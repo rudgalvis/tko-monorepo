@@ -1505,8 +1505,8 @@ function reconcile(r, e, t, s, i, n, o) {
   if (d !== null || f !== void 0) {
     for (var S = f === void 0 ? [] : array_from(f); d !== null; )
       d.e.f & INERT || S.push(d), d = d.next;
-    var k = S.length;
-    if (k > 0) {
+    var C = S.length;
+    if (C > 0) {
       var b = l === 0 ? t : null;
       pause_effects(e, S, b, c);
     }
@@ -1838,16 +1838,16 @@ function animate(r, e, t, s, i) {
           w.push(S), T || (T = S.overflow === "hidden");
         }
       T && (r.style.overflow = "hidden"), _ = () => {
-        var k = (
+        var C = (
           /** @type {number} */
           /** @type {globalThis.Animation} */
           g.currentTime
         );
-        return v + m * f(k / y);
+        return v + m * f(C / y);
       }, d && loop$1(() => {
         if (g.playState !== "running") return !1;
-        var k = _();
-        return d(k, 1 - k), !0;
+        var C = _();
+        return d(C, 1 - C), !0;
       });
     }
     g = r.animate(w, { duration: y, fill: "forwards" }), g.onfinish = () => {
@@ -2129,9 +2129,9 @@ function prop(r, e, t, s) {
   });
   return o && get$2(E), i || (E.equals = safe_equals), function(x, S) {
     if (arguments.length > 0) {
-      const k = S ? get$2(E) : n && o ? proxy(x) : x;
-      if (!E.equals(k)) {
-        if (w = !0, set(T, k), _ && h !== void 0 && (h = k), has_destroyed_component_ctx(E))
+      const C = S ? get$2(E) : n && o ? proxy(x) : x;
+      if (!E.equals(C)) {
+        if (w = !0, set(T, C), _ && h !== void 0 && (h = C), has_destroyed_component_ctx(E))
           return x;
         untrack(() => get$2(E));
       }
@@ -2560,14 +2560,14 @@ const persistentWritable = (r, e) => {
     discounts: 0,
     items: 0,
     updateTotals: function() {
+      var i;
       if (!window.CartJS) return;
-      console.log("dump", window.CartJS.cart);
       let s = 0;
-      window.CartJS.cart.items.forEach((i) => {
-        const { pre_oder_price: n, final_price: o } = cartItemToPreorderCartItem(i);
-        if (!n || !n.checkout_price)
-          return s += o;
-        s += n.checkout_price;
+      (i = window.CartJS.cart.items) == null || i.forEach((n) => {
+        const { pre_oder_price: o, final_price: l } = cartItemToPreorderCartItem(n);
+        if (!o || !o.checkout_price)
+          return s += l;
+        s += o.checkout_price;
       }), this.total = s, this.totalOriginal = window.CartJS.cart.original_total_price, this.discounts = window.CartJS.cart.total_discount, this.items = window.CartJS.cart.item_count;
     }
   };
@@ -2600,7 +2600,7 @@ const persistentWritable = (r, e) => {
 }, cacheSweeper = () => {
   isShopifyOnWindow() && isSweepRequired() && isIosSafari() && (sweep(), flagSweepComplete());
 }, dump = (...r) => console.log("dump", ...r), wait = (r) => new Promise((e) => setTimeout(e, r)), enforceCartCalculationConsistency = async () => {
-  await wait(1e3), console.log("dump", "test 2");
+  await wait(1e3);
   const r = () => {
     dump("regular cart update");
     const { CartJS: i } = window;
@@ -3129,17 +3129,17 @@ function ProductPrice(r, e) {
     } else
       get$2(w).comparedAt = void 0;
     if (o() === i()) return;
-    const C = n()[i()];
-    if (get$2(w).price = b.format(Math.round($ * C)), get$2(y).comparedAt) {
+    const k = n()[i()];
+    if (get$2(w).price = b.format(Math.round($ * k)), get$2(y).comparedAt) {
       const { value: P } = parseCurrencyString(get$2(y).comparedAt);
-      get$2(w).comparedAt = b.format(Math.round(P * C));
+      get$2(w).comparedAt = b.format(Math.round(P * k));
     } else
       get$2(w).comparedAt = void 0;
   });
   const T = async ({ price: b }) => {
     if (!u()) throw new Error("Market is required");
     if (!d() && !f()) throw new Error("Either variant or product id is required is required");
-    const $ = g.getVariantAutomaticDiscount.bind(g), C = g.getProductAutomaticDiscount.bind(g), P = d() ? () => $(u(), +d()) : () => C(u(), +f()), { amount: R } = await P();
+    const $ = g.getVariantAutomaticDiscount.bind(g), k = g.getProductAutomaticDiscount.bind(g), P = d() ? () => $(u(), +d()) : () => k(u(), +f()), { amount: R } = await P();
     if (!R || R === 0) return { price: b, comparedAt: void 0 };
     const { formatted: N } = subtractFromPriceWithSymbol(b, R);
     return { price: N, comparedAt: b };
@@ -3166,8 +3166,8 @@ function ProductPrice(r, e) {
   var A = root$d(), x = child(A);
   {
     var S = (b) => {
-      var $ = root_1$7(), C = child($);
-      component(C, () => get$2(E), (P, R) => {
+      var $ = root_1$7(), k = child($);
+      component(k, () => get$2(E), (P, R) => {
         R(P, spread_props(() => get$2(w)));
       }), reset($), transition$1(1, $, () => fade, () => ({ delay: 350, duration: 50 })), append(b, $);
     };
@@ -3176,7 +3176,7 @@ function ProductPrice(r, e) {
     });
   }
   reset(A), action(A, (b) => removeNonComponentChildren == null ? void 0 : removeNonComponentChildren(b)), append(r, A);
-  var k = pop({
+  var C = pop({
     get price() {
       return l();
     },
@@ -3226,7 +3226,7 @@ function ProductPrice(r, e) {
       _(b), flushSync();
     }
   });
-  return s(), k;
+  return s(), C;
 }
 customElements.define("product-price", create_custom_element(
   ProductPrice,
@@ -9269,18 +9269,18 @@ function updateSlides() {
   const x = t.grid && t.grid.rows > 1 && r.grid;
   x ? r.grid.initSlides(d) : r.grid && r.grid.unsetSlides();
   let S;
-  const k = t.slidesPerView === "auto" && t.breakpoints && Object.keys(t.breakpoints).filter((b) => typeof t.breakpoints[b].slidesPerView < "u").length > 0;
+  const C = t.slidesPerView === "auto" && t.breakpoints && Object.keys(t.breakpoints).filter((b) => typeof t.breakpoints[b].slidesPerView < "u").length > 0;
   for (let b = 0; b < f; b += 1) {
     S = 0;
     let $;
     if (d[b] && ($ = d[b]), x && r.grid.updateSlide(b, $, d), !(d[b] && elementStyle($, "display") === "none")) {
       if (t.slidesPerView === "auto") {
-        k && (d[b].style[r.getDirectionLabel("width")] = "");
-        const C = getComputedStyle($), P = $.style.transform, R = $.style.webkitTransform;
+        C && (d[b].style[r.getDirectionLabel("width")] = "");
+        const k = getComputedStyle($), P = $.style.transform, R = $.style.webkitTransform;
         if (P && ($.style.transform = "none"), R && ($.style.webkitTransform = "none"), t.roundLengths)
           S = r.isHorizontal() ? elementOuterSize($, "width") : elementOuterSize($, "height");
         else {
-          const N = e(C, "width"), I = e(C, "padding-left"), L = e(C, "padding-right"), D = e(C, "margin-left"), O = e(C, "margin-right"), F = C.getPropertyValue("box-sizing");
+          const N = e(k, "width"), I = e(k, "padding-left"), L = e(k, "padding-right"), D = e(k, "margin-left"), O = e(k, "margin-right"), F = k.getPropertyValue("box-sizing");
           if (F && F === "border-box")
             S = N + D + O;
           else {
@@ -9300,47 +9300,47 @@ function updateSlides() {
   if (r.virtualSize = Math.max(r.virtualSize, n) + v, o && l && (t.effect === "slide" || t.effect === "coverflow") && (s.style.width = `${r.virtualSize + w}px`), t.setWrapperSize && (s.style[r.getDirectionLabel("width")] = `${r.virtualSize + w}px`), x && r.grid.updateWrapperSize(S, h), !t.centeredSlides) {
     const b = [];
     for (let $ = 0; $ < h.length; $ += 1) {
-      let C = h[$];
-      t.roundLengths && (C = Math.floor(C)), h[$] <= r.virtualSize - n && b.push(C);
+      let k = h[$];
+      t.roundLengths && (k = Math.floor(k)), h[$] <= r.virtualSize - n && b.push(k);
     }
     h = b, Math.floor(r.virtualSize - n) - Math.floor(h[h.length - 1]) > 1 && h.push(r.virtualSize - n);
   }
   if (c && t.loop) {
     const b = _[0] + w;
     if (t.slidesPerGroup > 1) {
-      const $ = Math.ceil((r.virtual.slidesBefore + r.virtual.slidesAfter) / t.slidesPerGroup), C = b * t.slidesPerGroup;
+      const $ = Math.ceil((r.virtual.slidesBefore + r.virtual.slidesAfter) / t.slidesPerGroup), k = b * t.slidesPerGroup;
       for (let P = 0; P < $; P += 1)
-        h.push(h[h.length - 1] + C);
+        h.push(h[h.length - 1] + k);
     }
     for (let $ = 0; $ < r.virtual.slidesBefore + r.virtual.slidesAfter; $ += 1)
       t.slidesPerGroup === 1 && h.push(h[h.length - 1] + b), p.push(p[p.length - 1] + b), r.virtualSize += b;
   }
   if (h.length === 0 && (h = [0]), w !== 0) {
     const b = r.isHorizontal() && o ? "marginLeft" : r.getDirectionLabel("marginRight");
-    d.filter(($, C) => !t.cssMode || t.loop ? !0 : C !== d.length - 1).forEach(($) => {
+    d.filter(($, k) => !t.cssMode || t.loop ? !0 : k !== d.length - 1).forEach(($) => {
       $.style[b] = `${w}px`;
     });
   }
   if (t.centeredSlides && t.centeredSlidesBounds) {
     let b = 0;
-    _.forEach((C) => {
-      b += C + (w || 0);
+    _.forEach((k) => {
+      b += k + (w || 0);
     }), b -= w;
     const $ = b > n ? b - n : 0;
-    h = h.map((C) => C <= 0 ? -g : C > $ ? $ + v : C);
+    h = h.map((k) => k <= 0 ? -g : k > $ ? $ + v : k);
   }
   if (t.centerInsufficientSlides) {
     let b = 0;
-    _.forEach((C) => {
-      b += C + (w || 0);
+    _.forEach((k) => {
+      b += k + (w || 0);
     }), b -= w;
     const $ = (t.slidesOffsetBefore || 0) + (t.slidesOffsetAfter || 0);
     if (b + $ < n) {
-      const C = (n - b - $) / 2;
+      const k = (n - b - $) / 2;
       h.forEach((P, R) => {
-        h[R] = P - C;
+        h[R] = P - k;
       }), p.forEach((P, R) => {
-        p[R] = P + C;
+        p[R] = P + k;
       });
     }
   }
@@ -9352,7 +9352,7 @@ function updateSlides() {
   }), t.centeredSlides && t.cssMode && !t.centeredSlidesBounds) {
     setCSSProperty(s, "--swiper-centered-offset-before", `${-h[0]}px`), setCSSProperty(s, "--swiper-centered-offset-after", `${r.size / 2 - _[_.length - 1] / 2}px`);
     const b = -r.snapGrid[0], $ = -r.slidesGrid[0];
-    r.snapGrid = r.snapGrid.map((C) => C + b), r.slidesGrid = r.slidesGrid.map((C) => C + $);
+    r.snapGrid = r.snapGrid.map((k) => k + b), r.slidesGrid = r.slidesGrid.map((k) => k + $);
   }
   if (f !== u && r.emit("slidesLengthChange"), h.length !== m && (r.params.watchOverflow && r.checkOverflow(), r.emit("snapGridLengthChange")), p.length !== y && r.emit("slidesGridLengthChange"), t.watchSlidesProgress && r.updateSlidesOffset(), r.emit("slidesUpdated"), !c && !t.cssMode && (t.effect === "slide" || t.effect === "fade")) {
     const b = `${t.containerModifierClass}backface-hidden`, $ = r.el.classList.contains(b);
@@ -9750,8 +9750,8 @@ function slideTo(r, e, t, s, i) {
   const m = -c[v];
   if (l.normalizeSlideIndex)
     for (let x = 0; x < u.length; x += 1) {
-      const S = -Math.floor(m * 100), k = Math.floor(u[x] * 100), b = Math.floor(u[x + 1] * 100);
-      typeof u[x + 1] < "u" ? S >= k && S < b - (b - k) / 2 ? o = x : S >= k && S < b && (o = x + 1) : S >= k && (o = x);
+      const S = -Math.floor(m * 100), C = Math.floor(u[x] * 100), b = Math.floor(u[x + 1] * 100);
+      typeof u[x + 1] < "u" ? S >= C && S < b - (b - C) / 2 ? o = x : S >= C && S < b && (o = x + 1) : S >= C && (o = x);
     }
   if (n.initialized && o !== f && (!n.allowSlideNext && (h ? m > n.translate && m > n.minTranslate() : m < n.translate && m < n.minTranslate()) || !n.allowSlidePrev && m > n.translate && m > n.maxTranslate() && (f || 0) !== o))
     return !1;
@@ -10018,13 +10018,13 @@ function loopFix(r) {
   const T = u.grid && _.grid && _.grid.rows > 1;
   d.length < m + w || u.params.effect === "cards" && d.length < m + w * 2 ? showWarning("Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters") : T && _.grid.fill === "row" && showWarning("Swiper Loop Warning: Loop mode is not compatible with grid.fill = `row`");
   const E = [], A = [], x = T ? Math.ceil(d.length / _.grid.rows) : d.length, S = o && x - v < m && !g;
-  let k = S ? v : u.activeIndex;
-  typeof n > "u" ? n = u.getSlideIndex(d.find((I) => I.classList.contains(_.slideActiveClass))) : k = n;
+  let C = S ? v : u.activeIndex;
+  typeof n > "u" ? n = u.getSlideIndex(d.find((I) => I.classList.contains(_.slideActiveClass))) : C = n;
   const b = s === "next" || !s, $ = s === "prev" || !s;
-  let C = 0, P = 0;
+  let k = 0, P = 0;
   const N = (T ? d[n].column : n) + (g && typeof i > "u" ? -m / 2 + 0.5 : 0);
   if (N < w) {
-    C = Math.max(w - N, y);
+    k = Math.max(w - N, y);
     for (let I = 0; I < w - N; I += 1) {
       const L = I - Math.floor(I / x) * x;
       if (T) {
@@ -10054,16 +10054,16 @@ function loopFix(r) {
   }), _.watchSlidesProgress && u.updateSlidesOffset(), t) {
     if (E.length > 0 && $) {
       if (typeof e > "u") {
-        const I = u.slidesGrid[k], D = u.slidesGrid[k + C] - I;
-        c ? u.setTranslate(u.translate - D) : (u.slideTo(k + Math.ceil(C), 0, !1, !0), i && (u.touchEventsData.startTranslate = u.touchEventsData.startTranslate - D, u.touchEventsData.currentTranslate = u.touchEventsData.currentTranslate - D));
+        const I = u.slidesGrid[C], D = u.slidesGrid[C + k] - I;
+        c ? u.setTranslate(u.translate - D) : (u.slideTo(C + Math.ceil(k), 0, !1, !0), i && (u.touchEventsData.startTranslate = u.touchEventsData.startTranslate - D, u.touchEventsData.currentTranslate = u.touchEventsData.currentTranslate - D));
       } else if (i) {
         const I = T ? E.length / _.grid.rows : E.length;
         u.slideTo(u.activeIndex + I, 0, !1, !0), u.touchEventsData.currentTranslate = u.translate;
       }
     } else if (A.length > 0 && b)
       if (typeof e > "u") {
-        const I = u.slidesGrid[k], D = u.slidesGrid[k - P] - I;
-        c ? u.setTranslate(u.translate - D) : (u.slideTo(k - P, 0, !1, !0), i && (u.touchEventsData.startTranslate = u.touchEventsData.startTranslate - D, u.touchEventsData.currentTranslate = u.touchEventsData.currentTranslate - D));
+        const I = u.slidesGrid[C], D = u.slidesGrid[C - P] - I;
+        c ? u.setTranslate(u.translate - D) : (u.slideTo(C - P, 0, !1, !0), i && (u.touchEventsData.startTranslate = u.touchEventsData.startTranslate - D, u.touchEventsData.currentTranslate = u.touchEventsData.currentTranslate - D));
       } else {
         const I = T ? A.length / _.grid.rows : A.length;
         u.slideTo(u.activeIndex - I, 0, !1, !0);
@@ -11344,14 +11344,14 @@ function KnittersAccordionItem(r, e) {
   var T = child(w), E = child(T), A = sibling(E, 2), x = child(A, !0);
   reset(A);
   var S = sibling(A, 2);
-  let k;
+  let C;
   var b = child(S);
   ArrowIcon(b), reset(S), reset(T);
-  var $ = sibling(T, 2), C = child($);
+  var $ = sibling(T, 2), k = child($);
   let P;
-  var R = child(C, !0);
-  reset(C);
-  var N = sibling(C, 2);
+  var R = child(k, !0);
+  reset(k);
+  var N = sibling(k, 2);
   let I;
   var L = sibling(N, 2);
   {
@@ -11390,7 +11390,7 @@ function KnittersAccordionItem(r, e) {
   }
   return reset($), bind_this($, (O) => set(d, O), () => get$2(d)), reset(w), bind_this(w, (O) => set(f, O), () => get$2(f)), template_effect(
     (O, F, q) => {
-      set_attribute(E, "src", o()), set_attribute(E, "alt", `Small picture of ${t() ?? ""}`), set_text(x, t()), k = set_class(S, 1, "arrow svelte-pbk1c8", null, k, O), P = set_class(C, 1, "svelte-pbk1c8", null, P, F), set_text(R, i()), I = set_class(N, 1, "photo svelte-pbk1c8", null, I, q), set_attribute(N, "src", n()), set_attribute(N, "alt", `Picture of ${t() ?? ""}`);
+      set_attribute(E, "src", o()), set_attribute(E, "alt", `Small picture of ${t() ?? ""}`), set_text(x, t()), C = set_class(S, 1, "arrow svelte-pbk1c8", null, C, O), P = set_class(k, 1, "svelte-pbk1c8", null, P, F), set_text(R, i()), I = set_class(N, 1, "photo svelte-pbk1c8", null, I, q), set_attribute(N, "src", n()), set_attribute(N, "alt", `Picture of ${t() ?? ""}`);
     },
     [
       () => ({ "arrow---down": get$2(c) }),
@@ -11513,19 +11513,19 @@ function CurrencySelector(r, e) {
   push(e, !1), append_styles(r, $$css$3);
   const [t, s] = setup_stores(), i = () => store_get(displayCurrency, "$displayCurrency", t);
   function n(S, {
-    y: k = 100,
+    y: C = 100,
     scale: b = 0.5,
     duration: $ = 300,
-    easing: C = sineIn
+    easing: k = sineIn
     // Try different easing functions
   }) {
     return {
       duration: $,
-      easing: C,
+      easing: k,
       css: (P) => `
         transform:
           scale(${b + (1 - b) * P})
-          translateY(${(1 - P) * k}px);
+          translateY(${(1 - P) * C}px);
         opacity: ${P};
       `
     };
@@ -11540,7 +11540,7 @@ function CurrencySelector(r, e) {
       if (o() && i())
         try {
           const { available: S } = JSON.parse(o());
-          l(S), c(S.find((k) => k.currency === i()));
+          l(S), c(S.find((C) => C.currency === i()));
         } catch (S) {
           console.error("UI", S);
         }
@@ -11550,8 +11550,8 @@ function CurrencySelector(r, e) {
   var v = root$1(), m = child(v);
   {
     var y = (S) => {
-      var k = root_1$3(), b = child(k);
-      reset(k), template_effect(() => set_text(b, `${c().symbol ?? ""} ${c().currency ?? ""}`)), event("click", k, () => set(p, !get$2(p))), append(S, k);
+      var C = root_1$3(), b = child(C);
+      reset(C), template_effect(() => set_text(b, `${c().symbol ?? ""} ${c().currency ?? ""}`)), event("click", C, () => set(p, !get$2(p))), append(S, C);
     };
     if_block(m, (S) => {
       c() && S(y);
@@ -11562,17 +11562,17 @@ function CurrencySelector(r, e) {
   var E = child(w);
   {
     var A = (S) => {
-      var k = root_2$1();
-      each(k, 5, l, index, (b, $) => {
-        var C = root_3(), P = child(C), R = child(P);
-        reset(P), reset(C), template_effect(() => set_text(R, `${get$2($).symbol ?? ""}
-							${get$2($).currency ?? ""}`)), event("click", P, () => g(get$2($))), append(b, C);
-      }), reset(k), template_effect(() => set_style(k, `background: ${h()}`)), transition$1(3, k, () => n, () => ({
+      var C = root_2$1();
+      each(C, 5, l, index, (b, $) => {
+        var k = root_3(), P = child(k), R = child(P);
+        reset(P), reset(k), template_effect(() => set_text(R, `${get$2($).symbol ?? ""}
+							${get$2($).currency ?? ""}`)), event("click", P, () => g(get$2($))), append(b, k);
+      }), reset(C), template_effect(() => set_style(C, `background: ${h()}`)), transition$1(3, C, () => n, () => ({
         y: -16,
         scale: 0.95,
         duration: 250,
         easing: expoOut
-      })), append(S, k);
+      })), append(S, C);
     };
     if_block(E, (S) => {
       get$2(p) && S(A);
@@ -11974,6 +11974,9 @@ function PreOrderStrip(r, e) {
   });
 }
 customElements.define("pre-order-strip", create_custom_element(PreOrderStrip, { handle: {}, variantId: {}, message: {} }, [], [], !1));
+function ProductForm(r) {
+}
+create_custom_element(ProductForm, {}, [], [], !0);
 var root_1 = /* @__PURE__ */ template('<table class="svelte-1dtzky1"><tbody><tr><td>cookies</td><td>cart_currency</td><td> </td></tr><tr><td>cookies</td><td>localization</td><td> </td></tr><tr><td>localStorage</td><td>displayCurrency</td><td> </td></tr><tr><td>localStorage</td><td>marketCurrency</td><td> </td></tr><tr><td>localStorage</td><td>localization</td><td> </td></tr></tbody></table>');
 const $$css$1 = {
   hash: "svelte-1dtzky1",
@@ -11991,10 +11994,10 @@ function DevMarketDetails(r, e) {
       reset(w), reset(y);
       var E = sibling(y), A = sibling(child(E), 2), x = child(A, !0);
       reset(A), reset(E);
-      var S = sibling(E), k = sibling(child(S), 2), b = child(k, !0);
-      reset(k), reset(S);
-      var $ = sibling(S), C = sibling(child($), 2), P = child(C, !0);
-      reset(C), reset($), reset(_), reset(p), template_effect(
+      var S = sibling(E), C = sibling(child(S), 2), b = child(C, !0);
+      reset(C), reset(S);
+      var $ = sibling(S), k = sibling(child($), 2), P = child(k, !0);
+      reset(k), reset($), reset(_), reset(p), template_effect(
         (R, N) => {
           set_text(m, R), set_text(T, N), set_text(x, i()), set_text(b, n()), set_text(P, o());
         },
@@ -12107,6 +12110,7 @@ export {
   KnittersAccordionItem,
   PreOrderStrip,
   ProductDiscountPercentage,
+  ProductForm,
   ProductPrice,
   getAutomaticDiscount
 };

@@ -29,6 +29,7 @@ export { default as CurrencySelector } from './custom-elements/common/CurrencySe
 export { default as ProductPrice } from './custom-elements/common/ProductPrice.svelte';
 export { default as ProductDiscountPercentage } from './custom-elements/common/ProductDiscountPercentage.svelte';
 export { default as PreOrderStrip } from './custom-elements/pdp/pre-order/PreOrderStrip.svelte';
+export { default as ProductForm } from './custom-elements/pdp/ProductForm.svelte';
 export { default as DevMarketDetails } from './custom-elements/dev/DevMarketDetails.svelte';
 export { default as CartNote } from './custom-elements/cart/CartNote.svelte';
 
