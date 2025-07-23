@@ -4,5 +4,18 @@ Usage
 {% endcomment %}
 
 <script>
-    console.log('{{ label }}' || 'DUMP', {{ value | json }});
+    try {
+        // We assume value might have already been passed through | json pipe
+        // Will have to parse back up
+        const value = JSON.parse({{ value | json }});
+
+        console.log('{{ label }}' || 'DUMP', value);
+    } catch {
+        // If we can't parse it, we'll try to dump it as is
+        try {
+            const value = {{ value | json }};
+
+            console.log('{{ label }}' || 'DUMP', value);
+        } catch {}
+    }
 </script>

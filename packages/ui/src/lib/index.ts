@@ -32,6 +32,8 @@ export { default as PreOrderStrip } from './custom-elements/pdp/pre-order/PreOrd
 export { default as ProductForm } from './custom-elements/pdp/ProductForm.svelte';
 export { default as DevMarketDetails } from './custom-elements/dev/DevMarketDetails.svelte';
 export { default as CartNote } from './custom-elements/cart/CartNote.svelte';
+export { default as ColorSelector } from './custom-elements/pdp/color-selector/ColorSelector.svelte';
+export { default as SizeSelector } from './custom-elements/pdp/size-selector/SizeSelector.svelte';
 
 /* Regular exports */
 export { getAutomaticDiscount };

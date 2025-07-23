@@ -1,5 +1,10 @@
 ---- START Shopify standard product_form ---
 
+<h1>{{ product.title }}</h1>
+<h2>{{ product.type }}</h2>
+
+{% render 'dump', value: product %}
+
 <!-- Quantity Selector -->
 <input
         type="hidden"

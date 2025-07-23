@@ -185,6 +185,9 @@
     {%- endif -%}
 
     {% comment %}Ref: https://help.shopify.com/en/manual/online-store/themes/themes-by-shopify/vintage-themes/customizing-vintage-themes/show-remaining-quantity?section=Debut{% endcomment %}
+
+
+    {{ 'globo-preorder.css' | asset_url | stylesheet_tag }}
 </head>
 
 <body class="gradient" data-iso-code="{{ localization.country.iso_code }}">
@@ -213,7 +216,9 @@
     splitit('init', {
         apiKey: '3d2e63d4-7173-481f-96fa-363bf0fe0a2b',
         lang: 'en-US',
-        currency: 'EUR',
+        currency: 'EUR' +
+            '' +
+            '',
         currencySymbol: '€',
         debug: false,
     });

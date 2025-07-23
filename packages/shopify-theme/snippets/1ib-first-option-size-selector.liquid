@@ -1,0 +1,55 @@
+{% comment %}
+
+This should only be used on the setup we have/had.
+
+Where there is single color option with multiple sizes
+
+{% endcomment %}
+
+{% assign firstColor = product.variants[0].option1 %}
+{% assign firstColorVariants = null %}
+
+{% comment %} Populate firstColorVariants {% endcomment %}
+{% for variant in product.variants %}
+    {% if firstColor == variant.option1 %}
+        {% assign variant_array = variant | sort %}
+
+        {% assign firstColorVariants = firstColorVariants | concat: variant_array %}
+    {% endif %}
+{% endfor %}
+
+
+{% comment %} Process firstColorVariants to create SizeVariant objects {% endcomment %}
+{% comment %}
+	type SizeVariant = {
+		url: string;
+		label: string;
+		id: string;
+	};
+{% endcomment %}
+
+{% comment %} Build color variants array using native JSON filter {% endcomment %}
+{% assign json_items = '' %}
+
+{% for variant in firstColorVariants %}
+    {% comment %} Build single variant JSON object {% endcomment %}
+    {% capture variant_json -%}
+        {"url":"{{ variant.url }}","label":"{{ variant.option2 }}","id":"{{ variant.id }}"}
+    {%- endcapture %}
+
+    {% comment %} Add to main collection {% endcomment %}
+    {% if forloop.first %}
+        {% assign json_items = variant_json %}
+    {% else %}
+        {% assign json_items = json_items | append: ',' | append: variant_json %}
+    {% endif %}
+{% endfor %}
+
+{% assign size_variants = '[' | append: json_items | append: ']' %}
+
+{% comment %}{% render 'dump', value: size_variants %}{% endcomment %}
+
+<size-selector
+        list='{{ size_variants }}'
+        activeId="{{ product.selected_or_first_available_variant.id }}"
+></size-selector>

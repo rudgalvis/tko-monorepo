@@ -1,0 +1,16 @@
+[
+  {
+    "url": "/products/test-test",
+    "images": [
+      "//www.theknottyones.com/cdn/shop/products/test-test-591867_128x128_crop_center.jpg?v=1746666198"
+    ],
+    "id": "7485371416819"
+  },
+  {
+    "url": "/products/test-v2",
+    "images": [
+      "//www.theknottyones.com/cdn/shop/files/test-v2-9661010_128x128_crop_center.webp?v=1752891013"
+    ],
+    "id": "15100854010204"
+  }
+]
