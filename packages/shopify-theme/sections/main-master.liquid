@@ -462,7 +462,7 @@ Mobile Slider
 
                 {%- for block in section.blocks -%}
                     {%- case block.type -%}
-                        {%- when 'title' -%}
+                        {%- when 'title___false' -%}
                             <div class="mobile___adjustment">
                             <div class="mobile___price_holder">
                                 <div class="title-heart-container">
@@ -479,7 +479,7 @@ Mobile Slider
                             <p class="product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}" {{ block.shopify_attributes }}>
                                 {{- block.settings.text -}}
                             </p>
-                        {%- when 'price' -%}
+                        {%- when 'price___false' -%}
                             <div class="price___adjustment  {% if product.tags contains 'pre-order' %} price_adjustment_pre__order {% endif %}">
                                 {% render '1lib-pdp-price', product: product, pageQuerystring: pageQuerystring %}
 
@@ -518,7 +518,7 @@ Mobile Slider
                                 <p>{{ product.content }}</p>
                             </div>
 
-                        {%- when 'variant_picker' -%}
+                        {%- when 'variant_picker___false' -%}
 
                             {% assign sizeofsize = product.variants[0].option2 %}
 
@@ -660,7 +660,7 @@ Mobile Slider
                                         mobile: false,
                                 %}
                             {% endunless %}
-                        {%- when 'size' -%}
+                        {%- when 'size___false' -%}
 
 
                             {%- comment -%}detect button type{%- endcomment -%}
@@ -918,7 +918,7 @@ Mobile Slider
 
                                 <div class="product-options__wrapper">
                                     {% assign information = block.settings.specialfeatures | split: "," %}
-                                    {% if product.metafields.productsize.sizeguide != nil and sizeofsize != 'One Size' %}
+                                    {% if product.metafields.productsize.sizeguide != nil and sizeofsize != 'One Size' and false %}
                                         <div class="size-guide">
                                             {% render 'size-guide-link' %}
                                         </div>

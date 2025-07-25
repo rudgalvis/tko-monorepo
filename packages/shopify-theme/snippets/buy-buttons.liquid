@@ -62,7 +62,7 @@
 
                 {% comment %}Variant sizes{% endcomment %}
 
-                {% render 'dump', value: product.selected_or_first_available_variant %}
+                {% comment %}{% render 'dump', value: product.selected_or_first_available_variant %}{% endcomment %}
 
                 <product-price
                         price="{{ product.selected_or_first_available_variant.price | money }}"

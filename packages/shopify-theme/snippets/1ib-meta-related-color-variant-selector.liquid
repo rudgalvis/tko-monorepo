@@ -10,12 +10,29 @@ Metafield into UI
 {% assign recommended_products_core = product.metafields.variantproduct.productgroup.value | default: empty %}
 {% assign color_variants = product.metafields.custom.color_variant.value | default: empty %}
 
+{% render 'dump', value: recommended_products %}
+{% render 'dump', value: recommended_products_core %}
+
 {% if color_variants != blank %}
     {% assign combined_variants = color_variants %}
 {% else %}
-    {% assign combined_array = recommended_products | concat: recommended_products_core %}
+    {% comment %}Weird shiningans in liquid to merge two arrays, concat is not working{% endcomment %}
+    {% assign combined_array = "" | split: "" %}
+
+    {% for item in recommended_products %}
+        {% assign arrayItem = item | sort %}
+        {% assign combined_array = combined_array | concat: arrayItem %}
+    {% endfor %}
+
+    {% for item in recommended_products_core %}
+        {% assign arrayItem = item | sort %}
+        {% assign combined_array = combined_array | concat: arrayItem %}
+    {% endfor %}
+
     {% assign combined_variants = combined_array %}
 {% endif %}
+
+
 
 {% comment %} Process combined variants to create ColorVariant objects {% endcomment %}
 {% comment %}
@@ -57,17 +74,26 @@ Metafield into UI
 
 {% assign color_variants_json = '[' | append: json_items | append: ']' %}
 
-{% comment %}{% render 'dump', value: color_variants_json%}{% endcomment %}
+{% render 'dump', value: color_variants_json%}
 {% comment %}{% render 'dump', value: product.id%}{% endcomment %}
 
-<color-selector
-    list='{{ color_variants_json }}'
-    activeId="{{ product.id }}"
->
-    <div class="skeleton"></div>
-</color-selector>
+
+<div class="color-selector-wrapper">
+    <color-selector
+        list='{{ color_variants_json }}'
+        activeId="{{ product.id }}"
+    >
+        <div class="skeleton"></div>
+    </color-selector>
+</div>
 
 <style>
+    .color-selector-wrapper {
+        width: calc(100% + 25px);
+        overflow: hidden;
+    }
+
+
     color-selector .skeleton {
         width: 64px;
         height: 64px;
