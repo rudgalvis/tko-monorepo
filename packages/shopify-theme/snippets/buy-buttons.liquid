@@ -71,17 +71,22 @@
                         variant_id="{{ product.selected_or_first_available_variant.id }}"
                         product_id="{{ product.id }}"
                         type='ProductDetailsPagePrice'
-                ></product-price>
+                >
+                    <div class="skeleton">
+                        <div class="skeleton-wave"></div>
+                    </div>
+                </product-price>
 
-                <hr style="margin: 24px 0; border-color: rgba(205, 205, 205, 1);">
+
+                {% render '1ib-hr' %}
 
                 {% render '1ib-meta-related-color-variant-selector' %}
 
-                <hr style="margin: 24px 0; border-color: rgba(205, 205, 205, 1);">
+                {% render '1ib-hr' %}
 
                 {% render '1ib-first-option-size-selector' %}
 
-                <hr style="margin: 24px 0; border-color: rgba(205, 205, 205, 1);">
+                {% render '1ib-hr' %}
 
                 <div>
                     {% comment %} Debug the metafield values {% endcomment %}
@@ -211,6 +216,17 @@
 </div>
 
 <style>
+    product-price .skeleton > div {
+        height: 30px;
+        width: 150px;
+        border-radius: 50px;
+        overflow: hidden;
+    }
+    product-price .skeleton {
+        height: 50px;
+        padding: 10px 0;
+    }
+
     .product-form__submit {
         height: 56px;
         width: 100%;

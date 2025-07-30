@@ -2,9 +2,8 @@
 
 <script lang="ts">
 	import { removeNonComponentChildren } from '$lib/utils/dom/remove-non-component-children.js';
-	import { onMount } from 'svelte';
 	import Swiper from 'swiper';
-	import { Scrollbar } from 'swiper/modules';
+	import { Scrollbar, Mousewheel } from 'swiper/modules';
 	import 'swiper/scss';
 
 	type ColorVariant = {
@@ -31,11 +30,12 @@
 
 	let swiperEl = $state<HTMLDivElement>();
 	let swiper = $state<Swiper>();
+	let inited = $state<boolean>(false);
 
 	// Find the active item index
 	let activeIndex = $derived.by(() => {
 		if (!list || !activeId) return 0;
-		const index = list.findIndex(item => +item.id === +activeId);
+		const index = list.findIndex((item) => +item.id === +activeId);
 		return index !== -1 ? index : 0;
 	});
 
@@ -43,21 +43,35 @@
 		if (!swiperEl) return;
 
 		swiper = new Swiper(swiperEl, {
-			modules: [Scrollbar],
+			modules: [Scrollbar, Mousewheel],
 
 			slidesPerView: 'auto',
 			spaceBetween: 8,
 			scrollbar: {
 				el: '.swiper-scrollbar',
-				draggable: true,
+				draggable: true
 			},
-			slidesOffsetBefore: 24,
+			mousewheel: {
+				enabled: true,
+				forceToAxis: false, // Forces horizontal scrolling even on vertical wheel movement
+				sensitivity: 1, // Adjust sensitivity (optional)
+				releaseOnEdges: true, // Prevents page scroll when reaching swiper edges
+			},
+
 
 			on: {
-				init: (s) => {
+				init: (s: Swiper & { virtualSize: number; size: number }) => {
 					setTimeout(() => {
-						swiperEl.style.opacity = '1';
-						s.slideTo(activeIndex, 300); // 300ms transition
+						//						swiperEl.style.opacity = '1';
+						const needsScrollbar = s.virtualSize > s.size;
+
+						if (needsScrollbar && activeIndex > 0) {
+							s.slideTo(activeIndex, 0); // 300ms transition
+						}
+
+						console.log('dump', swiper)
+
+						inited = true;
 					}, 100);
 				}
 			}
@@ -69,14 +83,10 @@
 
 		initSwiper();
 	});
-
-	onMount(() => {
-		console.log(Swiper);
-	});
 </script>
 
-<section use:removeNonComponentChildren>
-	<div class="swiper" bind:this={swiperEl}>
+<section class="" use:removeNonComponentChildren={inited}>
+	<div class="swiper color-selector--swiper-wrapper" class:swiper--inited={inited} bind:this={swiperEl}>
 		<div class="swiper-wrapper">
 			{#each list as item}
 				<div class="swiper-slide">
@@ -120,8 +130,13 @@
 		overflow: visible;
 		line-height: 0;
 		opacity: 0;
-		height: 64px;
+		height: 0;
 		transition: opacity 0.3s ease;
+
+		&--inited {
+			height: auto;
+			opacity: 1;
+		}
 	}
 
 	.color-selector--link {
@@ -130,6 +145,10 @@
 
 	.swiper-slide {
 		width: 64px;
+
+		@media screen and (max-width: 767px) {
+			width: 44px;
+		}
 	}
 
 	.color-selector--image {
@@ -138,7 +157,7 @@
 		border-radius: 5px;
 
 		@media screen and (max-width: 767px) {
-			width: 44px;
+			min-width: 44px;
 			height: 44px;
 		}
 	}
@@ -151,16 +170,20 @@
 	:root {
 		//--swiper-scrollbar-bottom: 4px;
 		//--swiper-scrollbar-size: 10px;
-		--swiper-scrollbar-bg-color: rgba(0,0,0,.2);
+		--swiper-scrollbar-bg-color: rgba(0, 0, 0, 0.2);
 		--swiper-scrollbar-sides-offset: 0;
 	}
 
 	:global(.swiper-scrollbar) {
-		transform: scaleX(.95)
+		transform: scaleX(0.95);
 	}
 
-	:global(.swiper-horizontal>.swiper-scrollbar, .swiper-scrollbar.swiper-scrollbar-horizontal) {
-		width: 100%!important;
+	:global(.swiper-scrollbar) {
+		transition: opacity 0.3s ease;
+	}
+
+	:global(.swiper-horizontal > .swiper-scrollbar, .swiper-scrollbar.swiper-scrollbar-horizontal) {
+		width: 100% !important;
 	}
 
 	:global(.swiper-scrollbar-drag) {

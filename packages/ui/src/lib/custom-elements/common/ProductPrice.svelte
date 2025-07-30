@@ -189,12 +189,12 @@
 				return ProductDetailsPagePrice;
 		}
 	});
+
+	const shouldShowPrice = $derived($marketCurrency && finalPrice.price !== '-1');
 </script>
 
-<div use:removeNonComponentChildren>
-	{#if $marketCurrency && finalPrice.price !== '-1'}
-		<div in:fade={{ delay: 350, duration: 50 }}>
-			<PriceUi {...finalPrice} />
-		</div>
+<div use:removeNonComponentChildren={shouldShowPrice}>
+	{#if shouldShowPrice}
+		<PriceUi {...finalPrice} />
 	{/if}
 </div>

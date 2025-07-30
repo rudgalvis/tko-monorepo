@@ -74,7 +74,7 @@ Metafield into UI
 
 {% assign color_variants_json = '[' | append: json_items | append: ']' %}
 
-{% render 'dump', value: color_variants_json%}
+{% render 'dump', value: combined_variants, label: 'dump combined'%}
 {% comment %}{% render 'dump', value: product.id%}{% endcomment %}
 
 
@@ -83,7 +83,11 @@ Metafield into UI
         list='{{ color_variants_json }}'
         activeId="{{ product.id }}"
     >
-        <div class="skeleton"></div>
+        <div class="skeleton">
+            {% for item in combined_variants %}
+                <div class="skeleton-wave"></div>
+            {% endfor %}
+        </div>
     </color-selector>
 </div>
 
@@ -93,11 +97,28 @@ Metafield into UI
         overflow: hidden;
     }
 
-
     color-selector .skeleton {
-        width: 64px;
+        display: flex;
+        width: calc(100% - 25px);
+        overflow: hidden;
+        gap: 8px;
+    }
+
+    @media screen and (max-width: 767px) {
+        color-selector .skeleton {
+            width: calc(100% - 6px);
+        }
+
+        .color-selector-wrapper {
+            width: calc(100% + 6px);
+        }
+    }
+
+
+    color-selector .skeleton > div {
+        min-width: 64px;
         height: 64px;
-        background: #d3d3d3;
+        border: 1px solid transparent;
         border-radius: 5px;
     }
 </style>

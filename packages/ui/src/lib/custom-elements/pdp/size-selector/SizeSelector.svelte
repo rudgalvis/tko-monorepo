@@ -1,6 +1,8 @@
 <svelte:options customElement={{ tag: 'size-selector', shadow: 'none' }} />
 
 <script lang="ts">
+	import { removeNonComponentChildren } from '$lib/utils/dom/remove-non-component-children.js';
+
 	type SizeVariant = {
 		url: string;
 		label: string;
@@ -23,7 +25,7 @@
 	});
 </script>
 
-<div class="size-selector">
+<div class="size-selector" use:removeNonComponentChildren>
 	{#each list as item}
 		<a href={item.url} class="pill" class:active={+item.id === +activeId}>
 			{item.label}
@@ -61,6 +63,10 @@
 		&.active {
 			background: #000;
 			color: #fff;
+		}
+
+		@media screen and (max-width: 767px) {
+			font-size: 14px;
 		}
 	}
 </style>
