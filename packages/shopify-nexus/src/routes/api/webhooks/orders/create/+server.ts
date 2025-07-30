@@ -57,10 +57,10 @@ const handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => {
 				logger.info(`<${orderId}> Will pause Pre-order for ${e.variantId}`)
 			)
 
-		// Disabling pre-order for items
-		const disableSellingOutOfStockPromises = itemsToPausePreorder.map(
-			productService.disableSellOutOfStock.bind(productService)
-		)
+		// Disabling pre-order for items - done by Globo app
+//		const disableSellingOutOfStockPromises = itemsToPausePreorder.map(
+//			productService.disableSellOutOfStock.bind(productService)
+//		)
 
 		// Sending pre-order emails
 		const preorderEmailPromises = mailingService.sendPreorderNotifications({
@@ -71,12 +71,12 @@ const handlePreOrders = async (webhookData: OrdersCreateWebhookBody) => {
 		})
 
 		// Parallelizing
-		const salePausePromise = Promise.all(disableSellingOutOfStockPromises)
+//		const salePausePromise = Promise.all(disableSellingOutOfStockPromises)
 		const preorderNotificationPromise = Promise.all(preorderEmailPromises)
 
 		// Get responses
-		const [, preorderNotificationResponses] = await Promise.all([
-			salePausePromise,
+		const [preorderNotificationResponses] = await Promise.all([
+//			salePausePromise,
 			preorderNotificationPromise,
 		])
 
