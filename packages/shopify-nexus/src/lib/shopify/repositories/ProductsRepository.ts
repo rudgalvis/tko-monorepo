@@ -28,6 +28,11 @@ import {
 	type ProductVariantsBulkUpdateReturn,
 } from '$lib/shopify/mutations/productVariantsBulkUpdateMutation'
 import {
+    getProductsTagsQuery,
+    type GetProductTagsQueryVars,
+    type GetProductTagsQueryVarsReturn,
+} from '$lib/shopify/queries/getProductsTagsQuery'
+import {
 	getProductVariantInventoryDetailsQuery,
 	type ProductVariantInventoryDetailsResponse,
 } from '$lib/shopify/queries/getProductVariantInventoryDetailsQuery'
@@ -168,6 +173,18 @@ export class ProductsRepository extends BaseRepository {
 
 		return data.productDelete
 	}
+
+    async getProductsTags(ids: string[]) {
+        const { data, errors } = await this.client.request<GetProductTagsQueryVarsReturn>(getProductsTagsQuery, {
+            variables: { ids } as GetProductTagsQueryVars,
+        })
+
+        if (errors) console.error(errors)
+
+        if (!data) return null
+
+        return data.nodes.filter(node => !!node).map((node) => node.tags)
+    }
 
 	async getVariantPrice(countryCode: string, variantGid: string): Promise<VariantPrice> {
 		const { data, errors } = await this.client.request<GetVariantPriceByIdResponse>(

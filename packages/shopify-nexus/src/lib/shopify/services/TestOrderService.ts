@@ -27,6 +27,7 @@ export class TestOrderService {
 				inventoryBehaviour: 'DECREMENT_OBEYING_POLICY',
 			},
 			order: {
+				note: 'Please customize this order',
 				lineItems,
 				currency: currencyCode,
 				customer: {

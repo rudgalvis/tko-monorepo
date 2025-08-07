@@ -6,7 +6,7 @@ test(
 	async () => {
 		const orderService = new OrderService();
 
-		await orderService.addComment(6444598886713, 'test');
+		await orderService.addComment(11787425644892, 'test');
 	},
 	{ timeout: 15000 }
 );

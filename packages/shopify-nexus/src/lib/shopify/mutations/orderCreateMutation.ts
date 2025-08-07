@@ -86,6 +86,7 @@ type Order = {
 		locationId: string;
 		shipmentStatus: string;
 	};
+    note?: string,
 	customer?: OrderCreateCustomerInput;
 	currency: string;
 	lineItems: OrderInputLineItem[];

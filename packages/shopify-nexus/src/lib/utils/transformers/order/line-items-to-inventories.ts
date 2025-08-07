@@ -15,7 +15,7 @@ export const orderLineItemsToOrderLineInventories = async (
 
 	if (!productVariants) return []
 
-	const quantities = orderLineItem.map(({ quantity, variant_id, name }) => ({
+	const quantities = orderLineItem.map(({ quantity, variant_id }) => ({
 		id: gidGenerator(ObjectsGIDS.PRODUCT_VARIANT, variant_id),
 		orderedQuantity: quantity,
 	}))

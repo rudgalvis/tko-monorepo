@@ -1,76 +1,101 @@
-import type { PreorderNotificationResponse } from '$lib/mailing/MailingService'
+import type { NotificationProcessStatus } from '$lib/mailing/MailingService'
 import { OrderRepository } from '$lib/shopify/repositories/OrderRepository'
 import type { OrderLineInventory } from '$lib/types/OrderLineInventory'
 import type { ProductVariantIdentifier } from '$lib/utils/transformers/order/parse-order-webhook'
+import { dev } from '$app/environment'
+
 
 export type GeneratePreorderNoteInput = {
-	preorderNotificationResponses: PreorderNotificationResponse[]
-	itemsToPausePreorder: ProductVariantIdentifier[]
-	orderId: number
-	orderLineInventories: OrderLineInventory[]
+    notificationResponses: NotificationProcessStatus[]
+    itemsToPausePreorder: ProductVariantIdentifier[]
+    orderId: number
+    orderLineInventories: OrderLineInventory[]
 }
 
 export class OrderService {
-	constructor(public orderRepository = new OrderRepository()) {}
+    constructor(public orderRepository = new OrderRepository()) {}
 
-	async addComment(orderId: number, comment: string) {
-		const original = await this.orderRepository.readNote(orderId)
+    async addComment(orderId: number, comment: string) {
+        const original = await this.orderRepository.readNote(orderId)
 
-		const timestamp = `🤖 RRXTO 🕐 ${new Date().toLocaleString('LT')}`
-		const commentParts = [timestamp, comment, original].filter(Boolean)
+        const timestamp = `🤖 RRXTO ${dev ? 'DEV' : ''} 🕐 ${new Date().toLocaleString('LT')}`
+        const commentParts = [timestamp, comment, original].filter(Boolean)
 
-		const formattedComment = commentParts.join('\n\n')
+        const formattedComment = commentParts.join('\n\n')
 
-		return this.orderRepository.updateNote(orderId, formattedComment)
-	}
+        return this.orderRepository.updateNote(orderId, formattedComment)
+    }
 
-	async generatePreorderNote({
-		preorderNotificationResponses,
-		itemsToPausePreorder,
-		orderId,
-		orderLineInventories,
-	}: GeneratePreorderNoteInput) {
-		const comment = [
-			this.buildEmailNotificationsComment(preorderNotificationResponses),
-			this.buildPreorderPauseComment(itemsToPausePreorder, orderLineInventories),
-		]
-			.filter(Boolean) // removes all falsy values
-			.join('\n')
+    async generatePreorderNote({
+        notificationResponses,
+        itemsToPausePreorder,
+        orderId,
+        orderLineInventories,
+    }: GeneratePreorderNoteInput) {
+        const comment = [
+            this.buildEmailNotificationsComment(notificationResponses),
+            this.buildPreorderPauseComment(itemsToPausePreorder, orderLineInventories),
+        ]
+            .filter(Boolean) // removes all falsy values
+            .join('\n')
 
-		if(!comment) return
+        if (!comment) return
 
-		return this.addComment(orderId, comment)
-	}
+        return this.addComment(orderId, comment)
+    }
 
-	private buildEmailNotificationsComment(
-		preorderNotificationResponses: PreorderNotificationResponse[]
-	) {
-		return preorderNotificationResponses.reduce((acc, { forItem, mailingStatus }) => {
-			const messageId = mailingStatus.meta?.id
-			const emailComment = [`✉️ Pre-order email sent for ${forItem} item.`, messageId]
-				.filter(Boolean)
-				.join('\n')
+    private buildEmailNotificationsComment(
+        preorderNotificationResponses: NotificationProcessStatus[]
+    ) {
+        return preorderNotificationResponses.reduce((acc, { forItem, mailingStatus, group }) => {
+            let contentLines: string[] = []
 
-			return acc ? `${emailComment}\n${acc}` : emailComment
-		}, '')
-	}
+            switch (group) {
+                case 'preorder':
+                    contentLines = [
+                        `✉️ Pre-order email sent for ${forItem} item.`,
+                        mailingStatus.meta?.id ||
+                            '❗️Mailing status ID not found. Contact developer.',
+                    ]
+                    break
+                case 'handmade':
+                    contentLines = [
+                        `✉️Handmade email sent for ${forItem} item.`,
+                        mailingStatus.meta?.id ||
+                            '❗️Mailing status ID not found. Contact developer.',
+                    ]
+                    break
+                case 'customization':
+                    contentLines = [
+                        `✉️ Customization email sent for this order.`,
+                        mailingStatus.meta?.id ||
+                            '❗️Mailing status ID not found. Contact developer.',
+                    ]
+                    break
+            }
 
-	private buildPreorderPauseComment(
-		itemsToPausePreorder: ProductVariantIdentifier[],
-		orderLineInventories: OrderLineInventory[]
-	) {
-		return itemsToPausePreorder
-			.map((item) => {
-				const details = orderLineInventories.find((e) => e.id === item.variantId)
-				if (!details) return ''
+            const emailComment = contentLines.filter(Boolean).join('\n')
 
-				const {
-					title,
-					product: { title: productTitle },
-				} = details
-				return `🛑 Pre-order disabled for ${productTitle} - ${title}`
-			})
-			.filter(Boolean)
-			.join('\n')
-	}
+            return acc ? `${emailComment}\n${acc}` : emailComment
+        }, '')
+    }
+
+    private buildPreorderPauseComment(
+        itemsToPausePreorder: ProductVariantIdentifier[],
+        orderLineInventories: OrderLineInventory[]
+    ) {
+        return itemsToPausePreorder
+            .map((item) => {
+                const details = orderLineInventories.find((e) => e.id === item.variantId)
+                if (!details) return ''
+
+                const {
+                    title,
+                    product: { title: productTitle },
+                } = details
+                return `🛑 Pre-order disabled for ${productTitle} - ${title}`
+            })
+            .filter(Boolean)
+            .join('\n')
+    }
 }
