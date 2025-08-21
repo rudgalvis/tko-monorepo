@@ -81,48 +81,48 @@
             "type": "Announcement",
             "settings": {
               "selectCountry": "US",
-              "announcement_text2": "<h4>FREE SHIPPING. US DUTIES & TAXES INCLUDED.</h4>",
-              "announcement_text_mobile2": "<h4>FREE SHIPPING. US DUTIES & TAXES INCLUDED.</h4>"
+              "announcement_text2": "<p>ARCHIVE SALE: KNITS UP TO 50% OFF</p>",
+              "announcement_text_mobile2": "<p>ARCHIVE SALE: KNITS UP TO 50% OFF</p>"
             }
           },
           "d02e68ec-d38b-4d9f-a1d0-d4c083477e44": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "EU",
-              "announcement_text2": "<h4>SUMMER SALE: 20% OFF SITEWIDE</h4>",
-              "announcement_text_mobile2": "<h4>SUMMER SALE: 20% OFF SITEWIDE</h4>"
+              "announcement_text2": "<p>ARCHIVE SALE: KNITS UP TO 50% OFF</p>",
+              "announcement_text_mobile2": "<p>ARCHIVE SALE: KNITS UP TO 50% OFF</p>"
             }
           },
           "7217c372-c6e4-47e9-ad10-ff267ba787a9": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "UK",
-              "announcement_text2": "<h4>FREE SHIPPING. UK DUTIES & TAXES INCLUDED.</h4>",
-              "announcement_text_mobile2": "<h4>FREE SHIPPING. UK DUTIES & TAXES INCLUDED.</h4>"
+              "announcement_text2": "<p>ARCHIVE SALE: KNITS UP TO 50% OFF</p>",
+              "announcement_text_mobile2": "<p>ARCHIVE SALE: KNITS UP TO 50% OFF</p>"
             }
           },
           "1dc1e8fe-b2e9-45d2-8404-f6255b708b52": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "ALL",
-              "announcement_text2": "<h4>FREE WORLDWIDE SHIPPING. DUTIES & TAXES INCLUDED.</h4>",
-              "announcement_text_mobile2": "<h4>FREE WORLDWIDE SHIPPING. DUTIES & TAXES INCLUDED.</h4>"
+              "announcement_text2": "<p>ARCHIVE SALE: KNITS UP TO 50% OFF</p>",
+              "announcement_text_mobile2": "<p>ARCHIVE SALE: KNITS UP TO 50% OFF</p>"
             }
           },
           "7ba786a5-7f72-46aa-b6fa-9f994a534b38": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "AU",
-              "announcement_text2": "<h4>FREE WORLDWIDE SHIPPING. DUTIES & TAXES INCLUDED.</h4>",
-              "announcement_text_mobile2": "<h4>FREE WORLDWIDE SHIPPING. DUTIES & TAXES INCLUDED.</h4>"
+              "announcement_text2": "<p>ARCHIVE SALE: KNITS UP TO 50% OFF</p>",
+              "announcement_text_mobile2": "<p>ARCHIVE SALE: KNITS UP TO 50% OFF</p>"
             }
           },
           "710025a2-82e7-4b4c-8e1c-b10a04d306e2": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "LT",
-              "announcement_text2": "<h4>SUMMER SALE: 20% OFF SITEWIDE</h4>",
-              "announcement_text_mobile2": "<h4>SUMMER SALE: 20% OFF SITEWIDE</h4>"
+              "announcement_text2": "<p>ARCHIVE SALE: KNITS UP TO 50% OFF</p>",
+              "announcement_text_mobile2": "<p>ARCHIVE SALE: KNITS UP TO 50% OFF</p>"
             }
           }
         },
@@ -143,7 +143,7 @@
           "show_announcement2": true,
           "announcement_home_only2": false,
           "announcement_color2": "#000000",
-          "announcement_background2": "#b4bed6"
+          "announcement_background2": "#d64651"
         }
       },
       "static-header": {
@@ -192,26 +192,24 @@
               "urlenabled": true
             }
           },
-          "d241092f-e2b3-4771-977a-d8bdfbe4ea27": {
+          "menu_jfdmk4": {
             "type": "menu",
-            "disabled": true,
             "settings": {
-              "titleofmenu": "EXPLORE",
-              "megamenu-layouts": "full-image",
+              "titleofmenu": "SHOP",
+              "megamenu-layouts": "image-submenu",
               "titleofimages": "",
-              "headerlayoutsx": "1",
-              "image_one": "shopify://shop_images/knit-care_4a7034d6-62fe-4097-9f67-bdb9102ac502.jpg",
-              "image_one_url": "shopify://pages/knit-care",
-              "image_one_text": "KNIT CARE GUIDE",
-              "image_two": "shopify://shop_images/knit-repair_78fc235d-d32b-4a08-91d3-176647c65d15.jpg",
-              "image_two_url": "shopify://pages/knotty-atelier",
-              "image_two_text": "KNOTTY ATELIER",
-              "image_three": "shopify://shop_images/mega_menu_cards_-_ss24_472_x_591_px.jpg",
-              "image_three_url": "shopify://pages/vilnius-showroom",
-              "image_three_text": "VILNIUS SHOWROOM",
-              "image_four": "shopify://shop_images/1.jpg",
-              "image_four_url": "shopify://blogs/news",
-              "image_four_text": "THE KNOTTY JOURNAL",
+              "headerlayoutsx": "3",
+              "image_one": "shopify://shop_images/Homepage-Mobile-Jura-Nutmeg-Archive3.jpg",
+              "image_one_url": "shopify://collections/archive-sale",
+              "image_one_text": "Archive Sale",
+              "image_two": "shopify://shop_images/vedrynas-butter-yellow-cotton-top-9660346.jpg",
+              "image_two_url": "shopify://collections/new-arrivals",
+              "image_two_text": "New arrivals",
+              "image_three": "shopify://shop_images/skraistas-lilac-silk-mohair-cropped-cardigan-731240.jpg",
+              "image_three_url": "shopify://collections/best-sellers",
+              "image_three_text": "Best sellers",
+              "image_four_url": "",
+              "image_four_text": "",
               "urlenabled": true
             }
           }
@@ -219,7 +217,7 @@
         "block_order": [
           "dc85cb10-6347-476f-9349-73bdf668c47f",
           "2e22bd71-9e28-4a41-98b5-225c74175958",
-          "d241092f-e2b3-4771-977a-d8bdfbe4ea27"
+          "menu_jfdmk4"
         ],
         "settings": {
           "menu": "main-menu",

@@ -12,6 +12,17 @@
     "163431162472dd1865": {
       "type": "static-slider",
       "blocks": {
+        "0e9ae8b2-9428-43ec-b04c-dddf10ea1b00": {
+          "type": "Slider",
+          "settings": {
+            "slide-image": "shopify://shop_images/Homepage-Desktop-Delcia-Green-Archive.jpg",
+            "slide-image-mobile": "shopify://shop_images/Homepage-Mobile-Delcia-Green-Archive.jpg",
+            "slide-text": "Bi-Annual Archive Sale",
+            "button-text": "SHOP  UP TO 50% OFF",
+            "button-link": "shopify://collections/archive-sale",
+            "slide-text-color": "#ffffff"
+          }
+        },
         "29690200-f0ed-4565-ae99-b2158de61cc4": {
           "type": "Slider",
           "disabled": true,
@@ -26,32 +37,21 @@
         },
         "9e54d3d6-c2af-4269-accc-86b80bee5446": {
           "type": "Slider",
-          "settings": {
-            "slide-image": "shopify://shop_images/Homepage_-_Desktop_569faf63-0ee2-4565-b7cc-0c28ccc5e5f7.jpg",
-            "slide-image-mobile": "shopify://shop_images/Homepage_-_Mobile_474610ba-cd25-44eb-a85f-369a4eee633c.jpg",
-            "slide-text": "Summer sale: 20% off all knits",
-            "button-text": "SHOP NOW",
-            "button-link": "shopify://collections/summer-sale",
-            "slide-text-color": "#ffffff"
-          }
-        },
-        "0e9ae8b2-9428-43ec-b04c-dddf10ea1b00": {
-          "type": "Slider",
           "disabled": true,
           "settings": {
-            "slide-image": "shopify://shop_images/Collection_-_Desktop_3516f562-415a-4c4f-b5f1-843aa7b5fa37.jpg",
-            "slide-image-mobile": "shopify://shop_images/Homepage_-_Mobile_0fbfd4b2-2f36-46d2-aafc-d6bd61705ad3.jpg",
-            "slide-text": "Artisan-Made Winter Layers",
-            "button-text": "SHOP KNITS",
-            "button-link": "shopify://collections/all",
+            "slide-image": "shopify://shop_images/Homepage_-_Desktop_be4b5cc8-858f-48da-aa01-fc242c5091ce.jpg",
+            "slide-image-mobile": "shopify://shop_images/Homepage_-_Mobile_19dfd11f-5a8e-4ed2-8c12-734f9684e5ac.jpg",
+            "slide-text": "Sun’s out, artisan knits on",
+            "button-text": "SUMMER PIECES",
+            "button-link": "shopify://collections/summer-pieces",
             "slide-text-color": "#ffffff"
           }
         }
       },
       "block_order": [
+        "0e9ae8b2-9428-43ec-b04c-dddf10ea1b00",
         "29690200-f0ed-4565-ae99-b2158de61cc4",
-        "9e54d3d6-c2af-4269-accc-86b80bee5446",
-        "0e9ae8b2-9428-43ec-b04c-dddf10ea1b00"
+        "9e54d3d6-c2af-4269-accc-86b80bee5446"
       ],
       "settings": {
         "slider-dot-color": "#ffffff",
@@ -220,14 +220,14 @@
         "borderlayouttwocl": "top-bottom",
         "textposition": "space-between",
         "sectionlayouttwocl": "image-text",
-        "headingcl": "NEW IN: TOM CARDIGAN IN TAUPE",
+        "headingcl": "NEW IN: Sėja Sweater",
         "showtitletwo": true,
         "h2maxwidthdesktop": 440,
         "h2maxwidthmobile": 280,
-        "bodycl": "We may have just found the perfect shade for our bestselling cardigan. Same timeless, artisan-made knit. Same archive price. Now in a fresh, seasonless neutral that plays nice with your whole wardrobe.",
+        "bodycl": "Say hello to Sėja (Eng. “sowing”). She’s lightweight, easy to wear, and handmade-to-order just for you using a zero-waste circular knitting technique.",
         "pmaxwidthdesktop": 440,
         "pmaxwidthmobile": 280,
-        "cl-image": "shopify://shop_images/Homepage_Square_900x900-2_33ac6a50-3dc7-43e4-9e8a-57442868d10e.jpg",
+        "cl-image": "shopify://shop_images/Homepage_Square_900x900-2_a747c875-8ce4-40f3-8293-434fdf9257a9.jpg",
         "padding_sizeupm_section": 15,
         "padding_sizedownm_section": 15,
         "padding_sizeup": 15,
@@ -236,7 +236,7 @@
         "padding_sizedownm": 15,
         "showurlcl": true,
         "linkTextcl": "SHOP NOW",
-        "linkclUrl": "shopify://products/tom-taupe-cotton-cardigan",
+        "linkclUrl": "shopify://products/seja-silver-grey-cotton-sweater",
         "sectionID": ""
       }
     },
