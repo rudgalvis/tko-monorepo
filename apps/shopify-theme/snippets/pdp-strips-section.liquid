@@ -1,0 +1,27 @@
+{% assign discount_code_label = product.selected_or_first_available_variant.metafields.preorder.preordercontent.value %}
+{% assign discount_code_value = '12312312' %}
+
+{% assign pre_order_message = product.selected_or_first_available_variant.metafields.preorder.preordercontent.value %}
+
+{% assign show_strips = false %}
+{% if discount_code_label != blank and discount_code_value != blank %}
+    {% assign show_strips = true %}
+{% elsif pre_order_message != blank %}
+    {% assign show_strips = true %}
+{% endif %}
+
+{% if show_strips %}
+    <div class="strips-section">
+        {% render '1ib-discount-strip', discount_code_label: discount_code_label, discount_code_value: discount_code_value %}
+        {% render '1ib-pre-order-strip', pre_order_message: pre_order_message %}
+    </div>
+{% endif %}
+
+<style>
+    .strips-section {
+        margin: 24px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+</style>

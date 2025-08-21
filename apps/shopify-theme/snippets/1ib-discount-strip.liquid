@@ -1,0 +1,85 @@
+{% if discount_code_label != nil and discount_code_value != nil %}
+    <div class="discount-strip">
+        <p class="label" data-code="{{ discount_code_value }}">{{ discount_code_label }}</p>
+
+        <div class="discount-strip--copy">
+            <svg width="17" height="20" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 16C5.45 16 4.97917 15.8042 4.5875 15.4125C4.19583 15.0208 4 14.55 4 14V2C4 1.45 4.19583 0.979167 4.5875 0.5875C4.97917 0.195833 5.45 0 6 0H15C15.55 0 16.0208 0.195833 16.4125 0.5875C16.8042 0.979167 17 1.45 17 2V14C17 14.55 16.8042 15.0208 16.4125 15.4125C16.0208 15.8042 15.55 16 15 16H6ZM6 14H15V2H6V14ZM2 20C1.45 20 0.979167 19.8042 0.5875 19.4125C0.195833 19.0208 0 18.55 0 18V4H2V18H13V20H2Z" fill="black"/>
+            </svg>
+        </div>
+    </div>
+{% endif %}
+
+<script type="text/javascript">
+  function setupDiscountStripCopyListeners() {
+    // Find all discount strips on the page
+    const discountStrips = document.querySelectorAll('.discount-strip');
+
+    discountStrips.forEach(strip => {
+      const copyButton = strip.querySelector('.discount-strip--copy');
+      const label = strip.querySelector('.label');
+      const code = label.getAttribute('data-code');
+
+      if (copyButton && label) {
+        copyButton.addEventListener('click', async function() {
+          try {
+            // Use the modern clipboard API if available
+            if (navigator.clipboard && window.isSecureContext) {
+              await navigator.clipboard.writeText(code);
+            } else {
+              // Fallback for older browsers or non-HTTPS contexts
+              const textArea = document.createElement('textarea');
+              textArea.value = textToCopy;
+              textArea.style.position = 'fixed';
+              textArea.style.left = '-999999px';
+              textArea.style.top = '-999999px';
+              document.body.appendChild(textArea);
+              textArea.focus();
+              textArea.select();
+              document.execCommand('copy');
+              textArea.remove();
+            }
+
+            label.innerText = 'Code copied!'
+
+            setTimeout(() => {
+              label.innerText = '{{ discount_code_label }}'
+            }, 3000);
+
+            console.log('Text copied to clipboard:', textToCopy);
+          } catch (err) {
+            console.error('Failed to copy text: ', err);
+          }
+        });
+      }
+    });
+  }
+
+  // Initialize when the DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupDiscountStripCopyListeners);
+  } else {
+    setupDiscountStripCopyListeners();
+  }
+</script>
+
+<style>
+    .discount-strip {
+        color: black;
+        text-align: center;
+        padding: 8px 24px;
+        position: relative;
+        background-color: rgba(171, 182, 208, 0.25);
+    }
+
+
+    .discount-strip--copy {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 8px;
+        padding: 4px;
+        cursor: pointer;
+    }
+</style>
+

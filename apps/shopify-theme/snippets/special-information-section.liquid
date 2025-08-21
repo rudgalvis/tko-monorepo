@@ -1,0 +1,55 @@
+{% comment %}
+    params
+    list: string[]
+{% endcomment %}
+
+<div class="special-information">
+    {% for item in list %}
+        <div class="special-information--value">
+            <svg  viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 9.65L0 5.65L1.4 4.25L4 6.85L10.6 0.25L12 1.65L4 9.65Z" fill="#018849"/>
+            </svg>
+
+            <p class="label">{{ item | escape }} </p>
+        </div>
+    {% endfor %}
+</div>
+
+<style>
+    .special-information {
+        width: 100%;
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        color: black;
+        padding: 16px 0;
+        border-top: 1px solid rgba(205, 205, 205, 1);
+        border-bottom: 1px solid rgba(205, 205, 205, 1);
+        margin: 16px 0;
+    }
+
+    @media screen and (max-width: 767px) {
+        .special-information {
+            font-size: 14px;
+        }
+    }
+
+    .special-information--value {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .special-information--value  svg {
+        padding: 8px;
+        width: 32px;
+    }
+
+    @media screen and (max-width: 767px) {
+        .special-information--value  svg {
+            padding: 4px;
+            width: 24px;
+        }
+    }
+
+</style>

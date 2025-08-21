@@ -184,9 +184,10 @@
         <meta name="robots" content="noindex, nofollow">
     {%- endif -%}
 
-    <meta name="google-site-verification" content="vS2D_FQFHham0PaEZQocJ8A26Ep9YpU_AOvn9YZ-0EY" />
-
     {% comment %}Ref: https://help.shopify.com/en/manual/online-store/themes/themes-by-shopify/vintage-themes/customizing-vintage-themes/show-remaining-quantity?section=Debut{% endcomment %}
+
+
+    {{ 'globo-preorder.css' | asset_url | stylesheet_tag }}
 </head>
 
 <body class="gradient" data-iso-code="{{ localization.country.iso_code }}">
@@ -215,7 +216,9 @@
     splitit('init', {
         apiKey: '3d2e63d4-7173-481f-96fa-363bf0fe0a2b',
         lang: 'en-US',
-        currency: 'EUR',
+        currency: 'EUR' +
+            '' +
+            '',
         currencySymbol: '€',
         debug: false,
     });
@@ -345,6 +348,25 @@
 {% render 'globo.preorder.custom' %}
 
 <script type="text/javascript">
+    const dump = (...args) => console.log('dump', ...args)
+
+    function waitForFooterScripts() {
+        const checkInterval = setInterval(() => {
+            if (typeof window['footerScripts'] === 'function') {
+                clearInterval(checkInterval);
+                window['footerScripts']();
+            }
+        }, 100); // Check every 100ms
+
+        // Optional: Add a timeout to prevent infinite polling
+        setTimeout(() => {
+            clearInterval(checkInterval);
+            console.warn('footerScripts not found within timeout period');
+        }, 10000); // 10 second timeout
+    }
+
+    waitForFooterScripts();
+
     rivets.formatters.currency = {
         read: function(value) {
             return Math.round((value / 100)).toFixed(2)
@@ -352,6 +374,136 @@
         publish: function(value) {
             return Math.round(parseFloat(value) * 100)
         }
+    }
+
+    rivets.formatters.cartamount = (v) => {
+        dump(GloboPreorderParams.cart.checkout_charge_amount)
+
+        return GloboPreorderParams.cart.checkout_charge_amount
+    }
+    rivets.formatters.original_price = (cartItem) => window['cartItemToPreorderCartItem'](cartItem).original_price
+    rivets.formatters.final_price = (cartItem) => window['cartItemToPreorderCartItem'](cartItem).final_price
+    rivets.formatters.checkout_price = (cartItem) => window['cartItemToPreorderCartItem'](cartItem).pre_oder_price?.checkout_price
+    rivets.formatters.remaining_price = (cartItem) => window['cartItemToPreorderCartItem'](cartItem).pre_oder_price?.remaining_price
+    rivets.formatters.isPartialPayment = (cartItem) => !!window['cartItemToPreorderCartItem'](cartItem).pre_oder_price
+
+    rivets.formatters.total_checkout_price = (b, v) => {
+        console.log('dump',v.items[0].quantity)
+        let result = 0
+
+        v.items.forEach(item => {
+
+            const {pre_oder_price, final_price} = window['cartItemToPreorderCartItem'](item)
+
+            if(pre_oder_price) {
+                result += pre_oder_price.checkout_price
+            } else {
+                result += final_price
+            }
+        })
+
+        return result
+    }
+
+    let isUpdate = false
+
+    // $(document).on('cart.requestStarted', function(event, cart) {
+    //    dump('Cart request started');
+    //     // Show loading indicator, disable buttons, etc.
+    // });
+    //
+    // $(document).on('cart.requestComplete', function(event, cart) {
+    //    dump('Cart request complete');
+    //     // Show loading indicator, disable buttons, etc.
+    // });
+    //
+    // $(document).on('cart:before-update', function(event, cart) {
+    //    dump('Cart before-update');
+    //     // Show loading indicator, disable buttons, etc.
+    // });
+    //
+    // $(document).on('cart:before-update-item', function(event, cart) {
+    //     isUpdate = true
+    //    dump('Cart cart:before-update-item');
+    //     // Show loading indicator, disable buttons, etc.
+    // });
+    //
+    // let dbc
+    // $(document).on('cart.requestComplete', function(event, cart) {
+    //     clearTimeout(dbc)
+    //
+    //     dbc = setTimeout(() => {
+    //         if(isUpdate) {
+    //             dump('update complete')
+    //             isUpdate = false
+    //             return
+    //         }
+    //
+    //         dump('regular fetch complete')
+    //     }, 100)
+    //     // Show loading indicator, disable buttons, etc.
+    // });
+
+    // Force recalculation
+    // setTimeout(() => {
+    //     const el = document.getElementById('total-value-rivets');
+    //
+    //     dump({el})
+    //     const view = rivets.bind(el, '123123');
+    //
+    //     dump({view, data: view.model})
+    //     view.sync();
+    // }, 1000)
+
+    rivets.formatters.dump = (v) => {
+        console.log('dump', v)
+
+        return v
+        // setTimeout(() => {
+        // const variantId = v.variant_id;
+        // const productId = v.product_id;
+        // const productJson = Globo.Preorder.settings.products[productId];
+        // const profile = Globo.Preorder.getProductProfile(v, variantId, null);
+        // console.log('dump', {variantId, productId, profile})
+        // let released = '';
+        // switch (profile.discountPayment.partialPayment?.remainingBalanceChargeTrigger ?? 'MANUAL') {
+        //     case 'MANUAL':
+        //         released = new Date(now.setMonth(now.getMonth() + 6));
+        //         break;
+        //     case 'EXACT_TIME':
+        //         released = new Date(profile.discountPayment.partialPayment.remainingBalanceChargeExactTime);
+        //         break;
+        //     case 'TIME_AFTER_CHECKOUT':
+        //         const remainingBalanceChargeTimeAfterCheckout = profile.discountPayment.partialPayment.remainingBalanceChargeTimeAfterCheckout.replace('P', '').replace('D', '').replace('W', '').replace('M', '');
+        //         switch (profile.discountPayment.partialPayment?.remainingBalanceChargeTimeAfterCheckoutType ?? 'day') {
+        //             case 'day':
+        //                 released = new Date(now.setDate(now.getDate() + parseInt(remainingBalanceChargeTimeAfterCheckout)));
+        //                 break;
+        //             case 'week':
+        //                 released = new Date(now.setDate(now.getDate() + (parseInt(remainingBalanceChargeTimeAfterCheckout) * 7)));
+        //                 break;
+        //             case 'month':
+        //                 released = new Date(now.setMonth(now.getMonth() + parseInt(remainingBalanceChargeTimeAfterCheckout)));
+        //                 break;
+        //         }
+        //         break;
+        // }
+        // console.log('dump', released)
+        /* replace {{ release }} == released variable */
+        // }, 2000)
+
+        // console.log('dump',v)
+    }
+
+
+    window['a'] = () => {
+        dump(GloboPreorderParams.cart.items.find(e => e.handle === 'test-test').selling_plan_allocation)
+    }
+
+    window['getCart'] =  async () => {
+        await CartJS.getCart();
+
+        window['a']()
     }
 </script>
 </body>

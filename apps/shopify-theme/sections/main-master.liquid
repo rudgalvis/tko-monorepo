@@ -7,6 +7,10 @@
 {{ 'notifyme.css' | asset_url | stylesheet_tag }}
 
 
+<script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+
 <link rel="stylesheet" href="{{ 'component-card.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-product-grid.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -443,19 +447,22 @@ Mobile Slider
             </div>
 
         </div>
-        {% comment %}<div>{% endcomment %}
-            {% comment %}{% render  %}{% endcomment %}
-        {% comment %}</div>{% endcomment %}
         <div class="product__info-wrapper grid__item">
             <div id="ProductInfo-{{ section.id }}"
                  class="product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
                 {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
+                <div>
+                    {% render 'standard-add-to-cart',
+                            product:product,
+                            product_form_id: product_form_id,
+                            section: section
+                    %}
+                </div>
+
                 {%- for block in section.blocks -%}
                     {%- case block.type -%}
-
-
-                        {%- when 'title' -%}
+                        {%- when 'title___false' -%}
                             <div class="mobile___adjustment">
                             <div class="mobile___price_holder">
                                 <div class="title-heart-container">
@@ -472,10 +479,9 @@ Mobile Slider
                             <p class="product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}" {{ block.shopify_attributes }}>
                                 {{- block.settings.text -}}
                             </p>
-                        {%- when 'price' -%}
+                        {%- when 'price___false' -%}
                             <div class="price___adjustment  {% if product.tags contains 'pre-order' %} price_adjustment_pre__order {% endif %}">
                                 {% render '1lib-pdp-price', product: product, pageQuerystring: pageQuerystring %}
-
 
                                 <div class="split-container">
                                     <p>All import taxes and duties are <b>included</b>.</p>
@@ -495,8 +501,6 @@ Mobile Slider
                             {% endif %}
                             {%- endcomment -%}
 
-                            {% render '1ib-pre-order-strip' %}
-
                             {% comment %}<div id="preorderholder"{% endcomment %}
                                  {% comment %}class="pre-order-holder {% if product.tags contains 'pre-order' %} preorder__show_on_desktop {% endif %}">{% endcomment %}
                                 {% comment %}{% if product.tags contains 'pre-order' %}{% endcomment %}
@@ -507,11 +511,11 @@ Mobile Slider
 
 
                         {%- when 'description' -%}
-                            <div class="product___summary">
-                                <p>{{ product.content }}</p>
+                            <div class="body" style="color: black;">
+                                {{ product.content }}
                             </div>
 
-                        {%- when 'variant_picker' -%}
+                        {%- when 'variant_picker___false' -%}
 
                             {% assign sizeofsize = product.variants[0].option2 %}
 
@@ -653,7 +657,7 @@ Mobile Slider
                                         mobile: false,
                                 %}
                             {% endunless %}
-                        {%- when 'size' -%}
+                        {%- when 'size___false' -%}
 
 
                             {%- comment -%}detect button type{%- endcomment -%}
@@ -848,7 +852,6 @@ Mobile Slider
                                     {% endfor %}
                                 </div>
 
-
                                 <div class="buy-button-holder">
 
 
@@ -910,21 +913,28 @@ Mobile Slider
 
                             {% if informationcontrol != "" %}
 
-                                <div class="product-options__wrapper">
-                                    {% assign information = block.settings.specialfeatures | split: "," %}
-                                    {% if product.metafields.productsize.sizeguide != nil and sizeofsize != 'One Size' %}
-                                        <div class="size-guide">
-                                            {% render 'size-guide-link' %}
-                                        </div>
-                                    {% endif %}
-                                    <div class="option-select__wrapper">
-                                        {% for informations in information %}
-                                            <div class="osp osp-left">
-                                                <img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/product-dots.svg?v=1642786923"/>
-                                                <p> {{ informations | escape }} </p>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
+                                {% assign information = block.settings.specialfeatures | split: "," %}
+
+                                {% render 'special-information-section', list: information %}
+
+                                {% comment %}<div class="product-options__wrapper">{% endcomment %}
+
+                                    {% comment %}{% if product.metafields.productsize.sizeguide != nil and sizeofsize != 'One Size' and false %}{% endcomment %}
+                                        {% comment %}<div class="size-guide">{% endcomment %}
+                                            {% comment %}{% render 'size-guide-link' %}{% endcomment %}
+                                        {% comment %}</div>{% endcomment %}
+                                    {% comment %}{% endif %}{% endcomment %}
+                                    {% comment %}{% endcomment %}
+                                    {% comment %}<div class="option-select__wrapper">{% endcomment %}
+                                        {% comment %}{% render 'dump', value: information %}{% endcomment %}
+                                        {% comment %}{% for informations in information %}{% endcomment %}
+                                            {% comment %}teststees{% endcomment %}
+                                            {% comment %}<div class="osp osp-left">{% endcomment %}
+                                                {% comment %}<img src="https://cdn.shopify.com/s/files/1/0548/6644/4336/files/product-dots.svg?v=1642786923"/>{% endcomment %}
+                                                {% comment %}<p> {{ informations | escape }} </p>{% endcomment %}
+                                            {% comment %}</div>{% endcomment %}
+                                        {% comment %}{% endfor %}{% endcomment %}
+                                    {% comment %}</div>{% endcomment %}
                                     {%- comment -%}
                                     {% if product.tags contains 'pre-order' %}
                                        <div class="pre-order-mobile-holder" id="pre-order-mobile-holder">
@@ -933,8 +943,8 @@ Mobile Slider
                                  {% endif %}
                                  {%- endcomment -%}
 
-
-                                </div>
+{% comment %}{% endcomment %}
+                                {% comment %}</div>{% endcomment %}
 
                             {% endif %}
 
@@ -946,35 +956,7 @@ Mobile Slider
 
                         {%- when 'collapse' -%}
 
-
-                            <div class="product___descriptions_holder">
-                                <ul>
-
-                                    {%- for block in section.blocks -%}
-                                        {%- case block.type -%}
-                                            {%- when 'collapsible_tab' -%}
-                                                {% assign title = block.settings.heading %}
-                                                {% assign content = block.settings.content %}
-
-                                                {% comment %}V2 content is not set, render hardcoded legacy values{% endcomment %}
-                                                {% comment %}{% if block.settings.content == "" or block.settings.content == null %}{% endcomment %}
-                                                    {% comment %}{% case block.settings.collapse_order %}{% endcomment %}
-                                                        {% comment %}{%- when 'first' -%}{% endcomment %}
-                                                            {% comment %}{% assign content = product.metafields.my_fields.material_care.value %}{% endcomment %}
-                                                        {% comment %}{%- when 'second' -%}{% endcomment %}
-                                                            {% comment %}{% assign content = product.metafields.my_fields.free_shipping_returns.value %}{% endcomment %}
-                                                        {% comment %}{%- when 'third' -%}{% endcomment %}
-                                                            {% comment %}{% assign content = product.metafields.my_fields.sustainability.value %}{% endcomment %}
-                                                    {% comment %}{% endcase %}{% endcomment %}
-                                                {% comment %}{% endif %}{% endcomment %}
-
-                                                {% unless content == "" or block.settings.content == null %}
-                                                    {% render 'collapsible-tab', content: content, title: title %}
-                                                {% endunless %}
-                                        {%- endcase -%}
-                                    {%- endfor -%}
-                                </ul>
-                            </div>
+                            {% render 'pdp-accordion' %}
 
                         {%- when 'setsaveme' -%}
 
@@ -1437,14 +1419,14 @@ Mobile Slider
 </section>
 
 <script>
-    let url = new URL(window.location.href);
-    let params = url.searchParams;
-
-    if (params.has('variant')) {
-        params.delete('variant');
-        url.search = params.toString();
-        window.location.replace(url.toString());
-    }
+    // let url = new URL(window.location.href);
+    // let params = url.searchParams;
+    //
+    // if (params.has('variant')) {
+    //     params.delete('variant');
+    //     url.search = params.toString();
+    //     window.location.replace(url.toString());
+    // }
 </script>
 
 <script type="application/ld+json">
@@ -1575,6 +1557,20 @@ Mobile Slider
             }
           ],
           "default": "first"
+        },
+        {
+          "type": "text",
+          "id": "discount-code",
+          "default": "Collapsible tab",
+          "info": "Enter discount code message only here. Code itself should be coppied to next input",
+          "label": "Discount code message"
+        },
+        {
+          "type": "text",
+          "id": "discount-message",
+          "default": "Collapsible tab",
+          "info": "Enter discount code message only here. Code itself should be coppied to next input",
+          "label": "Discount code message"
         },
         {
           "type": "text",

@@ -1,0 +1,34 @@
+<div class="pdp-accordion">
+    <ul>
+
+        {%- for block in section.blocks -%}
+            {%- case block.type -%}
+                {%- when 'collapsible_tab' -%}
+                    {% assign title = block.settings.heading %}
+                    {% assign content = block.settings.content %}
+
+                    {% comment %}V2 content is not set, render hardcoded legacy values{% endcomment %}
+                    {% comment %}{% if block.settings.content == "" or block.settings.content == null %}{% endcomment %}
+                    {% comment %}{% case block.settings.collapse_order %}{% endcomment %}
+                    {% comment %}{%- when 'first' -%}{% endcomment %}
+                    {% comment %}{% assign content = product.metafields.my_fields.material_care.value %}{% endcomment %}
+                    {% comment %}{%- when 'second' -%}{% endcomment %}
+                    {% comment %}{% assign content = product.metafields.my_fields.free_shipping_returns.value %}{% endcomment %}
+                    {% comment %}{%- when 'third' -%}{% endcomment %}
+                    {% comment %}{% assign content = product.metafields.my_fields.sustainability.value %}{% endcomment %}
+                    {% comment %}{% endcase %}{% endcomment %}
+                    {% comment %}{% endif %}{% endcomment %}
+
+                    {% unless content == "" or block.settings.content == null %}
+                        {% render 'collapsible-tab', content: content, title: title %}
+                    {% endunless %}
+            {%- endcase -%}
+        {%- endfor -%}
+    </ul>
+</div>
+
+<style>
+    .pdp-accordion {
+        margin-top: 24px;
+    }
+</style>

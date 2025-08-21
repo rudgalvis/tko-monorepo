@@ -62,6 +62,8 @@ Create Json for product variant color or image
 {%- endcomment -%}
 
 
+{% comment %}{% render 'dump', value: cart %}{% endcomment %}
+
 <div class="color-holder__x" data-colorb="{{ settings.colorswatch }}"></div>
 <div class="drawer-container" data-cart-view="data-cart-view">
 
@@ -85,11 +87,10 @@ Create Json for product variant color or image
 
 
         <div class="drawer-product-container" rv-each-item="cart.items">
-            <div class="drawer-product-item">
+            <div class="drawer-product-item" rv-data-id="item.id">
 
                 <div class="dpi dpi-left" style="cursor: pointer" onclick="location.href=this.getAttribute('data-url')" rv-data-url="item.url">
                     <img class="drawer-product-image" rv-src="item.featured_image.url | addsize "/>
-
                 </div>
 
 
@@ -131,24 +132,53 @@ Create Json for product variant color or image
                                         <a href="javascript:void(0);" rv-data-cart-update="index | plus 1"
                                            rv-data-cart-quantity="item.quantity | plus 1">+</a>
                                     </div>
-
-
                                 </div>
                             </div>
 
                             <div class="drawer-price-container">
                                 <p class="drawer-price">
-                                    <product-price rv-price="item.final_line_price | currency"
-                                                   rv-compared_at="item.original_line_price | currency"
-                                                   iso_code="{{ localization.country.iso_code }}"
-                                                   rv-variant_id="item.variant_id"
-                                                   type="CartItemPrice">
-                                        {% if product.compare_at_price > product.price %}
-                                            <s aria-label="Original price" style="opacity: 0;">{{ product.compare_at_price | money }}</s>
-                                        {% endif %}
+                                    <div rv-hide="item | isPartialPayment">
+                                        <product-price rv-price="item | final_price | currency"
+                                                       rv-compared_at="item | original_price | currency"
+                                                       iso_code="{{ localization.country.iso_code }}"
+                                                       rv-variant_id="item.variant_id"
+                                                       type="CartItemPrice">
+                                            {% if product.compare_at_price > product.price %}
+                                                <s aria-label="Original price" style="opacity: 0;">{{ product.compare_at_price | money }}</s>
+                                            {% endif %}
 
-                                        <strong aria-label="Current price" style="opacity: 0;">{{ product.price | money }}</strong>
-                                    </product-price>
+                                            <strong aria-label="Current price" style="opacity: 0;">{{ product.price | money }}</strong>
+                                        </product-price>
+                                    </div>
+
+                                    <div rv-show="item | isPartialPayment">
+                                        {% comment %}<div>price now: <p rv-text="item | checkout_price | currency"></p></div>{% endcomment %}
+                                        {% comment %}<div>later: <p rv-text="item | remaining_price | currency"></p></div>{% endcomment %}
+
+                                        <div style="position: absolute; top: 0; transform: translateY(-100%); right: 0; opacity: .7; width: 250px; text-align: right;">
+                                            <p style="font-family: Monument; font-size: 10px; text-transform: uppercase">Full price:</p>
+                                            <div style="display: flex; justify-content: flex-end">
+                                            <product-price rv-price="item | final_price | currency"
+                                                           rv-compared_at="item | original_price | currency"
+                                                           iso_code="{{ localization.country.iso_code }}"
+                                                           rv-variant_id="item.variant_id"
+                                                           type="CartItemPrice">
+                                                {% if product.compare_at_price > product.price %}
+                                                    <s aria-label="Original price" style="opacity: 0;">{{ product.compare_at_price | money }}</s>
+                                                {% endif %}
+
+                                                <strong aria-label="Current price" style="opacity: 0;">{{ product.price | money }}</strong>
+                                            </product-price>
+                                            </div>
+                                            <p style="font-family: Monument; font-size: 10px; text-transform: uppercase">Pay now:</p>
+                                        </div>
+
+
+                                        <product-price rv-price="item | checkout_price | currency"
+                                                       iso_code="{{ localization.country.iso_code }}"
+                                                       type="CartItemPrice">
+                                        </product-price>
+                                    </div>
                                 </p>
                             </div>
                         </div>
@@ -217,7 +247,7 @@ Create Json for product variant color or image
             </div>
         {% endif %}
 
-        <div class="dpi-footer">
+        <div class="dpi-footer"  id="total-price-drawer-footer">
             <div style="margin: 10px -25px 0 0;">
                 <div class="cart-recommendations"></div>
             </div>
@@ -228,9 +258,8 @@ Create Json for product variant color or image
 
             <div class="title-price">
                 <p>TOTAL</p>
-                <p legacy-rv-html="cart.total_price | currency | money Currency.currentCurrency ">
-                    <product-price rv-price="cart.total_price | currency"
-                                   rv-compared_at="cart.original_total_price | currency"
+                <p style="margin-top: 18px">
+                    <product-price rv-price="total | currency" rv-compared_at="totalOriginal | currency"
                                    iso_code="{{ localization.country.iso_code }}"
                                    type="CartTotalPrice">
                         {% if product.compare_at_price > product.price %}
@@ -241,7 +270,23 @@ Create Json for product variant color or image
                     </product-price>
                 </p>
             </div>
-            <span class="co-wrapper" rv-show="cart.total_price | gt 0">
+
+            <div class="all-discounts" rv-show="discounts | gt 0">
+                <p>Discounts applied:</p>
+                <div class="all-discounts--value">
+                    <span>-</span><product-price rv-price="discounts | currency"
+                                   iso_code="{{ localization.country.iso_code }}"
+                                   type="CartItemPrice">
+                        {% if product.compare_at_price > product.price %}
+                            <s aria-label="Original price" style="opacity: 0;">{{ product.compare_at_price | money }}</s>
+                        {% endif %}
+
+                        <strong aria-label="Current price" style="opacity: 0;">{{ product.price | money }}</strong>
+                    </product-price>
+                </div>
+            </div>
+
+            <span class="co-wrapper" rv-show="items | gt 0">
              <form action="/cart" method="post">
                 <button class="co_button" type="submit" name="checkout"><span
                             id="checkout-text">CHECKOUT</span></button>
@@ -261,6 +306,32 @@ Create Json for product variant color or image
 </div>
 
 <style>
+    .all-discounts {
+        display: flex;
+        justify-content: space-between;
+        margin: -10px 0 16px;
+    }
+    .all-discounts p {
+        font-size: 14px;
+        color: #000;
+        font-family: Monument;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        letter-spacing: -.34px;
+    }
+    .all-discounts--value {
+        display: flex;
+    }
+    .all-discounts--value span {
+        font-size: 16px;
+        font-weight: 200;
+        font-family: "Monument", sans-serif;
+        line-height: 18px;
+    }
+    .all-discounts--value .price-ui--value {
+        /*color: rgb(210, 25, 16)!important;*/
+    }
+
     .recommendation-title{
         font-size: 14px;
         color: #000;

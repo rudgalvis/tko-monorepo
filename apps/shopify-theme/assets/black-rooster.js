@@ -7,7 +7,7 @@ var isOS = mdm.os();
 /*-------------------------------------------------*/
 
 rivets.formatters.addsize = function (value) {
-  if (value != null || value != "") {
+  if (value != null && value != "") {
     var image = value;
     var small = image.split("?");
     var url = small[0].slice(0, -4);

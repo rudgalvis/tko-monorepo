@@ -25,7 +25,11 @@
                    compared_at="{{ product.variants[0].compare_at_price | money_without_trailing_zeros | strip_html }}"
                    product_id="{{ product.id }}"
                    iso_code="{{ localization.country.iso_code }}"
-                   type="CollectionItemPrice"></product-price>
+                   type="CollectionItemPrice">
+        <div class="skeleton">
+            <div class="skeleton-wave"></div>
+        </div>
+    </product-price>
 
     {% if isSoldOut %}
         <div class="sold-out-at-price">
@@ -37,5 +41,12 @@
 <style scoped>
     .product-card-price {
         margin-top: 10px;
+    }
+
+    product-price .skeleton > div {
+        height: 19px;
+        width: 70px;
+        border-radius: 50px;
+        overflow: hidden;
     }
 </style>

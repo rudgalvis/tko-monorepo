@@ -148,6 +148,42 @@
 .color-icon-outline-button {
   --color-icon: rgb(var(--color-base-outline-button-labels));
 }
+
+
+@keyframes skeleton-wave {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton-wave {
+  position: relative;
+  background-color: #dfdfdf;
+  overflow: hidden;
+}
+
+.skeleton-wave::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+  );
+  animation: skeleton-wave 1.6s linear infinite;
+}
+
 /*
 .tko-grid > [style^='--aspect-ratio']::before {
   content: "";
