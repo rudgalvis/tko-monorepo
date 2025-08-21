@@ -165,6 +165,14 @@
                     {%- endif -%}
                 </div>
             {%- endform -%}
+
+
+            <div class="pdp-disclaimer">
+                <p class="fine muted">
+                    All import taxes and duties are included.
+                </p>
+            </div>
+
         </product-form>
     {%- else -%}
         <div class="product-form">
@@ -218,6 +226,12 @@
 </div>
 
 <style>
+    .pdp-disclaimer {
+        width: 100%;
+        text-align: center;
+        margin-top: -8px;
+    }
+
     product-price .skeleton > div {
         height: 30px;
         width: 150px;

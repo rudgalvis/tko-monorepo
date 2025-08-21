@@ -74,3 +74,21 @@
   }
 }
 
+.fine {
+  font-family: 'Monument Regular', sans-serif;
+  letter-spacing: -0.12px;
+  font-size: 14px;
+  line-height: 26px;
+}
+
+.fine.muted {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 767px) {
+  .fine {
+    font-size: 12px;
+  }
+}
+
+
