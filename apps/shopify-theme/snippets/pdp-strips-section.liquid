@@ -1,5 +1,5 @@
-{% assign discount_code_label = product.selected_or_first_available_variant.metafields.preorder.preordercontent.value %}
-{% assign discount_code_value = '12312312' %}
+{% assign discount_code_label = section.settings.discount-message %}
+{% assign discount_code_value =section.settings.discount-code %}
 
 {% assign pre_order_message = product.selected_or_first_available_variant.metafields.preorder.preordercontent.value %}
 
@@ -9,6 +9,8 @@
 {% elsif pre_order_message != blank %}
     {% assign show_strips = true %}
 {% endif %}
+
+{% render 'dump', value: section.settings.discount-message %}
 
 {% if show_strips %}
     <div class="strips-section">

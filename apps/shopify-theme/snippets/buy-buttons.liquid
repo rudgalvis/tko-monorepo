@@ -1,0 +1,415 @@
+{% comment %}
+  Renders product buy-buttons.
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} passing the block information.
+  - product_form_id: {String} product form id.
+  - section_id: {String} id of section to which this snippet belongs.
+  - show_pickup_availability: {Boolean} for the pickup availability. If true the pickup availability is rendered, false - not rendered (optional).
+
+  Usage:
+  {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
+{% endcomment %}
+<div {{ block.shopify_attributes }}>
+    {%- if product != blank -%}
+        {%- liquid
+            assign gift_card_recipient_feature_active = false
+            if block.settings.show_gift_card_recipient and product.gift_card?
+                assign gift_card_recipient_feature_active = true
+            endif
+
+            assign show_dynamic_checkout = false
+            if block.settings.show_dynamic_checkout and gift_card_recipient_feature_active == false
+                assign show_dynamic_checkout = true
+            endif
+        -%}
+
+        <product-form
+                class="product-form"
+                data-hide-errors="{{ gift_card_recipient_feature_active }}"
+                data-section-id="{{ section.id }}"
+        >
+            <div class="product-form__error-message-wrapper" role="alert" hidden>
+        <span class="svg-wrapper">
+          {{- 'icon-error.svg' | inline_asset_content -}}
+        </span>
+                <span class="product-form__error-message"></span>
+            </div>
+
+            {%- form 'product',
+                    product,
+                    id: product_form_id,
+                    class: 'form',
+                    novalidate: 'novalidate',
+                    data-type: 'add-to-cart-form'
+            -%}
+                <input
+                        type="hidden"
+                        name="id"
+                        value="{{ product.selected_or_first_available_variant.id }}"
+                        {% if product.selected_or_first_available_variant.available == false
+                        or quantity_rule_soldout
+                        or product.selected_or_first_available_variant == null
+                        %}
+                            disabled
+                        {% endif %}
+                        class="product-variant-id"
+                >
+
+                {%- if gift_card_recipient_feature_active -%}
+                    {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
+                {%- endif -%}
+
+                {% comment %}Variant sizes{% endcomment %}
+
+                {% comment %}{% render 'dump', value: product.selected_or_first_available_variant %}{% endcomment %}
+
+                <product-price
+                        price="{{ product.selected_or_first_available_variant.price | money }}"
+                        compared_at="{{ product.selected_or_first_available_variant.compare_at_price | money }}"
+                        iso_code="{{ localization.country.iso_code }}"
+                        variant_id="{{ product.selected_or_first_available_variant.id }}"
+                        product_id="{{ product.id }}"
+                        type='ProductDetailsPagePrice'
+                >
+                    <div class="skeleton">
+                        <div class="skeleton-wave"></div>
+                    </div>
+                </product-price>
+
+
+                {% render '1ib-hr' %}
+
+                {% render '1ib-meta-related-color-variant-selector' %}
+
+                {% render '1ib-hr' %}
+
+                {% render '1ib-first-option-size-selector' %}
+
+                {% render '1ib-hr' %}
+
+                {% render 'pdp-strips-section' %}
+
+                <div>
+                    {% comment %} Debug the metafield values {% endcomment %}
+
+                    {% comment %}{% assign recommended_products = product.metafields.variantproduct.productgroupseasonal.value | default: empty %}{% endcomment %}
+                    {% comment %}{% assign recommended_products_core = product.metafields.variantproduct.productgroup.value | default: empty %}{% endcomment %}
+                    {% comment %}{% assign color_variants = product.metafields.custom.color_variant.value | default: empty %}{% endcomment %}
+{% comment %}{% endcomment %}
+                    {% comment %}{% if color_variants != blank %}{% endcomment %}
+                        {% comment %}{% render 'color-select-2', color_variants: color_variants, active: product.selected_or_first_available_variant  %}{% endcomment %}
+                    {% comment %}{% else %}{% endcomment %}
+                        {% comment %}{% render 'color-select-2', color_variants: recommended_products, active: product.selected_or_first_available_variant  %}{% endcomment %}
+                        {% comment %}{% render 'color-select-2', color_variants: recommended_products_core, active: product.selected_or_first_available_variant  %}{% endcomment %}
+                    {% comment %}{% endif %}{% endcomment %}
+
+                    {% comment %}Size color{% endcomment %}
+                    {% comment %}{% for item in recommended_products %}{% endcomment %}
+                        {% comment %}{% render 'dump', value: item %}{% endcomment %}
+                        {% comment %}<a href="{{ item.url }}"><img src="{{ item.images[0] | product_img_url: '128x128' }}" alt="img"></a>{% endcomment %}
+                    {% comment %}{% endfor %}{% endcomment %}
+                    {% comment %}{% for item in recommended_products %}{% endcomment %}
+                        {% comment %}{% render 'dump', value: item %}{% endcomment %}
+                        {% comment %}<a href="{{ item.url }}"><img src="{{ item.images[0] | product_img_url: '128x128' }}" alt="img"></a>{% endcomment %}
+                    {% comment %}{% endfor %}{% endcomment %}
+                    {% comment %}{% for item in color_variants %}{% endcomment %}
+                        {% comment %}{% render 'dump', value: item %}{% endcomment %}
+                        {% comment %}<a href="{{ item.url }}"><img src="{{ item.images[0] | product_img_url: '128x128' }}" alt="img"></a>{% endcomment %}
+                    {% comment %}{% endfor %}{% endcomment %}
+
+
+                    {% comment %}<br>{% endcomment %}
+{% comment %}{% endcomment %}
+                    {% comment %}Size select{% endcomment %}
+                    {% comment %}{% for variant in product.variants %}{% endcomment %}
+                        {% comment %}<a href="{{ product.url }}?variant={{ variant.id }}">{{ variant.option2 }}</a>{% endcomment %}
+                    {% comment %}{% endfor %}{% endcomment %}
+                </div>
+
+                <div class="product-form__buttons">
+                    {%- liquid
+                        assign check_against_inventory = true
+                        if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
+                            assign check_against_inventory = false
+                        endif
+                        if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
+                            assign quantity_rule_soldout = true
+                        endif
+                    -%}
+                    <button
+                            id="ProductSubmitButton-{{ section_id }}"
+                            type="submit"
+                            name="add"
+                            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
+                            {% if product.selected_or_first_available_variant.available == false
+                            or quantity_rule_soldout
+                            or product.selected_or_first_available_variant == null
+                            %}
+                                disabled
+                            {% endif %}
+                    >
+            <span>
+              {%- if product.selected_or_first_available_variant == null -%}
+                  {{ 'products.product.unavailable' | t }}
+              {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+                  {{ 'products.product.sold_out' | t }}
+              {%- else -%}
+                  Buy for {{ product.selected_or_first_available_variant.price | money }}
+              {%- endif -%}
+            </span>
+                        {%- render 'loading-spinner' -%}
+                    </button>
+                    {%- if show_dynamic_checkout -%}
+                        {{ form | payment_button }}
+                    {%- endif -%}
+                </div>
+            {%- endform -%}
+        </product-form>
+    {%- else -%}
+        <div class="product-form">
+            <div class="product-form__buttons form">
+                <button
+                        type="submit"
+                        name="add"
+                        class="product-form__submit button button--full-width button--primary"
+                        disabled
+                >
+                    {{ 'products.product.sold_out' | t }}
+                </button>
+            </div>
+        </div>
+    {%- endif -%}
+
+    {%- if show_pickup_availability -%}
+        {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
+
+        {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities
+                | where: 'pick_up_enabled', true
+        -%}
+
+        <pickup-availability
+                class="product__pickup-availabilities quick-add-hidden"
+                {% if product.selected_or_first_available_variant.available and pick_up_availabilities.size > 0 %}
+                    available
+                {% endif %}
+                data-root-url="{{ routes.root_url }}"
+                data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                data-has-only-default-variant="{{ product.has_only_default_variant }}"
+                data-product-page-color-scheme="gradient color-{{ section.settings.color_scheme }}"
+        >
+            <template>
+                <pickup-availability-preview class="pickup-availability-preview">
+          <span class="svg-wrapper">
+            {{- 'icon-unavailable.svg' | inline_asset_content -}}
+          </span>
+                    <div class="pickup-availability-info">
+                        <p class="caption-large">{{ 'products.product.pickup_availability.unavailable' | t }}</p>
+                        <button class="pickup-availability-button link link--text underlined-link">
+                            {{ 'products.product.pickup_availability.refresh' | t }}
+                        </button>
+                    </div>
+                </pickup-availability-preview>
+            </template>
+        </pickup-availability>
+
+        <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+</div>
+
+<style>
+    product-price .skeleton > div {
+        height: 30px;
+        width: 150px;
+        border-radius: 50px;
+        overflow: hidden;
+    }
+    product-price .skeleton {
+        height: 50px;
+        padding: 10px 0;
+    }
+
+    .product-form__submit {
+        height: 56px;
+        width: 100%;
+
+        font-family: Monument, sans-serif;
+        font-weight: 500;
+        font-style: Light;
+        font-size: 24px;
+        leading-trim: NONE;
+        line-height: 100%;
+        letter-spacing: 0%;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .product-form__buttons button {
+        background: rgba(1, 136, 73, 1)!important;
+        border: 1px solid rgba(1, 136, 73, 1)!important;
+    }
+
+    .gPreorderBtn {
+        background: rgba(1, 136, 73, 1)!important;
+        border: 1px solid rgba(1, 136, 73, 1)!important;
+        font-family: Monument, sans-serif;
+        font-weight: 500;
+        font-style: Light;
+        font-size: 24px;
+        leading-trim: NONE;
+        line-height: 100%;
+        letter-spacing: 0%;
+        text-align: center;
+        vertical-align: middle;
+
+    }
+
+    @media screen and (max-width: 767px) {
+        .gPreorderBtn {
+            font-size: 24px;
+        }
+    }
+
+
+    .gPreorderWarning, .gPreorderBottomMessage, .gPreorderTopMessage {
+        display: none;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanNameWrapper p {
+        font-family: "Monument", sans-serif;
+        font-size: 18px!important;
+        /*display: none;*/
+    }
+
+    @media screen and (max-width: 767px) {
+        .gPreorderSellingPlanWrapper .gPreorderSellingPlanNameWrapper p {
+            font-size: 14px!important;
+        }
+    }
+
+
+    .gPreorderSellingPlanValue span,
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue .gPreorderPartialPaymentPrice{
+        font-family: "Monument", sans-serif;
+        font-size: 14px!important;
+        letter-spacing: -0.15px;
+    }
+
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanDescription {
+        font-family: "Monument Regular", sans-serif;
+        font-size: 14px!important;
+        color: rgba(0, 0, 0, 0.5);
+        font-weight: 100;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue {
+        border: 1px solid rgba(0,0,0,.05)!important;
+        padding: 0!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue .gPreorderPartialPaymentPrice {
+        border: none!important;
+        border-radius: 0;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions {
+        display: flex!important;
+        flex-direction: column;
+        gap: 8px;
+        color: black;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue label  {
+        flex-wrap: nowrap;
+        gap: 0;
+        width: 100%;
+    }
+
+    .gPreorderSellingPlanWrapper {
+        margin: 24px 0 !important;
+    }
+
+    @media screen and (max-width: 767px) {
+        .gPreorderSellingPlanWrapper {
+            margin: 8px 0 !important;
+        }
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue label span {
+        cursor: pointer;
+        transition: background-color .2s ease;
+        display: block;
+        margin-left: 0;
+        width: 100%;
+        padding-top: 12px!important;
+        padding-bottom: 12px!important;
+        position: relative;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue label:hover input:not(:checked)~span {
+        background: rgba(0,0,0,.03)!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue input {
+        display: none!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue input:checked~span {
+        background: rgba(0,0,0,.1)!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue input:checked~span:last-child:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 24px;
+        transform: translateY(-50%) rotate(45deg);
+        margin-top: -1px;
+        width: 6px;
+        height: 12px;
+        border: 2px solid #018849;
+        border-top: none;
+        border-left: none;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(3) {
+        /*width: 100%;*/
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(4) {
+        width: 100%;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:first-child,
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(2) {
+        padding-left: 24px!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:last-child {
+        padding-right: 24px!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span.gPreorderSellingPlanOptionName {
+        padding-right: 12px!important;
+    }
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span.gPreorderPartialPaymentPrice {
+        padding-left: 12px!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(0):not(:last-child),
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(1):not(:last-child),
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(2):not(:last-child),
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(3):not(:last-child) {
+        width: min-content;
+        white-space: nowrap;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions {
+        padding: 0!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup {
+        border: none;
+    }
+</style>

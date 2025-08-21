@@ -1,0 +1,124 @@
+{% comment %}
+
+Metafield into UI
+    -namespace: custom.color_variant
+
+
+{% endcomment %}
+
+{% assign recommended_products = product.metafields.variantproduct.productgroupseasonal.value | default: empty %}
+{% assign recommended_products_core = product.metafields.variantproduct.productgroup.value | default: empty %}
+{% assign color_variants = product.metafields.custom.color_variant.value | default: empty %}
+
+{% render 'dump', value: recommended_products %}
+{% render 'dump', value: recommended_products_core %}
+
+{% if color_variants != blank %}
+    {% assign combined_variants = color_variants %}
+{% else %}
+    {% comment %}Weird shiningans in liquid to merge two arrays, concat is not working{% endcomment %}
+    {% assign combined_array = "" | split: "" %}
+
+    {% for item in recommended_products %}
+        {% assign arrayItem = item | sort %}
+        {% assign combined_array = combined_array | concat: arrayItem %}
+    {% endfor %}
+
+    {% for item in recommended_products_core %}
+        {% assign arrayItem = item | sort %}
+        {% assign combined_array = combined_array | concat: arrayItem %}
+    {% endfor %}
+
+    {% assign combined_variants = combined_array %}
+{% endif %}
+
+
+
+{% comment %} Process combined variants to create ColorVariant objects {% endcomment %}
+{% comment %}
+	type ColorVariant = {
+		url: string;
+		images: string[];
+		id: string;
+	};
+{% endcomment %}
+
+
+{% comment %} Build color variants array using native JSON filter {% endcomment %}
+{% assign json_items = '' %}
+
+{% for variant in combined_variants %}
+    {% comment %} Build images array as comma-separated quoted strings {% endcomment %}
+    {% assign images_list = '' %}
+    {% for image in variant.images %}
+        {% assign image_url = image | product_img_url: '128x128', crop: 'center' %}
+        {% if forloop.first %}
+            {% assign images_list = '"' | append: image_url | append: '"' %}
+        {% else %}
+            {% assign images_list = images_list | append: ',"' | append: image_url | append: '"' %}
+        {% endif %}
+    {% endfor %}
+
+    {% comment %} Build single variant JSON object {% endcomment %}
+    {% capture variant_json -%}
+        {"url":"{{ variant.url }}","images":[{{ images_list }}],"id":"{{ variant.id }}"}
+    {%- endcapture %}
+
+    {% comment %} Add to main collection {% endcomment %}
+    {% if forloop.first %}
+        {% assign json_items = variant_json %}
+    {% else %}
+        {% assign json_items = json_items | append: ',' | append: variant_json %}
+    {% endif %}
+{% endfor %}
+
+{% assign color_variants_json = '[' | append: json_items | append: ']' %}
+
+{% render 'dump', value: combined_variants, label: 'dump combined'%}
+{% comment %}{% render 'dump', value: product.id%}{% endcomment %}
+
+
+<div class="color-selector-wrapper">
+    <color-selector
+        list='{{ color_variants_json }}'
+        activeId="{{ product.id }}"
+    >
+        <div class="skeleton">
+            {% for item in combined_variants %}
+                <div class="skeleton-wave"></div>
+            {% endfor %}
+        </div>
+    </color-selector>
+</div>
+
+<style>
+    .color-selector-wrapper {
+        width: calc(100% + 25px);
+        overflow: hidden;
+    }
+
+    color-selector .skeleton {
+        display: flex;
+        width: calc(100% - 25px);
+        overflow: hidden;
+        gap: 8px;
+    }
+
+    @media screen and (max-width: 767px) {
+        color-selector .skeleton {
+            width: calc(100% - 6px);
+        }
+
+        .color-selector-wrapper {
+            width: calc(100% + 6px);
+        }
+    }
+
+
+    color-selector .skeleton > div {
+        min-width: 64px;
+        height: 64px;
+        border: 1px solid transparent;
+        border-radius: 5px;
+    }
+</style>

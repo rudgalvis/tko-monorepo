@@ -1,0 +1,22 @@
+{% render 'pdp-title' %}
+
+<!-- Quantity Selector -->
+<input
+        type="hidden"
+        name="quantity"
+        value="1"
+        min="1"
+        form="{{ product_form_id }}"
+>
+
+{% render 'buy-buttons',
+        product: product,
+        product_form_id: product_form_id,
+        section_id: section.id,
+        show_pickup_availability: false
+%}
+
+{%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
+
+<!-- Required Scripts -->
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>

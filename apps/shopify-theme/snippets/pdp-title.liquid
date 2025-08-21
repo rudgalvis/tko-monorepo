@@ -1,0 +1,9 @@
+<div class="title-heart-container">
+    <h1 class="product__title" {{ block.shopify_attributes }}>
+        {%- render 'product-title', name: product.title -%}
+    </h1>
+    <div class="PDP-wishlist-container-desktop">{%- render 'button-wishlist-mobile', getproduct: product, dimention: '0 0 84 84', h_width: 20, h_height: 20, color: '#ffffff', device: 'PDP', getClass: 'heart-PDP' -%}</div>
+</div>
+<h2 class="product__type">
+    {{ product.type | escape }}
+</h2>
