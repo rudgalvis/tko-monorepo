@@ -452,13 +452,11 @@ Mobile Slider
 
                 {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
-                <div>
-                    {% render 'standard-add-to-cart',
-                            product:product,
-                            product_form_id: product_form_id,
-                            section: section
-                    %}
-                </div>
+                {% render 'standard-add-to-cart',
+                        product:product,
+                        product_form_id: product_form_id,
+                        section: section
+                %}
 
                 {%- for block in section.blocks -%}
                     {%- case block.type -%}
@@ -1289,13 +1287,18 @@ Mobile Slider
 
                             {% endif %}
 
-                    {%- endcase -%}
 
+
+
+
+
+
+                    {%- endcase -%}
 
                 {%- endfor -%}
 
-
             </div>
+
         </div>
     </div>
 
@@ -1557,26 +1560,6 @@ Mobile Slider
     }
   ],
   "settings": [
-    {
-      "type": "header",
-      "content": "Discount strip settings"
-    },
-    {
-      "type": "text",
-      "id": "discount-code",
-      "info": "This is what will be copied on copy button click. Enter full message in input below.",
-      "label": "Discount code"
-    },
-    {
-      "type": "text",
-      "id": "discount-message",
-      "info": "This message is shown to inform user about the discount code. Strip is only shown if both inputs are filled.",
-      "label": "Discount code message"
-    },
-    {
-      "type": "header",
-      "content": "Big header"
-    },
     {
       "type": "text",
       "id": "bid_header",

@@ -1,27 +1,20 @@
-{% render 'pdp-title' %}
+<div class="pdp-title-price-couple">
+    {% render 'pdp-title' %}
 
-<!-- Quantity Selector -->
-{% comment %}<input{% endcomment %}
-        {% comment %}type="hidden"{% endcomment %}
-        {% comment %}name="quantity"{% endcomment %}
-        {% comment %}value="1"{% endcomment %}
-        {% comment %}min="1"{% endcomment %}
-        {% comment %}form="{{ product_form_id }}"{% endcomment %}
-{% comment %}>{% endcomment %}
-
-<div class="pdp-price-container">
-    <product-price
-            price="{{ product.selected_or_first_available_variant.price | money }}"
-            compared_at="{{ product.selected_or_first_available_variant.compare_at_price | money }}"
-            iso_code="{{ localization.country.iso_code }}"
-            variant_id="{{ product.selected_or_first_available_variant.id }}"
-            product_id="{{ product.id }}"
-            type='ProductDetailsPagePrice'
-    >
-        <div class="skeleton">
-            <div class="skeleton-wave"></div>
-        </div>
-    </product-price>
+    <div class="pdp-price-container">
+        <product-price
+                price="{{ product.selected_or_first_available_variant.price | money }}"
+                compared_at="{{ product.selected_or_first_available_variant.compare_at_price | money }}"
+                iso_code="{{ localization.country.iso_code }}"
+                variant_id="{{ product.selected_or_first_available_variant.id }}"
+                product_id="{{ product.id }}"
+                type='ProductDetailsPagePrice'
+        >
+            <div class="skeleton">
+                <div class="skeleton-wave"></div>
+            </div>
+        </product-price>
+    </div>
 </div>
 
 {% render '1ib-hr' %}
@@ -54,8 +47,25 @@
 </div>
 
 <style>
+    .pdp-title-price-couple {
+    }
+
+    @media screen and (max-width: 767px) {
+        .pdp-title-price-couple  {
+            display: flex;
+            align-items: flex-start;
+        }
+    }
+
+
     .pdp-price-container {
         margin-top: 24px;
+    }
+
+    @media screen and (max-width: 767px) {
+        .pdp-price-container {
+            margin-top: 0;
+        }
     }
 
     .pdp-cta-footer {
@@ -80,6 +90,10 @@
 
         .pdp-cta-footer .gPreorderTopMessageParent {
             display: none!important;
+        }
+
+        .gBackInStock-Button {
+
         }
     }
 
