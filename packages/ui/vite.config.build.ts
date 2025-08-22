@@ -63,7 +63,7 @@ export default defineConfig(({ mode }) => {
 				emitCss: true
 			}),
 			viteStaticCopy({
-				targets: [{ src: 'static/assets/rr*', dest: '../../../shopify-theme/assets' }]
+				targets: [{ src: 'static/assets/rr*', dest: '../../../../apps/shopify-theme/assets' }]
 			}),
 			viteSingleFile() // Outputs everything to a single file
 		],

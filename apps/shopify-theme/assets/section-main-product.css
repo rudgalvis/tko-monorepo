@@ -436,10 +436,6 @@ h2.product__type {
   padding: 0 1rem;
 }
 
-.product .price-ui {
-  align-items: flex-start;
-}
-
 .product .price-ui .badge {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
