@@ -422,6 +422,7 @@
 
     .gPreorderBtn,
     .Globo-form .Globo-form-subscribe .Globo-form-body .Globo-body-content .Globo-content-form button {
+        pointer-events: all!important;
         background: rgba(1, 136, 73, 1)!important;
         border: 1px solid rgba(1, 136, 73, 1)!important;
         font-family: Monument, sans-serif;
@@ -436,18 +437,24 @@
 
     }
 
+    .button--primary:hover {
+        background: rgba(1, 136, 73, 1)!important;
+        border: 1px solid rgba(1, 136, 73, 1)!important;
+        opacity: .8;
+    }
+
     @media screen and (max-width: 767px) {
         .gPreorderBtn {
             font-size: 24px;
         }
 
         .gBackInStock-Button .gBackInStockBtn {
-            font-family: "Monument", sans-serif!important;
-            background: rgba(171, 182, 208, 1)!important;
-            color: black!important;
-            border: 1px solid rgba(171, 182, 208, 1)!important;
+            font-family: "Monument", sans-serif !important;
+            background: rgba(171, 182, 208, 1) !important;
+            color: black !important;
+            border: 1px solid rgba(171, 182, 208, 1) !important;
+        }
     }
-
 
     .gPreorderWarning, .gPreorderBottomMessage, .gPreorderTopMessage {
         display: none;
