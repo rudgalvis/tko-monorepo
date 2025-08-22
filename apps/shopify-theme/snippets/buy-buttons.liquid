@@ -305,6 +305,39 @@
         padding: 10px 0;
     }
 
+    /* Notify me popup */
+    .Globo-form .Globo-form-subscribe .Globo-form-header .Globo-header-background,
+    .Globo-form .Globo-form-subscribe .Globo-form-header .Globo-header-img-left,
+    .Globo-form .Globo-form-subscribe .Globo-form-header .Globo-header-img-right {
+        display: none!important;
+    }
+
+    .Globo-form .Globo-form-subscribe .Globo-form-header{
+        transform: translateY(150%);
+        height: 22px;
+    }
+
+    .Globo-form .Globo-form-subscribe .Globo-form-body {
+        border-radius: 10px;
+    }
+
+    .Globo-form-body,
+    .Globo-form .Globo-form-subscribe .Globo-form-body .Globo-body-header p {
+        font-family: "Monument", sans-serif!important;
+    }
+
+    .Globo-form .Globo-form-subscribe .Globo-form-body .Globo-body-content .Globo-content-product .Globo-product-infor .Globo-product-title,
+    .Globo-form .Globo-form-subscribe .Globo-form-body .Globo-body-content .Globo-content-product .Globo-product-infor .Globo-product-price,
+    .Globo-form .Globo-form-subscribe .Globo-form-body .Globo-body-footer p{
+        font-family: "Monument Regular", sans-serif!important;
+    }
+
+    .button:disabled, .button[aria-disabled=true], .button.disabled, .customer button:disabled, .customer button[aria-disabled=true], .customer button.disabled {
+        opacity: .2!important;
+    }
+
+        /*.ProductSubmitButton-template--25600510689628__main*/
+
     .product-form__submit {
         height: 56px;
         width: 100%;
@@ -325,7 +358,8 @@
         border: 1px solid rgba(1, 136, 73, 1)!important;
     }
 
-    .gPreorderBtn {
+    .gPreorderBtn,
+    .Globo-form .Globo-form-subscribe .Globo-form-body .Globo-body-content .Globo-content-form button {
         background: rgba(1, 136, 73, 1)!important;
         border: 1px solid rgba(1, 136, 73, 1)!important;
         font-family: Monument, sans-serif;
@@ -344,6 +378,11 @@
         .gPreorderBtn {
             font-size: 24px;
         }
+    .gBackInStock-Button .gBackInStockBtn {
+        font-family: "Monument", sans-serif!important;
+        background: rgba(171, 182, 208, 1)!important;
+        color: black!important;
+        border: 1px solid rgba(171, 182, 208, 1)!important;
     }
 
 
@@ -487,5 +526,40 @@
 
     .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup {
         border: none;
+    }
+
+    @media screen and (max-width: 768px) {
+        .gPreorderSellingPlanWrapper .gPreorderSellingPlanNameWrapper p {
+            font-size: 14px!important;
+        }
+
+        .gPreorderSellingPlanWrapper .gPreorderSellingPlanDescription {
+            font-size: 12px!important;
+        }
+
+        .gPreorderSellingPlanValue span, .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue .gPreorderPartialPaymentPrice {
+            font-size: 12px!important;
+        }
+
+        .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue label span {
+            padding-top: 8px!important;
+            padding-bottom: 8px!important;
+        }
+
+        .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:first-child,
+        .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(2) {
+            padding-left: 8px!important;
+        }
+
+        .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:last-child {
+            padding-right: 8px!important;
+        }
+
+        .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span.gPreorderSellingPlanOptionName {
+            padding-right: 4px!important;
+        }
+        .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span.gPreorderPartialPaymentPrice {
+            padding-left: 4px!important;
+        }
     }
 </style>

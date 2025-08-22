@@ -14,10 +14,25 @@ import type { Action } from 'svelte/action';
  * This is fix to remove them.
  * It's important to have spans for SEO fyi.
  * */
-export const removeNonComponentChildren: Action = (node: HTMLElement) => {
-	Array.from(node.parentElement?.children || [])
-		.filter((child) => child !== node) // Filter children that are not in component
-		.forEach((child) => child.parentElement?.removeChild(child)); // Remove them from DOM
+export const removeNonComponentChildren: Action<HTMLElement, boolean> = (
+	node: HTMLElement,
+	shouldRemove: boolean = true
+) => {
+	if (shouldRemove) {
+		Array.from(node.parentElement?.children || [])
+			.filter((child) => child !== node) // Filter children that are not in component
+			.forEach((child) => child.parentElement?.removeChild(child)); // Remove them from DOM
+	}
 
-	return {};
+	return {
+		update(newShouldRemove: boolean) {
+			// If we need to remove children and they haven't been removed yet
+			if (newShouldRemove && !shouldRemove) {
+				Array.from(node.parentElement?.children || [])
+					.filter((child) => child !== node)
+					.forEach((child) => child.parentElement?.removeChild(child));
+			}
+			shouldRemove = newShouldRemove;
+		}
+	};
 };

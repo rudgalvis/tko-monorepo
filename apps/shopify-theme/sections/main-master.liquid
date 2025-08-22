@@ -452,11 +452,13 @@ Mobile Slider
 
                 {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
-                {% render 'standard-add-to-cart',
-                        product:product,
-                        product_form_id: product_form_id,
-                        section: section
-                %}
+                <div>
+                    {% render 'standard-add-to-cart',
+                            product:product,
+                            product_form_id: product_form_id,
+                            section: section
+                    %}
+                </div>
 
                 {%- for block in section.blocks -%}
                     {%- case block.type -%}
