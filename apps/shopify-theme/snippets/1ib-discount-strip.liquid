@@ -1,4 +1,4 @@
-{% if discount_code_label != nil and discount_code_value != nil %}
+{% if discount_code_label != blank and discount_code_value != blank %}
     <div class="discount-strip">
         <p class="label" data-code="{{ discount_code_value }}">{{ discount_code_label }}</p>
 
@@ -87,4 +87,3 @@
         cursor: pointer;
     }
 </style>
-

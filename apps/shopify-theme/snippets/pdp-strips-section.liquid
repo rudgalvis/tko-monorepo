@@ -10,8 +10,6 @@
     {% assign show_strips = true %}
 {% endif %}
 
-{% render 'dump', value: section.settings.discount-message %}
-
 {% if show_strips %}
     <div class="strips-section">
         {% render '1ib-discount-strip', discount_code_label: discount_code_label, discount_code_value: discount_code_value %}
