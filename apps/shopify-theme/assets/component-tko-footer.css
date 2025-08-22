@@ -68,6 +68,12 @@ div#shopify-section-tko-footer {
   padding-right: 35px;
 }
 
+#shopify-section-tko-footer,
+.footer-sign {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .payment-badge {
   display: flex;
   gap: 2px;

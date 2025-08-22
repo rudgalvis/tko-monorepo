@@ -64,31 +64,10 @@
 
                 {% comment %}{% render 'dump', value: product.selected_or_first_available_variant %}{% endcomment %}
 
-                <product-price
-                        price="{{ product.selected_or_first_available_variant.price | money }}"
-                        compared_at="{{ product.selected_or_first_available_variant.compare_at_price | money }}"
-                        iso_code="{{ localization.country.iso_code }}"
-                        variant_id="{{ product.selected_or_first_available_variant.id }}"
-                        product_id="{{ product.id }}"
-                        type='ProductDetailsPagePrice'
-                >
-                    <div class="skeleton">
-                        <div class="skeleton-wave"></div>
-                    </div>
-                </product-price>
 
 
-                {% render '1ib-hr' %}
 
-                {% render '1ib-meta-related-color-variant-selector' %}
 
-                {% render '1ib-hr' %}
-
-                {% render '1ib-first-option-size-selector' %}
-
-                {% render '1ib-hr' %}
-
-                {% render 'pdp-strips-section' %}
 
                 <div>
                     {% comment %} Debug the metafield values {% endcomment %}
@@ -225,11 +204,94 @@
     {%- endif -%}
 </div>
 
+<script>
+
+  document.addEventListener("DOMContentLoaded", async (event) => {
+    const productFormOrg = document.querySelector('product-form');
+    const footer = document.querySelector('.pdp-cta-footer--content');
+
+    const cleanFooter = async (footerContent, retry = 0) => {
+        const paymentOptions = footerContent.querySelector('.gPreorderTopMessageParent');
+
+        // We need couple of tries, becasuse globo might not have added payment options yet
+        if(!paymentOptions) {
+            if(retry >= 5) {
+                await new Promise(resolve => setTimeout(resolve, 200));
+
+                return cleanFooter(footerContent, retry + 1)
+            } else {
+              return footerContent
+            }
+        }
+
+        paymentOptions.parentElement.removeChild(paymentOptions);
+
+        return footerContent
+    }
+
+    const moveCtaToFooter = async () => {
+      let footerContent = productFormOrg.cloneNode(true)
+      footerContent = await cleanFooter(footerContent)
+
+      footer.prepend(footerContent)
+    }
+
+    moveCtaToFooter()
+
+    const transformSidebarForMobile = () => {
+      // Theres multiple submit buttons, remove all, because moved to footer
+      const regularButtons = productFormOrg.querySelectorAll('.product-form__submit')
+
+      console.log('dump', { regularButtons })
+
+      if(regularButtons.length === 0) return
+
+      regularButtons.forEach(e => e.style.display = 'none')
+
+      // Disclaimer should not be shown
+      const disclaimer = productFormOrg.querySelector('.pdp-disclaimer')
+      if(disclaimer) disclaimer.style.display = 'none'
+    }
+
+    const transformSidebarForDesktop = () => {
+      // Theres multiple submit buttons, remove all, because moved to footer
+      const regularButtons = productFormOrg.querySelectorAll('.product-form__submit')
+
+      if(regularButtons.length === 0) return
+
+      regularButtons.forEach(e => e.style.display = null)
+
+      // Disclaimer should not be shown
+      const disclaimer = productFormOrg.querySelector('.pdp-disclaimer')
+      if(disclaimer) disclaimer.style.display = null
+    }
+
+    const responsiveTransformation = () => {
+      if(window.innerWidth <= 767) {
+        console.log('dump', 'transforming for mobile')
+        transformSidebarForMobile()
+      } else {
+        console.log('dump', 'transforming for desktop')
+        transformSidebarForDesktop()
+      }
+    }
+
+    window.addEventListener('resize', responsiveTransformation)
+    responsiveTransformation()
+  })
+
+</script>
+
 <style>
     .pdp-disclaimer {
         width: 100%;
         text-align: center;
-        margin-top: -8px;
+    }
+
+    @media screen and (max-width: 767px) {
+        .pdp-disclaimer  {
+            margin-top: -8px;
+        }
     }
 
     product-price .skeleton > div {

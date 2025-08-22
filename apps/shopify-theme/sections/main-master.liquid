@@ -448,17 +448,15 @@ Mobile Slider
 
         </div>
         <div class="product__info-wrapper grid__item">
-            <div id="ProductInfo-{{ section.id }}"
-                 class="product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
+            <div id="ProductInfo-{{ section.id }}" class="product__info-container">
+
                 {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
-                <div>
-                    {% render 'standard-add-to-cart',
-                            product:product,
-                            product_form_id: product_form_id,
-                            section: section
-                    %}
-                </div>
+                {% render 'standard-add-to-cart',
+                        product:product,
+                        product_form_id: product_form_id,
+                        section: section
+                %}
 
                 {%- for block in section.blocks -%}
                     {%- case block.type -%}
@@ -493,21 +491,6 @@ Mobile Slider
                             </div>
 
                             </div>
-                            {%- comment -%}
-                            {% if product.tags contains 'pre-order' %}
-                                  <div class="pre-order-holder">
-                                    {{ product.metafields.preorder.preordercontent }}
-                                  </div>
-                            {% endif %}
-                            {%- endcomment -%}
-
-                            {% comment %}<div id="preorderholder"{% endcomment %}
-                                 {% comment %}class="pre-order-holder {% if product.tags contains 'pre-order' %} preorder__show_on_desktop {% endif %}">{% endcomment %}
-                                {% comment %}{% if product.tags contains 'pre-order' %}{% endcomment %}
-                                    {% comment %}{{ product.metafields.preorder.preordercontent }}{% endcomment %}
-                                {% comment %}{% endif %}{% endcomment %}
-                            {% comment %}</div>{% endcomment %}
-
 
 
                         {%- when 'description' -%}

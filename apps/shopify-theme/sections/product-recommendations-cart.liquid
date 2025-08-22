@@ -31,7 +31,7 @@ and rendered inside some element
         }
 
         wrapper = document.getElementById('product-recommendations-cart')
-        if (!wrapper) throw new Error('Could not found wrapper element')
+        if (!wrapper) return console.error('Could not found wrapper element')
 
         // Initialize swiper
         if (window['swiper']) window['swiper'].destroy()
@@ -46,7 +46,7 @@ and rendered inside some element
             // },
         })
 
-        if (!swiper) throw new Error('Swiper not loaded')
+        if (!swiper) return console.error('Swiper not loaded')
 
         wrapper.classList.add('loaded')
     }

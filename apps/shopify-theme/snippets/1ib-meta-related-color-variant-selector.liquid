@@ -10,9 +10,6 @@ Metafield into UI
 {% assign recommended_products_core = product.metafields.variantproduct.productgroup.value | default: empty %}
 {% assign color_variants = product.metafields.custom.color_variant.value | default: empty %}
 
-{% render 'dump', value: recommended_products %}
-{% render 'dump', value: recommended_products_core %}
-
 {% if color_variants != blank %}
     {% assign combined_variants = color_variants %}
 {% else %}
@@ -73,9 +70,6 @@ Metafield into UI
 {% endfor %}
 
 {% assign color_variants_json = '[' | append: json_items | append: ']' %}
-
-{% render 'dump', value: combined_variants, label: 'dump combined'%}
-{% comment %}{% render 'dump', value: product.id%}{% endcomment %}
 
 
 <div class="color-selector-wrapper">

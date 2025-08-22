@@ -1,13 +1,38 @@
 {% render 'pdp-title' %}
 
 <!-- Quantity Selector -->
-<input
-        type="hidden"
-        name="quantity"
-        value="1"
-        min="1"
-        form="{{ product_form_id }}"
+{% comment %}<input{% endcomment %}
+        {% comment %}type="hidden"{% endcomment %}
+        {% comment %}name="quantity"{% endcomment %}
+        {% comment %}value="1"{% endcomment %}
+        {% comment %}min="1"{% endcomment %}
+        {% comment %}form="{{ product_form_id }}"{% endcomment %}
+{% comment %}>{% endcomment %}
+
+<product-price
+        price="{{ product.selected_or_first_available_variant.price | money }}"
+        compared_at="{{ product.selected_or_first_available_variant.compare_at_price | money }}"
+        iso_code="{{ localization.country.iso_code }}"
+        variant_id="{{ product.selected_or_first_available_variant.id }}"
+        product_id="{{ product.id }}"
+        type='ProductDetailsPagePrice'
 >
+    <div class="skeleton">
+        <div class="skeleton-wave"></div>
+    </div>
+</product-price>
+
+{% render '1ib-hr' %}
+
+{% render '1ib-meta-related-color-variant-selector' %}
+
+{% render '1ib-hr' %}
+
+{% render '1ib-first-option-size-selector' %}
+
+{% render '1ib-hr' %}
+
+{% render 'pdp-strips-section' %}
 
 {% render 'buy-buttons',
         product: product,
@@ -15,6 +40,135 @@
         section_id: section.id,
         show_pickup_availability: false
 %}
+
+<div class="sticky-start-marker"></div>
+
+<div class="pdp-cta-footer">
+    <div class="pdp-cta-footer--wrapper">
+        <div class="pdp-cta-footer--content">
+            {% comment %}<p>Shipping by May 15th</p>{% endcomment %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .pdp-cta-footer {
+        display: none;
+        position: sticky;
+        top: 100%;
+        transform: translateY(-100%);
+        height: var(--pdp-cta-footer-height);
+        z-index: 1;
+        margin-left: -6px;
+        margin-right: -6px;
+        margin-top: calc(var(--pdp-cta-footer-height) + 24px);
+        margin-bottom: calc((2 * var(--pdp-cta-footer-height) * -1) - 24px);
+        align-items: stretch;
+        transition: opacity 1s ease-in-out;
+    }
+
+    @media screen and (max-width: 767px) {
+        .pdp-cta-footer {
+            display: flex;
+        }
+
+        .pdp-cta-footer .gPreorderTopMessageParent {
+            display: none!important;
+        }
+    }
+
+    .pdp-cta-footer.is-stuck .pdp-cta-footer--wrapper::after {
+        opacity: 1;
+    }
+
+    .pdp-cta-footer--wrapper {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        padding: 8px 0 0;
+        display: flex;
+        align-items: stretch;
+    }
+
+    .pdp-cta-footer--wrapper::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: -10px;
+        right: -10px;
+        top: 8px;
+        transition: opacity .5s ease;
+        opacity: 0;
+        box-shadow: 0px -4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+
+    .pdp-cta-footer--content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background: rgba(238, 238, 234, 1);
+        padding: 8px 6px;
+    }
+
+    .pdp-cta-footer--content product-form {
+        margin: 0!important;
+    }
+</style>
+
+<script>
+  // use a script tag or an external JS file
+  const initializeStickyFooter = () => {
+    const stickyMarkerElement = document.querySelector('.sticky-start-marker');
+    const pdpCtaFooter = document.querySelector('.pdp-cta-footer');
+    const productInfoContainer = document.querySelector('.product__info-container');
+
+    if (!stickyMarkerElement || !productInfoContainer) {
+      console.warn('Sticky element or product info container not found');
+      return;
+    }
+
+    const stickyRect = stickyMarkerElement.getBoundingClientRect();
+    const containerRect = productInfoContainer.getBoundingClientRect();
+
+    const rootStyles = getComputedStyle(document.documentElement);
+    const footerHeight = rootStyles.getPropertyValue('--pdp-cta-footer-height').replace('px', '');
+
+    const stickyOffsetTop = stickyRect.top - containerRect.top;
+
+    ScrollTrigger.create({
+      trigger: ".product__info-container",
+      markers: false,
+      start: () => `${stickyOffsetTop + 104} bottom`, // When the top of the element is 80% down the viewport
+      end: "bottom+=32 bottom-=96", // When the bottom of the element is 20% up from the bottom
+      onEnter: () => {
+        pdpCtaFooter.classList.add('is-stuck');
+      },
+      onLeave: () => {
+        pdpCtaFooter.classList.remove('is-stuck');
+        // Optional: Add functionality when leaving the element
+      },
+      onEnterBack: () => {
+        pdpCtaFooter.classList.add('is-stuck');
+        // Optional: Add functionality when scrolling back up
+      },
+      onLeaveBack: () => {
+        pdpCtaFooter.classList.remove('is-stuck');
+        // Optional: Add functionality when scrolling up past the element
+      },
+      // Optional: Add visual debugging
+      // markers: true
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", (event) => {
+      setTimeout(() => {
+        gsap.registerPlugin(ScrollTrigger)
+
+        initializeStickyFooter()
+      }, 500)
+  });
+
+</script>
 
 {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
 
