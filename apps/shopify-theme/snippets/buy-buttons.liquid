@@ -210,6 +210,33 @@
     const productFormOrg = document.querySelector('product-form');
     const footer = document.querySelector('.pdp-cta-footer--content');
 
+    const addPriceToPreorderButton = async () => {
+      try {
+        // Buy buttons
+        const targetSelector = '.gPreorderBtnLoaded'
+        const targetEls = document.querySelectorAll(targetSelector)
+
+        // Element to take price value from
+        const price = await getPrice()
+
+        if (price) {
+          targetEls.forEach((e, index) => {
+            const c = e.cloneNode(true)
+
+            c.innerHTML = `Pre Order for ${price}`;
+
+            const clones = e.parentElement.querySelectorAll(targetSelector)
+
+            clones[0].style.display = 'none'
+
+            if(clones.length > 1) return
+
+            e.parentElement.appendChild(c)
+          })
+        }
+      } catch  {}
+    }
+
     const cleanFooter = async (footerContent, retry = 0) => {
         const paymentOptions = footerContent.querySelector('.gPreorderTopMessageParent');
 
@@ -259,6 +286,8 @@
 
       regularButtons.forEach(e => e.style.display = null)
 
+      addPriceToPreorderButton()
+
       // Disclaimer should not be shown
       const disclaimer = productFormOrg.querySelector('.pdp-disclaimer')
       if(disclaimer) disclaimer.style.display = null
@@ -275,6 +304,7 @@
     }
 
     window.addEventListener('resize', responsiveTransformation)
+
     responsiveTransformation()
 
     let priceSetSuccessfully = false
@@ -282,7 +312,7 @@
     let intervalAttempts = 0
     const maxIntervalAttempts = 20 // Stop after 10 seconds (20 * 500ms)
 
-    const getPrice = async (retry = 0) => {
+    const getPrice = async () => {
       const priceEl = document.querySelector('.price-ui--value')
 
       if(!priceEl && retry <= 5) {
@@ -335,37 +365,25 @@
       addPriceToBuyButton()
     }, 500)
 
-    document.addEventListener('globo.preorder.show.preorder', async (e) => {
-      try {
-        // Buy buttons
-        const targetEls = document.querySelectorAll('.gPreorderBtnLoaded')
-
-        // Element to take price value from
-        const price = await getPrice()
-
-        if (price) {
-          targetEls.forEach(e => {
-            const c = e.cloneNode(true)
-
-            c.innerHTML = `Pre Order for ${price}`;
-
-            e.parentElement.appendChild(c)
-            e.style.display = 'none'
-          })
+    document.addEventListener('globo.preorder.show.preorder', addPriceToPreorderButton);
+    setTimeout(addPriceToPreorderButton, 100)
+    setTimeout(addPriceToPreorderButton, 250)
+    setTimeout(addPriceToPreorderButton, 500)
+    setTimeout(addPriceToPreorderButton, 1000)
 
 
-
-          // setInterval(() => {
-          //   targetEls.forEach(e => e.innerHTML = `Pre Order for ${price}`)
-          // }, 1000)
-          console.log('dump', 'Price set successfully')
-        }
-      } catch (e) {
-
-      }
-    });
-
-
+    // Set price with interval, but stop after success or max attempts
+    // let attempts = 0
+    // const addPriceToPreorderButtonInterval = setInterval(() => {
+    //   attempts++
+    //
+    //   if(attempts >= 10) {
+    //     clearInterval(addPriceToPreorderButtonInterval)
+    //     return
+    //   }
+    //
+    //   addPriceToPreorderButton();
+    // }, 500)
 
   })
 
