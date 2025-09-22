@@ -1,6 +1,9 @@
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
 <head>
+    <script>
+      window['process'] = {env: {NODE_ENV: 'development'}}
+    </script>
     {% render '_tracking-cookiebot-head' %}
     {% render 'rr-custom-scripts' %}
 

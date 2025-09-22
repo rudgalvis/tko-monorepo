@@ -3076,7 +3076,7 @@ const persistentWritable = (r, e) => {
     t.updateTotals();
   }), t.updateTotals();
 }, mainFooter = () => {
-  console.log("dump", "mainfooter"), createCartDrawerFooterRivet();
+  createCartDrawerFooterRivet();
 }, isIosSafari = () => {
   if (typeof window > "u" || !window.navigator)
     return !1;

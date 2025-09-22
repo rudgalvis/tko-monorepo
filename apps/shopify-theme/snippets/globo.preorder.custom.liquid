@@ -1,0 +1,54 @@
+<script>
+  window.GloboPreorderParams = window.GloboPreorderParams || {};
+ window.GloboPreorderParams.selectors = window.GloboPreorderParams.selectors || {};
+ window.GloboPreorderParams.selectors.productAddToCartBtn = [".product-form__submit.button.button--full-width.button--primary"];
+  if(document.querySelector('a.size-selection.active')){
+      document.querySelector('.product-form').classList.add('product_form_visible');
+      if(document.querySelector('.product-form').querySelector('.gpoVariantSelector'))
+        document.querySelector('.product-form').querySelector('.gpoVariantSelector').value = document.querySelector('a.size-selection.active').getAttribute('data-variant-id');
+  }
+
+  document.querySelectorAll('.size-holder li').forEach(el => {
+      el.addEventListener('click', function(el){
+        if(document.querySelector('.product-form').querySelector('.gpoVariantSelector'))
+          document.querySelector('.product-form').querySelector('.gpoVariantSelector').value = document.querySelector('a.size-selection.active').getAttribute('data-variant-id');
+        document.querySelector('.product-form').classList.add('product_form_visible');
+        console.log('go here')
+        typeof Globo !== 'undefined' && typeof Globo.Preorder !== 'undefined' && Globo.Preorder.initPreorder()
+      })
+  })
+  document.addEventListener('globo.preorder.show.preorder', function (e) {
+  	const {form} = e.detail;
+    appSetInterval(function(){
+      if(document.querySelector('a.size-selection.active')){
+        form?.querySelector('.product-buy-button-active')?.classList.add('gPreorderHidden')
+      }
+    }, 500, 1)
+  });
+  document.addEventListener('globo.preorder.show.addtocart', function (e) {
+  	const {form} = e.detail;
+    appSetInterval(function(){
+      form?.querySelector('.product-buy-button-active')?.classList.remove('gPreorderHidden')
+    }, 500, 1)
+  });
+
+  function appSetInterval(callback, delay, repetitions) {
+    callback();
+    var x = 0;
+    var intervalID = window.setInterval(function () {
+        callback();
+        if (++x === repetitions) window.clearInterval(intervalID);
+    }, delay);
+  }
+</script>
+<style>
+  /*.product_form {*/
+  /*  display: none;*/
+  /*}*/
+  /*.product_form.product_form_visible {*/
+  /*  display: block !important;*/
+  /*}*/
+  /*.size___wrapper {*/
+  /*    flex-direction: column;*/
+  /*}*/
+</style>
