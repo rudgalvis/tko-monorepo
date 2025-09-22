@@ -242,8 +242,6 @@
       // Theres multiple submit buttons, remove all, because moved to footer
       const regularButtons = productFormOrg.querySelectorAll('.product-form__submit')
 
-      console.log('dump', { regularButtons })
-
       if(regularButtons.length === 0) return
 
       regularButtons.forEach(e => e.style.display = 'none')
@@ -338,8 +336,6 @@
     }, 500)
 
     document.addEventListener('globo.preorder.show.preorder', async (e) => {
-
-      console.log('dump', 'testsets')
       try {
         // Buy buttons
         const targetEls = document.querySelectorAll('.gPreorderBtnLoaded')
@@ -369,6 +365,8 @@
       }
     });
 
+
+
   })
 
 
@@ -377,6 +375,10 @@
 </script>
 
 <style>
+    .product-form {
+        pointer-events: all;
+    }
+
     .pdp-disclaimer {
         width: 100%;
         text-align: center;
@@ -474,9 +476,13 @@
         transition: opacity .3s ease;
     }
 
+    .Globo-form-popup {
+        padding: 0 6px;
+    }
+
     @media screen and (max-width: 767px) {
         .gBackInStockBtn {
-            font-size: 20px!important;
+            font-size: 14px!important;
         }
     }
 
@@ -522,9 +528,9 @@
 
         .gBackInStock-Button .gBackInStockBtn {
             font-family: "Monument", sans-serif !important;
-            background: rgba(171, 182, 208, 1) !important;
-            color: black !important;
-            border: 1px solid rgba(171, 182, 208, 1) !important;
+            background: rgba(171, 54, 58, 1) !important;
+            color: white !important;
+            border: 1px solid rgba(171, 54, 58, 1) !important;
         }
     }
 

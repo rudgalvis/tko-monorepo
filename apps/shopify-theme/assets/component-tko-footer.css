@@ -570,6 +570,7 @@ div#shopify-section-tko-footer {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     order: 1;
   }
 }

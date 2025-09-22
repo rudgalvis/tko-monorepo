@@ -70,6 +70,14 @@ Where there is single color option with multiple sizes
         display: flex;
         justify-content: space-between;
         align-items: center;
+        overflow: auto;
+    }
+
+    @media screen and (max-width: 767px) {
+    section.size-selector .pdp-size-guide {
+        white-space: nowrap;
+        margin-left: 1rem;
+    }
     }
 
     size-selector .skeleton {
