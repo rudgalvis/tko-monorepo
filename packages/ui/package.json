@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "storybook dev -p 6006 --ci",
     "dev-regular": "vite dev --config vite.config.js",
+    "dev-for-theme": "vite dev --config vite.config.js",
     "build": "vite build && npm run prepack",
     "build-for-theme": "vite build --config vite.config.build.js --mode production",
     "build-storybook": "storybook build",
