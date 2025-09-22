@@ -11,7 +11,7 @@
   "current": {
     "colors_solid_button_labels": "#FFFFFF",
     "colors_accent_1": "#121212",
-    "colors_accent_2": "#334FB4",
+    "colors_accent_2": "#d8a7a7",
     "colors_text": "#121212",
     "colors_outline_button_labels": "#121212",
     "colors_background_1": "#EEEEEA",
@@ -35,15 +35,15 @@
     "countformbg": "#d21910",
     "counttitle": "WINTER SALE ENDS IN",
     "popularsearch": "Delčia Cotton Sweater,Pilnatis Cotton Shorts,Pieva Cotton Bralette,Laumės Merino Wool Sweater,Heartbreaker Wool Sweater, Kalvos Vest",
-    "colorswatch": "Black:#000000,Acorn:#8B4202,Buckwheat:#927865,Earth:#705646,Off-White:#faf9f3,Pebble Grey:#e3e1dc,Dark Grey:#242526,Oat Milk:#fff2db,Naked Oat Milk:#fff8e8,Embroidered Oat Milk:Embroidered Oat Milk,Pearl:#ccc1ae,Grey:#807f80,Sage Green:#7abb97,Fern Green:#497b55,Lavender:#c2bfcf,Dark Wheat:#d3b787,Sea Salt:#fffef4,Beige:#e7dcc5,Dusty Pink:#B98182,Violet:#4f3d64,Forest:#415242,Moss Green:#556962,Light Grey:#e2e2e2,Sand Dune:#deccbe,Cherry:#8a0100,Baltic Blue:#7a8da5,White:#ffffff,Red:#be1930,Pine:#193f34,Naked Pebble Grey:#d6d6d6,Embroidered Pebble Grey:Embroidered Pebble Grey,Lilly Blue:#c2bfd2,Navy:#192034,Brown:#8d6b55,Off-White Baltic Fields:#fbfaf3,Brown Baltic Fields:#8d6b55,Gold:#d4b66b,Silver:#c0c0c0,Blue:#507099,Green:#028060,Embroidered Grey:Embroidered Pebble Grey,Naked Brown:#8D6B55,Lemon:#FADC90,Olive:#8F824F,Moss:#727339,Sunflower:Sunflower,Sand:#E5E3DC,Natural Linen:#E1DED4,Soft Blue:#BBC7C8,Land:land,Sea:sea,Natural Yarn:natural yarn,Fantasy Blue:fantasy blue,Oat Milk And Sea:oat milk and sea,Oat Milk And Fern Green:oat milk and fern green,Denim Blue:#7B899F,Midnight Blue:#3C4E74,Soft Beige:#E1D9D3,Wheat:#D7C4AD,Pine Green:#4B4B31,Dove Grey: dove grey,Striped Grey: striped grey,Sage:#82816C,Dusty Blue:#8798B1,Terracotta:#AB5C52,Ecru:#DBC8B1,Grass Green:#5F8458,Dusk: dusk,Dawn: dawn,Forest Green:#739B67,Tweed:tweed,Buckwheat and Blue:buckwheat and blue,Buckwheat and Off White:buckwheat and off white,Smoke:#51596B,Rhubarb:#A83554,Fantasy Rhubarb:fantasy rhubarb,Sky:sky,Waves:waves,Light:light,Dark:dark,Marble:marble,Honey:#F5e199,Nutmeg:#bb8151,Charcoal:#36454f,Onyx:#353839,Hellebore:#550d11,Dew:#DCE2EC,Sea Foam:#a4c2be,Fantasy Sea Foam:fantasy sea foam,Silver Grey:#d7d7d7,Golden Hour:#E3BCA3,Sunrise Yellow:#F4ED8C,Straw:#C49570,Slate:#B0A08C,Hellebore And Oat Milk:hellebore and oat milk,Sunrise And Oat Milk:sunrise and oat milk,Rhubarb And Fern Green:rhubarb and fern green,Nettle:#2E352E,Cloud Grey:#D0CBC7,Embroidered Cloud Grey:embroidered cloud grey,Fog Grey:#939299,Lilac And Oat Milk:lilac and oat milk,Nutmeg And Oak:nutmeg and oak,Burned Orange:#992A19,Lilac:#D0C0D3,Lilac And Black Flower:lilac and black flower,Lilac And Oat Milk Flower:lilac and oat milk flower,Lilac And Lemon Flower:lilac and lemon flower,Iris:#352852,Orange:#DE923B,Purple:#65314C,Stone Grey:#EAE7E3,Lemon And Lilac:lemon and lilac,Butter Yellow:#EEE9CA,Poppy Red:#A52115,Earth Brown:#9c866c,Taupe:#4d4644,Rose Pink:#edd2d1,Camel:#D5BA90,Mixed Beige:mixed beige",
+    "colorswatch": "Black:#000000,Acorn:#8B4202,Buckwheat:#927865,Earth:#705646,Off-White:#faf9f3,Pebble Grey:#e3e1dc,Dark Grey:#242526,Oat Milk:#fff2db,Naked Oat Milk:#fff8e8,Embroidered Oat Milk:Embroidered Oat Milk,Pearl:#ccc1ae,Grey:#807f80,Sage Green:#7abb97,Fern Green:#497b55,Lavender:#c2bfcf,Dark Wheat:#d3b787,Sea Salt:#fffef4,Beige:#e7dcc5,Violet:#4f3d64,Forest:#415242,Moss Green:#556962,Light Grey:#e2e2e2,Sand Dune:#deccbe,Cherry:#8a0100,Baltic Blue:#7a8da5,White:#ffffff,Red:#be1930,Pine:#193f34,Naked Pebble Grey:#d6d6d6,Embroidered Pebble Grey:Embroidered Pebble Grey,Lilly Blue:#c2bfd2,Navy:#192034,Brown:#8d6b55,Off-White Baltic Fields:#fbfaf3,Brown Baltic Fields:#8d6b55,Gold:#d4b66b,Silver:#c0c0c0,Blue:#507099,Green:#028060,Embroidered Grey:Embroidered Pebble Grey,Naked Brown:#8D6B55,Lemon:#FADC90,Olive:#8F824F,Moss:#727339,Sunflower:Sunflower,Sand:#E5E3DC,Natural Linen:#E1DED4,Soft Blue:#BBC7C8,Land:land,Sea:sea,Natural Yarn:natural yarn,Fantasy Blue:fantasy blue,Oat Milk And Sea:oat milk and sea,Oat Milk And Fern Green:oat milk and fern green,Denim Blue:#7B899F,Midnight Blue:#3C4E74,Soft Beige:#E1D9D3,Wheat:#D7C4AD,Pine Green:#4B4B31,Dove Grey: dove grey,Striped Grey: striped grey,Sage:#82816C,Dusty Blue:#8798B1,Terracotta:#AB5C52,Ecru:#DBC8B1,Grass Green:#5F8458,Dusk: dusk,Dawn: dawn,Forest Green:#739B67,Tweed:tweed,Buckwheat and Blue:buckwheat and blue,Buckwheat and Off White:buckwheat and off white,Smoke:#51596B,Rhubarb:#A83554,Fantasy Rhubarb:fantasy rhubarb,Sky:sky,Waves:waves,Light:light,Dark:dark,Marble:marble,Honey:#F5e199,Nutmeg:#bb8151,Charcoal:#36454f,Onyx:#353839,Hellebore:#550d11,Dew:#DCE2EC,Sea Foam:#a4c2be,Fantasy Sea Foam:fantasy sea foam,Silver Grey:#d7d7d7,Golden Hour:#E3BCA3,Sunrise Yellow:#F4ED8C,Straw:#C49570,Slate:#B0A08C,Hellebore And Oat Milk:hellebore and oat milk,Sunrise And Oat Milk:sunrise and oat milk,Rhubarb And Fern Green:rhubarb and fern green,Nettle:#2E352E,Cloud Grey:#D0CBC7,Embroidered Cloud Grey:embroidered cloud grey,Fog Grey:#939299,Lilac And Oat Milk:lilac and oat milk,Nutmeg And Oak:nutmeg and oak,Burned Orange:#992A19,Lilac:#D0C0D3,Lilac And Black Flower:lilac and black flower,Lilac And Oat Milk Flower:lilac and oat milk flower,Lilac And Lemon Flower:lilac and lemon flower,Iris:#352852,Orange:#DE923B,Purple:#65314C,Stone Grey:#EAE7E3,Lemon And Lilac:lemon and lilac,Butter Yellow:#EEE9CA, Dusty Pink:#D8A7A7, Poppy Red:#A52115,Earth Brown:#9c866c,Taupe:#4d4644,Rose Pink:#edd2d1,Camel:#D5BA90,Mixed Beige:mixed beige,Dusty Pink:#D8A7A7,Earth Brow:#835C3B,Twilight Gold:Twilight Gold,Raven Black:#141414",
     "colorGreen": "Pine,Sage Green,Fern Green,Forest,Moss Green,Olive,Land,Forest Green,Pine Green,Sage,Grass Green,Sea Foam, Fantasy Sea Foam, Nettle",
-    "colorBlue": "Baltic Blue,Navy,Soft Blue,Denim BLue,Sea,Fantasy Blue,Midnight Blue,Dusty Blue,Sky,Waves,Dew,Sea Foam,Fantasy Sea Foam",
+    "colorBlue": "Baltic Blue,Navy,Soft Blue,Denim BLue,Sea,Fantasy Blue,Midnight Blue,Dusty Blue,Sky,Waves,Dew,Sea Foam,Fantasy Sea Foam,Twilight Gold",
     "colorBeige": "Beige,Dark Wheat,Sand Dune,Embroidered Oat Milk,Oat Milk,Naked Oat Milk,Sea Salt,Off-White,Pearl,Off-White Baltic Fields,Natural Linen,Oat Milk and Land,Oat Milk and Sea,Natural Yarn,Sand,Soft Beige,Oat Milk And Sea,Oat Milk And Fern Green,Wheat,Ecru,Dusk,Dawn,Golden Hour, Straw,Camel, Mixed Beige",
     "colorBrown": "Brown,Brown Baltic Fields,Earth,Camel,Terracotta,Dusk,Dark, Sand, Tweed, Buckwheat, Buckwheat and Blue, Buckwheat and Off White,Slate, Nutmeg And Oak,Taupe,Earth Brown",
     "colorGrey": "Grey,Dove Grey,Light Grey,Naked Pebble Grey,Embroidered Pebble Grey,Striped Grey,Smoke, Dark Grey,Charcoal,Onyx, Silver Grey,Slate, Cloud Grey, Embroidered Silver Grey, Fog Grey, Stone Grey",
     "colorPink": "Dusty Pink,Dawn,Rhubarb,Fantasy Rhubarb,Rose Pink",
     "colorPurple": "Lavender,Lilly Blue,Violet, Lilac And Oat Milk,Lilac,Lilac And Lemon Flower,Lilac And Black Flower,Lilac And Oat Milk Flower,Iris,Purple",
-    "colorBlack": "Black",
+    "colorBlack": "Black, Raven Black",
     "colorWhite": "White,Off-White",
     "colorRed": "Red,Terracotta, Fantasy Rhubarb, Hellebore, Burned Orange,Orange,Poppy Red",
     "colorYellow": "Lemon,Light, Sunrise Yellow, Butter Yellow, Lemon and Lilac",
@@ -81,48 +81,48 @@
             "type": "Announcement",
             "settings": {
               "selectCountry": "US",
-              "announcement_text2": "<h4>FREE SHIPPING. US DUTIES & TAXES INCLUDED.</h4>",
-              "announcement_text_mobile2": "<h4>FREE SHIPPING. US DUTIES & TAXES INCLUDED.</h4>"
+              "announcement_text2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED</p>",
+              "announcement_text_mobile2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED</p>"
             }
           },
           "d02e68ec-d38b-4d9f-a1d0-d4c083477e44": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "EU",
-              "announcement_text2": "<h4>SUMMER SALE: 20% OFF SITEWIDE</h4>",
-              "announcement_text_mobile2": "<h4>SUMMER SALE: 20% OFF SITEWIDE</h4>"
+              "announcement_text2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED</p>",
+              "announcement_text_mobile2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED</p>"
             }
           },
           "7217c372-c6e4-47e9-ad10-ff267ba787a9": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "UK",
-              "announcement_text2": "<h4>FREE SHIPPING. UK DUTIES & TAXES INCLUDED.</h4>",
-              "announcement_text_mobile2": "<h4>FREE SHIPPING. UK DUTIES & TAXES INCLUDED.</h4>"
+              "announcement_text2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED</p>",
+              "announcement_text_mobile2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED</p>"
             }
           },
           "1dc1e8fe-b2e9-45d2-8404-f6255b708b52": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "ALL",
-              "announcement_text2": "<h4>FREE WORLDWIDE SHIPPING. DUTIES & TAXES INCLUDED.</h4>",
-              "announcement_text_mobile2": "<h4>FREE WORLDWIDE SHIPPING. DUTIES & TAXES INCLUDED.</h4>"
+              "announcement_text2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED</p>",
+              "announcement_text_mobile2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED</p>"
             }
           },
           "7ba786a5-7f72-46aa-b6fa-9f994a534b38": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "AU",
-              "announcement_text2": "<h4>FREE WORLDWIDE SHIPPING. DUTIES & TAXES INCLUDED.</h4>",
-              "announcement_text_mobile2": "<h4>FREE WORLDWIDE SHIPPING. DUTIES & TAXES INCLUDED.</h4>"
+              "announcement_text2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED</p>",
+              "announcement_text_mobile2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED</p>"
             }
           },
           "710025a2-82e7-4b4c-8e1c-b10a04d306e2": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "LT",
-              "announcement_text2": "<h4>SUMMER SALE: 20% OFF SITEWIDE</h4>",
-              "announcement_text_mobile2": "<h4>SUMMER SALE: 20% OFF SITEWIDE</h4>"
+              "announcement_text2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED</p>",
+              "announcement_text_mobile2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED</p>"
             }
           }
         },
@@ -149,8 +149,52 @@
       "static-header": {
         "type": "static-header",
         "blocks": {
+          "menu_jLejrP": {
+            "type": "menu",
+            "disabled": true,
+            "settings": {
+              "titleofmenu": "SHOP",
+              "megamenu-layouts": "image-submenu",
+              "titleofimages": "SHOP",
+              "headerlayoutsx": "3",
+              "image_one": "shopify://shop_images/DELCIA_LEMON_1_-_VIDEO_1080_x_1080_px.jpg",
+              "image_one_url": "shopify://collections/delcia",
+              "image_one_text": "Delčia edit",
+              "image_two": "shopify://shop_images/Homepage_-_Mobile_19dfd11f-5a8e-4ed2-8c12-734f9684e5ac.jpg",
+              "image_two_url": "shopify://collections/new-arrivals",
+              "image_two_text": "New arrivals",
+              "image_three": "shopify://shop_images/skraistas-lilac-silk-mohair-cropped-cardigan-631540.jpg",
+              "image_three_url": "shopify://collections/best-sellers",
+              "image_three_text": "Best sellers",
+              "image_four_url": "",
+              "image_four_text": "",
+              "urlenabled": true
+            }
+          },
+          "menu_jfdmk4": {
+            "type": "menu",
+            "settings": {
+              "titleofmenu": "SHOP",
+              "megamenu-layouts": "image-submenu",
+              "titleofimages": "",
+              "headerlayoutsx": "3",
+              "image_one": "shopify://shop_images/delcia-lilac-cotton-sweater-201907.jpg",
+              "image_one_url": "shopify://collections/delcia",
+              "image_one_text": "Delčia edit",
+              "image_two": "shopify://shop_images/delcia-earth-brown-cotton-sweater-5625858.jpg",
+              "image_two_url": "shopify://collections/new-arrivals",
+              "image_two_text": "New arrivals",
+              "image_three": "shopify://shop_images/perkunas-twilight-gold-mohair-silk-sweater-1070539.jpg",
+              "image_three_url": "shopify://collections/best-sellers",
+              "image_three_text": "Best sellers",
+              "image_four_url": "",
+              "image_four_text": "",
+              "urlenabled": true
+            }
+          },
           "dc85cb10-6347-476f-9349-73bdf668c47f": {
             "type": "menu",
+            "disabled": true,
             "settings": {
               "titleofmenu": "SHOP",
               "megamenu-layouts": "image-submenu",
@@ -191,35 +235,13 @@
               "image_four_text": "NOT PERFECT LINEN COLLABORATION",
               "urlenabled": true
             }
-          },
-          "d241092f-e2b3-4771-977a-d8bdfbe4ea27": {
-            "type": "menu",
-            "disabled": true,
-            "settings": {
-              "titleofmenu": "EXPLORE",
-              "megamenu-layouts": "full-image",
-              "titleofimages": "",
-              "headerlayoutsx": "1",
-              "image_one": "shopify://shop_images/knit-care_4a7034d6-62fe-4097-9f67-bdb9102ac502.jpg",
-              "image_one_url": "shopify://pages/knit-care",
-              "image_one_text": "KNIT CARE GUIDE",
-              "image_two": "shopify://shop_images/knit-repair_78fc235d-d32b-4a08-91d3-176647c65d15.jpg",
-              "image_two_url": "shopify://pages/knotty-atelier",
-              "image_two_text": "KNOTTY ATELIER",
-              "image_three": "shopify://shop_images/mega_menu_cards_-_ss24_472_x_591_px.jpg",
-              "image_three_url": "shopify://pages/vilnius-showroom",
-              "image_three_text": "VILNIUS SHOWROOM",
-              "image_four": "shopify://shop_images/1.jpg",
-              "image_four_url": "shopify://blogs/news",
-              "image_four_text": "THE KNOTTY JOURNAL",
-              "urlenabled": true
-            }
           }
         },
         "block_order": [
+          "menu_jLejrP",
+          "menu_jfdmk4",
           "dc85cb10-6347-476f-9349-73bdf668c47f",
-          "2e22bd71-9e28-4a41-98b5-225c74175958",
-          "d241092f-e2b3-4771-977a-d8bdfbe4ea27"
+          "2e22bd71-9e28-4a41-98b5-225c74175958"
         ],
         "settings": {
           "menu": "main-menu",
@@ -364,7 +386,7 @@
       },
       "5439026248262864547": {
         "type": "shopify://apps/preorder-globo/blocks/app-embed/e547a0ad-8212-4bcc-b02f-761faa9b8af2",
-        "disabled": false,
+        "disabled": true,
         "settings": {}
       }
     }

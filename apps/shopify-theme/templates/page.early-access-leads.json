@@ -19,10 +19,10 @@
         "onlyTextlayout": "only-bottom",
         "bgOnlyTextCTA": "#eeeeea",
         "colorOnlyTextCTA": "#000000",
-        "headingOnlyTextCTA": "BI-ANNUAL ARCHIVE SALE: AUGUST 1ST",
+        "headingOnlyTextCTA": "EXCLUSIVE PREVIEW",
         "maxwidthoftitle": 700,
         "maxwidthoftitlemobiled": 250,
-        "bodytextOnlyTextCTA": "Not to break your heart, but we are saying goodbye to some of our most loved pieces.\n\nSign up to get the first dibs. Knits will be up to 40% off.",
+        "bodytextOnlyTextCTA": "Membership has its privileges. Join now and get a front-row seat to new launches before the world sees them.",
         "fontsizetune": "27px",
         "maxwidthoftext": 900,
         "maxwidthoftextmobile": 320,
@@ -147,13 +147,14 @@
         "sectionID": "section-1"
       }
     },
-    "16401799220e8e4350": {
-      "type": "static-cta-subscribe",
+    "omnisend_early_access_form_7YUDPX": {
+      "type": "omnisend-early-access-form",
+      "name": "Early Access Email Form",
       "settings": {
         "borderlayoutsub": "hide-border",
         "subbgcolor": "#b4bed6",
         "subheading": "EARLY ACCESS THIS WAY",
-        "subbody": "<p>Stock is limited so you'll want to act fast.</p>",
+        "subbody": "<p>Sign up today. Tomorrow’s new arrivals will already be yours.</p>",
         "maxwidthofcta": 980,
         "maxwidthofctamobile": 300,
         "padding_sizeup": 18,
@@ -400,24 +401,6 @@
         "productheadertext": "",
         "bottomURL": ""
       }
-    },
-    "static_link_7iJrMj": {
-      "type": "static-link",
-      "settings": {
-        "onlyTextlayout": "hide-border",
-        "linktext": "SEE ALL KNITS",
-        "linkurl": "shopify://collections/all",
-        "thisisbigurl": false,
-        "justheader": false,
-        "padding_sizeup_sot": 20,
-        "padding_sizedow_sot": 20,
-        "padding_sizeup_sotm": 20,
-        "padding_sizedow_sotm": 20,
-        "containertop": 20,
-        "containerbottom": 20,
-        "containertopmobile": 20,
-        "containerbottommobile": 20
-      }
     }
   },
   "order": [
@@ -427,7 +410,7 @@
     "164001637237a519bf",
     "16446108729381799e",
     "164001900656e472ca",
-    "16401799220e8e4350",
+    "omnisend_early_access_form_7YUDPX",
     "164009869053d5286d",
     "1640097600a0caa913",
     "static_onlytext_alt_qU3ijY",
@@ -435,7 +418,6 @@
     "1640179165e980a659",
     "1640179650339e56d9",
     "1640179882f0ead277",
-    "static_hp_product_MatVDF",
-    "static_link_7iJrMj"
+    "static_hp_product_MatVDF"
   ]
 }

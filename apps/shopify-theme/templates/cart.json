@@ -14,13 +14,11 @@
       "blocks": {
         "a25472e4-0f5c-45e9-ad6a-056b081d8c37": {
           "type": "subtotal",
-          "settings": {
-          }
+          "settings": {}
         },
         "8f96c91a-d206-4d3c-a6a3-53538e608508": {
           "type": "buttons",
-          "settings": {
-          }
+          "settings": {}
         }
       },
       "block_order": [
@@ -28,7 +26,7 @@
         "8f96c91a-d206-4d3c-a6a3-53538e608508"
       ],
       "settings": {
-        "show_cart_note": false
+        "show_cart_note": true
       }
     }
   },

@@ -203,6 +203,17 @@
         "show_rating": false
       }
     },
+    "1657101713efe528ae": {
+      "type": "foursixty-pdp",
+      "settings": {
+        "onlyTextlayout": "hide-border",
+        "pdp_insta_title": "The Knotty Ones IRL",
+        "padding_sizeup_sot": 0,
+        "padding_sizedow_sot": 5,
+        "padding_sizeup_sotm": 0,
+        "padding_sizedow_sotm": 0
+      }
+    },
     "16571017306de7ad3a": {
       "type": "static-cta-subscribe",
       "settings": {
@@ -231,6 +242,7 @@
     "1657101662970126a6",
     "16571016824386821a",
     "1657101697e2c78553",
+    "1657101713efe528ae",
     "16571017306de7ad3a"
   ]
 }
