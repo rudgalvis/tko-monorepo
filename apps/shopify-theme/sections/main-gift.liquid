@@ -53,9 +53,7 @@
 Mobile Slider
 ----->
 <section class="mobile-slider-wrapper">
-  <div class="PDP-wishlist-container">
     {%- render 'button-wishlist-mobile', getproduct: product ,dimention: '0 0 42 42', h_width: 24 , h_height:24 , color:'#ffffff' -%}
-  </div> 
   {% for variant in product.variants  %}
       <div class="mobile-product-slider {% if forloop.first == true %}active{% endif %}">
         

@@ -379,18 +379,20 @@ ul.pimage-wrapper.active {
     height: 20px;
 }
 
+/* Active */
 .model-info-button {
+    background: rgba(238, 238, 234, 1);
+    border-radius: 20px;
     font-family: "Monument";
     font-size: 12px;
-    color: #fff;
-    letter-spacing: -0.15px;
-    line-height: 20px;
-    text-decoration: underline;
+    color: black;
+    line-height: 22px;
+    padding: 2px 8px 0;
     position: absolute;
     bottom: 7px;
+    transition: opacity .3s ease;
     left: 14px;
     z-index: 2;
-    padding: 4px;
 }
 
 .thumbnail-size {
@@ -419,7 +421,7 @@ ul.pimage-wrapper.active {
 }
 
 .model-info-button:hover {
-    color: white;
+    opacity: .8;
 }
 
 .info-window {
@@ -454,7 +456,7 @@ ul.pimage-wrapper.active {
     align-items: flex-start;
     justify-content: center;
     position: absolute;
-    right: 22px;
+    right: 12px;
     bottom: 22px;
 }
 
@@ -480,7 +482,9 @@ div.inches {
     padding: 0px 0px;
     cursor: pointer;
     line-height: 10px;
-    padding: 10px 0px 0px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 22px;
     height: 22px;
 }
@@ -494,7 +498,9 @@ div.cm {
     font-size: 10px;
     padding: 0px 0px;
     cursor: pointer;
-    padding: 10px 10px 0px 0px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
     width: 22px;
     height: 22px;
     line-height: 10px;
@@ -1504,7 +1510,7 @@ small {
     .infobox_close {
         position: absolute;
         right: 7px;
-        top: 0px;
+        top: 17px;
         cursor: pointer;
     }
 
@@ -1612,7 +1618,7 @@ small {
     }
 
     .mobile-product-slider {
-        margin-top: 97px;
+        margin-top: 80px;
         padding: 0px 6.5px;
     }
 
@@ -2149,16 +2155,15 @@ small {
         display: none;
     }
 
+    /* Active */
     .model-info-button {
         font-family: "Monument";
-        font-size: 10px;
-        color: white;
-        letter-spacing: -0.15px;
-        line-height: 20px;
-        text-decoration: underline;
+        font-size: 12px;
+        line-height: 22px;
         position: absolute;
-        bottom: 20px;
-        left: 17px;
+        top: 17px;
+        bottom: inherit;
+        left: 12px;
     }
 
     .infobox_close img {
@@ -2167,10 +2172,11 @@ small {
         aspect-ratio: unset;
     }
 
+    /* Active mobile */
     .infobox_close {
         position: absolute;
-        right: 7px;
-        top: 0px;
+        right: 12px;
+        top: 12px;
         cursor: pointer;
     }
 
@@ -2250,15 +2256,15 @@ small {
         bottom: 10px;
     }
 
+    /* Active mobile */
     .infobox {
         display: flex;
         flex-direction: column;
         position: absolute;
-        bottom: 56px;
-        left: 50%;
+        bottom: 0;
+        left: 0;
         z-index: 5;
-        width: 276px;
-        margin-left: -138px;
+        width: 100%;
     }
 
     .info-window p {
@@ -2267,9 +2273,9 @@ small {
         letter-spacing: -0.18px;
         line-height: 20px;
         color: black;
-        margin-block-start: 0em;
-        margin-block-end: 1em;
-        margin-block-end: 1.4em;
+        margin-block-start: em;
+        margin-block-end: 12px;
+        margin-block-end: 12px;
     }
 
     .info-window li span {
@@ -2393,7 +2399,7 @@ small {
     }
 
     .mobile-product-slider {
-        margin-top: 100px;
+        margin-top: 80px;
         padding: 0px 6.5px;
     }
 

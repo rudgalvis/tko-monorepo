@@ -20,67 +20,56 @@
 {% assign extraClassIt = getClass %}
 
 
-{%- if producttype.handle != blank  -%}
-  <button type="button" aria-label="Add to wishlist" class="whishlist-btn" button-wishlist data-product-handle="{{ producttype.handle }}">
-    <style scoped>
-      .icon {
-        fill: transparent;
-        stroke: {{color_heart}};
-        transition: fill 0.3s ease;
-        width: 100px;
-         height: 100px;
-      }
-
-      .active .icon {
-        fill: {{color_heart}};
-        stroke: {{color_heart}};
-      }
-
-      {% if detectdevice != 'PDP' %}
-
-      .whishlist-btn{
-          background: transparent;
-          border: none;
-          width: 30px;
-          position: absolute;
-          z-index: 5;
-          right: 25px;
-          top: 29px;
-      }
-      {% else %}
-      .whishlist-btn{
-          background: transparent;
-          border: none;
-          width: 30px;
-          position: absolute;
-          z-index: 5;
-          right: 25px;
-          top: 18px;
-      }
-      {% endif %}
-
-      @media (min-width: 320px) and (max-width: 480px) {
-      .whishlist-btn {
-        background: transparent;
-    border: none;
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    z-index: 5;
-    right: -9px;
-    top: -4px;
-}
-.icon {
-        fill: transparent;
-        stroke: {{color_heart}};
-        transition: fill 0.3s ease;
-        width: {{get_h_width}}px;
-         height: {{get_h_height}}px;;
-      }
-      }
-
-      
-    </style>
-    {%- render 'icon-heart-mobile' , dimention_heart:getdimention , extraclass : extraClassIt  -%}
+{%- if product.handle != blank  -%}
+  <button type="button" aria-label="Add to wishlist" class="whishlist-btn" button-wishlist data-product-handle="{{ product.handle }}">
+    {% render 'icon-heart-lucide' %}
   </button>
 {%- endif -%}
+
+<style>
+  .whishlist-btn {
+    background: rgba(238, 238, 234, 1);
+    border-radius: 100px;
+    color: black;
+    border: none;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    z-index: 5;
+    right: 0px;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .whishlist-btn.active .fill {
+    opacity: 1;
+  }
+
+  @media (pointer: fine) {
+    .whishlist-btn:hover:not(.active) .fill {
+      opacity: .7;
+    }
+  }
+
+  .whishlist-btn svg {
+    transform: translateY(1px);
+    width: 22px;
+    height: 22px;
+  }
+
+  @media screen and (max-width: 767px){
+    .whishlist-btn {
+      right: 18px;
+      top: 17px;
+    }
+
+
+    .whishlist-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 1.2px;
+    }
+  }
+</style>

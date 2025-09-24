@@ -154,9 +154,7 @@
 Mobile Slider
 ----->
 <section class="mobile-slider-wrapper">
-    <div class="PDP-wishlist-container">
-        {%- render 'button-wishlist-mobile', getproduct: product, dimention: '0 0 42 42', h_width: 24, h_height: 24, color: '#ffffff' -%}
-    </div>
+    {%- render 'button-wishlist-mobile', getproduct: product -%}
     <div class="mobile-product-slider active">
 
         <div id="mobile-gallery" class="mps-container mobile-slider stable js-exp-gallery" data-flickity
@@ -184,7 +182,7 @@ Mobile Slider
                         {% assign getOrderNumberStepTwo = getOrderNumberStepOne[0] | split: "-" %}
                         {% assign getOrderNumberStepThree = getOrderNumberStepTwo[1] %}
                         {% if getOrderNumberStepThree == getOrderNumberG %}
-                            <a data-gendertype="" class="model-info-button" href="javascript:void(0);">MODEL INFO</a>
+                            <a data-gendertype="" class="model-info-button" href="javascript:void(0);">Model info</a>
                             {% break %}
                         {% endif %}
 
@@ -336,7 +334,7 @@ Mobile Slider
                                 {% assign getOrderNumberStepThree = getOrderNumberStepTwo[1] %}
                                 {% if getOrderNumberStepThree == getOrderNumberG %}
                                     <a data-gendertype="{{ gendercontrol }}" class="model-info-button"
-                                       href="javascript:void(0);">MODEL INFO</a>
+                                       href="javascript:void(0);">Model info</a>
                                     {% break %}
                                 {% endif %}
 

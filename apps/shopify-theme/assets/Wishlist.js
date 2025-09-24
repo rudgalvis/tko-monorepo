@@ -89,8 +89,9 @@ const setupGrid = async (grid) => {
 
 
 $(document).on('click', '.whishlist-btn', function (event) {
-    console.log('click');
     var datahandle = $(this).attr('data-product-handle');
+
+    console.log(this)
     updateWishlist(datahandle);
     if ($(this).hasClass('active')) {
         $(this).removeClass('active')
