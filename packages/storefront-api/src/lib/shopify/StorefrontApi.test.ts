@@ -11,7 +11,7 @@ test('test', async () => {
 
 test('Test automatic variant discount', async () => {
 	const storefrontApi = new StorefrontApi()
-	const a = await storefrontApi.getAutomaticDiscountForVariant('FR', 54488371429724);
+	const a = await storefrontApi.getAutomaticDiscountForVariant('LT', 55226119979356);
 
 	console.log(a);
 });

@@ -7,7 +7,6 @@ export const GET: RequestHandler = async ({ params }) => {
 	if (!variant_id) throw error(400, { message: 'Variant ID is required' })
 	if (!iso_country) throw error(400, { message: 'Country code is required' })
 
-
 	const productService = new ProductService()
 
 	try {

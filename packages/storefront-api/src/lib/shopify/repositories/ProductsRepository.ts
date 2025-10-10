@@ -2,6 +2,7 @@ import {
 	getAvailableVariantsByProductByIdQuery,
 	type GetAvailableVariantsByProductByIdResponse
 } from '$lib/shopify/queries/GetAvailableVariantsByProductByIdQuery.js';
+import { getProduct, type GetProduct } from '$lib/shopify/queries/GetProduct.js';
 import {
 	getVariantPriceByIdQuery,
 	type GetVariantPriceByIdResponse
@@ -68,5 +69,28 @@ export class ProductsRepository extends BaseRepository {
 					}
 				: null
 		};
+	}
+
+	async getProduct(productGid: string) {
+		const { data, errors } = await this.client.request<GetProduct>(
+			getProduct,
+			{
+				variables: {
+					id: productGid
+				}
+			}
+		);
+
+		if (errors) {
+			console.error(errors);
+		}
+
+		if (!data)
+			throw new Error(`Failed to get product price by product id: ${productGid}`);
+
+		if (!data.product)
+			throw new Error(`Product not found: ${productGid}`);
+
+		return data.product
 	}
 }
