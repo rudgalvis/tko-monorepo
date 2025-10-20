@@ -89,8 +89,7 @@
     "sass": "^1.82.0",
     "storefront-api": "workspace:*",
     "swiper": "^11.1.14",
-    "tailwindcss": "^4.1.4",
-    "winston": "^3.17.0"
+    "tailwindcss": "^4.1.4"
   },
   "eslintConfig": {
     "extends": [
