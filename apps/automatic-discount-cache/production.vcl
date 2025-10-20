@@ -25,9 +25,13 @@ sub vcl_recv {
 }
 
 sub vcl_backend_response {
-    # Cache the response for 1 hour by default if backend doesn't specify
+    # Cache currency-rates for 12 hours, others for 1 hour by default if backend doesn't specify
     if (beresp.ttl <= 0s) {
-        set beresp.ttl = 1h;
+        if (bereq.url ~ "currency-rates") {
+            set beresp.ttl = 12h;
+        } else {
+            set beresp.ttl = 1h;
+        }
         set beresp.uncacheable = false;
     }
 

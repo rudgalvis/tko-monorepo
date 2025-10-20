@@ -8,7 +8,7 @@ export class CurrencyRatesApi {
 		this.repository = new FreeCurrencyApiRepository(this.apiKey);
 	}
 
-	getRates(baseCurrency: string, currencies: string[]): Promise<Record<string, number> | null> {
+	getRates(baseCurrency: string, currencies: string[]): Promise<Record<string, number>> | null {
 		try {
 			return this.repository.getRates(baseCurrency, currencies);
 		} catch (e) {
