@@ -10,7 +10,7 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 # Install pnpm
-RUN corepack enable && corepack prepare pnpm@10.10.0 --activate
+RUN corepack enable && corepack prepare pnpm@8.15.5 --activate
 
 WORKDIR /app
 
@@ -38,7 +38,7 @@ RUN pnpm build
 FROM node:23-slim
 
 # Install pnpm
-RUN corepack enable && corepack prepare pnpm@10.10.0 --activate
+RUN corepack enable && corepack prepare pnpm@8.15.5 --activate
 
 WORKDIR /app
 
