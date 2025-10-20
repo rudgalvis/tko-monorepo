@@ -1,6 +1,6 @@
 import type { BaseCurrencyRatesRepositoryInterface } from '$lib/currency-rates/repositories/BaseCurrencyRatesRepositoryInterface.js';
 //@ts-expect-error - package has no types
-import Api from '@everapi/freecurrencyapi-js';
+import Api from '@everapi/currencyapi-js';
 
 export class FreeCurrencyApiRepository implements BaseCurrencyRatesRepositoryInterface {
 	private api: Api;
