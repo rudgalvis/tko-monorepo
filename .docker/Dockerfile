@@ -53,6 +53,7 @@ COPY --from=builder --chown=appuser:appgroup /app/pnpm-*.yaml ./
 # Copy node_modules and packages with correct ownership
 COPY --from=builder --chown=appuser:appgroup /app/node_modules ./node_modules
 COPY --from=builder --chown=appuser:appgroup /app/packages ./packages
+COPY --from=builder --chown=appuser:appgroup /app/apps ./apps
 
 USER appuser
 
