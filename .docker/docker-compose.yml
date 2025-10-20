@@ -22,13 +22,13 @@ services:
     container_name: a16t-cache
     image: a16t-cache
     build:
-      context: ./../packages/automatic-discount-cache
+      context: ./../apps/automatic-discount-cache
       dockerfile: ./.docker/Dockerfile
     ports:
       - "50000:80"    # Expose Varnish on port 80
       - "50001:3000"  # Expose Varnish on port 80
     volumes:
-      - ../packages/automatic-discount-cache/production.vcl:/etc/varnish/default.vcl:ro
+      - ../apps/automatic-discount-cache/production.vcl:/etc/varnish/default.vcl:ro
     environment:
       - VARNISH_SIZE=2G  # Cache size
     command: -p default_ttl=3600 -p default_grace=3600
