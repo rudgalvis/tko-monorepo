@@ -18,6 +18,12 @@ export class FreeCurrencyApiRepository implements BaseCurrencyRatesRepositoryInt
 			currencies: currencies.join(',')
 		});
 
-		return data;
+		const r: Record<string, number> = {}
+
+		Object.keys(data).map(key => {
+			r[key] = data[key].value
+		})
+
+		return r;
 	}
 }
