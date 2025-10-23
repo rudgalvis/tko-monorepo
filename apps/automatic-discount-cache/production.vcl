@@ -25,17 +25,16 @@ sub vcl_recv {
 }
 
 sub vcl_backend_response {
-    # Cache currency-rates for 12 hours, others for 1 hour by default if backend doesn't specify
-    if (beresp.ttl <= 0s) {
-        if (bereq.url ~ "currency-rates") {
-            set beresp.ttl = 12h;
-        } else {
-            set beresp.ttl = 1h;
-        }
+    # Force TTL for specific endpoints regardless of backend headers
+    if (bereq.url ~ "currency-rates") {
+        set beresp.ttl = 12h;
+        set beresp.uncacheable = false;
+    } else if (bereq.url ~ "(automatic-discount|regional-variant-price)") {
+        set beresp.ttl = 1h;
         set beresp.uncacheable = false;
     }
 
-    # In vcl_backend_response:
+    # Handle 5xx errors
     if (beresp.status >= 500 && beresp.status < 600) {
         set beresp.ttl = 0s;
         set beresp.uncacheable = true;
