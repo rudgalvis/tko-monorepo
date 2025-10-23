@@ -27,9 +27,17 @@ sub vcl_recv {
 sub vcl_backend_response {
     # Force TTL for specific endpoints regardless of backend headers
     if (bereq.url ~ "currency-rates") {
+        # Remove backend TTL headers
+        unset beresp.http.Cache-Control
+        unset beresp.http.Expires;
+
         set beresp.ttl = 12h;
         set beresp.uncacheable = false;
     } else if (bereq.url ~ "(automatic-discount|regional-variant-price)") {
+        # Remove backend TTL headers
+        unset beresp.http.Cache-Control
+        unset beresp.http.Expires;
+
         set beresp.ttl = 1h;
         set beresp.uncacheable = false;
     }
