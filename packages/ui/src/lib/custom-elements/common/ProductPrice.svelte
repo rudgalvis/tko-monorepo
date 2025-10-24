@@ -51,7 +51,7 @@
 		DEV_market?: 'EUR' | 'AUD' | 'GBP' | 'USD'; // For storybook usage
 	}>();
 
-  let isCheckingDiscount = $state(true);
+  let isCheckingDiscount = $state(false);
 
 	const nexusApi = new NexusApi();
 	const EMPTY_PRICE_OBJECT = {

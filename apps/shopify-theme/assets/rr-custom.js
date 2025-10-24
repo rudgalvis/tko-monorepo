@@ -3902,7 +3902,7 @@ var root$f = /* @__PURE__ */ from_html("<div><!></div>");
 function ProductPrice(r, e) {
   push(e, !0);
   const t = () => store_get(displayCurrency, "$displayCurrency", i), s = () => store_get(currencyRates, "$currencyRates", i), n = () => store_get(marketCurrency, "$marketCurrency", i), [i, o] = setup_stores(), l = prop(e, "price", 7), c = prop(e, "compared_at", 7), u = prop(e, "iso_code", 7), d = prop(e, "variant_id", 7), f = prop(e, "product_id", 7), p = prop(e, "type", 7, "ProductDetailsPagePrice"), _ = prop(e, "DEV_currency", 7), h = prop(e, "DEV_market", 7);
-  let g = /* @__PURE__ */ state(!0);
+  let g = /* @__PURE__ */ state(!1);
   const v = new NexusApi(), w = { price: "-1", comparedAt: void 0 }, y = /* @__PURE__ */ user_derived(() => normalizePrice(l(), c())), m = /* @__PURE__ */ state(proxy(w)), b = /* @__PURE__ */ state(proxy(w));
   user_effect(() => {
     if (get$2(m).price = get$2(y).price, get$2(m).comparedAt = get$2(y).comparedAt, !!u() && !(!d() && !f()) && get$2(y).price && !get$2(y).comparedAt)
@@ -3967,10 +3967,15 @@ function ProductPrice(r, e) {
   }), T = /* @__PURE__ */ user_derived(() => n() && get$2(b).price !== "-1" && !get$2(g));
   let $;
   user_effect(() => {
-    $ && ($.shouldShowPrice = get$2(T), $.dispatchEvent(new CustomEvent("shouldShowPriceChanged", {
-      detail: { shouldShowPrice: get$2(T) },
-      bubbles: !0
-    })));
+    setTimeout(
+      () => {
+        $ && ($.shouldShowPrice = get$2(T), $.dispatchEvent(new CustomEvent("shouldShowPriceChanged", {
+          detail: { shouldShowPrice: get$2(T) },
+          bubbles: !0
+        })), console.log("ProductPrice: shouldShowPrice changed to", get$2(T)));
+      },
+      0
+    );
   });
   var C = {
     get price() {
