@@ -328,20 +328,152 @@
     let intervalAttempts = 0
     const maxIntervalAttempts = 20 // Stop after 10 seconds (20 * 500ms)
 
-    const getPrice = async () => {
-      const priceEl = document.querySelector('.price-ui--value')
-
-      if(!priceEl && retry <= 5) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-
-        return getPrice(retry + 1)
-      } else if(!priceEl) {
-        console.error('dump', 'could not find dynamic value')
-
-        return
+    // Price Observer with subscriber pattern
+    class PriceObserver {
+      constructor() {
+        this.subscribers = new Set()
+        this.currentPrice = null
+        this.observer = null
+        this.priceElement = null
+        this.retryCount = 0
+        this.maxRetries = 10
+        this.retryInterval = 100
       }
 
-      return priceEl.innerText.trim()
+      // Subscribe to price changes
+      subscribe(callback) {
+        this.subscribers.add(callback)
+        // If we already have a price, notify the new subscriber immediately
+        if (this.currentPrice !== null) {
+          callback(this.currentPrice)
+        }
+        return () => this.subscribers.delete(callback)
+      }
+
+      // Notify all subscribers of price changes
+      notifySubscribers(newPrice) {
+        if (newPrice !== this.currentPrice) {
+          this.currentPrice = newPrice
+          this.subscribers.forEach(callback => {
+            try {
+              callback(newPrice)
+            } catch (error) {
+              console.error('Price observer subscriber error:', error)
+            }
+          })
+        }
+      }
+
+      // Get current price synchronously
+      getCurrentPrice() {
+        return this.currentPrice
+      }
+
+      // Get price with retry logic (backward compatibility)
+      async getPrice(retry = 0) {
+        const priceEl = document.querySelector('.price-ui--value')
+
+        if (!priceEl && retry <= this.maxRetries) {
+          await new Promise(resolve => setTimeout(resolve, this.retryInterval))
+          return this.getPrice(retry + 1)
+        } else if (!priceEl) {
+          console.error('dump', 'could not find dynamic value')
+          return null
+        }
+
+        const price = priceEl.innerText.trim()
+        this.notifySubscribers(price)
+        return price
+      }
+
+      // Start observing price element changes
+      startObserving() {
+        if (this.observer) {
+          this.observer.disconnect()
+        }
+
+        // First, try to find the price element
+        this.findAndObservePriceElement()
+
+        // If not found, set up a retry mechanism
+        if (!this.priceElement) {
+          this.retryObserving()
+        }
+      }
+
+      // Find price element and set up observer
+      findAndObservePriceElement() {
+        this.priceElement = document.querySelector('.price-ui--value')
+        
+        if (this.priceElement) {
+          // Set up MutationObserver to watch for text changes
+          this.observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+              if (mutation.type === 'childList' || mutation.type === 'characterData') {
+                const newPrice = this.priceElement.innerText.trim()
+                if (newPrice && newPrice !== this.currentPrice) {
+                  this.notifySubscribers(newPrice)
+                }
+              }
+            })
+          })
+
+          // Start observing
+          this.observer.observe(this.priceElement, {
+            childList: true,
+            subtree: true,
+            characterData: true
+          })
+
+          // Get initial price
+          const initialPrice = this.priceElement.innerText.trim()
+          if (initialPrice) {
+            this.notifySubscribers(initialPrice)
+          }
+
+          console.log('dump', 'Price observer started')
+        }
+      }
+
+      // Retry mechanism for finding price element
+      retryObserving() {
+        if (this.retryCount < this.maxRetries) {
+          this.retryCount++
+          setTimeout(() => {
+            this.findAndObservePriceElement()
+            if (!this.priceElement) {
+              this.retryObserving()
+            }
+          }, this.retryInterval)
+        } else {
+          console.warn('dump', 'Price observer: Could not find price element after max retries')
+        }
+      }
+
+      // Stop observing
+      stopObserving() {
+        if (this.observer) {
+          this.observer.disconnect()
+          this.observer = null
+        }
+        this.priceElement = null
+        this.retryCount = 0
+      }
+
+      // Clean up
+      destroy() {
+        this.stopObserving()
+        this.subscribers.clear()
+        this.currentPrice = null
+      }
+    }
+
+    // Create global price observer instance
+    const priceObserver = new PriceObserver()
+
+    // Legacy getPrice function for backward compatibility
+    const getPrice = async (retry = 0) => {
+      return priceObserver.getPrice(retry)
     }
 
     const addPriceToBuyButton = async (retry = 0) => {
@@ -365,6 +497,28 @@
         isSettingPrice = false
       }
     }
+
+    // Subscribe to price changes for automatic updates
+    const unsubscribePriceUpdates = priceObserver.subscribe((newPrice) => {
+      // Update buy button prices automatically
+      const targetEls = document.querySelectorAll('.pdp-cta-price')
+      targetEls.forEach(e => e.innerHTML = newPrice)
+      
+      // Update preorder button prices automatically
+      const preorderTargetEls = document.querySelectorAll('.gPreorderBtnLoaded')
+      preorderTargetEls.forEach(e => {
+        const c = e.cloneNode(true)
+        c.innerHTML = `Pre Order for ${newPrice}`
+        const clones = e.parentElement.querySelectorAll('.gPreorderBtnLoaded')
+        if (clones.length > 1) return
+        e.parentElement.appendChild(c)
+      })
+      
+      console.log('dump', 'Price updated automatically:', newPrice)
+    })
+
+    // Start the price observer
+    priceObserver.startObserving()
 
     // Set price with interval, but stop after success or max attempts
     const addPriceToBuyButtonInterval = setInterval(() => {
