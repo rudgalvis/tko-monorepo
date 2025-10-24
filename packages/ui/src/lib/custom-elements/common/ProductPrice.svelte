@@ -23,7 +23,6 @@
 		subtractFromPriceWithSymbol
 	} from '$lib/utils/formatters/price-formatter.js';
 	import { NexusApi } from 'storefront-api';
-	import { fade } from 'svelte/transition';
 
 	type AvailableTypes =
 		| 'ProductDetailsPagePrice'
@@ -51,6 +50,8 @@
 		DEV_currency?: 'EUR' | 'AUD' | 'GBP' | 'USD'; // For storybook usage
 		DEV_market?: 'EUR' | 'AUD' | 'GBP' | 'USD'; // For storybook usage
 	}>();
+
+  let isCheckingDiscount = $state(true);
 
 	const nexusApi = new NexusApi();
 	const EMPTY_PRICE_OBJECT = {
@@ -143,6 +144,8 @@
 		if (!variant_id && !product_id)
 			throw new Error('Either variant or product id is required is required');
 
+    isCheckingDiscount = true
+
 		// We have two different strategies depending on which id was provided
 		const getterByVariant = nexusApi.getVariantAutomaticDiscount.bind(nexusApi);
 		const getterByProduct = nexusApi.getProductAutomaticDiscount.bind(nexusApi);
@@ -152,6 +155,9 @@
 			: () => getterByProduct(market, +product_id);
 
 		const { amount } = await getDiscount();
+
+
+    isCheckingDiscount = false
 
 		if (!amount || amount === 0)
 			return {
@@ -190,10 +196,32 @@
 		}
 	});
 
-	const shouldShowPrice = $derived($marketCurrency && finalPrice.price !== '-1');
+	const shouldShowPrice: boolean = $derived($marketCurrency && finalPrice.price !== '-1' && !isCheckingDiscount) as boolean;
+
+	// Expose shouldShowPrice to the custom element
+	let customElement: HTMLElement;
+	
+	// Update the custom element's property when shouldShowPrice changes
+	$effect(() => {
+		// Use a timeout to ensure the element is properly mounted
+		setTimeout(() => {
+			if (customElement) {
+				// Set as a property on the custom element
+				(customElement as any).shouldShowPrice = shouldShowPrice;
+				
+				// Dispatch a custom event when the value changes
+				customElement.dispatchEvent(new CustomEvent('shouldShowPriceChanged', {
+					detail: { shouldShowPrice },
+					bubbles: true
+				}));
+				
+				console.log('ProductPrice: shouldShowPrice changed to', shouldShowPrice);
+			}
+		}, 0);
+	});
 </script>
 
-<div use:removeNonComponentChildren={shouldShowPrice}>
+<div bind:this={customElement} use:removeNonComponentChildren={shouldShowPrice}>
 	{#if shouldShowPrice}
 		<PriceUi {...finalPrice} />
 	{/if}

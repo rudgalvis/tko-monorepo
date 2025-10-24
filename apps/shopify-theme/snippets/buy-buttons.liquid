@@ -134,7 +134,7 @@
               {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
                   {{ 'products.product.sold_out' | t }}
               {%- else -%}
-                  Buy for <span class="pdp-cta-price">{{ product.selected_or_first_available_variant.price | money }}</span>
+                  Buy <span class="pdp-cta-price"></span>
               {%- endif -%}
             </span>
                         {%- render 'loading-spinner' -%}
@@ -476,33 +476,65 @@
       return priceObserver.getPrice(retry)
     }
 
-    const addPriceToBuyButton = async (retry = 0) => {
-      if (priceSetSuccessfully || isSettingPrice) return
-
-      isSettingPrice = true
-
-      try {
-        // Buy buttons
-        const targetEls = document.querySelectorAll('.pdp-cta-price')
-
-        // Element to take price value from
-        const price = await getPrice()
-
-        if (price) {
-          targetEls.forEach(e => e.innerHTML = price)
-          priceSetSuccessfully = true
-          console.log('dump', 'Price set successfully')
-        }
-      } finally {
-        isSettingPrice = false
+    // Listen for shouldShowPrice changes from product-price web component
+    const setupProductPriceListener = () => {
+      const productPriceElement = document.querySelector('product-price')
+      
+      if (productPriceElement) {
+        console.log('dump', 'Found product-price element, setting up listener')
+        
+        // Listen for shouldShowPrice changes
+        productPriceElement.addEventListener('shouldShowPriceChanged', (event) => {
+          const shouldShowPrice = event.detail.shouldShowPrice
+          console.log('dump', 'shouldShowPrice changed:', shouldShowPrice)
+          
+          // You can add your custom logic here based on shouldShowPrice
+          if (shouldShowPrice) {
+            addPriceToBuyButton()
+            console.log('dump', 'Price is ready to be displayed')
+            // Add any logic when price should be shown
+          } else {
+            console.log('dump', 'Price is not ready to be displayed')
+            // Add any logic when price should be hidden
+          }
+        })
+        
+        // Get initial value
+        const initialShouldShowPrice = productPriceElement.shouldShowPrice
+        console.log('dump', 'Initial shouldShowPrice:', initialShouldShowPrice)
       }
     }
 
+    // Setup the listener
+    setupProductPriceListener()
+
+    const addPriceToBuyButton = async (retry = 0) => {
+      // if (priceSetSuccessfully || isSettingPrice) return
+      //
+      // isSettingPrice = true
+      //
+      // try {
+      //   // Buy buttons
+      //   const targetEls = document.querySelectorAll('.pdp-cta-price')
+      //
+      //   // Element to take price value from
+      //   const price = await getPrice()
+      //
+      //   if (price) {
+      //     targetEls.forEach(e => e.innerHTML = ` for ${price}`)
+      //     priceSetSuccessfully = true
+      //     console.log('dump', 'Price set successfully')
+      //   }
+      // } finally {
+      //   isSettingPrice = false
+      // }
+    }
+
     // Subscribe to price changes for automatic updates
-    const unsubscribePriceUpdates = priceObserver.subscribe((newPrice) => {
+    priceObserver.subscribe((newPrice) => {
       // Update buy button prices automatically
       const targetEls = document.querySelectorAll('.pdp-cta-price')
-      targetEls.forEach(e => e.innerHTML = newPrice)
+      targetEls.forEach(e => e.innerHTML = ` for ${newPrice}`)
       
       // Update preorder button prices automatically
       const preorderTargetEls = document.querySelectorAll('.gPreorderBtnLoaded')
@@ -520,45 +552,8 @@
     // Start the price observer
     priceObserver.startObserving()
 
-    // Set price with interval, but stop after success or max attempts
-    const addPriceToBuyButtonInterval = setInterval(() => {
-      intervalAttempts++
-
-      if (priceSetSuccessfully || intervalAttempts >= maxIntervalAttempts) {
-        clearInterval(addPriceToBuyButtonInterval)
-        if (!priceSetSuccessfully && intervalAttempts >= maxIntervalAttempts) {
-          console.warn('dump', 'Stopped trying to set price after max attempts')
-        }
-        return
-      }
-
-      addPriceToBuyButton()
-    }, 500)
-
     document.addEventListener('globo.preorder.show.preorder', addPriceToPreorderButton);
-    setTimeout(addPriceToPreorderButton, 100)
-    setTimeout(addPriceToPreorderButton, 250)
-    setTimeout(addPriceToPreorderButton, 500)
-    setTimeout(addPriceToPreorderButton, 1000)
-
-
-    // Set price with interval, but stop after success or max attempts
-    // let attempts = 0
-    // const addPriceToPreorderButtonInterval = setInterval(() => {
-    //   attempts++
-    //
-    //   if(attempts >= 10) {
-    //     clearInterval(addPriceToPreorderButtonInterval)
-    //     return
-    //   }
-    //
-    //   addPriceToPreorderButton();
-    // }, 500)
-
   })
-
-
-
 
 </script>
 
@@ -601,6 +596,7 @@
         overflow: hidden;
     }
     product-price .skeleton {
+        display: none;    
         height: 50px;
         padding: 10px 0;
     }
