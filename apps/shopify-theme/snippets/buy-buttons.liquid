@@ -205,53 +205,136 @@
 </div>
 
 <script>
+  let isPriceReady = false
+  let isPreorder = false
+  let price = undefined
+
+
+  const addPriceToBuyButton = () => {
+    console.log('dump', 'Adding price to buy button:', price)
+    const targetEls = document.querySelectorAll('.pdp-cta-price')
+    targetEls.forEach(e => e.innerHTML = ` for ${price}`)
+  }
+
+  const addPriceToPreorderButton = (parent = null) => {
+    if(!parent) {
+      addPriceToPreorderButton(document.querySelector('.pdp-cta-footer--content'))
+      addPriceToPreorderButton(document.querySelector('.product-form__buttons'))
+      // addPriceToPreorderButton(document.querySelector('.pdp-cta-footer--content'))
+    }
+
+    const preorderTargetEls = parent.querySelectorAll('.gPreorderBtnLoaded:not(.hidden)')
+
+    console.log('dump', 'Adding price to pre-order button:', price, preorderTargetEls)
+    if(preorderTargetEls.length === 0) {
+      console.log('dump', 'No preorder buttons found')
+      setTimeout(() => {
+        return addPriceToPreorderButton()
+      }, 50)
+    }
+
+    preorderTargetEls.forEach(e => {
+      const c = e.cloneNode(true) // Clone original while not changed
+
+      // Then hide original
+      e.classList.add('hidden') // If original is modified - globo will recreate it. Thus we hiding org, and using clone
+
+
+      // Append only if not already added
+      const clones = e.parentElement.querySelectorAll('.gPreorderBtnLoaded:not(.hidden)')
+      if (clones.length > 1) return
+
+      // Add price to clone button
+      c.innerHTML = `Pre Order for ${price}`
+
+      e.parentElement.appendChild(c)
+    })
+  }
+
+  const updateCTAS = () => {
+    if(!isPriceReady) return
+    if(!price) return
+
+    if(isPreorder) {
+      addPriceToPreorderButton()
+    } else {
+      addPriceToBuyButton()
+    }
+  }
+
+  document.addEventListener('globo.preorder.show.preorder', () => {
+    isPreorder = true
+    updateCTAS()
+  });
+
+  // Listen for shouldShowPrice changes from product-price web component
+  const setupPriceInitializationListener = () => {
+    const productPriceElement = document.querySelector('.pdp-price-container product-price')
+
+    if (productPriceElement) {
+      productPriceElement.addEventListener('shouldShowPriceChanged', (event) => {
+        const shouldShowPrice = event.detail.shouldShowPrice
+
+        if (shouldShowPrice) {
+          isPriceReady = true
+          updateCTAS()
+        }
+      })
+    }
+  }
+
+  // Setup the listener
+  setupPriceInitializationListener()
 
   document.addEventListener("DOMContentLoaded", async (event) => {
+    updateCTAS()
+
     const productFormOrg = document.querySelector('product-form');
     const footer = document.querySelector('.pdp-cta-footer--content');
 
-    const getPreOrderPrice = async () => {
-      const priceEl = document.querySelector('.gPreorderPartialPaymentPrice')
+    // const getPreOrderPrice = async () => {
+    //   const priceEl = document.querySelector('.gPreorderPartialPaymentPrice')
+    //
+    //   if(!priceEl && retry <= 5) {
+    //     await new Promise(resolve => setTimeout(resolve, 100));
+    //
+    //     return getPrice(retry + 1)
+    //   } else if(!priceEl) {
+    //     console.error('dump', 'could not find dynamic value')
+    //
+    //     return
+    //   }
+    //
+    //   return priceEl.innerText.trim()
+    // }
 
-      if(!priceEl && retry <= 5) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-
-        return getPrice(retry + 1)
-      } else if(!priceEl) {
-        console.error('dump', 'could not find dynamic value')
-
-        return
-      }
-
-      return priceEl.innerText.trim()
-    }
-
-    const addPriceToPreorderButton = async () => {
-      try {
-        // Buy buttons
-        const targetSelector = '.gPreorderBtnLoaded'
-        const targetEls = document.querySelectorAll(targetSelector)
-
-        // Element to take price value from
-        const price = await getPrice()
-
-        if (price) {
-          targetEls.forEach((e, index) => {
-            const c = e.cloneNode(true)
-
-            c.innerHTML = `Pre Order for ${price}`;
-
-            const clones = e.parentElement.querySelectorAll(targetSelector)
-
-            clones[0].style.display = 'none'
-
-            if(clones.length > 1) return
-
-            e.parentElement.appendChild(c)
-          })
-        }
-      } catch  {}
-    }
+    // const addPriceToPreorderButton = async () => {
+      console.log('dump', 'addPriceToPreorderButton')
+      // try {
+      //   // Buy buttons
+      //   const targetSelector = '.gPreorderBtnLoaded'
+      //   const targetEls = document.querySelectorAll(targetSelector)
+      //
+      //   // Element to take price value from
+      //   const price = await getPrice()
+      //
+      //   if (price) {
+      //     targetEls.forEach((e, index) => {
+      //       const c = e.cloneNode(true)
+      //
+      //       c.innerHTML = `Pre Order for ${price}`;
+      //
+      //       const clones = e.parentElement.querySelectorAll(targetSelector)
+      //
+      //       clones[0].style.display = 'none'
+      //
+      //       if(clones.length > 1) return
+      //
+      //       e.parentElement.appendChild(c)
+      //     })
+      //   }
+      // } catch  {}
+    // }
 
     const cleanFooter = async (footerContent, retry = 0) => {
         const paymentOptions = footerContent.querySelector('.gPreorderTopMessageParent');
@@ -302,8 +385,6 @@
 
       regularButtons.forEach(e => e.style.display = null)
 
-      addPriceToPreorderButton()
-
       // Disclaimer should not be shown
       const disclaimer = productFormOrg.querySelector('.pdp-disclaimer')
       if(disclaimer) disclaimer.style.display = null
@@ -311,10 +392,10 @@
 
     const responsiveTransformation = () => {
       if(window.innerWidth <= 767) {
-        console.log('dump', 'transforming for mobile')
+        // console.log('dump', 'transforming for mobile')
         transformSidebarForMobile()
       } else {
-        console.log('dump', 'transforming for desktop')
+        // console.log('dump', 'transforming for desktop')
         transformSidebarForDesktop()
       }
     }
@@ -431,7 +512,7 @@
             this.notifySubscribers(initialPrice)
           }
 
-          console.log('dump', 'Price observer started')
+          // console.log('dump', 'Price observer started')
         }
       }
 
@@ -471,88 +552,15 @@
     // Create global price observer instance
     const priceObserver = new PriceObserver()
 
-    // Legacy getPrice function for backward compatibility
-    const getPrice = async (retry = 0) => {
-      return priceObserver.getPrice(retry)
-    }
-
-    // Listen for shouldShowPrice changes from product-price web component
-    const setupProductPriceListener = () => {
-      const productPriceElement = document.querySelector('product-price')
-      
-      if (productPriceElement) {
-        console.log('dump', 'Found product-price element, setting up listener')
-        
-        // Listen for shouldShowPrice changes
-        productPriceElement.addEventListener('shouldShowPriceChanged', (event) => {
-          const shouldShowPrice = event.detail.shouldShowPrice
-          console.log('dump', 'shouldShowPrice changed:', shouldShowPrice)
-          
-          // You can add your custom logic here based on shouldShowPrice
-          if (shouldShowPrice) {
-            addPriceToBuyButton()
-            console.log('dump', 'Price is ready to be displayed')
-            // Add any logic when price should be shown
-          } else {
-            console.log('dump', 'Price is not ready to be displayed')
-            // Add any logic when price should be hidden
-          }
-        })
-        
-        // Get initial value
-        const initialShouldShowPrice = productPriceElement.shouldShowPrice
-        console.log('dump', 'Initial shouldShowPrice:', initialShouldShowPrice)
-      }
-    }
-
-    // Setup the listener
-    setupProductPriceListener()
-
-    const addPriceToBuyButton = async (retry = 0) => {
-      // if (priceSetSuccessfully || isSettingPrice) return
-      //
-      // isSettingPrice = true
-      //
-      // try {
-      //   // Buy buttons
-      //   const targetEls = document.querySelectorAll('.pdp-cta-price')
-      //
-      //   // Element to take price value from
-      //   const price = await getPrice()
-      //
-      //   if (price) {
-      //     targetEls.forEach(e => e.innerHTML = ` for ${price}`)
-      //     priceSetSuccessfully = true
-      //     console.log('dump', 'Price set successfully')
-      //   }
-      // } finally {
-      //   isSettingPrice = false
-      // }
-    }
-
     // Subscribe to price changes for automatic updates
     priceObserver.subscribe((newPrice) => {
-      // Update buy button prices automatically
-      const targetEls = document.querySelectorAll('.pdp-cta-price')
-      targetEls.forEach(e => e.innerHTML = ` for ${newPrice}`)
-      
-      // Update preorder button prices automatically
-      const preorderTargetEls = document.querySelectorAll('.gPreorderBtnLoaded')
-      preorderTargetEls.forEach(e => {
-        const c = e.cloneNode(true)
-        c.innerHTML = `Pre Order for ${newPrice}`
-        const clones = e.parentElement.querySelectorAll('.gPreorderBtnLoaded')
-        if (clones.length > 1) return
-        e.parentElement.appendChild(c)
-      })
-      
-      console.log('dump', 'Price updated automatically:', newPrice)
+      price = newPrice
+
+      updateCTAS();
     })
 
     // Start the price observer
     priceObserver.startObserving()
-
-    document.addEventListener('globo.preorder.show.preorder', addPriceToPreorderButton);
   })
 
 </script>

@@ -38,6 +38,7 @@
 		variant_id,
 		product_id,
 		type = 'ProductDetailsPagePrice',
+    isPriceReady = $bindable(false),
 		DEV_currency,
 		DEV_market
 	} = $props<{
@@ -46,6 +47,7 @@
 		iso_code?: string; // LT, AU, ...
 		variant_id?: string; // numeric
 		product_id?: string; // numeric
+    isPriceReady?: boolean;
 		type?: AvailableTypes; // Maps to a UI component to use
 		DEV_currency?: 'EUR' | 'AUD' | 'GBP' | 'USD'; // For storybook usage
 		DEV_market?: 'EUR' | 'AUD' | 'GBP' | 'USD'; // For storybook usage
@@ -204,7 +206,6 @@
 	// Update the custom element's property when shouldShowPrice changes
 	$effect(() => {
 		// Use a timeout to ensure the element is properly mounted
-		setTimeout(() => {
 			if (customElement) {
 				// Set as a property on the custom element
 				(customElement as any).shouldShowPrice = shouldShowPrice;
@@ -214,10 +215,7 @@
 					detail: { shouldShowPrice },
 					bubbles: true
 				}));
-				
-				console.log('ProductPrice: shouldShowPrice changed to', shouldShowPrice);
 			}
-		}, 0);
 	});
 </script>
 
