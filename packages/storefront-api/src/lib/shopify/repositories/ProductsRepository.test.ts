@@ -1,5 +1,5 @@
 import { ProductsRepository } from '$lib/shopify/repositories/ProductsRepository.js';
-import { generateProductGid, generateVariantGid } from '$lib/shopify/utils/generators/gid-generator.js';
+import { generateProductGid } from '$lib/shopify/utils/generators/gid-generator.js';
 import { test, describe, expect } from 'vitest';
 
 describe('ProductsRepository', () => {

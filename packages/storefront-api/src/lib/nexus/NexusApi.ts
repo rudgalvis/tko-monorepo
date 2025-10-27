@@ -16,7 +16,7 @@ export class NexusApi {
 		GET_AVAILABLE_VARIANT_IDS: () => `products/get-available-variant-ids`
 	};
 
-	async getVariantAutomaticDiscount(market: string, variantId: number) {
+	async getVariantAutomaticDiscount(market: string, variantId: number, signal?: AbortSignal) {
 		try {
 			const response = await fetch(
 				`${this.BASE_URL}/${this.API_VERSION_PATH}/${this.API_ROUTES.GET_VARIANT_AUTOMATIC_DISCOUNT(market, variantId)}`,
@@ -24,7 +24,8 @@ export class NexusApi {
 					method: 'GET',
 					headers: {
 						...this.NGROK_SKIP_HEADER
-					}
+					},
+					signal
 				}
 			);
 

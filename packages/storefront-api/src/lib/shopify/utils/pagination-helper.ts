@@ -14,7 +14,7 @@ export class PaginationHelper {
 	 * @param pageSize - Number of items per page (default: 50)
 	 * @returns Promise with all products and pagination info
 	 */
-	static async fetchAllPages<T>(
+	static async fetchAllPages(
 		fetchFunction: (variables: GetAllAvailableVariantsVars) => Promise<GetAllAvailableVariantsResponse>,
 		pageSize: number = 50
 	): Promise<PaginatedResult<GetAllAvailableVariantsResponse['products']['edges'][0]['node']>> {
