@@ -84,7 +84,6 @@ export class TaskController {
         // Task is not running, so start it
         this._status = TaskStatus.RUNNING
         this._startedAt = Date.now()
-        this.saveDetails()
         await this.action()
     }
 
@@ -149,29 +148,31 @@ export class TaskController {
     private finishTask() {
         this._status = TaskStatus.FINISHED
         this._finishedAt = Date.now()
-        this.saveDetails()
     }
 
     private failTask() {
         this._status = TaskStatus.FAILED
         this._finishedAt = Date.now()
-        this.saveDetails()
     }
 
     private isTimedout() {
         return this._startedAt && Date.now() - this._startedAt > this.TIMEOUT_MS
     }
 
+    loadFromData(data: TaskDetails): void {
+        this.options.market = data.market
+        this.options.variantId = data.variantId
+        this.options.index = data.index
+        this._status = data.status
+        this._startedAt = data.startedAt
+        this._finishedAt = data.finishedAt
+    }
+
     private loadDetails(): void {
         const details = this.storage.get<TaskDetails>(`task-${this.options.index}`)
 
         if(details) {
-            this.options.market = details.market
-            this.options.variantId = details.variantId
-            this.options.index = details.index
-            this._status = details.status
-            this._startedAt = details.startedAt
-            this._finishedAt = details.finishedAt
+            this.loadFromData(details)
         }
     }
 

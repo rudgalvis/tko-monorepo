@@ -12,6 +12,8 @@ type ControllerDetails = {
     initiatedAt: number | undefined
     completedAt: number | undefined
     index: number
+    isRunning: boolean
+    lastActivityAt: number | undefined
 }
 
 
@@ -33,6 +35,8 @@ export class PriceCachingController {
     private completedAt: number | undefined
     private index: number = 0
     private stopFlag: boolean = false
+    private isRunning: boolean = false
+    private lastActivityAt: number | undefined
     private tasks: TaskController[] = []
 
     private readonly storage: FileStorageService
@@ -51,9 +55,12 @@ export class PriceCachingController {
     }
 
     async initialize() {
-        // Load in all task ctonroller data from storage and create task controller with this single load
-        console.log(this.taskStorage.storage.all())
-        // await this.createTasks()
+        // Load in all task controller data from storage and create task controller with this single load
+        const allTaskData = this.taskStorage.storage.all()
+        console.log('Loaded task data:', allTaskData)
+        
+        // Create tasks with bulk-loaded data
+        await this.createTasks()
     }
 
     get details(): ControllerDetails | undefined {
@@ -62,32 +69,54 @@ export class PriceCachingController {
             initiatedAt: this.initiatedAt,
             completedAt: this.completedAt,
             index: this.index,
+            isRunning: this.isRunning,
+            lastActivityAt: this.lastActivityAt,
         }
     }
 
     async startCaching() {
-        this.stopFlag = false
+        // If already running, check if we should recover from a stuck state
+        if (this.isRunning) {
+            const shouldRecover = this.shouldRecoverFromStuckState()
+            
+            if (!shouldRecover) {
+                console.log('Caching already running, returning current status')
+                return
+            }
+            
+            console.log('Detected stuck state, recovering by resuming from next task')
+            // Continue to resume execution
+        }
 
+        this.isRunning = true
+        this.stopFlag = false
+        this.lastActivityAt = Date.now()
+        
         if(!this.initiatedAt) {
             this.initiatedAt = Date.now()
         }
 
-        if(this.initiatedAt && !this.completedAt) {
-            throw new Error('Caching already started')
-        }
-
         this.saveDetails()
-
         await this.runNextTask()
     }
 
     async stopCaching() {
         this.stopFlag = true
+        this.isRunning = false
         this.saveDetails()
+        this.taskStorage.save() // Force save on stop
+        this.storage.save()
     }
 
     async runNextTask(): Promise<void> {
-        if(this.stopFlag) return
+        if(this.stopFlag) {
+            this.isRunning = false
+            return
+        }
+
+        // Update last activity before running task
+        this.lastActivityAt = Date.now()
+        this.saveDetails()
 
         try {
             await this.tasks[this.index].run()
@@ -99,7 +128,10 @@ export class PriceCachingController {
 
         if(this.index >= this.tasks.length) {
             this.completedAt = Date.now()
+            this.isRunning = false
             this.saveDetails()
+            this.taskStorage.save() // Force save on completion
+            this.storage.save()
             console.log('stopping because we have run all tasks')
         } else {
             this.saveDetails()
@@ -132,6 +164,8 @@ export class PriceCachingController {
             return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
         }
 
+        const isStuck = this.isRunning && this.shouldRecoverFromStuckState()
+        
         return {
             ...this.details,
             index: `${this.index} / ${this.tasks.length}`,
@@ -140,7 +174,8 @@ export class PriceCachingController {
             progress: Math.floor((this.index / this.tasks.length) * 100) + '%',
             duration: getDuration(),
             failedTasks,
-            completedTasks
+            completedTasks,
+            isStuck
         }
     }
 
@@ -149,6 +184,8 @@ export class PriceCachingController {
         this.initiatedAt = undefined
         this.completedAt = undefined
         this.index = 0
+        this.isRunning = false
+        this.lastActivityAt = undefined
         this.taskStorage.clear()
         this.storage.clear()
     }
@@ -158,16 +195,43 @@ export class PriceCachingController {
 
         if(!variantIds) return []
 
+        // Get all existing task data from storage in one operation
+        const allTaskData = this.taskStorage.storage.all()
+
         variantIds.forEach((variantId, index) => {
             PriceCachingController.MARKETS_TO_CACHE.forEach((market, marketIndex) => {
-                this.tasks.push(new TaskController({
-                    index: (index * PriceCachingController.MARKETS_TO_CACHE.length) + marketIndex,
+                const taskIndex = (index * PriceCachingController.MARKETS_TO_CACHE.length) + marketIndex
+                
+                // Create task controller with pre-loaded data if it exists
+                const taskController = new TaskController({
+                    index: taskIndex,
                     market,
                     variantId,
                     storage: this.taskStorage
-                }))
+                })
+                
+                // Load existing task details if available
+                const existingData = allTaskData[`task-${taskIndex}`]
+                if (existingData) {
+                    // Load the data using the proper method to avoid individual file reads
+                    taskController.loadFromData(existingData)
+                }
+                
+                this.tasks.push(taskController)
             })
         })
+    }
+
+    private shouldRecoverFromStuckState(): boolean {
+        if (!this.lastActivityAt) {
+            // No last activity recorded, allow recovery
+            return true
+        }
+        
+        const STUCK_THRESHOLD_MS = 30000 // 30 seconds (6x task timeout)
+        const timeSinceLastActivity = Date.now() - this.lastActivityAt
+        
+        return timeSinceLastActivity > STUCK_THRESHOLD_MS
     }
 
     private loadDetails(): void {
@@ -178,6 +242,8 @@ export class PriceCachingController {
             this.initiatedAt = details.initiatedAt
             this.completedAt = details.completedAt
             this.index = details.index
+            this.isRunning = details.isRunning ?? false
+            this.lastActivityAt = details.lastActivityAt
         }
     }
 

@@ -6,20 +6,23 @@ export class FileStorageService {
     constructor(public cacheId: string, public ttl: number) {
         this.storage = new FlatCache({
             cacheId,
-            ttl: this.ttl
+            ttl: this.ttl,
+            persistInterval: 30000 // Auto-save to disk every 30 seconds
         })
 
         this.storage.load()
     }
 
     get<T>(key: string): T | undefined {
-        this.storage.load()
         return this.storage.getKey(key) as T | undefined
     }
 
     set<T>(key: string, value: T): void {
-        this.storage.load()
         this.storage.setKey(key, value)
+        // No immediate save - persistInterval handles it
+    }
+
+    save(): void {
         this.storage.save()
     }
 

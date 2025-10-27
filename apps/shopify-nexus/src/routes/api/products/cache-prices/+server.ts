@@ -3,14 +3,10 @@ import { PriceCachingController } from '$lib/modules/price-caching/PriceCachingC
 import { json } from '@sveltejs/kit'
 
 const controller = new PriceCachingController()
+await controller.initialize()
 
 export const GET: RequestHandler = async () => {
-    await controller.initialize()
-
-    // Long running task
     controller.startCaching()
-
     const status = await controller.getStatus()
-
     return json(status)
 }
