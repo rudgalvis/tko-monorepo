@@ -38,7 +38,7 @@ sub vcl_backend_response {
         unset beresp.http.Cache-Control;
         unset beresp.http.Expires;
 
-        set beresp.ttl = 1h;
+        set beresp.ttl = 24h;
         set beresp.uncacheable = false;
     }
 

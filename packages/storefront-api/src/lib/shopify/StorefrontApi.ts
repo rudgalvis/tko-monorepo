@@ -2,6 +2,10 @@ import {
 	getProductVariantsByHandleQuery,
 	type GetProductVariantsResponse
 } from '$lib/shopify/queries/GetProductVariantsByHandleQuery.js';
+import {
+	type GetAllAvailableVariantsResponse,
+	type GetAllAvailableVariantsVars
+} from '$lib/shopify/queries/GetAllAvailableVariantsQuery.js';
 import { BaseRepository } from '$lib/shopify/repositories/BaseRepository.js';
 import { CartRepository } from '$lib/shopify/repositories/CartRepository.js';
 import {
@@ -80,5 +84,36 @@ export class StorefrontApi extends BaseRepository {
 		if (!metafield) return null;
 
 		return metafield.value;
+	}
+
+	async getAllAvailableVariants(variables: GetAllAvailableVariantsVars): Promise<GetAllAvailableVariantsResponse> {
+		return await this.productsRepository.getAllAvailableVariants(variables);
+	}
+
+	/**
+	 * Gets all products with pagination support
+	 * @param pageSize - Number of products per page (default: 50)
+	 * @returns Promise with all products and pagination info
+	 */
+	async getAllProducts(pageSize: number = 50) {
+		return await this.productsRepository.getAllProducts(pageSize);
+	}
+
+	/**
+	 * Gets all available variants from all products with pagination support
+	 * @param pageSize - Number of products per page (default: 50)
+	 * @returns Promise with all available variants from all products
+	 */
+	async getAllAvailableVariantsFromAllProducts(pageSize: number = 50) {
+		return await this.productsRepository.getAllAvailableVariantsFromAllProducts(pageSize);
+	}
+
+	/**
+	 * Gets all available variant IDs from all products with pagination support
+	 * @param pageSize - Number of products per page (default: 50)
+	 * @returns Promise with array of variant IDs
+	 */
+	async getAllAvailableVariantIds(pageSize: number = 50): Promise<string[]> {
+		return await this.productsRepository.getAllAvailableVariantIds(pageSize);
 	}
 }

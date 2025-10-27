@@ -63,10 +63,11 @@
 	},
 	"dependencies": {
 		"@shopify/shopify-api": "^11.9.0",
-		"ui": "workspace:*",
-		"storefront-api": "workspace:*",
 		"common-utils": "workspace:*",
+		"flat-cache": "^6.1.18",
 		"form-data": "^4.0.2",
-		"mailgun.js": "^12.0.1"
+		"mailgun.js": "^12.0.1",
+		"storefront-api": "workspace:*",
+		"ui": "workspace:*"
 	}
 }

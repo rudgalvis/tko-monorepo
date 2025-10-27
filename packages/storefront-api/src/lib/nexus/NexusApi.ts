@@ -11,7 +11,9 @@ export class NexusApi {
 			`automatic-discount/${isoCode}/${variantId}`,
 		GET_PRODUCT_AUTOMATIC_DISCOUNT: (isoCode: string, productId: number) =>
 			`automatic-discount/product/${isoCode}/${productId}`,
-		GET_CURRENCY_RATES: (baseMarket: string) => `currency-rates/${baseMarket}`
+		GET_CURRENCY_RATES: (baseMarket: string) => `currency-rates/${baseMarket}`,
+		CACHE_PRODUCT_PRICES: () => `products/cache-prices`,
+		GET_AVAILABLE_VARIANT_IDS: () => `products/get-available-variant-ids`
 	};
 
 	async getVariantAutomaticDiscount(market: string, variantId: number) {
@@ -54,6 +56,46 @@ export class NexusApi {
 		try {
 			const response = await fetch(
 				`${this.BASE_URL}/${this.API_VERSION_PATH}/${this.API_ROUTES.GET_CURRENCY_RATES(market)}`,
+				{
+					method: 'GET',
+					headers: {
+						...this.NGROK_SKIP_HEADER
+					}
+				}
+			);
+
+			return await response.json();
+		} catch (e) {
+			console.error(e);
+
+			return null;
+		}
+	}
+
+	async cacheProductPrices(): Promise<unknown | null> {
+		try {
+			const response = await fetch(
+				`${this.BASE_URL}/${this.API_VERSION_PATH}/${this.API_ROUTES.CACHE_PRODUCT_PRICES()}`,
+				{
+					method: 'GET',
+					headers: {
+						...this.NGROK_SKIP_HEADER
+					}
+				}
+			);
+
+			return await response.json();
+		} catch (e) {
+			console.error(e);
+
+			return null;
+		}
+	}
+
+	async getAvailableVariantIds(): Promise<string[] | null> {
+		try {
+			const response = await fetch(
+				`${this.BASE_URL}/${this.API_VERSION_PATH}/${this.API_ROUTES.GET_AVAILABLE_VARIANT_IDS()}`,
 				{
 					method: 'GET',
 					headers: {
