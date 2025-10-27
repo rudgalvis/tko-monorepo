@@ -1,10 +1,13 @@
 import { FileStorageService } from "$lib/services/FileStorageService"
 import { NexusApi } from "storefront-api"
 
-interface TaskControllerConfig {
+export type TaskParams = {
     index: number
     market: string
     variantId: string
+}
+
+export type TaskControllerConfig = TaskParams & {
     storage?: FileStorageService
     nexusApi?: NexusApi
 }
@@ -30,14 +33,15 @@ export class TaskController {
     private _startedAt: number | undefined
     private _finishedAt: number | undefined
 
-    private readonly options: TaskControllerConfig
-    private readonly storage: FileStorageService
+    private options: TaskControllerConfig
+
+    public readonly storage: FileStorageService
     private readonly nexusApi: NexusApi
 
     private readonly TIMEOUT_MS: number = 5000 // 5 seconds
 
     constructor(config: TaskControllerConfig) {
-        if (!config.index) throw new Error('Index must be set')
+        if (config.index === undefined || config.index === null) throw new Error('Index must be set')
         
         this.options = {
             index: config.index,
@@ -45,10 +49,11 @@ export class TaskController {
             variantId: config.variantId
         }
         
-        this.storage = config.storage ?? new FileStorageService('task-controller', 3600)
+        this.storage = config.storage ?? new FileStorageService('task-controller', 3600 * 1000)
         this.nexusApi = config.nexusApi ?? new NexusApi()
         
-        this.loadDetails()
+        // Override from storage if it exists
+        // this.loadDetails()
     }
 
     get details(): TaskDetails | undefined {
@@ -63,67 +68,82 @@ export class TaskController {
     }
 
     async run() {
-        switch(this._status) {
-            case TaskStatus.RUNNING:
-                if(this.isTimedout()) {
-                    this.failTask()
-                    return
-                } else {
-                    throw new Error('Task is already running')
-                }
-                break
-            default:
-                this._status = TaskStatus.RUNNING
-                this._startedAt = Date.now()
-                this.saveDetails()
-                await this.action()
-                break
+        // Check if task is already running
+        if (this._status === TaskStatus.RUNNING) {
+            // First check if it's timed out
+            if (!this.isTimedout()) {
+                // If not timed out, it's genuinely still running
+                throw new Error('Task is already running. Breaking this run off.')
+            }
+
+            // If timed out, fail the task
+            this.failTask()
+            return
         }
+        
+        // Task is not running, so start it
+        this._status = TaskStatus.RUNNING
+        this._startedAt = Date.now()
+        this.saveDetails()
+        await this.action()
     }
 
     private async action(): Promise<void> {
         const controller = new AbortController()
-        let taskCompleted = false
+        let timeoutOccurred = false
         
-        const processTask = async () => {
-            try {
-                const discountResult = await this.nexusApi.getVariantAutomaticDiscount(this.options.market, +this.options.variantId, controller.signal)
-            
-                if (!taskCompleted) {
-                    taskCompleted = true
-                    if (discountResult) {
-                        this.finishTask()
-                    } else {
-                        this.failTask()
-                    }
-                }
-            } catch (error) {
-                if (!taskCompleted) {
-                    taskCompleted = true
-                    if (error instanceof Error && error.name === 'AbortError') {
-                        // Request was cancelled due to timeout, but task may already be failed by timeout
-                        // Only fail if not already completed
-                        this.failTask()
-                    } else {
-                        // Other error occurred, fail the task
-                        this.failTask()
-                    }
-                }
-            }
-        }
-
-        const timeout = new Promise<void>((resolve) => {
-            setTimeout(() => {
-                if (!taskCompleted) {
-                    taskCompleted = true
-                    controller.abort()
-                    this.failTask()
-                }
-                resolve()
+        const taskPromise = new Promise<boolean>((resolve, reject) => {
+            // Set up timeout that aborts and rejects
+            const timeoutId = setTimeout(() => {
+                timeoutOccurred = true
+                controller.abort()
+                reject(new Error('Task timeout'))
             }, this.TIMEOUT_MS)
+            
+            // Execute API call
+            this.nexusApi.getVariantAutomaticDiscount(
+                this.options.market, 
+                +this.options.variantId, 
+                controller.signal
+            )
+                .then((discountResult) => {
+                    // Check if the request was aborted due to timeout
+                    if (timeoutOccurred || controller.signal.aborted) {
+                        reject(new Error('Task timeout'))
+                        return
+                    }
+                    
+                    if (discountResult) {
+                       resolve(true)
+                    } else {
+                        reject(new Error('Failed to get variant automatic discount'))
+                    }
+                })
+                .catch(error => {
+                    // Handle API errors (including abort errors)
+                    if (timeoutOccurred || controller.signal.aborted) {
+                        reject(new Error('Task timeout'))
+                    } else {
+                        reject(error)
+                    }
+                })
+                .finally(() => {
+                    clearTimeout(timeoutId)
+                })
         })
-
-        await Promise.race([processTask(), timeout])
+        
+        // Handle completion
+        try {
+            const success = await taskPromise
+            if (success) {
+                this.finishTask() 
+            } else {
+                console.error('Failed to get variant automatic discount for market', this.options.market, 'variant', this.options.variantId)
+                this.failTask()
+            }
+        } catch {
+            this.failTask()
+        }
     }
 
     private finishTask() {
@@ -156,7 +176,7 @@ export class TaskController {
     }
 
     private saveDetails() {
-        void this.storage.set(`task-${this.options.index}`, this.details)
+        this.storage.set(`task-${this.options.index}`, this.details)
     }
 }
 

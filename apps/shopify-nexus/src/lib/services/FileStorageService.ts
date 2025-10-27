@@ -1,7 +1,7 @@
 import { FlatCache } from "flat-cache";
 
 export class FileStorageService {
-    private storage: FlatCache
+    public storage: FlatCache
 
     constructor(public cacheId: string, public ttl: number) {
         this.storage = new FlatCache({
@@ -20,6 +20,11 @@ export class FileStorageService {
     set<T>(key: string, value: T): void {
         this.storage.load()
         this.storage.setKey(key, value)
+        this.storage.save()
+    }
+
+    clear(): void {
+        this.storage.clear()
         this.storage.save()
     }
 }

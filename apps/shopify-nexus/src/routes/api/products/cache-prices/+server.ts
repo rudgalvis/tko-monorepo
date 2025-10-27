@@ -1,14 +1,16 @@
 import type { RequestHandler } from './$types'
-import { PricingCacheService } from '$lib/cache/pricing'
+import { PriceCachingController } from '$lib/modules/price-caching/PriceCachingController'
+import { json } from '@sveltejs/kit'
 
-const pricingCacheService = new PricingCacheService()
+const controller = new PriceCachingController()
 
 export const GET: RequestHandler = async () => {
-    const result = await pricingCacheService.startCaching()
-    
-    if (!result.success) {
-        return new Response(result.message, { status: 400 })
-    }
+    await controller.initialize()
 
-    return new Response(result.message)
+    // Long running task
+    controller.startCaching()
+
+    const status = await controller.getStatus()
+
+    return json(status)
 }
