@@ -292,13 +292,11 @@ export class CacheService {
 			if (progress && progress.completed > 0 && progress.avg_time_per_request_ms > 0) {
 				avgTimePerRequestMs += progress.avg_time_per_request_ms * progress.completed;
 				totalRequestsForAvg += progress.completed;
-				console.log(`[getStatus] Market ${marketId}: completed=${progress.completed}, avg_time=${progress.avg_time_per_request_ms}ms`);
 			}
 		}
 
 		if (totalRequestsForAvg > 0) {
 			avgTimePerRequestMs = avgTimePerRequestMs / totalRequestsForAvg;
-			console.log(`[getStatus] Overall avg_time_per_request_ms: ${avgTimePerRequestMs}ms (from ${totalRequestsForAvg} requests)`);
 		}
 
 		// Build market status

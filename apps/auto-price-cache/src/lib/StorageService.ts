@@ -171,8 +171,6 @@ export class StorageService {
 		analytics.success_rate = totalCompleted > 0 ? (totalSuccessful / totalCompleted) * 100 : 0;
 		analytics.avg_time_per_request_ms = totalCompleted > 0 ? weightedTimeSum / totalCompleted : 0;
 		
-		console.log(`[updateAnalytics] Updated analytics: avg_time=${analytics.avg_time_per_request_ms}ms, completed=${totalCompleted}, success_rate=${analytics.success_rate.toFixed(1)}%`);
-
 		this.saveAnalytics(analytics);
 	}
 

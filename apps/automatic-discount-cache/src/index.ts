@@ -37,6 +37,49 @@ const app = new Elysia()
       message: "All cache was cleared successfully",
     };
   })
+  .get("/ban/*", async ({ params, set }) => {
+    // Extract the path after /ban/
+    const path = params["*"];
+    
+    if (!path) {
+      set.status = 400;
+      return { 
+        error: "No path provided", 
+        code: "MISSING_PATH" 
+      };
+    }
+
+    // Escape special regex characters for Varnish ban command
+    // The path should match the URL pattern in Varnish
+    const escapedPath = path.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    
+    const process = Bun.spawn(
+      ["bash", "-c", `varnishadm "ban req.url ~ ^/${escapedPath}"`],
+      {
+        stdout: "pipe",
+        stderr: "pipe",
+      }
+    );
+
+    const output = await new Response(process.stdout).text();
+    const errorOutput = await new Response(process.stderr).text();
+
+    if (errorOutput && errorOutput.trim()) {
+      set.status = 500;
+      return {
+        success: false,
+        error: errorOutput.trim(),
+        code: "BAN_ERROR",
+      };
+    }
+
+    return {
+      success: true,
+      output: output.trim(),
+      path: `/${path}`,
+      message: `Cache cleared for path: /${path}`,
+    };
+  })
   .listen(3000);
 
 console.log(

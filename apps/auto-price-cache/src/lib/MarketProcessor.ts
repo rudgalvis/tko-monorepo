@@ -109,8 +109,6 @@ export class MarketProcessor {
 			this.progress.avg_time_per_request_ms * (this.progress.completed - 1) + durationMs;
 		this.progress.avg_time_per_request_ms = totalTime / this.progress.completed;
 		
-		console.log(`[MarketProcessor] ${this.progress.market_id}: completed=${this.progress.completed}, avg_time=${this.progress.avg_time_per_request_ms}ms, latest_duration=${durationMs}ms`);
-
 		// Update ETA
 		this.updateETA();
 

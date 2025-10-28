@@ -13,6 +13,29 @@ const nexusApi = new NexusApi();
 // Cache variant IDs globally since they're the same for all markets
 let cachedVariantIds: string[] | null = null;
 
+// Hardcoded base URL for the automatic-discount-cache service production
+const VARNISH_CACHE_BASE_URL = 'https://a16t-cache-control.tko.rudgalvis.com';
+
+/**
+ * Invalidate Varnish cache for a specific path
+ */
+async function invalidateVarnishCache(path: string): Promise<void> {
+	try {
+		const banUrl = `${VARNISH_CACHE_BASE_URL}/ban/${path}`;
+		
+		const response = await fetch(banUrl);
+		
+		if (!response.ok) {
+			console.warn(`[VarnishCache] Failed to invalidate Varnish cache for ${path}: ${response.status}`);
+		} else {
+			console.log(`[VarnishCache] Varnish cache invalidated for ${path}`);
+		}
+	} catch (error) {
+		// Silent fail - don't break the main process if cache invalidation fails
+		console.error('Failed to invalidate Varnish cache:', error);
+	}
+}
+
 // Get available markets from config
 async function getAvailableMarkets(): Promise<Market[]> {
 	return getConfiguredMarkets();
@@ -53,9 +76,12 @@ async function fetchPrice(variantId: string, marketId: string): Promise<PriceFet
 	const variantIdNum = parseInt(variantId);
 	
 	// Construct the URL for logging purposes
-	const url = `/api/nexus/variant-automatic-discount/${marketId}/${variantIdNum}`;
+	const url = `automatic-discount/${marketId}/${variantIdNum}`;
 	
 	try {
+		// Invalidate Varnish cache before fetching from Nexus API
+		await invalidateVarnishCache(url);
+		
 		const result = await nexusApi.getVariantAutomaticDiscount(marketId, variantIdNum);
 		const duration = performance.now() - startTime;
 		
