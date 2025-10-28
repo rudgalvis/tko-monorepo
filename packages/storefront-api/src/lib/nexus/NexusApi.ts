@@ -17,21 +17,27 @@ export class NexusApi {
 	};
 
 	async getVariantAutomaticDiscount(market: string, variantId: number, signal?: AbortSignal): Promise<{amount: number} | undefined> {
-		try {
-			const response = await fetch(
-				`${this.BASE_URL}/${this.API_VERSION_PATH}/${this.API_ROUTES.GET_VARIANT_AUTOMATIC_DISCOUNT(market, variantId)}`,
-				{
-					method: 'GET',
-					headers: {
-						...this.NGROK_SKIP_HEADER
-					},
-					signal
-				}
-			);
+		const response = await fetch(
+			`${this.BASE_URL}/${this.API_VERSION_PATH}/${this.API_ROUTES.GET_VARIANT_AUTOMATIC_DISCOUNT(market, variantId)}`,
+			{
+				method: 'GET',
+				headers: {
+					...this.NGROK_SKIP_HEADER
+				},
+				signal
+			}
+		);
 
+		if(!response.ok) {
+			throw new Error(`Failed to get variant automatic discount: ${response.statusText}. Querying: ${this.BASE_URL}/${this.API_VERSION_PATH}/${this.API_ROUTES.GET_VARIANT_AUTOMATIC_DISCOUNT(market, variantId)}`);
+		}
+
+		try {
 			return await response.json();
 		} catch (e) {
-			console.error(e);
+			console.error(e)
+
+			return undefined
 		}
 	}
 

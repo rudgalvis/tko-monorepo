@@ -98,11 +98,17 @@ export class TaskController {
                 controller.abort()
                 reject(new Error('Task timeout'))
             }, this.TIMEOUT_MS)
+
+            const variantId = +this.options.variantId.split('/').pop()
+
+            console.log({ variantId })
+
+            if(!variantId || typeof variantId !== 'number') throw Error('variantId is not a number')
             
             // Execute API call
             this.nexusApi.getVariantAutomaticDiscount(
-                this.options.market, 
-                +this.options.variantId, 
+                this.options.market,
+                +variantId,
                 controller.signal
             )
                 .then((discountResult) => {
@@ -119,6 +125,7 @@ export class TaskController {
                     }
                 })
                 .catch(error => {
+                    // console.error('Error', error)
                     // Handle API errors (including abort errors)
                     if (timeoutOccurred || controller.signal.aborted) {
                         reject(new Error('Task timeout'))
@@ -140,7 +147,9 @@ export class TaskController {
                 console.error('Failed to get variant automatic discount for market', this.options.market, 'variant', this.options.variantId)
                 this.failTask()
             }
-        } catch {
+        } catch (e) {
+            console.error('Error', e)
+
             this.failTask()
         }
     }
@@ -151,6 +160,7 @@ export class TaskController {
     }
 
     private failTask() {
+        console.log('Fail task')
         this._status = TaskStatus.FAILED
         this._finishedAt = Date.now()
     }

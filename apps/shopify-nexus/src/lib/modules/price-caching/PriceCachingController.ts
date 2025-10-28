@@ -1,22 +1,7 @@
 import { FileStorageService } from "$lib/services/FileStorageService"
 import { NexusApi } from "storefront-api"
 import { TaskController, TaskStatus } from "./TaskController"
-
-export class StopError extends Error {
-    public readonly name = 'StopError'
-    public readonly index: number
-    public readonly totalTasks: number
-    public readonly initiatedAt: string | undefined
-    public readonly stoppedAt: string
-
-    constructor(index: number, totalTasks: number, initiatedAt: number | undefined) {
-        super(`Price caching stopped at task ${index + 1}/${totalTasks}`)
-        this.index = index
-        this.totalTasks = totalTasks
-        this.initiatedAt = initiatedAt ? (new Date(initiatedAt)).toISOString() : undefined
-        this.stoppedAt = (new Date()).toISOString()
-    }
-}
+import { StopError } from "./StopError"
 
 export type PriceCachingControllerConfig = {
     storage?: FileStorageService
@@ -121,6 +106,15 @@ export class PriceCachingController {
     }
 
     async startCaching() {
+        // Check if its already finish, then restart
+        if(this.completedAt) {
+            console.log('Caching already finished, restarting',this.completedAt)
+            await this.fullReset()
+            await this.startCaching()
+            await new Promise(resolve => setTimeout(resolve, 1000))
+            return
+        }
+
         // If already running, check if we should recover from a stuck state
         if (this.isRunning) {
             const shouldRecover = this.shouldRecoverFromStuckState()
@@ -142,6 +136,7 @@ export class PriceCachingController {
         }
 
         this.saveDetails()
+
         await this.run()
     }
 
@@ -154,7 +149,7 @@ export class PriceCachingController {
         this.isRunning = false
     }
 
-    private runnerBreaker() {
+    private async runnerBreaker() {
         // Check if stop flag exists, do fresh check every 10th run, to optimize I/O
         const {stop} = this.getFlags(true)
 
@@ -163,14 +158,14 @@ export class PriceCachingController {
 
             const errorParams = [this.index, this.tasks.length, this.initiatedAt]
 
-            this.fullReset()
+            await this.fullReset()
 
             throw new StopError(...errorParams as [number, number, number | undefined])
         }
     }
 
     private async run(): Promise<void> {
-        this.runnerBreaker()
+        await this.runnerBreaker()
 
         // Update last activity before running task
         this.lastActivityAt = Date.now()
@@ -267,7 +262,7 @@ export class PriceCachingController {
         }
     }
 
-    private fullReset() {
+    private async fullReset() {
         this.initiatedAt = undefined
         this.completedAt = undefined
         this.index = 0
@@ -280,6 +275,8 @@ export class PriceCachingController {
         }
         this.taskStorage.clear()
         this.storage.clear()
+        console.log('Full reset completed')
+        await this.initialize()
     }
 
     private async createTasks() {
@@ -293,7 +290,7 @@ export class PriceCachingController {
         PriceCachingController.MARKETS_TO_CACHE.forEach((market, marketIndex) => {
             variantIds.forEach((variantId, index) => {
                 const taskIndex = (index * PriceCachingController.MARKETS_TO_CACHE.length) + marketIndex
-                
+
                 // Create task controller with pre-loaded data if it exists
                 const taskController = new TaskController({
                     index: taskIndex,

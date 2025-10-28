@@ -5,7 +5,6 @@ import { StorefrontApi } from 'storefront-api'
 
 
 export const GET: RequestHandler = async () => {
-    console.log('test')
     const storageKey = 'available-variant-ids'
     const storage = new FileStorageService(storageKey, 1000 * 60 * 60 * 24)
 
