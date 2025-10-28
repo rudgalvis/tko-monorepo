@@ -34,5 +34,6 @@ export class FileStorageService {
     clear(): void {
         this.storage.clear()
         this.storage.save()
+        this.storage.load()
     }
 }

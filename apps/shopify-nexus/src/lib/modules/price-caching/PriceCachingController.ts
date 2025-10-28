@@ -2,6 +2,22 @@ import { FileStorageService } from "$lib/services/FileStorageService"
 import { NexusApi } from "storefront-api"
 import { TaskController, TaskStatus } from "./TaskController"
 
+export class StopError extends Error {
+    public readonly name = 'StopError'
+    public readonly index: number
+    public readonly totalTasks: number
+    public readonly initiatedAt: string | undefined
+    public readonly stoppedAt: string
+
+    constructor(index: number, totalTasks: number, initiatedAt: number | undefined) {
+        super(`Price caching stopped at task ${index + 1}/${totalTasks}`)
+        this.index = index
+        this.totalTasks = totalTasks
+        this.initiatedAt = initiatedAt ? (new Date(initiatedAt)).toISOString() : undefined
+        this.stoppedAt = (new Date()).toISOString()
+    }
+}
+
 export type PriceCachingControllerConfig = {
     storage?: FileStorageService
     nexusApi?: NexusApi
@@ -17,6 +33,8 @@ type ControllerDetails = {
     index: number
     isRunning: boolean
     lastActivityAt: number | undefined
+    averageTaskDurationMs?: number
+    estimatedCompletionAt?: number
 }
 
 export class PriceCachingController {
@@ -38,6 +56,8 @@ export class PriceCachingController {
     private index: number = 0
     private isRunning: boolean = false
     private lastActivityAt: number | undefined
+    private averageTaskDurationMs: number | undefined
+    private estimatedCompletionAt: number | undefined
     private tasks: TaskController[] = []
 
     // Flags should be stored in FS, and separetly from ofther details so not to be oeverwriten by details writes
@@ -76,6 +96,8 @@ export class PriceCachingController {
             index: this.index,
             isRunning: this.isRunning,
             lastActivityAt: this.lastActivityAt,
+            averageTaskDurationMs: this.averageTaskDurationMs,
+            estimatedCompletionAt: this.estimatedCompletionAt,
         }
     }
 
@@ -138,8 +160,12 @@ export class PriceCachingController {
 
         if(stop) {
             this.isRunning = false
+
+            const errorParams = [this.index, this.tasks.length, this.initiatedAt]
+
             this.fullReset()
-            throw new Error('Stopped with stop flag')
+
+            throw new StopError(...errorParams as [number, number, number | undefined])
         }
     }
 
@@ -153,10 +179,17 @@ export class PriceCachingController {
         try {
             await this.tasks[this.index].run()
         } catch (error) {
-            console.error(error)
+            if (error instanceof StopError) {
+                console.log(`Price caching stopped: ${error.message}`)
+                return // Gracefully exit without logging as error
+            }
+            console.error('Task execution error:', error)
         }
 
         this.index++
+        
+        // Recalculate time estimation after each task
+        this.calculateTimeEstimation()
 
         if(this.index >= this.tasks.length) {
             this.completedAt = Date.now()
@@ -167,7 +200,7 @@ export class PriceCachingController {
             console.log('stopping because we have run all tasks')
         } else {
             this.saveDetails()
-            console.log('running next task')
+            console.log(`running next task ${this.index + 1} of ${this.tasks.length}`)
 
             return await this.run()
         }
@@ -198,8 +231,30 @@ export class PriceCachingController {
 
         const isStuck = this.isRunning && this.shouldRecoverFromStuckState()
         
+        // Calculate time estimation
+        this.calculateTimeEstimation()
+        
+        // Get market statistics
+        const marketStatistics = this.getMarketStatistics()
+        
+        const getEstimatedTimeRemaining = () => {
+            if (!this.estimatedCompletionAt) return undefined
+            
+            const remainingMs = this.estimatedCompletionAt - Date.now()
+            if (remainingMs <= 0) return '00:00:00'
+            
+            const hours = Math.floor(remainingMs / (1000 * 60 * 60))
+            const minutes = Math.floor((remainingMs % (1000 * 60 * 60)) / (1000 * 60))
+            const seconds = Math.floor((remainingMs % (1000 * 60)) / 1000)
+            
+            return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+        }
+        
         return {
             ...this.details,
+            estimatedCompletionAt: this.estimatedCompletionAt? (new Date(this.estimatedCompletionAt)).toISOString() : undefined,
+            estimatedTimeRemaining: getEstimatedTimeRemaining(),
+            averageTaskDurationMs: this.averageTaskDurationMs,
             index: `${this.index} / ${this.tasks.length}`,
             initiatedAt: this.initiatedAt? (new Date(this.initiatedAt)).toISOString() : undefined,
             completedAt: this.completedAt? (new Date(this.completedAt)).toISOString() : undefined,
@@ -207,7 +262,8 @@ export class PriceCachingController {
             duration: getDuration(),
             failedTasks,
             completedTasks,
-            isStuck
+            isStuck,
+            marketStatistics,
         }
     }
 
@@ -217,6 +273,8 @@ export class PriceCachingController {
         this.index = 0
         this.isRunning = false
         this.lastActivityAt = undefined
+        this.averageTaskDurationMs = undefined
+        this.estimatedCompletionAt = undefined
         this._flags = {
             stop: false
         }
@@ -232,8 +290,8 @@ export class PriceCachingController {
         // Get all existing task data from storage in one operation
         const allTaskData = this.taskStorage.storage.all()
 
-        variantIds.forEach((variantId, index) => {
-            PriceCachingController.MARKETS_TO_CACHE.forEach((market, marketIndex) => {
+        PriceCachingController.MARKETS_TO_CACHE.forEach((market, marketIndex) => {
+            variantIds.forEach((variantId, index) => {
                 const taskIndex = (index * PriceCachingController.MARKETS_TO_CACHE.length) + marketIndex
                 
                 // Create task controller with pre-loaded data if it exists
@@ -277,6 +335,92 @@ export class PriceCachingController {
             this.index = details.index
             this.isRunning = details.isRunning ?? false
             this.lastActivityAt = details.lastActivityAt
+            this.averageTaskDurationMs = details.averageTaskDurationMs
+            this.estimatedCompletionAt = details.estimatedCompletionAt
+        }
+    }
+
+    private getMarketStatistics(): Record<string, { total: number; completed: number; failed: number; pending: number; percentComplete: string }> {
+        const marketStats: Record<string, { total: number; completed: number; failed: number; pending: number; percentComplete: string }> = {}
+        
+        // Initialize all markets
+        PriceCachingController.MARKETS_TO_CACHE.forEach(market => {
+            marketStats[market] = {
+                total: 0,
+                completed: 0,
+                failed: 0,
+                pending: 0,
+                percentComplete: '0%'
+            }
+        })
+        
+        // Count tasks by market and status
+        this.tasks.forEach(task => {
+            const details = task.details
+            if (!details) return
+            
+            const market = details.market
+            if (!marketStats[market]) return
+            
+            marketStats[market].total++
+            
+            if (details.status === TaskStatus.FINISHED) {
+                marketStats[market].completed++
+            } else if (details.status === TaskStatus.FAILED) {
+                marketStats[market].failed++
+            } else {
+                marketStats[market].pending++
+            }
+        })
+        
+        // Calculate percentages
+        Object.keys(marketStats).forEach(market => {
+            const stats = marketStats[market]
+            if (stats.total > 0) {
+                const percentage = Math.floor((stats.completed / stats.total) * 100)
+                stats.percentComplete = `${percentage}%`
+            }
+        })
+        
+        return marketStats
+    }
+    
+    private calculateTimeEstimation(): void {
+        // Get completed tasks with valid timing data
+        const completedTasks = this.tasks
+            .filter(task => {
+                const details = task.details
+                return details?.status === TaskStatus.FINISHED && 
+                       details.startedAt && 
+                       details.finishedAt
+            })
+            .map(task => {
+                const details = task.details!
+                return details.finishedAt! - details.startedAt!
+            })
+        
+        if (completedTasks.length === 0) {
+            this.averageTaskDurationMs = undefined
+            this.estimatedCompletionAt = undefined
+            return
+        }
+        
+        // Use rolling average of last 50 tasks (or all if less than 50)
+        const windowSize = Math.min(50, completedTasks.length)
+        const recentTasks = completedTasks.slice(-windowSize)
+        
+        // Calculate average duration
+        const totalDuration = recentTasks.reduce((sum, duration) => sum + duration, 0)
+        this.averageTaskDurationMs = Math.floor(totalDuration / recentTasks.length)
+        
+        // Calculate remaining tasks
+        const remainingTasks = this.tasks.length - this.index
+        
+        if (remainingTasks > 0 && this.averageTaskDurationMs) {
+            const estimatedRemainingMs = remainingTasks * this.averageTaskDurationMs
+            this.estimatedCompletionAt = Date.now() + estimatedRemainingMs
+        } else {
+            this.estimatedCompletionAt = undefined
         }
     }
 
