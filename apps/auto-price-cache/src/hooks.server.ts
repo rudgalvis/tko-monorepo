@@ -1,8 +1,11 @@
 import { type Handle, redirect, type Cookies } from '@sveltejs/kit';
-import {DASHBOARD_PASSWORD} from '$env/static/private';
+import { DASHBOARD_PASSWORD } from '$env/static/private';
 
 const SECRET_PASSWORD = DASHBOARD_PASSWORD;
 const SESSION_COOKIE_NAME = 'price-cache-session';
+
+// Bearer token for API authentication
+const API_BEARER_TOKEN = DASHBOARD_PASSWORD;
 
 // Simple session validation
 function isAuthenticated(cookies: Cookies): boolean {
@@ -10,13 +13,35 @@ function isAuthenticated(cookies: Cookies): boolean {
 	return session === SECRET_PASSWORD;
 }
 
+// Check bearer token authentication
+function isBearerTokenValid(authHeader: string | null): boolean {
+	if (!authHeader) return false;
+	const token = authHeader.replace(/^Bearer\s+/i, '');
+	return token === API_BEARER_TOKEN;
+}
+
 // Public routes that don't require authentication
 const publicRoutes = ['/login'];
 
+// API routes that accept bearer token authentication
+const apiRoutes = ['/api/'];
+
 export const handle: Handle = async ({ event, resolve }) => {
-	const { url, cookies } = event;
+	const { url, cookies, request } = event;
 	
-	// Check if user is authenticated
+	// Check if this is an API route
+	const isApiRoute = apiRoutes.some(route => url.pathname.startsWith(route));
+	
+	// For API routes, check bearer token first
+	if (isApiRoute) {
+		const authHeader = request.headers.get('Authorization');
+		if (isBearerTokenValid(authHeader)) {
+			event.locals.authenticated = true;
+			return resolve(event);
+		}
+	}
+	
+	// Check if user is authenticated via cookie
 	const authenticated = isAuthenticated(cookies);
 	
 	// Store auth state in locals for use in pages

@@ -144,19 +144,19 @@
 	function getStatusColor(statusValue: ProcessStatus): string {
 		switch (statusValue) {
 			case ProcessStatus.IDLE:
-				return 'bg-gray-100 text-gray-800';
+				return 'bg-muted text-muted-foreground';
 			case ProcessStatus.INITIALIZING:
-				return 'bg-blue-100 text-blue-800';
+				return 'bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300';
 			case ProcessStatus.PROCESSING:
-				return 'bg-yellow-100 text-yellow-800';
+				return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-950 dark:text-yellow-300';
 			case ProcessStatus.PAUSED:
-				return 'bg-purple-100 text-purple-800';
+				return 'bg-purple-100 text-purple-800 dark:bg-purple-950 dark:text-purple-300';
 			case ProcessStatus.COMPLETED:
-				return 'bg-green-100 text-green-800';
+				return 'bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-300';
 			case ProcessStatus.ERROR:
-				return 'bg-red-100 text-red-800';
+				return 'bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-300';
 			default:
-				return 'bg-gray-100 text-gray-800';
+				return 'bg-muted text-muted-foreground';
 		}
 	}
 
@@ -200,760 +200,359 @@
 	}
 </script>
 
-<div class="container">
-	<header>
-		<div class="header-content">
-			<div>
-				<h1>Price Cache Dashboard</h1>
-				<p>Monitor and control the automatic price caching process</p>
-			</div>
-			<form method="POST" action="/logout">
-				<button type="submit" class="btn-logout">
-					🔓 Logout
-				</button>
-			</form>
-		</div>
-	</header>
-
-	{#if error}
-		<div class="alert error">
-			<strong>Error:</strong>
-			{error}
-		</div>
-	{/if}
-
-	{#if status}
-		<!-- Status Overview -->
-		<div class="card">
-			<h2>Status Overview </h2>
-			<div class="status-grid">
-				<div class="status-item">
-					<span class="label">Current State</span>
-					<span class="badge {getStatusColor(status.current_state.status)}">
-						{status.current_state.status}
-					</span>
+<div class="min-h-screen bg-background">
+	<div class="mx-auto max-w-7xl p-4 sm:p-6 lg:p-8">
+		<!-- Header -->
+		<header class="mb-8">
+			<div class="flex items-start justify-between gap-4 flex-wrap">
+				<div>
+					<h1 class="text-3xl font-bold tracking-tight">Price Cache Dashboard</h1>
+					<p class="text-muted-foreground mt-1">
+						Monitor and control the automatic price caching process
+					</p>
 				</div>
-				<div class="status-item">
-					<span class="label">Overall Progress</span>
-					<span class="value">{status.overall_progress.toFixed(1)}%</span>
-				</div>
-				<div class="status-item">
-					<span class="label">Total ETA</span>
-					<span class="value">{formatDuration(status.total_eta_minutes)}</span>
-				</div>
-				<div class="status-item">
-					<span class="label">Success Rate</span>
-					<span class="value">{status.analytics.success_rate.toFixed(1)}%</span>
-				</div>
-			</div>
-
-			{#if status.current_state.status === ProcessStatus.PROCESSING && status.current_state.current_market}
-				<div class="progress-bar">
-					<div class="progress-fill" style="width: {status.overall_progress}%"></div>
-				</div>
-				<p class="progress-text">
-					Processing market: <strong>{status.current_state.current_market}</strong> 
-				</p>
-			{/if}
-		</div>
-
-		<!-- Controls -->
-		<div class="card">
-			<h2>Controls</h2>
-			<div class="button-group">
-				<button
-					onclick={startProcess}
-					disabled={loading ||
-						status.current_state.status === ProcessStatus.PROCESSING ||
-						status.current_state.status === ProcessStatus.INITIALIZING}
-					class="btn btn-primary"
-				>
-					{status.current_state.status === ProcessStatus.PAUSED ? 'Resume' : 'Start'} Process
-				</button>
-				<button
-					onclick={stopProcess}
-					disabled={loading ||
-						!(
-							status.current_state.status === ProcessStatus.PROCESSING ||
-							status.current_state.status === ProcessStatus.INITIALIZING
-						)}
-					class="btn btn-secondary"
-				>
-					Stop Process
-				</button>
-				<button
-					onclick={resetProcess}
-					disabled={loading ||
-						status.current_state.status === ProcessStatus.PROCESSING ||
-						status.current_state.status === ProcessStatus.INITIALIZING}
-					class="btn btn-danger"
-				>
-					Reset
-				</button>
-			</div>
-			<label class="checkbox-label">
-				<input type="checkbox" bind:checked={autoRefresh} />
-				Auto-refresh (every 2s)
-			</label>
-		</div>
-
-		<!-- Analytics -->
-		<div class="card">
-			<h2>Analytics</h2>
-			<div class="stats-grid">
-				<div class="stat">
-					<span class="stat-value">{status.analytics.total_success.toLocaleString()}</span>
-					<span class="stat-label">Total Success</span>
-				</div>
-				<div class="stat">
-					<span class="stat-value">{status.analytics.total_fails.toLocaleString()}</span>
-					<span class="stat-label">Total Fails</span>
-				</div>
-				<div class="stat">
-					<span class="stat-value"
-						>{status.analytics.avg_time_per_request_ms.toFixed(0)}ms</span
+				<form method="POST" action="/logout">
+					<button
+						type="submit"
+						class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-destructive text-destructive-foreground hover:bg-destructive/90 h-10 py-2 px-4"
 					>
-					<span class="stat-label">Avg Time/Request</span>
+						Logout
+					</button>
+				</form>
+			</div>
+		</header>
+
+		{#if error}
+			<div class="rounded-lg border border-destructive/50 bg-destructive/10 p-4 mb-6">
+				<p class="text-sm text-destructive">
+					<strong>Error:</strong>
+					{error}
+				</p>
+			</div>
+		{/if}
+
+		{#if status}
+			<!-- Status Overview -->
+			<div class="rounded-lg border bg-card text-card-foreground shadow-sm mb-6">
+				<div class="p-6">
+					<h2 class="text-2xl font-semibold mb-4">Status Overview</h2>
+					<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-4">
+						<div class="space-y-2">
+							<p class="text-sm text-muted-foreground font-medium">Current State</p>
+							<span
+								class="inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-semibold {getStatusColor(
+									status.current_state.status
+								)}"
+							>
+								{status.current_state.status}
+							</span>
+						</div>
+						<div class="space-y-2">
+							<p class="text-sm text-muted-foreground font-medium">Overall Progress</p>
+							<p class="text-2xl font-bold">{status.overall_progress.toFixed(1)}%</p>
+						</div>
+						<div class="space-y-2">
+							<p class="text-sm text-muted-foreground font-medium">Total ETA</p>
+							<p class="text-2xl font-bold">{formatDuration(status.total_eta_minutes)}</p>
+						</div>
+						<div class="space-y-2">
+							<p class="text-sm text-muted-foreground font-medium">Success Rate</p>
+							<p class="text-2xl font-bold">{status.analytics.success_rate.toFixed(1)}%</p>
+						</div>
+					</div>
+
+					{#if status.current_state.status === ProcessStatus.PROCESSING && status.current_state.current_market}
+						<div class="space-y-2">
+							<div class="h-2 w-full overflow-hidden rounded-full bg-secondary">
+								<div
+									class="h-full bg-primary transition-all duration-300"
+									style="width: {status.overall_progress}%"
+								></div>
+							</div>
+							<p class="text-sm text-muted-foreground text-center">
+								Processing market: <strong>{status.current_state.current_market}</strong>
+							</p>
+						</div>
+					{/if}
 				</div>
 			</div>
-		</div>
 
-		<!-- Market Progress -->
-		<div class="card">
-			<h2>Market Progress</h2>
-			<div class="market-list">
-				{#each Object.entries(status.markets) as [marketId, marketData] (marketId)}
-					<div class="market-item">
-						<div class="market-header">
-							<h3>{marketId}</h3>
-							<span class="market-progress"
-								>{marketData.completed}/{marketData.total}</span
+			<!-- Controls -->
+			<div class="rounded-lg border bg-card text-card-foreground shadow-sm mb-6">
+				<div class="p-6">
+					<h2 class="text-2xl font-semibold mb-4">Controls</h2>
+					<div class="flex flex-wrap gap-3 mb-4">
+						<button
+							onclick={startProcess}
+							disabled={loading ||
+								status.current_state.status === ProcessStatus.PROCESSING ||
+								status.current_state.status === ProcessStatus.INITIALIZING}
+							class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+						>
+							{status.current_state.status === ProcessStatus.PAUSED ? 'Resume' : 'Start'} Process
+						</button>
+						<button
+							onclick={stopProcess}
+							disabled={loading ||
+								!(
+									status.current_state.status === ProcessStatus.PROCESSING ||
+									status.current_state.status === ProcessStatus.INITIALIZING
+								)}
+							class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+						>
+							Stop Process
+						</button>
+						<button
+							onclick={resetProcess}
+							disabled={loading ||
+								status.current_state.status === ProcessStatus.PROCESSING ||
+								status.current_state.status === ProcessStatus.INITIALIZING}
+							class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-destructive text-destructive-foreground hover:bg-destructive/90 h-10 px-4 py-2"
+						>
+							Reset
+						</button>
+					</div>
+					<label class="flex items-center gap-2 cursor-pointer select-none">
+						<input
+							type="checkbox"
+							bind:checked={autoRefresh}
+							class="h-4 w-4 rounded border-input ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+						/>
+						<span class="text-sm font-medium">Auto-refresh (every 2s)</span>
+					</label>
+				</div>
+			</div>
+
+			<!-- Analytics -->
+			<div class="rounded-lg border bg-card text-card-foreground shadow-sm mb-6">
+				<div class="p-6">
+					<h2 class="text-2xl font-semibold mb-4">Analytics</h2>
+					<div class="grid gap-4 md:grid-cols-3">
+						<div class="flex flex-col items-center justify-center space-y-1 p-6 rounded-lg bg-muted/50">
+							<p class="text-3xl font-bold">{status.analytics.total_success.toLocaleString()}</p>
+							<p class="text-xs text-muted-foreground uppercase tracking-wide">Total Success</p>
+						</div>
+						<div class="flex flex-col items-center justify-center space-y-1 p-6 rounded-lg bg-muted/50">
+							<p class="text-3xl font-bold">{status.analytics.total_fails.toLocaleString()}</p>
+							<p class="text-xs text-muted-foreground uppercase tracking-wide">Total Fails</p>
+						</div>
+						<div class="flex flex-col items-center justify-center space-y-1 p-6 rounded-lg bg-muted/50">
+							<p class="text-3xl font-bold"
+								>{status.analytics.avg_time_per_request_ms.toFixed(0)}ms</p
 							>
+							<p class="text-xs text-muted-foreground uppercase tracking-wide">Avg Time/Request</p>
 						</div>
-						<div class="market-stats">
-							<span class="market-stat">
-								Success Rate: <strong>{marketData.success_rate.toFixed(1)}%</strong>
+					</div>
+				</div>
+			</div>
+
+			<!-- Market Progress -->
+			<div class="rounded-lg border bg-card text-card-foreground shadow-sm mb-6">
+				<div class="p-6">
+					<h2 class="text-2xl font-semibold mb-4">Market Progress</h2>
+					<div class="space-y-4">
+						{#each Object.entries(status.markets) as [marketId, marketData] (marketId)}
+							<div class="rounded-lg border p-4 space-y-3">
+								<div class="flex items-center justify-between">
+									<h3 class="text-lg font-semibold">{marketId}</h3>
+									<span class="text-lg font-semibold text-primary"
+										>{marketData.completed}/{marketData.total}</span
+									>
+								</div>
+								<div class="flex flex-wrap gap-4 text-sm text-muted-foreground">
+									<span>
+										Success Rate: <strong class="text-foreground"
+											>{marketData.success_rate.toFixed(1)}%</strong
+										>
+									</span>
+									<span>
+										Failed: <strong class="text-foreground">{marketData.failed}</strong>
+									</span>
+									<span>
+										ETA: <strong class="text-foreground"
+											>{formatDuration(marketData.eta_minutes)}</strong
+										>
+									</span>
+								</div>
+								{#if marketData.total > 0}
+									<div class="h-2 w-full overflow-hidden rounded-full bg-secondary">
+										<div
+											class="h-full bg-primary transition-all duration-300"
+											style="width: {(marketData.completed / marketData.total) * 100}%"
+										></div>
+									</div>
+								{/if}
+							</div>
+						{/each}
+					</div>
+				</div>
+			</div>
+
+			<!-- Process Details -->
+			<div class="rounded-lg border bg-card text-card-foreground shadow-sm mb-6">
+				<div class="p-6">
+					<h2 class="text-2xl font-semibold mb-4">Process Details</h2>
+					<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+						<div class="space-y-1">
+							<p class="text-xs text-muted-foreground uppercase tracking-wide">Started At</p>
+							<p class="text-sm font-medium">{formatTime(status.current_state.started_at)}</p>
+						</div>
+						<div class="space-y-1">
+							<p class="text-xs text-muted-foreground uppercase tracking-wide">Estimated End</p>
+							<p class="text-sm font-medium">
+								{formatTime(status.current_state.estimated_end_at)}
+							</p>
+						</div>
+						<div class="space-y-1">
+							<p class="text-xs text-muted-foreground uppercase tracking-wide">Total ETA</p>
+							<p class="text-sm font-medium">{formatDuration(status.total_eta_minutes)}</p>
+						</div>
+						<div class="space-y-1">
+							<p class="text-xs text-muted-foreground uppercase tracking-wide">Current Market</p>
+							<p class="text-sm font-medium">
+								{status.current_state.current_market || 'None'}
+							</p>
+						</div>
+						<div class="space-y-1">
+							<p class="text-xs text-muted-foreground uppercase tracking-wide">Total Markets</p>
+							<p class="text-sm font-medium">{status.current_state.total_markets}</p>
+						</div>
+						<div class="space-y-1">
+							<p class="text-xs text-muted-foreground uppercase tracking-wide">
+								Completed Markets
+							</p>
+							<p class="text-sm font-medium">
+								{status.current_state.current_market_index}/{status.current_state.total_markets}
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		{:else}
+			<div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+				<div class="p-6">
+					<p class="text-muted-foreground">Loading status...</p>
+				</div>
+			</div>
+		{/if}
+
+		<!-- Fetch Logs Section -->
+		<div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+			<div class="p-6">
+				<div class="flex items-center justify-between mb-4">
+					<h2 class="text-2xl font-semibold">Fetch Call Logs</h2>
+					<button
+						onclick={() => (showFetchLogs = !showFetchLogs)}
+						class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
+					>
+						{showFetchLogs ? 'Hide' : 'Show'}
+					</button>
+				</div>
+
+				{#if showFetchLogs}
+					{#if fetchLogsStats}
+						<div class="grid gap-4 md:grid-cols-5 mb-6 p-4 rounded-lg bg-muted/50">
+							<div class="flex flex-col items-center space-y-1">
+								<p class="text-2xl font-bold">{fetchLogsStats.total}</p>
+								<p class="text-xs text-muted-foreground uppercase tracking-wide">Total Calls</p>
+							</div>
+							<div class="flex flex-col items-center space-y-1">
+								<p class="text-2xl font-bold text-green-600 dark:text-green-400">
+									{fetchLogsStats.successful}
+								</p>
+								<p class="text-xs text-muted-foreground uppercase tracking-wide">Successful</p>
+							</div>
+							<div class="flex flex-col items-center space-y-1">
+								<p class="text-2xl font-bold text-red-600 dark:text-red-400">
+									{fetchLogsStats.failed}
+								</p>
+								<p class="text-xs text-muted-foreground uppercase tracking-wide">Failed</p>
+							</div>
+							<div class="flex flex-col items-center space-y-1">
+								<p class="text-2xl font-bold">{fetchLogsStats.success_rate.toFixed(1)}%</p>
+								<p class="text-xs text-muted-foreground uppercase tracking-wide">Success Rate</p>
+							</div>
+							<div class="flex flex-col items-center space-y-1">
+								<p class="text-2xl font-bold">
+									{formatDurationMs(fetchLogsStats.avg_duration_ms)}
+								</p>
+								<p class="text-xs text-muted-foreground uppercase tracking-wide">Avg Duration</p>
+							</div>
+						</div>
+					{/if}
+
+					{#if fetchLogsMetadata}
+						<div class="flex flex-wrap gap-6 mb-6 p-3 rounded-md bg-muted/30 text-sm text-muted-foreground">
+							<span>
+								Run ID: <strong class="text-foreground">{fetchLogsMetadata.run_id}</strong>
 							</span>
-							<span class="market-stat">
-								Failed: <strong>{marketData.failed}</strong>
-							</span>
-							<span class="market-stat">
-								ETA: <strong>{formatDuration(marketData.eta_minutes)}</strong>
+							<span>
+								Started: <strong class="text-foreground"
+									>{formatTime(fetchLogsMetadata.started_at)}</strong
+								>
 							</span>
 						</div>
-						{#if marketData.total > 0}
-							<div class="progress-bar small">
-								<div
-									class="progress-fill"
-									style="width: {(marketData.completed / marketData.total) * 100}%"
-								></div>
+					{/if}
+
+					<div class="space-y-4">
+						{#if fetchLogs.length === 0}
+							<p class="text-center py-8 text-muted-foreground">No fetch calls logged yet</p>
+						{:else}
+							<div class="rounded-md border overflow-hidden">
+								<div class="overflow-x-auto">
+									<table class="w-full text-sm">
+										<thead class="border-b bg-muted/50">
+											<tr>
+												<th class="h-12 px-4 text-left align-middle font-medium">Time</th>
+												<th class="h-12 px-4 text-left align-middle font-medium">Status</th>
+												<th class="h-12 px-4 text-left align-middle font-medium">URL</th>
+												<th class="h-12 px-4 text-left align-middle font-medium">Market</th>
+												<th class="h-12 px-4 text-left align-middle font-medium">Product ID</th>
+												<th class="h-12 px-4 text-left align-middle font-medium">Duration</th>
+												<th class="h-12 px-4 text-left align-middle font-medium">Error</th>
+											</tr>
+										</thead>
+										<tbody>
+											{#each fetchLogs as log (log.id)}
+												<tr
+													class="border-b transition-colors hover:bg-muted/50 {log.success
+														? 'bg-green-50/50 dark:bg-green-950/20'
+														: 'bg-red-50/50 dark:bg-red-950/20'}"
+												>
+													<td class="p-4 align-middle text-xs text-muted-foreground">
+														{formatTimestamp(log.timestamp)}
+													</td>
+													<td class="p-4 align-middle">
+														<span
+															class="inline-flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold {log.success
+																? 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300'
+																: 'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300'}"
+														>
+															{log.success ? '✓' : '✗'}
+														</span>
+													</td>
+													<td
+														class="p-4 align-middle font-mono text-xs max-w-xs truncate"
+														title={log.url}
+													>
+														{log.url}
+													</td>
+													<td class="p-4 align-middle">{log.market_id}</td>
+													<td class="p-4 align-middle">{log.product_id}</td>
+													<td class="p-4 align-middle">{formatDurationMs(log.duration_ms)}</td>
+													<td class="p-4 align-middle text-xs text-destructive max-w-xs truncate">
+														{log.error || '-'}
+													</td>
+												</tr>
+											{/each}
+										</tbody>
+									</table>
+								</div>
 							</div>
 						{/if}
 					</div>
-				{/each}
-			</div>
-		</div>
-
-		<!-- Process Details -->
-		<div class="card">
-			<h2>Process Details</h2>
-			<div class="details-grid">
-				<div class="detail-item">
-					<span class="detail-label">Started At</span>
-					<span class="detail-value">{formatTime(status.current_state.started_at)}</span>
-				</div>
-				<div class="detail-item">
-					<span class="detail-label">Estimated End</span>
-					<span class="detail-value"
-						>{formatTime(status.current_state.estimated_end_at)}</span
-					>
-				</div>
-				<div class="detail-item">
-					<span class="detail-label">Total ETA</span>
-					<span class="detail-value">{formatDuration(status.total_eta_minutes)}</span>
-				</div>
-				<div class="detail-item">
-					<span class="detail-label">Current Market</span>
-					<span class="detail-value"
-						>{status.current_state.current_market || 'None'}</span
-					>
-				</div>
-				<div class="detail-item">
-					<span class="detail-label">Total Markets</span>
-					<span class="detail-value">{status.current_state.total_markets}</span>
-				</div>
-				<div class="detail-item">
-					<span class="detail-label">Completed Markets</span>
-					<span class="detail-value">{status.current_state.current_market_index}/{status.current_state.total_markets}</span>
-				</div>
-			</div>
-		</div>
-	{:else}
-		<div class="card">
-			<p>Loading status...</p>
-		</div>
-	{/if}
-
-	<!-- Fetch Logs Section -->
-	<div class="card">
-		<div class="logs-header">
-			<h2>Fetch Call Logs</h2>
-			<button class="btn-toggle" onclick={() => (showFetchLogs = !showFetchLogs)}>
-				{showFetchLogs ? 'Hide' : 'Show'}
-			</button>
-		</div>
-
-		{#if showFetchLogs}
-			{#if fetchLogsStats}
-				<div class="logs-stats">
-					<div class="log-stat">
-						<span class="log-stat-value">{fetchLogsStats.total}</span>
-						<span class="log-stat-label">Total Calls</span>
-					</div>
-					<div class="log-stat">
-						<span class="log-stat-value success">{fetchLogsStats.successful}</span>
-						<span class="log-stat-label">Successful</span>
-					</div>
-					<div class="log-stat">
-						<span class="log-stat-value failed">{fetchLogsStats.failed}</span>
-						<span class="log-stat-label">Failed</span>
-					</div>
-					<div class="log-stat">
-						<span class="log-stat-value">{fetchLogsStats.success_rate.toFixed(1)}%</span>
-						<span class="log-stat-label">Success Rate</span>
-					</div>
-					<div class="log-stat">
-						<span class="log-stat-value"
-							>{formatDurationMs(fetchLogsStats.avg_duration_ms)}</span
-						>
-						<span class="log-stat-label">Avg Duration</span>
-					</div>
-				</div>
-			{/if}
-
-			{#if fetchLogsMetadata}
-				<div class="logs-metadata">
-					<span class="metadata-item">
-						Run ID: <strong>{fetchLogsMetadata.run_id}</strong>
-					</span>
-					<span class="metadata-item">
-						Started: <strong>{formatTime(fetchLogsMetadata.started_at)}</strong>
-					</span>
-				</div>
-			{/if}
-
-			<div class="logs-container">
-				{#if fetchLogs.length === 0}
-					<p class="no-logs">No fetch calls logged yet</p>
-				{:else}
-					<div class="logs-table-wrapper">
-						<table class="logs-table">
-							<thead>
-								<tr>
-									<th>Time</th>
-									<th>Status</th>
-									<th>URL</th>
-									<th>Market</th>
-									<th>Product ID</th>
-									<th>Duration</th>
-									<th>Error</th>
-								</tr>
-							</thead>
-							<tbody>
-								{#each fetchLogs as log (log.id)}
-									<tr class={log.success ? 'log-success' : 'log-failed'}>
-										<td class="log-time">{formatTimestamp(log.timestamp)}</td>
-										<td>
-											<span class="status-badge {log.success ? 'success' : 'failed'}">
-												{log.success ? '✓' : '✗'}
-											</span>
-										</td>
-										<td class="log-url" title={log.url}>{log.url}</td>
-										<td>{log.market_id}</td>
-										<td>{log.product_id}</td>
-										<td>{formatDurationMs(log.duration_ms)}</td>
-										<td class="log-error">{log.error || '-'}</td>
-									</tr>
-								{/each}
-							</tbody>
-						</table>
-					</div>
 				{/if}
 			</div>
-		{/if}
+		</div>
 	</div>
 </div>
-
-<style>
-	:global(body) {
-		margin: 0;
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-			sans-serif;
-		background: #f5f7fa;
-		color: #2c3e50;
-	}
-
-	.container {
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 2rem;
-	}
-
-	header {
-		margin-bottom: 2rem;
-	}
-
-	.header-content {
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-start;
-		gap: 1rem;
-		flex-wrap: wrap;
-	}
-
-	.btn-logout {
-		padding: 0.625rem 1.25rem;
-		background: #e74c3c;
-		color: white;
-		border: none;
-		border-radius: 6px;
-		font-size: 0.9rem;
-		font-weight: 600;
-		cursor: pointer;
-		transition: all 0.2s;
-		white-space: nowrap;
-	}
-
-	.btn-logout:hover {
-		background: #c0392b;
-		transform: translateY(-1px);
-		box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
-	}
-
-	h1 {
-		font-size: 2.5rem;
-		margin: 0 0 0.5rem 0;
-		color: #2c3e50;
-	}
-
-	h2 {
-		font-size: 1.5rem;
-		margin: 0 0 1rem 0;
-		color: #34495e;
-	}
-
-	h3 {
-		font-size: 1.1rem;
-		margin: 0;
-		color: #34495e;
-	}
-
-	p {
-		margin: 0;
-		color: #7f8c8d;
-	}
-
-	.card {
-		background: white;
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin-bottom: 1.5rem;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	}
-
-	.alert {
-		padding: 1rem;
-		border-radius: 4px;
-		margin-bottom: 1rem;
-	}
-
-	.alert.error {
-		background: #fee;
-		border: 1px solid #fcc;
-		color: #c33;
-	}
-
-	.status-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		gap: 1rem;
-		margin-bottom: 1rem;
-	}
-
-	.status-item {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-
-	.label {
-		font-size: 0.875rem;
-		color: #7f8c8d;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-	}
-
-	.value {
-		font-size: 1.5rem;
-		font-weight: 600;
-		color: #2c3e50;
-	}
-
-	.badge {
-		display: inline-block;
-		padding: 0.25rem 0.75rem;
-		border-radius: 4px;
-		font-size: 0.875rem;
-		font-weight: 600;
-		width: fit-content;
-	}
-
-	.progress-bar {
-		height: 24px;
-		background: #ecf0f1;
-		border-radius: 12px;
-		overflow: hidden;
-		margin-bottom: 0.5rem;
-	}
-
-	.progress-bar.small {
-		height: 8px;
-		border-radius: 4px;
-	}
-
-	.progress-fill {
-		height: 100%;
-		background: linear-gradient(90deg, #3498db, #2ecc71);
-		transition: width 0.3s ease;
-	}
-
-	.progress-text {
-		text-align: center;
-		font-size: 0.875rem;
-		color: #7f8c8d;
-	}
-
-	.button-group {
-		display: flex;
-		gap: 1rem;
-		margin-bottom: 1rem;
-		flex-wrap: wrap;
-	}
-
-	.btn {
-		padding: 0.75rem 1.5rem;
-		border: none;
-		border-radius: 4px;
-		font-size: 1rem;
-		font-weight: 600;
-		cursor: pointer;
-		transition: all 0.2s;
-	}
-
-	.btn:disabled {
-		opacity: 0.5;
-		cursor: not-allowed;
-	}
-
-	.btn-primary {
-		background: #3498db;
-		color: white;
-	}
-
-	.btn-primary:hover:not(:disabled) {
-		background: #2980b9;
-	}
-
-	.btn-secondary {
-		background: #95a5a6;
-		color: white;
-	}
-
-	.btn-secondary:hover:not(:disabled) {
-		background: #7f8c8d;
-	}
-
-	.btn-danger {
-		background: #e74c3c;
-		color: white;
-	}
-
-	.btn-danger:hover:not(:disabled) {
-		background: #c0392b;
-	}
-
-	.checkbox-label {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		cursor: pointer;
-		user-select: none;
-	}
-
-	.stats-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-		gap: 1.5rem;
-	}
-
-	.stat {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		text-align: center;
-	}
-
-	.stat-value {
-		font-size: 2rem;
-		font-weight: 700;
-		color: #2c3e50;
-	}
-
-	.stat-label {
-		font-size: 0.875rem;
-		color: #7f8c8d;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		margin-top: 0.25rem;
-	}
-
-	.market-list {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-	}
-
-	.market-item {
-		border: 1px solid #ecf0f1;
-		border-radius: 6px;
-		padding: 1rem;
-	}
-
-	.market-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-bottom: 0.75rem;
-	}
-
-	.market-progress {
-		font-size: 1.25rem;
-		font-weight: 600;
-		color: #3498db;
-	}
-
-	.market-stats {
-		display: flex;
-		gap: 1.5rem;
-		margin-bottom: 0.75rem;
-		flex-wrap: wrap;
-	}
-
-	.market-stat {
-		font-size: 0.875rem;
-		color: #7f8c8d;
-	}
-
-	.details-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		gap: 1rem;
-	}
-
-	.detail-item {
-		display: flex;
-		flex-direction: column;
-		gap: 0.25rem;
-	}
-
-	.detail-label {
-		font-size: 0.75rem;
-		color: #7f8c8d;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-	}
-
-	.detail-value {
-		font-size: 1rem;
-		color: #2c3e50;
-		font-weight: 500;
-	}
-
-	/* Fetch Logs Styles */
-	.logs-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-bottom: 1rem;
-	}
-
-	.btn-toggle {
-		padding: 0.5rem 1rem;
-		border: 1px solid #ddd;
-		border-radius: 4px;
-		background: white;
-		cursor: pointer;
-		font-size: 0.875rem;
-		transition: all 0.2s;
-	}
-
-	.btn-toggle:hover {
-		background: #f5f7fa;
-		border-color: #3498db;
-	}
-
-	.logs-stats {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-		gap: 1rem;
-		margin-bottom: 1rem;
-		padding: 1rem;
-		background: #f8f9fa;
-		border-radius: 6px;
-	}
-
-	.log-stat {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		text-align: center;
-	}
-
-	.log-stat-value {
-		font-size: 1.5rem;
-		font-weight: 700;
-		color: #2c3e50;
-	}
-
-	.log-stat-value.success {
-		color: #27ae60;
-	}
-
-	.log-stat-value.failed {
-		color: #e74c3c;
-	}
-
-	.log-stat-label {
-		font-size: 0.75rem;
-		color: #7f8c8d;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		margin-top: 0.25rem;
-	}
-
-	.logs-metadata {
-		display: flex;
-		gap: 2rem;
-		margin-bottom: 1rem;
-		padding: 0.75rem 1rem;
-		background: #ecf0f1;
-		border-radius: 4px;
-		font-size: 0.875rem;
-		color: #7f8c8d;
-		flex-wrap: wrap;
-	}
-
-	.metadata-item strong {
-		color: #2c3e50;
-	}
-
-	.logs-container {
-		margin-top: 1rem;
-	}
-
-	.no-logs {
-		text-align: center;
-		padding: 2rem;
-		color: #7f8c8d;
-		font-style: italic;
-	}
-
-	.logs-table-wrapper {
-		overflow-x: auto;
-		border: 1px solid #ecf0f1;
-		border-radius: 6px;
-	}
-
-	.logs-table {
-		width: 100%;
-		border-collapse: collapse;
-		font-size: 0.875rem;
-	}
-
-	.logs-table thead {
-		background: #f8f9fa;
-		border-bottom: 2px solid #ecf0f1;
-	}
-
-	.logs-table th {
-		padding: 0.75rem;
-		text-align: left;
-		font-weight: 600;
-		color: #34495e;
-		text-transform: uppercase;
-		font-size: 0.75rem;
-		letter-spacing: 0.5px;
-	}
-
-	.logs-table td {
-		padding: 0.75rem;
-		border-bottom: 1px solid #ecf0f1;
-	}
-
-	.logs-table tbody tr:hover {
-		background: #f8f9fa;
-	}
-
-	.logs-table tbody tr.log-success {
-		background: rgba(39, 174, 96, 0.05);
-	}
-
-	.logs-table tbody tr.log-failed {
-		background: rgba(231, 76, 60, 0.05);
-	}
-
-	.log-time {
-		white-space: nowrap;
-		color: #7f8c8d;
-		font-size: 0.8rem;
-	}
-
-	.log-url {
-		font-family: 'Courier New', monospace;
-		font-size: 0.8rem;
-		max-width: 300px;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-
-	.log-error {
-		color: #e74c3c;
-		font-size: 0.8rem;
-		max-width: 200px;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-
-	.status-badge {
-		display: inline-block;
-		width: 24px;
-		height: 24px;
-		line-height: 24px;
-		text-align: center;
-		border-radius: 50%;
-		font-weight: bold;
-		font-size: 0.875rem;
-	}
-
-	.status-badge.success {
-		background: #d4edda;
-		color: #155724;
-	}
-
-	.status-badge.failed {
-		background: #f8d7da;
-		color: #721c24;
-	}
-</style>

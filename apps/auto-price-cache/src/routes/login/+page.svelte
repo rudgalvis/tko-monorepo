@@ -4,170 +4,73 @@
 	let { form } = $props();
 </script>
 
-<div class="login-container">
-	<div class="login-card">
-		<div class="login-header">
-			<h1>🔒 Price Cache Dashboard</h1>
-			<p>Please enter the password to continue</p>
-		</div>
-
-		<form method="POST" use:enhance>
-			<div class="form-group">
-				<label for="password">Password</label>
-				<input
-					type="password"
-					id="password"
-					name="password"
-					required
-					autofocus
-					placeholder="Enter password"
-				/>
-			</div>
-
-			{#if form?.error}
-				<div class="error-message">
-					{form.error}
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4">
+	<div class="w-full max-w-md">
+		<div class="rounded-lg border bg-card text-card-foreground shadow-lg">
+			<div class="p-8 space-y-6">
+				<!-- Header -->
+				<div class="space-y-2 text-center">
+					<div class="flex justify-center mb-4">
+						<div class="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-6 w-6 text-primary"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+								/>
+							</svg>
+						</div>
+					</div>
+					<h1 class="text-2xl font-semibold tracking-tight">Price Cache Dashboard</h1>
+					<p class="text-sm text-muted-foreground">Enter your password to access the dashboard</p>
 				</div>
-			{/if}
 
-			<button type="submit" class="login-btn">
-				Login
-			</button>
-		</form>
+				<!-- Form -->
+				<form method="POST" use:enhance class="space-y-4">
+					<div class="space-y-2">
+						<label for="password" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+							Password
+						</label>
+						<input
+							type="password"
+							id="password"
+							name="password"
+							required
+							placeholder="Enter your password"
+							class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+						/>
+					</div>
 
-		<div class="login-footer">
-			<p class="hint">
-				Hint: Check your environment variables or use default credentials
-			</p>
+					{#if form?.error}
+						<div class="rounded-md border border-destructive/50 bg-destructive/10 p-3">
+							<p class="text-sm text-destructive">
+								{form.error}
+							</p>
+						</div>
+					{/if}
+
+					<button
+						type="submit"
+						class="w-full inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+					>
+						Sign In
+					</button>
+				</form>
+
+				<!-- Footer -->
+				<div class="pt-4 border-t">
+					<p class="text-xs text-center text-muted-foreground">
+						Check your environment variables or use default credentials
+					</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
-
-<style>
-	:global(body) {
-		margin: 0;
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-			sans-serif;
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-		min-height: 100vh;
-	}
-
-	.login-container {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		min-height: 100vh;
-		padding: 1rem;
-	}
-
-	.login-card {
-		background: white;
-		border-radius: 12px;
-		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-		width: 100%;
-		max-width: 420px;
-		padding: 2.5rem;
-		animation: slideUp 0.4s ease-out;
-	}
-
-	@keyframes slideUp {
-		from {
-			opacity: 0;
-			transform: translateY(20px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	.login-header {
-		text-align: center;
-		margin-bottom: 2rem;
-	}
-
-	.login-header h1 {
-		font-size: 1.75rem;
-		margin: 0 0 0.5rem 0;
-		color: #2c3e50;
-	}
-
-	.login-header p {
-		margin: 0;
-		color: #7f8c8d;
-		font-size: 0.95rem;
-	}
-
-	.form-group {
-		margin-bottom: 1.5rem;
-	}
-
-	.form-group label {
-		display: block;
-		margin-bottom: 0.5rem;
-		font-weight: 600;
-		color: #34495e;
-		font-size: 0.9rem;
-	}
-
-	.form-group input {
-		width: 100%;
-		padding: 0.875rem;
-		border: 2px solid #e0e0e0;
-		border-radius: 8px;
-		font-size: 1rem;
-		transition: all 0.2s;
-		box-sizing: border-box;
-	}
-
-	.form-group input:focus {
-		outline: none;
-		border-color: #667eea;
-		box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-	}
-
-	.error-message {
-		background: #fee;
-		border: 1px solid #fcc;
-		color: #c33;
-		padding: 0.875rem;
-		border-radius: 6px;
-		margin-bottom: 1rem;
-		font-size: 0.9rem;
-		text-align: center;
-	}
-
-	.login-btn {
-		width: 100%;
-		padding: 1rem;
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-		color: white;
-		border: none;
-		border-radius: 8px;
-		font-size: 1rem;
-		font-weight: 600;
-		cursor: pointer;
-		transition: all 0.2s;
-	}
-
-	.login-btn:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-	}
-
-	.login-btn:active {
-		transform: translateY(0);
-	}
-
-	.login-footer {
-		margin-top: 1.5rem;
-		text-align: center;
-	}
-
-	.hint {
-		margin: 0;
-		color: #95a5a6;
-		font-size: 0.85rem;
-	}
-</style>
-
