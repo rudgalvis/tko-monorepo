@@ -19,6 +19,7 @@ COPY pnpm-*.yaml ./
 COPY package.json ./
 COPY packages/common-utils/package.json ./packages/common-utils/package.json
 COPY apps/shopify-nexus/package.json ./apps/shopify-nexus/package.json
+COPY apps/auto-price-cache/package.json ./apps/auto-price-cache/package.json
 COPY packages/storefront-api/package.json ./packages/storefront-api/package.json
 COPY packages/ui/package.json ./packages/ui/package.json
 
@@ -54,6 +55,16 @@ COPY --from=builder --chown=appuser:appgroup /app/pnpm-*.yaml ./
 COPY --from=builder --chown=appuser:appgroup /app/node_modules ./node_modules
 COPY --from=builder --chown=appuser:appgroup /app/packages ./packages
 COPY --from=builder --chown=appuser:appgroup /app/apps ./apps
+
+# Create logs and cache directories for auto-price-cache with proper permissions
+RUN mkdir -p /app/apps/auto-price-cache/logs && \
+    mkdir -p /app/apps/auto-price-cache/.cache && \
+    chown -R appuser:appgroup /app/apps/auto-price-cache/logs && \
+    chown -R appuser:appgroup /app/apps/auto-price-cache/.cache
+
+# Create logs directory for shopify-nexus with proper permissions
+RUN mkdir -p /app/apps/shopify-nexus/logs && \
+    chown -R appuser:appgroup /app/apps/shopify-nexus/logs
 
 USER appuser
 

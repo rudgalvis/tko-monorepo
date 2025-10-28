@@ -8,8 +8,10 @@
     "build:api": "pnpm --filter storefront-api build",
     "build:ui": "pnpm --filter ui build",
     "build:nexus": "pnpm --filter shopify-nexus build",
-    "build": "pnpm build:common && pnpm build:api && pnpm build:ui && pnpm build:nexus",
+    "build:auto-price-cache": "pnpm --filter auto-price-cache build",
+    "build": "pnpm build:common && pnpm build:api && pnpm build:ui && pnpm build:nexus && pnpm build:auto-price-cache",
     "start": "pnpm --filter shopify-nexus start",
+    "start:auto-price-cache": "pnpm --filter auto-price-cache start",
     "prepack:api": "pnpm --filter storefront-api prepack",
     "build:liquid": "pnpm --filter ui build-for-theme"
   },

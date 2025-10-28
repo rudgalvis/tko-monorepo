@@ -4,6 +4,7 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
+		"start": "node build/index.js",
 		"dev": "vite dev --port 5174",
 		"build": "vite build",
 		"preview": "vite preview",
@@ -23,7 +24,7 @@
 	"devDependencies": {
 		"@eslint/compat": "^1.4.0",
 		"@eslint/js": "^9.36.0",
-		"@sveltejs/adapter-auto": "^6.1.0",
+		"@sveltejs/adapter-node": "^5.2.12",
 		"@sveltejs/kit": "^2.43.2",
 		"@sveltejs/vite-plugin-svelte": "^6.2.0",
 		"@types/node": "^22",
