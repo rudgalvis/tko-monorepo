@@ -16,7 +16,13 @@ function isAuthenticated(cookies: Cookies): boolean {
 // Check bearer token authentication
 function isBearerTokenValid(authHeader: string | null): boolean {
 	if (!authHeader) return false;
-	const token = authHeader.replace(/^Bearer\s+/i, '');
+	
+	// Extract token from "Bearer <token>" format, handling any whitespace
+	const match = authHeader.match(/^Bearer\s+(.+)$/i);
+	if (!match) return false;
+	
+	const token = match[1].trim();
+	
 	return token === API_BEARER_TOKEN;
 }
 
@@ -38,6 +44,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 		if (isBearerTokenValid(authHeader)) {
 			event.locals.authenticated = true;
 			return resolve(event);
+		} else {
+			// For API routes, return 401 if Bearer token is invalid
+			return new Response('Unauthorized', { status: 401 });
 		}
 	}
 	
