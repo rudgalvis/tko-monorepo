@@ -8,13 +8,25 @@
    pnpm install
    ```
 
-2. **Start Development Server**
+2. **Configure Password (Optional)**
+   ```bash
+   # Set a custom password via environment variable
+   echo "DASHBOARD_PASSWORD=your-secure-password" > .env
+   # Or use the default password: admin123
+   ```
+
+3. **Start Development Server**
    ```bash
    pnpm dev
    ```
 
-3. **Open Dashboard**
-   Navigate to http://localhost:5173
+4. **Open Dashboard**
+   Navigate to http://localhost:5174
+   
+5. **Login**
+   - Enter the password (default: `admin123`)
+   - You'll stay logged in for 7 days
+   - Use the "Logout" button to end your session
 
 ## First Run
 
@@ -206,11 +218,29 @@ You can inspect these files for debugging.
 3. **Auto-refresh**: 2-second interval balances freshness vs performance
 4. **Cache Storage**: Uses efficient flat-file caching
 
+## Security
+
+### Password Protection
+
+The dashboard is protected with password authentication:
+
+- **Default Password**: `admin123`
+- **Custom Password**: Set `DASHBOARD_PASSWORD` environment variable
+- **Session Duration**: 7 days
+- **Logout**: Click the "Logout" button in the dashboard header
+
+**⚠️ Important**: Always change the default password in production!
+
+```bash
+# Production deployment
+DASHBOARD_PASSWORD=strong-secure-password pnpm start
+```
+
 ## Next Steps
 
-1. Replace mock data providers with real API calls
-2. Customize UI styling if needed
-3. Add authentication if deploying publicly
+1. **Change default password** for production use
+2. Replace mock data providers with real API calls
+3. Customize UI styling if needed
 4. Set up monitoring and alerts
 5. Consider adding retry logic for failed requests
 

@@ -202,8 +202,17 @@
 
 <div class="container">
 	<header>
-		<h1>Price Cache Dashboard</h1>
-		<p>Monitor and control the automatic price caching process</p>
+		<div class="header-content">
+			<div>
+				<h1>Price Cache Dashboard</h1>
+				<p>Monitor and control the automatic price caching process</p>
+			</div>
+			<form method="POST" action="/logout">
+				<button type="submit" class="btn-logout">
+					🔓 Logout
+				</button>
+			</form>
+		</div>
 	</header>
 
 	{#if error}
@@ -492,6 +501,33 @@
 
 	header {
 		margin-bottom: 2rem;
+	}
+
+	.header-content {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.btn-logout {
+		padding: 0.625rem 1.25rem;
+		background: #e74c3c;
+		color: white;
+		border: none;
+		border-radius: 6px;
+		font-size: 0.9rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.2s;
+		white-space: nowrap;
+	}
+
+	.btn-logout:hover {
+		background: #c0392b;
+		transform: translateY(-1px);
+		box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
 	}
 
 	h1 {

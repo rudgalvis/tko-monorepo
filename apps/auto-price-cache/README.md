@@ -33,6 +33,7 @@ The system follows a layered architecture based on the following components:
 
 ## Features
 
+✅ **Password Protection** - Secure authentication to protect dashboard access  
 ✅ **State Persistence** - Automatic saving of progress to filesystem  
 ✅ **Crash Recovery** - Automatically resumes from last saved state after interruption  
 ✅ **Sequential Processing** - Controlled, rate-limited processing of products  
@@ -47,6 +48,10 @@ The system follows a layered architecture based on the following components:
 ```bash
 # Install dependencies
 pnpm install
+
+# Set up environment variables (optional)
+# Create a .env file and set DASHBOARD_PASSWORD
+echo "DASHBOARD_PASSWORD=your-secure-password" > .env
 
 # Start development server
 pnpm dev
@@ -66,7 +71,34 @@ pnpm preview
 pnpm dev
 ```
 
-Navigate to `http://localhost:5173` to access the dashboard.
+Navigate to `http://localhost:5174` to access the dashboard.
+
+### Authentication
+
+The dashboard is protected by password authentication. On first access, you'll be prompted to log in.
+
+**Default Password:** `admin123`
+
+**Setting a Custom Password:**
+
+Set the `DASHBOARD_PASSWORD` environment variable:
+
+```bash
+# Option 1: Using .env file
+echo "DASHBOARD_PASSWORD=your-secure-password" > .env
+
+# Option 2: Inline with command
+DASHBOARD_PASSWORD=your-secure-password pnpm dev
+
+# Option 3: Export in your shell
+export DASHBOARD_PASSWORD=your-secure-password
+pnpm dev
+```
+
+**Security Notes:**
+- Always change the default password in production
+- The session cookie is valid for 7 days
+- Use the "Logout" button in the dashboard to end your session
 
 ### Dashboard Controls
 
