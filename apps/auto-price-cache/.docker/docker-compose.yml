@@ -1,0 +1,26 @@
+services:
+  auto-price-cache:
+    container_name: auto-price-cache
+    # The name of the image that will be created when building this container
+    image: auto-price-cache
+    build:
+      context: ./../
+      dockerfile: ./.docker/Dockerfile
+    user: "node"
+    environment:
+      # Internal server error messages will not send stacktrace to the browser in production
+      - NODE_ENV=production
+      # Sets the timezone of the containers OS
+      - TZ=Europe/Vilnius
+    # Points to a file with the sensitive environment variables
+    env_file:
+      - ../.env.example
+    restart: unless-stopped
+    ports:
+      - 51001:3000
+    volumes:
+      # Persist logs directory
+      - ../logs:/app/logs
+      # Persist cache directory
+      - ../.cache:/app/.cache
+
