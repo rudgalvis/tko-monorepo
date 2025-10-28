@@ -23,6 +23,16 @@ function isBearerTokenValid(authHeader: string | null): boolean {
 	
 	const token = match[1].trim();
 	
+	// Debug logging
+	console.log('=== AUTH DEBUG ===');
+	console.log('Auth header:', JSON.stringify(authHeader));
+	console.log('Extracted token:', JSON.stringify(token));
+	console.log('Expected token:', JSON.stringify(API_BEARER_TOKEN));
+	console.log('Token length:', token.length);
+	console.log('Expected length:', API_BEARER_TOKEN.length);
+	console.log('Tokens match:', token === API_BEARER_TOKEN);
+	console.log('==================');
+	
 	return token === API_BEARER_TOKEN;
 }
 
