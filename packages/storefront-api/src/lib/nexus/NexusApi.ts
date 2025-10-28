@@ -42,7 +42,6 @@ export class NexusApi {
 	}
 
 	async getProductAutomaticDiscount(market: string, variantId: number) {
-		try {
 			const response = await fetch(
 				`${this.BASE_URL}/${this.API_VERSION_PATH}/${this.API_ROUTES.GET_PRODUCT_AUTOMATIC_DISCOUNT(market, variantId)}`,
 				{
@@ -53,10 +52,8 @@ export class NexusApi {
 				}
 			);
 
+
 			return await response.json();
-		} catch (e) {
-			console.error(e);
-		}
 	}
 
 	async getCurrencyRates(market: string): Promise<Record<string, number> | null> {
