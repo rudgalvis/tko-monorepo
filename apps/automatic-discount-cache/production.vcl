@@ -31,12 +31,20 @@ sub vcl_backend_response {
         unset beresp.http.Cache-Control;
         unset beresp.http.Expires;
 
+        # Set browser cache headers (12 hours)
+        set beresp.http.Cache-Control = "public, max-age=43200"; # 12 hours in seconds
+        set beresp.http.Expires = now + 12h;
+
         set beresp.ttl = 12h;
         set beresp.uncacheable = false;
     } else if (bereq.url ~ "(automatic-discount|regional-variant-price)") {
         # Remove backend TTL headers
         unset beresp.http.Cache-Control;
         unset beresp.http.Expires;
+
+        # Set browser cache headers (24 hours)
+        set beresp.http.Cache-Control = "public, max-age=86400"; # 24 hours in seconds
+        set beresp.http.Expires = now + 24h;
 
         set beresp.ttl = 24h;
         set beresp.uncacheable = false;
