@@ -17,8 +17,9 @@ test('PriceCachingController status', async () => {
     console.log(status)
 })
 
-test('PriceCachingController reset', async () => {
+test('PriceCachingController stop', async () => {
     const controller = new PriceCachingController()
 
-    await controller.fullReset()
+    await controller.stopCaching()
 })
+

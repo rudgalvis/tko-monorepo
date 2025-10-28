@@ -22,6 +22,11 @@ export class FileStorageService {
         // No immediate save - persistInterval handles it
     }
 
+    // New saves to the storage must be loaded in
+    load(): void {
+        this.storage.load()
+    }
+
     save(): void {
         this.storage.save()
     }

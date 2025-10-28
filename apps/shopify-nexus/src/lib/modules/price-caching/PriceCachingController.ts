@@ -7,15 +7,17 @@ export type PriceCachingControllerConfig = {
     nexusApi?: NexusApi
 }
 
+type Flags = {
+    stop: boolean
+}
+
 type ControllerDetails = {
-    stopFlag: boolean
     initiatedAt: number | undefined
     completedAt: number | undefined
     index: number
     isRunning: boolean
     lastActivityAt: number | undefined
 }
-
 
 export class PriceCachingController {
     private static readonly MARKETS_TO_CACHE = [
@@ -34,10 +36,14 @@ export class PriceCachingController {
     private initiatedAt: number | undefined
     private completedAt: number | undefined
     private index: number = 0
-    private stopFlag: boolean = false
     private isRunning: boolean = false
     private lastActivityAt: number | undefined
     private tasks: TaskController[] = []
+
+    // Flags should be stored in FS, and separetly from ofther details so not to be oeverwriten by details writes
+    private _flags: Flags = {
+        stop: false
+    }
 
     private readonly storage: FileStorageService
     private readonly taskStorage: FileStorageService
@@ -65,13 +71,31 @@ export class PriceCachingController {
 
     get details(): ControllerDetails | undefined {
         return {
-            stopFlag: this.stopFlag,
             initiatedAt: this.initiatedAt,
             completedAt: this.completedAt,
             index: this.index,
             isRunning: this.isRunning,
             lastActivityAt: this.lastActivityAt,
         }
+    }
+
+    getFlags(fresh: boolean) {
+        if(!fresh) return this._flags
+
+        // Must load in external changes to fs
+        this.storage.load()
+
+        const storedFlags = this.storage.get<Flags>('flags')
+
+        if(!storedFlags) return this._flags
+
+        return this._flags = storedFlags
+    }
+
+    setFlags(value: Flags) {
+        this._flags = value
+        this.storage.set<Flags>('flags', value)
+        this.storage.save()
     }
 
     async startCaching() {
@@ -89,7 +113,6 @@ export class PriceCachingController {
         }
 
         this.isRunning = true
-        this.stopFlag = false
         this.lastActivityAt = Date.now()
         
         if(!this.initiatedAt) {
@@ -97,22 +120,31 @@ export class PriceCachingController {
         }
 
         this.saveDetails()
-        await this.runNextTask()
+        await this.run()
     }
 
     async stopCaching() {
-        this.stopFlag = true
+        this.setFlags({
+            ...this.getFlags(true),
+            stop: true,
+        })
+
         this.isRunning = false
-        this.saveDetails()
-        this.taskStorage.save() // Force save on stop
-        this.storage.save()
     }
 
-    async runNextTask(): Promise<void> {
-        if(this.stopFlag) {
+    private runnerBreaker() {
+        // Check if stop flag exists, do fresh check every 10th run, to optimize I/O
+        const {stop} = this.getFlags(true)
+
+        if(stop) {
             this.isRunning = false
-            return
+            this.fullReset()
+            throw new Error('Stopped with stop flag')
         }
+    }
+
+    private async run(): Promise<void> {
+        this.runnerBreaker()
 
         // Update last activity before running task
         this.lastActivityAt = Date.now()
@@ -136,8 +168,8 @@ export class PriceCachingController {
         } else {
             this.saveDetails()
             console.log('running next task')
-            
-            return await this.runNextTask()
+
+            return await this.run()
         }
     }
 
@@ -179,13 +211,15 @@ export class PriceCachingController {
         }
     }
 
-    public fullReset() {
-        this.stopFlag = false
+    private fullReset() {
         this.initiatedAt = undefined
         this.completedAt = undefined
         this.index = 0
         this.isRunning = false
         this.lastActivityAt = undefined
+        this._flags = {
+            stop: false
+        }
         this.taskStorage.clear()
         this.storage.clear()
     }
@@ -238,7 +272,6 @@ export class PriceCachingController {
         const details = this.storage.get<ControllerDetails>(`price-caching-controller`)
 
         if(details) {
-            this.stopFlag = details.stopFlag
             this.initiatedAt = details.initiatedAt
             this.completedAt = details.completedAt
             this.index = details.index
