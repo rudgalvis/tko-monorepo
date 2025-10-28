@@ -3,6 +3,13 @@ import { sveltekit } from '@sveltejs/kit/vite';
 
 export default defineConfig({
 	plugins: [sveltekit()],
+	server: {
+		hmr: false,
+		watch: {
+			// Ignore lib directory to prevent automatic server restarts
+			ignored: ['**/src/lib/**']
+		}
+	},
 	test: {
 		expect: { requireAssertions: true },
 		projects: [
@@ -12,9 +19,9 @@ export default defineConfig({
 					name: 'server',
 					environment: 'node',
 					include: ['src/**/*.{test,spec}.{js,ts}'],
-					exclude: ['src/**/*.svelte.{test,spec}.{js,ts}']
+					exclude: ['src/**/*.svelte.{test,spec}.{js,ts}'] 
 				}
 			}
 		]
-	}
+	} 
 });

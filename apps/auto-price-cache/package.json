@@ -17,7 +17,8 @@
 	},
 	"dependencies": {
 		"flat-cache": "^6.1.18",
-		"storefront-api": "workspace:*"
+		"storefront-api": "workspace:*",
+		"winston": "^3.17.0"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.4.0",

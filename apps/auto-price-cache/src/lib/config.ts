@@ -7,7 +7,7 @@ import type { Market } from './types';
 export const MARKETS: Market[] = [
 	{ id: 'US', name: 'United States' },
 	{ id: 'CA', name: 'Canada' },
-	{ id: 'UK', name: 'United Kingdom' },
+	{ id: 'GB', name: 'United Kingdom' },
 	{ id: 'LT', name: 'Lithuania' },
 	{ id: 'AU', name: 'Australia' },
 

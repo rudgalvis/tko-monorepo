@@ -1,4 +1,5 @@
 import type { MarketProgress, PriceFetchResult, Variant } from './types';
+import { logFailedItem, logMarketSummary } from './logger';
 
 /**
  * MarketProcessor handles sequential processing of products for a single market
@@ -50,9 +51,10 @@ export class MarketProcessor {
 		fetchPriceFunc: (productId: string, marketId: string) => Promise<PriceFetchResult>
 	): Promise<PriceFetchResult> {
 		const startTime = Date.now();
+		const productId = String(product.id);
 
 		try {
-			const result = await fetchPriceFunc(product.id, this.progress.market_id);
+			const result = await fetchPriceFunc(productId, this.progress.market_id);
 			const duration = Date.now() - startTime;
 
 			this.recordResult(result, duration);
@@ -63,7 +65,7 @@ export class MarketProcessor {
 			const errorMessage = error instanceof Error ? error.message : 'Unknown error';
 
 			const result: PriceFetchResult = {
-				product_id: product.id,
+				product_id: productId,
 				market_id: this.progress.market_id,
 				success: false,
 				duration_ms: duration,
@@ -86,11 +88,19 @@ export class MarketProcessor {
 			this.progress.successful++;
 		} else {
 			this.progress.failed++;
-			this.progress.errors.push({
+			const errorRecord = {
 				product_id: result.product_id,
 				error_message: result.error || 'Unknown error',
 				timestamp: new Date().toISOString(),
 				retry_count: 0
+			};
+			this.progress.errors.push(errorRecord);
+
+			// Log the failed item to file
+			logFailedItem({
+				...errorRecord,
+				market_id: this.progress.market_id,
+				duration_ms: durationMs
 			});
 		}
 
@@ -98,6 +108,8 @@ export class MarketProcessor {
 		const totalTime =
 			this.progress.avg_time_per_request_ms * (this.progress.completed - 1) + durationMs;
 		this.progress.avg_time_per_request_ms = totalTime / this.progress.completed;
+		
+		console.log(`[MarketProcessor] ${this.progress.market_id}: completed=${this.progress.completed}, avg_time=${this.progress.avg_time_per_request_ms}ms, latest_duration=${durationMs}ms`);
 
 		// Update ETA
 		this.updateETA();
@@ -142,6 +154,20 @@ export class MarketProcessor {
 	markCompleted(): MarketProgress {
 		this.progress.completed_at = new Date().toISOString();
 		this.progress.eta_minutes = 0;
+
+		// Log market summary with failures if any
+		if (this.progress.failed > 0) {
+			logMarketSummary({
+				market_id: this.progress.market_id,
+				total_products: this.progress.total_products,
+				completed: this.progress.completed,
+				successful: this.progress.successful,
+				failed: this.progress.failed,
+				success_rate: this.getSuccessRate(),
+				failed_items: this.progress.errors
+			});
+		}
+
 		return this.getProgress();
 	}
 

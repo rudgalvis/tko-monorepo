@@ -25,6 +25,7 @@ export interface ProcessState {
 	markets: string[];
 	total_markets: number;
 	current_market_index: number;
+	market_totals: Record<string, number>; // Total products per market
 }
 
 /**
@@ -119,5 +120,21 @@ export interface PriceFetchResult {
 	success: boolean;
 	duration_ms: number;
 	error?: string;
+	url?: string;
+}
+
+/**
+ * Fetch log entry for tracking all fetch calls
+ */
+export interface FetchLogEntry {
+	id: string;
+	timestamp: string;
+	url: string;
+	product_id: string;
+	market_id: string;
+	success: boolean;
+	duration_ms: number;
+	error?: string;
+	status_code?: number;
 }
 

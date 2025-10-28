@@ -2,7 +2,6 @@ import { CacheService } from './CacheService';
 import { getAvailableMarkets as getConfiguredMarkets } from './config';
 import type { Market, Variant, PriceFetchResult } from './types';
 import { NexusApi } from 'storefront-api';
-import {PUBLIC_NEXUS_BASE_URL} from '$env/static/public';
 
 /**
  * Data providers that connect to actual data sources
@@ -26,7 +25,6 @@ async function getAvailableMarkets(): Promise<Market[]> {
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function getProductsForMarket(_marketId: string): Promise<Variant[]> {
-	console.log(PUBLIC_NEXUS_BASE_URL)
 	// Fetch variant IDs if not already cached
 	if (!cachedVariantIds) {
 		const variantIds = await nexusApi.getAvailableVariantIds();
@@ -49,23 +47,86 @@ async function getProductsForMarket(_marketId: string): Promise<Variant[]> {
 	return products;
 }
 
-// Mock: Fetch price for a product in a specific market
-async function fetchPrice(productId: string, marketId: string): Promise<PriceFetchResult> {
-	// TODO: Replace with actual API call
-	// Simulate network delay
-	const delay = Math.random() * 500 + 100; // 100-600ms
-	await new Promise((resolve) => setTimeout(resolve, delay));
+// Fetch price for a product in a specific market using Nexus API
+async function fetchPrice(variantId: string, marketId: string): Promise<PriceFetchResult> {
+	const startTime = performance.now();
+	const variantIdNum = parseInt(variantId);
+	
+	// Construct the URL for logging purposes
+	const url = `/api/nexus/variant-automatic-discount/${marketId}/${variantIdNum}`;
+	
+	try {
+		const result = await nexusApi.getVariantAutomaticDiscount(marketId, variantIdNum);
+		const duration = performance.now() - startTime;
+		
+		if (result === undefined) {
+			const fetchResult = {
+				product_id: variantId,
+				market_id: marketId,
+				success: false,
+				duration_ms: duration,
+				error: 'Failed to fetch variant automatic discount from Nexus API',
+				url
+			};
+			
+			// Log the failed fetch
+			logFetchCall(fetchResult);
+			
+			return fetchResult;
+		}
+		
+		const fetchResult = {
+			product_id: variantId,
+			market_id: marketId,
+			success: true,
+			duration_ms: duration,
+			url
+		};
+		
+		// Log the successful fetch
+		logFetchCall(fetchResult);
+		
+		return fetchResult;
+	} catch (error) {
+		const duration = performance.now() - startTime;
+		const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+		
+		const fetchResult = {
+			product_id: variantId,
+			market_id: marketId,
+			success: false,
+			duration_ms: duration,
+			error: errorMessage,
+			url
+		};
+		
+		// Log the failed fetch
+		logFetchCall(fetchResult);
+		
+		return fetchResult;
+	}
+}
 
-	// Simulate 95% success rate
-	const success = Math.random() > 0.05;
-
-	return {
-		product_id: productId,
-		market_id: marketId,
-		success,
-		duration_ms: delay,
-		error: success ? undefined : 'Simulated API error'
-	};
+/**
+ * Log a fetch call to the fetch log service
+ */
+function logFetchCall(result: PriceFetchResult): void {
+	try {
+		const cacheService = getCacheService();
+		const fetchLogService = cacheService.getFetchLogService();
+		
+		fetchLogService.logFetch({
+			url: result.url || 'unknown',
+			product_id: result.product_id,
+			market_id: result.market_id,
+			success: result.success,
+			duration_ms: result.duration_ms,
+			error: result.error
+		});
+	} catch (error) {
+		// Silent fail - don't break the main process if logging fails
+		console.error('Failed to log fetch call:', error);
+	}
 }
 
 /**

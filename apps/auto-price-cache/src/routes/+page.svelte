@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import type { StatusResponse } from '$lib/types';
+	import type { StatusResponse, FetchLogEntry } from '$lib/types';
 	import { ProcessStatus } from '$lib/types';
 
 	let status = $state<StatusResponse | null>(null);
@@ -8,9 +8,26 @@
 	let error = $state<string | null>(null);
 	let autoRefresh = $state(true);
 	let refreshInterval: ReturnType<typeof setInterval> | null = null;
+	
+	// Fetch logs state
+	let fetchLogs = $state<FetchLogEntry[]>([]);
+	let fetchLogsStats = $state<{
+		total: number;
+		successful: number;
+		failed: number;
+		success_rate: number;
+		avg_duration_ms: number;
+	} | null>(null);
+	let fetchLogsMetadata = $state<{
+		run_id: string;
+		started_at: string;
+		total_logs: number;
+	} | null>(null);
+	let showFetchLogs = $state(true);
 
 	onMount(() => {
 		fetchStatus();
+		fetchLogsData();
 		startAutoRefresh();
 	});
 
@@ -23,6 +40,7 @@
 		refreshInterval = setInterval(() => {
 			if (autoRefresh) {
 				fetchStatus();
+				fetchLogsData();
 			}
 		}, 2000); // Refresh every 2 seconds
 	}
@@ -45,6 +63,21 @@
 		} catch (e) {
 			error = e instanceof Error ? e.message : 'Unknown error';
 			console.error('Error fetching status:', e);
+		}
+	}
+
+	async function fetchLogsData() {
+		try {
+			const response = await fetch('/api/cache/prices/logs?limit=100');
+			if (!response.ok) {
+				throw new Error('Failed to fetch logs');
+			}
+			const data = await response.json();
+			fetchLogs = data.logs || [];
+			fetchLogsStats = data.stats || null;
+			fetchLogsMetadata = data.metadata || null;
+		} catch (e) {
+			console.error('Error fetching logs:', e);
 		}
 	}
 
@@ -137,7 +170,33 @@
 		if (minutes < 60) return `${Math.round(minutes)}m`;
 		const hours = Math.floor(minutes / 60);
 		const mins = Math.round(minutes % 60);
-		return `${hours}h ${mins}m`;
+		return `${hours}h ${mins}m`; 
+	}
+
+	function formatDurationMs(ms: number): string {
+		if (ms < 1000) return `${Math.round(ms)}ms`;
+		return `${(ms / 1000).toFixed(2)}s`;
+	}
+
+	function formatTimestamp(isoString: string): string {
+		const date = new Date(isoString);
+		const now = new Date();
+		const diff = now.getTime() - date.getTime();
+		
+		// Less than 60 seconds ago
+		if (diff < 60000) {
+			const seconds = Math.floor(diff / 1000);
+			return `${seconds}s ago`;
+		}
+		
+		// Less than 60 minutes ago
+		if (diff < 3600000) {
+			const minutes = Math.floor(diff / 60000);
+			return `${minutes}m ago`;
+		}
+		
+		// Otherwise show time
+		return date.toLocaleTimeString();
 	}
 </script>
 
@@ -157,7 +216,7 @@
 	{#if status}
 		<!-- Status Overview -->
 		<div class="card">
-			<h2>Status Overview</h2>
+			<h2>Status Overview </h2>
 			<div class="status-grid">
 				<div class="status-item">
 					<span class="label">Current State</span>
@@ -184,7 +243,7 @@
 					<div class="progress-fill" style="width: {status.overall_progress}%"></div>
 				</div>
 				<p class="progress-text">
-					Processing market: <strong>{status.current_state.current_market}</strong>
+					Processing market: <strong>{status.current_state.current_market}</strong> 
 				</p>
 			{/if}
 		</div>
@@ -254,7 +313,7 @@
 		<div class="card">
 			<h2>Market Progress</h2>
 			<div class="market-list">
-				{#each Object.entries(status.markets) as [marketId, marketData]}
+				{#each Object.entries(status.markets) as [marketId, marketData] (marketId)}
 					<div class="market-item">
 						<div class="market-header">
 							<h3>{marketId}</h3>
@@ -301,6 +360,10 @@
 					>
 				</div>
 				<div class="detail-item">
+					<span class="detail-label">Total ETA</span>
+					<span class="detail-value">{formatDuration(status.total_eta_minutes)}</span>
+				</div>
+				<div class="detail-item">
 					<span class="detail-label">Current Market</span>
 					<span class="detail-value"
 						>{status.current_state.current_market || 'None'}</span
@@ -310,6 +373,10 @@
 					<span class="detail-label">Total Markets</span>
 					<span class="detail-value">{status.current_state.total_markets}</span>
 				</div>
+				<div class="detail-item">
+					<span class="detail-label">Completed Markets</span>
+					<span class="detail-value">{status.current_state.current_market_index}/{status.current_state.total_markets}</span>
+				</div>
 			</div>
 		</div>
 	{:else}
@@ -317,6 +384,95 @@
 			<p>Loading status...</p>
 		</div>
 	{/if}
+
+	<!-- Fetch Logs Section -->
+	<div class="card">
+		<div class="logs-header">
+			<h2>Fetch Call Logs</h2>
+			<button class="btn-toggle" onclick={() => (showFetchLogs = !showFetchLogs)}>
+				{showFetchLogs ? 'Hide' : 'Show'}
+			</button>
+		</div>
+
+		{#if showFetchLogs}
+			{#if fetchLogsStats}
+				<div class="logs-stats">
+					<div class="log-stat">
+						<span class="log-stat-value">{fetchLogsStats.total}</span>
+						<span class="log-stat-label">Total Calls</span>
+					</div>
+					<div class="log-stat">
+						<span class="log-stat-value success">{fetchLogsStats.successful}</span>
+						<span class="log-stat-label">Successful</span>
+					</div>
+					<div class="log-stat">
+						<span class="log-stat-value failed">{fetchLogsStats.failed}</span>
+						<span class="log-stat-label">Failed</span>
+					</div>
+					<div class="log-stat">
+						<span class="log-stat-value">{fetchLogsStats.success_rate.toFixed(1)}%</span>
+						<span class="log-stat-label">Success Rate</span>
+					</div>
+					<div class="log-stat">
+						<span class="log-stat-value"
+							>{formatDurationMs(fetchLogsStats.avg_duration_ms)}</span
+						>
+						<span class="log-stat-label">Avg Duration</span>
+					</div>
+				</div>
+			{/if}
+
+			{#if fetchLogsMetadata}
+				<div class="logs-metadata">
+					<span class="metadata-item">
+						Run ID: <strong>{fetchLogsMetadata.run_id}</strong>
+					</span>
+					<span class="metadata-item">
+						Started: <strong>{formatTime(fetchLogsMetadata.started_at)}</strong>
+					</span>
+				</div>
+			{/if}
+
+			<div class="logs-container">
+				{#if fetchLogs.length === 0}
+					<p class="no-logs">No fetch calls logged yet</p>
+				{:else}
+					<div class="logs-table-wrapper">
+						<table class="logs-table">
+							<thead>
+								<tr>
+									<th>Time</th>
+									<th>Status</th>
+									<th>URL</th>
+									<th>Market</th>
+									<th>Product ID</th>
+									<th>Duration</th>
+									<th>Error</th>
+								</tr>
+							</thead>
+							<tbody>
+								{#each fetchLogs as log (log.id)}
+									<tr class={log.success ? 'log-success' : 'log-failed'}>
+										<td class="log-time">{formatTimestamp(log.timestamp)}</td>
+										<td>
+											<span class="status-badge {log.success ? 'success' : 'failed'}">
+												{log.success ? '✓' : '✗'}
+											</span>
+										</td>
+										<td class="log-url" title={log.url}>{log.url}</td>
+										<td>{log.market_id}</td>
+										<td>{log.product_id}</td>
+										<td>{formatDurationMs(log.duration_ms)}</td>
+										<td class="log-error">{log.error || '-'}</td>
+									</tr>
+								{/each}
+							</tbody>
+						</table>
+					</div>
+				{/if}
+			</div>
+		{/if}
+	</div>
 </div>
 
 <style>
@@ -585,5 +741,183 @@
 		font-size: 1rem;
 		color: #2c3e50;
 		font-weight: 500;
+	}
+
+	/* Fetch Logs Styles */
+	.logs-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1rem;
+	}
+
+	.btn-toggle {
+		padding: 0.5rem 1rem;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		background: white;
+		cursor: pointer;
+		font-size: 0.875rem;
+		transition: all 0.2s;
+	}
+
+	.btn-toggle:hover {
+		background: #f5f7fa;
+		border-color: #3498db;
+	}
+
+	.logs-stats {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+		gap: 1rem;
+		margin-bottom: 1rem;
+		padding: 1rem;
+		background: #f8f9fa;
+		border-radius: 6px;
+	}
+
+	.log-stat {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	.log-stat-value {
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: #2c3e50;
+	}
+
+	.log-stat-value.success {
+		color: #27ae60;
+	}
+
+	.log-stat-value.failed {
+		color: #e74c3c;
+	}
+
+	.log-stat-label {
+		font-size: 0.75rem;
+		color: #7f8c8d;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		margin-top: 0.25rem;
+	}
+
+	.logs-metadata {
+		display: flex;
+		gap: 2rem;
+		margin-bottom: 1rem;
+		padding: 0.75rem 1rem;
+		background: #ecf0f1;
+		border-radius: 4px;
+		font-size: 0.875rem;
+		color: #7f8c8d;
+		flex-wrap: wrap;
+	}
+
+	.metadata-item strong {
+		color: #2c3e50;
+	}
+
+	.logs-container {
+		margin-top: 1rem;
+	}
+
+	.no-logs {
+		text-align: center;
+		padding: 2rem;
+		color: #7f8c8d;
+		font-style: italic;
+	}
+
+	.logs-table-wrapper {
+		overflow-x: auto;
+		border: 1px solid #ecf0f1;
+		border-radius: 6px;
+	}
+
+	.logs-table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.875rem;
+	}
+
+	.logs-table thead {
+		background: #f8f9fa;
+		border-bottom: 2px solid #ecf0f1;
+	}
+
+	.logs-table th {
+		padding: 0.75rem;
+		text-align: left;
+		font-weight: 600;
+		color: #34495e;
+		text-transform: uppercase;
+		font-size: 0.75rem;
+		letter-spacing: 0.5px;
+	}
+
+	.logs-table td {
+		padding: 0.75rem;
+		border-bottom: 1px solid #ecf0f1;
+	}
+
+	.logs-table tbody tr:hover {
+		background: #f8f9fa;
+	}
+
+	.logs-table tbody tr.log-success {
+		background: rgba(39, 174, 96, 0.05);
+	}
+
+	.logs-table tbody tr.log-failed {
+		background: rgba(231, 76, 60, 0.05);
+	}
+
+	.log-time {
+		white-space: nowrap;
+		color: #7f8c8d;
+		font-size: 0.8rem;
+	}
+
+	.log-url {
+		font-family: 'Courier New', monospace;
+		font-size: 0.8rem;
+		max-width: 300px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.log-error {
+		color: #e74c3c;
+		font-size: 0.8rem;
+		max-width: 200px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.status-badge {
+		display: inline-block;
+		width: 24px;
+		height: 24px;
+		line-height: 24px;
+		text-align: center;
+		border-radius: 50%;
+		font-weight: bold;
+		font-size: 0.875rem;
+	}
+
+	.status-badge.success {
+		background: #d4edda;
+		color: #155724;
+	}
+
+	.status-badge.failed {
+		background: #f8d7da;
+		color: #721c24;
 	}
 </style>

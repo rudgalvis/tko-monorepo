@@ -11,3 +11,7 @@ vite.config.ts.timestamp-*
 
 # Cache directory
 .cache
+
+# Log files
+logs
+*.log

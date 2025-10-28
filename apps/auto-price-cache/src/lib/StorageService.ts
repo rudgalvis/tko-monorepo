@@ -150,16 +150,28 @@ export class StorageService {
 		let totalCompleted = 0;
 		let totalSuccessful = 0;
 		let totalFailed = 0;
+		let weightedTimeSum = 0;
 
-		for (const market of Object.values(analytics.markets)) {
+		for (const marketId of Object.keys(analytics.markets)) {
+			const market = analytics.markets[marketId];
+			const marketProgress = this.loadMarketProgress(marketId);
+			
 			totalCompleted += market.completed;
 			totalSuccessful += market.successful;
 			totalFailed += market.failed;
+			
+			// Calculate weighted average time per request
+			if (marketProgress && marketProgress.avg_time_per_request_ms > 0 && market.completed > 0) {
+				weightedTimeSum += marketProgress.avg_time_per_request_ms * market.completed;
+			}
 		}
 
 		analytics.total_success = totalSuccessful;
 		analytics.total_fails = totalFailed;
 		analytics.success_rate = totalCompleted > 0 ? (totalSuccessful / totalCompleted) * 100 : 0;
+		analytics.avg_time_per_request_ms = totalCompleted > 0 ? weightedTimeSum / totalCompleted : 0;
+		
+		console.log(`[updateAnalytics] Updated analytics: avg_time=${analytics.avg_time_per_request_ms}ms, completed=${totalCompleted}, success_rate=${analytics.success_rate.toFixed(1)}%`);
 
 		this.saveAnalytics(analytics);
 	}

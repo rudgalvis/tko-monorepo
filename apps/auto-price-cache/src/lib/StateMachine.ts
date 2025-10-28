@@ -26,7 +26,8 @@ export class StateMachine {
 			error_message: null,
 			markets: [],
 			total_markets: 0,
-			current_market_index: 0
+			current_market_index: 0,
+			market_totals: {}
 		};
 	}
 
@@ -61,7 +62,7 @@ export class StateMachine {
 	/**
 	 * Transition to INITIALIZING state
 	 */
-	transitionToInitializing(markets: string[]): ProcessState {
+	transitionToInitializing(markets: string[], marketTotals: Record<string, number>): ProcessState {
 		if (!this.canTransition(this.state.status, ProcessStatus.INITIALIZING)) {
 			throw new Error(
 				`Cannot transition from ${this.state.status} to ${ProcessStatus.INITIALIZING}`
@@ -73,6 +74,7 @@ export class StateMachine {
 			status: ProcessStatus.INITIALIZING,
 			markets,
 			total_markets: markets.length,
+			market_totals: marketTotals,
 			started_at: new Date().toISOString(),
 			current_market_index: 0,
 			current_market: null,
