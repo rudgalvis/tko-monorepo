@@ -9,12 +9,18 @@ interface ResultDisplay {
 		totalVariantsChecked: number
 		activeVariantsCount: number
 		archivedDraftCount: number
+		marketsChecked?: string[]
 	}
-	tableData: Array<{ url: string; price: string; compareAtPrice: string }>
+	tableData: Array<{ url: string; price: string; compareAtPrice: string | null; [key: string]: unknown }>
 }
 
-function displayResult(label: string, result: ResultDisplay, limit?: number) {
+function displayResult(label: string, result: ResultDisplay, limit?: number, additionalColumns?: string[]) {
 	console.log(`\n========== ${label} ==========`)
+	
+	// Display markets if available
+	if (result.summary.marketsChecked) {
+		console.log(`Markets checked: ${result.summary.marketsChecked.join(', ')}`)
+	}
 	
 	// Display summary as regular console.log
 	console.log(`Pages: ${
@@ -32,7 +38,10 @@ function displayResult(label: string, result: ResultDisplay, limit?: number) {
 	if (result.tableData.length > 0) {
 		console.log('\n--- Product Data ---')
 		const displayData = limit ? result.tableData.slice(0, limit) : result.tableData
-		console.table(displayData, ['price', 'compareAtPrice', 'url'])
+		
+		// Build columns list: base columns + any additional columns (like market codes)
+		const columns = ['price', 'compareAtPrice', ...(additionalColumns || []), 'url']
+		console.table(displayData, columns)
 		
 		if (limit && result.tableData.length > limit) {
 			console.log(`... and ${result.tableData.length - limit} more`)
@@ -48,19 +57,17 @@ test('Get all available variant IDs with compared_at price', async () => {
 	displayResult('SUMMARY', result)
 }, {timeout: 15000})
 
-test('Get variants with compared_at price - partial run (2 pages)', async () => {
-	const productService = new ProductService()
-	const result = await productService.getAllAvailableVariantsWithCompareAtPrice(50, 2)
-	displayResult('PARTIAL RUN SUMMARY', result, 5)
-}, {timeout: 15000})
-
 test('Get variants with compared_at price - with offset (start from page 3)', async () => {
 	const productService = new ProductService()
 	const result = await productService.getAllAvailableVariantsWithCompareAtPrice(50, 1, 8)
 	displayResult('OFFSET RUN SUMMARY', result, 5)
 }, {timeout: 15000})
 
-test('table', () => {
-    console.table([{price: 20, compareAtPrice: 30}], ['price', 'compareAtPrice'])
-})
+test('Get variants with discounts by market', async () => {
+	const productService = new ProductService()
+	const result = await productService.getVariantsWithDiscountsByMarket(['US', 'GB'], 200, 1, 3)
+	displayResult('VARIANTS WITH MARKET DISCOUNTS', result, 100, result.summary.marketsChecked)
+}, {timeout: 60000})
+
+
 

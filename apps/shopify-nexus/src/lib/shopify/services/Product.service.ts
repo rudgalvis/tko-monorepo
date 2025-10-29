@@ -2,12 +2,13 @@ import { ProductsRepository } from '$lib/shopify/repositories/ProductsRepository
 import { DiscountType } from '$lib/shopify/types/enums/DiscountType'
 import { ProductVariantInventoryPolicy } from '$lib/shopify/types/enums/ProductVariantInventoryPolicy'
 import type { FinalVariantPrice } from '$lib/shopify/types/FinalVariantPrice'
-import { generateVariantGid } from 'common-utils'
-import { StorefrontApi } from 'storefront-api'
+import { generateVariantGid, gidToNumericId } from 'common-utils'
+import { StorefrontApi, NexusApi } from 'storefront-api'
 
 export class ProductService {
 	constructor(public productRepository = new ProductsRepository(),
-							public storefrontApi = new StorefrontApi()) {}
+								public storefrontApi = new StorefrontApi(),
+								public nexusApi = new NexusApi()) {}
 
 	async disableSellOutOfStock({ productId, variantId }: { productId: string; variantId: string }) {
 		const r = await this.productRepository.variantsBulkUpdate({
@@ -126,6 +127,8 @@ export class ProductService {
 		// Prepare table data
 		const tableData = activeVariants.map(v => ({
 			url: v.adminUrl,
+			productId: v.productId,
+			variantId: v.variantId,
 			price: v.price,
 			compareAtPrice: v.compareAtPrice
 		}))
@@ -144,6 +147,82 @@ export class ProductService {
 			},
 			tableData,
 			activeVariants // Full variant data if needed
+		}
+	}
+
+	/**
+	 * Gets all available variants with compareAtPrice and checks automatic discounts across multiple markets
+	 * For each variant with compareAtPrice, fetches automatic discount amount for each country code provided
+	 * Uses cached Nexus API for faster responses
+	 * @param countryCodes - Array of country codes to check (e.g., ['US', 'GB', 'DE'])
+	 * @param pageSize - Number of items per page (default: 250)
+	 * @param numberOfPages - Number of pages to fetch. Undefined means fetch all pages (default: undefined)
+	 * @param startPage - Page number to start from (1-indexed). Use to skip initial pages (default: 1)
+	 * @returns Table data with additional columns for each market's automatic discount amount
+	 * @throws Error if NexusApi is not configured for production (must use HTTPS)
+	 */
+	async getVariantsWithDiscountsByMarket(
+		countryCodes: string[], 
+		pageSize = 250, 
+		numberOfPages?: number, 
+		startPage = 1
+	) {
+		// Validate that NexusApi is configured for production (HTTPS only)
+		// This function is intended for production use only with cached responses
+		const nexusBaseUrl = this.nexusApi['BASE_URL'] || ''
+		if (!nexusBaseUrl.startsWith('https://')) {
+			throw new Error(
+				`getVariantsWithDiscountsByMarket() is configured for production use only. ` +
+				`NexusApi BASE_URL must use HTTPS. Current URL: ${nexusBaseUrl}`
+			)
+		}
+
+		// Get all variants with compareAtPrice
+		const variantsData = await this.getAllAvailableVariantsWithCompareAtPrice(
+			pageSize, 
+			numberOfPages, 
+			startPage
+		)
+		
+		// For each variant, check automatic discount for each country code
+		const tableDataWithDiscounts = await Promise.all(
+			variantsData.tableData.map(async (variant) => {
+				const discountsByMarket: Record<string, number> = {}
+				
+				// Only check automatic discounts if variant has compareAtPrice
+				if (variant.compareAtPrice) {
+					for (const countryCode of countryCodes) {
+						try {
+							// Use NexusApi instead of Storefront API for automatic discount retrieval
+							// NexusApi is cached in production, providing significantly faster responses
+							// NOTE: Environment files must be configured for production (HTTPS)
+							// This function is intended for internal system analysis with cached production API
+							const discountResponse = await this.nexusApi.getVariantAutomaticDiscount(
+								countryCode, 
+								gidToNumericId(variant.variantId)
+							)
+							discountsByMarket[countryCode] = discountResponse?.amount ?? 0
+						} catch (error) {
+							console.error(`Failed to get discount for variant ${variant.variantId} in ${countryCode}:`, error)
+							discountsByMarket[countryCode] = 0
+						}
+					}
+				}
+				
+				return {
+					...variant,
+					...discountsByMarket
+				}
+			})
+		)
+		
+		return {
+			summary: {
+				...variantsData.summary,
+				marketsChecked: countryCodes
+			},
+			tableData: tableDataWithDiscounts,
+			activeVariants: variantsData.activeVariants
 		}
 	}
 }
