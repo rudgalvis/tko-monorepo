@@ -204,7 +204,7 @@ export class ProductService {
 							discountsByMarket[countryCode] = discountResponse?.amount ?? 0
 						} catch (error) {
 							console.error(`Failed to get discount for variant ${variant.variantId} in ${countryCode}:`, error)
-							discountsByMarket[countryCode] = 0
+							discountsByMarket[countryCode] = -1
 						}
 					}
 				}
