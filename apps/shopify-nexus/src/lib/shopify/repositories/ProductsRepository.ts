@@ -45,6 +45,11 @@ import {
 	type ProductByHandleReturn,
 	type ProductByHandleVars,
 } from '$lib/shopify/queries/productByHandleQuery'
+import {
+	getAllAvailableProductsWithComparedAtPriceQuery,
+	type GetAllAvailableProductsWithComparedAtPriceResponse,
+	type GetAllAvailableProductsWithComparedAtPriceVars,
+} from '$lib/shopify/queries/getAllAvailableProductsWithComparedAtPriceQuery'
 import { BaseRepository } from '$lib/shopify/repositories/BaseRepository'
 import { ProductVariantInventoryPolicy } from '$lib/shopify/types/enums/ProductVariantInventoryPolicy'
 import type { VariantPrice } from 'storefront-api'
@@ -243,5 +248,96 @@ export class ProductsRepository extends BaseRepository {
 	 * */
 	async getFinalVariantPrice() {
 
+	}
+
+	/**
+	 * Gets all available product variants with their compared_at price
+	 * Useful for identifying pricing problems and discount issues
+	 */
+	async getAllAvailableVariantsWithComparedAtPrice(variables: GetAllAvailableProductsWithComparedAtPriceVars = { first: 50 }) {
+		const { data, errors } = await this.client.request<GetAllAvailableProductsWithComparedAtPriceResponse>(
+			getAllAvailableProductsWithComparedAtPriceQuery,
+			{
+				variables,
+			}
+		)
+
+		if (errors) console.error(errors)
+
+		if (!data) return null
+
+		// Flatten the response to return all variants with their compareAtPrice
+		const allVariants = data.products.edges.flatMap(product => 
+			product.node.variants.edges
+				.filter(variant => variant.node.availableForSale)
+				.map(variant => ({
+					variantId: variant.node.id,
+					availableForSale: variant.node.availableForSale,
+					price: variant.node.price,
+					compareAtPrice: variant.node.compareAtPrice,
+					product: {
+						id: product.node.id,
+						status: product.node.status,
+					}
+				}))
+		)
+
+		return {
+			variants: allVariants,
+			pageInfo: data.products.pageInfo,
+			totalCount: allVariants.length
+		}
+	}
+
+	/**
+	 * Gets all variant IDs that are available for sale and have a compareAtPrice set
+	 * Returns variant ID, product ID, and product status (ACTIVE/DRAFT/ARCHIVED)
+	 * Useful for identifying variants with discounts
+	 */
+	async getAllAvailableProductsWithComparedAtPrice(variables: GetAllAvailableProductsWithComparedAtPriceVars = { first: 250 }) {
+		const { data, errors } = await this.client.request<GetAllAvailableProductsWithComparedAtPriceResponse>(
+			getAllAvailableProductsWithComparedAtPriceQuery,
+			{
+				variables,
+			}
+		)
+
+		if (errors) console.error(errors)
+
+		if (!data) return null
+
+		// Flatten and filter to get variant info with product status
+		const variants = data.products.edges.flatMap(product => 
+			product.node.variants.edges
+				.filter(variant => 
+					variant.node.availableForSale && 
+					variant.node.compareAtPrice !== null &&
+					variant.node.compareAtPrice !== '0' &&
+					variant.node.compareAtPrice !== '0.0' &&
+					variant.node.compareAtPrice !== '0.00'
+				)
+				.map(variant => {
+					// Extract numeric IDs from GID format
+					const productNumericId = product.node.id.split('/').pop()
+					const variantNumericId = variant.node.id.split('/').pop()
+					const adminUrl = `https://admin.shopify.com/store/the-knotty-ones/products/${productNumericId}/variants/${variantNumericId}`
+					
+					return {
+						variantId: variant.node.id,
+						productId: product.node.id,
+						productStatus: product.node.status,
+						isProductActive: product.node.status === 'ACTIVE',
+						price: variant.node.price,
+						compareAtPrice: variant.node.compareAtPrice,
+						adminUrl
+					}
+				})
+		)
+
+		return {
+			variants,
+			pageInfo: data.products.pageInfo,
+			totalCount: variants.length
+		}
 	}
 }
