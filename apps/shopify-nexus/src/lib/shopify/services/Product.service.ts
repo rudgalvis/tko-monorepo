@@ -71,8 +71,14 @@ export class ProductService {
 	 * @param pageSize - Number of items per page (default: 250)
 	 * @param numberOfPages - Number of pages to fetch. Undefined means fetch all pages (default: undefined)
 	 * @param startPage - Page number to start from (1-indexed). Use to skip initial pages (default: 1)
+	 * @param markets - Array of ISO 3166-1 alpha-2 country codes for market-specific pricing (e.g., ['US', 'DE', 'GB'])
 	 */
-	async getAllAvailableVariantsWithCompareAtPrice(pageSize = 250, numberOfPages?: number, startPage = 1) {
+	async getAllAvailableVariantsWithCompareAtPrice(
+		pageSize = 250, 
+		numberOfPages?: number, 
+		startPage = 1,
+		markets: string[] = []
+	) {
 		let result = await this.productRepository.getAllAvailableProductsWithComparedAtPrice({ first: pageSize })
 		
 		if (!result) {
@@ -125,13 +131,47 @@ export class ProductService {
 		const activeVariants = allVariants.filter(v => v.isProductActive)
 		
 		// Prepare table data
-		const tableData = activeVariants.map(v => ({
+		let tableData = activeVariants.map(v => ({
 			url: v.adminUrl,
 			productId: v.productId,
 			variantId: v.variantId,
 			price: v.price,
 			compareAtPrice: v.compareAtPrice
 		}))
+
+		// If markets are provided, fetch market-specific pricing
+		if (markets.length > 0) {
+			tableData = await Promise.all(
+				tableData.map(async (variant) => {
+					const marketPricing: Record<string, string | null> = {}
+
+					for (const market of markets) {
+						try {
+							const contextualPricing = await this.productRepository.getVariantContextualPricing(
+								variant.variantId,
+								market
+							)
+							
+							if (contextualPricing) {
+								// Store price as number (convert from string)
+								marketPricing[`${market}_price`] = contextualPricing.price.amount
+								// Store compareAtPrice as number or null
+								marketPricing[`${market}_compareAtPrice`] = contextualPricing.compareAtPrice?.amount ?? null
+							}
+						} catch (error) {
+							console.error(`Failed to get pricing for variant ${variant.variantId} in market ${market}:`, error)
+							marketPricing[`${market}_price`] = '0'
+							marketPricing[`${market}_compareAtPrice`] = null
+						}
+					}
+
+					return {
+						...variant,
+						...marketPricing
+					}
+				})
+			)
+		}
 		
 		const endPage = startPage + pageCount - 1
 		
@@ -143,7 +183,8 @@ export class ProductService {
 				pageCount,
 				startPage,
 				endPage,
-				pageRange: `${startPage}-${endPage}`
+				pageRange: `${startPage}-${endPage}`,
+				marketsRequested: markets
 			},
 			tableData,
 			activeVariants // Full variant data if needed
@@ -181,7 +222,8 @@ export class ProductService {
 		const variantsData = await this.getAllAvailableVariantsWithCompareAtPrice(
 			pageSize, 
 			numberOfPages, 
-			startPage
+			startPage,
+            countryCodes
 		)
 		
 		// For each variant, check automatic discount for each country code
@@ -201,10 +243,11 @@ export class ProductService {
 								countryCode, 
 								gidToNumericId(variant.variantId)
 							)
-							discountsByMarket[countryCode] = discountResponse?.amount ?? 0
+							// Use _discount suffix to avoid overwriting contextual pricing data
+							discountsByMarket[`${countryCode}_discount`] = discountResponse?.amount ?? 0
 						} catch (error) {
 							console.error(`Failed to get discount for variant ${variant.variantId} in ${countryCode}:`, error)
-							discountsByMarket[countryCode] = -1
+							discountsByMarket[`${countryCode}_discount`] = -1
 						}
 					}
 				}

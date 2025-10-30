@@ -41,6 +41,11 @@ import {
 	type GetVariantPriceByIdResponse,
 } from '$lib/shopify/queries/getVariantPriceByIdQuery'
 import {
+	getVariantContextualPricingQuery,
+	type GetVariantContextualPricingResponse,
+	type GetVariantContextualPricingVars,
+} from '$lib/shopify/queries/getVariantContextualPricingQuery'
+import {
 	productByHandleQuery,
 	type ProductByHandleReturn,
 	type ProductByHandleVars,
@@ -339,5 +344,28 @@ export class ProductsRepository extends BaseRepository {
 			pageInfo: data.products.pageInfo,
 			totalCount: variants.length
 		}
+	}
+
+	/**
+	 * Gets contextual pricing (price and compareAtPrice) for a specific variant in a given country/market
+	 * @param variantId - The variant GID
+	 * @param country - ISO 3166-1 alpha-2 country code (e.g., 'US', 'DE', 'GB')
+	 */
+	async getVariantContextualPricing(variantId: string, country: string) {
+		const { data, errors } = await this.client.request<GetVariantContextualPricingResponse>(
+			getVariantContextualPricingQuery,
+			{
+				variables: {
+					id: variantId,
+					country: country.toUpperCase()
+				} as GetVariantContextualPricingVars
+			}
+		)
+
+		if (errors) console.error(errors)
+
+		if (!data) return null
+
+		return data.productVariant.contextualPricing
 	}
 }
