@@ -244,7 +244,7 @@ export async function exportVariantsToJSON(
 	
 	// Determine output directory and file path
 	const timestamp = new Date().toISOString().replace(/[:.]/g, '-')
-	const filename = `variant-discounts-mock-${timestamp}.json`
+	const filename = `variant-discounts-${timestamp}.json`
 	const defaultPath = join(process.cwd(), 'src', 'lib', 'data-analysis', 'product-prices', filename)
 	const filepath = outputPath || defaultPath
 	

@@ -62,17 +62,17 @@ test('should fetch variants with contextual pricing across multiple markets', as
 
 /**
  * Developer utility test - Exports small variant discount dataset to JSON for data analysis
- * Run this to create mock data for developing and testing data analysis logic
+ * Run this to create test data for developing and testing data analysis logic
  * Stored in: src/lib/data-analysis/product-prices/
  */
-test('[MOCK DATA] should export small variant dataset to JSON for analysis', async () => {
+test('[GENERATE TEST DATA] should export small variant dataset to JSON for analysis', async () => {
 	const productService = new ProductService()
-	const markets = ['US', 'LT']
+	const markets = ['US', 'CA', 'GB', 'LT', 'AU']
 	
 	await exportVariantsToJSON(productService, markets, { 
-		pageSize: 50, 
-		numberOfPages: 1, 
-		pageNumber: 8, 
+		pageSize: 250,
+		numberOfPages: 10,
+		pageNumber: 1,
 		logPreview: true 
 	})
 }, {timeout: 30000})
