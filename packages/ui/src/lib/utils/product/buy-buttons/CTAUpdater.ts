@@ -7,6 +7,19 @@ export class CTAUpdater {
 	private isPriceReady = false;
 	private isPreorder = false;
 	private price: string | undefined;
+	private isInitialized = false;
+	private onComplete?: () => void;
+
+	/**
+	 * Set completion callback for when CTA updates are complete
+	 */
+	setCompletionCallback(callback: () => void): void {
+		this.onComplete = callback;
+		// If already initialized, call immediately
+		if (this.isInitialized) {
+			callback();
+		}
+	}
 
 	/**
 	 * Set the price and trigger update
@@ -96,6 +109,12 @@ export class CTAUpdater {
 			this.addPriceToPreorderButton();
 		} else {
 			this.addPriceToBuyButton();
+		}
+
+		// Signal completion after first update
+		if (!this.isInitialized) {
+			this.isInitialized = true;
+			this.onComplete?.();
 		}
 	}
 }

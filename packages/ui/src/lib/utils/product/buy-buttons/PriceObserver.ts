@@ -12,6 +12,19 @@ export class PriceObserver {
 	private observer: MutationObserver | null = null;
 	private priceElement: HTMLElement | null = null;
 	private retryCount = 0;
+	private isInitialized = false;
+	private onComplete?: () => void;
+
+	/**
+	 * Set completion callback for when observer finishes initialization
+	 */
+	setCompletionCallback(callback: () => void): void {
+		this.onComplete = callback;
+		// If already initialized, call immediately
+		if (this.isInitialized) {
+			callback();
+		}
+	}
 
 	/**
 	 * Subscribe to price changes
@@ -118,6 +131,12 @@ export class PriceObserver {
 			if (initialPrice) {
 				this.notifySubscribers(initialPrice);
 			}
+
+			// Mark as initialized and signal completion
+			if (!this.isInitialized) {
+				this.isInitialized = true;
+				this.onComplete?.();
+			}
 		}
 	}
 
@@ -135,6 +154,11 @@ export class PriceObserver {
 			}, BUY_BUTTONS_CONFIG.retry.interval);
 		} else {
 			console.warn('Price observer: Could not find price element after max retries');
+			// Signal completion even if price element wasn't found
+			if (!this.isInitialized) {
+				this.isInitialized = true;
+				this.onComplete?.();
+			}
 		}
 	}
 

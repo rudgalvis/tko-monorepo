@@ -7,10 +7,23 @@ import { BUY_BUTTONS_CONFIG } from './config.js';
 export class ResponsiveLayoutManager {
 	private productForm: HTMLElement | null = null;
 	private boundHandleResize: () => void;
+	private isInitialized = false;
+	private onComplete?: () => void;
 
 	constructor(productFormSelector = BUY_BUTTONS_CONFIG.selectors.productForm) {
 		this.productForm = document.querySelector(productFormSelector);
 		this.boundHandleResize = this.handleResize.bind(this);
+	}
+
+	/**
+	 * Set completion callback for when layout initialization is complete
+	 */
+	setCompletionCallback(callback: () => void): void {
+		this.onComplete = callback;
+		// If already initialized, call immediately
+		if (this.isInitialized) {
+			callback();
+		}
 	}
 
 	/**
@@ -19,6 +32,12 @@ export class ResponsiveLayoutManager {
 	init(): void {
 		this.handleResize();
 		window.addEventListener('resize', this.boundHandleResize);
+		
+		// Signal completion after initial layout is set
+		if (!this.isInitialized) {
+			this.isInitialized = true;
+			this.onComplete?.();
+		}
 	}
 
 	/**

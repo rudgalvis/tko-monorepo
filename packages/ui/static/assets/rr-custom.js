@@ -2,9 +2,9 @@ var Fe = Object.defineProperty;
 var Le = (r) => {
   throw TypeError(r);
 };
-var qe = (r, e, t) => e in r ? Fe(r, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : r[e] = t;
-var D = (r, e, t) => qe(r, typeof e != "symbol" ? e + "" : e, t), Ie = (r, e, t) => e.has(r) || Le("Cannot " + t);
-var T = (r, e, t) => (Ie(r, e, "read from private field"), t ? t.call(r) : e.get(r)), F = (r, e, t) => e.has(r) ? Le("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(r) : e.set(r, t), L = (r, e, t, s) => (Ie(r, e, "write to private field"), s ? s.call(r, t) : e.set(r, t), t), q = (r, e, t) => (Ie(r, e, "access private method"), t);
+var ze = (r, e, t) => e in r ? Fe(r, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : r[e] = t;
+var L = (r, e, t) => ze(r, typeof e != "symbol" ? e + "" : e, t), Ie = (r, e, t) => e.has(r) || Le("Cannot " + t);
+var T = (r, e, t) => (Ie(r, e, "read from private field"), t ? t.call(r) : e.get(r)), F = (r, e, t) => e.has(r) ? Le("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(r) : e.set(r, t), D = (r, e, t, s) => (Ie(r, e, "write to private field"), s ? s.call(r, t) : e.set(r, t), t), z = (r, e, t) => (Ie(r, e, "access private method"), t);
 const isBrowser$1 = typeof window < "u", DEV = !1;
 var is_array = Array.isArray, index_of = Array.prototype.indexOf, array_from = Array.from, object_keys = Object.keys, define_property = Object.defineProperty, get_descriptor = Object.getOwnPropertyDescriptor, get_descriptors = Object.getOwnPropertyDescriptors, object_prototype = Object.prototype, array_prototype = Array.prototype, get_prototype_of = Object.getPrototypeOf, is_extensible = Object.isExtensible;
 function is_function(r) {
@@ -28,8 +28,8 @@ function deferred() {
 const DERIVED = 2, EFFECT = 4, RENDER_EFFECT = 8, BLOCK_EFFECT = 16, BRANCH_EFFECT = 32, ROOT_EFFECT = 64, BOUNDARY_EFFECT = 128, CLEAN = 1024, DIRTY = 2048, MAYBE_DIRTY = 4096, INERT = 8192, DESTROYED = 16384, EFFECT_RAN = 32768, EFFECT_TRANSPARENT = 65536, INSPECT_EFFECT = 1 << 17, HEAD_EFFECT = 1 << 18, EFFECT_PRESERVED = 1 << 19, USER_EFFECT = 1 << 20, UNOWNED = 256, DISCONNECTED = 512, WAS_MARKED = 32768, REACTION_IS_UPDATING = 1 << 21, ASYNC = 1 << 22, ERROR_VALUE = 1 << 23, STATE_SYMBOL = Symbol("$state"), LEGACY_PROPS = Symbol("legacy props"), LOADING_ATTR_SYMBOL = Symbol(""), STALE_REACTION = new class extends Error {
   constructor() {
     super(...arguments);
-    D(this, "name", "StaleReactionError");
-    D(this, "message", "The reaction that called `getAbortSignal()` was re-run or destroyed");
+    L(this, "name", "StaleReactionError");
+    L(this, "message", "The reaction that called `getAbortSignal()` was re-run or destroyed");
   }
 }(), TEXT_NODE = 3, COMMENT_NODE = 8;
 function equals(r) {
@@ -437,13 +437,13 @@ var pe, _e, ge, ue, ye, me, ve, G, ke, ce, $e, Me;
 const Ae = class Ae {
   constructor() {
     F(this, G);
-    D(this, "committed", !1);
+    L(this, "committed", !1);
     /**
      * The current values of any sources that are updated in this batch
      * They keys of this map are identical to `this.#previous`
      * @type {Map<Source, any>}
      */
-    D(this, "current", /* @__PURE__ */ new Map());
+    L(this, "current", /* @__PURE__ */ new Map());
     /**
      * The values of any sources that are updated in this batch _before_ those updates took place.
      * They keys of this map are identical to `this.#current`
@@ -485,7 +485,7 @@ const Ae = class Ae {
      * is committed — we skip over these during `process`
      * @type {Set<Effect>}
      */
-    D(this, "skipped_effects", /* @__PURE__ */ new Set());
+    L(this, "skipped_effects", /* @__PURE__ */ new Set());
   }
   /**
    *
@@ -501,8 +501,8 @@ const Ae = class Ae {
       block_effects: []
     };
     for (const s of e)
-      q(this, G, ke).call(this, s, t);
-    q(this, G, $e).call(this), T(this, ue) > 0 ? (q(this, G, ce).call(this, t.effects), q(this, G, ce).call(this, t.render_effects), q(this, G, ce).call(this, t.block_effects)) : (previous_batch = this, current_batch = null, flush_queued_effects(t.render_effects), flush_queued_effects(t.effects), previous_batch = null), batch_values = null;
+      z(this, G, ke).call(this, s, t);
+    z(this, G, $e).call(this), T(this, ue) > 0 ? (z(this, G, ce).call(this, t.effects), z(this, G, ce).call(this, t.render_effects), z(this, G, ce).call(this, t.block_effects)) : (previous_batch = this, current_batch = null, flush_queued_effects(t.render_effects), flush_queued_effects(t.effects), previous_batch = null), batch_values = null;
   }
   /**
    * Associate a change to a given source with the current
@@ -524,7 +524,7 @@ const Ae = class Ae {
       if (this.activate(), flush_effects(), current_batch !== null && current_batch !== this)
         return;
     } else
-      q(this, G, $e).call(this);
+      z(this, G, $e).call(this);
     this.deactivate();
     for (const e of effect_pending_updates)
       if (effect_pending_updates.delete(e), e(), current_batch !== null)
@@ -535,26 +535,26 @@ const Ae = class Ae {
    * @param {boolean} blocking
    */
   increment(e) {
-    L(this, ge, T(this, ge) + 1), e && L(this, ue, T(this, ue) + 1);
+    D(this, ge, T(this, ge) + 1), e && D(this, ue, T(this, ue) + 1);
   }
   /**
    *
    * @param {boolean} blocking
    */
   decrement(e) {
-    L(this, ge, T(this, ge) - 1), e && L(this, ue, T(this, ue) - 1);
+    D(this, ge, T(this, ge) - 1), e && D(this, ue, T(this, ue) - 1);
     for (const t of T(this, me))
       set_signal_status(t, DIRTY), schedule_effect(t);
     for (const t of T(this, ve))
       set_signal_status(t, MAYBE_DIRTY), schedule_effect(t);
-    L(this, me, []), L(this, ve, []), this.flush();
+    D(this, me, []), D(this, ve, []), this.flush();
   }
   /** @param {() => void} fn */
   add_callback(e) {
     T(this, _e).add(e);
   }
   settled() {
-    return (T(this, ye) ?? L(this, ye, deferred())).promise;
+    return (T(this, ye) ?? D(this, ye, deferred())).promise;
   }
   static ensure() {
     if (current_batch === null) {
@@ -599,7 +599,7 @@ ke = function(e, t) {
     }
     var u = s.parent;
     for (s = s.next; s === null && u !== null; )
-      u === t.effect && (q(this, G, ce).call(this, t.effects), q(this, G, ce).call(this, t.render_effects), q(this, G, ce).call(this, t.block_effects), t = /** @type {EffectTarget} */
+      u === t.effect && (z(this, G, ce).call(this, t.effects), z(this, G, ce).call(this, t.render_effects), z(this, G, ce).call(this, t.block_effects), t = /** @type {EffectTarget} */
       t.parent), s = u.next, u = u.parent;
   }
 }, /**
@@ -613,7 +613,7 @@ ce = function(e) {
     for (const e of T(this, _e)) e();
     T(this, _e).clear();
   }
-  T(this, ge) === 0 && q(this, G, Me).call(this);
+  T(this, ge) === 0 && z(this, G, Me).call(this);
 }, Me = function() {
   var n, i;
   if (batches.size > 1) {
@@ -649,7 +649,7 @@ ce = function(e) {
         if (queued_root_effects.length > 0) {
           current_batch = o, o.apply();
           for (const f of queued_root_effects)
-            q(n = o, G, ke).call(n, f, s);
+            z(n = o, G, ke).call(n, f, s);
           queued_root_effects = [], o.deactivate();
         }
       }
@@ -787,7 +787,7 @@ var flags = EFFECT_TRANSPARENT | EFFECT_PRESERVED | BOUNDARY_EFFECT;
 function boundary(r, e, t) {
   new Boundary(r, e, t);
 }
-var K, H, be, Z, de, ee, Y, W, te, se, oe, fe, ae, he, le, xe, Ce, V, je, Be, Re, Te, Pe, Ne;
+var K, H, be, Z, de, ee, Y, W, te, se, oe, fe, ae, he, le, xe, Ce, q, je, Be, Re, Te, Pe, Ne;
 class Boundary {
   /**
    * @param {TemplateNode} node
@@ -795,9 +795,9 @@ class Boundary {
    * @param {((anchor: Node) => void)} children
    */
   constructor(e, t, s) {
-    F(this, V);
+    F(this, q);
     /** @type {Boundary | null} */
-    D(this, "parent");
+    L(this, "parent");
     F(this, K, !1);
     /** @type {TemplateNode} */
     F(this, H);
@@ -833,30 +833,30 @@ class Boundary {
     F(this, xe, () => {
       T(this, le) && internal_set(T(this, le), T(this, fe));
     });
-    F(this, Ce, createSubscriber(() => (L(this, le, source(T(this, fe))), () => {
-      L(this, le, null);
+    F(this, Ce, createSubscriber(() => (D(this, le, source(T(this, fe))), () => {
+      D(this, le, null);
     })));
-    L(this, H, e), L(this, Z, t), L(this, de, s), this.parent = /** @type {Effect} */
-    active_effect.b, L(this, K, !!T(this, Z).pending), L(this, ee, block(() => {
+    D(this, H, e), D(this, Z, t), D(this, de, s), this.parent = /** @type {Effect} */
+    active_effect.b, D(this, K, !!T(this, Z).pending), D(this, ee, block(() => {
       if (active_effect.b = this, hydrating) {
         const i = T(this, be);
         hydrate_next(), /** @type {Comment} */
         i.nodeType === COMMENT_NODE && /** @type {Comment} */
-        i.data === HYDRATION_START_ELSE ? q(this, V, Be).call(this) : q(this, V, je).call(this);
+        i.data === HYDRATION_START_ELSE ? z(this, q, Be).call(this) : z(this, q, je).call(this);
       } else {
-        var n = q(this, V, Re).call(this);
+        var n = z(this, q, Re).call(this);
         try {
-          L(this, Y, branch(() => s(n)));
+          D(this, Y, branch(() => s(n)));
         } catch (i) {
           this.error(i);
         }
-        T(this, ae) > 0 ? q(this, V, Pe).call(this) : L(this, K, !1);
+        T(this, ae) > 0 ? z(this, q, Pe).call(this) : D(this, K, !1);
       }
       return () => {
         var i;
         (i = T(this, oe)) == null || i.remove();
       };
-    }, flags)), hydrating && L(this, H, hydrate_node);
+    }, flags)), hydrating && D(this, H, hydrate_node);
   }
   /**
    * Returns `true` if the effect exists inside a boundary whose pending snippet is shown
@@ -875,7 +875,7 @@ class Boundary {
    * @param {1 | -1} d
    */
   update_pending_count(e) {
-    q(this, V, Ne).call(this, e), L(this, fe, T(this, fe) + e), effect_pending_updates.add(T(this, xe));
+    z(this, q, Ne).call(this, e), D(this, fe, T(this, fe) + e), effect_pending_updates.add(T(this, xe));
   }
   get_effect_pending() {
     return T(this, Ce).call(this), get$2(
@@ -889,7 +889,7 @@ class Boundary {
     let s = T(this, Z).failed;
     if (T(this, he) || !t && !s)
       throw e;
-    T(this, Y) && (destroy_effect(T(this, Y)), L(this, Y, null)), T(this, W) && (destroy_effect(T(this, W)), L(this, W, null)), T(this, te) && (destroy_effect(T(this, te)), L(this, te, null)), hydrating && (set_hydrate_node(
+    T(this, Y) && (destroy_effect(T(this, Y)), D(this, Y, null)), T(this, W) && (destroy_effect(T(this, W)), D(this, W, null)), T(this, te) && (destroy_effect(T(this, te)), D(this, te, null)), hydrating && (set_hydrate_node(
       /** @type {TemplateNode} */
       T(this, be)
     ), next(), set_hydrate_node(skip_nodes()));
@@ -899,9 +899,9 @@ class Boundary {
         svelte_boundary_reset_noop();
         return;
       }
-      n = !0, i && svelte_boundary_reset_onerror(), Batch.ensure(), L(this, fe, 0), T(this, te) !== null && pause_effect(T(this, te), () => {
-        L(this, te, null);
-      }), L(this, K, this.has_pending_snippet()), L(this, Y, q(this, V, Te).call(this, () => (L(this, he, !1), branch(() => T(this, de).call(this, T(this, H)))))), T(this, ae) > 0 ? q(this, V, Pe).call(this) : L(this, K, !1);
+      n = !0, i && svelte_boundary_reset_onerror(), Batch.ensure(), D(this, fe, 0), T(this, te) !== null && pause_effect(T(this, te), () => {
+        D(this, te, null);
+      }), D(this, K, this.has_pending_snippet()), D(this, Y, z(this, q, Te).call(this, () => (D(this, he, !1), branch(() => T(this, de).call(this, T(this, H)))))), T(this, ae) > 0 ? z(this, q, Pe).call(this) : D(this, K, !1);
     };
     var l = active_reaction;
     try {
@@ -912,8 +912,8 @@ class Boundary {
       set_active_reaction(l);
     }
     s && queue_micro_task(() => {
-      L(this, te, q(this, V, Te).call(this, () => {
-        Batch.ensure(), L(this, he, !0);
+      D(this, te, z(this, q, Te).call(this, () => {
+        Batch.ensure(), D(this, he, !0);
         try {
           return branch(() => {
             s(
@@ -929,34 +929,34 @@ class Boundary {
             T(this, ee).parent
           ), null;
         } finally {
-          L(this, he, !1);
+          D(this, he, !1);
         }
       }));
     });
   }
 }
-K = new WeakMap(), H = new WeakMap(), be = new WeakMap(), Z = new WeakMap(), de = new WeakMap(), ee = new WeakMap(), Y = new WeakMap(), W = new WeakMap(), te = new WeakMap(), se = new WeakMap(), oe = new WeakMap(), fe = new WeakMap(), ae = new WeakMap(), he = new WeakMap(), le = new WeakMap(), xe = new WeakMap(), Ce = new WeakMap(), V = new WeakSet(), je = function() {
+K = new WeakMap(), H = new WeakMap(), be = new WeakMap(), Z = new WeakMap(), de = new WeakMap(), ee = new WeakMap(), Y = new WeakMap(), W = new WeakMap(), te = new WeakMap(), se = new WeakMap(), oe = new WeakMap(), fe = new WeakMap(), ae = new WeakMap(), he = new WeakMap(), le = new WeakMap(), xe = new WeakMap(), Ce = new WeakMap(), q = new WeakSet(), je = function() {
   try {
-    L(this, Y, branch(() => T(this, de).call(this, T(this, H))));
+    D(this, Y, branch(() => T(this, de).call(this, T(this, H))));
   } catch (e) {
     this.error(e);
   }
-  L(this, K, !1);
+  D(this, K, !1);
 }, Be = function() {
   const e = T(this, Z).pending;
-  e && (L(this, W, branch(() => e(T(this, H)))), Batch.enqueue(() => {
-    var t = q(this, V, Re).call(this);
-    L(this, Y, q(this, V, Te).call(this, () => (Batch.ensure(), branch(() => T(this, de).call(this, t))))), T(this, ae) > 0 ? q(this, V, Pe).call(this) : (pause_effect(
+  e && (D(this, W, branch(() => e(T(this, H)))), Batch.enqueue(() => {
+    var t = z(this, q, Re).call(this);
+    D(this, Y, z(this, q, Te).call(this, () => (Batch.ensure(), branch(() => T(this, de).call(this, t))))), T(this, ae) > 0 ? z(this, q, Pe).call(this) : (pause_effect(
       /** @type {Effect} */
       T(this, W),
       () => {
-        L(this, W, null);
+        D(this, W, null);
       }
-    ), L(this, K, !1));
+    ), D(this, K, !1));
   }));
 }, Re = function() {
   var e = T(this, H);
-  return T(this, K) && (L(this, oe, create_text()), T(this, H).before(T(this, oe)), e = T(this, oe)), e;
+  return T(this, K) && (D(this, oe, create_text()), T(this, H).before(T(this, oe)), e = T(this, oe)), e;
 }, /**
  * @param {() => Effect | null} fn
  */
@@ -975,10 +975,10 @@ Te = function(e) {
     /** @type {(anchor: Node) => void} */
     T(this, Z).pending
   );
-  T(this, Y) !== null && (L(this, se, document.createDocumentFragment()), T(this, se).append(
+  T(this, Y) !== null && (D(this, se, document.createDocumentFragment()), T(this, se).append(
     /** @type {TemplateNode} */
     T(this, oe)
-  ), move_effect(T(this, Y), T(this, se))), T(this, W) === null && L(this, W, branch(() => e(T(this, H))));
+  ), move_effect(T(this, Y), T(this, se))), T(this, W) === null && D(this, W, branch(() => e(T(this, H))));
 }, /**
  * Updates the pending count associated with the currently visible pending snippet,
  * if any, such that we can replace the snippet with content once work is done
@@ -987,12 +987,12 @@ Te = function(e) {
 Ne = function(e) {
   var t;
   if (!this.has_pending_snippet()) {
-    this.parent && q(t = this.parent, V, Ne).call(t, e);
+    this.parent && z(t = this.parent, q, Ne).call(t, e);
     return;
   }
-  L(this, ae, T(this, ae) + e), T(this, ae) === 0 && (L(this, K, !1), T(this, W) && pause_effect(T(this, W), () => {
-    L(this, W, null);
-  }), T(this, se) && (T(this, H).before(T(this, se)), L(this, se, null)));
+  D(this, ae, T(this, ae) + e), T(this, ae) === 0 && (D(this, K, !1), T(this, W) && pause_effect(T(this, W), () => {
+    D(this, W, null);
+  }), T(this, se) && (T(this, H).before(T(this, se)), D(this, se, null)));
 };
 function flatten(r, e, t) {
   const s = is_runes() ? derived : derived_safe_equal;
@@ -2059,7 +2059,7 @@ class BranchManager {
    */
   constructor(e, t = !0) {
     /** @type {TemplateNode} */
-    D(this, "anchor");
+    L(this, "anchor");
     /** @type {Map<Batch, Key>} */
     F(this, ne, /* @__PURE__ */ new Map());
     /** @type {Map<Key, Effect>} */
@@ -2107,7 +2107,7 @@ class BranchManager {
         }
       }
     });
-    this.anchor = e, L(this, Ee, t);
+    this.anchor = e, D(this, Ee, t);
   }
   /**
    *
@@ -2290,7 +2290,7 @@ function each(r, e, t, s, n, i = null) {
   }), hydrating && (o = hydrate_node);
 }
 function reconcile(r, e, t, s, n, i, o, l, c) {
-  var M, U, z, X;
+  var M, U, V, X;
   var u = (o & EACH_IS_ANIMATED) !== 0, d = (o & (EACH_ITEM_REACTIVE | EACH_INDEX_REACTIVE)) !== 0, f = e.length, p = t.items, _ = t.first, h = _, g, m = null, w, y = [], v = [], b, S, E, P;
   if (u)
     for (P = 0; P < f; P += 1)
@@ -2354,7 +2354,7 @@ function reconcile(r, e, t, s, n, i, o, l, c) {
       var j = o & EACH_IS_CONTROLLED && f === 0 ? n : null;
       if (u) {
         for (P = 0; P < $; P += 1)
-          (z = C[P].a) == null || z.measure();
+          (V = C[P].a) == null || V.measure();
         for (P = 0; P < $; P += 1)
           (X = C[P].a) == null || X.fix();
       }
@@ -3052,14 +3052,14 @@ class Svelte4Component {
         }
       }
     );
-    L(this, J, (e.hydrate ? hydrate : mount)(e.component, {
+    D(this, J, (e.hydrate ? hydrate : mount)(e.component, {
       target: e.target,
       anchor: e.anchor,
       props: n,
       context: e.context,
       intro: e.intro ?? !1,
       recover: e.recover
-    })), (!((i = e == null ? void 0 : e.props) != null && i.$$host) || e.sync === !1) && flushSync(), L(this, ie, n.$$events);
+    })), (!((i = e == null ? void 0 : e.props) != null && i.$$host) || e.sync === !1) && flushSync(), D(this, ie, n.$$events);
     for (const o of Object.keys(T(this, J)))
       o === "$set" || o === "$destroy" || o === "$on" || define_property(this, o, {
         get() {
@@ -3112,25 +3112,25 @@ typeof HTMLElement == "function" && (SvelteElement = class extends HTMLElement {
   constructor(e, t, s) {
     super();
     /** The Svelte component constructor */
-    D(this, "$$ctor");
+    L(this, "$$ctor");
     /** Slots */
-    D(this, "$$s");
+    L(this, "$$s");
     /** @type {any} The Svelte component instance */
-    D(this, "$$c");
+    L(this, "$$c");
     /** Whether or not the custom element is connected */
-    D(this, "$$cn", !1);
+    L(this, "$$cn", !1);
     /** @type {Record<string, any>} Component props data */
-    D(this, "$$d", {});
+    L(this, "$$d", {});
     /** `true` if currently in the process of reflecting component props back to attributes */
-    D(this, "$$r", !1);
+    L(this, "$$r", !1);
     /** @type {Record<string, CustomElementPropDefinition>} Props definition (name, reflected, type etc) */
-    D(this, "$$p_d", {});
+    L(this, "$$p_d", {});
     /** @type {Record<string, EventListenerOrEventListenerObject[]>} Event listeners */
-    D(this, "$$l", {});
+    L(this, "$$l", {});
     /** @type {Map<EventListenerOrEventListenerObject, Function>} Event listener unsubscribe functions */
-    D(this, "$$l_u", /* @__PURE__ */ new Map());
+    L(this, "$$l_u", /* @__PURE__ */ new Map());
     /** @type {any} The managed render effect for reflecting attributes */
-    D(this, "$$me");
+    L(this, "$$me");
     this.$$ctor = e, this.$$s = t, s && this.attachShadow({ mode: "open" });
   }
   /**
@@ -3485,11 +3485,19 @@ const isPage = (r) => {
 };
 class PriceObserver {
   constructor() {
-    D(this, "subscribers", /* @__PURE__ */ new Set());
-    D(this, "currentPrice", null);
-    D(this, "observer", null);
-    D(this, "priceElement", null);
-    D(this, "retryCount", 0);
+    L(this, "subscribers", /* @__PURE__ */ new Set());
+    L(this, "currentPrice", null);
+    L(this, "observer", null);
+    L(this, "priceElement", null);
+    L(this, "retryCount", 0);
+    L(this, "isInitialized", !1);
+    L(this, "onComplete");
+  }
+  /**
+   * Set completion callback for when observer finishes initialization
+   */
+  setCompletionCallback(e) {
+    this.onComplete = e, this.isInitialized && e();
   }
   /**
    * Subscribe to price changes
@@ -3543,15 +3551,16 @@ class PriceObserver {
    * Find price element and set up observer
    */
   findAndObservePriceElement() {
+    var e;
     if (this.priceElement = document.querySelector(
       BUY_BUTTONS_CONFIG.selectors.priceValue
     ), this.priceElement) {
-      this.observer = new MutationObserver((t) => {
-        t.forEach((s) => {
-          var n;
-          if (s.type === "childList" || s.type === "characterData") {
-            const i = (n = this.priceElement) == null ? void 0 : n.innerText.trim();
-            i && i !== this.currentPrice && this.notifySubscribers(i);
+      this.observer = new MutationObserver((s) => {
+        s.forEach((n) => {
+          var i;
+          if (n.type === "childList" || n.type === "characterData") {
+            const o = (i = this.priceElement) == null ? void 0 : i.innerText.trim();
+            o && o !== this.currentPrice && this.notifySubscribers(o);
           }
         });
       }), this.observer.observe(this.priceElement, {
@@ -3559,17 +3568,18 @@ class PriceObserver {
         subtree: !0,
         characterData: !0
       });
-      const e = this.priceElement.innerText.trim();
-      e && this.notifySubscribers(e);
+      const t = this.priceElement.innerText.trim();
+      t && this.notifySubscribers(t), this.isInitialized || (this.isInitialized = !0, (e = this.onComplete) == null || e.call(this));
     }
   }
   /**
    * Retry mechanism for finding price element
    */
   retryObserving() {
+    var e;
     this.retryCount < BUY_BUTTONS_CONFIG.retry.maxAttempts ? (this.retryCount++, setTimeout(() => {
       this.findAndObservePriceElement(), this.priceElement || this.retryObserving();
-    }, BUY_BUTTONS_CONFIG.retry.interval)) : console.warn("Price observer: Could not find price element after max retries");
+    }, BUY_BUTTONS_CONFIG.retry.interval)) : (console.warn("Price observer: Could not find price element after max retries"), this.isInitialized || (this.isInitialized = !0, (e = this.onComplete) == null || e.call(this)));
   }
   /**
    * Stop observing
@@ -3586,9 +3596,17 @@ class PriceObserver {
 }
 class CTAUpdater {
   constructor() {
-    D(this, "isPriceReady", !1);
-    D(this, "isPreorder", !1);
-    D(this, "price");
+    L(this, "isPriceReady", !1);
+    L(this, "isPreorder", !1);
+    L(this, "price");
+    L(this, "isInitialized", !1);
+    L(this, "onComplete");
+  }
+  /**
+   * Set completion callback for when CTA updates are complete
+   */
+  setCompletionCallback(e) {
+    this.onComplete = e, this.isInitialized && e();
   }
   /**
    * Set the price and trigger update
@@ -3649,20 +3667,30 @@ class CTAUpdater {
    * Update CTA buttons based on current state
    */
   update() {
-    !this.isPriceReady || !this.price || (this.isPreorder ? this.addPriceToPreorderButton() : this.addPriceToBuyButton());
+    var e;
+    !this.isPriceReady || !this.price || (this.isPreorder ? this.addPriceToPreorderButton() : this.addPriceToBuyButton(), this.isInitialized || (this.isInitialized = !0, (e = this.onComplete) == null || e.call(this)));
   }
 }
 class ResponsiveLayoutManager {
   constructor(e = BUY_BUTTONS_CONFIG.selectors.productForm) {
-    D(this, "productForm", null);
-    D(this, "boundHandleResize");
+    L(this, "productForm", null);
+    L(this, "boundHandleResize");
+    L(this, "isInitialized", !1);
+    L(this, "onComplete");
     this.productForm = document.querySelector(e), this.boundHandleResize = this.handleResize.bind(this);
+  }
+  /**
+   * Set completion callback for when layout initialization is complete
+   */
+  setCompletionCallback(e) {
+    this.onComplete = e, this.isInitialized && e();
   }
   /**
    * Initialize responsive layout handling
    */
   init() {
-    this.handleResize(), window.addEventListener("resize", this.boundHandleResize);
+    var e;
+    this.handleResize(), window.addEventListener("resize", this.boundHandleResize), this.isInitialized || (this.isInitialized = !0, (e = this.onComplete) == null || e.call(this));
   }
   /**
    * Handle window resize events
@@ -3707,17 +3735,29 @@ class ResponsiveLayoutManager {
 }
 class FooterCTAManager {
   constructor() {
-    D(this, "productForm", null);
-    D(this, "footer", null);
+    L(this, "productForm", null);
+    L(this, "footer", null);
+    L(this, "isInitialized", !1);
+    L(this, "onComplete");
     this.productForm = document.querySelector(BUY_BUTTONS_CONFIG.selectors.productForm), this.footer = document.querySelector(BUY_BUTTONS_CONFIG.selectors.footer);
+  }
+  /**
+   * Set completion callback for when footer move is complete
+   */
+  setCompletionCallback(e) {
+    this.onComplete = e, this.isInitialized && e();
   }
   /**
    * Move CTA to footer (for mobile sticky footer)
    */
   async moveCtaToFooter() {
-    if (!this.productForm || !this.footer) return;
+    var t, s;
+    if (!this.productForm || !this.footer) {
+      this.isInitialized || (this.isInitialized = !0, (t = this.onComplete) == null || t.call(this));
+      return;
+    }
     let e = this.productForm.cloneNode(!0);
-    e = await this.cleanFooter(e), this.footer.prepend(e);
+    e = await this.cleanFooter(e), this.footer.prepend(e), this.isInitialized || (this.isInitialized = !0, (s = this.onComplete) == null || s.call(this));
   }
   /**
    * Clean footer content by removing payment options
@@ -3736,44 +3776,58 @@ class FooterCTAManager {
 const frontendLogger = {
   debug: (...r) => {
     console.log("[UI]", ...r);
+  },
+  warn: (...r) => {
+    console.warn("[UI]", ...r);
   }
 };
 class PaymentOptionManager {
   constructor() {
-    D(this, "debug", !1);
-    D(this, "sellingPlanOptionsSelector", ".gPreorderSellingPlanOptions");
-    D(this, "sellingPlanParentSelector", ".gPreorderSellingPlanParent");
-    D(this, "observerContainerSelector", ".product__info-container");
-    D(this, "observer", null);
+    L(this, "debug", !1);
+    L(this, "sellingPlanOptionsSelector", ".gPreorderSellingPlanOptions");
+    L(this, "sellingPlanParentSelector", ".gPreorderSellingPlanParent");
+    L(this, "observerContainerSelector", ".product__info-container");
+    L(this, "observer", null);
+    L(this, "isInitialized", !1);
+    L(this, "onComplete");
+  }
+  /**
+   * Set completion callback for when payment option check is complete
+   */
+  setCompletionCallback(e) {
+    this.onComplete = e, this.isInitialized && e();
   }
   /**
    * Initialize the payment option manager
    * Sets up observer on product info container for dynamic content changes
    */
   init() {
-    this.setupObserver(), this.debug && frontendLogger.debug("PaymentOptionManager initialized");
+    this.setupObserver(), this.debug && frontendLogger.debug("PaymentOptionManager initialized"), this.checkAndHideParent();
   }
   /**
    * Check if selling plan parent should be hidden based on child count
    * Hides parent if only one child exists
    */
   checkAndHideParent() {
+    var s;
     const e = document.querySelector(this.sellingPlanOptionsSelector);
     if (!e)
       return;
     if (e.children.length === 1) {
-      const s = document.querySelector(this.sellingPlanParentSelector);
-      s && (this.debug && frontendLogger.debug("Only one selling plan option found, hiding parent"), s.style.display = "none", this.stopObserving());
+      const n = document.querySelector(this.sellingPlanParentSelector);
+      n && (this.debug && frontendLogger.debug("Only one selling plan option found, hiding parent"), n.style.display = "none", this.stopObserving());
     }
+    this.isInitialized || (this.isInitialized = !0, (s = this.onComplete) == null || s.call(this));
   }
   /**
    * Setup observer on product info container to handle dynamic content loading
    * Reacts when selling plan options are added to the DOM
    */
   setupObserver() {
+    var t;
     const e = document.querySelector(this.observerContainerSelector);
     if (!e) {
-      this.debug && frontendLogger.debug("Product info container not found", this.observerContainerSelector);
+      this.debug && frontendLogger.debug("Product info container not found", this.observerContainerSelector), this.isInitialized || (this.isInitialized = !0, (t = this.onComplete) == null || t.call(this));
       return;
     }
     this.observer = new MutationObserver(() => {
@@ -3798,22 +3852,116 @@ class PaymentOptionManager {
   }
 }
 class BuyButtonsManager {
-  constructor() {
-    D(this, "priceObserver");
-    D(this, "ctaUpdater");
-    D(this, "responsiveLayout");
-    D(this, "footerManager");
-    D(this, "paymentOptionManager");
-    this.priceObserver = new PriceObserver(), this.ctaUpdater = new CTAUpdater(), this.responsiveLayout = new ResponsiveLayoutManager(), this.footerManager = new FooterCTAManager(), this.paymentOptionManager = new PaymentOptionManager();
+  constructor(e = !1) {
+    L(this, "priceObserver");
+    L(this, "ctaUpdater");
+    L(this, "responsiveLayout");
+    L(this, "footerManager");
+    L(this, "paymentOptionManager");
+    L(this, "completionTracking", /* @__PURE__ */ new Map());
+    L(this, "skeletonElement", null);
+    L(this, "completionPollInterval", null);
+    L(this, "debug", !1);
+    this.debug = e, this.priceObserver = new PriceObserver(), this.ctaUpdater = new CTAUpdater(), this.responsiveLayout = new ResponsiveLayoutManager(), this.footerManager = new FooterCTAManager(), this.paymentOptionManager = new PaymentOptionManager();
+  }
+  onAllComplete() {
+    this.debug && frontendLogger.debug("All buy button managers initialized successfully"), this.hideCtaSkeleton();
+  }
+  /**
+   * Set completion callback to be called when all managers finish initialization
+   */
+  onComplete(e) {
+    this.onAllComplete = e;
+  }
+  /**
+   * Track manager completion and check if all are done
+   */
+  markManagerComplete(e) {
+    this.debug && frontendLogger.debug(`✅ Manager completed: ${e}`), this.completionTracking.set(e, !0), this.logCompletionStatus(), this.checkAllComplete();
+  }
+  /**
+   * Log current completion status for debugging
+   */
+  logCompletionStatus() {
+    if (this.debug) {
+      const e = Array.from(this.completionTracking.entries()).map(
+        ([t, s]) => ({
+          manager: t,
+          complete: s,
+          status: s ? "✅ DONE" : "⏳ WAITING"
+        })
+      );
+      frontendLogger.debug("📊 Buy Buttons Manager Status:", e);
+    }
+  }
+  /**
+   * Start polling to track pending completions
+   */
+  startCompletionPolling() {
+    this.completionPollInterval || (this.completionPollInterval = setInterval(() => {
+      const e = Array.from(this.completionTracking.entries()).filter(([, t]) => !t).map(([t]) => t);
+      e.length > 0 && this.debug && frontendLogger.warn(
+        `⏳ Still waiting for completion of: ${e.join(", ")}`
+      );
+    }, 5e3));
+  }
+  /**
+   * Stop polling for completions
+   */
+  stopCompletionPolling() {
+    this.completionPollInterval && (clearInterval(this.completionPollInterval), this.completionPollInterval = null);
+  }
+  /**
+   * Check if all initialized managers are complete
+   */
+  checkAllComplete() {
+    var s;
+    const e = Array.from(this.completionTracking.keys());
+    e.every(
+      (n) => this.completionTracking.get(n) === !0
+    ) && e.length > 0 && (this.debug && frontendLogger.debug("✅ All buy button managers initialized successfully", {
+      managers: e
+    }), this.stopCompletionPolling(), (s = this.onAllComplete) == null || s.call(this));
+  }
+  /**
+   * Create and show skeleton loading overlay on CTA button
+   */
+  showCtaSkeleton() {
+    const e = document.querySelector(".product-form__buttons");
+    !e || this.skeletonElement || (this.skeletonElement = document.createElement("div"), this.skeletonElement.className = "skeleton-wave", this.skeletonElement.style.cssText = `
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 10;
+			border-radius: 4px;
+		`, e.appendChild(this.skeletonElement), this.debug && frontendLogger.debug("CTA skeleton shown"));
+  }
+  /**
+   * Hide and remove skeleton loading overlay
+   */
+  hideCtaSkeleton() {
+    this.skeletonElement && this.skeletonElement.parentElement && (this.skeletonElement.remove(), this.skeletonElement = null, this.debug && frontendLogger.debug("CTA skeleton hidden"));
   }
   /**
    * Initialize all buy button functionality
    */
   init() {
-    this.priceObserver.subscribe((e) => {
+    this.showCtaSkeleton(), this.completionTracking.set("priceObserver", !1), this.completionTracking.set("ctaUpdater", !1), this.completionTracking.set("responsiveLayout", !1), this.completionTracking.set("footerManager", !1), this.debug && frontendLogger.debug("🚀 Initializing Buy Buttons Manager"), this.debug && this.logCompletionStatus(), this.debug && this.startCompletionPolling(), this.priceObserver.setCompletionCallback(() => {
+      this.markManagerComplete("priceObserver");
+    }), this.ctaUpdater.setCompletionCallback(() => {
+      this.markManagerComplete("ctaUpdater");
+    }), this.responsiveLayout.setCompletionCallback(() => {
+      this.markManagerComplete("responsiveLayout");
+    }), this.footerManager.setCompletionCallback(() => {
+      this.markManagerComplete("footerManager");
+    }), this.priceObserver.subscribe((e) => {
       this.ctaUpdater.setPrice(e);
     }), this.priceObserver.startObserving(), document.addEventListener("globo.preorder.show.preorder", () => {
-      this.ctaUpdater.setIsPreorder(!0), this.paymentOptionManager.init();
+      this.ctaUpdater.setIsPreorder(!0), this.completionTracking.set("paymentOptionManager", !1), this.paymentOptionManager.setCompletionCallback(() => {
+        this.markManagerComplete("paymentOptionManager");
+      }), this.paymentOptionManager.init();
     }), this.setupPriceInitializationListener(), this.footerManager.moveCtaToFooter(), this.responsiveLayout.init();
   }
   /**
@@ -3885,7 +4033,6 @@ product-price .skeleton {
     font-weight: 500;
     font-style: Light;
     font-size: 24px;
-    leading-trim: NONE;
     line-height: 100%;
     letter-spacing: 0%;
     text-align: center;
@@ -3903,6 +4050,9 @@ product-price .skeleton {
     opacity: .8;
 }
 
+.product-form__buttons {
+    position: relative;
+}
 `, buyButtonsGloboStyles = `/* ========================================
    BUY BUTTONS - Globo Third-Party Styles
    Customizations for Globo library components
@@ -4008,7 +4158,6 @@ product-price .skeleton {
     font-weight: 500;
     font-style: Light;
     font-size: 24px;
-    leading-trim: NONE;
     line-height: 100%;
     letter-spacing: 0%;
     text-align: center;
@@ -4196,10 +4345,10 @@ product-price .skeleton {
         padding-left: 4px!important;
     }
 }
-`, buyButtonsInitialize = () => {
+`, buyButtonsInitialize = (r) => {
   console.log("dump", "buyButtonsInitialize"), loadStyles(buyButtonsStyles, { id: "buy-buttons-styles" }), loadStyles(buyButtonsGloboStyles, { id: "buy-buttons-globo-styles" });
-  const r = new BuyButtonsManager();
-  r.init(), window.BuyButtonsManager = r;
+  const e = new BuyButtonsManager();
+  e.init(), window.BuyButtonsManager = e;
 }, mainFooter = () => {
   createCartDrawerFooterRivet(), isPage(Page.PDP) && buyButtonsInitialize();
 }, isIosSafari = () => {
@@ -4251,10 +4400,10 @@ product-price .skeleton {
 }, PUBLIC_NEXUS_BASE_URL = "https://shopify-nexus.tko.rudgalvis.com";
 class NexusApi {
   constructor() {
-    D(this, "BASE_URL", PUBLIC_NEXUS_BASE_URL);
-    D(this, "API_VERSION_PATH", "api");
-    D(this, "NGROK_SKIP_HEADER", {});
-    D(this, "API_ROUTES", {
+    L(this, "BASE_URL", PUBLIC_NEXUS_BASE_URL);
+    L(this, "API_VERSION_PATH", "api");
+    L(this, "NGROK_SKIP_HEADER", {});
+    L(this, "API_ROUTES", {
       GET_VARIANT_AUTOMATIC_DISCOUNT: (e, t) => `automatic-discount/${e}/${t}`,
       GET_PRODUCT_AUTOMATIC_DISCOUNT: (e, t) => `automatic-discount/product/${e}/${t}`,
       GET_CURRENCY_RATES: (e) => `currency-rates/${e}`,
@@ -13891,10 +14040,10 @@ function updateSlides() {
             I = C + B + M;
           else {
             const {
-              clientWidth: z,
+              clientWidth: V,
               offsetWidth: X
             } = R;
-            I = C + $ + j + B + M + (X - z);
+            I = C + $ + j + B + M + (X - V);
           }
         }
         k && (R.style.transform = k), N && (R.style.webkitTransform = N), t.roundLengths && (I = Math.floor(I));
@@ -15938,8 +16087,8 @@ function KnittersAccordionItem(r, e) {
     }), l || (l = !0);
   }, w = () => {
   }, y = () => {
-    const U = new URLSearchParams(window.location.search), { knitter: z } = Object.fromEntries(U.entries());
-    z === s() && set(c, !0);
+    const U = new URLSearchParams(window.location.search), { knitter: V } = Object.fromEntries(U.entries());
+    V === s() && set(c, !0);
   };
   onMount(() => {
     get$2(c) ? g() : m(), y();
@@ -15998,9 +16147,9 @@ function KnittersAccordionItem(r, e) {
   var B = sibling($, 2);
   {
     var M = (U) => {
-      var z = root_1$7();
+      var V = root_1$7();
       let X;
-      var we = child(z);
+      var we = child(V);
       {
         let Oe = /* @__PURE__ */ derived_safe_equal(() => !get$2(c) || get$2(u));
         KnitterReviewsList(we, {
@@ -16017,17 +16166,17 @@ function KnittersAccordionItem(r, e) {
         get id() {
           return s();
         }
-      }), reset(z), template_effect((Oe) => X = set_class(z, 1, "reviews svelte-1mwffhh", null, X, Oe), [
+      }), reset(V), template_effect((Oe) => X = set_class(V, 1, "reviews svelte-1mwffhh", null, X, Oe), [
         () => ({ "fade-in": get$2(c), "fade-out": !get$2(c) })
-      ]), append(U, z);
+      ]), append(U, V);
     };
     if_block(B, (U) => {
       s() && U(M);
     });
   }
   return reset(x), bind_this(x, (U) => set(d, U), () => get$2(d)), reset(b), bind_this(b, (U) => set(f, U), () => get$2(f)), template_effect(
-    (U, z, X) => {
-      set_attribute(E, "src", o()), set_attribute(E, "alt", `Small picture of ${t() ?? ""}`), set_text(I, t()), O = set_class(A, 1, "arrow svelte-1mwffhh", null, O, U), N = set_class(k, 1, "svelte-1mwffhh", null, N, z), set_text(C, n()), j = set_class($, 1, "photo svelte-1mwffhh", null, j, X), set_attribute($, "src", i()), set_attribute($, "alt", `Picture of ${t() ?? ""}`);
+    (U, V, X) => {
+      set_attribute(E, "src", o()), set_attribute(E, "alt", `Small picture of ${t() ?? ""}`), set_text(I, t()), O = set_class(A, 1, "arrow svelte-1mwffhh", null, O, U), N = set_class(k, 1, "svelte-1mwffhh", null, N, V), set_text(C, n()), j = set_class($, 1, "photo svelte-1mwffhh", null, j, X), set_attribute($, "src", i()), set_attribute($, "alt", `Picture of ${t() ?? ""}`);
     },
     [
       () => ({ "arrow---down": get$2(c) }),

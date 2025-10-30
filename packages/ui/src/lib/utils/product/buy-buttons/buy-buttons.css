@@ -43,7 +43,6 @@ product-price .skeleton {
     font-weight: 500;
     font-style: Light;
     font-size: 24px;
-    leading-trim: NONE;
     line-height: 100%;
     letter-spacing: 0%;
     text-align: center;
@@ -61,3 +60,6 @@ product-price .skeleton {
     opacity: .8;
 }
 
+.product-form__buttons {
+    position: relative;
+}

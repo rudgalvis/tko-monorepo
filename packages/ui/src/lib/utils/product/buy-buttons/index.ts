@@ -22,14 +22,21 @@ declare global {
 
 /**
  * Auto-initializer for buy buttons functionality
+ * @param onComplete Optional callback to be called when all managers finish initialization
  */
-export const buyButtonsInitialize = () => {
+export const buyButtonsInitialize = (onComplete?: () => void) => {
 	console.log('dump', 'buyButtonsInitialize');
 
     loadStyles(buyButtonsStyles, { id: 'buy-buttons-styles' });
     loadStyles(buyButtonsGloboStyles, { id: 'buy-buttons-globo-styles' });
 
     const manager = new BuyButtonsManager();
+    
+    // Set completion callback if provided
+    if (onComplete) {
+        manager.onComplete(onComplete);
+    }
+    
     manager.init();
 
     // Expose to window for external access if needed

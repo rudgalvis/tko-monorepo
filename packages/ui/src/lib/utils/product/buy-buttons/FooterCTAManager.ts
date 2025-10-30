@@ -6,6 +6,8 @@ import { BUY_BUTTONS_CONFIG } from './config.js';
 export class FooterCTAManager {
 	private productForm: HTMLElement | null = null;
 	private footer: HTMLElement | null = null;
+	private isInitialized = false;
+	private onComplete?: () => void;
 
 	constructor() {
 		this.productForm = document.querySelector(BUY_BUTTONS_CONFIG.selectors.productForm);
@@ -13,15 +15,39 @@ export class FooterCTAManager {
 	}
 
 	/**
+	 * Set completion callback for when footer move is complete
+	 */
+	setCompletionCallback(callback: () => void): void {
+		this.onComplete = callback;
+		// If already initialized, call immediately
+		if (this.isInitialized) {
+			callback();
+		}
+	}
+
+	/**
 	 * Move CTA to footer (for mobile sticky footer)
 	 */
 	async moveCtaToFooter(): Promise<void> {
-		if (!this.productForm || !this.footer) return;
+		if (!this.productForm || !this.footer) {
+			// Signal completion even if elements not found
+			if (!this.isInitialized) {
+				this.isInitialized = true;
+				this.onComplete?.();
+			}
+			return;
+		}
 
 		let footerContent = this.productForm.cloneNode(true) as HTMLElement;
 		footerContent = await this.cleanFooter(footerContent);
 
 		this.footer.prepend(footerContent);
+		
+		// Signal completion after footer is populated
+		if (!this.isInitialized) {
+			this.isInitialized = true;
+			this.onComplete?.();
+		}
 	}
 
 	/**

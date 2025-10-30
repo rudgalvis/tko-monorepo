@@ -4,6 +4,7 @@ import { ResponsiveLayoutManager } from './ResponsiveLayout.js';
 import { FooterCTAManager } from './FooterCTAManager.js';
 import { PaymentOptionManager } from './PaymentOptionManager.js';
 import { BUY_BUTTONS_CONFIG } from './config.js';
+import { frontendLogger as logger } from '../../loggers/frontend-logger.js';
 
 /**
  * Main orchestrator for product buy buttons functionality
@@ -15,8 +16,19 @@ export class BuyButtonsManager {
 	private responsiveLayout: ResponsiveLayoutManager;
 	private footerManager: FooterCTAManager;
 	private paymentOptionManager: PaymentOptionManager;
+	
+	private completionTracking = new Map<string, boolean>();
+	private skeletonElement: HTMLElement | null = null;
+	private completionPollInterval: ReturnType<typeof setInterval> | null = null;
+	private readonly debug: boolean = false;
 
-	constructor() {
+	private onAllComplete() {
+        if (this.debug) logger.debug('All buy button managers initialized successfully');
+		this.hideCtaSkeleton();
+    }
+
+	constructor(debug: boolean = false) {
+		this.debug = debug;
 		this.priceObserver = new PriceObserver();
 		this.ctaUpdater = new CTAUpdater();
 		this.responsiveLayout = new ResponsiveLayoutManager();
@@ -25,9 +37,157 @@ export class BuyButtonsManager {
 	}
 
 	/**
+	 * Set completion callback to be called when all managers finish initialization
+	 */
+	onComplete(callback: () => void): void {
+		this.onAllComplete = callback;
+	}
+
+	/**
+	 * Track manager completion and check if all are done
+	 */
+	private markManagerComplete(managerName: string): void {
+		if (this.debug) logger.debug(`✅ Manager completed: ${managerName}`);
+		this.completionTracking.set(managerName, true);
+		this.logCompletionStatus();
+		this.checkAllComplete();
+	}
+
+	/**
+	 * Log current completion status for debugging
+	 */
+	private logCompletionStatus(): void {
+		if (this.debug) {
+			const status = Array.from(this.completionTracking.entries()).map(
+				([manager, complete]) => ({
+					manager,
+					complete,
+					status: complete ? '✅ DONE' : '⏳ WAITING'
+				})
+			);
+			logger.debug('📊 Buy Buttons Manager Status:', status);
+		}
+	}
+
+	/**
+	 * Start polling to track pending completions
+	 */
+	private startCompletionPolling(): void {
+		if (this.completionPollInterval) return;
+
+		this.completionPollInterval = setInterval(() => {
+			const pendingManagers = Array.from(this.completionTracking.entries())
+				.filter(([, complete]) => !complete)
+				.map(([name]) => name);
+
+			if (pendingManagers.length > 0) {
+				if (this.debug) logger.warn(
+					`⏳ Still waiting for completion of: ${pendingManagers.join(', ')}`
+				);
+			}
+		}, 5000); // Poll every 5 seconds
+	}
+
+	/**
+	 * Stop polling for completions
+	 */
+	private stopCompletionPolling(): void {
+		if (this.completionPollInterval) {
+			clearInterval(this.completionPollInterval);
+			this.completionPollInterval = null;
+		}
+	}
+
+	/**
+	 * Check if all initialized managers are complete
+	 */
+	private checkAllComplete(): void {
+		const expectedManagers = Array.from(this.completionTracking.keys());
+		const allComplete = expectedManagers.every(
+			(manager) => this.completionTracking.get(manager) === true
+		);
+
+		if (allComplete && expectedManagers.length > 0) {
+			if (this.debug) logger.debug('✅ All buy button managers initialized successfully', {
+				managers: expectedManagers,
+			});
+			this.stopCompletionPolling();
+			this.onAllComplete?.();
+		}
+	}
+
+	/**
+	 * Create and show skeleton loading overlay on CTA button
+	 */
+	private showCtaSkeleton(): void {
+		const productFormButtons = document.querySelector('.product-form__buttons');
+		
+		if (!productFormButtons || this.skeletonElement) {
+			return;
+		}
+
+		// Create skeleton overlay element
+		this.skeletonElement = document.createElement('div');
+		this.skeletonElement.className = 'skeleton-wave';
+		this.skeletonElement.style.cssText = `
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 10;
+			border-radius: 4px;
+		`;
+
+		productFormButtons.appendChild(this.skeletonElement);
+		if (this.debug) logger.debug('CTA skeleton shown');
+	}
+
+	/**
+	 * Hide and remove skeleton loading overlay
+	 */
+	private hideCtaSkeleton(): void {
+		if (this.skeletonElement && this.skeletonElement.parentElement) {
+			this.skeletonElement.remove();
+			this.skeletonElement = null;
+			if (this.debug) logger.debug('CTA skeleton hidden');
+		}
+	}
+
+	/**
 	 * Initialize all buy button functionality
 	 */
 	init(): void {
+		// Show skeleton loading state
+		this.showCtaSkeleton();
+
+		// Register managers that will always initialize
+		this.completionTracking.set('priceObserver', false);
+		this.completionTracking.set('ctaUpdater', false);
+		this.completionTracking.set('responsiveLayout', false);
+		this.completionTracking.set('footerManager', false);
+
+		if (this.debug) logger.debug('🚀 Initializing Buy Buttons Manager');
+		if (this.debug) this.logCompletionStatus();
+		if (this.debug) this.startCompletionPolling();
+
+		// Setup completion callbacks
+		this.priceObserver.setCompletionCallback(() => {
+			this.markManagerComplete('priceObserver');
+		});
+
+		this.ctaUpdater.setCompletionCallback(() => {
+			this.markManagerComplete('ctaUpdater');
+		});
+
+		this.responsiveLayout.setCompletionCallback(() => {
+			this.markManagerComplete('responsiveLayout');
+		});
+
+		this.footerManager.setCompletionCallback(() => {
+			this.markManagerComplete('footerManager');
+		});
+
 		// Setup price subscription
 		this.priceObserver.subscribe((newPrice) => {
 			this.ctaUpdater.setPrice(newPrice);
@@ -41,6 +201,11 @@ export class BuyButtonsManager {
 			this.ctaUpdater.setIsPreorder(true);
 
             // Initialize payment option visibility management
+			// This is conditionally initialized, so register it only when needed
+			this.completionTracking.set('paymentOptionManager', false);
+			this.paymentOptionManager.setCompletionCallback(() => {
+				this.markManagerComplete('paymentOptionManager');
+			});
             this.paymentOptionManager.init();
 		});
 

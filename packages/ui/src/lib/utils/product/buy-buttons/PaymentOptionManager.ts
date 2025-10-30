@@ -9,6 +9,19 @@ export class PaymentOptionManager {
 	private readonly sellingPlanParentSelector = '.gPreorderSellingPlanParent';
 	private readonly observerContainerSelector = '.product__info-container';
 	private observer: MutationObserver | null = null;
+	private isInitialized = false;
+	private onComplete?: () => void;
+
+	/**
+	 * Set completion callback for when payment option check is complete
+	 */
+	setCompletionCallback(callback: () => void): void {
+		this.onComplete = callback;
+		// If already initialized, call immediately
+		if (this.isInitialized) {
+			callback();
+		}
+	}
 
 	/**
 	 * Initialize the payment option manager
@@ -17,6 +30,9 @@ export class PaymentOptionManager {
 	init(): void {
 		this.setupObserver();
 		if(this.debug) logger.debug('PaymentOptionManager initialized');
+		
+		// Check immediately on init
+		this.checkAndHideParent();
 	}
 
 	/**
@@ -32,7 +48,7 @@ export class PaymentOptionManager {
 
 		const children = sellingPlanOptions.children;
 
-		// Hide parent if only one child exists
+		// Hide parent if only one child exists - meaning theres no options, no noeed to show
 		if (children.length === 1) {
 			const parent = document.querySelector(this.sellingPlanParentSelector);
 			if (parent) {
@@ -41,8 +57,15 @@ export class PaymentOptionManager {
 				
 				// Stop observing after successful hide - no need to continue watching
 				this.stopObserving();
+				
 			}
 		}
+
+        // Signal completion after hiding parent
+        if (!this.isInitialized) {
+            this.isInitialized = true;
+            this.onComplete?.();
+        }
 	}
 
 	/**
@@ -54,6 +77,11 @@ export class PaymentOptionManager {
 
 		if (!observerContainer) {
 			if(this.debug) logger.debug('Product info container not found', this.observerContainerSelector);
+			// Signal completion even if container not found
+			if (!this.isInitialized) {
+				this.isInitialized = true;
+				this.onComplete?.();
+			}
 			return;
 		}
 
