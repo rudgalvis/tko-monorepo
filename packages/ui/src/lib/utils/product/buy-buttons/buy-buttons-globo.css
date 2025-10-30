@@ -1,0 +1,293 @@
+/* ========================================
+   BUY BUTTONS - Globo Third-Party Styles
+   Customizations for Globo library components
+   ======================================== */
+
+/* ========================================
+   Globo Back-in-Stock Button
+   ======================================== */
+
+@media screen and (max-width: 767px) {
+    .gBackInStock-Button {
+        display: none!important;
+    }
+
+    .pdp-cta-footer .gBackInStock-Button {
+        display: block!important;
+    }
+
+    .singleProductPreOrderForm.preorderLoaded .product-form__buttons:has(~ #Globo-Back-In-Stock) {
+        display: none;
+    }
+
+    #Globo-Back-In-Stock {
+        margin: 0 0 8px;
+    }
+}
+
+.gBackInStockBtn {
+    background: rgba(171, 54, 58, 1)!important;
+    border: 1px solid rgba(171, 54, 58, 1)!important;
+    color: white!important;
+    border: 1px solid rgba(171, 182, 208, 1)!important;
+    font-family: Monument, sans-serif!important;
+    font-size: 20px!important;
+    transition: opacity .3s ease;
+}
+
+.gBackInStockBtn:hover {
+    background: rgba(171, 54, 58, 1)!important;
+    color: white!important;
+    border: 1px solid rgba(171, 54, 58, 1)!important;
+    opacity: .8;
+}
+
+@media screen and (max-width: 767px) {
+    .gBackInStockBtn {
+        font-size: 14px!important;
+    }
+
+    .gBackInStock-Button .gBackInStockBtn {
+        font-family: "Monument", sans-serif !important;
+        background: rgba(171, 54, 58, 1) !important;
+        color: white !important;
+        border: 1px solid rgba(171, 54, 58, 1) !important;
+    }
+}
+
+/* ========================================
+   Globo Notify Me Popup
+   ======================================== */
+
+.Globo-form .Globo-form-subscribe .Globo-form-header .Globo-header-background,
+.Globo-form .Globo-form-subscribe .Globo-form-header .Globo-header-img-left,
+.Globo-form .Globo-form-subscribe .Globo-form-header .Globo-header-img-right {
+    display: none!important;
+}
+
+.Globo-form .Globo-form-subscribe .Globo-form-header {
+    transform: translateY(150%);
+    height: 22px;
+}
+
+.Globo-form .Globo-form-subscribe .Globo-form-body {
+    border-radius: 10px;
+}
+
+.Globo-form-body,
+.Globo-form .Globo-form-subscribe .Globo-form-body .Globo-body-header p {
+    font-family: "Monument", sans-serif!important;
+}
+
+.Globo-form .Globo-form-subscribe .Globo-form-body .Globo-body-content .Globo-content-product .Globo-product-infor .Globo-product-title,
+.Globo-form .Globo-form-subscribe .Globo-form-body .Globo-body-content .Globo-content-product .Globo-product-infor .Globo-product-price,
+.Globo-form .Globo-form-subscribe .Globo-form-body .Globo-body-footer p {
+    font-family: "Monument Regular", sans-serif!important;
+    color: black;
+}
+
+.Globo-form-popup {
+    padding: 0 6px;
+}
+
+/* ========================================
+   Globo Preorder Button
+   ======================================== */
+
+.gPreorderBtn,
+.Globo-form .Globo-form-subscribe .Globo-form-body .Globo-body-content .Globo-content-form button {
+    pointer-events: all!important;
+    background: rgba(1, 136, 73, 1)!important;
+    border: 1px solid rgba(1, 136, 73, 1)!important;
+    font-family: Monument, sans-serif;
+    font-weight: 500;
+    font-style: Light;
+    font-size: 24px;
+    leading-trim: NONE;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 767px) {
+    .gPreorderBtn {
+        font-size: 24px;
+    }
+}
+
+.gPreorderWarning,
+.gPreorderBottomMessage,
+.gPreorderTopMessage {
+    display: none;
+}
+
+/* ========================================
+   Globo Preorder Selling Plan Options
+   ======================================== */
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanNameWrapper p {
+    font-family: "Monument", sans-serif;
+    font-size: 18px!important;
+}
+
+@media screen and (max-width: 767px) {
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanNameWrapper p {
+        font-size: 14px!important;
+    }
+}
+
+.gPreorderSellingPlanValue span,
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue .gPreorderPartialPaymentPrice {
+    font-family: "Monument", sans-serif;
+    font-size: 14px!important;
+    letter-spacing: -0.15px;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanDescription {
+    font-family: "Monument Regular", sans-serif;
+    font-size: 14px!important;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 100;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue {
+    border: 1px solid rgba(0,0,0,.05)!important;
+    padding: 0!important;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue .gPreorderPartialPaymentPrice {
+    border: none!important;
+    border-radius: 0;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions {
+    display: flex!important;
+    flex-direction: column;
+    gap: 8px;
+    color: black;
+    padding: 0!important;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue label {
+    flex-wrap: nowrap!important;
+    gap: 0;
+    width: 100%;
+}
+
+.gPreorderSellingPlanWrapper {
+    margin: 24px 0 !important;
+}
+
+@media screen and (max-width: 767px) {
+    .gPreorderSellingPlanWrapper {
+        margin: 8px 0 !important;
+    }
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue label span {
+    cursor: pointer;
+    transition: background-color .2s ease;
+    display: block;
+    margin-left: 0;
+    width: 100%;
+    padding-top: 12px!important;
+    padding-bottom: 12px!important;
+    position: relative;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue label:hover input:not(:checked)~span {
+    background: rgba(0,0,0,.03)!important;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue input {
+    display: none!important;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue input:checked~span {
+    background: rgba(0,0,0,.1)!important;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue input:checked~span:last-child:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    transform: translateY(-50%) rotate(45deg);
+    margin-top: -1px;
+    width: 6px;
+    height: 12px;
+    border: 2px solid #018849;
+    border-top: none;
+    border-left: none;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(4) {
+    width: 100%;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:first-child,
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(2) {
+    padding-left: 24px!important;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:last-child {
+    padding-right: 24px!important;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span.gPreorderSellingPlanOptionName {
+    padding-right: 12px!important;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span.gPreorderPartialPaymentPrice {
+    padding-left: 12px!important;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(0):not(:last-child),
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(1):not(:last-child),
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(2):not(:last-child),
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(3):not(:last-child) {
+    width: min-content;
+    white-space: nowrap;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup {
+    border: none;
+}
+
+@media screen and (max-width: 768px) {
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanNameWrapper p {
+        font-size: 14px!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanDescription {
+        font-size: 12px!important;
+    }
+
+    .gPreorderSellingPlanValue span,
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue .gPreorderPartialPaymentPrice {
+        font-size: 12px!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue label span {
+        padding-top: 8px!important;
+        padding-bottom: 8px!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:first-child,
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(2) {
+        padding-left: 8px!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:last-child {
+        padding-right: 8px!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span.gPreorderSellingPlanOptionName {
+        padding-right: 4px!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span.gPreorderPartialPaymentPrice {
+        padding-left: 4px!important;
+    }
+}

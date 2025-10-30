@@ -1,10 +1,10 @@
 var Fe = Object.defineProperty;
-var De = (r) => {
+var Le = (r) => {
   throw TypeError(r);
 };
 var qe = (r, e, t) => e in r ? Fe(r, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : r[e] = t;
-var q = (r, e, t) => qe(r, typeof e != "symbol" ? e + "" : e, t), $e = (r, e, t) => e.has(r) || De("Cannot " + t);
-var T = (r, e, t) => ($e(r, e, "read from private field"), t ? t.call(r) : e.get(r)), B = (r, e, t) => e.has(r) ? De("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(r) : e.set(r, t), D = (r, e, t, s) => ($e(r, e, "write to private field"), s ? s.call(r, t) : e.set(r, t), t), F = (r, e, t) => ($e(r, e, "access private method"), t);
+var D = (r, e, t) => qe(r, typeof e != "symbol" ? e + "" : e, t), Ie = (r, e, t) => e.has(r) || Le("Cannot " + t);
+var T = (r, e, t) => (Ie(r, e, "read from private field"), t ? t.call(r) : e.get(r)), F = (r, e, t) => e.has(r) ? Le("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(r) : e.set(r, t), L = (r, e, t, s) => (Ie(r, e, "write to private field"), s ? s.call(r, t) : e.set(r, t), t), q = (r, e, t) => (Ie(r, e, "access private method"), t);
 const isBrowser$1 = typeof window < "u", DEV = !1;
 var is_array = Array.isArray, index_of = Array.prototype.indexOf, array_from = Array.from, object_keys = Object.keys, define_property = Object.defineProperty, get_descriptor = Object.getOwnPropertyDescriptor, get_descriptors = Object.getOwnPropertyDescriptors, object_prototype = Object.prototype, array_prototype = Array.prototype, get_prototype_of = Object.getPrototypeOf, is_extensible = Object.isExtensible;
 function is_function(r) {
@@ -28,8 +28,8 @@ function deferred() {
 const DERIVED = 2, EFFECT = 4, RENDER_EFFECT = 8, BLOCK_EFFECT = 16, BRANCH_EFFECT = 32, ROOT_EFFECT = 64, BOUNDARY_EFFECT = 128, CLEAN = 1024, DIRTY = 2048, MAYBE_DIRTY = 4096, INERT = 8192, DESTROYED = 16384, EFFECT_RAN = 32768, EFFECT_TRANSPARENT = 65536, INSPECT_EFFECT = 1 << 17, HEAD_EFFECT = 1 << 18, EFFECT_PRESERVED = 1 << 19, USER_EFFECT = 1 << 20, UNOWNED = 256, DISCONNECTED = 512, WAS_MARKED = 32768, REACTION_IS_UPDATING = 1 << 21, ASYNC = 1 << 22, ERROR_VALUE = 1 << 23, STATE_SYMBOL = Symbol("$state"), LEGACY_PROPS = Symbol("legacy props"), LOADING_ATTR_SYMBOL = Symbol(""), STALE_REACTION = new class extends Error {
   constructor() {
     super(...arguments);
-    q(this, "name", "StaleReactionError");
-    q(this, "message", "The reaction that called `getAbortSignal()` was re-run or destroyed");
+    D(this, "name", "StaleReactionError");
+    D(this, "message", "The reaction that called `getAbortSignal()` was re-run or destroyed");
   }
 }(), TEXT_NODE = 3, COMMENT_NODE = 8;
 function equals(r) {
@@ -282,7 +282,7 @@ function proxy(r) {
         return d;
       },
       set(l, c, u, d) {
-        var m;
+        var v;
         var f = t.get(c), p = c in l;
         if (s && c === "length")
           for (var _ = u; _ < /** @type {Source<number>} */
@@ -291,14 +291,14 @@ function proxy(r) {
             h !== void 0 ? set(h, UNINITIALIZED) : _ in l && (h = o(() => /* @__PURE__ */ state(UNINITIALIZED)), t.set(_ + "", h));
           }
         if (f === void 0)
-          (!p || (m = get_descriptor(l, c)) != null && m.writable) && (f = o(() => /* @__PURE__ */ state(void 0)), set(f, proxy(u)), t.set(c, f));
+          (!p || (v = get_descriptor(l, c)) != null && v.writable) && (f = o(() => /* @__PURE__ */ state(void 0)), set(f, proxy(u)), t.set(c, f));
         else {
           p = f.v !== UNINITIALIZED;
           var g = o(() => proxy(u));
           set(f, g);
         }
-        var v = Reflect.getOwnPropertyDescriptor(l, c);
-        if (v != null && v.set && v.set.call(d, u), !p) {
+        var m = Reflect.getOwnPropertyDescriptor(l, c);
+        if (m != null && m.set && m.set.call(d, u), !p) {
           if (s && typeof c == "string") {
             var w = (
               /** @type {Source<number>} */
@@ -433,59 +433,59 @@ function apply_adjustments(r) {
 }
 const batches = /* @__PURE__ */ new Set();
 let current_batch = null, previous_batch = null, batch_values = null, effect_pending_updates = /* @__PURE__ */ new Set(), queued_root_effects = [], last_scheduled_effect = null, is_flushing = !1, is_flushing_sync = !1;
-var pe, _e, ge, ue, ye, ve, me, z, ke, ce, Pe, je;
-const xe = class xe {
+var pe, _e, ge, ue, ye, me, ve, G, ke, ce, $e, Me;
+const Ae = class Ae {
   constructor() {
-    B(this, z);
-    q(this, "committed", !1);
+    F(this, G);
+    D(this, "committed", !1);
     /**
      * The current values of any sources that are updated in this batch
      * They keys of this map are identical to `this.#previous`
      * @type {Map<Source, any>}
      */
-    q(this, "current", /* @__PURE__ */ new Map());
+    D(this, "current", /* @__PURE__ */ new Map());
     /**
      * The values of any sources that are updated in this batch _before_ those updates took place.
      * They keys of this map are identical to `this.#current`
      * @type {Map<Source, any>}
      */
-    B(this, pe, /* @__PURE__ */ new Map());
+    F(this, pe, /* @__PURE__ */ new Map());
     /**
      * When the batch is committed (and the DOM is updated), we need to remove old branches
      * and append new ones by calling the functions added inside (if/each/key/etc) blocks
      * @type {Set<() => void>}
      */
-    B(this, _e, /* @__PURE__ */ new Set());
+    F(this, _e, /* @__PURE__ */ new Set());
     /**
      * The number of async effects that are currently in flight
      */
-    B(this, ge, 0);
+    F(this, ge, 0);
     /**
      * The number of async effects that are currently in flight, _not_ inside a pending boundary
      */
-    B(this, ue, 0);
+    F(this, ue, 0);
     /**
      * A deferred that resolves when the batch is committed, used with `settled()`
      * TODO replace with Promise.withResolvers once supported widely enough
      * @type {{ promise: Promise<void>, resolve: (value?: any) => void, reject: (reason: unknown) => void } | null}
      */
-    B(this, ye, null);
+    F(this, ye, null);
     /**
      * Deferred effects (which run after async work has completed) that are DIRTY
      * @type {Effect[]}
      */
-    B(this, ve, []);
+    F(this, me, []);
     /**
      * Deferred effects that are MAYBE_DIRTY
      * @type {Effect[]}
      */
-    B(this, me, []);
+    F(this, ve, []);
     /**
      * A set of branches that still exist, but will be destroyed when this batch
      * is committed — we skip over these during `process`
      * @type {Set<Effect>}
      */
-    q(this, "skipped_effects", /* @__PURE__ */ new Set());
+    D(this, "skipped_effects", /* @__PURE__ */ new Set());
   }
   /**
    *
@@ -501,8 +501,8 @@ const xe = class xe {
       block_effects: []
     };
     for (const s of e)
-      F(this, z, ke).call(this, s, t);
-    F(this, z, Pe).call(this), T(this, ue) > 0 ? (F(this, z, ce).call(this, t.effects), F(this, z, ce).call(this, t.render_effects), F(this, z, ce).call(this, t.block_effects)) : (previous_batch = this, current_batch = null, flush_queued_effects(t.render_effects), flush_queued_effects(t.effects), previous_batch = null), batch_values = null;
+      q(this, G, ke).call(this, s, t);
+    q(this, G, $e).call(this), T(this, ue) > 0 ? (q(this, G, ce).call(this, t.effects), q(this, G, ce).call(this, t.render_effects), q(this, G, ce).call(this, t.block_effects)) : (previous_batch = this, current_batch = null, flush_queued_effects(t.render_effects), flush_queued_effects(t.effects), previous_batch = null), batch_values = null;
   }
   /**
    * Associate a change to a given source with the current
@@ -524,7 +524,7 @@ const xe = class xe {
       if (this.activate(), flush_effects(), current_batch !== null && current_batch !== this)
         return;
     } else
-      F(this, z, Pe).call(this);
+      q(this, G, $e).call(this);
     this.deactivate();
     for (const e of effect_pending_updates)
       if (effect_pending_updates.delete(e), e(), current_batch !== null)
@@ -535,31 +535,31 @@ const xe = class xe {
    * @param {boolean} blocking
    */
   increment(e) {
-    D(this, ge, T(this, ge) + 1), e && D(this, ue, T(this, ue) + 1);
+    L(this, ge, T(this, ge) + 1), e && L(this, ue, T(this, ue) + 1);
   }
   /**
    *
    * @param {boolean} blocking
    */
   decrement(e) {
-    D(this, ge, T(this, ge) - 1), e && D(this, ue, T(this, ue) - 1);
-    for (const t of T(this, ve))
-      set_signal_status(t, DIRTY), schedule_effect(t);
+    L(this, ge, T(this, ge) - 1), e && L(this, ue, T(this, ue) - 1);
     for (const t of T(this, me))
+      set_signal_status(t, DIRTY), schedule_effect(t);
+    for (const t of T(this, ve))
       set_signal_status(t, MAYBE_DIRTY), schedule_effect(t);
-    D(this, ve, []), D(this, me, []), this.flush();
+    L(this, me, []), L(this, ve, []), this.flush();
   }
   /** @param {() => void} fn */
   add_callback(e) {
     T(this, _e).add(e);
   }
   settled() {
-    return (T(this, ye) ?? D(this, ye, deferred())).promise;
+    return (T(this, ye) ?? L(this, ye, deferred())).promise;
   }
   static ensure() {
     if (current_batch === null) {
-      const e = current_batch = new xe();
-      batches.add(current_batch), is_flushing_sync || xe.enqueue(() => {
+      const e = current_batch = new Ae();
+      batches.add(current_batch), is_flushing_sync || Ae.enqueue(() => {
         current_batch === e && e.flush();
       });
     }
@@ -572,7 +572,7 @@ const xe = class xe {
   apply() {
   }
 };
-pe = new WeakMap(), _e = new WeakMap(), ge = new WeakMap(), ue = new WeakMap(), ye = new WeakMap(), ve = new WeakMap(), me = new WeakMap(), z = new WeakSet(), /**
+pe = new WeakMap(), _e = new WeakMap(), ge = new WeakMap(), ue = new WeakMap(), ye = new WeakMap(), me = new WeakMap(), ve = new WeakMap(), G = new WeakSet(), /**
  * Traverse the effect tree, executing effects or stashing
  * them for later execution as appropriate
  * @param {Effect} root
@@ -599,7 +599,7 @@ ke = function(e, t) {
     }
     var u = s.parent;
     for (s = s.next; s === null && u !== null; )
-      u === t.effect && (F(this, z, ce).call(this, t.effects), F(this, z, ce).call(this, t.render_effects), F(this, z, ce).call(this, t.block_effects), t = /** @type {EffectTarget} */
+      u === t.effect && (q(this, G, ce).call(this, t.effects), q(this, G, ce).call(this, t.render_effects), q(this, G, ce).call(this, t.block_effects), t = /** @type {EffectTarget} */
       t.parent), s = u.next, u = u.parent;
   }
 }, /**
@@ -607,14 +607,14 @@ ke = function(e, t) {
  */
 ce = function(e) {
   for (const t of e)
-    (t.f & DIRTY ? T(this, ve) : T(this, me)).push(t), set_signal_status(t, CLEAN);
-}, Pe = function() {
+    (t.f & DIRTY ? T(this, me) : T(this, ve)).push(t), set_signal_status(t, CLEAN);
+}, $e = function() {
   if (T(this, ue) === 0) {
     for (const e of T(this, _e)) e();
     T(this, _e).clear();
   }
-  T(this, ge) === 0 && F(this, z, je).call(this);
-}, je = function() {
+  T(this, ge) === 0 && q(this, G, Me).call(this);
+}, Me = function() {
   var n, i;
   if (batches.size > 1) {
     T(this, pe).clear();
@@ -649,7 +649,7 @@ ce = function(e) {
         if (queued_root_effects.length > 0) {
           current_batch = o, o.apply();
           for (const f of queued_root_effects)
-            F(n = o, z, ke).call(n, f, s);
+            q(n = o, G, ke).call(n, f, s);
           queued_root_effects = [], o.deactivate();
         }
       }
@@ -658,7 +658,7 @@ ce = function(e) {
   }
   this.committed = !0, batches.delete(this), (i = T(this, ye)) == null || i.resolve();
 };
-let Batch = xe;
+let Batch = Ae;
 function flushSync(r) {
   var e = is_flushing_sync;
   is_flushing_sync = !0;
@@ -787,7 +787,7 @@ var flags = EFFECT_TRANSPARENT | EFFECT_PRESERVED | BOUNDARY_EFFECT;
 function boundary(r, e, t) {
   new Boundary(r, e, t);
 }
-var K, G, be, Z, de, ee, Y, W, te, se, ae, fe, oe, he, le, Ce, Oe, V, Me, Ue, Re, Te, Ae, Ne;
+var K, H, be, Z, de, ee, Y, W, te, se, oe, fe, ae, he, le, xe, Ce, V, je, Be, Re, Te, Pe, Ne;
 class Boundary {
   /**
    * @param {TemplateNode} node
@@ -795,33 +795,33 @@ class Boundary {
    * @param {((anchor: Node) => void)} children
    */
   constructor(e, t, s) {
-    B(this, V);
+    F(this, V);
     /** @type {Boundary | null} */
-    q(this, "parent");
-    B(this, K, !1);
+    D(this, "parent");
+    F(this, K, !1);
     /** @type {TemplateNode} */
-    B(this, G);
+    F(this, H);
     /** @type {TemplateNode | null} */
-    B(this, be, hydrating ? hydrate_node : null);
+    F(this, be, hydrating ? hydrate_node : null);
     /** @type {BoundaryProps} */
-    B(this, Z);
+    F(this, Z);
     /** @type {((anchor: Node) => void)} */
-    B(this, de);
+    F(this, de);
     /** @type {Effect} */
-    B(this, ee);
+    F(this, ee);
     /** @type {Effect | null} */
-    B(this, Y, null);
+    F(this, Y, null);
     /** @type {Effect | null} */
-    B(this, W, null);
+    F(this, W, null);
     /** @type {Effect | null} */
-    B(this, te, null);
+    F(this, te, null);
     /** @type {DocumentFragment | null} */
-    B(this, se, null);
+    F(this, se, null);
     /** @type {TemplateNode | null} */
-    B(this, ae, null);
-    B(this, fe, 0);
-    B(this, oe, 0);
-    B(this, he, !1);
+    F(this, oe, null);
+    F(this, fe, 0);
+    F(this, ae, 0);
+    F(this, he, !1);
     /**
      * A source containing the number of pending async deriveds/expressions.
      * Only created if `$effect.pending()` is used inside the boundary,
@@ -829,34 +829,34 @@ class Boundary {
      * calls followed by no-op flushes
      * @type {Source<number> | null}
      */
-    B(this, le, null);
-    B(this, Ce, () => {
+    F(this, le, null);
+    F(this, xe, () => {
       T(this, le) && internal_set(T(this, le), T(this, fe));
     });
-    B(this, Oe, createSubscriber(() => (D(this, le, source(T(this, fe))), () => {
-      D(this, le, null);
+    F(this, Ce, createSubscriber(() => (L(this, le, source(T(this, fe))), () => {
+      L(this, le, null);
     })));
-    D(this, G, e), D(this, Z, t), D(this, de, s), this.parent = /** @type {Effect} */
-    active_effect.b, D(this, K, !!T(this, Z).pending), D(this, ee, block(() => {
+    L(this, H, e), L(this, Z, t), L(this, de, s), this.parent = /** @type {Effect} */
+    active_effect.b, L(this, K, !!T(this, Z).pending), L(this, ee, block(() => {
       if (active_effect.b = this, hydrating) {
         const i = T(this, be);
         hydrate_next(), /** @type {Comment} */
         i.nodeType === COMMENT_NODE && /** @type {Comment} */
-        i.data === HYDRATION_START_ELSE ? F(this, V, Ue).call(this) : F(this, V, Me).call(this);
+        i.data === HYDRATION_START_ELSE ? q(this, V, Be).call(this) : q(this, V, je).call(this);
       } else {
-        var n = F(this, V, Re).call(this);
+        var n = q(this, V, Re).call(this);
         try {
-          D(this, Y, branch(() => s(n)));
+          L(this, Y, branch(() => s(n)));
         } catch (i) {
           this.error(i);
         }
-        T(this, oe) > 0 ? F(this, V, Ae).call(this) : D(this, K, !1);
+        T(this, ae) > 0 ? q(this, V, Pe).call(this) : L(this, K, !1);
       }
       return () => {
         var i;
-        (i = T(this, ae)) == null || i.remove();
+        (i = T(this, oe)) == null || i.remove();
       };
-    }, flags)), hydrating && D(this, G, hydrate_node);
+    }, flags)), hydrating && L(this, H, hydrate_node);
   }
   /**
    * Returns `true` if the effect exists inside a boundary whose pending snippet is shown
@@ -875,10 +875,10 @@ class Boundary {
    * @param {1 | -1} d
    */
   update_pending_count(e) {
-    F(this, V, Ne).call(this, e), D(this, fe, T(this, fe) + e), effect_pending_updates.add(T(this, Ce));
+    q(this, V, Ne).call(this, e), L(this, fe, T(this, fe) + e), effect_pending_updates.add(T(this, xe));
   }
   get_effect_pending() {
-    return T(this, Oe).call(this), get$2(
+    return T(this, Ce).call(this), get$2(
       /** @type {Source<number>} */
       T(this, le)
     );
@@ -889,7 +889,7 @@ class Boundary {
     let s = T(this, Z).failed;
     if (T(this, he) || !t && !s)
       throw e;
-    T(this, Y) && (destroy_effect(T(this, Y)), D(this, Y, null)), T(this, W) && (destroy_effect(T(this, W)), D(this, W, null)), T(this, te) && (destroy_effect(T(this, te)), D(this, te, null)), hydrating && (set_hydrate_node(
+    T(this, Y) && (destroy_effect(T(this, Y)), L(this, Y, null)), T(this, W) && (destroy_effect(T(this, W)), L(this, W, null)), T(this, te) && (destroy_effect(T(this, te)), L(this, te, null)), hydrating && (set_hydrate_node(
       /** @type {TemplateNode} */
       T(this, be)
     ), next(), set_hydrate_node(skip_nodes()));
@@ -899,9 +899,9 @@ class Boundary {
         svelte_boundary_reset_noop();
         return;
       }
-      n = !0, i && svelte_boundary_reset_onerror(), Batch.ensure(), D(this, fe, 0), T(this, te) !== null && pause_effect(T(this, te), () => {
-        D(this, te, null);
-      }), D(this, K, this.has_pending_snippet()), D(this, Y, F(this, V, Te).call(this, () => (D(this, he, !1), branch(() => T(this, de).call(this, T(this, G)))))), T(this, oe) > 0 ? F(this, V, Ae).call(this) : D(this, K, !1);
+      n = !0, i && svelte_boundary_reset_onerror(), Batch.ensure(), L(this, fe, 0), T(this, te) !== null && pause_effect(T(this, te), () => {
+        L(this, te, null);
+      }), L(this, K, this.has_pending_snippet()), L(this, Y, q(this, V, Te).call(this, () => (L(this, he, !1), branch(() => T(this, de).call(this, T(this, H)))))), T(this, ae) > 0 ? q(this, V, Pe).call(this) : L(this, K, !1);
     };
     var l = active_reaction;
     try {
@@ -912,12 +912,12 @@ class Boundary {
       set_active_reaction(l);
     }
     s && queue_micro_task(() => {
-      D(this, te, F(this, V, Te).call(this, () => {
-        Batch.ensure(), D(this, he, !0);
+      L(this, te, q(this, V, Te).call(this, () => {
+        Batch.ensure(), L(this, he, !0);
         try {
           return branch(() => {
             s(
-              T(this, G),
+              T(this, H),
               () => e,
               () => o
             );
@@ -929,34 +929,34 @@ class Boundary {
             T(this, ee).parent
           ), null;
         } finally {
-          D(this, he, !1);
+          L(this, he, !1);
         }
       }));
     });
   }
 }
-K = new WeakMap(), G = new WeakMap(), be = new WeakMap(), Z = new WeakMap(), de = new WeakMap(), ee = new WeakMap(), Y = new WeakMap(), W = new WeakMap(), te = new WeakMap(), se = new WeakMap(), ae = new WeakMap(), fe = new WeakMap(), oe = new WeakMap(), he = new WeakMap(), le = new WeakMap(), Ce = new WeakMap(), Oe = new WeakMap(), V = new WeakSet(), Me = function() {
+K = new WeakMap(), H = new WeakMap(), be = new WeakMap(), Z = new WeakMap(), de = new WeakMap(), ee = new WeakMap(), Y = new WeakMap(), W = new WeakMap(), te = new WeakMap(), se = new WeakMap(), oe = new WeakMap(), fe = new WeakMap(), ae = new WeakMap(), he = new WeakMap(), le = new WeakMap(), xe = new WeakMap(), Ce = new WeakMap(), V = new WeakSet(), je = function() {
   try {
-    D(this, Y, branch(() => T(this, de).call(this, T(this, G))));
+    L(this, Y, branch(() => T(this, de).call(this, T(this, H))));
   } catch (e) {
     this.error(e);
   }
-  D(this, K, !1);
-}, Ue = function() {
+  L(this, K, !1);
+}, Be = function() {
   const e = T(this, Z).pending;
-  e && (D(this, W, branch(() => e(T(this, G)))), Batch.enqueue(() => {
-    var t = F(this, V, Re).call(this);
-    D(this, Y, F(this, V, Te).call(this, () => (Batch.ensure(), branch(() => T(this, de).call(this, t))))), T(this, oe) > 0 ? F(this, V, Ae).call(this) : (pause_effect(
+  e && (L(this, W, branch(() => e(T(this, H)))), Batch.enqueue(() => {
+    var t = q(this, V, Re).call(this);
+    L(this, Y, q(this, V, Te).call(this, () => (Batch.ensure(), branch(() => T(this, de).call(this, t))))), T(this, ae) > 0 ? q(this, V, Pe).call(this) : (pause_effect(
       /** @type {Effect} */
       T(this, W),
       () => {
-        D(this, W, null);
+        L(this, W, null);
       }
-    ), D(this, K, !1));
+    ), L(this, K, !1));
   }));
 }, Re = function() {
-  var e = T(this, G);
-  return T(this, K) && (D(this, ae, create_text()), T(this, G).before(T(this, ae)), e = T(this, ae)), e;
+  var e = T(this, H);
+  return T(this, K) && (L(this, oe, create_text()), T(this, H).before(T(this, oe)), e = T(this, oe)), e;
 }, /**
  * @param {() => Effect | null} fn
  */
@@ -970,15 +970,15 @@ Te = function(e) {
   } finally {
     set_active_effect(t), set_active_reaction(s), set_component_context(n);
   }
-}, Ae = function() {
+}, Pe = function() {
   const e = (
     /** @type {(anchor: Node) => void} */
     T(this, Z).pending
   );
-  T(this, Y) !== null && (D(this, se, document.createDocumentFragment()), T(this, se).append(
+  T(this, Y) !== null && (L(this, se, document.createDocumentFragment()), T(this, se).append(
     /** @type {TemplateNode} */
-    T(this, ae)
-  ), move_effect(T(this, Y), T(this, se))), T(this, W) === null && D(this, W, branch(() => e(T(this, G))));
+    T(this, oe)
+  ), move_effect(T(this, Y), T(this, se))), T(this, W) === null && L(this, W, branch(() => e(T(this, H))));
 }, /**
  * Updates the pending count associated with the currently visible pending snippet,
  * if any, such that we can replace the snippet with content once work is done
@@ -987,12 +987,12 @@ Te = function(e) {
 Ne = function(e) {
   var t;
   if (!this.has_pending_snippet()) {
-    this.parent && F(t = this.parent, V, Ne).call(t, e);
+    this.parent && q(t = this.parent, V, Ne).call(t, e);
     return;
   }
-  D(this, oe, T(this, oe) + e), T(this, oe) === 0 && (D(this, K, !1), T(this, W) && pause_effect(T(this, W), () => {
-    D(this, W, null);
-  }), T(this, se) && (T(this, G).before(T(this, se)), D(this, se, null)));
+  L(this, ae, T(this, ae) + e), T(this, ae) === 0 && (L(this, K, !1), T(this, W) && pause_effect(T(this, W), () => {
+    L(this, W, null);
+  }), T(this, se) && (T(this, H).before(T(this, se)), L(this, se, null)));
 };
 function flatten(r, e, t) {
   const s = is_runes() ? derived : derived_safe_equal;
@@ -1093,9 +1093,9 @@ function async_derived(r, e) {
         h !== STALE_REACTION && (i.f |= ERROR_VALUE, internal_set(i, h));
       else {
         i.f & ERROR_VALUE && (i.f ^= ERROR_VALUE), internal_set(i, _);
-        for (const [g, v] of l) {
+        for (const [g, m] of l) {
           if (l.delete(g), g === u) break;
-          v.reject(STALE_REACTION);
+          m.reject(STALE_REACTION);
         }
       }
       o && (s.update_pending_count(-1), u.decrement(d));
@@ -1394,8 +1394,8 @@ function update_reaction(r) {
         );
     return n !== null && n !== r && (read_version++, untracked_writes !== null && (s === null ? s = untracked_writes : s.push(.../** @type {Source[]} */
     untracked_writes))), r.f & ERROR_VALUE && (r.f ^= ERROR_VALUE), p;
-  } catch (v) {
-    return handle_error(v);
+  } catch (m) {
+    return handle_error(m);
   } finally {
     r.f ^= REACTION_IS_UPDATING, new_deps = e, skipped_deps = t, untracked_writes = s, active_reaction = n, skip_reaction = i, current_sources = o, set_component_context(l), untracking = c, update_version = u;
   }
@@ -1867,21 +1867,21 @@ function handle_event_propagation(r) {
           // -> the target could not have been disabled because it emits the event in the first place
           r.target === i))
             if (is_array(g)) {
-              var [v, ...w] = g;
-              v.apply(i, [r, ...w]);
+              var [m, ...w] = g;
+              m.apply(i, [r, ...w]);
             } else
               g.call(i, r);
-        } catch (m) {
-          p ? _.push(m) : p = m;
+        } catch (v) {
+          p ? _.push(v) : p = v;
         }
         if (r.cancelBubble || h === e || h === null)
           break;
         i = h;
       }
       if (p) {
-        for (let m of _)
+        for (let v of _)
           queueMicrotask(() => {
-            throw m;
+            throw v;
           });
         throw p;
       }
@@ -2059,19 +2059,19 @@ class BranchManager {
    */
   constructor(e, t = !0) {
     /** @type {TemplateNode} */
-    q(this, "anchor");
+    D(this, "anchor");
     /** @type {Map<Batch, Key>} */
-    B(this, ne, /* @__PURE__ */ new Map());
+    F(this, ne, /* @__PURE__ */ new Map());
     /** @type {Map<Key, Effect>} */
-    B(this, re, /* @__PURE__ */ new Map());
+    F(this, re, /* @__PURE__ */ new Map());
     /** @type {Map<Key, Branch>} */
-    B(this, Q, /* @__PURE__ */ new Map());
+    F(this, Q, /* @__PURE__ */ new Map());
     /**
      * Whether to pause (i.e. outro) on change, or destroy immediately.
      * This is necessary for `<svelte:element>`
      */
-    B(this, Ee, !0);
-    B(this, Se, () => {
+    F(this, Ee, !0);
+    F(this, Se, () => {
       var e = (
         /** @type {Batch} */
         current_batch
@@ -2107,7 +2107,7 @@ class BranchManager {
         }
       }
     });
-    this.anchor = e, D(this, Ee, t);
+    this.anchor = e, L(this, Ee, t);
   }
   /**
    *
@@ -2205,7 +2205,7 @@ function each(r, e, t, s, n, i = null) {
     var w = t();
     return is_array(w) ? w : w == null ? [] : array_from(w);
   }), h, g;
-  function v() {
+  function m() {
     reconcile(
       g,
       h,
@@ -2230,8 +2230,8 @@ function each(r, e, t, s, n, i = null) {
     f = w === 0;
     let y = !1;
     if (hydrating) {
-      var m = read_hydration_instruction(o) === HYDRATION_START_ELSE;
-      m !== (w === 0) && (o = skip_nodes(), set_hydrate_node(o), set_hydrating(!1), y = !0);
+      var v = read_hydration_instruction(o) === HYDRATION_START_ELSE;
+      v !== (w === 0) && (o = skip_nodes(), set_hydrate_node(o), set_hydrating(!1), y = !0);
     }
     if (hydrating) {
       for (var b = null, S, E = 0; E < w; E++) {
@@ -2241,124 +2241,124 @@ function each(r, e, t, s, n, i = null) {
           hydrate_node, y = !0, set_hydrating(!1);
           break;
         }
-        var A = h[E], $ = s(A, E);
+        var P = h[E], I = s(P, E);
         S = create_item(
           hydrate_node,
           l,
           b,
           null,
-          A,
-          $,
+          P,
+          I,
           E,
           n,
           e,
           t
-        ), l.items.set($, S), b = S;
+        ), l.items.set(I, S), b = S;
       }
       w > 0 && set_hydrate_node(skip_nodes());
     }
     if (hydrating)
       w === 0 && i && (d = branch(() => i(o)));
     else if (should_defer_append()) {
-      var x = /* @__PURE__ */ new Set(), I = (
+      var A = /* @__PURE__ */ new Set(), O = (
         /** @type {Batch} */
         current_batch
       );
       for (E = 0; E < w; E += 1) {
-        A = h[E], $ = s(A, E);
-        var R = l.items.get($) ?? p.get($);
-        R ? e & (EACH_ITEM_REACTIVE | EACH_INDEX_REACTIVE) && update_item(R, A, E, e) : (S = create_item(
+        P = h[E], I = s(P, E);
+        var R = l.items.get(I) ?? p.get(I);
+        R ? e & (EACH_ITEM_REACTIVE | EACH_INDEX_REACTIVE) && update_item(R, P, E, e) : (S = create_item(
           null,
           l,
           null,
           null,
-          A,
-          $,
+          P,
+          I,
           E,
           n,
           e,
           t,
           !0
-        ), p.set($, S)), x.add($);
+        ), p.set(I, S)), A.add(I);
       }
-      for (const [C, k] of l.items)
-        x.has(C) || I.skipped_effects.add(k.e);
-      I.add_callback(v);
+      for (const [x, k] of l.items)
+        A.has(x) || O.skipped_effects.add(k.e);
+      O.add_callback(m);
     } else
-      v();
+      m();
     y && set_hydrating(!0), get$2(_);
   }), hydrating && (o = hydrate_node);
 }
 function reconcile(r, e, t, s, n, i, o, l, c) {
-  var L, U, H, X;
-  var u = (o & EACH_IS_ANIMATED) !== 0, d = (o & (EACH_ITEM_REACTIVE | EACH_INDEX_REACTIVE)) !== 0, f = e.length, p = t.items, _ = t.first, h = _, g, v = null, w, y = [], m = [], b, S, E, A;
+  var M, U, z, X;
+  var u = (o & EACH_IS_ANIMATED) !== 0, d = (o & (EACH_ITEM_REACTIVE | EACH_INDEX_REACTIVE)) !== 0, f = e.length, p = t.items, _ = t.first, h = _, g, m = null, w, y = [], v = [], b, S, E, P;
   if (u)
-    for (A = 0; A < f; A += 1)
-      b = e[A], S = l(b, A), E = p.get(S), E !== void 0 && ((L = E.a) == null || L.measure(), (w ?? (w = /* @__PURE__ */ new Set())).add(E));
-  for (A = 0; A < f; A += 1) {
-    if (b = e[A], S = l(b, A), E = p.get(S), E === void 0) {
-      var $ = s.get(S);
-      if ($ !== void 0) {
-        s.delete(S), p.set(S, $);
-        var x = v ? v.next : h;
-        link(t, v, $), link(t, $, x), move($, x, n), v = $;
+    for (P = 0; P < f; P += 1)
+      b = e[P], S = l(b, P), E = p.get(S), E !== void 0 && ((M = E.a) == null || M.measure(), (w ?? (w = /* @__PURE__ */ new Set())).add(E));
+  for (P = 0; P < f; P += 1) {
+    if (b = e[P], S = l(b, P), E = p.get(S), E === void 0) {
+      var I = s.get(S);
+      if (I !== void 0) {
+        s.delete(S), p.set(S, I);
+        var A = m ? m.next : h;
+        link(t, m, I), link(t, I, A), move(I, A, n), m = I;
       } else {
-        var I = h ? (
+        var O = h ? (
           /** @type {TemplateNode} */
           h.e.nodes_start
         ) : n;
-        v = create_item(
-          I,
+        m = create_item(
+          O,
           t,
-          v,
-          v === null ? t.first : v.next,
+          m,
+          m === null ? t.first : m.next,
           b,
           S,
-          A,
+          P,
           i,
           o,
           c
         );
       }
-      p.set(S, v), y = [], m = [], h = v.next;
+      p.set(S, m), y = [], v = [], h = m.next;
       continue;
     }
-    if (d && update_item(E, b, A, o), E.e.f & INERT && (resume_effect(E.e), u && ((U = E.a) == null || U.unfix(), (w ?? (w = /* @__PURE__ */ new Set())).delete(E))), E !== h) {
+    if (d && update_item(E, b, P, o), E.e.f & INERT && (resume_effect(E.e), u && ((U = E.a) == null || U.unfix(), (w ?? (w = /* @__PURE__ */ new Set())).delete(E))), E !== h) {
       if (g !== void 0 && g.has(E)) {
-        if (y.length < m.length) {
-          var R = m[0], C;
-          v = R.prev;
+        if (y.length < v.length) {
+          var R = v[0], x;
+          m = R.prev;
           var k = y[0], N = y[y.length - 1];
-          for (C = 0; C < y.length; C += 1)
-            move(y[C], R, n);
-          for (C = 0; C < m.length; C += 1)
-            g.delete(m[C]);
-          link(t, k.prev, N.next), link(t, v, k), link(t, N, R), h = R, v = N, A -= 1, y = [], m = [];
+          for (x = 0; x < y.length; x += 1)
+            move(y[x], R, n);
+          for (x = 0; x < v.length; x += 1)
+            g.delete(v[x]);
+          link(t, k.prev, N.next), link(t, m, k), link(t, N, R), h = R, m = N, P -= 1, y = [], v = [];
         } else
-          g.delete(E), move(E, h, n), link(t, E.prev, E.next), link(t, E, v === null ? t.first : v.next), link(t, v, E), v = E;
+          g.delete(E), move(E, h, n), link(t, E.prev, E.next), link(t, E, m === null ? t.first : m.next), link(t, m, E), m = E;
         continue;
       }
-      for (y = [], m = []; h !== null && h.k !== S; )
-        h.e.f & INERT || (g ?? (g = /* @__PURE__ */ new Set())).add(h), m.push(h), h = h.next;
+      for (y = [], v = []; h !== null && h.k !== S; )
+        h.e.f & INERT || (g ?? (g = /* @__PURE__ */ new Set())).add(h), v.push(h), h = h.next;
       if (h === null)
         continue;
       E = h;
     }
-    y.push(E), v = E, h = E.next;
+    y.push(E), m = E, h = E.next;
   }
   if (h !== null || g !== void 0) {
-    for (var O = g === void 0 ? [] : array_from(g); h !== null; )
-      h.e.f & INERT || O.push(h), h = h.next;
-    var P = O.length;
-    if (P > 0) {
+    for (var C = g === void 0 ? [] : array_from(g); h !== null; )
+      h.e.f & INERT || C.push(h), h = h.next;
+    var $ = C.length;
+    if ($ > 0) {
       var j = o & EACH_IS_CONTROLLED && f === 0 ? n : null;
       if (u) {
-        for (A = 0; A < P; A += 1)
-          (H = O[A].a) == null || H.measure();
-        for (A = 0; A < P; A += 1)
-          (X = O[A].a) == null || X.fix();
+        for (P = 0; P < $; P += 1)
+          (z = C[P].a) == null || z.measure();
+        for (P = 0; P < $; P += 1)
+          (X = C[P].a) == null || X.fix();
       }
-      pause_effects(t, O, j);
+      pause_effects(t, C, j);
     }
   }
   u && queue_micro_task(() => {
@@ -2366,9 +2366,9 @@ function reconcile(r, e, t, s, n, i, o, l, c) {
     if (w !== void 0)
       for (E of w)
         (we = E.a) == null || we.apply();
-  }), r.first = t.first && t.first.e, r.last = v && v.e;
-  for (var M of s.values())
-    destroy_effect(M.e);
+  }), r.first = t.first && t.first.e, r.last = m && m.e;
+  for (var B of s.values())
+    destroy_effect(B.e);
   s.clear();
 }
 function update_item(r, e, t, s) {
@@ -2391,8 +2391,8 @@ function create_item(r, e, t, s, n, i, o, l, c, u, d) {
   };
   try {
     if (r === null) {
-      var v = document.createDocumentFragment();
-      v.append(r = create_text());
+      var m = document.createDocumentFragment();
+      m.append(r = create_text());
     }
     return g.e = branch(() => l(
       /** @type {Node} */
@@ -2631,9 +2631,9 @@ function transition$1(r, e, t, s) {
         dispatch_event(e, "introend"), u == null || u.abort(), u = o = void 0, e.style.overflow = c;
       });
     },
-    out(v) {
+    out(m) {
       e.inert = !0, dispatch_event(e, "outrostart"), d = animate(e, f(), u, 0, () => {
-        dispatch_event(e, "outroend"), v == null || v();
+        dispatch_event(e, "outroend"), m == null || m();
       });
     },
     stop: () => {
@@ -2665,8 +2665,8 @@ function animate(r, e, t, s, n) {
     var o, l = !1;
     return queue_micro_task(() => {
       if (!l) {
-        var v = e({ direction: i ? "in" : "out" });
-        o = animate(r, v, t, s, n);
+        var m = e({ direction: i ? "in" : "out" });
+        o = animate(r, m, t, s, n);
       }
     }), {
       abort: () => {
@@ -2693,33 +2693,33 @@ function animate(r, e, t, s, n) {
   var h = () => 1 - s, g = r.animate(p, { duration: c, fill: "forwards" });
   return g.onfinish = () => {
     g.cancel();
-    var v = (t == null ? void 0 : t.t()) ?? 1 - s;
+    var m = (t == null ? void 0 : t.t()) ?? 1 - s;
     t == null || t.abort();
-    var w = s - v, y = (
+    var w = s - m, y = (
       /** @type {number} */
       e.duration * Math.abs(w)
-    ), m = [];
+    ), v = [];
     if (y > 0) {
       var b = !1;
       if (u)
         for (var S = Math.ceil(y / 16.666666666666668), E = 0; E <= S; E += 1) {
-          var A = v + w * f(E / S), $ = css_to_keyframe(u(A, 1 - A));
-          m.push($), b || (b = $.overflow === "hidden");
+          var P = m + w * f(E / S), I = css_to_keyframe(u(P, 1 - P));
+          v.push(I), b || (b = I.overflow === "hidden");
         }
       b && (r.style.overflow = "hidden"), h = () => {
-        var x = (
+        var A = (
           /** @type {number} */
           /** @type {globalThis.Animation} */
           g.currentTime
         );
-        return v + w * f(x / y);
+        return m + w * f(A / y);
       }, d && loop$1(() => {
         if (g.playState !== "running") return !1;
-        var x = h();
-        return d(x, 1 - x), !0;
+        var A = h();
+        return d(A, 1 - A), !0;
       });
     }
-    g = r.animate(m, { duration: y, fill: "forwards" }), g.onfinish = () => {
+    g = r.animate(v, { duration: y, fill: "forwards" }), g.onfinish = () => {
       h = () => s, d == null || d(s, 1 - s), n();
     };
   }, {
@@ -2955,7 +2955,7 @@ function spread_props(...r) {
   return new Proxy({ props: r }, spread_props_handler);
 }
 function prop(r, e, t, s) {
-  var m;
+  var v;
   var n = !legacy_mode_flag || (t & PROPS_IS_RUNES) !== 0, i = (t & PROPS_IS_BINDABLE) !== 0, o = (t & PROPS_IS_LAZY_INITIAL) !== 0, l = (
     /** @type {V} */
     s
@@ -2968,7 +2968,7 @@ function prop(r, e, t, s) {
   )), l), d;
   if (i) {
     var f = STATE_SYMBOL in r || LEGACY_PROPS in r;
-    d = ((m = get_descriptor(r, e)) == null ? void 0 : m.set) ?? (f && e in r ? (b) => r[e] = b : void 0);
+    d = ((v = get_descriptor(r, e)) == null ? void 0 : v.set) ?? (f && e in r ? (b) => r[e] = b : void 0);
   }
   var p, _ = !1;
   i ? [p, _] = capture_store_binding(() => (
@@ -3001,7 +3001,7 @@ function prop(r, e, t, s) {
       }
     );
   }
-  var v = !1, w = (t & PROPS_IS_IMMUTABLE ? derived : derived_safe_equal)(() => (v = !1, h()));
+  var m = !1, w = (t & PROPS_IS_IMMUTABLE ? derived : derived_safe_equal)(() => (m = !1, h()));
   i && get$2(w);
   var y = (
     /** @type {Effect} */
@@ -3012,9 +3012,9 @@ function prop(r, e, t, s) {
     function(b, S) {
       if (arguments.length > 0) {
         const E = S ? get$2(w) : n && i ? proxy(b) : b;
-        return set(w, E), v = !0, l !== void 0 && (l = E), b;
+        return set(w, E), m = !0, l !== void 0 && (l = E), b;
       }
-      return is_destroying_effect && v || y.f & DESTROYED ? w.v : get$2(w);
+      return is_destroying_effect && m || y.f & DESTROYED ? w.v : get$2(w);
     }
   );
 }
@@ -3030,9 +3030,9 @@ class Svelte4Component {
    */
   constructor(e) {
     /** @type {any} */
-    B(this, ie);
+    F(this, ie);
     /** @type {Record<string, any>} */
-    B(this, J);
+    F(this, J);
     var i;
     var t = /* @__PURE__ */ new Map(), s = (o, l) => {
       var c = /* @__PURE__ */ mutable_source(l, !1, !1);
@@ -3052,14 +3052,14 @@ class Svelte4Component {
         }
       }
     );
-    D(this, J, (e.hydrate ? hydrate : mount)(e.component, {
+    L(this, J, (e.hydrate ? hydrate : mount)(e.component, {
       target: e.target,
       anchor: e.anchor,
       props: n,
       context: e.context,
       intro: e.intro ?? !1,
       recover: e.recover
-    })), (!((i = e == null ? void 0 : e.props) != null && i.$$host) || e.sync === !1) && flushSync(), D(this, ie, n.$$events);
+    })), (!((i = e == null ? void 0 : e.props) != null && i.$$host) || e.sync === !1) && flushSync(), L(this, ie, n.$$events);
     for (const o of Object.keys(T(this, J)))
       o === "$set" || o === "$destroy" || o === "$on" || define_property(this, o, {
         get() {
@@ -3112,25 +3112,25 @@ typeof HTMLElement == "function" && (SvelteElement = class extends HTMLElement {
   constructor(e, t, s) {
     super();
     /** The Svelte component constructor */
-    q(this, "$$ctor");
+    D(this, "$$ctor");
     /** Slots */
-    q(this, "$$s");
+    D(this, "$$s");
     /** @type {any} The Svelte component instance */
-    q(this, "$$c");
+    D(this, "$$c");
     /** Whether or not the custom element is connected */
-    q(this, "$$cn", !1);
+    D(this, "$$cn", !1);
     /** @type {Record<string, any>} Component props data */
-    q(this, "$$d", {});
+    D(this, "$$d", {});
     /** `true` if currently in the process of reflecting component props back to attributes */
-    q(this, "$$r", !1);
+    D(this, "$$r", !1);
     /** @type {Record<string, CustomElementPropDefinition>} Props definition (name, reflected, type etc) */
-    q(this, "$$p_d", {});
+    D(this, "$$p_d", {});
     /** @type {Record<string, EventListenerOrEventListenerObject[]>} Event listeners */
-    q(this, "$$l", {});
+    D(this, "$$l", {});
     /** @type {Map<EventListenerOrEventListenerObject, Function>} Event listener unsubscribe functions */
-    q(this, "$$l_u", /* @__PURE__ */ new Map());
+    D(this, "$$l_u", /* @__PURE__ */ new Map());
     /** @type {any} The managed render effect for reflecting attributes */
-    q(this, "$$me");
+    D(this, "$$me");
     this.$$ctor = e, this.$$s = t, s && this.attachShadow({ mode: "open" });
   }
   /**
@@ -3452,8 +3452,756 @@ const persistentWritable = (r, e) => {
   window.rivets.bind(e, t), document.addEventListener("cart:fix-1-applied", () => {
     t.updateTotals();
   }), t.updateTotals();
+};
+var Page = /* @__PURE__ */ ((r) => (r.PDP = "pdp", r))(Page || {});
+const isPage = (r) => {
+  switch (r) {
+    case "pdp":
+      return window.location.pathname.includes("/products/");
+    default:
+      return !1;
+  }
+}, BUY_BUTTONS_CONFIG = {
+  selectors: {
+    priceValue: ".price-ui--value",
+    ctaPrice: ".pdp-cta-price",
+    preorderButton: ".gPreorderBtnLoaded",
+    productForm: "product-form",
+    productFormSubmit: ".product-form__submit",
+    footer: ".pdp-cta-footer--content",
+    disclaimer: ".pdp-disclaimer",
+    paymentOptions: ".gPreorderTopMessageParent",
+    productPriceElement: ".pdp-price-container product-price"
+  },
+  retry: {
+    maxAttempts: 10,
+    interval: 100,
+    maxFooterRetries: 5,
+    footerInterval: 200
+  },
+  breakpoints: {
+    mobile: 767
+  }
+};
+class PriceObserver {
+  constructor() {
+    D(this, "subscribers", /* @__PURE__ */ new Set());
+    D(this, "currentPrice", null);
+    D(this, "observer", null);
+    D(this, "priceElement", null);
+    D(this, "retryCount", 0);
+  }
+  /**
+   * Subscribe to price changes
+   * @param callback Function to call when price changes
+   * @returns Unsubscribe function
+   */
+  subscribe(e) {
+    return this.subscribers.add(e), this.currentPrice !== null && e(this.currentPrice), () => this.subscribers.delete(e);
+  }
+  /**
+   * Notify all subscribers of price changes
+   */
+  notifySubscribers(e) {
+    e !== this.currentPrice && (this.currentPrice = e, this.subscribers.forEach((t) => {
+      try {
+        t(e);
+      } catch (s) {
+        console.error("Price observer subscriber error:", s);
+      }
+    }));
+  }
+  /**
+   * Get current price synchronously
+   */
+  getCurrentPrice() {
+    return this.currentPrice;
+  }
+  /**
+   * Get price with retry logic (backward compatibility)
+   */
+  async getPrice(e = 0) {
+    const t = document.querySelector(
+      BUY_BUTTONS_CONFIG.selectors.priceValue
+    );
+    if (!t && e <= BUY_BUTTONS_CONFIG.retry.maxAttempts)
+      return await new Promise(
+        (n) => setTimeout(n, BUY_BUTTONS_CONFIG.retry.interval)
+      ), this.getPrice(e + 1);
+    if (!t)
+      return console.error("Could not find price element"), null;
+    const s = t.innerText.trim();
+    return this.notifySubscribers(s), s;
+  }
+  /**
+   * Start observing price element changes
+   */
+  startObserving() {
+    this.observer && this.observer.disconnect(), this.findAndObservePriceElement(), this.priceElement || this.retryObserving();
+  }
+  /**
+   * Find price element and set up observer
+   */
+  findAndObservePriceElement() {
+    if (this.priceElement = document.querySelector(
+      BUY_BUTTONS_CONFIG.selectors.priceValue
+    ), this.priceElement) {
+      this.observer = new MutationObserver((t) => {
+        t.forEach((s) => {
+          var n;
+          if (s.type === "childList" || s.type === "characterData") {
+            const i = (n = this.priceElement) == null ? void 0 : n.innerText.trim();
+            i && i !== this.currentPrice && this.notifySubscribers(i);
+          }
+        });
+      }), this.observer.observe(this.priceElement, {
+        childList: !0,
+        subtree: !0,
+        characterData: !0
+      });
+      const e = this.priceElement.innerText.trim();
+      e && this.notifySubscribers(e);
+    }
+  }
+  /**
+   * Retry mechanism for finding price element
+   */
+  retryObserving() {
+    this.retryCount < BUY_BUTTONS_CONFIG.retry.maxAttempts ? (this.retryCount++, setTimeout(() => {
+      this.findAndObservePriceElement(), this.priceElement || this.retryObserving();
+    }, BUY_BUTTONS_CONFIG.retry.interval)) : console.warn("Price observer: Could not find price element after max retries");
+  }
+  /**
+   * Stop observing
+   */
+  stopObserving() {
+    this.observer && (this.observer.disconnect(), this.observer = null), this.priceElement = null, this.retryCount = 0;
+  }
+  /**
+   * Clean up all resources
+   */
+  destroy() {
+    this.stopObserving(), this.subscribers.clear(), this.currentPrice = null;
+  }
+}
+class CTAUpdater {
+  constructor() {
+    D(this, "isPriceReady", !1);
+    D(this, "isPreorder", !1);
+    D(this, "price");
+  }
+  /**
+   * Set the price and trigger update
+   */
+  setPrice(e) {
+    this.price = e, this.isPriceReady = !0, this.update();
+  }
+  /**
+   * Set preorder state and trigger update
+   */
+  setIsPreorder(e) {
+    this.isPreorder = e, this.update();
+  }
+  /**
+   * Add price to regular buy button
+   */
+  addPriceToBuyButton() {
+    document.querySelectorAll(
+      BUY_BUTTONS_CONFIG.selectors.ctaPrice
+    ).forEach((t) => {
+      t.innerHTML = ` for ${this.price}`;
+    });
+  }
+  /**
+   * Add price to preorder button (handles Globo integration)
+   */
+  addPriceToPreorderButton(e = null) {
+    if (!e) {
+      const s = document.querySelector(
+        BUY_BUTTONS_CONFIG.selectors.footer
+      ), n = document.querySelector(
+        ".product-form__buttons"
+      );
+      this.addPriceToPreorderButton(s), this.addPriceToPreorderButton(n);
+      return;
+    }
+    if (!e) return;
+    const t = e.querySelectorAll(
+      `${BUY_BUTTONS_CONFIG.selectors.preorderButton}:not(.hidden)`
+    );
+    if (t.length === 0) {
+      setTimeout(() => {
+        this.addPriceToPreorderButton(e);
+      }, 50);
+      return;
+    }
+    t.forEach((s) => {
+      var o, l;
+      const n = s.cloneNode(!0);
+      s.classList.add("hidden");
+      const i = (o = s.parentElement) == null ? void 0 : o.querySelectorAll(
+        `${BUY_BUTTONS_CONFIG.selectors.preorderButton}:not(.hidden)`
+      );
+      i && i.length > 1 || (n.innerHTML = `Pre Order for ${this.price}`, (l = s.parentElement) == null || l.appendChild(n));
+    });
+  }
+  /**
+   * Update CTA buttons based on current state
+   */
+  update() {
+    !this.isPriceReady || !this.price || (this.isPreorder ? this.addPriceToPreorderButton() : this.addPriceToBuyButton());
+  }
+}
+class ResponsiveLayoutManager {
+  constructor(e = BUY_BUTTONS_CONFIG.selectors.productForm) {
+    D(this, "productForm", null);
+    D(this, "boundHandleResize");
+    this.productForm = document.querySelector(e), this.boundHandleResize = this.handleResize.bind(this);
+  }
+  /**
+   * Initialize responsive layout handling
+   */
+  init() {
+    this.handleResize(), window.addEventListener("resize", this.boundHandleResize);
+  }
+  /**
+   * Handle window resize events
+   */
+  handleResize() {
+    window.innerWidth <= BUY_BUTTONS_CONFIG.breakpoints.mobile ? this.transformForMobile() : this.transformForDesktop();
+  }
+  /**
+   * Transform layout for mobile view
+   * Hides buttons in sidebar (they're shown in footer instead)
+   */
+  transformForMobile() {
+    if (!this.productForm) return;
+    this.productForm.querySelectorAll(
+      BUY_BUTTONS_CONFIG.selectors.productFormSubmit
+    ).forEach((s) => s.style.display = "none");
+    const t = this.productForm.querySelector(
+      BUY_BUTTONS_CONFIG.selectors.disclaimer
+    );
+    t && (t.style.display = "none");
+  }
+  /**
+   * Transform layout for desktop view
+   * Shows buttons in sidebar
+   */
+  transformForDesktop() {
+    if (!this.productForm) return;
+    this.productForm.querySelectorAll(
+      BUY_BUTTONS_CONFIG.selectors.productFormSubmit
+    ).forEach((s) => s.style.display = "");
+    const t = this.productForm.querySelector(
+      BUY_BUTTONS_CONFIG.selectors.disclaimer
+    );
+    t && (t.style.display = "");
+  }
+  /**
+   * Clean up event listeners
+   */
+  destroy() {
+    window.removeEventListener("resize", this.boundHandleResize);
+  }
+}
+class FooterCTAManager {
+  constructor() {
+    D(this, "productForm", null);
+    D(this, "footer", null);
+    this.productForm = document.querySelector(BUY_BUTTONS_CONFIG.selectors.productForm), this.footer = document.querySelector(BUY_BUTTONS_CONFIG.selectors.footer);
+  }
+  /**
+   * Move CTA to footer (for mobile sticky footer)
+   */
+  async moveCtaToFooter() {
+    if (!this.productForm || !this.footer) return;
+    let e = this.productForm.cloneNode(!0);
+    e = await this.cleanFooter(e), this.footer.prepend(e);
+  }
+  /**
+   * Clean footer content by removing payment options
+   * (Globo adds these dynamically, we need to wait for them)
+   */
+  async cleanFooter(e, t = 0) {
+    var n;
+    const s = e.querySelector(
+      BUY_BUTTONS_CONFIG.selectors.paymentOptions
+    );
+    return s ? ((n = s.parentElement) == null || n.removeChild(s), e) : t >= BUY_BUTTONS_CONFIG.retry.maxFooterRetries ? e : (await new Promise(
+      (i) => setTimeout(i, BUY_BUTTONS_CONFIG.retry.footerInterval)
+    ), this.cleanFooter(e, t + 1));
+  }
+}
+const frontendLogger = {
+  debug: (...r) => {
+    console.log("[UI]", ...r);
+  }
+};
+class PaymentOptionManager {
+  constructor() {
+    D(this, "debug", !1);
+    D(this, "sellingPlanOptionsSelector", ".gPreorderSellingPlanOptions");
+    D(this, "sellingPlanParentSelector", ".gPreorderSellingPlanParent");
+    D(this, "observerContainerSelector", ".product__info-container");
+    D(this, "observer", null);
+  }
+  /**
+   * Initialize the payment option manager
+   * Sets up observer on product info container for dynamic content changes
+   */
+  init() {
+    this.setupObserver(), this.debug && frontendLogger.debug("PaymentOptionManager initialized");
+  }
+  /**
+   * Check if selling plan parent should be hidden based on child count
+   * Hides parent if only one child exists
+   */
+  checkAndHideParent() {
+    const e = document.querySelector(this.sellingPlanOptionsSelector);
+    if (!e)
+      return;
+    if (e.children.length === 1) {
+      const s = document.querySelector(this.sellingPlanParentSelector);
+      s && (this.debug && frontendLogger.debug("Only one selling plan option found, hiding parent"), s.style.display = "none", this.stopObserving());
+    }
+  }
+  /**
+   * Setup observer on product info container to handle dynamic content loading
+   * Reacts when selling plan options are added to the DOM
+   */
+  setupObserver() {
+    const e = document.querySelector(this.observerContainerSelector);
+    if (!e) {
+      this.debug && frontendLogger.debug("Product info container not found", this.observerContainerSelector);
+      return;
+    }
+    this.observer = new MutationObserver(() => {
+      this.checkAndHideParent();
+    }), this.observer.observe(e, {
+      childList: !0,
+      subtree: !0,
+      attributes: !0
+    }), this.debug && frontendLogger.debug("PaymentOptionManager observer started on", this.observerContainerSelector);
+  }
+  /**
+   * Stop observing for mutations
+   */
+  stopObserving() {
+    this.observer && (this.observer.disconnect(), this.observer = null, this.debug && frontendLogger.debug("PaymentOptionManager observer stopped"));
+  }
+  /**
+   * Clean up observer
+   */
+  destroy() {
+    this.stopObserving();
+  }
+}
+class BuyButtonsManager {
+  constructor() {
+    D(this, "priceObserver");
+    D(this, "ctaUpdater");
+    D(this, "responsiveLayout");
+    D(this, "footerManager");
+    D(this, "paymentOptionManager");
+    this.priceObserver = new PriceObserver(), this.ctaUpdater = new CTAUpdater(), this.responsiveLayout = new ResponsiveLayoutManager(), this.footerManager = new FooterCTAManager(), this.paymentOptionManager = new PaymentOptionManager();
+  }
+  /**
+   * Initialize all buy button functionality
+   */
+  init() {
+    this.priceObserver.subscribe((e) => {
+      this.ctaUpdater.setPrice(e);
+    }), this.priceObserver.startObserving(), document.addEventListener("globo.preorder.show.preorder", () => {
+      this.ctaUpdater.setIsPreorder(!0), this.paymentOptionManager.init();
+    }), this.setupPriceInitializationListener(), this.footerManager.moveCtaToFooter(), this.responsiveLayout.init();
+  }
+  /**
+   * Listen for price initialization from product-price web component
+   */
+  setupPriceInitializationListener() {
+    const e = document.querySelector(
+      BUY_BUTTONS_CONFIG.selectors.productPriceElement
+    );
+    e && e.addEventListener("shouldShowPriceChanged", (t) => {
+      var i;
+      ((i = t.detail) == null ? void 0 : i.shouldShowPrice) && this.ctaUpdater.update();
+    });
+  }
+  /**
+   * Clean up all resources
+   */
+  destroy() {
+    this.priceObserver.destroy(), this.responsiveLayout.destroy(), this.paymentOptionManager.destroy();
+  }
+}
+const loadStyles = (r, e = {}) => {
+  if (typeof document > "u" || e.id && document.getElementById(e.id))
+    return;
+  const t = document.createElement("style");
+  e.id && (t.id = e.id, t.setAttribute("data-source", e.id)), t.textContent = r, e.prepend && document.head.firstChild ? document.head.insertBefore(t, document.head.firstChild) : document.body.insertBefore(t, document.body.firstChild);
+}, buyButtonsStyles = `/* ========================================
+   BUY BUTTONS - Native Styles Only
+   Non-third-party component styles
+   ======================================== */
+
+.product-form {
+    pointer-events: all;
+}
+
+.pdp-disclaimer {
+    width: 100%;
+    text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+    .pdp-disclaimer {
+        margin-top: -8px;
+    }
+}
+
+product-price .skeleton > div {
+    height: 30px;
+    width: 150px;
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+product-price .skeleton {
+    display: none;    
+    height: 50px;
+    padding: 10px 0;
+}
+
+.button:disabled, .button[aria-disabled=true], .button.disabled, .customer button:disabled, .customer button[aria-disabled=true], .customer button.disabled {
+    opacity: .2!important;
+    display: none;
+}
+
+.product-form__submit {
+    height: 56px;
+    width: 100%;
+    font-family: Monument, sans-serif;
+    font-weight: 500;
+    font-style: Light;
+    font-size: 24px;
+    leading-trim: NONE;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.product-form__buttons button {
+    background: rgba(1, 136, 73, 1)!important;
+    border: 1px solid rgba(1, 136, 73, 1)!important;
+}
+
+.button--primary:hover {
+    background: rgba(1, 136, 73, 1)!important;
+    border: 1px solid rgba(1, 136, 73, 1)!important;
+    opacity: .8;
+}
+
+`, buyButtonsGloboStyles = `/* ========================================
+   BUY BUTTONS - Globo Third-Party Styles
+   Customizations for Globo library components
+   ======================================== */
+
+/* ========================================
+   Globo Back-in-Stock Button
+   ======================================== */
+
+@media screen and (max-width: 767px) {
+    .gBackInStock-Button {
+        display: none!important;
+    }
+
+    .pdp-cta-footer .gBackInStock-Button {
+        display: block!important;
+    }
+
+    .singleProductPreOrderForm.preorderLoaded .product-form__buttons:has(~ #Globo-Back-In-Stock) {
+        display: none;
+    }
+
+    #Globo-Back-In-Stock {
+        margin: 0 0 8px;
+    }
+}
+
+.gBackInStockBtn {
+    background: rgba(171, 54, 58, 1)!important;
+    border: 1px solid rgba(171, 54, 58, 1)!important;
+    color: white!important;
+    border: 1px solid rgba(171, 182, 208, 1)!important;
+    font-family: Monument, sans-serif!important;
+    font-size: 20px!important;
+    transition: opacity .3s ease;
+}
+
+.gBackInStockBtn:hover {
+    background: rgba(171, 54, 58, 1)!important;
+    color: white!important;
+    border: 1px solid rgba(171, 54, 58, 1)!important;
+    opacity: .8;
+}
+
+@media screen and (max-width: 767px) {
+    .gBackInStockBtn {
+        font-size: 14px!important;
+    }
+
+    .gBackInStock-Button .gBackInStockBtn {
+        font-family: "Monument", sans-serif !important;
+        background: rgba(171, 54, 58, 1) !important;
+        color: white !important;
+        border: 1px solid rgba(171, 54, 58, 1) !important;
+    }
+}
+
+/* ========================================
+   Globo Notify Me Popup
+   ======================================== */
+
+.Globo-form .Globo-form-subscribe .Globo-form-header .Globo-header-background,
+.Globo-form .Globo-form-subscribe .Globo-form-header .Globo-header-img-left,
+.Globo-form .Globo-form-subscribe .Globo-form-header .Globo-header-img-right {
+    display: none!important;
+}
+
+.Globo-form .Globo-form-subscribe .Globo-form-header {
+    transform: translateY(150%);
+    height: 22px;
+}
+
+.Globo-form .Globo-form-subscribe .Globo-form-body {
+    border-radius: 10px;
+}
+
+.Globo-form-body,
+.Globo-form .Globo-form-subscribe .Globo-form-body .Globo-body-header p {
+    font-family: "Monument", sans-serif!important;
+}
+
+.Globo-form .Globo-form-subscribe .Globo-form-body .Globo-body-content .Globo-content-product .Globo-product-infor .Globo-product-title,
+.Globo-form .Globo-form-subscribe .Globo-form-body .Globo-body-content .Globo-content-product .Globo-product-infor .Globo-product-price,
+.Globo-form .Globo-form-subscribe .Globo-form-body .Globo-body-footer p {
+    font-family: "Monument Regular", sans-serif!important;
+    color: black;
+}
+
+.Globo-form-popup {
+    padding: 0 6px;
+}
+
+/* ========================================
+   Globo Preorder Button
+   ======================================== */
+
+.gPreorderBtn,
+.Globo-form .Globo-form-subscribe .Globo-form-body .Globo-body-content .Globo-content-form button {
+    pointer-events: all!important;
+    background: rgba(1, 136, 73, 1)!important;
+    border: 1px solid rgba(1, 136, 73, 1)!important;
+    font-family: Monument, sans-serif;
+    font-weight: 500;
+    font-style: Light;
+    font-size: 24px;
+    leading-trim: NONE;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 767px) {
+    .gPreorderBtn {
+        font-size: 24px;
+    }
+}
+
+.gPreorderWarning,
+.gPreorderBottomMessage,
+.gPreorderTopMessage {
+    display: none;
+}
+
+/* ========================================
+   Globo Preorder Selling Plan Options
+   ======================================== */
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanNameWrapper p {
+    font-family: "Monument", sans-serif;
+    font-size: 18px!important;
+}
+
+@media screen and (max-width: 767px) {
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanNameWrapper p {
+        font-size: 14px!important;
+    }
+}
+
+.gPreorderSellingPlanValue span,
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue .gPreorderPartialPaymentPrice {
+    font-family: "Monument", sans-serif;
+    font-size: 14px!important;
+    letter-spacing: -0.15px;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanDescription {
+    font-family: "Monument Regular", sans-serif;
+    font-size: 14px!important;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 100;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue {
+    border: 1px solid rgba(0,0,0,.05)!important;
+    padding: 0!important;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue .gPreorderPartialPaymentPrice {
+    border: none!important;
+    border-radius: 0;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions {
+    display: flex!important;
+    flex-direction: column;
+    gap: 8px;
+    color: black;
+    padding: 0!important;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue label {
+    flex-wrap: nowrap!important;
+    gap: 0;
+    width: 100%;
+}
+
+.gPreorderSellingPlanWrapper {
+    margin: 24px 0 !important;
+}
+
+@media screen and (max-width: 767px) {
+    .gPreorderSellingPlanWrapper {
+        margin: 8px 0 !important;
+    }
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue label span {
+    cursor: pointer;
+    transition: background-color .2s ease;
+    display: block;
+    margin-left: 0;
+    width: 100%;
+    padding-top: 12px!important;
+    padding-bottom: 12px!important;
+    position: relative;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue label:hover input:not(:checked)~span {
+    background: rgba(0,0,0,.03)!important;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue input {
+    display: none!important;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue input:checked~span {
+    background: rgba(0,0,0,.1)!important;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue input:checked~span:last-child:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    transform: translateY(-50%) rotate(45deg);
+    margin-top: -1px;
+    width: 6px;
+    height: 12px;
+    border: 2px solid #018849;
+    border-top: none;
+    border-left: none;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(4) {
+    width: 100%;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:first-child,
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(2) {
+    padding-left: 24px!important;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:last-child {
+    padding-right: 24px!important;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span.gPreorderSellingPlanOptionName {
+    padding-right: 12px!important;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span.gPreorderPartialPaymentPrice {
+    padding-left: 12px!important;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(0):not(:last-child),
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(1):not(:last-child),
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(2):not(:last-child),
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(3):not(:last-child) {
+    width: min-content;
+    white-space: nowrap;
+}
+
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup {
+    border: none;
+}
+
+@media screen and (max-width: 768px) {
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanNameWrapper p {
+        font-size: 14px!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanDescription {
+        font-size: 12px!important;
+    }
+
+    .gPreorderSellingPlanValue span,
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue .gPreorderPartialPaymentPrice {
+        font-size: 12px!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue label span {
+        padding-top: 8px!important;
+        padding-bottom: 8px!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:first-child,
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:nth-child(2) {
+        padding-left: 8px!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span:last-child {
+        padding-right: 8px!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span.gPreorderSellingPlanOptionName {
+        padding-right: 4px!important;
+    }
+
+    .gPreorderSellingPlanWrapper .gPreorderSellingPlanGroup .gPreorderSellingPlanOptions .gPreorderSellingPlanValue span.gPreorderPartialPaymentPrice {
+        padding-left: 4px!important;
+    }
+}
+`, buyButtonsInitialize = () => {
+  console.log("dump", "buyButtonsInitialize"), loadStyles(buyButtonsStyles, { id: "buy-buttons-styles" }), loadStyles(buyButtonsGloboStyles, { id: "buy-buttons-globo-styles" });
+  const r = new BuyButtonsManager();
+  r.init(), window.BuyButtonsManager = r;
 }, mainFooter = () => {
-  createCartDrawerFooterRivet();
+  createCartDrawerFooterRivet(), isPage(Page.PDP) && buyButtonsInitialize();
 }, isIosSafari = () => {
   if (typeof window > "u" || !window.navigator)
     return !1;
@@ -3503,10 +4251,10 @@ const persistentWritable = (r, e) => {
 }, PUBLIC_NEXUS_BASE_URL = "https://shopify-nexus.tko.rudgalvis.com";
 class NexusApi {
   constructor() {
-    q(this, "BASE_URL", PUBLIC_NEXUS_BASE_URL);
-    q(this, "API_VERSION_PATH", "api");
-    q(this, "NGROK_SKIP_HEADER", {});
-    q(this, "API_ROUTES", {
+    D(this, "BASE_URL", PUBLIC_NEXUS_BASE_URL);
+    D(this, "API_VERSION_PATH", "api");
+    D(this, "NGROK_SKIP_HEADER", {});
+    D(this, "API_ROUTES", {
       GET_VARIANT_AUTOMATIC_DISCOUNT: (e, t) => `automatic-discount/${e}/${t}`,
       GET_PRODUCT_AUTOMATIC_DISCOUNT: (e, t) => `automatic-discount/product/${e}/${t}`,
       GET_CURRENCY_RATES: (e) => `currency-rates/${e}`,
@@ -3679,8 +4427,8 @@ const getCookie = (r, e = null) => {
     console.error(s);
   }
 }, PUBLIC_VERSION = "5";
-var Le;
-typeof window < "u" && ((Le = window.__svelte ?? (window.__svelte = {})).v ?? (Le.v = /* @__PURE__ */ new Set())).add(PUBLIC_VERSION);
+var De;
+typeof window < "u" && ((De = window.__svelte ?? (window.__svelte = {})).v ?? (De.v = /* @__PURE__ */ new Set())).add(PUBLIC_VERSION);
 enable_legacy_mode_flag();
 var root_1$c = /* @__PURE__ */ from_html('<s class="price-ui--value svelte-sl8aa8"> </s>'), root$j = /* @__PURE__ */ from_html('<div class="price-ui svelte-sl8aa8"><!> <p> </p></div>');
 const $$css$l = {
@@ -3865,8 +4613,8 @@ function CollectionItemPrice(r, e) {
   }, o = root$h(), l = child(o);
   {
     var c = (h) => {
-      var g = root_1$a(), v = child(g, !0);
-      reset(g), template_effect(() => set_text(v, s())), append(h, g);
+      var g = root_1$a(), m = child(g, !0);
+      reset(g), template_effect(() => set_text(m, s())), append(h, g);
     };
     if_block(l, (h) => {
       s() && h(c);
@@ -3879,8 +4627,8 @@ function CollectionItemPrice(r, e) {
   var p = sibling(u, 2);
   {
     var _ = (h) => {
-      var g = root_2$4(), v = child(g), w = child(v);
-      reset(v), reset(g), template_effect(() => set_text(w, `-${get$2(n) ?? ""}% off`)), append(h, g);
+      var g = root_2$4(), m = child(g), w = child(m);
+      reset(m), reset(g), template_effect(() => set_text(w, `-${get$2(n) ?? ""}% off`)), append(h, g);
     };
     if_block(p, (h) => {
       get$2(n) && h(_);
@@ -3933,8 +4681,8 @@ function ProductDetailsPagePrice(r, e) {
   var d = sibling(l, 2);
   {
     var f = (h) => {
-      var g = root_1$9(), v = child(g, !0);
-      reset(g), template_effect(() => set_text(v, s())), append(h, g);
+      var g = root_1$9(), m = child(g, !0);
+      reset(g), template_effect(() => set_text(m, s())), append(h, g);
     };
     if_block(d, (h) => {
       s() && h(f);
@@ -3943,8 +4691,8 @@ function ProductDetailsPagePrice(r, e) {
   var p = sibling(d, 2);
   {
     var _ = (h) => {
-      var g = root_2$3(), v = child(g), w = child(v);
-      reset(v), reset(g), template_effect(() => set_text(w, `-${get$2(n) ?? ""}% off`)), append(h, g);
+      var g = root_2$3(), m = child(g), w = child(m);
+      reset(m), reset(g), template_effect(() => set_text(w, `-${get$2(n) ?? ""}% off`)), append(h, g);
     };
     if_block(p, (h) => {
       get$2(n) && h(_);
@@ -3982,20 +4730,20 @@ var root$f = /* @__PURE__ */ from_html("<div><!></div>");
 function ProductPrice(r, e) {
   push(e, !0);
   const t = () => store_get(displayCurrency, "$displayCurrency", i), s = () => store_get(currencyRates, "$currencyRates", i), n = () => store_get(marketCurrency, "$marketCurrency", i), [i, o] = setup_stores(), l = prop(e, "price", 7), c = prop(e, "compared_at", 7), u = prop(e, "iso_code", 7), d = prop(e, "variant_id", 7), f = prop(e, "product_id", 7), p = prop(e, "type", 7, "ProductDetailsPagePrice"), _ = prop(e, "isPriceReady", 15, !1), h = prop(e, "DEV_currency", 7), g = prop(e, "DEV_market", 7);
-  let v = /* @__PURE__ */ state(!1);
-  const w = new NexusApi(), y = { price: "-1", comparedAt: void 0 }, m = /* @__PURE__ */ user_derived(() => normalizePrice(l(), c())), b = /* @__PURE__ */ state(proxy(y)), S = /* @__PURE__ */ state(proxy(y));
+  let m = /* @__PURE__ */ state(!1);
+  const w = new NexusApi(), y = { price: "-1", comparedAt: void 0 }, v = /* @__PURE__ */ user_derived(() => normalizePrice(l(), c())), b = /* @__PURE__ */ state(proxy(y)), S = /* @__PURE__ */ state(proxy(y));
   user_effect(() => {
-    if (get$2(b).price = get$2(m).price, get$2(b).comparedAt = get$2(m).comparedAt, !!u() && !(!d() && !f()) && get$2(m).price && !get$2(m).comparedAt)
+    if (get$2(b).price = get$2(v).price, get$2(b).comparedAt = get$2(v).comparedAt, !!u() && !(!d() && !f()) && get$2(v).price && !get$2(v).comparedAt)
       try {
-        E({ ...get$2(m) }).then(({ price: O, comparedAt: P }) => {
-          get$2(b).price = O, get$2(b).comparedAt = P;
+        E({ ...get$2(v) }).then(({ price: C, comparedAt: $ }) => {
+          get$2(b).price = C, get$2(b).comparedAt = $;
         });
-      } catch (O) {
-        console.error(O);
+      } catch (C) {
+        console.error(C);
       }
   }), user_effect(() => {
     if (!t() || !s()) return;
-    const O = new Intl.NumberFormat(void 0, {
+    const C = new Intl.NumberFormat(void 0, {
       style: "currency",
       currency: t(),
       // 'EUR', 'USD', etc.
@@ -4003,33 +4751,33 @@ function ProductPrice(r, e) {
       currencyDisplay: "narrowSymbol",
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
-    }), { value: P } = parseCurrencyString(get$2(b).price);
-    if (get$2(S).price = O.format(P), get$2(b).comparedAt) {
-      const { value: M } = parseCurrencyString(get$2(b).comparedAt);
-      get$2(S).comparedAt = O.format(M);
+    }), { value: $ } = parseCurrencyString(get$2(b).price);
+    if (get$2(S).price = C.format($), get$2(b).comparedAt) {
+      const { value: B } = parseCurrencyString(get$2(b).comparedAt);
+      get$2(S).comparedAt = C.format(B);
     } else
       get$2(S).comparedAt = void 0;
     if (n() === t()) return;
     const j = s()[t()];
-    if (get$2(S).price = O.format(Math.round(P * j)), get$2(b).comparedAt) {
-      const { value: M } = parseCurrencyString(get$2(b).comparedAt);
-      get$2(S).comparedAt = O.format(Math.round(M * j));
+    if (get$2(S).price = C.format(Math.round($ * j)), get$2(b).comparedAt) {
+      const { value: B } = parseCurrencyString(get$2(b).comparedAt);
+      get$2(S).comparedAt = C.format(Math.round(B * j));
     } else
       get$2(S).comparedAt = void 0;
   });
-  const E = async ({ price: O }) => {
+  const E = async ({ price: C }) => {
     if (!u()) throw new Error("Market is required");
     if (!d() && !f()) throw new Error("Either variant or product id is required is required");
-    set(v, !0);
-    const P = w.getVariantAutomaticDiscount.bind(w), j = w.getProductAutomaticDiscount.bind(w), M = d() ? () => P(u(), +d()) : () => j(u(), +f()), { amount: L } = await M();
-    if (set(v, !1), !L || L === 0) return { price: O, comparedAt: void 0 };
-    const { formatted: U } = subtractFromPriceWithSymbol(O, L);
-    return { price: U, comparedAt: O };
+    set(m, !0);
+    const $ = w.getVariantAutomaticDiscount.bind(w), j = w.getProductAutomaticDiscount.bind(w), B = d() ? () => $(u(), +d()) : () => j(u(), +f()), { amount: M } = await B();
+    if (set(m, !1), !M || M === 0) return { price: C, comparedAt: void 0 };
+    const { formatted: U } = subtractFromPriceWithSymbol(C, M);
+    return { price: U, comparedAt: C };
   };
   user_effect(() => {
     h() && displayCurrency.set(h()), g() && marketCurrency.set(g());
   });
-  const A = /* @__PURE__ */ user_derived(() => {
+  const P = /* @__PURE__ */ user_derived(() => {
     switch (p()) {
       case "CartItemPrice":
         return CartItemPrice;
@@ -4044,83 +4792,83 @@ function ProductPrice(r, e) {
       default:
         return ProductDetailsPagePrice;
     }
-  }), $ = /* @__PURE__ */ user_derived(() => n() && get$2(S).price !== "-1" && !get$2(v));
-  let x;
+  }), I = /* @__PURE__ */ user_derived(() => n() && get$2(S).price !== "-1" && !get$2(m));
+  let A;
   user_effect(() => {
-    x && (x.shouldShowPrice = get$2($), x.dispatchEvent(new CustomEvent("shouldShowPriceChanged", {
-      detail: { shouldShowPrice: get$2($) },
+    A && (A.shouldShowPrice = get$2(I), A.dispatchEvent(new CustomEvent("shouldShowPriceChanged", {
+      detail: { shouldShowPrice: get$2(I) },
       bubbles: !0
     })));
   });
-  var I = {
+  var O = {
     get price() {
       return l();
     },
-    set price(O) {
-      l(O), flushSync();
+    set price(C) {
+      l(C), flushSync();
     },
     get compared_at() {
       return c();
     },
-    set compared_at(O) {
-      c(O), flushSync();
+    set compared_at(C) {
+      c(C), flushSync();
     },
     get iso_code() {
       return u();
     },
-    set iso_code(O) {
-      u(O), flushSync();
+    set iso_code(C) {
+      u(C), flushSync();
     },
     get variant_id() {
       return d();
     },
-    set variant_id(O) {
-      d(O), flushSync();
+    set variant_id(C) {
+      d(C), flushSync();
     },
     get product_id() {
       return f();
     },
-    set product_id(O) {
-      f(O), flushSync();
+    set product_id(C) {
+      f(C), flushSync();
     },
     get type() {
       return p();
     },
-    set type(O = "ProductDetailsPagePrice") {
-      p(O), flushSync();
+    set type(C = "ProductDetailsPagePrice") {
+      p(C), flushSync();
     },
     get isPriceReady() {
       return _();
     },
-    set isPriceReady(O = !1) {
-      _(O), flushSync();
+    set isPriceReady(C = !1) {
+      _(C), flushSync();
     },
     get DEV_currency() {
       return h();
     },
-    set DEV_currency(O) {
-      h(O), flushSync();
+    set DEV_currency(C) {
+      h(C), flushSync();
     },
     get DEV_market() {
       return g();
     },
-    set DEV_market(O) {
-      g(O), flushSync();
+    set DEV_market(C) {
+      g(C), flushSync();
     }
-  }, R = root$f(), C = child(R);
+  }, R = root$f(), x = child(R);
   {
-    var k = (O) => {
-      var P = comment(), j = first_child(P);
-      component(j, () => get$2(A), (M, L) => {
-        L(M, spread_props(() => get$2(S)));
-      }), append(O, P);
+    var k = (C) => {
+      var $ = comment(), j = first_child($);
+      component(j, () => get$2(P), (B, M) => {
+        M(B, spread_props(() => get$2(S)));
+      }), append(C, $);
     };
-    if_block(C, (O) => {
-      get$2($) && O(k);
+    if_block(x, (C) => {
+      get$2(I) && C(k);
     });
   }
-  reset(R), bind_this(R, (O) => x = O, () => x), action(R, (O, P) => removeNonComponentChildren == null ? void 0 : removeNonComponentChildren(O, P), () => get$2($)), append(r, R);
-  var N = pop(I);
+  reset(R), bind_this(R, (C) => A = C, () => A), action(R, (C, $) => removeNonComponentChildren == null ? void 0 : removeNonComponentChildren(C, $), () => get$2(I)), append(r, R);
+  var N = pop(O);
   return o(), N;
 }
 customElements.define("product-price", create_custom_element(
@@ -4326,12 +5074,12 @@ function __esDecorate(r, e, t, s, n, i) {
       if (p) throw new TypeError("Cannot add initializers after decoration has completed");
       i.push(o(w || null));
     };
-    var v = (0, t[_])(l === "accessor" ? { get: d.get, set: d.set } : d[c], h);
+    var m = (0, t[_])(l === "accessor" ? { get: d.get, set: d.set } : d[c], h);
     if (l === "accessor") {
-      if (v === void 0) continue;
-      if (v === null || typeof v != "object") throw new TypeError("Object expected");
-      (f = o(v.get)) && (d.get = f), (f = o(v.set)) && (d.set = f), (f = o(v.init)) && n.unshift(f);
-    } else (f = o(v)) && (l === "field" ? n.unshift(f) : d[c] = f);
+      if (m === void 0) continue;
+      if (m === null || typeof m != "object") throw new TypeError("Object expected");
+      (f = o(m.get)) && (d.get = f), (f = o(m.set)) && (d.set = f), (f = o(m.init)) && n.unshift(f);
+    } else (f = o(m)) && (l === "field" ? n.unshift(f) : d[c] = f);
   }
   u && Object.defineProperty(u, s.name, d), p = !0;
 }
@@ -4508,8 +5256,8 @@ function __asyncGenerator(r, e, t) {
   }
   function l(_, h) {
     s[_] && (n[_] = function(g) {
-      return new Promise(function(v, w) {
-        i.push([_, g, v, w]) > 1 || c(_, g);
+      return new Promise(function(m, w) {
+        i.push([_, g, m, w]) > 1 || c(_, g);
       });
     }, h && (n[_] = h(n[_])));
   }
@@ -4799,8 +5547,8 @@ class FunctionsClient {
           throw new FunctionsRelayError(_);
         if (!_.ok)
           throw new FunctionsHttpError(_);
-        let g = ((n = _.headers.get("Content-Type")) !== null && n !== void 0 ? n : "text/plain").split(";")[0].trim(), v;
-        return g === "application/json" ? v = yield _.json() : g === "application/octet-stream" || g === "application/pdf" ? v = yield _.blob() : g === "text/event-stream" ? v = _ : g === "multipart/form-data" ? v = yield _.formData() : v = yield _.text(), { data: v, error: null, response: _ };
+        let g = ((n = _.headers.get("Content-Type")) !== null && n !== void 0 ? n : "text/plain").split(";")[0].trim(), m;
+        return g === "application/json" ? m = yield _.json() : g === "application/octet-stream" || g === "application/pdf" ? m = yield _.blob() : g === "text/event-stream" ? m = _ : g === "multipart/form-data" ? m = yield _.formData() : m = yield _.text(), { data: m, error: null, response: _ };
       } catch (i) {
         return i instanceof Error && i.name === "AbortError" ? { data: null, error: new FunctionsFetchError(i) } : {
           data: null,
@@ -4895,20 +5643,20 @@ function requirePostgrestBuilder() {
         signal: this.signal
       }).then(async (u) => {
         var d, f, p, _;
-        let h = null, g = null, v = null, w = u.status, y = u.statusText;
+        let h = null, g = null, m = null, w = u.status, y = u.statusText;
         if (u.ok) {
           if (this.method !== "HEAD") {
             const E = await u.text();
             E === "" || (this.headers.get("Accept") === "text/csv" || this.headers.get("Accept") && (!((d = this.headers.get("Accept")) === null || d === void 0) && d.includes("application/vnd.pgrst.plan+text")) ? g = E : g = JSON.parse(E));
           }
           const b = (f = this.headers.get("Prefer")) === null || f === void 0 ? void 0 : f.match(/count=(exact|planned|estimated)/), S = (p = u.headers.get("content-range")) === null || p === void 0 ? void 0 : p.split("/");
-          b && S && S.length > 1 && (v = parseInt(S[1])), this.isMaybeSingle && this.method === "GET" && Array.isArray(g) && (g.length > 1 ? (h = {
+          b && S && S.length > 1 && (m = parseInt(S[1])), this.isMaybeSingle && this.method === "GET" && Array.isArray(g) && (g.length > 1 ? (h = {
             // https://github.com/PostgREST/postgrest/blob/a867d79c42419af16c18c3fb019eba8df992626f/src/PostgREST/Error.hs#L553
             code: "PGRST116",
             details: `Results contain ${g.length} rows, application/vnd.pgrst.object+json requires 1 row`,
             hint: null,
             message: "JSON object requested, multiple (or no) rows returned"
-          }, g = null, v = null, w = 406, y = "Not Acceptable") : g.length === 1 ? g = g[0] : g = null);
+          }, g = null, m = null, w = 406, y = "Not Acceptable") : g.length === 1 ? g = g[0] : g = null);
         } else {
           const b = await u.text();
           try {
@@ -4924,7 +5672,7 @@ function requirePostgrestBuilder() {
         return {
           error: h,
           data: g,
-          count: v,
+          count: m,
           status: w,
           statusText: y
         };
@@ -5750,8 +6498,8 @@ function requirePostgrestClient() {
       let f;
       const p = new URL(`${this.url}/rpc/${i}`);
       let _;
-      l || c ? (f = l ? "HEAD" : "GET", Object.entries(o).filter(([g, v]) => v !== void 0).map(([g, v]) => [g, Array.isArray(v) ? `{${v.join(",")}}` : `${v}`]).forEach(([g, v]) => {
-        p.searchParams.append(g, v);
+      l || c ? (f = l ? "HEAD" : "GET", Object.entries(o).filter(([g, m]) => m !== void 0).map(([g, m]) => [g, Array.isArray(m) ? `{${m.join(",")}}` : `${m}`]).forEach(([g, m]) => {
+        p.searchParams.append(g, m);
       })) : (f = "POST", _ = o);
       const h = new Headers(this.headers);
       return u && h.set("Prefer", `count=${u}`), new t.default({
@@ -6140,7 +6888,7 @@ class RealtimePresence {
     }), this.map(o, (u, d) => {
       const f = i[u];
       if (f) {
-        const p = d.map((v) => v.presence_ref), _ = f.map((v) => v.presence_ref), h = d.filter((v) => _.indexOf(v.presence_ref) < 0), g = f.filter((v) => p.indexOf(v.presence_ref) < 0);
+        const p = d.map((m) => m.presence_ref), _ = f.map((m) => m.presence_ref), h = d.filter((m) => _.indexOf(m.presence_ref) < 0), g = f.filter((m) => p.indexOf(m.presence_ref) < 0);
         h.length > 0 && (l[u] = h), g.length > 0 && (c[u] = g);
       } else
         l[u] = d;
@@ -6283,11 +7031,11 @@ class RealtimeChannel {
           e == null || e(REALTIME_SUBSCRIBE_STATES.SUBSCRIBED);
           return;
         } else {
-          const g = this.bindings.postgres_changes, v = (h = g == null ? void 0 : g.length) !== null && h !== void 0 ? h : 0, w = [];
-          for (let y = 0; y < v; y++) {
-            const m = g[y], { filter: { event: b, schema: S, table: E, filter: A } } = m, $ = _ && _[y];
-            if ($ && $.event === b && $.schema === S && $.table === E && $.filter === A)
-              w.push(Object.assign(Object.assign({}, m), { id: $.id }));
+          const g = this.bindings.postgres_changes, m = (h = g == null ? void 0 : g.length) !== null && h !== void 0 ? h : 0, w = [];
+          for (let y = 0; y < m; y++) {
+            const v = g[y], { filter: { event: b, schema: S, table: E, filter: P } } = v, I = _ && _[y];
+            if (I && I.event === b && I.schema === S && I.table === E && I.filter === P)
+              w.push(Object.assign(Object.assign({}, v), { id: I.id }));
             else {
               this.unsubscribe(), this.state = CHANNEL_STATES.errored, e == null || e(REALTIME_SUBSCRIBE_STATES.CHANNEL_ERROR, new Error("mismatch between server and client bindings for postgres changes"));
               return;
@@ -6498,31 +7246,31 @@ class RealtimeChannel {
     if (t && !p)
       throw "channel onMessage callbacks must return the payload, modified or unmodified";
     ["insert", "update", "delete"].includes(o) ? (n = this.bindings.postgres_changes) === null || n === void 0 || n.filter((_) => {
-      var h, g, v;
-      return ((h = _.filter) === null || h === void 0 ? void 0 : h.event) === "*" || ((v = (g = _.filter) === null || g === void 0 ? void 0 : g.event) === null || v === void 0 ? void 0 : v.toLocaleLowerCase()) === o;
+      var h, g, m;
+      return ((h = _.filter) === null || h === void 0 ? void 0 : h.event) === "*" || ((m = (g = _.filter) === null || g === void 0 ? void 0 : g.event) === null || m === void 0 ? void 0 : m.toLocaleLowerCase()) === o;
     }).map((_) => _.callback(p, s)) : (i = this.bindings[o]) === null || i === void 0 || i.filter((_) => {
-      var h, g, v, w, y, m;
+      var h, g, m, w, y, v;
       if (["broadcast", "presence", "postgres_changes"].includes(o))
         if ("id" in _) {
           const b = _.id, S = (h = _.filter) === null || h === void 0 ? void 0 : h.event;
-          return b && ((g = t.ids) === null || g === void 0 ? void 0 : g.includes(b)) && (S === "*" || (S == null ? void 0 : S.toLocaleLowerCase()) === ((v = t.data) === null || v === void 0 ? void 0 : v.type.toLocaleLowerCase()));
+          return b && ((g = t.ids) === null || g === void 0 ? void 0 : g.includes(b)) && (S === "*" || (S == null ? void 0 : S.toLocaleLowerCase()) === ((m = t.data) === null || m === void 0 ? void 0 : m.type.toLocaleLowerCase()));
         } else {
           const b = (y = (w = _ == null ? void 0 : _.filter) === null || w === void 0 ? void 0 : w.event) === null || y === void 0 ? void 0 : y.toLocaleLowerCase();
-          return b === "*" || b === ((m = t == null ? void 0 : t.event) === null || m === void 0 ? void 0 : m.toLocaleLowerCase());
+          return b === "*" || b === ((v = t == null ? void 0 : t.event) === null || v === void 0 ? void 0 : v.toLocaleLowerCase());
         }
       else
         return _.type.toLocaleLowerCase() === o;
     }).map((_) => {
       if (typeof p == "object" && "ids" in p) {
-        const h = p.data, { schema: g, table: v, commit_timestamp: w, type: y, errors: m } = h;
+        const h = p.data, { schema: g, table: m, commit_timestamp: w, type: y, errors: v } = h;
         p = Object.assign(Object.assign({}, {
           schema: g,
-          table: v,
+          table: m,
           commit_timestamp: w,
           eventType: y,
           new: {},
           old: {},
-          errors: m
+          errors: v
         }), this._getPayloadRecords(h));
       }
       _.callback(p, s);
@@ -9682,8 +10430,8 @@ class GoTrueAdminApi {
         throw d.error;
       const f = await d.json(), p = (o = d.headers.get("x-total-count")) !== null && o !== void 0 ? o : 0, _ = (c = (l = d.headers.get("link")) === null || l === void 0 ? void 0 : l.split(",")) !== null && c !== void 0 ? c : [];
       return _.length > 0 && (_.forEach((h) => {
-        const g = parseInt(h.split(";")[0].split("=")[1].substring(0, 1)), v = JSON.parse(h.split(";")[1].split("=")[1]);
-        u[`${v}Page`] = g;
+        const g = parseInt(h.split(";")[0].split("=")[1].substring(0, 1)), m = JSON.parse(h.split(";")[1].split("=")[1]);
+        u[`${m}Page`] = g;
       }), u.total = parseInt(p)), { data: Object.assign(Object.assign({}, f), u), error: null };
     } catch (u) {
       if (isAuthError(u))
@@ -9805,8 +10553,8 @@ class GoTrueAdminApi {
         throw d.error;
       const f = await d.json(), p = (o = d.headers.get("x-total-count")) !== null && o !== void 0 ? o : 0, _ = (c = (l = d.headers.get("link")) === null || l === void 0 ? void 0 : l.split(",")) !== null && c !== void 0 ? c : [];
       return _.length > 0 && (_.forEach((h) => {
-        const g = parseInt(h.split(";")[0].split("=")[1].substring(0, 1)), v = JSON.parse(h.split(";")[1].split("=")[1]);
-        u[`${v}Page`] = g;
+        const g = parseInt(h.split(";")[0].split("=")[1].substring(0, 1)), m = JSON.parse(h.split(";")[1].split("=")[1]);
+        u[`${m}Page`] = g;
       }), u.total = parseInt(p)), { data: Object.assign(Object.assign({}, f), u), error: null };
     } catch (u) {
       if (isAuthError(u))
@@ -9989,7 +10737,7 @@ function createSiweMessage(r) {
       throw new Error(`@supabase/auth-js: Invalid SIWE message field "statement". Statement must not include '\\n'. Provided value: ${r.statement}`);
   }
   const _ = getAddress(r.address), h = d ? `${d}://${s}` : s, g = r.statement ? `${r.statement}
-` : "", v = `${h} wants you to sign in with your Ethereum account:
+` : "", m = `${h} wants you to sign in with your Ethereum account:
 ${_}
 
 ${g}`;
@@ -10004,15 +10752,15 @@ Not Before: ${l.toISOString()}`), c && (w += `
 Request ID: ${c}`), u) {
     let y = `
 Resources:`;
-    for (const m of u) {
-      if (!m || typeof m != "string")
-        throw new Error(`@supabase/auth-js: Invalid SIWE message field "resources". Every resource must be a valid string. Provided value: ${m}`);
+    for (const v of u) {
+      if (!v || typeof v != "string")
+        throw new Error(`@supabase/auth-js: Invalid SIWE message field "resources". Every resource must be a valid string. Provided value: ${v}`);
       y += `
-- ${m}`;
+- ${v}`;
     }
     w += y;
   }
-  return `${v}
+  return `${m}
 ${w}`;
 }
 class WebAuthnError extends Error {
@@ -10882,45 +11630,45 @@ class GoTrueClient {
     if ("message" in e)
       _ = e.message, h = e.signature;
     else {
-      const { chain: g, wallet: v, statement: w, options: y } = e;
-      let m;
+      const { chain: g, wallet: m, statement: w, options: y } = e;
+      let v;
       if (isBrowser())
-        if (typeof v == "object")
-          m = v;
+        if (typeof m == "object")
+          v = m;
         else {
-          const x = window;
-          if ("ethereum" in x && typeof x.ethereum == "object" && "request" in x.ethereum && typeof x.ethereum.request == "function")
-            m = x.ethereum;
+          const A = window;
+          if ("ethereum" in A && typeof A.ethereum == "object" && "request" in A.ethereum && typeof A.ethereum.request == "function")
+            v = A.ethereum;
           else
             throw new Error("@supabase/auth-js: No compatible Ethereum wallet interface on the window object (window.ethereum) detected. Make sure the user already has a wallet installed and connected for this app. Prefer passing the wallet interface object directly to signInWithWeb3({ chain: 'ethereum', wallet: resolvedUserWallet }) instead.");
         }
       else {
-        if (typeof v != "object" || !(y != null && y.url))
+        if (typeof m != "object" || !(y != null && y.url))
           throw new Error("@supabase/auth-js: Both wallet and url must be specified in non-browser environments.");
-        m = v;
+        v = m;
       }
-      const b = new URL((t = y == null ? void 0 : y.url) !== null && t !== void 0 ? t : window.location.href), S = await m.request({
+      const b = new URL((t = y == null ? void 0 : y.url) !== null && t !== void 0 ? t : window.location.href), S = await v.request({
         method: "eth_requestAccounts"
-      }).then((x) => x).catch(() => {
+      }).then((A) => A).catch(() => {
         throw new Error("@supabase/auth-js: Wallet method eth_requestAccounts is missing or invalid");
       });
       if (!S || S.length === 0)
         throw new Error("@supabase/auth-js: No accounts available. Please ensure the wallet is connected.");
       const E = getAddress(S[0]);
-      let A = (s = y == null ? void 0 : y.signInWithEthereum) === null || s === void 0 ? void 0 : s.chainId;
-      if (!A) {
-        const x = await m.request({
+      let P = (s = y == null ? void 0 : y.signInWithEthereum) === null || s === void 0 ? void 0 : s.chainId;
+      if (!P) {
+        const A = await v.request({
           method: "eth_chainId"
         });
-        A = fromHex(x);
+        P = fromHex(A);
       }
-      const $ = {
+      const I = {
         domain: b.host,
         address: E,
         statement: w,
         uri: b.href,
         version: "1",
-        chainId: A,
+        chainId: P,
         nonce: (n = y == null ? void 0 : y.signInWithEthereum) === null || n === void 0 ? void 0 : n.nonce,
         issuedAt: (o = (i = y == null ? void 0 : y.signInWithEthereum) === null || i === void 0 ? void 0 : i.issuedAt) !== null && o !== void 0 ? o : /* @__PURE__ */ new Date(),
         expirationTime: (l = y == null ? void 0 : y.signInWithEthereum) === null || l === void 0 ? void 0 : l.expirationTime,
@@ -10928,13 +11676,13 @@ class GoTrueClient {
         requestId: (u = y == null ? void 0 : y.signInWithEthereum) === null || u === void 0 ? void 0 : u.requestId,
         resources: (d = y == null ? void 0 : y.signInWithEthereum) === null || d === void 0 ? void 0 : d.resources
       };
-      _ = createSiweMessage($), h = await m.request({
+      _ = createSiweMessage(I), h = await v.request({
         method: "personal_sign",
         params: [toHex(_), E]
       });
     }
     try {
-      const { data: g, error: v } = await _request(this.fetch, "POST", `${this.url}/token?grant_type=web3`, {
+      const { data: g, error: m } = await _request(this.fetch, "POST", `${this.url}/token?grant_type=web3`, {
         headers: this.headers,
         body: Object.assign({
           chain: "ethereum",
@@ -10943,12 +11691,12 @@ class GoTrueClient {
         }, !((f = e.options) === null || f === void 0) && f.captchaToken ? { gotrue_meta_security: { captcha_token: (p = e.options) === null || p === void 0 ? void 0 : p.captchaToken } } : null),
         xform: _sessionResponse
       });
-      if (v)
-        throw v;
+      if (m)
+        throw m;
       return !g || !g.session || !g.user ? {
         data: { user: null, session: null },
         error: new AuthInvalidTokenResponseError()
-      } : (g.session && (await this._saveSession(g.session), await this._notifyAllSubscribers("SIGNED_IN", g.session)), { data: Object.assign({}, g), error: v });
+      } : (g.session && (await this._saveSession(g.session), await this._notifyAllSubscribers("SIGNED_IN", g.session)), { data: Object.assign({}, g), error: m });
     } catch (g) {
       if (isAuthError(g))
         return { data: { user: null, session: null }, error: g };
@@ -10961,7 +11709,7 @@ class GoTrueClient {
     if ("message" in e)
       h = e.message, g = e.signature;
     else {
-      const { chain: v, wallet: w, statement: y, options: m } = e;
+      const { chain: m, wallet: w, statement: y, options: v } = e;
       let b;
       if (isBrowser())
         if (typeof w == "object")
@@ -10974,27 +11722,27 @@ class GoTrueClient {
             throw new Error("@supabase/auth-js: No compatible Solana wallet interface on the window object (window.solana) detected. Make sure the user already has a wallet installed and connected for this app. Prefer passing the wallet interface object directly to signInWithWeb3({ chain: 'solana', wallet: resolvedUserWallet }) instead.");
         }
       else {
-        if (typeof w != "object" || !(m != null && m.url))
+        if (typeof w != "object" || !(v != null && v.url))
           throw new Error("@supabase/auth-js: Both wallet and url must be specified in non-browser environments.");
         b = w;
       }
-      const S = new URL((t = m == null ? void 0 : m.url) !== null && t !== void 0 ? t : window.location.href);
+      const S = new URL((t = v == null ? void 0 : v.url) !== null && t !== void 0 ? t : window.location.href);
       if ("signIn" in b && b.signIn) {
-        const E = await b.signIn(Object.assign(Object.assign(Object.assign({ issuedAt: (/* @__PURE__ */ new Date()).toISOString() }, m == null ? void 0 : m.signInWithSolana), {
+        const E = await b.signIn(Object.assign(Object.assign(Object.assign({ issuedAt: (/* @__PURE__ */ new Date()).toISOString() }, v == null ? void 0 : v.signInWithSolana), {
           // non-overridable properties
           version: "1",
           domain: S.host,
           uri: S.href
         }), y ? { statement: y } : null));
-        let A;
+        let P;
         if (Array.isArray(E) && E[0] && typeof E[0] == "object")
-          A = E[0];
+          P = E[0];
         else if (E && typeof E == "object" && "signedMessage" in E && "signature" in E)
-          A = E;
+          P = E;
         else
           throw new Error("@supabase/auth-js: Wallet method signIn() returned unrecognized value");
-        if ("signedMessage" in A && "signature" in A && (typeof A.signedMessage == "string" || A.signedMessage instanceof Uint8Array) && A.signature instanceof Uint8Array)
-          h = typeof A.signedMessage == "string" ? A.signedMessage : new TextDecoder().decode(A.signedMessage), g = A.signature;
+        if ("signedMessage" in P && "signature" in P && (typeof P.signedMessage == "string" || P.signedMessage instanceof Uint8Array) && P.signature instanceof Uint8Array)
+          h = typeof P.signedMessage == "string" ? P.signedMessage : new TextDecoder().decode(P.signedMessage), g = P.signature;
         else
           throw new Error("@supabase/auth-js: Wallet method signIn() API returned object without signedMessage and signature fields");
       } else {
@@ -11006,15 +11754,15 @@ class GoTrueClient {
           ...y ? ["", y, ""] : [""],
           "Version: 1",
           `URI: ${S.href}`,
-          `Issued At: ${(n = (s = m == null ? void 0 : m.signInWithSolana) === null || s === void 0 ? void 0 : s.issuedAt) !== null && n !== void 0 ? n : (/* @__PURE__ */ new Date()).toISOString()}`,
-          ...!((i = m == null ? void 0 : m.signInWithSolana) === null || i === void 0) && i.notBefore ? [`Not Before: ${m.signInWithSolana.notBefore}`] : [],
-          ...!((o = m == null ? void 0 : m.signInWithSolana) === null || o === void 0) && o.expirationTime ? [`Expiration Time: ${m.signInWithSolana.expirationTime}`] : [],
-          ...!((l = m == null ? void 0 : m.signInWithSolana) === null || l === void 0) && l.chainId ? [`Chain ID: ${m.signInWithSolana.chainId}`] : [],
-          ...!((c = m == null ? void 0 : m.signInWithSolana) === null || c === void 0) && c.nonce ? [`Nonce: ${m.signInWithSolana.nonce}`] : [],
-          ...!((u = m == null ? void 0 : m.signInWithSolana) === null || u === void 0) && u.requestId ? [`Request ID: ${m.signInWithSolana.requestId}`] : [],
-          ...!((f = (d = m == null ? void 0 : m.signInWithSolana) === null || d === void 0 ? void 0 : d.resources) === null || f === void 0) && f.length ? [
+          `Issued At: ${(n = (s = v == null ? void 0 : v.signInWithSolana) === null || s === void 0 ? void 0 : s.issuedAt) !== null && n !== void 0 ? n : (/* @__PURE__ */ new Date()).toISOString()}`,
+          ...!((i = v == null ? void 0 : v.signInWithSolana) === null || i === void 0) && i.notBefore ? [`Not Before: ${v.signInWithSolana.notBefore}`] : [],
+          ...!((o = v == null ? void 0 : v.signInWithSolana) === null || o === void 0) && o.expirationTime ? [`Expiration Time: ${v.signInWithSolana.expirationTime}`] : [],
+          ...!((l = v == null ? void 0 : v.signInWithSolana) === null || l === void 0) && l.chainId ? [`Chain ID: ${v.signInWithSolana.chainId}`] : [],
+          ...!((c = v == null ? void 0 : v.signInWithSolana) === null || c === void 0) && c.nonce ? [`Nonce: ${v.signInWithSolana.nonce}`] : [],
+          ...!((u = v == null ? void 0 : v.signInWithSolana) === null || u === void 0) && u.requestId ? [`Request ID: ${v.signInWithSolana.requestId}`] : [],
+          ...!((f = (d = v == null ? void 0 : v.signInWithSolana) === null || d === void 0 ? void 0 : d.resources) === null || f === void 0) && f.length ? [
             "Resources",
-            ...m.signInWithSolana.resources.map((A) => `- ${A}`)
+            ...v.signInWithSolana.resources.map((P) => `- ${P}`)
           ] : []
         ].join(`
 `);
@@ -11025,21 +11773,21 @@ class GoTrueClient {
       }
     }
     try {
-      const { data: v, error: w } = await _request(this.fetch, "POST", `${this.url}/token?grant_type=web3`, {
+      const { data: m, error: w } = await _request(this.fetch, "POST", `${this.url}/token?grant_type=web3`, {
         headers: this.headers,
         body: Object.assign({ chain: "solana", message: h, signature: bytesToBase64URL(g) }, !((p = e.options) === null || p === void 0) && p.captchaToken ? { gotrue_meta_security: { captcha_token: (_ = e.options) === null || _ === void 0 ? void 0 : _.captchaToken } } : null),
         xform: _sessionResponse
       });
       if (w)
         throw w;
-      return !v || !v.session || !v.user ? {
+      return !m || !m.session || !m.user ? {
         data: { user: null, session: null },
         error: new AuthInvalidTokenResponseError()
-      } : (v.session && (await this._saveSession(v.session), await this._notifyAllSubscribers("SIGNED_IN", v.session)), { data: Object.assign({}, v), error: w });
-    } catch (v) {
-      if (isAuthError(v))
-        return { data: { user: null, session: null }, error: v };
-      throw v;
+      } : (m.session && (await this._saveSession(m.session), await this._notifyAllSubscribers("SIGNED_IN", m.session)), { data: Object.assign({}, m), error: w });
+    } catch (m) {
+      if (isAuthError(m))
+        return { data: { user: null, session: null }, error: m };
+      throw m;
     }
   }
   async _exchangeCodeForSession(e) {
@@ -11531,9 +12279,9 @@ class GoTrueClient {
       if (t === "pkce") {
         if (this._debug("#_initialize()", "begin", "is PKCE flow", !0), !e.code)
           throw new AuthPKCEGrantCodeExchangeError("No code detected.");
-        const { data: y, error: m } = await this._exchangeCodeForSession(e.code);
-        if (m)
-          throw m;
+        const { data: y, error: v } = await this._exchangeCodeForSession(e.code);
+        if (v)
+          throw v;
         const b = new URL(window.location.href);
         return b.searchParams.delete("code"), window.history.replaceState(window.history.state, "", b.toString()), { data: { session: y.session, redirectType: null }, error: null };
       }
@@ -11547,9 +12295,9 @@ class GoTrueClient {
       _ * 1e3 <= AUTO_REFRESH_TICK_DURATION_MS && console.warn(`@supabase/gotrue-js: Session as retrieved from URL expires in ${_}s, should have been closer to ${f}s`);
       const h = p - f;
       d - h >= 120 ? console.warn("@supabase/gotrue-js: Session as retrieved from URL was issued over 120s ago, URL could be stale", h, p, d) : d - h < 0 && console.warn("@supabase/gotrue-js: Session as retrieved from URL was issued in the future? Check the device clock for skew", h, p, d);
-      const { data: g, error: v } = await this._getUser(i);
-      if (v)
-        throw v;
+      const { data: g, error: m } = await this._getUser(i);
+      if (m)
+        throw m;
       const w = {
         provider_token: s,
         provider_refresh_token: n,
@@ -12587,9 +13335,9 @@ function fly(r, { delay: e = 0, duration: t = 400, easing: s = cubic_out, x: n =
     delay: e,
     duration: t,
     easing: s,
-    css: (g, v) => `
+    css: (g, m) => `
 			transform: ${u} translate(${(1 - g) * f}${p}, ${(1 - g) * _}${h});
-			opacity: ${c - d * v}`
+			opacity: ${c - d * m}`
   };
 }
 function isObject$1(r) {
@@ -12960,13 +13708,13 @@ function Resize(r) {
           height: _
         } = e;
         let h = p, g = _;
-        f.forEach((v) => {
+        f.forEach((m) => {
           let {
             contentBoxSize: w,
             contentRect: y,
-            target: m
-          } = v;
-          m && m !== e.el || (h = y ? y.width : (w[0] || w).inlineSize, g = y ? y.height : (w[0] || w).blockSize);
+            target: v
+          } = m;
+          v && v !== e.el || (h = y ? y.width : (w[0] || w).inlineSize, g = y ? y.height : (w[0] || w).blockSize);
         }), (h !== p || g !== _) && l();
       });
     }), i.observe(e.el));
@@ -13101,8 +13849,8 @@ function updateSize() {
 }
 function updateSlides() {
   const r = this;
-  function e(I, R) {
-    return parseFloat(I.getPropertyValue(r.getDirectionLabel(R)) || 0);
+  function e(O, R) {
+    return parseFloat(O.getPropertyValue(r.getDirectionLabel(R)) || 0);
   }
   const t = r.params, {
     wrapperEl: s,
@@ -13115,90 +13863,90 @@ function updateSlides() {
   const _ = [], h = [];
   let g = t.slidesOffsetBefore;
   typeof g == "function" && (g = t.slidesOffsetBefore.call(r));
-  let v = t.slidesOffsetAfter;
-  typeof v == "function" && (v = t.slidesOffsetAfter.call(r));
+  let m = t.slidesOffsetAfter;
+  typeof m == "function" && (m = t.slidesOffsetAfter.call(r));
   const w = r.snapGrid.length, y = r.slidesGrid.length;
-  let m = t.spaceBetween, b = -g, S = 0, E = 0;
+  let v = t.spaceBetween, b = -g, S = 0, E = 0;
   if (typeof i > "u")
     return;
-  typeof m == "string" && m.indexOf("%") >= 0 ? m = parseFloat(m.replace("%", "")) / 100 * i : typeof m == "string" && (m = parseFloat(m)), r.virtualSize = -m, d.forEach((I) => {
-    o ? I.style.marginLeft = "" : I.style.marginRight = "", I.style.marginBottom = "", I.style.marginTop = "";
+  typeof v == "string" && v.indexOf("%") >= 0 ? v = parseFloat(v.replace("%", "")) / 100 * i : typeof v == "string" && (v = parseFloat(v)), r.virtualSize = -v, d.forEach((O) => {
+    o ? O.style.marginLeft = "" : O.style.marginRight = "", O.style.marginBottom = "", O.style.marginTop = "";
   }), t.centeredSlides && t.cssMode && (setCSSProperty(s, "--swiper-centered-offset-before", ""), setCSSProperty(s, "--swiper-centered-offset-after", ""));
-  const A = t.grid && t.grid.rows > 1 && r.grid;
-  A ? r.grid.initSlides(d) : r.grid && r.grid.unsetSlides();
-  let $;
-  const x = t.slidesPerView === "auto" && t.breakpoints && Object.keys(t.breakpoints).filter((I) => typeof t.breakpoints[I].slidesPerView < "u").length > 0;
-  for (let I = 0; I < f; I += 1) {
-    $ = 0;
+  const P = t.grid && t.grid.rows > 1 && r.grid;
+  P ? r.grid.initSlides(d) : r.grid && r.grid.unsetSlides();
+  let I;
+  const A = t.slidesPerView === "auto" && t.breakpoints && Object.keys(t.breakpoints).filter((O) => typeof t.breakpoints[O].slidesPerView < "u").length > 0;
+  for (let O = 0; O < f; O += 1) {
+    I = 0;
     let R;
-    if (d[I] && (R = d[I]), A && r.grid.updateSlide(I, R, d), !(d[I] && elementStyle(R, "display") === "none")) {
+    if (d[O] && (R = d[O]), P && r.grid.updateSlide(O, R, d), !(d[O] && elementStyle(R, "display") === "none")) {
       if (t.slidesPerView === "auto") {
-        x && (d[I].style[r.getDirectionLabel("width")] = "");
-        const C = getComputedStyle(R), k = R.style.transform, N = R.style.webkitTransform;
+        A && (d[O].style[r.getDirectionLabel("width")] = "");
+        const x = getComputedStyle(R), k = R.style.transform, N = R.style.webkitTransform;
         if (k && (R.style.transform = "none"), N && (R.style.webkitTransform = "none"), t.roundLengths)
-          $ = r.isHorizontal() ? elementOuterSize(R, "width") : elementOuterSize(R, "height");
+          I = r.isHorizontal() ? elementOuterSize(R, "width") : elementOuterSize(R, "height");
         else {
-          const O = e(C, "width"), P = e(C, "padding-left"), j = e(C, "padding-right"), M = e(C, "margin-left"), L = e(C, "margin-right"), U = C.getPropertyValue("box-sizing");
+          const C = e(x, "width"), $ = e(x, "padding-left"), j = e(x, "padding-right"), B = e(x, "margin-left"), M = e(x, "margin-right"), U = x.getPropertyValue("box-sizing");
           if (U && U === "border-box")
-            $ = O + M + L;
+            I = C + B + M;
           else {
             const {
-              clientWidth: H,
+              clientWidth: z,
               offsetWidth: X
             } = R;
-            $ = O + P + j + M + L + (X - H);
+            I = C + $ + j + B + M + (X - z);
           }
         }
-        k && (R.style.transform = k), N && (R.style.webkitTransform = N), t.roundLengths && ($ = Math.floor($));
+        k && (R.style.transform = k), N && (R.style.webkitTransform = N), t.roundLengths && (I = Math.floor(I));
       } else
-        $ = (i - (t.slidesPerView - 1) * m) / t.slidesPerView, t.roundLengths && ($ = Math.floor($)), d[I] && (d[I].style[r.getDirectionLabel("width")] = `${$}px`);
-      d[I] && (d[I].swiperSlideSize = $), h.push($), t.centeredSlides ? (b = b + $ / 2 + S / 2 + m, S === 0 && I !== 0 && (b = b - i / 2 - m), I === 0 && (b = b - i / 2 - m), Math.abs(b) < 1 / 1e3 && (b = 0), t.roundLengths && (b = Math.floor(b)), E % t.slidesPerGroup === 0 && p.push(b), _.push(b)) : (t.roundLengths && (b = Math.floor(b)), (E - Math.min(r.params.slidesPerGroupSkip, E)) % r.params.slidesPerGroup === 0 && p.push(b), _.push(b), b = b + $ + m), r.virtualSize += $ + m, S = $, E += 1;
+        I = (i - (t.slidesPerView - 1) * v) / t.slidesPerView, t.roundLengths && (I = Math.floor(I)), d[O] && (d[O].style[r.getDirectionLabel("width")] = `${I}px`);
+      d[O] && (d[O].swiperSlideSize = I), h.push(I), t.centeredSlides ? (b = b + I / 2 + S / 2 + v, S === 0 && O !== 0 && (b = b - i / 2 - v), O === 0 && (b = b - i / 2 - v), Math.abs(b) < 1 / 1e3 && (b = 0), t.roundLengths && (b = Math.floor(b)), E % t.slidesPerGroup === 0 && p.push(b), _.push(b)) : (t.roundLengths && (b = Math.floor(b)), (E - Math.min(r.params.slidesPerGroupSkip, E)) % r.params.slidesPerGroup === 0 && p.push(b), _.push(b), b = b + I + v), r.virtualSize += I + v, S = I, E += 1;
     }
   }
-  if (r.virtualSize = Math.max(r.virtualSize, i) + v, o && l && (t.effect === "slide" || t.effect === "coverflow") && (s.style.width = `${r.virtualSize + m}px`), t.setWrapperSize && (s.style[r.getDirectionLabel("width")] = `${r.virtualSize + m}px`), A && r.grid.updateWrapperSize($, p), !t.centeredSlides) {
-    const I = [];
+  if (r.virtualSize = Math.max(r.virtualSize, i) + m, o && l && (t.effect === "slide" || t.effect === "coverflow") && (s.style.width = `${r.virtualSize + v}px`), t.setWrapperSize && (s.style[r.getDirectionLabel("width")] = `${r.virtualSize + v}px`), P && r.grid.updateWrapperSize(I, p), !t.centeredSlides) {
+    const O = [];
     for (let R = 0; R < p.length; R += 1) {
-      let C = p[R];
-      t.roundLengths && (C = Math.floor(C)), p[R] <= r.virtualSize - i && I.push(C);
+      let x = p[R];
+      t.roundLengths && (x = Math.floor(x)), p[R] <= r.virtualSize - i && O.push(x);
     }
-    p = I, Math.floor(r.virtualSize - i) - Math.floor(p[p.length - 1]) > 1 && p.push(r.virtualSize - i);
+    p = O, Math.floor(r.virtualSize - i) - Math.floor(p[p.length - 1]) > 1 && p.push(r.virtualSize - i);
   }
   if (c && t.loop) {
-    const I = h[0] + m;
+    const O = h[0] + v;
     if (t.slidesPerGroup > 1) {
-      const R = Math.ceil((r.virtual.slidesBefore + r.virtual.slidesAfter) / t.slidesPerGroup), C = I * t.slidesPerGroup;
+      const R = Math.ceil((r.virtual.slidesBefore + r.virtual.slidesAfter) / t.slidesPerGroup), x = O * t.slidesPerGroup;
       for (let k = 0; k < R; k += 1)
-        p.push(p[p.length - 1] + C);
+        p.push(p[p.length - 1] + x);
     }
     for (let R = 0; R < r.virtual.slidesBefore + r.virtual.slidesAfter; R += 1)
-      t.slidesPerGroup === 1 && p.push(p[p.length - 1] + I), _.push(_[_.length - 1] + I), r.virtualSize += I;
+      t.slidesPerGroup === 1 && p.push(p[p.length - 1] + O), _.push(_[_.length - 1] + O), r.virtualSize += O;
   }
-  if (p.length === 0 && (p = [0]), m !== 0) {
-    const I = r.isHorizontal() && o ? "marginLeft" : r.getDirectionLabel("marginRight");
-    d.filter((R, C) => !t.cssMode || t.loop ? !0 : C !== d.length - 1).forEach((R) => {
-      R.style[I] = `${m}px`;
+  if (p.length === 0 && (p = [0]), v !== 0) {
+    const O = r.isHorizontal() && o ? "marginLeft" : r.getDirectionLabel("marginRight");
+    d.filter((R, x) => !t.cssMode || t.loop ? !0 : x !== d.length - 1).forEach((R) => {
+      R.style[O] = `${v}px`;
     });
   }
   if (t.centeredSlides && t.centeredSlidesBounds) {
-    let I = 0;
-    h.forEach((C) => {
-      I += C + (m || 0);
-    }), I -= m;
-    const R = I > i ? I - i : 0;
-    p = p.map((C) => C <= 0 ? -g : C > R ? R + v : C);
+    let O = 0;
+    h.forEach((x) => {
+      O += x + (v || 0);
+    }), O -= v;
+    const R = O > i ? O - i : 0;
+    p = p.map((x) => x <= 0 ? -g : x > R ? R + m : x);
   }
   if (t.centerInsufficientSlides) {
-    let I = 0;
-    h.forEach((C) => {
-      I += C + (m || 0);
-    }), I -= m;
+    let O = 0;
+    h.forEach((x) => {
+      O += x + (v || 0);
+    }), O -= v;
     const R = (t.slidesOffsetBefore || 0) + (t.slidesOffsetAfter || 0);
-    if (I + R < i) {
-      const C = (i - I - R) / 2;
+    if (O + R < i) {
+      const x = (i - O - R) / 2;
       p.forEach((k, N) => {
-        p[N] = k - C;
+        p[N] = k - x;
       }), _.forEach((k, N) => {
-        _[N] = k + C;
+        _[N] = k + x;
       });
     }
   }
@@ -13209,12 +13957,12 @@ function updateSlides() {
     slidesSizesGrid: h
   }), t.centeredSlides && t.cssMode && !t.centeredSlidesBounds) {
     setCSSProperty(s, "--swiper-centered-offset-before", `${-p[0]}px`), setCSSProperty(s, "--swiper-centered-offset-after", `${r.size / 2 - h[h.length - 1] / 2}px`);
-    const I = -r.snapGrid[0], R = -r.slidesGrid[0];
-    r.snapGrid = r.snapGrid.map((C) => C + I), r.slidesGrid = r.slidesGrid.map((C) => C + R);
+    const O = -r.snapGrid[0], R = -r.slidesGrid[0];
+    r.snapGrid = r.snapGrid.map((x) => x + O), r.slidesGrid = r.slidesGrid.map((x) => x + R);
   }
   if (f !== u && r.emit("slidesLengthChange"), p.length !== w && (r.params.watchOverflow && r.checkOverflow(), r.emit("snapGridLengthChange")), _.length !== y && r.emit("slidesGridLengthChange"), t.watchSlidesProgress && r.updateSlidesOffset(), r.emit("slidesUpdated"), !c && !t.cssMode && (t.effect === "slide" || t.effect === "fade")) {
-    const I = `${t.containerModifierClass}backface-hidden`, R = r.el.classList.contains(I);
-    f <= t.maxBackfaceHiddenSlides ? R || r.el.classList.add(I) : R && r.el.classList.remove(I);
+    const O = `${t.containerModifierClass}backface-hidden`, R = r.el.classList.contains(O);
+    f <= t.maxBackfaceHiddenSlides ? R || r.el.classList.add(O) : R && r.el.classList.remove(O);
   }
 }
 function updateAutoHeight(r) {
@@ -13267,8 +14015,8 @@ function updateSlidesProgress(r) {
     const u = s[c];
     let d = u.swiperSlideOffset;
     t.cssMode && t.centeredSlides && (d -= s[0].swiperSlideOffset);
-    const f = (o + (t.centeredSlides ? e.minTranslate() : 0) - d) / (u.swiperSlideSize + l), p = (o - i[0] + (t.centeredSlides ? e.minTranslate() : 0) - d) / (u.swiperSlideSize + l), _ = -(o - d), h = _ + e.slidesSizesGrid[c], g = _ >= 0 && _ <= e.size - e.slidesSizesGrid[c], v = _ >= 0 && _ < e.size - 1 || h > 1 && h <= e.size || _ <= 0 && h >= e.size;
-    v && (e.visibleSlides.push(u), e.visibleSlidesIndexes.push(c)), toggleSlideClasses$1(u, v, t.slideVisibleClass), toggleSlideClasses$1(u, g, t.slideFullyVisibleClass), u.progress = n ? -f : f, u.originalProgress = n ? -p : p;
+    const f = (o + (t.centeredSlides ? e.minTranslate() : 0) - d) / (u.swiperSlideSize + l), p = (o - i[0] + (t.centeredSlides ? e.minTranslate() : 0) - d) / (u.swiperSlideSize + l), _ = -(o - d), h = _ + e.slidesSizesGrid[c], g = _ >= 0 && _ <= e.size - e.slidesSizesGrid[c], m = _ >= 0 && _ < e.size - 1 || h > 1 && h <= e.size || _ <= 0 && h >= e.size;
+    m && (e.visibleSlides.push(u), e.visibleSlidesIndexes.push(c)), toggleSlideClasses$1(u, m, t.slideVisibleClass), toggleSlideClasses$1(u, g, t.slideFullyVisibleClass), u.progress = n ? -f : f, u.originalProgress = n ? -p : p;
   }
 }
 function updateProgress(r) {
@@ -13597,47 +14345,47 @@ function slideTo(r, e, t, s, n) {
     return !1;
   typeof e > "u" && (e = i.params.speed);
   const g = Math.min(i.params.slidesPerGroupSkip, o);
-  let v = g + Math.floor((o - g) / i.params.slidesPerGroup);
-  v >= c.length && (v = c.length - 1);
-  const w = -c[v];
+  let m = g + Math.floor((o - g) / i.params.slidesPerGroup);
+  m >= c.length && (m = c.length - 1);
+  const w = -c[m];
   if (l.normalizeSlideIndex)
-    for (let A = 0; A < u.length; A += 1) {
-      const $ = -Math.floor(w * 100), x = Math.floor(u[A] * 100), I = Math.floor(u[A + 1] * 100);
-      typeof u[A + 1] < "u" ? $ >= x && $ < I - (I - x) / 2 ? o = A : $ >= x && $ < I && (o = A + 1) : $ >= x && (o = A);
+    for (let P = 0; P < u.length; P += 1) {
+      const I = -Math.floor(w * 100), A = Math.floor(u[P] * 100), O = Math.floor(u[P + 1] * 100);
+      typeof u[P + 1] < "u" ? I >= A && I < O - (O - A) / 2 ? o = P : I >= A && I < O && (o = P + 1) : I >= A && (o = P);
     }
   if (i.initialized && o !== f && (!i.allowSlideNext && (p ? w > i.translate && w > i.minTranslate() : w < i.translate && w < i.minTranslate()) || !i.allowSlidePrev && w > i.translate && w > i.maxTranslate() && (f || 0) !== o))
     return !1;
   o !== (d || 0) && t && i.emit("beforeSlideChangeStart"), i.updateProgress(w);
   let y;
   o > f ? y = "next" : o < f ? y = "prev" : y = "reset";
-  const m = i.virtual && i.params.virtual.enabled;
-  if (!(m && n) && (p && -w === i.translate || !p && w === i.translate))
+  const v = i.virtual && i.params.virtual.enabled;
+  if (!(v && n) && (p && -w === i.translate || !p && w === i.translate))
     return i.updateActiveIndex(o), l.autoHeight && i.updateAutoHeight(), i.updateSlidesClasses(), l.effect !== "slide" && i.setTranslate(w), y !== "reset" && (i.transitionStart(t, y), i.transitionEnd(t, y)), !1;
   if (l.cssMode) {
-    const A = i.isHorizontal(), $ = p ? w : -w;
+    const P = i.isHorizontal(), I = p ? w : -w;
     if (e === 0)
-      m && (i.wrapperEl.style.scrollSnapType = "none", i._immediateVirtual = !0), m && !i._cssModeVirtualInitialSet && i.params.initialSlide > 0 ? (i._cssModeVirtualInitialSet = !0, requestAnimationFrame(() => {
-        _[A ? "scrollLeft" : "scrollTop"] = $;
-      })) : _[A ? "scrollLeft" : "scrollTop"] = $, m && requestAnimationFrame(() => {
+      v && (i.wrapperEl.style.scrollSnapType = "none", i._immediateVirtual = !0), v && !i._cssModeVirtualInitialSet && i.params.initialSlide > 0 ? (i._cssModeVirtualInitialSet = !0, requestAnimationFrame(() => {
+        _[P ? "scrollLeft" : "scrollTop"] = I;
+      })) : _[P ? "scrollLeft" : "scrollTop"] = I, v && requestAnimationFrame(() => {
         i.wrapperEl.style.scrollSnapType = "", i._immediateVirtual = !1;
       });
     else {
       if (!i.support.smoothScroll)
         return animateCSSModeScroll({
           swiper: i,
-          targetPosition: $,
-          side: A ? "left" : "top"
+          targetPosition: I,
+          side: P ? "left" : "top"
         }), !0;
       _.scrollTo({
-        [A ? "left" : "top"]: $,
+        [P ? "left" : "top"]: I,
         behavior: "smooth"
       });
     }
     return !0;
   }
   const E = getBrowser().isSafari;
-  return m && !n && E && i.isElement && i.virtual.update(!1, !1, o), i.setTransition(e), i.setTranslate(w), i.updateActiveIndex(o), i.updateSlidesClasses(), i.emit("beforeTransitionStart", e, s), i.transitionStart(t, y), e === 0 ? i.transitionEnd(t, y) : i.animating || (i.animating = !0, i.onSlideToWrapperTransitionEnd || (i.onSlideToWrapperTransitionEnd = function($) {
-    !i || i.destroyed || $.target === this && (i.wrapperEl.removeEventListener("transitionend", i.onSlideToWrapperTransitionEnd), i.onSlideToWrapperTransitionEnd = null, delete i.onSlideToWrapperTransitionEnd, i.transitionEnd(t, y));
+  return v && !n && E && i.isElement && i.virtual.update(!1, !1, o), i.setTransition(e), i.setTranslate(w), i.updateActiveIndex(o), i.updateSlidesClasses(), i.emit("beforeTransitionStart", e, s), i.transitionStart(t, y), e === 0 ? i.transitionEnd(t, y) : i.animating || (i.animating = !0, i.onSlideToWrapperTransitionEnd || (i.onSlideToWrapperTransitionEnd = function(I) {
+    !i || i.destroyed || I.target === this && (i.wrapperEl.removeEventListener("transitionend", i.onSlideToWrapperTransitionEnd), i.onSlideToWrapperTransitionEnd = null, delete i.onSlideToWrapperTransitionEnd, i.transitionEnd(t, y));
   }), i.wrapperEl.addEventListener("transitionend", i.onSlideToWrapperTransitionEnd)), !0;
 }
 function slideToLoop(r, e, t, s) {
@@ -13729,15 +14477,15 @@ function slidePrev(r, e, t) {
     return y < 0 ? -Math.floor(Math.abs(y)) : Math.floor(y);
   }
   const _ = p(f), h = i.map((y) => p(y)), g = n.freeMode && n.freeMode.enabled;
-  let v = i[h.indexOf(_) - 1];
-  if (typeof v > "u" && (n.cssMode || g)) {
+  let m = i[h.indexOf(_) - 1];
+  if (typeof m > "u" && (n.cssMode || g)) {
     let y;
-    i.forEach((m, b) => {
-      _ >= m && (y = b);
-    }), typeof y < "u" && (v = g ? i[y] : i[y > 0 ? y - 1 : y]);
+    i.forEach((v, b) => {
+      _ >= v && (y = b);
+    }), typeof y < "u" && (m = g ? i[y] : i[y > 0 ? y - 1 : y]);
   }
   let w = 0;
-  if (typeof v < "u" && (w = o.indexOf(v), w < 0 && (w = s.activeIndex - 1), n.slidesPerView === "auto" && n.slidesPerGroup === 1 && n.slidesPerGroupAuto && (w = w - s.slidesPerViewDynamic("previous", !0) + 1, w = Math.max(w, 0))), n.rewind && s.isBeginning) {
+  if (typeof m < "u" && (w = o.indexOf(m), w < 0 && (w = s.activeIndex - 1), n.slidesPerView === "auto" && n.slidesPerGroup === 1 && n.slidesPerGroupAuto && (w = w - s.slidesPerViewDynamic("previous", !0) + 1, w = Math.max(w, 0))), n.rewind && s.isBeginning) {
     const y = s.params.virtual && s.params.virtual.enabled && s.virtual ? s.virtual.slides.length - 1 : s.slides.length - 1;
     return s.slideTo(y, r, e, t);
   } else if (n.loop && s.activeIndex === 0 && n.cssMode)
@@ -13861,7 +14609,7 @@ function loopFix(r) {
     params: h
   } = u, {
     centeredSlides: g,
-    initialSlide: v
+    initialSlide: m
   } = h;
   if (u.allowSlidePrev = !0, u.allowSlideNext = !0, u.virtual && h.virtual.enabled) {
     t && (!h.centeredSlides && u.snapIndex === 0 ? u.slideTo(u.virtual.slides.length, 0, !1, !0) : h.centeredSlides && u.snapIndex < h.slidesPerView ? u.slideTo(u.virtual.slides.length + u.snapIndex, 0, !1, !0) : u.snapIndex === u.snapGrid.length - 1 && u.slideTo(u.virtual.slidesBefore, 0, !1, !0)), u.allowSlidePrev = f, u.allowSlideNext = p, u.emit("loopFix");
@@ -13870,64 +14618,64 @@ function loopFix(r) {
   let w = h.slidesPerView;
   w === "auto" ? w = u.slidesPerViewDynamic() : (w = Math.ceil(parseFloat(h.slidesPerView, 10)), g && w % 2 === 0 && (w = w + 1));
   const y = h.slidesPerGroupAuto ? w : h.slidesPerGroup;
-  let m = g ? Math.max(y, Math.ceil(w / 2)) : y;
-  m % y !== 0 && (m += y - m % y), m += h.loopAdditionalSlides, u.loopedSlides = m;
+  let v = g ? Math.max(y, Math.ceil(w / 2)) : y;
+  v % y !== 0 && (v += y - v % y), v += h.loopAdditionalSlides, u.loopedSlides = v;
   const b = u.grid && h.grid && h.grid.rows > 1;
-  d.length < w + m || u.params.effect === "cards" && d.length < w + m * 2 ? showWarning("Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters") : b && h.grid.fill === "row" && showWarning("Swiper Loop Warning: Loop mode is not compatible with grid.fill = `row`");
-  const S = [], E = [], A = b ? Math.ceil(d.length / h.grid.rows) : d.length, $ = o && A - v < w && !g;
-  let x = $ ? v : u.activeIndex;
-  typeof i > "u" ? i = u.getSlideIndex(d.find((P) => P.classList.contains(h.slideActiveClass))) : x = i;
-  const I = s === "next" || !s, R = s === "prev" || !s;
-  let C = 0, k = 0;
-  const O = (b ? d[i].column : i) + (g && typeof n > "u" ? -w / 2 + 0.5 : 0);
-  if (O < m) {
-    C = Math.max(m - O, y);
-    for (let P = 0; P < m - O; P += 1) {
-      const j = P - Math.floor(P / A) * A;
+  d.length < w + v || u.params.effect === "cards" && d.length < w + v * 2 ? showWarning("Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters") : b && h.grid.fill === "row" && showWarning("Swiper Loop Warning: Loop mode is not compatible with grid.fill = `row`");
+  const S = [], E = [], P = b ? Math.ceil(d.length / h.grid.rows) : d.length, I = o && P - m < w && !g;
+  let A = I ? m : u.activeIndex;
+  typeof i > "u" ? i = u.getSlideIndex(d.find(($) => $.classList.contains(h.slideActiveClass))) : A = i;
+  const O = s === "next" || !s, R = s === "prev" || !s;
+  let x = 0, k = 0;
+  const C = (b ? d[i].column : i) + (g && typeof n > "u" ? -w / 2 + 0.5 : 0);
+  if (C < v) {
+    x = Math.max(v - C, y);
+    for (let $ = 0; $ < v - C; $ += 1) {
+      const j = $ - Math.floor($ / P) * P;
       if (b) {
-        const M = A - j - 1;
-        for (let L = d.length - 1; L >= 0; L -= 1)
-          d[L].column === M && S.push(L);
+        const B = P - j - 1;
+        for (let M = d.length - 1; M >= 0; M -= 1)
+          d[M].column === B && S.push(M);
       } else
-        S.push(A - j - 1);
+        S.push(P - j - 1);
     }
-  } else if (O + w > A - m) {
-    k = Math.max(O - (A - m * 2), y), $ && (k = Math.max(k, w - A + v + 1));
-    for (let P = 0; P < k; P += 1) {
-      const j = P - Math.floor(P / A) * A;
-      b ? d.forEach((M, L) => {
-        M.column === j && E.push(L);
+  } else if (C + w > P - v) {
+    k = Math.max(C - (P - v * 2), y), I && (k = Math.max(k, w - P + m + 1));
+    for (let $ = 0; $ < k; $ += 1) {
+      const j = $ - Math.floor($ / P) * P;
+      b ? d.forEach((B, M) => {
+        B.column === j && E.push(M);
       }) : E.push(j);
     }
   }
   if (u.__preventObserver__ = !0, requestAnimationFrame(() => {
     u.__preventObserver__ = !1;
-  }), u.params.effect === "cards" && d.length < w + m * 2 && (E.includes(i) && E.splice(E.indexOf(i), 1), S.includes(i) && S.splice(S.indexOf(i), 1)), R && S.forEach((P) => {
-    d[P].swiperLoopMoveDOM = !0, _.prepend(d[P]), d[P].swiperLoopMoveDOM = !1;
-  }), I && E.forEach((P) => {
-    d[P].swiperLoopMoveDOM = !0, _.append(d[P]), d[P].swiperLoopMoveDOM = !1;
-  }), u.recalcSlides(), h.slidesPerView === "auto" ? u.updateSlides() : b && (S.length > 0 && R || E.length > 0 && I) && u.slides.forEach((P, j) => {
-    u.grid.updateSlide(j, P, u.slides);
+  }), u.params.effect === "cards" && d.length < w + v * 2 && (E.includes(i) && E.splice(E.indexOf(i), 1), S.includes(i) && S.splice(S.indexOf(i), 1)), R && S.forEach(($) => {
+    d[$].swiperLoopMoveDOM = !0, _.prepend(d[$]), d[$].swiperLoopMoveDOM = !1;
+  }), O && E.forEach(($) => {
+    d[$].swiperLoopMoveDOM = !0, _.append(d[$]), d[$].swiperLoopMoveDOM = !1;
+  }), u.recalcSlides(), h.slidesPerView === "auto" ? u.updateSlides() : b && (S.length > 0 && R || E.length > 0 && O) && u.slides.forEach(($, j) => {
+    u.grid.updateSlide(j, $, u.slides);
   }), h.watchSlidesProgress && u.updateSlidesOffset(), t) {
     if (S.length > 0 && R) {
       if (typeof e > "u") {
-        const P = u.slidesGrid[x], M = u.slidesGrid[x + C] - P;
-        c ? u.setTranslate(u.translate - M) : (u.slideTo(x + Math.ceil(C), 0, !1, !0), n && (u.touchEventsData.startTranslate = u.touchEventsData.startTranslate - M, u.touchEventsData.currentTranslate = u.touchEventsData.currentTranslate - M));
+        const $ = u.slidesGrid[A], B = u.slidesGrid[A + x] - $;
+        c ? u.setTranslate(u.translate - B) : (u.slideTo(A + Math.ceil(x), 0, !1, !0), n && (u.touchEventsData.startTranslate = u.touchEventsData.startTranslate - B, u.touchEventsData.currentTranslate = u.touchEventsData.currentTranslate - B));
       } else if (n) {
-        const P = b ? S.length / h.grid.rows : S.length;
-        u.slideTo(u.activeIndex + P, 0, !1, !0), u.touchEventsData.currentTranslate = u.translate;
+        const $ = b ? S.length / h.grid.rows : S.length;
+        u.slideTo(u.activeIndex + $, 0, !1, !0), u.touchEventsData.currentTranslate = u.translate;
       }
-    } else if (E.length > 0 && I)
+    } else if (E.length > 0 && O)
       if (typeof e > "u") {
-        const P = u.slidesGrid[x], M = u.slidesGrid[x - k] - P;
-        c ? u.setTranslate(u.translate - M) : (u.slideTo(x - k, 0, !1, !0), n && (u.touchEventsData.startTranslate = u.touchEventsData.startTranslate - M, u.touchEventsData.currentTranslate = u.touchEventsData.currentTranslate - M));
+        const $ = u.slidesGrid[A], B = u.slidesGrid[A - k] - $;
+        c ? u.setTranslate(u.translate - B) : (u.slideTo(A - k, 0, !1, !0), n && (u.touchEventsData.startTranslate = u.touchEventsData.startTranslate - B, u.touchEventsData.currentTranslate = u.touchEventsData.currentTranslate - B));
       } else {
-        const P = b ? E.length / h.grid.rows : E.length;
-        u.slideTo(u.activeIndex - P, 0, !1, !0);
+        const $ = b ? E.length / h.grid.rows : E.length;
+        u.slideTo(u.activeIndex - $, 0, !1, !0);
       }
   }
   if (u.allowSlidePrev = f, u.allowSlideNext = p, u.controller && u.controller.control && !l) {
-    const P = {
+    const $ = {
       slideRealIndex: e,
       direction: s,
       setTranslate: n,
@@ -13936,11 +14684,11 @@ function loopFix(r) {
     };
     Array.isArray(u.controller.control) ? u.controller.control.forEach((j) => {
       !j.destroyed && j.params.loop && j.loopFix({
-        ...P,
+        ...$,
         slideTo: j.params.slidesPerView === h.slidesPerView ? t : !1
       });
     }) : u.controller.control instanceof u.constructor && u.controller.control.params.loop && u.controller.control.loopFix({
-      ...P,
+      ...$,
       slideTo: u.controller.control.params.slidesPerView === h.slidesPerView ? t : !1
     });
   }
@@ -14048,8 +14796,8 @@ function onTouchStart(r) {
   }), o.startX = _, o.startY = h, n.touchStartTime = now(), e.allowClick = !0, e.updateSize(), e.swipeDirection = void 0, i.threshold > 0 && (n.allowThresholdMove = !1);
   let g = !0;
   c.matches(n.focusableElements) && (g = !1, c.nodeName === "SELECT" && (n.isTouched = !1)), t.activeElement && t.activeElement.matches(n.focusableElements) && t.activeElement !== c && (s.pointerType === "mouse" || s.pointerType !== "mouse" && !c.matches(n.focusableElements)) && t.activeElement.blur();
-  const v = g && e.allowTouchMove && i.touchStartPreventDefault;
-  (i.touchStartForcePreventDefault || v) && !c.isContentEditable && s.preventDefault(), i.freeMode && i.freeMode.enabled && e.freeMode && e.animating && !i.cssMode && e.freeMode.onTouchStart(), e.emit("touchStart", s);
+  const m = g && e.allowTouchMove && i.touchStartPreventDefault;
+  (i.touchStartForcePreventDefault || m) && !c.isContentEditable && s.preventDefault(), i.freeMode && i.freeMode.enabled && e.freeMode && e.animating && !i.cssMode && e.freeMode.onTouchStart(), e.emit("touchStart", s);
 }
 function onTouchMove(r) {
   const e = getDocument(), t = this, s = t.touchEventsData, {
@@ -14117,7 +14865,7 @@ function onTouchMove(r) {
   t.allowClick = !1, !n.cssMode && c.cancelable && c.preventDefault(), n.touchMoveStopPropagation && !n.nested && c.stopPropagation();
   let h = t.isHorizontal() ? p : _, g = t.isHorizontal() ? i.currentX - i.previousX : i.currentY - i.previousY;
   n.oneWayMovement && (h = Math.abs(h) * (o ? 1 : -1), g = Math.abs(g) * (o ? 1 : -1)), i.diff = h, h *= n.touchRatio, o && (h = -h, g = -g);
-  const v = t.touchesDirection;
+  const m = t.touchesDirection;
   t.swipeDirection = h > 0 ? "prev" : "next", t.touchesDirection = g > 0 ? "prev" : "next";
   const w = t.params.loop && !n.cssMode, y = t.touchesDirection === "next" && t.allowSlideNext || t.touchesDirection === "prev" && t.allowSlidePrev;
   if (!s.isMoved) {
@@ -14135,7 +14883,7 @@ function onTouchMove(r) {
     }
     s.allowMomentumBounce = !1, n.grabCursor && (t.allowSlideNext === !0 || t.allowSlidePrev === !0) && t.setGrabCursor(!0), t.emit("sliderFirstMove", c);
   }
-  if ((/* @__PURE__ */ new Date()).getTime(), n._loopSwapReset !== !1 && s.isMoved && s.allowThresholdMove && v !== t.touchesDirection && w && y && Math.abs(h) >= 1) {
+  if ((/* @__PURE__ */ new Date()).getTime(), n._loopSwapReset !== !1 && s.isMoved && s.allowThresholdMove && m !== t.touchesDirection && w && y && Math.abs(h) >= 1) {
     Object.assign(i, {
       startX: d,
       startY: f,
@@ -14146,16 +14894,16 @@ function onTouchMove(r) {
     return;
   }
   t.emit("sliderMove", c), s.isMoved = !0, s.currentTranslate = h + s.startTranslate;
-  let m = !0, b = n.resistanceRatio;
+  let v = !0, b = n.resistanceRatio;
   if (n.touchReleaseOnEdges && (b = 0), h > 0 ? (w && y && s.allowThresholdMove && s.currentTranslate > (n.centeredSlides ? t.minTranslate() - t.slidesSizesGrid[t.activeIndex + 1] - (n.slidesPerView !== "auto" && t.slides.length - n.slidesPerView >= 2 ? t.slidesSizesGrid[t.activeIndex + 1] + t.params.spaceBetween : 0) - t.params.spaceBetween : t.minTranslate()) && t.loopFix({
     direction: "prev",
     setTranslate: !0,
     activeSlideIndex: 0
-  }), s.currentTranslate > t.minTranslate() && (m = !1, n.resistance && (s.currentTranslate = t.minTranslate() - 1 + (-t.minTranslate() + s.startTranslate + h) ** b))) : h < 0 && (w && y && s.allowThresholdMove && s.currentTranslate < (n.centeredSlides ? t.maxTranslate() + t.slidesSizesGrid[t.slidesSizesGrid.length - 1] + t.params.spaceBetween + (n.slidesPerView !== "auto" && t.slides.length - n.slidesPerView >= 2 ? t.slidesSizesGrid[t.slidesSizesGrid.length - 1] + t.params.spaceBetween : 0) : t.maxTranslate()) && t.loopFix({
+  }), s.currentTranslate > t.minTranslate() && (v = !1, n.resistance && (s.currentTranslate = t.minTranslate() - 1 + (-t.minTranslate() + s.startTranslate + h) ** b))) : h < 0 && (w && y && s.allowThresholdMove && s.currentTranslate < (n.centeredSlides ? t.maxTranslate() + t.slidesSizesGrid[t.slidesSizesGrid.length - 1] + t.params.spaceBetween + (n.slidesPerView !== "auto" && t.slides.length - n.slidesPerView >= 2 ? t.slidesSizesGrid[t.slidesSizesGrid.length - 1] + t.params.spaceBetween : 0) : t.maxTranslate()) && t.loopFix({
     direction: "next",
     setTranslate: !0,
     activeSlideIndex: t.slides.length - (n.slidesPerView === "auto" ? t.slidesPerViewDynamic() : Math.ceil(parseFloat(n.slidesPerView, 10)))
-  }), s.currentTranslate < t.maxTranslate() && (m = !1, n.resistance && (s.currentTranslate = t.maxTranslate() + 1 - (t.maxTranslate() - s.startTranslate - h) ** b))), m && (c.preventedByNestedSwiper = !0), !t.allowSlideNext && t.swipeDirection === "next" && s.currentTranslate < s.startTranslate && (s.currentTranslate = s.startTranslate), !t.allowSlidePrev && t.swipeDirection === "prev" && s.currentTranslate > s.startTranslate && (s.currentTranslate = s.startTranslate), !t.allowSlidePrev && !t.allowSlideNext && (s.currentTranslate = s.startTranslate), n.threshold > 0)
+  }), s.currentTranslate < t.maxTranslate() && (v = !1, n.resistance && (s.currentTranslate = t.maxTranslate() + 1 - (t.maxTranslate() - s.startTranslate - h) ** b))), v && (c.preventedByNestedSwiper = !0), !t.allowSlideNext && t.swipeDirection === "next" && s.currentTranslate < s.startTranslate && (s.currentTranslate = s.startTranslate), !t.allowSlidePrev && t.swipeDirection === "prev" && s.currentTranslate > s.startTranslate && (s.currentTranslate = s.startTranslate), !t.allowSlidePrev && !t.allowSlideNext && (s.currentTranslate = s.startTranslate), n.threshold > 0)
     if (Math.abs(h) > n.threshold || s.allowThresholdMove) {
       if (!s.allowThresholdMove) {
         s.allowThresholdMove = !0, i.startX = i.currentX, i.startY = i.currentY, s.currentTranslate = s.startTranslate, i.diff = t.isHorizontal() ? i.currentX - i.startX : i.currentY - i.startY;
@@ -14216,20 +14964,20 @@ function onTouchEnd(r) {
     return;
   }
   const h = _ >= -e.maxTranslate() && !e.params.loop;
-  let g = 0, v = e.slidesSizesGrid[0];
+  let g = 0, m = e.slidesSizesGrid[0];
   for (let S = 0; S < u.length; S += S < o.slidesPerGroupSkip ? 1 : o.slidesPerGroup) {
     const E = S < o.slidesPerGroupSkip - 1 ? 1 : o.slidesPerGroup;
-    typeof u[S + E] < "u" ? (h || _ >= u[S] && _ < u[S + E]) && (g = S, v = u[S + E] - u[S]) : (h || _ >= u[S]) && (g = S, v = u[u.length - 1] - u[u.length - 2]);
+    typeof u[S + E] < "u" ? (h || _ >= u[S] && _ < u[S + E]) && (g = S, m = u[S + E] - u[S]) : (h || _ >= u[S]) && (g = S, m = u[u.length - 1] - u[u.length - 2]);
   }
   let w = null, y = null;
   o.rewind && (e.isBeginning ? y = o.virtual && o.virtual.enabled && e.virtual ? e.virtual.slides.length - 1 : e.slides.length - 1 : e.isEnd && (w = 0));
-  const m = (_ - u[g]) / v, b = g < o.slidesPerGroupSkip - 1 ? 1 : o.slidesPerGroup;
+  const v = (_ - u[g]) / m, b = g < o.slidesPerGroupSkip - 1 ? 1 : o.slidesPerGroup;
   if (p > o.longSwipesMs) {
     if (!o.longSwipes) {
       e.slideTo(e.activeIndex);
       return;
     }
-    e.swipeDirection === "next" && (m >= o.longSwipesRatio ? e.slideTo(o.rewind && e.isEnd ? w : g + b) : e.slideTo(g)), e.swipeDirection === "prev" && (m > 1 - o.longSwipesRatio ? e.slideTo(g + b) : y !== null && m < 0 && Math.abs(m) > o.longSwipesRatio ? e.slideTo(y) : e.slideTo(g));
+    e.swipeDirection === "next" && (v >= o.longSwipesRatio ? e.slideTo(o.rewind && e.isEnd ? w : g + b) : e.slideTo(g)), e.swipeDirection === "prev" && (v > 1 - o.longSwipesRatio ? e.slideTo(g + b) : y !== null && v < 0 && Math.abs(v) > o.longSwipesRatio ? e.slideTo(y) : e.slideTo(g));
   } else {
     if (!o.shortSwipes) {
       e.slideTo(e.activeIndex);
@@ -14342,20 +15090,20 @@ function setBreakpoint() {
   if (!i || i && Object.keys(i).length === 0) return;
   const o = getDocument(), l = s.breakpointsBase === "window" || !s.breakpointsBase ? s.breakpointsBase : "container", c = ["window", "container"].includes(s.breakpointsBase) || !s.breakpointsBase ? r.el : o.querySelector(s.breakpointsBase), u = r.getBreakpoint(i, l, c);
   if (!u || r.currentBreakpoint === u) return;
-  const f = (u in i ? i[u] : void 0) || r.originalParams, p = isGridEnabled(r, s), _ = isGridEnabled(r, f), h = r.params.grabCursor, g = f.grabCursor, v = s.enabled;
+  const f = (u in i ? i[u] : void 0) || r.originalParams, p = isGridEnabled(r, s), _ = isGridEnabled(r, f), h = r.params.grabCursor, g = f.grabCursor, m = s.enabled;
   p && !_ ? (n.classList.remove(`${s.containerModifierClass}grid`, `${s.containerModifierClass}grid-column`), r.emitContainerClasses()) : !p && _ && (n.classList.add(`${s.containerModifierClass}grid`), (f.grid.fill && f.grid.fill === "column" || !f.grid.fill && s.grid.fill === "column") && n.classList.add(`${s.containerModifierClass}grid-column`), r.emitContainerClasses()), h && !g ? r.unsetGrabCursor() : !h && g && r.setGrabCursor(), ["navigation", "pagination", "scrollbar"].forEach((E) => {
     if (typeof f[E] > "u") return;
-    const A = s[E] && s[E].enabled, $ = f[E] && f[E].enabled;
-    A && !$ && r[E].disable(), !A && $ && r[E].enable();
+    const P = s[E] && s[E].enabled, I = f[E] && f[E].enabled;
+    P && !I && r[E].disable(), !P && I && r[E].enable();
   });
-  const w = f.direction && f.direction !== s.direction, y = s.loop && (f.slidesPerView !== s.slidesPerView || w), m = s.loop;
+  const w = f.direction && f.direction !== s.direction, y = s.loop && (f.slidesPerView !== s.slidesPerView || w), v = s.loop;
   w && t && r.changeDirection(), extend(r.params, f);
   const b = r.params.enabled, S = r.params.loop;
   Object.assign(r, {
     allowTouchMove: r.params.allowTouchMove,
     allowSlideNext: r.params.allowSlideNext,
     allowSlidePrev: r.params.allowSlidePrev
-  }), v && !b ? r.disable() : !v && b && r.enable(), r.currentBreakpoint = u, r.emit("_beforeBreakpoint", f), t && (y ? (r.loopDestroy(), r.loopCreate(e), r.updateSlides()) : !m && S ? (r.loopCreate(e), r.updateSlides()) : m && !S && r.loopDestroy()), r.emit("breakpoint", f);
+  }), m && !b ? r.disable() : !m && b && r.enable(), r.currentBreakpoint = u, r.emit("_beforeBreakpoint", f), t && (y ? (r.loopDestroy(), r.loopCreate(e), r.updateSlides()) : !v && S ? (r.loopCreate(e), r.updateSlides()) : v && !S && r.loopDestroy()), r.emit("breakpoint", f);
 }
 function getBreakpoint(r, e, t) {
   if (e === void 0 && (e = "window"), !r || e === "container" && !t) return;
@@ -14932,7 +15680,7 @@ function KnitterReviewsList(r, e) {
   const l = async () => {
     if (!t()) return console.error("No id provided");
     const { data: h, error: g } = await supabase.from("knitter_reviews").select("*").order("created_at", { ascending: !1 }).eq("knitter_id", t());
-    h && (set(n, h.map((v) => ({ ...v, created_at: new Date(v.created_at) }))), setTimeout(() => set(i, !0)), set(o, !0));
+    h && (set(n, h.map((m) => ({ ...m, created_at: new Date(m.created_at) }))), setTimeout(() => set(i, !0)), set(o, !0));
   };
   legacy_pre_effect(() => (deep_read_state(s()), get$2(o)), () => {
     !s() && !get$2(o) && l();
@@ -14956,8 +15704,8 @@ function KnitterReviewsList(r, e) {
   TitleType(d, {
     children: (h, g) => {
       next();
-      var v = text("Customers feedback");
-      append(h, v);
+      var m = text("Customers feedback");
+      append(h, m);
     },
     $$slots: { default: !0 }
   });
@@ -14966,26 +15714,26 @@ function KnitterReviewsList(r, e) {
     var p = (h) => {
       KnitterReviewsListSkeleton(h);
     }, _ = (h) => {
-      var g = comment(), v = first_child(g);
+      var g = comment(), m = first_child(g);
       {
-        var w = (m) => {
+        var w = (v) => {
           var b = root_4();
-          append(m, b);
-        }, y = (m) => {
+          append(v, b);
+        }, y = (v) => {
           var b = root_5();
           each(b, 5, () => get$2(n), index, (S, E) => {
-            var A = root_6$1(), $ = child(A);
-            KnitterReviewItem($, {
+            var P = root_6$1(), I = child(P);
+            KnitterReviewItem(I, {
               get review() {
                 return get$2(E);
               }
-            }), reset(A), append(S, A);
-          }), reset(b), transition$1(3, b, () => fade), append(m, b);
+            }), reset(P), append(S, P);
+          }), reset(b), transition$1(3, b, () => fade), append(v, b);
         };
         if_block(
-          v,
-          (m) => {
-            get$2(n), untrack(() => get$2(n).length === 0) ? m(w) : m(y, !1);
+          m,
+          (v) => {
+            get$2(n), untrack(() => get$2(n).length === 0) ? v(w) : v(y, !1);
           },
           !0
         );
@@ -15070,29 +15818,29 @@ function KnitterReviewForm(r, e) {
   TitleType(d, {
     children: (h, g) => {
       next();
-      var v = text("Leave a feedback");
-      append(h, v);
+      var m = text("Leave a feedback");
+      append(h, m);
     },
     $$slots: { default: !0 }
   });
   var f = sibling(d, 2);
   {
     var p = (h) => {
-      var g = root_2$2(), v = child(g);
-      remove_textarea_child(v);
-      var w = sibling(v, 2), y = child(w);
+      var g = root_2$2(), m = child(g);
+      remove_textarea_child(m);
+      var w = sibling(m, 2), y = child(w);
       remove_input_defaults(y);
-      var m = sibling(y, 2);
+      var v = sibling(y, 2);
       {
         var b = (E) => {
-          var A = root_3$1();
-          append(E, A);
+          var P = root_3$1();
+          append(E, P);
         };
-        if_block(m, (E) => {
+        if_block(v, (E) => {
           get$2(i) === "error" && E(b);
         });
       }
-      var S = sibling(m, 2);
+      var S = sibling(v, 2);
       {
         let E = /* @__PURE__ */ derived_safe_equal(() => !get$2(n) || !get$2(s));
         Button(S, {
@@ -15101,24 +15849,24 @@ function KnitterReviewForm(r, e) {
           get disabled() {
             return get$2(E);
           },
-          children: (A, $) => {
+          children: (P, I) => {
             next();
-            var x = text("Leave a feedback");
-            append(A, x);
+            var A = text("Leave a feedback");
+            append(P, A);
           },
           $$slots: { default: !0 }
         });
       }
-      reset(w), reset(g), bind_value(v, () => get$2(n), (E) => set(n, E)), bind_value(y, () => get$2(s), (E) => set(s, E)), event$1("submit", g, preventDefault(l)), append(h, g);
+      reset(w), reset(g), bind_value(m, () => get$2(n), (E) => set(n, E)), bind_value(y, () => get$2(s), (E) => set(s, E)), event$1("submit", g, preventDefault(l)), append(h, g);
     }, _ = (h) => {
-      var g = comment(), v = first_child(g);
+      var g = comment(), m = first_child(g);
       {
         var w = (y) => {
-          var m = root_6();
-          append(y, m);
+          var v = root_6();
+          append(y, v);
         };
         if_block(
-          v,
+          m,
           (y) => {
             get$2(i) === "success" && y(w);
           },
@@ -15183,24 +15931,24 @@ function KnittersAccordionItem(r, e) {
     !get$2(c) || !get$2(d) || (set(u, !0), get$2(d).addEventListener("transitionend", h), setTimeout(() => {
       mutate(d, get$2(d).style.maxHeight = `${get$2(d).scrollHeight}px`), mutate(d, get$2(d).style.transition = "max-height .3s ease");
     }), l || (l = !0));
-  }, v = () => {
+  }, m = () => {
     if (get$2(c) || !get$2(d)) return console.warn("No content element");
     set(u, !0), l && mutate(d, get$2(d).style.maxHeight = `${get$2(d).scrollHeight}px`), setTimeout(() => {
       mutate(d, get$2(d).style.maxHeight = "0px"), mutate(d, get$2(d).style.transition = "max-height .15s ease");
     }), l || (l = !0);
   }, w = () => {
   }, y = () => {
-    const U = new URLSearchParams(window.location.search), { knitter: H } = Object.fromEntries(U.entries());
-    H === s() && set(c, !0);
+    const U = new URLSearchParams(window.location.search), { knitter: z } = Object.fromEntries(U.entries());
+    z === s() && set(c, !0);
   };
   onMount(() => {
-    get$2(c) ? g() : v(), y();
+    get$2(c) ? g() : m(), y();
   }), legacy_pre_effect(() => get$2(c), () => {
     get$2(c) && g();
   }), legacy_pre_effect(() => get$2(c), () => {
-    get$2(c) || v();
+    get$2(c) || m();
   }), legacy_pre_effect_reset();
-  var m = {
+  var v = {
     get name() {
       return t();
     },
@@ -15235,58 +15983,58 @@ function KnittersAccordionItem(r, e) {
   init();
   var b = root$6();
   event$1("resize", $window, w);
-  var S = child(b), E = child(S), A = sibling(E, 2), $ = child(A, !0);
-  reset(A);
-  var x = sibling(A, 2);
-  let I;
-  var R = child(x);
-  ArrowIcon(R), reset(x), reset(S);
-  var C = sibling(S, 2), k = child(C);
+  var S = child(b), E = child(S), P = sibling(E, 2), I = child(P, !0);
+  reset(P);
+  var A = sibling(P, 2);
+  let O;
+  var R = child(A);
+  ArrowIcon(R), reset(A), reset(S);
+  var x = sibling(S, 2), k = child(x);
   let N;
-  var O = child(k, !0);
+  var C = child(k, !0);
   reset(k);
-  var P = sibling(k, 2);
+  var $ = sibling(k, 2);
   let j;
-  var M = sibling(P, 2);
+  var B = sibling($, 2);
   {
-    var L = (U) => {
-      var H = root_1$7();
+    var M = (U) => {
+      var z = root_1$7();
       let X;
-      var we = child(H);
+      var we = child(z);
       {
-        let Ie = /* @__PURE__ */ derived_safe_equal(() => !get$2(c) || get$2(u));
+        let Oe = /* @__PURE__ */ derived_safe_equal(() => !get$2(c) || get$2(u));
         KnitterReviewsList(we, {
           get id() {
             return s();
           },
           get isFetchBlock() {
-            return get$2(Ie);
+            return get$2(Oe);
           }
         });
       }
-      var Be = sibling(we, 2);
-      KnitterReviewForm(Be, {
+      var Ue = sibling(we, 2);
+      KnitterReviewForm(Ue, {
         get id() {
           return s();
         }
-      }), reset(H), template_effect((Ie) => X = set_class(H, 1, "reviews svelte-1mwffhh", null, X, Ie), [
+      }), reset(z), template_effect((Oe) => X = set_class(z, 1, "reviews svelte-1mwffhh", null, X, Oe), [
         () => ({ "fade-in": get$2(c), "fade-out": !get$2(c) })
-      ]), append(U, H);
+      ]), append(U, z);
     };
-    if_block(M, (U) => {
-      s() && U(L);
+    if_block(B, (U) => {
+      s() && U(M);
     });
   }
-  return reset(C), bind_this(C, (U) => set(d, U), () => get$2(d)), reset(b), bind_this(b, (U) => set(f, U), () => get$2(f)), template_effect(
-    (U, H, X) => {
-      set_attribute(E, "src", o()), set_attribute(E, "alt", `Small picture of ${t() ?? ""}`), set_text($, t()), I = set_class(x, 1, "arrow svelte-1mwffhh", null, I, U), N = set_class(k, 1, "svelte-1mwffhh", null, N, H), set_text(O, n()), j = set_class(P, 1, "photo svelte-1mwffhh", null, j, X), set_attribute(P, "src", i()), set_attribute(P, "alt", `Picture of ${t() ?? ""}`);
+  return reset(x), bind_this(x, (U) => set(d, U), () => get$2(d)), reset(b), bind_this(b, (U) => set(f, U), () => get$2(f)), template_effect(
+    (U, z, X) => {
+      set_attribute(E, "src", o()), set_attribute(E, "alt", `Small picture of ${t() ?? ""}`), set_text(I, t()), O = set_class(A, 1, "arrow svelte-1mwffhh", null, O, U), N = set_class(k, 1, "svelte-1mwffhh", null, N, z), set_text(C, n()), j = set_class($, 1, "photo svelte-1mwffhh", null, j, X), set_attribute($, "src", i()), set_attribute($, "alt", `Picture of ${t() ?? ""}`);
     },
     [
       () => ({ "arrow---down": get$2(c) }),
       () => ({ "fade-in": get$2(c), "fade-out": !get$2(c) }),
       () => ({ "fade-in": get$2(c), "fade-out": !get$2(c) })
     ]
-  ), event$1("click", S, p), append(r, b), pop(m);
+  ), event$1("click", S, p), append(r, b), pop(v);
 }
 customElements.define("knitter-accordion-item", create_custom_element(KnittersAccordionItem, { name: {}, id: {}, description: {}, photo: {}, avatar: {} }, [], [], !0));
 var root$5 = /* @__PURE__ */ from_html('<div class="svelte-xwfa80"><!></div>');
@@ -15351,115 +16099,115 @@ const $$css$5 = {
 function CurrencySelector(r, e) {
   push(e, !1), append_styles(r, $$css$5);
   const t = () => store_get(displayCurrency, "$displayCurrency", s), [s, n] = setup_stores();
-  function i(x, {
-    y: I = 100,
+  function i(A, {
+    y: O = 100,
     scale: R = 0.5,
-    duration: C = 300,
+    duration: x = 300,
     easing: k = sineIn
     // Try different easing functions
   }) {
     return {
-      duration: C,
+      duration: x,
       easing: k,
       css: (N) => `
         transform:
           scale(${R + (1 - R) * N})
-          translateY(${(1 - N) * I}px);
+          translateY(${(1 - N) * O}px);
         opacity: ${N};
       `
     };
   }
   let o = prop(e, "params", 12, void 0), l = prop(e, "available", 28, () => []), c = prop(e, "active", 12, void 0), u = prop(e, "left", 12, !0), d = prop(e, "center", 12, !1), f = prop(e, "right", 12, !1), p = prop(e, "bg", 12, "#eeeeea"), _ = /* @__PURE__ */ mutable_source(!1), h = /* @__PURE__ */ mutable_source(!1);
-  const g = (x) => {
-    set(_, !1), set(h, !0), c(x), displayCurrency.set(x.currency);
+  const g = (A) => {
+    set(_, !1), set(h, !0), c(A), displayCurrency.set(A.currency);
   };
   legacy_pre_effect(
     () => (deep_read_state(o()), t(), get$2(h)),
     () => {
       if (o() && t())
         try {
-          const { available: x } = JSON.parse(o());
-          l(x), c(x.find((I) => I.currency === t()));
-        } catch (x) {
-          console.error("UI", x);
+          const { available: A } = JSON.parse(o());
+          l(A), c(A.find((O) => O.currency === t()));
+        } catch (A) {
+          console.error("UI", A);
         }
       else get$2(h) && set(h, !1);
     }
   ), legacy_pre_effect_reset();
-  var v = {
+  var m = {
     get params() {
       return o();
     },
-    set params(x) {
-      o(x), flushSync();
+    set params(A) {
+      o(A), flushSync();
     },
     get available() {
       return l();
     },
-    set available(x) {
-      l(x), flushSync();
+    set available(A) {
+      l(A), flushSync();
     },
     get active() {
       return c();
     },
-    set active(x) {
-      c(x), flushSync();
+    set active(A) {
+      c(A), flushSync();
     },
     get left() {
       return u();
     },
-    set left(x) {
-      u(x), flushSync();
+    set left(A) {
+      u(A), flushSync();
     },
     get center() {
       return d();
     },
-    set center(x) {
-      d(x), flushSync();
+    set center(A) {
+      d(A), flushSync();
     },
     get right() {
       return f();
     },
-    set right(x) {
-      f(x), flushSync();
+    set right(A) {
+      f(A), flushSync();
     },
     get bg() {
       return p();
     },
-    set bg(x) {
-      p(x), flushSync();
+    set bg(A) {
+      p(A), flushSync();
     }
   };
   init();
   var w = root$3(), y = child(w);
   {
-    var m = (x) => {
-      var I = root_1$5(), R = child(I);
-      reset(I), template_effect(() => set_text(R, `${deep_read_state(c()), untrack(() => c().symbol) ?? ""} ${deep_read_state(c()), untrack(() => c().currency) ?? ""}`)), event$1("click", I, () => set(_, !get$2(_))), append(x, I);
+    var v = (A) => {
+      var O = root_1$5(), R = child(O);
+      reset(O), template_effect(() => set_text(R, `${deep_read_state(c()), untrack(() => c().symbol) ?? ""} ${deep_read_state(c()), untrack(() => c().currency) ?? ""}`)), event$1("click", O, () => set(_, !get$2(_))), append(A, O);
     };
-    if_block(y, (x) => {
-      c() && x(m);
+    if_block(y, (A) => {
+      c() && A(v);
     });
   }
   var b = sibling(y, 2);
   let S;
   var E = child(b);
   {
-    var A = (x) => {
-      var I = root_2$1();
-      each(I, 5, l, index, (R, C) => {
-        var k = root_3(), N = child(k), O = child(N);
-        reset(N), reset(k), template_effect(() => set_text(O, `${get$2(C), untrack(() => get$2(C).symbol) ?? ""}
-							${get$2(C), untrack(() => get$2(C).currency) ?? ""}`)), event$1("click", N, () => g(get$2(C))), append(R, k);
-      }), reset(I), template_effect(() => set_style(I, `background: ${p()}`)), transition$1(3, I, () => i, () => ({ y: -16, scale: 0.95, duration: 250, easing: expoOut })), append(x, I);
+    var P = (A) => {
+      var O = root_2$1();
+      each(O, 5, l, index, (R, x) => {
+        var k = root_3(), N = child(k), C = child(N);
+        reset(N), reset(k), template_effect(() => set_text(C, `${get$2(x), untrack(() => get$2(x).symbol) ?? ""}
+							${get$2(x), untrack(() => get$2(x).currency) ?? ""}`)), event$1("click", N, () => g(get$2(x))), append(R, k);
+      }), reset(O), template_effect(() => set_style(O, `background: ${p()}`)), transition$1(3, O, () => i, () => ({ y: -16, scale: 0.95, duration: 250, easing: expoOut })), append(A, O);
     };
-    if_block(E, (x) => {
-      get$2(_) && x(A);
+    if_block(E, (A) => {
+      get$2(_) && A(P);
     });
   }
-  reset(b), reset(w), template_effect((x) => S = set_class(b, 1, "dropdown svelte-1c359or", null, S, x), [() => ({ left: u(), center: d(), right: f() })]), append(r, w);
-  var $ = pop(v);
-  return n(), $;
+  reset(b), reset(w), template_effect((A) => S = set_class(b, 1, "dropdown svelte-1c359or", null, S, A), [() => ({ left: u(), center: d(), right: f() })]), append(r, w);
+  var I = pop(m);
+  return n(), I;
 }
 customElements.define("currency-selector", create_custom_element(
   CurrencySelector,
@@ -15552,13 +16300,13 @@ function ProductDiscountPercentage(r, e) {
   init();
   var h = comment(), g = first_child(h);
   {
-    var v = (w) => {
+    var m = (w) => {
       var y = root_1$4();
-      let m;
+      let v;
       var b = child(y);
       reset(y), template_effect(
         (S) => {
-          m = set_class(y, 1, "discount-percentage svelte-1ru3l9", null, m, S), set_text(b, `-${f() ?? ""}% off`);
+          v = set_class(y, 1, "discount-percentage svelte-1ru3l9", null, v, S), set_text(b, `-${f() ?? ""}% off`);
         },
         [
           () => ({
@@ -15570,7 +16318,7 @@ function ProductDiscountPercentage(r, e) {
       ), append(w, y);
     };
     if_block(g, (w) => {
-      f() && +f() > 0 && w(v);
+      f() && +f() > 0 && w(m);
     });
   }
   return append(r, h), pop(_);
@@ -15821,18 +16569,18 @@ function DevMarketDetails(r, e) {
   }, u = comment(), d = first_child(u);
   {
     var f = (_) => {
-      var h = root_1$2(), g = child(h), v = child(g), w = sibling(child(v), 2), y = child(w, !0);
-      reset(w), reset(v);
-      var m = sibling(v), b = sibling(child(m), 2), S = child(b, !0);
-      reset(b), reset(m);
-      var E = sibling(m), A = sibling(child(E), 2), $ = child(A, !0);
-      reset(A), reset(E);
-      var x = sibling(E), I = sibling(child(x), 2), R = child(I, !0);
-      reset(I), reset(x);
-      var C = sibling(x), k = sibling(child(C), 2), N = child(k, !0);
-      reset(k), reset(C), reset(g), reset(h), template_effect(
-        (O, P) => {
-          set_text(y, O), set_text(S, P), set_text($, t()), set_text(R, s()), set_text(N, n());
+      var h = root_1$2(), g = child(h), m = child(g), w = sibling(child(m), 2), y = child(w, !0);
+      reset(w), reset(m);
+      var v = sibling(m), b = sibling(child(v), 2), S = child(b, !0);
+      reset(b), reset(v);
+      var E = sibling(v), P = sibling(child(E), 2), I = child(P, !0);
+      reset(P), reset(E);
+      var A = sibling(E), O = sibling(child(A), 2), R = child(O, !0);
+      reset(O), reset(A);
+      var x = sibling(A), k = sibling(child(x), 2), N = child(k, !0);
+      reset(k), reset(x), reset(g), reset(h), template_effect(
+        (C, $) => {
+          set_text(y, C), set_text(S, $), set_text(I, t()), set_text(R, s()), set_text(N, n());
         },
         [
           () => getCookie("cart_currency"),
@@ -15864,9 +16612,9 @@ function CartNote(r, e) {
   localStorage.getItem("staging");
   const n = /* @__PURE__ */ user_derived(() => !0);
   function i(h, g) {
-    let v;
+    let m;
     return (...w) => {
-      clearTimeout(v), v = setTimeout(() => h.apply(this, w), g);
+      clearTimeout(m), m = setTimeout(() => h.apply(this, w), g);
     };
   }
   const l = i((h) => {
@@ -15900,13 +16648,13 @@ function CartNote(r, e) {
   }, f = comment(), p = first_child(f);
   {
     var _ = (h) => {
-      var g = comment(), v = first_child(g);
+      var g = comment(), m = first_child(g);
       {
         var w = (y) => {
-          var m = root_2();
-          remove_textarea_child(m), m.__input = [onChange, l], bind_value(m, () => get$2(c), (b) => set(c, b)), append(y, m);
+          var v = root_2();
+          remove_textarea_child(v), v.__input = [onChange, l], bind_value(v, () => get$2(c), (b) => set(c, b)), append(y, v);
         };
-        if_block(v, (y) => {
+        if_block(m, (y) => {
           get$2(s) && y(w);
         });
       }
@@ -15945,13 +16693,13 @@ function Mousewheel(r) {
   };
   let o, l = now(), c;
   const u = [];
-  function d(m) {
-    let A = 0, $ = 0, x = 0, I = 0;
-    return "detail" in m && ($ = m.detail), "wheelDelta" in m && ($ = -m.wheelDelta / 120), "wheelDeltaY" in m && ($ = -m.wheelDeltaY / 120), "wheelDeltaX" in m && (A = -m.wheelDeltaX / 120), "axis" in m && m.axis === m.HORIZONTAL_AXIS && (A = $, $ = 0), x = A * 10, I = $ * 10, "deltaY" in m && (I = m.deltaY), "deltaX" in m && (x = m.deltaX), m.shiftKey && !x && (x = I, I = 0), (x || I) && m.deltaMode && (m.deltaMode === 1 ? (x *= 40, I *= 40) : (x *= 800, I *= 800)), x && !A && (A = x < 1 ? -1 : 1), I && !$ && ($ = I < 1 ? -1 : 1), {
-      spinX: A,
-      spinY: $,
-      pixelX: x,
-      pixelY: I
+  function d(v) {
+    let P = 0, I = 0, A = 0, O = 0;
+    return "detail" in v && (I = v.detail), "wheelDelta" in v && (I = -v.wheelDelta / 120), "wheelDeltaY" in v && (I = -v.wheelDeltaY / 120), "wheelDeltaX" in v && (P = -v.wheelDeltaX / 120), "axis" in v && v.axis === v.HORIZONTAL_AXIS && (P = I, I = 0), A = P * 10, O = I * 10, "deltaY" in v && (O = v.deltaY), "deltaX" in v && (A = v.deltaX), v.shiftKey && !A && (A = O, O = 0), (A || O) && v.deltaMode && (v.deltaMode === 1 ? (A *= 40, O *= 40) : (A *= 800, O *= 800)), A && !P && (P = A < 1 ? -1 : 1), O && !I && (I = O < 1 ? -1 : 1), {
+      spinX: P,
+      spinY: I,
+      pixelX: A,
+      pixelY: O
     };
   }
   function f() {
@@ -15960,47 +16708,47 @@ function Mousewheel(r) {
   function p() {
     e.enabled && (e.mouseEntered = !1);
   }
-  function _(m) {
-    return e.params.mousewheel.thresholdDelta && m.delta < e.params.mousewheel.thresholdDelta || e.params.mousewheel.thresholdTime && now() - l < e.params.mousewheel.thresholdTime ? !1 : m.delta >= 6 && now() - l < 60 ? !0 : (m.direction < 0 ? (!e.isEnd || e.params.loop) && !e.animating && (e.slideNext(), n("scroll", m.raw)) : (!e.isBeginning || e.params.loop) && !e.animating && (e.slidePrev(), n("scroll", m.raw)), l = new i.Date().getTime(), !1);
+  function _(v) {
+    return e.params.mousewheel.thresholdDelta && v.delta < e.params.mousewheel.thresholdDelta || e.params.mousewheel.thresholdTime && now() - l < e.params.mousewheel.thresholdTime ? !1 : v.delta >= 6 && now() - l < 60 ? !0 : (v.direction < 0 ? (!e.isEnd || e.params.loop) && !e.animating && (e.slideNext(), n("scroll", v.raw)) : (!e.isBeginning || e.params.loop) && !e.animating && (e.slidePrev(), n("scroll", v.raw)), l = new i.Date().getTime(), !1);
   }
-  function h(m) {
+  function h(v) {
     const b = e.params.mousewheel;
-    if (m.direction < 0) {
+    if (v.direction < 0) {
       if (e.isEnd && !e.params.loop && b.releaseOnEdges)
         return !0;
     } else if (e.isBeginning && !e.params.loop && b.releaseOnEdges)
       return !0;
     return !1;
   }
-  function g(m) {
-    let b = m, S = !0;
-    if (!e.enabled || m.target.closest(`.${e.params.mousewheel.noMousewheelClass}`)) return;
+  function g(v) {
+    let b = v, S = !0;
+    if (!e.enabled || v.target.closest(`.${e.params.mousewheel.noMousewheelClass}`)) return;
     const E = e.params.mousewheel;
     e.params.cssMode && b.preventDefault();
-    let A = e.el;
-    e.params.mousewheel.eventsTarget !== "container" && (A = document.querySelector(e.params.mousewheel.eventsTarget));
-    const $ = A && A.contains(b.target);
-    if (!e.mouseEntered && !$ && !E.releaseOnEdges) return !0;
+    let P = e.el;
+    e.params.mousewheel.eventsTarget !== "container" && (P = document.querySelector(e.params.mousewheel.eventsTarget));
+    const I = P && P.contains(b.target);
+    if (!e.mouseEntered && !I && !E.releaseOnEdges) return !0;
     b.originalEvent && (b = b.originalEvent);
-    let x = 0;
-    const I = e.rtlTranslate ? -1 : 1, R = d(b);
+    let A = 0;
+    const O = e.rtlTranslate ? -1 : 1, R = d(b);
     if (E.forceToAxis)
       if (e.isHorizontal())
-        if (Math.abs(R.pixelX) > Math.abs(R.pixelY)) x = -R.pixelX * I;
+        if (Math.abs(R.pixelX) > Math.abs(R.pixelY)) A = -R.pixelX * O;
         else return !0;
-      else if (Math.abs(R.pixelY) > Math.abs(R.pixelX)) x = -R.pixelY;
+      else if (Math.abs(R.pixelY) > Math.abs(R.pixelX)) A = -R.pixelY;
       else return !0;
     else
-      x = Math.abs(R.pixelX) > Math.abs(R.pixelY) ? -R.pixelX * I : -R.pixelY;
-    if (x === 0) return !0;
-    E.invert && (x = -x);
-    let C = e.getTranslate() + x * E.sensitivity;
-    if (C >= e.minTranslate() && (C = e.minTranslate()), C <= e.maxTranslate() && (C = e.maxTranslate()), S = e.params.loop ? !0 : !(C === e.minTranslate() || C === e.maxTranslate()), S && e.params.nested && b.stopPropagation(), !e.params.freeMode || !e.params.freeMode.enabled) {
+      A = Math.abs(R.pixelX) > Math.abs(R.pixelY) ? -R.pixelX * O : -R.pixelY;
+    if (A === 0) return !0;
+    E.invert && (A = -A);
+    let x = e.getTranslate() + A * E.sensitivity;
+    if (x >= e.minTranslate() && (x = e.minTranslate()), x <= e.maxTranslate() && (x = e.maxTranslate()), S = e.params.loop ? !0 : !(x === e.minTranslate() || x === e.maxTranslate()), S && e.params.nested && b.stopPropagation(), !e.params.freeMode || !e.params.freeMode.enabled) {
       const k = {
         time: now(),
-        delta: Math.abs(x),
-        direction: Math.sign(x),
-        raw: m
+        delta: Math.abs(A),
+        direction: Math.sign(A),
+        raw: v
       };
       u.length >= 2 && u.shift();
       const N = u.length ? u[u.length - 1] : void 0;
@@ -16009,23 +16757,23 @@ function Mousewheel(r) {
     } else {
       const k = {
         time: now(),
-        delta: Math.abs(x),
-        direction: Math.sign(x)
+        delta: Math.abs(A),
+        direction: Math.sign(A)
       }, N = c && k.time < c.time + 500 && k.delta <= c.delta && k.direction === c.direction;
       if (!N) {
         c = void 0;
-        let O = e.getTranslate() + x * E.sensitivity;
-        const P = e.isBeginning, j = e.isEnd;
-        if (O >= e.minTranslate() && (O = e.minTranslate()), O <= e.maxTranslate() && (O = e.maxTranslate()), e.setTransition(0), e.setTranslate(O), e.updateProgress(), e.updateActiveIndex(), e.updateSlidesClasses(), (!P && e.isBeginning || !j && e.isEnd) && e.updateSlidesClasses(), e.params.loop && e.loopFix({
+        let C = e.getTranslate() + A * E.sensitivity;
+        const $ = e.isBeginning, j = e.isEnd;
+        if (C >= e.minTranslate() && (C = e.minTranslate()), C <= e.maxTranslate() && (C = e.maxTranslate()), e.setTransition(0), e.setTranslate(C), e.updateProgress(), e.updateActiveIndex(), e.updateSlidesClasses(), (!$ && e.isBeginning || !j && e.isEnd) && e.updateSlidesClasses(), e.params.loop && e.loopFix({
           direction: k.direction < 0 ? "next" : "prev",
           byMousewheel: !0
         }), e.params.freeMode.sticky) {
           clearTimeout(o), o = void 0, u.length >= 15 && u.shift();
-          const M = u.length ? u[u.length - 1] : void 0, L = u[0];
-          if (u.push(k), M && (k.delta > M.delta || k.direction !== M.direction))
+          const B = u.length ? u[u.length - 1] : void 0, M = u[0];
+          if (u.push(k), B && (k.delta > B.delta || k.direction !== B.direction))
             u.splice(0);
-          else if (u.length >= 15 && k.time - L.time < 500 && L.delta - k.delta >= 1 && k.delta <= 6) {
-            const U = x > 0 ? 0.8 : 0.2;
+          else if (u.length >= 15 && k.time - M.time < 500 && M.delta - k.delta >= 1 && k.delta <= 6) {
+            const U = A > 0 ? 0.8 : 0.2;
             c = k, u.splice(0), o = nextTick(() => {
               e.destroyed || !e.params || e.slideToClosest(e.params.speed, !0, void 0, U);
             }, 0);
@@ -16036,21 +16784,21 @@ function Mousewheel(r) {
             c = k, u.splice(0), e.slideToClosest(e.params.speed, !0, void 0, U);
           }, 500));
         }
-        if (N || n("scroll", b), e.params.autoplay && e.params.autoplay.disableOnInteraction && e.autoplay.stop(), E.releaseOnEdges && (O === e.minTranslate() || O === e.maxTranslate()))
+        if (N || n("scroll", b), e.params.autoplay && e.params.autoplay.disableOnInteraction && e.autoplay.stop(), E.releaseOnEdges && (C === e.minTranslate() || C === e.maxTranslate()))
           return !0;
       }
     }
     return b.preventDefault ? b.preventDefault() : b.returnValue = !1, !1;
   }
-  function v(m) {
+  function m(v) {
     let b = e.el;
-    e.params.mousewheel.eventsTarget !== "container" && (b = document.querySelector(e.params.mousewheel.eventsTarget)), b[m]("mouseenter", f), b[m]("mouseleave", p), b[m]("wheel", g);
+    e.params.mousewheel.eventsTarget !== "container" && (b = document.querySelector(e.params.mousewheel.eventsTarget)), b[v]("mouseenter", f), b[v]("mouseleave", p), b[v]("wheel", g);
   }
   function w() {
-    return e.params.cssMode ? (e.wrapperEl.removeEventListener("wheel", g), !0) : e.mousewheel.enabled ? !1 : (v("addEventListener"), e.mousewheel.enabled = !0, !0);
+    return e.params.cssMode ? (e.wrapperEl.removeEventListener("wheel", g), !0) : e.mousewheel.enabled ? !1 : (m("addEventListener"), e.mousewheel.enabled = !0, !0);
   }
   function y() {
-    return e.params.cssMode ? (e.wrapperEl.addEventListener(event, g), !0) : e.mousewheel.enabled ? (v("removeEventListener"), e.mousewheel.enabled = !1, !0) : !1;
+    return e.params.cssMode ? (e.wrapperEl.addEventListener(event, g), !0) : e.mousewheel.enabled ? (m("removeEventListener"), e.mousewheel.enabled = !1, !0) : !1;
   }
   s("init", () => {
     !e.params.mousewheel.enabled && e.params.cssMode && y(), e.params.mousewheel.enabled && w();
@@ -16101,102 +16849,102 @@ function Scrollbar(r) {
   function _() {
     if (!e.params.scrollbar.el || !e.scrollbar.el) return;
     const {
-      scrollbar: C,
+      scrollbar: x,
       rtlTranslate: k
     } = e, {
       dragEl: N,
-      el: O
-    } = C, P = e.params.scrollbar, j = e.params.loop ? e.progressLoop : e.progress;
-    let M = d, L = (f - d) * j;
-    k ? (L = -L, L > 0 ? (M = d - L, L = 0) : -L + d > f && (M = f + L)) : L < 0 ? (M = d + L, L = 0) : L + d > f && (M = f - L), e.isHorizontal() ? (N.style.transform = `translate3d(${L}px, 0, 0)`, N.style.width = `${M}px`) : (N.style.transform = `translate3d(0px, ${L}px, 0)`, N.style.height = `${M}px`), P.hide && (clearTimeout(l), O.style.opacity = 1, l = setTimeout(() => {
-      O.style.opacity = 0, O.style.transitionDuration = "400ms";
+      el: C
+    } = x, $ = e.params.scrollbar, j = e.params.loop ? e.progressLoop : e.progress;
+    let B = d, M = (f - d) * j;
+    k ? (M = -M, M > 0 ? (B = d - M, M = 0) : -M + d > f && (B = f + M)) : M < 0 ? (B = d + M, M = 0) : M + d > f && (B = f - M), e.isHorizontal() ? (N.style.transform = `translate3d(${M}px, 0, 0)`, N.style.width = `${B}px`) : (N.style.transform = `translate3d(0px, ${M}px, 0)`, N.style.height = `${B}px`), $.hide && (clearTimeout(l), C.style.opacity = 1, l = setTimeout(() => {
+      C.style.opacity = 0, C.style.transitionDuration = "400ms";
     }, 1e3));
   }
-  function h(C) {
-    !e.params.scrollbar.el || !e.scrollbar.el || (e.scrollbar.dragEl.style.transitionDuration = `${C}ms`);
+  function h(x) {
+    !e.params.scrollbar.el || !e.scrollbar.el || (e.scrollbar.dragEl.style.transitionDuration = `${x}ms`);
   }
   function g() {
     if (!e.params.scrollbar.el || !e.scrollbar.el) return;
     const {
-      scrollbar: C
+      scrollbar: x
     } = e, {
       dragEl: k,
       el: N
-    } = C;
-    k.style.width = "", k.style.height = "", f = e.isHorizontal() ? N.offsetWidth : N.offsetHeight, p = e.size / (e.virtualSize + e.params.slidesOffsetBefore - (e.params.centeredSlides ? e.snapGrid[0] : 0)), e.params.scrollbar.dragSize === "auto" ? d = f * p : d = parseInt(e.params.scrollbar.dragSize, 10), e.isHorizontal() ? k.style.width = `${d}px` : k.style.height = `${d}px`, p >= 1 ? N.style.display = "none" : N.style.display = "", e.params.scrollbar.hide && (N.style.opacity = 0), e.params.watchOverflow && e.enabled && C.el.classList[e.isLocked ? "add" : "remove"](e.params.scrollbar.lockClass);
+    } = x;
+    k.style.width = "", k.style.height = "", f = e.isHorizontal() ? N.offsetWidth : N.offsetHeight, p = e.size / (e.virtualSize + e.params.slidesOffsetBefore - (e.params.centeredSlides ? e.snapGrid[0] : 0)), e.params.scrollbar.dragSize === "auto" ? d = f * p : d = parseInt(e.params.scrollbar.dragSize, 10), e.isHorizontal() ? k.style.width = `${d}px` : k.style.height = `${d}px`, p >= 1 ? N.style.display = "none" : N.style.display = "", e.params.scrollbar.hide && (N.style.opacity = 0), e.params.watchOverflow && e.enabled && x.el.classList[e.isLocked ? "add" : "remove"](e.params.scrollbar.lockClass);
   }
-  function v(C) {
-    return e.isHorizontal() ? C.clientX : C.clientY;
+  function m(x) {
+    return e.isHorizontal() ? x.clientX : x.clientY;
   }
-  function w(C) {
+  function w(x) {
     const {
       scrollbar: k,
       rtlTranslate: N
     } = e, {
-      el: O
+      el: C
     } = k;
-    let P;
-    P = (v(C) - elementOffset(O)[e.isHorizontal() ? "left" : "top"] - (u !== null ? u : d / 2)) / (f - d), P = Math.max(Math.min(P, 1), 0), N && (P = 1 - P);
-    const j = e.minTranslate() + (e.maxTranslate() - e.minTranslate()) * P;
+    let $;
+    $ = (m(x) - elementOffset(C)[e.isHorizontal() ? "left" : "top"] - (u !== null ? u : d / 2)) / (f - d), $ = Math.max(Math.min($, 1), 0), N && ($ = 1 - $);
+    const j = e.minTranslate() + (e.maxTranslate() - e.minTranslate()) * $;
     e.updateProgress(j), e.setTranslate(j), e.updateActiveIndex(), e.updateSlidesClasses();
   }
-  function y(C) {
+  function y(x) {
     const k = e.params.scrollbar, {
       scrollbar: N,
-      wrapperEl: O
+      wrapperEl: C
     } = e, {
-      el: P,
+      el: $,
       dragEl: j
     } = N;
-    o = !0, u = C.target === j ? v(C) - C.target.getBoundingClientRect()[e.isHorizontal() ? "left" : "top"] : null, C.preventDefault(), C.stopPropagation(), O.style.transitionDuration = "100ms", j.style.transitionDuration = "100ms", w(C), clearTimeout(c), P.style.transitionDuration = "0ms", k.hide && (P.style.opacity = 1), e.params.cssMode && (e.wrapperEl.style["scroll-snap-type"] = "none"), n("scrollbarDragStart", C);
+    o = !0, u = x.target === j ? m(x) - x.target.getBoundingClientRect()[e.isHorizontal() ? "left" : "top"] : null, x.preventDefault(), x.stopPropagation(), C.style.transitionDuration = "100ms", j.style.transitionDuration = "100ms", w(x), clearTimeout(c), $.style.transitionDuration = "0ms", k.hide && ($.style.opacity = 1), e.params.cssMode && (e.wrapperEl.style["scroll-snap-type"] = "none"), n("scrollbarDragStart", x);
   }
-  function m(C) {
+  function v(x) {
     const {
       scrollbar: k,
       wrapperEl: N
     } = e, {
-      el: O,
-      dragEl: P
+      el: C,
+      dragEl: $
     } = k;
-    o && (C.preventDefault && C.cancelable ? C.preventDefault() : C.returnValue = !1, w(C), N.style.transitionDuration = "0ms", O.style.transitionDuration = "0ms", P.style.transitionDuration = "0ms", n("scrollbarDragMove", C));
+    o && (x.preventDefault && x.cancelable ? x.preventDefault() : x.returnValue = !1, w(x), N.style.transitionDuration = "0ms", C.style.transitionDuration = "0ms", $.style.transitionDuration = "0ms", n("scrollbarDragMove", x));
   }
-  function b(C) {
+  function b(x) {
     const k = e.params.scrollbar, {
       scrollbar: N,
-      wrapperEl: O
+      wrapperEl: C
     } = e, {
-      el: P
+      el: $
     } = N;
-    o && (o = !1, e.params.cssMode && (e.wrapperEl.style["scroll-snap-type"] = "", O.style.transitionDuration = ""), k.hide && (clearTimeout(c), c = nextTick(() => {
-      P.style.opacity = 0, P.style.transitionDuration = "400ms";
-    }, 1e3)), n("scrollbarDragEnd", C), k.snapOnRelease && e.slideToClosest());
+    o && (o = !1, e.params.cssMode && (e.wrapperEl.style["scroll-snap-type"] = "", C.style.transitionDuration = ""), k.hide && (clearTimeout(c), c = nextTick(() => {
+      $.style.opacity = 0, $.style.transitionDuration = "400ms";
+    }, 1e3)), n("scrollbarDragEnd", x), k.snapOnRelease && e.slideToClosest());
   }
-  function S(C) {
+  function S(x) {
     const {
       scrollbar: k,
       params: N
-    } = e, O = k.el;
-    if (!O) return;
-    const P = O, j = N.passiveListeners ? {
+    } = e, C = k.el;
+    if (!C) return;
+    const $ = C, j = N.passiveListeners ? {
       passive: !1,
       capture: !1
-    } : !1, M = N.passiveListeners ? {
+    } : !1, B = N.passiveListeners ? {
       passive: !0,
       capture: !1
     } : !1;
-    if (!P) return;
-    const L = C === "on" ? "addEventListener" : "removeEventListener";
-    P[L]("pointerdown", y, j), i[L]("pointermove", m, j), i[L]("pointerup", b, M);
+    if (!$) return;
+    const M = x === "on" ? "addEventListener" : "removeEventListener";
+    $[M]("pointerdown", y, j), i[M]("pointermove", v, j), i[M]("pointerup", b, B);
   }
   function E() {
     !e.params.scrollbar.el || !e.scrollbar.el || S("on");
   }
-  function A() {
+  function P() {
     !e.params.scrollbar.el || !e.scrollbar.el || S("off");
   }
-  function $() {
+  function I() {
     const {
-      scrollbar: C,
+      scrollbar: x,
       el: k
     } = e;
     e.params.scrollbar = createElementIfNotDefined(e, e.originalParams.scrollbar, e.params.scrollbar, {
@@ -16204,58 +16952,58 @@ function Scrollbar(r) {
     });
     const N = e.params.scrollbar;
     if (!N.el) return;
-    let O;
-    if (typeof N.el == "string" && e.isElement && (O = e.el.querySelector(N.el)), !O && typeof N.el == "string") {
-      if (O = i.querySelectorAll(N.el), !O.length) return;
-    } else O || (O = N.el);
-    e.params.uniqueNavElements && typeof N.el == "string" && O.length > 1 && k.querySelectorAll(N.el).length === 1 && (O = k.querySelector(N.el)), O.length > 0 && (O = O[0]), O.classList.add(e.isHorizontal() ? N.horizontalClass : N.verticalClass);
-    let P;
-    O && (P = O.querySelector(classesToSelector(e.params.scrollbar.dragClass)), P || (P = createElement("div", e.params.scrollbar.dragClass), O.append(P))), Object.assign(C, {
-      el: O,
-      dragEl: P
-    }), N.draggable && E(), O && O.classList[e.enabled ? "remove" : "add"](...classesToTokens(e.params.scrollbar.lockClass));
+    let C;
+    if (typeof N.el == "string" && e.isElement && (C = e.el.querySelector(N.el)), !C && typeof N.el == "string") {
+      if (C = i.querySelectorAll(N.el), !C.length) return;
+    } else C || (C = N.el);
+    e.params.uniqueNavElements && typeof N.el == "string" && C.length > 1 && k.querySelectorAll(N.el).length === 1 && (C = k.querySelector(N.el)), C.length > 0 && (C = C[0]), C.classList.add(e.isHorizontal() ? N.horizontalClass : N.verticalClass);
+    let $;
+    C && ($ = C.querySelector(classesToSelector(e.params.scrollbar.dragClass)), $ || ($ = createElement("div", e.params.scrollbar.dragClass), C.append($))), Object.assign(x, {
+      el: C,
+      dragEl: $
+    }), N.draggable && E(), C && C.classList[e.enabled ? "remove" : "add"](...classesToTokens(e.params.scrollbar.lockClass));
   }
-  function x() {
-    const C = e.params.scrollbar, k = e.scrollbar.el;
-    k && k.classList.remove(...classesToTokens(e.isHorizontal() ? C.horizontalClass : C.verticalClass)), A();
+  function A() {
+    const x = e.params.scrollbar, k = e.scrollbar.el;
+    k && k.classList.remove(...classesToTokens(e.isHorizontal() ? x.horizontalClass : x.verticalClass)), P();
   }
   s("changeDirection", () => {
     if (!e.scrollbar || !e.scrollbar.el) return;
-    const C = e.params.scrollbar;
+    const x = e.params.scrollbar;
     let {
       el: k
     } = e.scrollbar;
     k = makeElementsArray(k), k.forEach((N) => {
-      N.classList.remove(C.horizontalClass, C.verticalClass), N.classList.add(e.isHorizontal() ? C.horizontalClass : C.verticalClass);
+      N.classList.remove(x.horizontalClass, x.verticalClass), N.classList.add(e.isHorizontal() ? x.horizontalClass : x.verticalClass);
     });
   }), s("init", () => {
-    e.params.scrollbar.enabled === !1 ? R() : ($(), g(), _());
+    e.params.scrollbar.enabled === !1 ? R() : (I(), g(), _());
   }), s("update resize observerUpdate lock unlock changeDirection", () => {
     g();
   }), s("setTranslate", () => {
     _();
-  }), s("setTransition", (C, k) => {
+  }), s("setTransition", (x, k) => {
     h(k);
   }), s("enable disable", () => {
     const {
-      el: C
+      el: x
     } = e.scrollbar;
-    C && C.classList[e.enabled ? "remove" : "add"](...classesToTokens(e.params.scrollbar.lockClass));
+    x && x.classList[e.enabled ? "remove" : "add"](...classesToTokens(e.params.scrollbar.lockClass));
   }), s("destroy", () => {
-    x();
+    A();
   });
-  const I = () => {
-    e.el.classList.remove(...classesToTokens(e.params.scrollbar.scrollbarDisabledClass)), e.scrollbar.el && e.scrollbar.el.classList.remove(...classesToTokens(e.params.scrollbar.scrollbarDisabledClass)), $(), g(), _();
+  const O = () => {
+    e.el.classList.remove(...classesToTokens(e.params.scrollbar.scrollbarDisabledClass)), e.scrollbar.el && e.scrollbar.el.classList.remove(...classesToTokens(e.params.scrollbar.scrollbarDisabledClass)), I(), g(), _();
   }, R = () => {
-    e.el.classList.add(...classesToTokens(e.params.scrollbar.scrollbarDisabledClass)), e.scrollbar.el && e.scrollbar.el.classList.add(...classesToTokens(e.params.scrollbar.scrollbarDisabledClass)), x();
+    e.el.classList.add(...classesToTokens(e.params.scrollbar.scrollbarDisabledClass)), e.scrollbar.el && e.scrollbar.el.classList.add(...classesToTokens(e.params.scrollbar.scrollbarDisabledClass)), A();
   };
   Object.assign(e.scrollbar, {
-    enable: I,
+    enable: O,
     disable: R,
     updateSize: g,
     setTranslate: _,
-    init: $,
-    destroy: x
+    init: I,
+    destroy: A
   });
 }
 var root_1$1 = /* @__PURE__ */ from_html('<div class="swiper-slide svelte-1vei7h4"><a class="color-selector--link svelte-1vei7h4"><img alt="img"/></a></div>'), root$1 = /* @__PURE__ */ from_html('<section><div><div class="swiper-wrapper"></div> <div class="swiper-scrollbar"></div></div></section>');
@@ -16277,7 +17025,7 @@ function ColorSelector(r, e) {
     }
   }), i = /* @__PURE__ */ state(void 0), o = /* @__PURE__ */ state(void 0), l = /* @__PURE__ */ state(!1), c = /* @__PURE__ */ user_derived(() => {
     if (!get$2(n) || !t()) return 0;
-    const g = get$2(n).findIndex((v) => +v.id == +t());
+    const g = get$2(n).findIndex((m) => +m.id == +t());
     return g !== -1 ? g : 0;
   });
   const u = () => {
@@ -16333,17 +17081,17 @@ function ColorSelector(r, e) {
   }, f = root$1(), p = child(f);
   let _;
   var h = child(p);
-  return each(h, 21, () => get$2(n), index, (g, v) => {
-    var w = root_1$1(), y = child(w), m = child(y);
+  return each(h, 21, () => get$2(n), index, (g, m) => {
+    var w = root_1$1(), y = child(w), v = child(y);
     let b;
     reset(y), reset(w), template_effect(
       (S) => {
         var E;
-        set_attribute(y, "href", get$2(v).url), b = set_class(m, 1, "color-selector--image svelte-1vei7h4", null, b, S), set_attribute(m, "src", (E = get$2(v)) == null ? void 0 : E.images[0]);
+        set_attribute(y, "href", get$2(m).url), b = set_class(v, 1, "color-selector--image svelte-1vei7h4", null, b, S), set_attribute(v, "src", (E = get$2(m)) == null ? void 0 : E.images[0]);
       },
-      [() => ({ active: +get$2(v).id == +t() })]
+      [() => ({ active: +get$2(m).id == +t() })]
     ), append(g, w);
-  }), reset(h), next(2), reset(p), bind_this(p, (g) => set(i, g), () => get$2(i)), reset(f), action(f, (g, v) => removeNonComponentChildren == null ? void 0 : removeNonComponentChildren(g, v), () => get$2(l)), template_effect((g) => _ = set_class(p, 1, "swiper color-selector--swiper-wrapper svelte-1vei7h4", null, _, g), [() => ({ "swiper--inited": get$2(l) })]), append(r, f), pop(d);
+  }), reset(h), next(2), reset(p), bind_this(p, (g) => set(i, g), () => get$2(i)), reset(f), action(f, (g, m) => removeNonComponentChildren == null ? void 0 : removeNonComponentChildren(g, m), () => get$2(l)), template_effect((g) => _ = set_class(p, 1, "swiper color-selector--swiper-wrapper svelte-1vei7h4", null, _, g), [() => ({ "swiper--inited": get$2(l) })]), append(r, f), pop(d);
 }
 customElements.define("color-selector", create_custom_element(ColorSelector, { activeId: {}, list: {} }, [], [], !1));
 var root_1 = /* @__PURE__ */ from_html("<a> </a>"), root = /* @__PURE__ */ from_html('<div class="size-selector svelte-nkwbzs"></div>');
@@ -16398,17 +17146,23 @@ typeof window < "u" && (window.UI = {
 }, window.footerScripts = mainFooter, window.getAutomaticDiscount = getAutomaticDiscount, window.cartItemToPreorderCartItem = cartItemToPreorderCartItem);
 mainHead();
 export {
+  BUY_BUTTONS_CONFIG,
+  BuyButtonsManager,
+  CTAUpdater,
   CartNote,
   CartRecommendationCard,
   ColorSelector,
   CurrencySelector,
   DevMarketDetails,
+  FooterCTAManager,
   KnittersAccordion,
   KnittersAccordionItem,
   PreOrderStrip,
+  PriceObserver,
   ProductDiscountPercentage,
   ProductForm,
   ProductPrice,
+  ResponsiveLayoutManager,
   SizeSelector,
   getAutomaticDiscount
 };
