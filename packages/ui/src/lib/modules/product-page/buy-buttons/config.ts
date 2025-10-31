@@ -15,7 +15,7 @@ export const BUY_BUTTONS_CONFIG = {
 		productPriceElement: '.pdp-price-container product-price',
 		skeletonWave: '.skeleton-wave',
 		globoBackInStock: '#Globo-Back-In-Stock',
-		sellingPlanOptions: '.gPreorderSellingPlanOptions',
+		sellingPlanOptions: '.gPreorderSellingPlanOptions', 
 		sellingPlanParent: '.gPreorderSellingPlanParent',
 		observerContainer: '.product__info-container',
 	},

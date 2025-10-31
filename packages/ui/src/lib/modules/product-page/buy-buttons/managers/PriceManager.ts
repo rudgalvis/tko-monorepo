@@ -1,5 +1,5 @@
 import { BUY_BUTTONS_CONFIG } from '../config.js';
-import { frontendLogger as logger } from '../../../../loggers/frontend-logger.js';
+import { frontendLogger as logger } from '../../../../utils/loggers/frontend-logger.js';
 import type { PriceCallback, CompletionCallback } from '../types.js';
 
 /**

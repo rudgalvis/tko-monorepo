@@ -5,7 +5,7 @@ import { FooterCTAManager } from './FooterCTAManager.js';
 import { PaymentOptionManager } from './PaymentOptionManager.js';
 import { SkeletonManager } from './SkeletonManager.js';
 import { BUY_BUTTONS_CONFIG } from '../config.js';
-import { frontendLogger as logger } from '../../../../loggers/frontend-logger.js';
+import { frontendLogger as logger } from '../../../../utils/loggers/frontend-logger.js';
 import { isPreorderProduct } from './preorder.js';
 import { CompletionTracker } from '../utils/CompletionTracker.js';
 import type { CompletionCallback } from '../types.js';
@@ -24,6 +24,7 @@ export class BuyButtonsManager {
 	private paymentOptionManager: PaymentOptionManager;
 	private skeletonManager: SkeletonManager;
 	private completionTracker: CompletionTracker;
+	private externalCallback?: CompletionCallback;
 
 	constructor() {
 		this.debug = BUY_BUTTONS_CONFIG.debug.enabled;
@@ -40,11 +41,7 @@ export class BuyButtonsManager {
 	 * Set completion callback to be called when all managers finish initialization
 	 */
 	onComplete(callback: CompletionCallback): void {
-		this.completionTracker.onComplete(() => {
-			if (this.debug) logger.debug('All buy button managers initialized successfully');
-			this.skeletonManager.hideSkeletons();
-			callback();
-		});
+		this.externalCallback = callback;
 	}
 
 	/**
@@ -60,6 +57,15 @@ export class BuyButtonsManager {
 		this.completionTracker.register('responsiveManager');
 		this.completionTracker.register('footerManager');
 		this.completionTracker.register('paymentOptionManager');
+
+		// Register internal completion callback (always runs)
+		this.completionTracker.onComplete(() => {
+			if (this.debug) logger.debug('All buy button managers initialized successfully');
+			this.skeletonManager.hideSkeletons();
+			
+			// Call external callback if provided
+			this.externalCallback?.();
+		});
 
 		if (this.debug) {
 			logger.debug('🚀 Initializing Buy Buttons Manager');

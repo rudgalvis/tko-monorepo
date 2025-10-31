@@ -11,7 +11,7 @@ export class CompletionTracker {
 	private completionPollInterval: ReturnType<typeof setInterval> | null = null;
 	private onAllComplete?: CompletionCallback;
 
-	constructor(debug = false) {
+	constructor(debug = true) {
 		this.debug = debug;
 	}
 
@@ -39,9 +39,13 @@ export class CompletionTracker {
 
 	/**
 	 * Set callback to be called when all managers are complete
+	 * If all managers are already complete, calls the callback immediately
 	 */
 	onComplete(callback: CompletionCallback): void {
 		this.onAllComplete = callback;
+		
+		// Check if all managers are already complete (race condition handling)
+		this.checkAllComplete();
 	}
 
 	/**
