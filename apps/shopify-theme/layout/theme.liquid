@@ -392,6 +392,7 @@
     rivets.formatters.checkout_price = (cartItem) => window['cartItemToPreorderCartItem'](cartItem).pre_oder_price?.checkout_price
     rivets.formatters.remaining_price = (cartItem) => window['cartItemToPreorderCartItem'](cartItem).pre_oder_price?.remaining_price
     rivets.formatters.isPartialPayment = (cartItem) => !!window['cartItemToPreorderCartItem'](cartItem).pre_oder_price
+    rivets.formatters.isPreorderItem = (cartItem) => !!cartItem.properties?._is_preorder
 
     rivets.formatters.total_checkout_price = (b, v) => {
         console.log('dump',v.items[0].quantity)

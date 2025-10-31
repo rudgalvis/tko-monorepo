@@ -306,8 +306,8 @@ justify-content: space-between;
     width: auto;
     height: auto;
     display:flex;
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: center;
+    width: 100%;
     justify-content: flex-start;
 }
 
@@ -320,6 +320,18 @@ justify-content: space-between;
     -moz-osx-font-smoothing: grayscale;
    margin-block-start: 0em;
    margin-block-end: 0em;
+}
+
+.dpi-price-size  p.badge {
+    letter-spacing: 0.33px;
+    font-weight: 300;
+    font-size: 10px;
+    text-transform: uppercase;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    padding: 4px 16px;
+    margin-left: 10px;
+    transform: translateY(-2px);
 }
 
 .dpi-variant{

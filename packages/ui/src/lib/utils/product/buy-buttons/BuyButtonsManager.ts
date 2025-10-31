@@ -12,6 +12,8 @@ import { frontendLogger as logger } from '../../loggers/frontend-logger.js';
  * Coordinates price observation, CTA updates, responsive layout, and footer management
  */
 export class BuyButtonsManager {
+	private readonly debug = false;
+	
 	private priceObserver: PriceObserver;
 	private ctaUpdater: CTAUpdater;
 	private responsiveLayout: ResponsiveLayoutManager;
@@ -21,7 +23,6 @@ export class BuyButtonsManager {
 	
 	private completionTracking = new Map<string, boolean>();
 	private completionPollInterval: ReturnType<typeof setInterval> | null = null;
-	private readonly debug = true;
 
 	private onAllComplete() {
         if (this.debug) logger.debug('All buy button managers initialized successfully');

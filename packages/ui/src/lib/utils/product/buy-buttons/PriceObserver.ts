@@ -8,6 +8,8 @@ export type PriceCallback = (price: string) => void;
  * Uses the observer pattern to allow multiple parts of the app to react to price updates.
  */
 export class PriceObserver {
+	private readonly debug: boolean = true;
+	
 	private subscribers = new Set<PriceCallback>();
 	private currentPrice: string | null = null;
 	private observer: MutationObserver | null = null;
@@ -16,7 +18,6 @@ export class PriceObserver {
 	private isInitialized = false;
 	private onComplete?: () => void;
 	private completeTimer: number | null = null;
-	private readonly debug: boolean = true;
 	private readonly STABILITY_DELAY_MS = 100;
 	private changeCounter = 0;
 

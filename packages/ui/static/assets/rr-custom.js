@@ -3490,6 +3490,7 @@ const isPage = (r) => {
 };
 class PriceObserver {
   constructor() {
+    L(this, "debug", !0);
     L(this, "subscribers", /* @__PURE__ */ new Set());
     L(this, "currentPrice", null);
     L(this, "observer", null);
@@ -3498,7 +3499,6 @@ class PriceObserver {
     L(this, "isInitialized", !1);
     L(this, "onComplete");
     L(this, "completeTimer", null);
-    L(this, "debug", !0);
     L(this, "STABILITY_DELAY_MS", 100);
     L(this, "changeCounter", 0);
   }
@@ -4057,6 +4057,7 @@ class SkeletonManager {
 }
 class BuyButtonsManager {
   constructor() {
+    L(this, "debug", !1);
     L(this, "priceObserver");
     L(this, "ctaUpdater");
     L(this, "responsiveLayout");
@@ -4065,7 +4066,6 @@ class BuyButtonsManager {
     L(this, "skeletonManager");
     L(this, "completionTracking", /* @__PURE__ */ new Map());
     L(this, "completionPollInterval", null);
-    L(this, "debug", !0);
     this.priceObserver = new PriceObserver(), this.ctaUpdater = new CTAUpdater(), this.responsiveLayout = new ResponsiveLayoutManager(), this.paymentOptionManager = new PaymentOptionManager(), this.footerManager = new FooterCTAManager(this.paymentOptionManager), this.skeletonManager = new SkeletonManager();
   }
   onAllComplete() {
