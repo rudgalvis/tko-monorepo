@@ -1,4 +1,10 @@
 import { frontendLogger as logger } from '../../loggers/frontend-logger.js';
+
+export interface PaymentOptionsInfo {
+	hasPaymentOptions: boolean;
+	optionCount: number;
+}
+
 /**
  * Manages payment option visibility based on available selling plans
  * Hides the parent container if only one selling plan option is available
@@ -24,15 +30,51 @@ export class PaymentOptionManager {
 	}
 
 	/**
-	 * Initialize the payment option manager
+	 * Get information about available payment options
+	 * Used by SkeletonManager to determine what skeletons to show
+	 */
+	getPaymentOptionsInfo(): PaymentOptionsInfo {
+		const sellingPlanOptions = document.querySelector(this.sellingPlanOptionsSelector);
+		
+		if (!sellingPlanOptions) {
+			return {
+				hasPaymentOptions: false,
+				optionCount: 0
+			};
+		}
+
+		const optionCount = sellingPlanOptions.children.length;
+		
+		return {
+			hasPaymentOptions: optionCount > 0,
+			optionCount
+		};
+	}
+
+	/**
+	 * Initialize the payment option manager for observing and hiding behavior
 	 * Sets up observer on product info container for dynamic content changes
+	 * Should be called when preorder functionality is active
 	 */
 	init(): void {
 		this.setupObserver();
-		if(this.debug) logger.debug('PaymentOptionManager initialized');
+		if(this.debug) logger.debug('PaymentOptionManager observer initialized');
 		
 		// Check immediately on init
 		this.checkAndHideParent();
+	}
+
+	/**
+	 * Initialize only the completion tracking without observer
+	 * Used when we need payment options info but don't need hiding behavior
+	 */
+	initWithoutObserver(): void {
+		// Signal completion immediately since we're not setting up observer
+		if (!this.isInitialized) {
+			this.isInitialized = true;
+			this.onComplete?.();
+		}
+		if(this.debug) logger.debug('PaymentOptionManager initialized without observer');
 	}
 
 	/**

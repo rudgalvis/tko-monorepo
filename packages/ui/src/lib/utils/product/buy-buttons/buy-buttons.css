@@ -63,3 +63,7 @@ product-price .skeleton {
 .product-form__buttons {
     position: relative;
 }
+
+.relative {
+    position: relative;
+}

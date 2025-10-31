@@ -1,6 +1,6 @@
 export const BUY_BUTTONS_CONFIG = {
 	selectors: {
-		priceValue: '.price-ui--value',
+		priceValue: '.pdp-price-container .price-ui--value',
 		ctaPrice: '.pdp-cta-price',
 		preorderButton: '.gPreorderBtnLoaded',
 		productForm: 'product-form',
@@ -12,9 +12,7 @@ export const BUY_BUTTONS_CONFIG = {
 	},
 	retry: {
 		maxAttempts: 10,
-		interval: 100,
-		maxFooterRetries: 5,
-		footerInterval: 200
+		interval: 100
 	},
 	breakpoints: {
 		mobile: 767

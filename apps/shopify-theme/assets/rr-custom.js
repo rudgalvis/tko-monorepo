@@ -300,11 +300,11 @@ function proxy(r) {
         var m = Reflect.getOwnPropertyDescriptor(l, c);
         if (m != null && m.set && m.set.call(d, u), !p) {
           if (s && typeof c == "string") {
-            var w = (
+            var y = (
               /** @type {Source<number>} */
               t.get("length")
-            ), y = Number(c);
-            Number.isInteger(y) && y >= w.v && set(w, y + 1);
+            ), w = Number(c);
+            Number.isInteger(w) && w >= y.v && set(y, w + 1);
           }
           increment(n);
         }
@@ -433,7 +433,7 @@ function apply_adjustments(r) {
 }
 const batches = /* @__PURE__ */ new Set();
 let current_batch = null, previous_batch = null, batch_values = null, effect_pending_updates = /* @__PURE__ */ new Set(), queued_root_effects = [], last_scheduled_effect = null, is_flushing = !1, is_flushing_sync = !1;
-var pe, _e, ge, ue, ye, me, ve, G, ke, ce, $e, Me;
+var pe, _e, ge, ue, we, me, ve, G, ke, ce, $e, Me;
 const Ae = class Ae {
   constructor() {
     F(this, G);
@@ -469,7 +469,7 @@ const Ae = class Ae {
      * TODO replace with Promise.withResolvers once supported widely enough
      * @type {{ promise: Promise<void>, resolve: (value?: any) => void, reject: (reason: unknown) => void } | null}
      */
-    F(this, ye, null);
+    F(this, we, null);
     /**
      * Deferred effects (which run after async work has completed) that are DIRTY
      * @type {Effect[]}
@@ -554,7 +554,7 @@ const Ae = class Ae {
     T(this, _e).add(e);
   }
   settled() {
-    return (T(this, ye) ?? D(this, ye, deferred())).promise;
+    return (T(this, we) ?? D(this, we, deferred())).promise;
   }
   static ensure() {
     if (current_batch === null) {
@@ -572,7 +572,7 @@ const Ae = class Ae {
   apply() {
   }
 };
-pe = new WeakMap(), _e = new WeakMap(), ge = new WeakMap(), ue = new WeakMap(), ye = new WeakMap(), me = new WeakMap(), ve = new WeakMap(), G = new WeakSet(), /**
+pe = new WeakMap(), _e = new WeakMap(), ge = new WeakMap(), ue = new WeakMap(), we = new WeakMap(), me = new WeakMap(), ve = new WeakMap(), G = new WeakSet(), /**
  * Traverse the effect tree, executing effects or stashing
  * them for later execution as appropriate
  * @param {Effect} root
@@ -656,7 +656,7 @@ ce = function(e) {
     }
     current_batch = null, batch_values = e;
   }
-  this.committed = !0, batches.delete(this), (i = T(this, ye)) == null || i.resolve();
+  this.committed = !0, batches.delete(this), (i = T(this, we)) == null || i.resolve();
 };
 let Batch = Ae;
 function flushSync(r) {
@@ -1824,11 +1824,11 @@ function delegate(r) {
 }
 let last_propagated_event = null;
 function handle_event_propagation(r) {
-  var y;
+  var w;
   var e = this, t = (
     /** @type {Node} */
     e.ownerDocument
-  ), s = r.type, n = ((y = r.composedPath) == null ? void 0 : y.call(r)) || [], i = (
+  ), s = r.type, n = ((w = r.composedPath) == null ? void 0 : w.call(r)) || [], i = (
     /** @type {null | Element} */
     n[0] || r.target
   );
@@ -1867,8 +1867,8 @@ function handle_event_propagation(r) {
           // -> the target could not have been disabled because it emits the event in the first place
           r.target === i))
             if (is_array(g)) {
-              var [m, ...w] = g;
-              m.apply(i, [r, ...w]);
+              var [m, ...y] = g;
+              m.apply(i, [r, ...y]);
             } else
               g.call(i, r);
         } catch (v) {
@@ -2202,8 +2202,8 @@ function each(r, e, t, s, n, i = null) {
   }
   hydrating && hydrate_next();
   var d = null, f = !1, p = /* @__PURE__ */ new Map(), _ = /* @__PURE__ */ derived_safe_equal(() => {
-    var w = t();
-    return is_array(w) ? w : w == null ? [] : array_from(w);
+    var y = t();
+    return is_array(y) ? y : y == null ? [] : array_from(y);
   }), h, g;
   function m() {
     reconcile(
@@ -2224,21 +2224,21 @@ function each(r, e, t, s, n, i = null) {
     g ?? (g = /** @type {Effect} */
     active_effect), h = /** @type {V[]} */
     get$2(_);
-    var w = h.length;
-    if (f && w === 0)
+    var y = h.length;
+    if (f && y === 0)
       return;
-    f = w === 0;
-    let y = !1;
+    f = y === 0;
+    let w = !1;
     if (hydrating) {
       var v = read_hydration_instruction(o) === HYDRATION_START_ELSE;
-      v !== (w === 0) && (o = skip_nodes(), set_hydrate_node(o), set_hydrating(!1), y = !0);
+      v !== (y === 0) && (o = skip_nodes(), set_hydrate_node(o), set_hydrating(!1), w = !0);
     }
     if (hydrating) {
-      for (var b = null, S, E = 0; E < w; E++) {
+      for (var b = null, S, E = 0; E < y; E++) {
         if (hydrate_node.nodeType === COMMENT_NODE && /** @type {Comment} */
         hydrate_node.data === HYDRATION_END) {
           o = /** @type {Comment} */
-          hydrate_node, y = !0, set_hydrating(!1);
+          hydrate_node, w = !0, set_hydrating(!1);
           break;
         }
         var P = h[E], I = s(P, E);
@@ -2255,16 +2255,16 @@ function each(r, e, t, s, n, i = null) {
           t
         ), l.items.set(I, S), b = S;
       }
-      w > 0 && set_hydrate_node(skip_nodes());
+      y > 0 && set_hydrate_node(skip_nodes());
     }
     if (hydrating)
-      w === 0 && i && (d = branch(() => i(o)));
+      y === 0 && i && (d = branch(() => i(o)));
     else if (should_defer_append()) {
       var A = /* @__PURE__ */ new Set(), O = (
         /** @type {Batch} */
         current_batch
       );
-      for (E = 0; E < w; E += 1) {
+      for (E = 0; E < y; E += 1) {
         P = h[E], I = s(P, E);
         var R = l.items.get(I) ?? p.get(I);
         R ? e & (EACH_ITEM_REACTIVE | EACH_INDEX_REACTIVE) && update_item(R, P, E, e) : (S = create_item(
@@ -2286,15 +2286,15 @@ function each(r, e, t, s, n, i = null) {
       O.add_callback(m);
     } else
       m();
-    y && set_hydrating(!0), get$2(_);
+    w && set_hydrating(!0), get$2(_);
   }), hydrating && (o = hydrate_node);
 }
 function reconcile(r, e, t, s, n, i, o, l, c) {
   var M, U, V, X;
-  var u = (o & EACH_IS_ANIMATED) !== 0, d = (o & (EACH_ITEM_REACTIVE | EACH_INDEX_REACTIVE)) !== 0, f = e.length, p = t.items, _ = t.first, h = _, g, m = null, w, y = [], v = [], b, S, E, P;
+  var u = (o & EACH_IS_ANIMATED) !== 0, d = (o & (EACH_ITEM_REACTIVE | EACH_INDEX_REACTIVE)) !== 0, f = e.length, p = t.items, _ = t.first, h = _, g, m = null, y, w = [], v = [], b, S, E, P;
   if (u)
     for (P = 0; P < f; P += 1)
-      b = e[P], S = l(b, P), E = p.get(S), E !== void 0 && ((M = E.a) == null || M.measure(), (w ?? (w = /* @__PURE__ */ new Set())).add(E));
+      b = e[P], S = l(b, P), E = p.get(S), E !== void 0 && ((M = E.a) == null || M.measure(), (y ?? (y = /* @__PURE__ */ new Set())).add(E));
   for (P = 0; P < f; P += 1) {
     if (b = e[P], S = l(b, P), E = p.get(S), E === void 0) {
       var I = s.get(S);
@@ -2320,31 +2320,31 @@ function reconcile(r, e, t, s, n, i, o, l, c) {
           c
         );
       }
-      p.set(S, m), y = [], v = [], h = m.next;
+      p.set(S, m), w = [], v = [], h = m.next;
       continue;
     }
-    if (d && update_item(E, b, P, o), E.e.f & INERT && (resume_effect(E.e), u && ((U = E.a) == null || U.unfix(), (w ?? (w = /* @__PURE__ */ new Set())).delete(E))), E !== h) {
+    if (d && update_item(E, b, P, o), E.e.f & INERT && (resume_effect(E.e), u && ((U = E.a) == null || U.unfix(), (y ?? (y = /* @__PURE__ */ new Set())).delete(E))), E !== h) {
       if (g !== void 0 && g.has(E)) {
-        if (y.length < v.length) {
+        if (w.length < v.length) {
           var R = v[0], x;
           m = R.prev;
-          var k = y[0], N = y[y.length - 1];
-          for (x = 0; x < y.length; x += 1)
-            move(y[x], R, n);
+          var k = w[0], N = w[w.length - 1];
+          for (x = 0; x < w.length; x += 1)
+            move(w[x], R, n);
           for (x = 0; x < v.length; x += 1)
             g.delete(v[x]);
-          link(t, k.prev, N.next), link(t, m, k), link(t, N, R), h = R, m = N, P -= 1, y = [], v = [];
+          link(t, k.prev, N.next), link(t, m, k), link(t, N, R), h = R, m = N, P -= 1, w = [], v = [];
         } else
           g.delete(E), move(E, h, n), link(t, E.prev, E.next), link(t, E, m === null ? t.first : m.next), link(t, m, E), m = E;
         continue;
       }
-      for (y = [], v = []; h !== null && h.k !== S; )
+      for (w = [], v = []; h !== null && h.k !== S; )
         h.e.f & INERT || (g ?? (g = /* @__PURE__ */ new Set())).add(h), v.push(h), h = h.next;
       if (h === null)
         continue;
       E = h;
     }
-    y.push(E), m = E, h = E.next;
+    w.push(E), m = E, h = E.next;
   }
   if (h !== null || g !== void 0) {
     for (var C = g === void 0 ? [] : array_from(g); h !== null; )
@@ -2362,10 +2362,10 @@ function reconcile(r, e, t, s, n, i, o, l, c) {
     }
   }
   u && queue_micro_task(() => {
-    var we;
-    if (w !== void 0)
-      for (E of w)
-        (we = E.a) == null || we.apply();
+    var ye;
+    if (y !== void 0)
+      for (E of y)
+        (ye = E.a) == null || ye.apply();
   }), r.first = t.first && t.first.e, r.last = m && m.e;
   for (var B of s.values())
     destroy_effect(B.e);
@@ -2695,15 +2695,15 @@ function animate(r, e, t, s, n) {
     g.cancel();
     var m = (t == null ? void 0 : t.t()) ?? 1 - s;
     t == null || t.abort();
-    var w = s - m, y = (
+    var y = s - m, w = (
       /** @type {number} */
-      e.duration * Math.abs(w)
+      e.duration * Math.abs(y)
     ), v = [];
-    if (y > 0) {
+    if (w > 0) {
       var b = !1;
       if (u)
-        for (var S = Math.ceil(y / 16.666666666666668), E = 0; E <= S; E += 1) {
-          var P = m + w * f(E / S), I = css_to_keyframe(u(P, 1 - P));
+        for (var S = Math.ceil(w / 16.666666666666668), E = 0; E <= S; E += 1) {
+          var P = m + y * f(E / S), I = css_to_keyframe(u(P, 1 - P));
           v.push(I), b || (b = I.overflow === "hidden");
         }
       b && (r.style.overflow = "hidden"), h = () => {
@@ -2712,14 +2712,14 @@ function animate(r, e, t, s, n) {
           /** @type {globalThis.Animation} */
           g.currentTime
         );
-        return m + w * f(A / y);
+        return m + y * f(A / w);
       }, d && loop$1(() => {
         if (g.playState !== "running") return !1;
         var A = h();
         return d(A, 1 - A), !0;
       });
     }
-    g = r.animate(v, { duration: y, fill: "forwards" }), g.onfinish = () => {
+    g = r.animate(v, { duration: w, fill: "forwards" }), g.onfinish = () => {
       h = () => s, d == null || d(s, 1 - s), n();
     };
   }, {
@@ -3001,9 +3001,9 @@ function prop(r, e, t, s) {
       }
     );
   }
-  var m = !1, w = (t & PROPS_IS_IMMUTABLE ? derived : derived_safe_equal)(() => (m = !1, h()));
-  i && get$2(w);
-  var y = (
+  var m = !1, y = (t & PROPS_IS_IMMUTABLE ? derived : derived_safe_equal)(() => (m = !1, h()));
+  i && get$2(y);
+  var w = (
     /** @type {Effect} */
     active_effect
   );
@@ -3011,10 +3011,10 @@ function prop(r, e, t, s) {
     /** @type {() => V} */
     function(b, S) {
       if (arguments.length > 0) {
-        const E = S ? get$2(w) : n && i ? proxy(b) : b;
-        return set(w, E), m = !0, l !== void 0 && (l = E), b;
+        const E = S ? get$2(y) : n && i ? proxy(b) : b;
+        return set(y, E), m = !0, l !== void 0 && (l = E), b;
       }
-      return is_destroying_effect && m || y.f & DESTROYED ? w.v : get$2(w);
+      return is_destroying_effect && m || w.f & DESTROYED ? y.v : get$2(y);
     }
   );
 }
@@ -3463,7 +3463,7 @@ const isPage = (r) => {
   }
 }, BUY_BUTTONS_CONFIG = {
   selectors: {
-    priceValue: ".price-ui--value",
+    priceValue: ".pdp-price-container .price-ui--value",
     ctaPrice: ".pdp-cta-price",
     preorderButton: ".gPreorderBtnLoaded",
     productForm: "product-form",
@@ -3475,12 +3475,17 @@ const isPage = (r) => {
   },
   retry: {
     maxAttempts: 10,
-    interval: 100,
-    maxFooterRetries: 5,
-    footerInterval: 200
+    interval: 100
   },
   breakpoints: {
     mobile: 767
+  }
+}, frontendLogger = {
+  debug: (...r) => {
+    console.log("[UI]", ...r);
+  },
+  warn: (...r) => {
+    console.warn("[UI]", ...r);
   }
 };
 class PriceObserver {
@@ -3492,6 +3497,9 @@ class PriceObserver {
     L(this, "retryCount", 0);
     L(this, "isInitialized", !1);
     L(this, "onComplete");
+    L(this, "completeTimer", null);
+    L(this, "STABILITY_DELAY_MS", 100);
+    L(this, "changeCounter", 0);
   }
   /**
    * Set completion callback for when observer finishes initialization
@@ -3511,13 +3519,30 @@ class PriceObserver {
    * Notify all subscribers of price changes
    */
   notifySubscribers(e) {
-    e !== this.currentPrice && (this.currentPrice = e, this.subscribers.forEach((t) => {
+    e !== this.currentPrice && (this.currentPrice = e, this.changeCounter++, frontendLogger.debug(`💰 Price change #${this.changeCounter}: ${e}`, {
+      previousPrice: this.currentPrice,
+      newPrice: e,
+      changeNumber: this.changeCounter,
+      subscriberCount: this.subscribers.size
+    }), this.subscribers.forEach((t) => {
       try {
         t(e);
       } catch (s) {
         console.error("Price observer subscriber error:", s);
       }
     }));
+  }
+  /**
+   * Signal completion after price has been stable for the configured delay
+   */
+  scheduleCompletion() {
+    this.completeTimer !== null && clearTimeout(this.completeTimer), this.completeTimer = window.setTimeout(() => {
+      var e;
+      this.isInitialized || (frontendLogger.debug(`✅ Price observer completed after ${this.STABILITY_DELAY_MS}ms stability`, {
+        finalPrice: this.currentPrice,
+        totalChanges: this.changeCounter
+      }), this.isInitialized = !0, (e = this.onComplete) == null || e.call(this));
+    }, this.STABILITY_DELAY_MS);
   }
   /**
    * Get current price synchronously
@@ -3545,22 +3570,24 @@ class PriceObserver {
    * Start observing price element changes
    */
   startObserving() {
-    this.observer && this.observer.disconnect(), this.findAndObservePriceElement(), this.priceElement || this.retryObserving();
+    frontendLogger.debug("🚀 Starting price observation"), this.observer && this.observer.disconnect(), this.findAndObservePriceElement(), this.priceElement || this.retryObserving();
   }
   /**
    * Find price element and set up observer
    */
   findAndObservePriceElement() {
-    var e;
     if (this.priceElement = document.querySelector(
       BUY_BUTTONS_CONFIG.selectors.priceValue
     ), this.priceElement) {
-      this.observer = new MutationObserver((s) => {
-        s.forEach((n) => {
-          var i;
-          if (n.type === "childList" || n.type === "characterData") {
-            const o = (i = this.priceElement) == null ? void 0 : i.innerText.trim();
-            o && o !== this.currentPrice && this.notifySubscribers(o);
+      frontendLogger.debug("🔍 Price element found, setting up mutation observer"), this.observer = new MutationObserver((t) => {
+        t.forEach((s) => {
+          var n;
+          if (s.type === "childList" || s.type === "characterData") {
+            const i = (n = this.priceElement) == null ? void 0 : n.innerText.trim();
+            i && i !== this.currentPrice && (frontendLogger.debug(`📍 Price mutation detected: ${i}`, {
+              mutationType: s.type,
+              newPrice: i
+            }), this.notifySubscribers(i), this.scheduleCompletion());
           }
         });
       }), this.observer.observe(this.priceElement, {
@@ -3568,8 +3595,8 @@ class PriceObserver {
         subtree: !0,
         characterData: !0
       });
-      const t = this.priceElement.innerText.trim();
-      t && this.notifySubscribers(t), this.isInitialized || (this.isInitialized = !0, (e = this.onComplete) == null || e.call(this));
+      const e = this.priceElement.innerText.trim();
+      e && (frontendLogger.debug(`🎯 Initial price detected: ${e}`), this.notifySubscribers(e)), this.scheduleCompletion();
     }
   }
   /**
@@ -3577,15 +3604,18 @@ class PriceObserver {
    */
   retryObserving() {
     var e;
-    this.retryCount < BUY_BUTTONS_CONFIG.retry.maxAttempts ? (this.retryCount++, setTimeout(() => {
+    this.retryCount < BUY_BUTTONS_CONFIG.retry.maxAttempts ? (this.retryCount++, frontendLogger.debug(`🔄 Retry attempt #${this.retryCount} to find price element`), setTimeout(() => {
       this.findAndObservePriceElement(), this.priceElement || this.retryObserving();
-    }, BUY_BUTTONS_CONFIG.retry.interval)) : (console.warn("Price observer: Could not find price element after max retries"), this.isInitialized || (this.isInitialized = !0, (e = this.onComplete) == null || e.call(this)));
+    }, BUY_BUTTONS_CONFIG.retry.interval)) : (frontendLogger.warn("⚠️ Price observer: Could not find price element after max retries", {
+      maxAttempts: BUY_BUTTONS_CONFIG.retry.maxAttempts,
+      totalRetries: this.retryCount
+    }), this.isInitialized || (this.isInitialized = !0, (e = this.onComplete) == null || e.call(this)));
   }
   /**
    * Stop observing
    */
   stopObserving() {
-    this.observer && (this.observer.disconnect(), this.observer = null), this.priceElement = null, this.retryCount = 0;
+    this.observer && (this.observer.disconnect(), this.observer = null), this.completeTimer !== null && (clearTimeout(this.completeTimer), this.completeTimer = null), this.priceElement = null, this.retryCount = 0;
   }
   /**
    * Clean up all resources
@@ -3734,12 +3764,13 @@ class ResponsiveLayoutManager {
   }
 }
 class FooterCTAManager {
-  constructor() {
+  constructor(e) {
     L(this, "productForm", null);
     L(this, "footer", null);
     L(this, "isInitialized", !1);
     L(this, "onComplete");
-    this.productForm = document.querySelector(BUY_BUTTONS_CONFIG.selectors.productForm), this.footer = document.querySelector(BUY_BUTTONS_CONFIG.selectors.footer);
+    L(this, "paymentOptionManager");
+    this.productForm = document.querySelector(BUY_BUTTONS_CONFIG.selectors.productForm), this.footer = document.querySelector(BUY_BUTTONS_CONFIG.selectors.footer), this.paymentOptionManager = e;
   }
   /**
    * Set completion callback for when footer move is complete
@@ -3750,37 +3781,30 @@ class FooterCTAManager {
   /**
    * Move CTA to footer (for mobile sticky footer)
    */
-  async moveCtaToFooter() {
+  moveCtaToFooter() {
     var t, s;
     if (!this.productForm || !this.footer) {
       this.isInitialized || (this.isInitialized = !0, (t = this.onComplete) == null || t.call(this));
       return;
     }
-    let e = this.productForm.cloneNode(!0);
-    e = await this.cleanFooter(e), this.footer.prepend(e), this.isInitialized || (this.isInitialized = !0, (s = this.onComplete) == null || s.call(this));
+    const e = this.productForm.cloneNode(!0);
+    this.cleanFooter(e), this.footer.prepend(e), this.isInitialized || (this.isInitialized = !0, (s = this.onComplete) == null || s.call(this));
   }
   /**
    * Clean footer content by removing payment options
-   * (Globo adds these dynamically, we need to wait for them)
+   * Uses PaymentOptionManager to efficiently check if payment options exist
+   * Note: PaymentOptionManager must be initialized before this is called
    */
-  async cleanFooter(e, t = 0) {
-    var n;
-    const s = e.querySelector(
-      BUY_BUTTONS_CONFIG.selectors.paymentOptions
-    );
-    return s ? ((n = s.parentElement) == null || n.removeChild(s), e) : t >= BUY_BUTTONS_CONFIG.retry.maxFooterRetries ? e : (await new Promise(
-      (i) => setTimeout(i, BUY_BUTTONS_CONFIG.retry.footerInterval)
-    ), this.cleanFooter(e, t + 1));
+  cleanFooter(e) {
+    var s;
+    if (this.paymentOptionManager.getPaymentOptionsInfo().hasPaymentOptions) {
+      const n = e.querySelector(
+        BUY_BUTTONS_CONFIG.selectors.paymentOptions
+      );
+      n && ((s = n.parentElement) == null || s.removeChild(n));
+    }
   }
 }
-const frontendLogger = {
-  debug: (...r) => {
-    console.log("[UI]", ...r);
-  },
-  warn: (...r) => {
-    console.warn("[UI]", ...r);
-  }
-};
 class PaymentOptionManager {
   constructor() {
     L(this, "debug", !1);
@@ -3798,11 +3822,37 @@ class PaymentOptionManager {
     this.onComplete = e, this.isInitialized && e();
   }
   /**
-   * Initialize the payment option manager
+   * Get information about available payment options
+   * Used by SkeletonManager to determine what skeletons to show
+   */
+  getPaymentOptionsInfo() {
+    const e = document.querySelector(this.sellingPlanOptionsSelector);
+    if (!e)
+      return {
+        hasPaymentOptions: !1,
+        optionCount: 0
+      };
+    const t = e.children.length;
+    return {
+      hasPaymentOptions: t > 0,
+      optionCount: t
+    };
+  }
+  /**
+   * Initialize the payment option manager for observing and hiding behavior
    * Sets up observer on product info container for dynamic content changes
+   * Should be called when preorder functionality is active
    */
   init() {
-    this.setupObserver(), this.debug && frontendLogger.debug("PaymentOptionManager initialized"), this.checkAndHideParent();
+    this.setupObserver(), this.debug && frontendLogger.debug("PaymentOptionManager observer initialized"), this.checkAndHideParent();
+  }
+  /**
+   * Initialize only the completion tracking without observer
+   * Used when we need payment options info but don't need hiding behavior
+   */
+  initWithoutObserver() {
+    var e;
+    this.isInitialized || (this.isInitialized = !0, (e = this.onComplete) == null || e.call(this)), this.debug && frontendLogger.debug("PaymentOptionManager initialized without observer");
   }
   /**
    * Check if selling plan parent should be hidden based on child count
@@ -3851,21 +3901,91 @@ class PaymentOptionManager {
     this.stopObserving();
   }
 }
+class SkeletonManager {
+  constructor() {
+    L(this, "debug", !1);
+    L(this, "productFormButtonsSelector", ".product-form__buttons");
+    L(this, "SKELETON_HEIGHT", "60px");
+    L(this, "styledElements", []);
+  }
+  /**
+   * Show skeleton loading state
+   * Called on initialization
+   */
+  showSkeletons() {
+    this.createSkeleton(), this.debug && frontendLogger.debug("Skeleton shown");
+  }
+  /**
+   * Hide skeleton loading state
+   * Called when all managers complete initialization
+   */
+  hideSkeletons() {
+    this.removeSkeleton(), this.debug && frontendLogger.debug("Skeleton hidden");
+  }
+  /**
+   * Create skeleton loading overlay on all product form buttons instances
+   * Sets fixed height, hidden overflow, margin-bottom, and adds skeleton overlay
+   * Handles both original and cloned (footer) instances
+   */
+  createSkeleton() {
+    const e = document.querySelectorAll(this.productFormButtonsSelector);
+    if (e.length === 0) {
+      this.debug && frontendLogger.debug("No product form buttons found");
+      return;
+    }
+    e.forEach((t) => {
+      const s = t, n = s.style.height || "", i = s.style.overflow || "", o = s.style.marginBottom || "";
+      s.style.height = this.SKELETON_HEIGHT, s.style.overflow = "hidden", s.style.marginBottom = "5px";
+      const l = document.createElement("div");
+      l.className = "skeleton-wave", l.style.cssText = `
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				z-index: 10;
+			`, s.appendChild(l), this.styledElements.push({
+        element: s,
+        originalHeight: n,
+        originalOverflow: i,
+        originalMarginBottom: o
+      });
+    }), this.debug && frontendLogger.debug(`Created ${this.styledElements.length} skeleton instance(s)`);
+  }
+  /**
+   * Remove all skeleton overlays from page and restore original styles
+   * Uses simple approach: removes all .skeleton-wave elements from entire page
+   */
+  removeSkeleton() {
+    const e = document.querySelectorAll(".skeleton-wave");
+    e.forEach((t) => {
+      t.remove();
+    }), this.styledElements.forEach(({ element: t, originalHeight: s, originalOverflow: n, originalMarginBottom: i }) => {
+      t.style.height = s, t.style.overflow = n, t.style.marginBottom = i;
+    }), this.debug && frontendLogger.debug(`Removed ${e.length} skeleton element(s) and restored styles for ${this.styledElements.length} element(s)`), this.styledElements = [];
+  }
+  /**
+   * Clean up resources
+   */
+  destroy() {
+    this.removeSkeleton();
+  }
+}
 class BuyButtonsManager {
-  constructor(e = !1) {
+  constructor() {
     L(this, "priceObserver");
     L(this, "ctaUpdater");
     L(this, "responsiveLayout");
     L(this, "footerManager");
     L(this, "paymentOptionManager");
+    L(this, "skeletonManager");
     L(this, "completionTracking", /* @__PURE__ */ new Map());
-    L(this, "skeletonElement", null);
     L(this, "completionPollInterval", null);
     L(this, "debug", !1);
-    this.debug = e, this.priceObserver = new PriceObserver(), this.ctaUpdater = new CTAUpdater(), this.responsiveLayout = new ResponsiveLayoutManager(), this.footerManager = new FooterCTAManager(), this.paymentOptionManager = new PaymentOptionManager();
+    this.priceObserver = new PriceObserver(), this.ctaUpdater = new CTAUpdater(), this.responsiveLayout = new ResponsiveLayoutManager(), this.paymentOptionManager = new PaymentOptionManager(), this.footerManager = new FooterCTAManager(this.paymentOptionManager), this.skeletonManager = new SkeletonManager();
   }
   onAllComplete() {
-    this.debug && frontendLogger.debug("All buy button managers initialized successfully"), this.hideCtaSkeleton();
+    this.debug && frontendLogger.debug("All buy button managers initialized successfully"), this.skeletonManager.hideSkeletons();
   }
   /**
    * Set completion callback to be called when all managers finish initialization
@@ -3924,31 +4044,10 @@ class BuyButtonsManager {
     }), this.stopCompletionPolling(), (s = this.onAllComplete) == null || s.call(this));
   }
   /**
-   * Create and show skeleton loading overlay on CTA button
-   */
-  showCtaSkeleton() {
-    const e = document.querySelector(".product-form__buttons");
-    !e || this.skeletonElement || (this.skeletonElement = document.createElement("div"), this.skeletonElement.className = "skeleton-wave", this.skeletonElement.style.cssText = `
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			z-index: 10;
-			border-radius: 4px;
-		`, e.appendChild(this.skeletonElement), this.debug && frontendLogger.debug("CTA skeleton shown"));
-  }
-  /**
-   * Hide and remove skeleton loading overlay
-   */
-  hideCtaSkeleton() {
-    this.skeletonElement && this.skeletonElement.parentElement && (this.skeletonElement.remove(), this.skeletonElement = null, this.debug && frontendLogger.debug("CTA skeleton hidden"));
-  }
-  /**
    * Initialize all buy button functionality
    */
   init() {
-    this.showCtaSkeleton(), this.completionTracking.set("priceObserver", !1), this.completionTracking.set("ctaUpdater", !1), this.completionTracking.set("responsiveLayout", !1), this.completionTracking.set("footerManager", !1), this.debug && frontendLogger.debug("🚀 Initializing Buy Buttons Manager"), this.debug && this.logCompletionStatus(), this.debug && this.startCompletionPolling(), this.priceObserver.setCompletionCallback(() => {
+    this.skeletonManager.showSkeletons(), this.completionTracking.set("priceObserver", !1), this.completionTracking.set("ctaUpdater", !1), this.completionTracking.set("responsiveLayout", !1), this.completionTracking.set("footerManager", !1), this.completionTracking.set("paymentOptionManager", !1), this.debug && frontendLogger.debug("🚀 Initializing Buy Buttons Manager"), this.debug && this.logCompletionStatus(), this.debug && this.startCompletionPolling(), this.priceObserver.setCompletionCallback(() => {
       this.markManagerComplete("priceObserver");
     }), this.ctaUpdater.setCompletionCallback(() => {
       this.markManagerComplete("ctaUpdater");
@@ -3956,12 +4055,12 @@ class BuyButtonsManager {
       this.markManagerComplete("responsiveLayout");
     }), this.footerManager.setCompletionCallback(() => {
       this.markManagerComplete("footerManager");
-    }), this.priceObserver.subscribe((e) => {
+    }), this.paymentOptionManager.setCompletionCallback(() => {
+      this.markManagerComplete("paymentOptionManager");
+    }), this.paymentOptionManager.initWithoutObserver(), this.priceObserver.subscribe((e) => {
       this.ctaUpdater.setPrice(e);
     }), this.priceObserver.startObserving(), document.addEventListener("globo.preorder.show.preorder", () => {
-      this.ctaUpdater.setIsPreorder(!0), this.completionTracking.set("paymentOptionManager", !1), this.paymentOptionManager.setCompletionCallback(() => {
-        this.markManagerComplete("paymentOptionManager");
-      }), this.paymentOptionManager.init();
+      this.ctaUpdater.setIsPreorder(!0), this.paymentOptionManager.init();
     }), this.setupPriceInitializationListener(), this.footerManager.moveCtaToFooter(), this.responsiveLayout.init();
   }
   /**
@@ -3980,7 +4079,7 @@ class BuyButtonsManager {
    * Clean up all resources
    */
   destroy() {
-    this.priceObserver.destroy(), this.responsiveLayout.destroy(), this.paymentOptionManager.destroy();
+    this.priceObserver.destroy(), this.responsiveLayout.destroy(), this.paymentOptionManager.destroy(), this.skeletonManager.destroy();
   }
 }
 const loadStyles = (r, e = {}) => {
@@ -4051,6 +4150,10 @@ product-price .skeleton {
 }
 
 .product-form__buttons {
+    position: relative;
+}
+
+.relative {
     position: relative;
 }
 `, buyButtonsGloboStyles = `/* ========================================
@@ -4346,7 +4449,7 @@ product-price .skeleton {
     }
 }
 `, buyButtonsInitialize = (r) => {
-  console.log("dump", "buyButtonsInitialize"), loadStyles(buyButtonsStyles, { id: "buy-buttons-styles" }), loadStyles(buyButtonsGloboStyles, { id: "buy-buttons-globo-styles" });
+  console.log("dump", "buyButtonsInitialize"), window.BuyButtonsManager && (frontendLogger.debug("🧹 Destroying previous BuyButtonsManager instance"), window.BuyButtonsManager.destroy()), loadStyles(buyButtonsStyles, { id: "buy-buttons-styles" }), loadStyles(buyButtonsGloboStyles, { id: "buy-buttons-globo-styles" });
   const e = new BuyButtonsManager();
   e.init(), window.BuyButtonsManager = e;
 }, mainFooter = () => {
@@ -4776,8 +4879,8 @@ function CollectionItemPrice(r, e) {
   var p = sibling(u, 2);
   {
     var _ = (h) => {
-      var g = root_2$4(), m = child(g), w = child(m);
-      reset(m), reset(g), template_effect(() => set_text(w, `-${get$2(n) ?? ""}% off`)), append(h, g);
+      var g = root_2$4(), m = child(g), y = child(m);
+      reset(m), reset(g), template_effect(() => set_text(y, `-${get$2(n) ?? ""}% off`)), append(h, g);
     };
     if_block(p, (h) => {
       get$2(n) && h(_);
@@ -4840,8 +4943,8 @@ function ProductDetailsPagePrice(r, e) {
   var p = sibling(d, 2);
   {
     var _ = (h) => {
-      var g = root_2$3(), m = child(g), w = child(m);
-      reset(m), reset(g), template_effect(() => set_text(w, `-${get$2(n) ?? ""}% off`)), append(h, g);
+      var g = root_2$3(), m = child(g), y = child(m);
+      reset(m), reset(g), template_effect(() => set_text(y, `-${get$2(n) ?? ""}% off`)), append(h, g);
     };
     if_block(p, (h) => {
       get$2(n) && h(_);
@@ -4880,7 +4983,7 @@ function ProductPrice(r, e) {
   push(e, !0);
   const t = () => store_get(displayCurrency, "$displayCurrency", i), s = () => store_get(currencyRates, "$currencyRates", i), n = () => store_get(marketCurrency, "$marketCurrency", i), [i, o] = setup_stores(), l = prop(e, "price", 7), c = prop(e, "compared_at", 7), u = prop(e, "iso_code", 7), d = prop(e, "variant_id", 7), f = prop(e, "product_id", 7), p = prop(e, "type", 7, "ProductDetailsPagePrice"), _ = prop(e, "isPriceReady", 15, !1), h = prop(e, "DEV_currency", 7), g = prop(e, "DEV_market", 7);
   let m = /* @__PURE__ */ state(!1);
-  const w = new NexusApi(), y = { price: "-1", comparedAt: void 0 }, v = /* @__PURE__ */ user_derived(() => normalizePrice(l(), c())), b = /* @__PURE__ */ state(proxy(y)), S = /* @__PURE__ */ state(proxy(y));
+  const y = new NexusApi(), w = { price: "-1", comparedAt: void 0 }, v = /* @__PURE__ */ user_derived(() => normalizePrice(l(), c())), b = /* @__PURE__ */ state(proxy(w)), S = /* @__PURE__ */ state(proxy(w));
   user_effect(() => {
     if (get$2(b).price = get$2(v).price, get$2(b).comparedAt = get$2(v).comparedAt, !!u() && !(!d() && !f()) && get$2(v).price && !get$2(v).comparedAt)
       try {
@@ -4918,7 +5021,7 @@ function ProductPrice(r, e) {
     if (!u()) throw new Error("Market is required");
     if (!d() && !f()) throw new Error("Either variant or product id is required is required");
     set(m, !0);
-    const $ = w.getVariantAutomaticDiscount.bind(w), j = w.getProductAutomaticDiscount.bind(w), B = d() ? () => $(u(), +d()) : () => j(u(), +f()), { amount: M } = await B();
+    const $ = y.getVariantAutomaticDiscount.bind(y), j = y.getProductAutomaticDiscount.bind(y), B = d() ? () => $(u(), +d()) : () => j(u(), +f()), { amount: M } = await B();
     if (set(m, !1), !M || M === 0) return { price: C, comparedAt: void 0 };
     const { formatted: U } = subtractFromPriceWithSymbol(C, M);
     return { price: U, comparedAt: C };
@@ -5211,17 +5314,17 @@ function __param(r, e) {
   };
 }
 function __esDecorate(r, e, t, s, n, i) {
-  function o(w) {
-    if (w !== void 0 && typeof w != "function") throw new TypeError("Function expected");
-    return w;
+  function o(y) {
+    if (y !== void 0 && typeof y != "function") throw new TypeError("Function expected");
+    return y;
   }
   for (var l = s.kind, c = l === "getter" ? "get" : l === "setter" ? "set" : "value", u = !e && r ? s.static ? r : r.prototype : null, d = e || (u ? Object.getOwnPropertyDescriptor(u, s.name) : {}), f, p = !1, _ = t.length - 1; _ >= 0; _--) {
     var h = {};
     for (var g in s) h[g] = g === "access" ? {} : s[g];
     for (var g in s.access) h.access[g] = s.access[g];
-    h.addInitializer = function(w) {
+    h.addInitializer = function(y) {
       if (p) throw new TypeError("Cannot add initializers after decoration has completed");
-      i.push(o(w || null));
+      i.push(o(y || null));
     };
     var m = (0, t[_])(l === "accessor" ? { get: d.get, set: d.set } : d[c], h);
     if (l === "accessor") {
@@ -5405,8 +5508,8 @@ function __asyncGenerator(r, e, t) {
   }
   function l(_, h) {
     s[_] && (n[_] = function(g) {
-      return new Promise(function(m, w) {
-        i.push([_, g, m, w]) > 1 || c(_, g);
+      return new Promise(function(m, y) {
+        i.push([_, g, m, y]) > 1 || c(_, g);
       });
     }, h && (n[_] = h(n[_])));
   }
@@ -5689,8 +5792,8 @@ class FunctionsClient {
           headers: Object.assign(Object.assign(Object.assign({}, u), this.headers), i),
           body: p,
           signal: c
-        }).catch((w) => {
-          throw w.name === "AbortError" ? w : new FunctionsFetchError(w);
+        }).catch((y) => {
+          throw y.name === "AbortError" ? y : new FunctionsFetchError(y);
         }), h = _.headers.get("x-relay-error");
         if (h && h === "true")
           throw new FunctionsRelayError(_);
@@ -5792,7 +5895,7 @@ function requirePostgrestBuilder() {
         signal: this.signal
       }).then(async (u) => {
         var d, f, p, _;
-        let h = null, g = null, m = null, w = u.status, y = u.statusText;
+        let h = null, g = null, m = null, y = u.status, w = u.statusText;
         if (u.ok) {
           if (this.method !== "HEAD") {
             const E = await u.text();
@@ -5805,25 +5908,25 @@ function requirePostgrestBuilder() {
             details: `Results contain ${g.length} rows, application/vnd.pgrst.object+json requires 1 row`,
             hint: null,
             message: "JSON object requested, multiple (or no) rows returned"
-          }, g = null, m = null, w = 406, y = "Not Acceptable") : g.length === 1 ? g = g[0] : g = null);
+          }, g = null, m = null, y = 406, w = "Not Acceptable") : g.length === 1 ? g = g[0] : g = null);
         } else {
           const b = await u.text();
           try {
-            h = JSON.parse(b), Array.isArray(h) && u.status === 404 && (g = [], h = null, w = 200, y = "OK");
+            h = JSON.parse(b), Array.isArray(h) && u.status === 404 && (g = [], h = null, y = 200, w = "OK");
           } catch {
-            u.status === 404 && b === "" ? (w = 204, y = "No Content") : h = {
+            u.status === 404 && b === "" ? (y = 204, w = "No Content") : h = {
               message: b
             };
           }
-          if (h && this.isMaybeSingle && (!((_ = h == null ? void 0 : h.details) === null || _ === void 0) && _.includes("0 rows")) && (h = null, w = 200, y = "OK"), h && this.shouldThrowOnError)
+          if (h && this.isMaybeSingle && (!((_ = h == null ? void 0 : h.details) === null || _ === void 0) && _.includes("0 rows")) && (h = null, y = 200, w = "OK"), h && this.shouldThrowOnError)
             throw new t.default(h);
         }
         return {
           error: h,
           data: g,
           count: m,
-          status: w,
-          statusText: y
+          status: y,
+          statusText: w
         };
       });
       return this.shouldThrowOnError || (c = c.catch((u) => {
@@ -7180,17 +7283,17 @@ class RealtimeChannel {
           e == null || e(REALTIME_SUBSCRIBE_STATES.SUBSCRIBED);
           return;
         } else {
-          const g = this.bindings.postgres_changes, m = (h = g == null ? void 0 : g.length) !== null && h !== void 0 ? h : 0, w = [];
-          for (let y = 0; y < m; y++) {
-            const v = g[y], { filter: { event: b, schema: S, table: E, filter: P } } = v, I = _ && _[y];
+          const g = this.bindings.postgres_changes, m = (h = g == null ? void 0 : g.length) !== null && h !== void 0 ? h : 0, y = [];
+          for (let w = 0; w < m; w++) {
+            const v = g[w], { filter: { event: b, schema: S, table: E, filter: P } } = v, I = _ && _[w];
             if (I && I.event === b && I.schema === S && I.table === E && I.filter === P)
-              w.push(Object.assign(Object.assign({}, v), { id: I.id }));
+              y.push(Object.assign(Object.assign({}, v), { id: I.id }));
             else {
               this.unsubscribe(), this.state = CHANNEL_STATES.errored, e == null || e(REALTIME_SUBSCRIBE_STATES.CHANNEL_ERROR, new Error("mismatch between server and client bindings for postgres changes"));
               return;
             }
           }
-          this.bindings.postgres_changes = w, e && e(REALTIME_SUBSCRIBE_STATES.SUBSCRIBED);
+          this.bindings.postgres_changes = y, e && e(REALTIME_SUBSCRIBE_STATES.SUBSCRIBED);
           return;
         }
       }).receive("error", (_) => {
@@ -7398,25 +7501,25 @@ class RealtimeChannel {
       var h, g, m;
       return ((h = _.filter) === null || h === void 0 ? void 0 : h.event) === "*" || ((m = (g = _.filter) === null || g === void 0 ? void 0 : g.event) === null || m === void 0 ? void 0 : m.toLocaleLowerCase()) === o;
     }).map((_) => _.callback(p, s)) : (i = this.bindings[o]) === null || i === void 0 || i.filter((_) => {
-      var h, g, m, w, y, v;
+      var h, g, m, y, w, v;
       if (["broadcast", "presence", "postgres_changes"].includes(o))
         if ("id" in _) {
           const b = _.id, S = (h = _.filter) === null || h === void 0 ? void 0 : h.event;
           return b && ((g = t.ids) === null || g === void 0 ? void 0 : g.includes(b)) && (S === "*" || (S == null ? void 0 : S.toLocaleLowerCase()) === ((m = t.data) === null || m === void 0 ? void 0 : m.type.toLocaleLowerCase()));
         } else {
-          const b = (y = (w = _ == null ? void 0 : _.filter) === null || w === void 0 ? void 0 : w.event) === null || y === void 0 ? void 0 : y.toLocaleLowerCase();
+          const b = (w = (y = _ == null ? void 0 : _.filter) === null || y === void 0 ? void 0 : y.event) === null || w === void 0 ? void 0 : w.toLocaleLowerCase();
           return b === "*" || b === ((v = t == null ? void 0 : t.event) === null || v === void 0 ? void 0 : v.toLocaleLowerCase());
         }
       else
         return _.type.toLocaleLowerCase() === o;
     }).map((_) => {
       if (typeof p == "object" && "ids" in p) {
-        const h = p.data, { schema: g, table: m, commit_timestamp: w, type: y, errors: v } = h;
+        const h = p.data, { schema: g, table: m, commit_timestamp: y, type: w, errors: v } = h;
         p = Object.assign(Object.assign({}, {
           schema: g,
           table: m,
-          commit_timestamp: w,
-          eventType: y,
+          commit_timestamp: y,
+          eventType: w,
           new: {},
           old: {},
           errors: v
@@ -10890,27 +10993,27 @@ function createSiweMessage(r) {
 ${_}
 
 ${g}`;
-  let w = `URI: ${f}
+  let y = `URI: ${f}
 Version: ${p}
 Chain ID: ${t}${o ? `
 Nonce: ${o}` : ""}
 Issued At: ${i.toISOString()}`;
-  if (n && (w += `
-Expiration Time: ${n.toISOString()}`), l && (w += `
-Not Before: ${l.toISOString()}`), c && (w += `
+  if (n && (y += `
+Expiration Time: ${n.toISOString()}`), l && (y += `
+Not Before: ${l.toISOString()}`), c && (y += `
 Request ID: ${c}`), u) {
-    let y = `
+    let w = `
 Resources:`;
     for (const v of u) {
       if (!v || typeof v != "string")
         throw new Error(`@supabase/auth-js: Invalid SIWE message field "resources". Every resource must be a valid string. Provided value: ${v}`);
-      y += `
+      w += `
 - ${v}`;
     }
-    w += y;
+    y += w;
   }
   return `${m}
-${w}`;
+${y}`;
 }
 class WebAuthnError extends Error {
   constructor({ message: e, code: t, cause: s, name: n }) {
@@ -11779,7 +11882,7 @@ class GoTrueClient {
     if ("message" in e)
       _ = e.message, h = e.signature;
     else {
-      const { chain: g, wallet: m, statement: w, options: y } = e;
+      const { chain: g, wallet: m, statement: y, options: w } = e;
       let v;
       if (isBrowser())
         if (typeof m == "object")
@@ -11792,11 +11895,11 @@ class GoTrueClient {
             throw new Error("@supabase/auth-js: No compatible Ethereum wallet interface on the window object (window.ethereum) detected. Make sure the user already has a wallet installed and connected for this app. Prefer passing the wallet interface object directly to signInWithWeb3({ chain: 'ethereum', wallet: resolvedUserWallet }) instead.");
         }
       else {
-        if (typeof m != "object" || !(y != null && y.url))
+        if (typeof m != "object" || !(w != null && w.url))
           throw new Error("@supabase/auth-js: Both wallet and url must be specified in non-browser environments.");
         v = m;
       }
-      const b = new URL((t = y == null ? void 0 : y.url) !== null && t !== void 0 ? t : window.location.href), S = await v.request({
+      const b = new URL((t = w == null ? void 0 : w.url) !== null && t !== void 0 ? t : window.location.href), S = await v.request({
         method: "eth_requestAccounts"
       }).then((A) => A).catch(() => {
         throw new Error("@supabase/auth-js: Wallet method eth_requestAccounts is missing or invalid");
@@ -11804,7 +11907,7 @@ class GoTrueClient {
       if (!S || S.length === 0)
         throw new Error("@supabase/auth-js: No accounts available. Please ensure the wallet is connected.");
       const E = getAddress(S[0]);
-      let P = (s = y == null ? void 0 : y.signInWithEthereum) === null || s === void 0 ? void 0 : s.chainId;
+      let P = (s = w == null ? void 0 : w.signInWithEthereum) === null || s === void 0 ? void 0 : s.chainId;
       if (!P) {
         const A = await v.request({
           method: "eth_chainId"
@@ -11814,16 +11917,16 @@ class GoTrueClient {
       const I = {
         domain: b.host,
         address: E,
-        statement: w,
+        statement: y,
         uri: b.href,
         version: "1",
         chainId: P,
-        nonce: (n = y == null ? void 0 : y.signInWithEthereum) === null || n === void 0 ? void 0 : n.nonce,
-        issuedAt: (o = (i = y == null ? void 0 : y.signInWithEthereum) === null || i === void 0 ? void 0 : i.issuedAt) !== null && o !== void 0 ? o : /* @__PURE__ */ new Date(),
-        expirationTime: (l = y == null ? void 0 : y.signInWithEthereum) === null || l === void 0 ? void 0 : l.expirationTime,
-        notBefore: (c = y == null ? void 0 : y.signInWithEthereum) === null || c === void 0 ? void 0 : c.notBefore,
-        requestId: (u = y == null ? void 0 : y.signInWithEthereum) === null || u === void 0 ? void 0 : u.requestId,
-        resources: (d = y == null ? void 0 : y.signInWithEthereum) === null || d === void 0 ? void 0 : d.resources
+        nonce: (n = w == null ? void 0 : w.signInWithEthereum) === null || n === void 0 ? void 0 : n.nonce,
+        issuedAt: (o = (i = w == null ? void 0 : w.signInWithEthereum) === null || i === void 0 ? void 0 : i.issuedAt) !== null && o !== void 0 ? o : /* @__PURE__ */ new Date(),
+        expirationTime: (l = w == null ? void 0 : w.signInWithEthereum) === null || l === void 0 ? void 0 : l.expirationTime,
+        notBefore: (c = w == null ? void 0 : w.signInWithEthereum) === null || c === void 0 ? void 0 : c.notBefore,
+        requestId: (u = w == null ? void 0 : w.signInWithEthereum) === null || u === void 0 ? void 0 : u.requestId,
+        resources: (d = w == null ? void 0 : w.signInWithEthereum) === null || d === void 0 ? void 0 : d.resources
       };
       _ = createSiweMessage(I), h = await v.request({
         method: "personal_sign",
@@ -11858,11 +11961,11 @@ class GoTrueClient {
     if ("message" in e)
       h = e.message, g = e.signature;
     else {
-      const { chain: m, wallet: w, statement: y, options: v } = e;
+      const { chain: m, wallet: y, statement: w, options: v } = e;
       let b;
       if (isBrowser())
-        if (typeof w == "object")
-          b = w;
+        if (typeof y == "object")
+          b = y;
         else {
           const E = window;
           if ("solana" in E && typeof E.solana == "object" && ("signIn" in E.solana && typeof E.solana.signIn == "function" || "signMessage" in E.solana && typeof E.solana.signMessage == "function"))
@@ -11871,9 +11974,9 @@ class GoTrueClient {
             throw new Error("@supabase/auth-js: No compatible Solana wallet interface on the window object (window.solana) detected. Make sure the user already has a wallet installed and connected for this app. Prefer passing the wallet interface object directly to signInWithWeb3({ chain: 'solana', wallet: resolvedUserWallet }) instead.");
         }
       else {
-        if (typeof w != "object" || !(v != null && v.url))
+        if (typeof y != "object" || !(v != null && v.url))
           throw new Error("@supabase/auth-js: Both wallet and url must be specified in non-browser environments.");
-        b = w;
+        b = y;
       }
       const S = new URL((t = v == null ? void 0 : v.url) !== null && t !== void 0 ? t : window.location.href);
       if ("signIn" in b && b.signIn) {
@@ -11882,7 +11985,7 @@ class GoTrueClient {
           version: "1",
           domain: S.host,
           uri: S.href
-        }), y ? { statement: y } : null));
+        }), w ? { statement: w } : null));
         let P;
         if (Array.isArray(E) && E[0] && typeof E[0] == "object")
           P = E[0];
@@ -11900,7 +12003,7 @@ class GoTrueClient {
         h = [
           `${S.host} wants you to sign in with your Solana account:`,
           b.publicKey.toBase58(),
-          ...y ? ["", y, ""] : [""],
+          ...w ? ["", w, ""] : [""],
           "Version: 1",
           `URI: ${S.href}`,
           `Issued At: ${(n = (s = v == null ? void 0 : v.signInWithSolana) === null || s === void 0 ? void 0 : s.issuedAt) !== null && n !== void 0 ? n : (/* @__PURE__ */ new Date()).toISOString()}`,
@@ -11922,17 +12025,17 @@ class GoTrueClient {
       }
     }
     try {
-      const { data: m, error: w } = await _request(this.fetch, "POST", `${this.url}/token?grant_type=web3`, {
+      const { data: m, error: y } = await _request(this.fetch, "POST", `${this.url}/token?grant_type=web3`, {
         headers: this.headers,
         body: Object.assign({ chain: "solana", message: h, signature: bytesToBase64URL(g) }, !((p = e.options) === null || p === void 0) && p.captchaToken ? { gotrue_meta_security: { captcha_token: (_ = e.options) === null || _ === void 0 ? void 0 : _.captchaToken } } : null),
         xform: _sessionResponse
       });
-      if (w)
-        throw w;
+      if (y)
+        throw y;
       return !m || !m.session || !m.user ? {
         data: { user: null, session: null },
         error: new AuthInvalidTokenResponseError()
-      } : (m.session && (await this._saveSession(m.session), await this._notifyAllSubscribers("SIGNED_IN", m.session)), { data: Object.assign({}, m), error: w });
+      } : (m.session && (await this._saveSession(m.session), await this._notifyAllSubscribers("SIGNED_IN", m.session)), { data: Object.assign({}, m), error: y });
     } catch (m) {
       if (isAuthError(m))
         return { data: { user: null, session: null }, error: m };
@@ -12428,11 +12531,11 @@ class GoTrueClient {
       if (t === "pkce") {
         if (this._debug("#_initialize()", "begin", "is PKCE flow", !0), !e.code)
           throw new AuthPKCEGrantCodeExchangeError("No code detected.");
-        const { data: y, error: v } = await this._exchangeCodeForSession(e.code);
+        const { data: w, error: v } = await this._exchangeCodeForSession(e.code);
         if (v)
           throw v;
         const b = new URL(window.location.href);
-        return b.searchParams.delete("code"), window.history.replaceState(window.history.state, "", b.toString()), { data: { session: y.session, redirectType: null }, error: null };
+        return b.searchParams.delete("code"), window.history.replaceState(window.history.state, "", b.toString()), { data: { session: w.session, redirectType: null }, error: null };
       }
       const { provider_token: s, provider_refresh_token: n, access_token: i, refresh_token: o, expires_in: l, expires_at: c, token_type: u } = e;
       if (!i || !l || !o || !u)
@@ -12447,7 +12550,7 @@ class GoTrueClient {
       const { data: g, error: m } = await this._getUser(i);
       if (m)
         throw m;
-      const w = {
+      const y = {
         provider_token: s,
         provider_refresh_token: n,
         access_token: i,
@@ -12457,7 +12560,7 @@ class GoTrueClient {
         token_type: u,
         user: g.user
       };
-      return window.location.hash = "", this._debug("#_getSessionFromURL()", "clearing window.location.hash"), { data: { session: w, redirectType: e.type }, error: null };
+      return window.location.hash = "", this._debug("#_getSessionFromURL()", "clearing window.location.hash"), { data: { session: y, redirectType: e.type }, error: null };
     } catch (s) {
       if (isAuthError(s))
         return { data: { session: null, redirectType: null }, error: s };
@@ -13859,11 +13962,11 @@ function Resize(r) {
         let h = p, g = _;
         f.forEach((m) => {
           let {
-            contentBoxSize: w,
-            contentRect: y,
+            contentBoxSize: y,
+            contentRect: w,
             target: v
           } = m;
-          v && v !== e.el || (h = y ? y.width : (w[0] || w).inlineSize, g = y ? y.height : (w[0] || w).blockSize);
+          v && v !== e.el || (h = w ? w.width : (y[0] || y).inlineSize, g = w ? w.height : (y[0] || y).blockSize);
         }), (h !== p || g !== _) && l();
       });
     }), i.observe(e.el));
@@ -14014,7 +14117,7 @@ function updateSlides() {
   typeof g == "function" && (g = t.slidesOffsetBefore.call(r));
   let m = t.slidesOffsetAfter;
   typeof m == "function" && (m = t.slidesOffsetAfter.call(r));
-  const w = r.snapGrid.length, y = r.slidesGrid.length;
+  const y = r.snapGrid.length, w = r.slidesGrid.length;
   let v = t.spaceBetween, b = -g, S = 0, E = 0;
   if (typeof i > "u")
     return;
@@ -14109,7 +14212,7 @@ function updateSlides() {
     const O = -r.snapGrid[0], R = -r.slidesGrid[0];
     r.snapGrid = r.snapGrid.map((x) => x + O), r.slidesGrid = r.slidesGrid.map((x) => x + R);
   }
-  if (f !== u && r.emit("slidesLengthChange"), p.length !== w && (r.params.watchOverflow && r.checkOverflow(), r.emit("snapGridLengthChange")), _.length !== y && r.emit("slidesGridLengthChange"), t.watchSlidesProgress && r.updateSlidesOffset(), r.emit("slidesUpdated"), !c && !t.cssMode && (t.effect === "slide" || t.effect === "fade")) {
+  if (f !== u && r.emit("slidesLengthChange"), p.length !== y && (r.params.watchOverflow && r.checkOverflow(), r.emit("snapGridLengthChange")), _.length !== w && r.emit("slidesGridLengthChange"), t.watchSlidesProgress && r.updateSlidesOffset(), r.emit("slidesUpdated"), !c && !t.cssMode && (t.effect === "slide" || t.effect === "fade")) {
     const O = `${t.containerModifierClass}backface-hidden`, R = r.el.classList.contains(O);
     f <= t.maxBackfaceHiddenSlides ? R || r.el.classList.add(O) : R && r.el.classList.remove(O);
   }
@@ -14496,22 +14599,22 @@ function slideTo(r, e, t, s, n) {
   const g = Math.min(i.params.slidesPerGroupSkip, o);
   let m = g + Math.floor((o - g) / i.params.slidesPerGroup);
   m >= c.length && (m = c.length - 1);
-  const w = -c[m];
+  const y = -c[m];
   if (l.normalizeSlideIndex)
     for (let P = 0; P < u.length; P += 1) {
-      const I = -Math.floor(w * 100), A = Math.floor(u[P] * 100), O = Math.floor(u[P + 1] * 100);
+      const I = -Math.floor(y * 100), A = Math.floor(u[P] * 100), O = Math.floor(u[P + 1] * 100);
       typeof u[P + 1] < "u" ? I >= A && I < O - (O - A) / 2 ? o = P : I >= A && I < O && (o = P + 1) : I >= A && (o = P);
     }
-  if (i.initialized && o !== f && (!i.allowSlideNext && (p ? w > i.translate && w > i.minTranslate() : w < i.translate && w < i.minTranslate()) || !i.allowSlidePrev && w > i.translate && w > i.maxTranslate() && (f || 0) !== o))
+  if (i.initialized && o !== f && (!i.allowSlideNext && (p ? y > i.translate && y > i.minTranslate() : y < i.translate && y < i.minTranslate()) || !i.allowSlidePrev && y > i.translate && y > i.maxTranslate() && (f || 0) !== o))
     return !1;
-  o !== (d || 0) && t && i.emit("beforeSlideChangeStart"), i.updateProgress(w);
-  let y;
-  o > f ? y = "next" : o < f ? y = "prev" : y = "reset";
+  o !== (d || 0) && t && i.emit("beforeSlideChangeStart"), i.updateProgress(y);
+  let w;
+  o > f ? w = "next" : o < f ? w = "prev" : w = "reset";
   const v = i.virtual && i.params.virtual.enabled;
-  if (!(v && n) && (p && -w === i.translate || !p && w === i.translate))
-    return i.updateActiveIndex(o), l.autoHeight && i.updateAutoHeight(), i.updateSlidesClasses(), l.effect !== "slide" && i.setTranslate(w), y !== "reset" && (i.transitionStart(t, y), i.transitionEnd(t, y)), !1;
+  if (!(v && n) && (p && -y === i.translate || !p && y === i.translate))
+    return i.updateActiveIndex(o), l.autoHeight && i.updateAutoHeight(), i.updateSlidesClasses(), l.effect !== "slide" && i.setTranslate(y), w !== "reset" && (i.transitionStart(t, w), i.transitionEnd(t, w)), !1;
   if (l.cssMode) {
-    const P = i.isHorizontal(), I = p ? w : -w;
+    const P = i.isHorizontal(), I = p ? y : -y;
     if (e === 0)
       v && (i.wrapperEl.style.scrollSnapType = "none", i._immediateVirtual = !0), v && !i._cssModeVirtualInitialSet && i.params.initialSlide > 0 ? (i._cssModeVirtualInitialSet = !0, requestAnimationFrame(() => {
         _[P ? "scrollLeft" : "scrollTop"] = I;
@@ -14533,8 +14636,8 @@ function slideTo(r, e, t, s, n) {
     return !0;
   }
   const E = getBrowser().isSafari;
-  return v && !n && E && i.isElement && i.virtual.update(!1, !1, o), i.setTransition(e), i.setTranslate(w), i.updateActiveIndex(o), i.updateSlidesClasses(), i.emit("beforeTransitionStart", e, s), i.transitionStart(t, y), e === 0 ? i.transitionEnd(t, y) : i.animating || (i.animating = !0, i.onSlideToWrapperTransitionEnd || (i.onSlideToWrapperTransitionEnd = function(I) {
-    !i || i.destroyed || I.target === this && (i.wrapperEl.removeEventListener("transitionend", i.onSlideToWrapperTransitionEnd), i.onSlideToWrapperTransitionEnd = null, delete i.onSlideToWrapperTransitionEnd, i.transitionEnd(t, y));
+  return v && !n && E && i.isElement && i.virtual.update(!1, !1, o), i.setTransition(e), i.setTranslate(y), i.updateActiveIndex(o), i.updateSlidesClasses(), i.emit("beforeTransitionStart", e, s), i.transitionStart(t, w), e === 0 ? i.transitionEnd(t, w) : i.animating || (i.animating = !0, i.onSlideToWrapperTransitionEnd || (i.onSlideToWrapperTransitionEnd = function(I) {
+    !i || i.destroyed || I.target === this && (i.wrapperEl.removeEventListener("transitionend", i.onSlideToWrapperTransitionEnd), i.onSlideToWrapperTransitionEnd = null, delete i.onSlideToWrapperTransitionEnd, i.transitionEnd(t, w));
   }), i.wrapperEl.addEventListener("transitionend", i.onSlideToWrapperTransitionEnd)), !0;
 }
 function slideToLoop(r, e, t, s) {
@@ -14622,26 +14725,26 @@ function slidePrev(r, e, t) {
     }), s._clientLeft = s.wrapperEl.clientLeft;
   }
   const f = l ? s.translate : -s.translate;
-  function p(y) {
-    return y < 0 ? -Math.floor(Math.abs(y)) : Math.floor(y);
+  function p(w) {
+    return w < 0 ? -Math.floor(Math.abs(w)) : Math.floor(w);
   }
-  const _ = p(f), h = i.map((y) => p(y)), g = n.freeMode && n.freeMode.enabled;
+  const _ = p(f), h = i.map((w) => p(w)), g = n.freeMode && n.freeMode.enabled;
   let m = i[h.indexOf(_) - 1];
   if (typeof m > "u" && (n.cssMode || g)) {
-    let y;
+    let w;
     i.forEach((v, b) => {
-      _ >= v && (y = b);
-    }), typeof y < "u" && (m = g ? i[y] : i[y > 0 ? y - 1 : y]);
+      _ >= v && (w = b);
+    }), typeof w < "u" && (m = g ? i[w] : i[w > 0 ? w - 1 : w]);
   }
-  let w = 0;
-  if (typeof m < "u" && (w = o.indexOf(m), w < 0 && (w = s.activeIndex - 1), n.slidesPerView === "auto" && n.slidesPerGroup === 1 && n.slidesPerGroupAuto && (w = w - s.slidesPerViewDynamic("previous", !0) + 1, w = Math.max(w, 0))), n.rewind && s.isBeginning) {
-    const y = s.params.virtual && s.params.virtual.enabled && s.virtual ? s.virtual.slides.length - 1 : s.slides.length - 1;
-    return s.slideTo(y, r, e, t);
+  let y = 0;
+  if (typeof m < "u" && (y = o.indexOf(m), y < 0 && (y = s.activeIndex - 1), n.slidesPerView === "auto" && n.slidesPerGroup === 1 && n.slidesPerGroupAuto && (y = y - s.slidesPerViewDynamic("previous", !0) + 1, y = Math.max(y, 0))), n.rewind && s.isBeginning) {
+    const w = s.params.virtual && s.params.virtual.enabled && s.virtual ? s.virtual.slides.length - 1 : s.slides.length - 1;
+    return s.slideTo(w, r, e, t);
   } else if (n.loop && s.activeIndex === 0 && n.cssMode)
     return requestAnimationFrame(() => {
-      s.slideTo(w, r, e, t);
+      s.slideTo(y, r, e, t);
     }), !0;
-  return s.slideTo(w, r, e, t);
+  return s.slideTo(y, r, e, t);
 }
 function slideReset(r, e, t) {
   e === void 0 && (e = !0);
@@ -14764,21 +14867,21 @@ function loopFix(r) {
     t && (!h.centeredSlides && u.snapIndex === 0 ? u.slideTo(u.virtual.slides.length, 0, !1, !0) : h.centeredSlides && u.snapIndex < h.slidesPerView ? u.slideTo(u.virtual.slides.length + u.snapIndex, 0, !1, !0) : u.snapIndex === u.snapGrid.length - 1 && u.slideTo(u.virtual.slidesBefore, 0, !1, !0)), u.allowSlidePrev = f, u.allowSlideNext = p, u.emit("loopFix");
     return;
   }
-  let w = h.slidesPerView;
-  w === "auto" ? w = u.slidesPerViewDynamic() : (w = Math.ceil(parseFloat(h.slidesPerView, 10)), g && w % 2 === 0 && (w = w + 1));
-  const y = h.slidesPerGroupAuto ? w : h.slidesPerGroup;
-  let v = g ? Math.max(y, Math.ceil(w / 2)) : y;
-  v % y !== 0 && (v += y - v % y), v += h.loopAdditionalSlides, u.loopedSlides = v;
+  let y = h.slidesPerView;
+  y === "auto" ? y = u.slidesPerViewDynamic() : (y = Math.ceil(parseFloat(h.slidesPerView, 10)), g && y % 2 === 0 && (y = y + 1));
+  const w = h.slidesPerGroupAuto ? y : h.slidesPerGroup;
+  let v = g ? Math.max(w, Math.ceil(y / 2)) : w;
+  v % w !== 0 && (v += w - v % w), v += h.loopAdditionalSlides, u.loopedSlides = v;
   const b = u.grid && h.grid && h.grid.rows > 1;
-  d.length < w + v || u.params.effect === "cards" && d.length < w + v * 2 ? showWarning("Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters") : b && h.grid.fill === "row" && showWarning("Swiper Loop Warning: Loop mode is not compatible with grid.fill = `row`");
-  const S = [], E = [], P = b ? Math.ceil(d.length / h.grid.rows) : d.length, I = o && P - m < w && !g;
+  d.length < y + v || u.params.effect === "cards" && d.length < y + v * 2 ? showWarning("Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters") : b && h.grid.fill === "row" && showWarning("Swiper Loop Warning: Loop mode is not compatible with grid.fill = `row`");
+  const S = [], E = [], P = b ? Math.ceil(d.length / h.grid.rows) : d.length, I = o && P - m < y && !g;
   let A = I ? m : u.activeIndex;
   typeof i > "u" ? i = u.getSlideIndex(d.find(($) => $.classList.contains(h.slideActiveClass))) : A = i;
   const O = s === "next" || !s, R = s === "prev" || !s;
   let x = 0, k = 0;
-  const C = (b ? d[i].column : i) + (g && typeof n > "u" ? -w / 2 + 0.5 : 0);
+  const C = (b ? d[i].column : i) + (g && typeof n > "u" ? -y / 2 + 0.5 : 0);
   if (C < v) {
-    x = Math.max(v - C, y);
+    x = Math.max(v - C, w);
     for (let $ = 0; $ < v - C; $ += 1) {
       const j = $ - Math.floor($ / P) * P;
       if (b) {
@@ -14788,8 +14891,8 @@ function loopFix(r) {
       } else
         S.push(P - j - 1);
     }
-  } else if (C + w > P - v) {
-    k = Math.max(C - (P - v * 2), y), I && (k = Math.max(k, w - P + m + 1));
+  } else if (C + y > P - v) {
+    k = Math.max(C - (P - v * 2), w), I && (k = Math.max(k, y - P + m + 1));
     for (let $ = 0; $ < k; $ += 1) {
       const j = $ - Math.floor($ / P) * P;
       b ? d.forEach((B, M) => {
@@ -14799,7 +14902,7 @@ function loopFix(r) {
   }
   if (u.__preventObserver__ = !0, requestAnimationFrame(() => {
     u.__preventObserver__ = !1;
-  }), u.params.effect === "cards" && d.length < w + v * 2 && (E.includes(i) && E.splice(E.indexOf(i), 1), S.includes(i) && S.splice(S.indexOf(i), 1)), R && S.forEach(($) => {
+  }), u.params.effect === "cards" && d.length < y + v * 2 && (E.includes(i) && E.splice(E.indexOf(i), 1), S.includes(i) && S.splice(S.indexOf(i), 1)), R && S.forEach(($) => {
     d[$].swiperLoopMoveDOM = !0, _.prepend(d[$]), d[$].swiperLoopMoveDOM = !1;
   }), O && E.forEach(($) => {
     d[$].swiperLoopMoveDOM = !0, _.append(d[$]), d[$].swiperLoopMoveDOM = !1;
@@ -15016,9 +15119,9 @@ function onTouchMove(r) {
   n.oneWayMovement && (h = Math.abs(h) * (o ? 1 : -1), g = Math.abs(g) * (o ? 1 : -1)), i.diff = h, h *= n.touchRatio, o && (h = -h, g = -g);
   const m = t.touchesDirection;
   t.swipeDirection = h > 0 ? "prev" : "next", t.touchesDirection = g > 0 ? "prev" : "next";
-  const w = t.params.loop && !n.cssMode, y = t.touchesDirection === "next" && t.allowSlideNext || t.touchesDirection === "prev" && t.allowSlidePrev;
+  const y = t.params.loop && !n.cssMode, w = t.touchesDirection === "next" && t.allowSlideNext || t.touchesDirection === "prev" && t.allowSlidePrev;
   if (!s.isMoved) {
-    if (w && y && t.loopFix({
+    if (y && w && t.loopFix({
       direction: t.swipeDirection
     }), s.startTranslate = t.getTranslate(), t.setTransition(0), t.animating) {
       const S = new window.CustomEvent("transitionend", {
@@ -15032,7 +15135,7 @@ function onTouchMove(r) {
     }
     s.allowMomentumBounce = !1, n.grabCursor && (t.allowSlideNext === !0 || t.allowSlidePrev === !0) && t.setGrabCursor(!0), t.emit("sliderFirstMove", c);
   }
-  if ((/* @__PURE__ */ new Date()).getTime(), n._loopSwapReset !== !1 && s.isMoved && s.allowThresholdMove && m !== t.touchesDirection && w && y && Math.abs(h) >= 1) {
+  if ((/* @__PURE__ */ new Date()).getTime(), n._loopSwapReset !== !1 && s.isMoved && s.allowThresholdMove && m !== t.touchesDirection && y && w && Math.abs(h) >= 1) {
     Object.assign(i, {
       startX: d,
       startY: f,
@@ -15044,11 +15147,11 @@ function onTouchMove(r) {
   }
   t.emit("sliderMove", c), s.isMoved = !0, s.currentTranslate = h + s.startTranslate;
   let v = !0, b = n.resistanceRatio;
-  if (n.touchReleaseOnEdges && (b = 0), h > 0 ? (w && y && s.allowThresholdMove && s.currentTranslate > (n.centeredSlides ? t.minTranslate() - t.slidesSizesGrid[t.activeIndex + 1] - (n.slidesPerView !== "auto" && t.slides.length - n.slidesPerView >= 2 ? t.slidesSizesGrid[t.activeIndex + 1] + t.params.spaceBetween : 0) - t.params.spaceBetween : t.minTranslate()) && t.loopFix({
+  if (n.touchReleaseOnEdges && (b = 0), h > 0 ? (y && w && s.allowThresholdMove && s.currentTranslate > (n.centeredSlides ? t.minTranslate() - t.slidesSizesGrid[t.activeIndex + 1] - (n.slidesPerView !== "auto" && t.slides.length - n.slidesPerView >= 2 ? t.slidesSizesGrid[t.activeIndex + 1] + t.params.spaceBetween : 0) - t.params.spaceBetween : t.minTranslate()) && t.loopFix({
     direction: "prev",
     setTranslate: !0,
     activeSlideIndex: 0
-  }), s.currentTranslate > t.minTranslate() && (v = !1, n.resistance && (s.currentTranslate = t.minTranslate() - 1 + (-t.minTranslate() + s.startTranslate + h) ** b))) : h < 0 && (w && y && s.allowThresholdMove && s.currentTranslate < (n.centeredSlides ? t.maxTranslate() + t.slidesSizesGrid[t.slidesSizesGrid.length - 1] + t.params.spaceBetween + (n.slidesPerView !== "auto" && t.slides.length - n.slidesPerView >= 2 ? t.slidesSizesGrid[t.slidesSizesGrid.length - 1] + t.params.spaceBetween : 0) : t.maxTranslate()) && t.loopFix({
+  }), s.currentTranslate > t.minTranslate() && (v = !1, n.resistance && (s.currentTranslate = t.minTranslate() - 1 + (-t.minTranslate() + s.startTranslate + h) ** b))) : h < 0 && (y && w && s.allowThresholdMove && s.currentTranslate < (n.centeredSlides ? t.maxTranslate() + t.slidesSizesGrid[t.slidesSizesGrid.length - 1] + t.params.spaceBetween + (n.slidesPerView !== "auto" && t.slides.length - n.slidesPerView >= 2 ? t.slidesSizesGrid[t.slidesSizesGrid.length - 1] + t.params.spaceBetween : 0) : t.maxTranslate()) && t.loopFix({
     direction: "next",
     setTranslate: !0,
     activeSlideIndex: t.slides.length - (n.slidesPerView === "auto" ? t.slidesPerViewDynamic() : Math.ceil(parseFloat(n.slidesPerView, 10)))
@@ -15118,21 +15221,21 @@ function onTouchEnd(r) {
     const E = S < o.slidesPerGroupSkip - 1 ? 1 : o.slidesPerGroup;
     typeof u[S + E] < "u" ? (h || _ >= u[S] && _ < u[S + E]) && (g = S, m = u[S + E] - u[S]) : (h || _ >= u[S]) && (g = S, m = u[u.length - 1] - u[u.length - 2]);
   }
-  let w = null, y = null;
-  o.rewind && (e.isBeginning ? y = o.virtual && o.virtual.enabled && e.virtual ? e.virtual.slides.length - 1 : e.slides.length - 1 : e.isEnd && (w = 0));
+  let y = null, w = null;
+  o.rewind && (e.isBeginning ? w = o.virtual && o.virtual.enabled && e.virtual ? e.virtual.slides.length - 1 : e.slides.length - 1 : e.isEnd && (y = 0));
   const v = (_ - u[g]) / m, b = g < o.slidesPerGroupSkip - 1 ? 1 : o.slidesPerGroup;
   if (p > o.longSwipesMs) {
     if (!o.longSwipes) {
       e.slideTo(e.activeIndex);
       return;
     }
-    e.swipeDirection === "next" && (v >= o.longSwipesRatio ? e.slideTo(o.rewind && e.isEnd ? w : g + b) : e.slideTo(g)), e.swipeDirection === "prev" && (v > 1 - o.longSwipesRatio ? e.slideTo(g + b) : y !== null && v < 0 && Math.abs(v) > o.longSwipesRatio ? e.slideTo(y) : e.slideTo(g));
+    e.swipeDirection === "next" && (v >= o.longSwipesRatio ? e.slideTo(o.rewind && e.isEnd ? y : g + b) : e.slideTo(g)), e.swipeDirection === "prev" && (v > 1 - o.longSwipesRatio ? e.slideTo(g + b) : w !== null && v < 0 && Math.abs(v) > o.longSwipesRatio ? e.slideTo(w) : e.slideTo(g));
   } else {
     if (!o.shortSwipes) {
       e.slideTo(e.activeIndex);
       return;
     }
-    e.navigation && (s.target === e.navigation.nextEl || s.target === e.navigation.prevEl) ? s.target === e.navigation.nextEl ? e.slideTo(g + b) : e.slideTo(g) : (e.swipeDirection === "next" && e.slideTo(w !== null ? w : g + b), e.swipeDirection === "prev" && e.slideTo(y !== null ? y : g));
+    e.navigation && (s.target === e.navigation.nextEl || s.target === e.navigation.prevEl) ? s.target === e.navigation.nextEl ? e.slideTo(g + b) : e.slideTo(g) : (e.swipeDirection === "next" && e.slideTo(y !== null ? y : g + b), e.swipeDirection === "prev" && e.slideTo(w !== null ? w : g));
   }
 }
 function onResize() {
@@ -15245,14 +15348,14 @@ function setBreakpoint() {
     const P = s[E] && s[E].enabled, I = f[E] && f[E].enabled;
     P && !I && r[E].disable(), !P && I && r[E].enable();
   });
-  const w = f.direction && f.direction !== s.direction, y = s.loop && (f.slidesPerView !== s.slidesPerView || w), v = s.loop;
-  w && t && r.changeDirection(), extend(r.params, f);
+  const y = f.direction && f.direction !== s.direction, w = s.loop && (f.slidesPerView !== s.slidesPerView || y), v = s.loop;
+  y && t && r.changeDirection(), extend(r.params, f);
   const b = r.params.enabled, S = r.params.loop;
   Object.assign(r, {
     allowTouchMove: r.params.allowTouchMove,
     allowSlideNext: r.params.allowSlideNext,
     allowSlidePrev: r.params.allowSlidePrev
-  }), m && !b ? r.disable() : !m && b && r.enable(), r.currentBreakpoint = u, r.emit("_beforeBreakpoint", f), t && (y ? (r.loopDestroy(), r.loopCreate(e), r.updateSlides()) : !v && S ? (r.loopCreate(e), r.updateSlides()) : v && !S && r.loopDestroy()), r.emit("breakpoint", f);
+  }), m && !b ? r.disable() : !m && b && r.enable(), r.currentBreakpoint = u, r.emit("_beforeBreakpoint", f), t && (w ? (r.loopDestroy(), r.loopCreate(e), r.updateSlides()) : !v && S ? (r.loopCreate(e), r.updateSlides()) : v && !S && r.loopDestroy()), r.emit("breakpoint", f);
 }
 function getBreakpoint(r, e, t) {
   if (e === void 0 && (e = "window"), !r || e === "container" && !t) return;
@@ -15865,10 +15968,10 @@ function KnitterReviewsList(r, e) {
     }, _ = (h) => {
       var g = comment(), m = first_child(g);
       {
-        var w = (v) => {
+        var y = (v) => {
           var b = root_4();
           append(v, b);
-        }, y = (v) => {
+        }, w = (v) => {
           var b = root_5();
           each(b, 5, () => get$2(n), index, (S, E) => {
             var P = root_6$1(), I = child(P);
@@ -15882,7 +15985,7 @@ function KnitterReviewsList(r, e) {
         if_block(
           m,
           (v) => {
-            get$2(n), untrack(() => get$2(n).length === 0) ? v(w) : v(y, !1);
+            get$2(n), untrack(() => get$2(n).length === 0) ? v(y) : v(w, !1);
           },
           !0
         );
@@ -15977,9 +16080,9 @@ function KnitterReviewForm(r, e) {
     var p = (h) => {
       var g = root_2$2(), m = child(g);
       remove_textarea_child(m);
-      var w = sibling(m, 2), y = child(w);
-      remove_input_defaults(y);
-      var v = sibling(y, 2);
+      var y = sibling(m, 2), w = child(y);
+      remove_input_defaults(w);
+      var v = sibling(w, 2);
       {
         var b = (E) => {
           var P = root_3$1();
@@ -16006,18 +16109,18 @@ function KnitterReviewForm(r, e) {
           $$slots: { default: !0 }
         });
       }
-      reset(w), reset(g), bind_value(m, () => get$2(n), (E) => set(n, E)), bind_value(y, () => get$2(s), (E) => set(s, E)), event$1("submit", g, preventDefault(l)), append(h, g);
+      reset(y), reset(g), bind_value(m, () => get$2(n), (E) => set(n, E)), bind_value(w, () => get$2(s), (E) => set(s, E)), event$1("submit", g, preventDefault(l)), append(h, g);
     }, _ = (h) => {
       var g = comment(), m = first_child(g);
       {
-        var w = (y) => {
+        var y = (w) => {
           var v = root_6();
-          append(y, v);
+          append(w, v);
         };
         if_block(
           m,
-          (y) => {
-            get$2(i) === "success" && y(w);
+          (w) => {
+            get$2(i) === "success" && w(y);
           },
           !0
         );
@@ -16085,13 +16188,13 @@ function KnittersAccordionItem(r, e) {
     set(u, !0), l && mutate(d, get$2(d).style.maxHeight = `${get$2(d).scrollHeight}px`), setTimeout(() => {
       mutate(d, get$2(d).style.maxHeight = "0px"), mutate(d, get$2(d).style.transition = "max-height .15s ease");
     }), l || (l = !0);
-  }, w = () => {
   }, y = () => {
+  }, w = () => {
     const U = new URLSearchParams(window.location.search), { knitter: V } = Object.fromEntries(U.entries());
     V === s() && set(c, !0);
   };
   onMount(() => {
-    get$2(c) ? g() : m(), y();
+    get$2(c) ? g() : m(), w();
   }), legacy_pre_effect(() => get$2(c), () => {
     get$2(c) && g();
   }), legacy_pre_effect(() => get$2(c), () => {
@@ -16131,7 +16234,7 @@ function KnittersAccordionItem(r, e) {
   };
   init();
   var b = root$6();
-  event$1("resize", $window, w);
+  event$1("resize", $window, y);
   var S = child(b), E = child(S), P = sibling(E, 2), I = child(P, !0);
   reset(P);
   var A = sibling(P, 2);
@@ -16149,10 +16252,10 @@ function KnittersAccordionItem(r, e) {
     var M = (U) => {
       var V = root_1$7();
       let X;
-      var we = child(V);
+      var ye = child(V);
       {
         let Oe = /* @__PURE__ */ derived_safe_equal(() => !get$2(c) || get$2(u));
-        KnitterReviewsList(we, {
+        KnitterReviewsList(ye, {
           get id() {
             return s();
           },
@@ -16161,7 +16264,7 @@ function KnittersAccordionItem(r, e) {
           }
         });
       }
-      var Ue = sibling(we, 2);
+      var Ue = sibling(ye, 2);
       KnitterReviewForm(Ue, {
         get id() {
           return s();
@@ -16328,17 +16431,17 @@ function CurrencySelector(r, e) {
     }
   };
   init();
-  var w = root$3(), y = child(w);
+  var y = root$3(), w = child(y);
   {
     var v = (A) => {
       var O = root_1$5(), R = child(O);
       reset(O), template_effect(() => set_text(R, `${deep_read_state(c()), untrack(() => c().symbol) ?? ""} ${deep_read_state(c()), untrack(() => c().currency) ?? ""}`)), event$1("click", O, () => set(_, !get$2(_))), append(A, O);
     };
-    if_block(y, (A) => {
+    if_block(w, (A) => {
       c() && A(v);
     });
   }
-  var b = sibling(y, 2);
+  var b = sibling(w, 2);
   let S;
   var E = child(b);
   {
@@ -16354,7 +16457,7 @@ function CurrencySelector(r, e) {
       get$2(_) && A(P);
     });
   }
-  reset(b), reset(w), template_effect((A) => S = set_class(b, 1, "dropdown svelte-1c359or", null, S, A), [() => ({ left: u(), center: d(), right: f() })]), append(r, w);
+  reset(b), reset(y), template_effect((A) => S = set_class(b, 1, "dropdown svelte-1c359or", null, S, A), [() => ({ left: u(), center: d(), right: f() })]), append(r, y);
   var I = pop(m);
   return n(), I;
 }
@@ -16389,10 +16492,10 @@ function ProductDiscountPercentage(r, e) {
   let d = /* @__PURE__ */ mutable_source(), f = prop(e, "discountPercentage", 12);
   const p = async () => {
     if (!n() || !i() || s() && s() !== "nodiscount") return;
-    const { amount: w } = await u.getAutomaticDiscount(n(), +i());
-    if (!w) return;
-    const { formatted: y } = subtractFromPriceWithSymbol(t(), w);
-    set(l, t()), set(c, y);
+    const { amount: y } = await u.getAutomaticDiscount(n(), +i());
+    if (!y) return;
+    const { formatted: w } = subtractFromPriceWithSymbol(t(), y);
+    set(l, t()), set(c, w);
   };
   legacy_pre_effect(() => deep_read_state(t()), () => {
     set(l, t());
@@ -16412,50 +16515,50 @@ function ProductDiscountPercentage(r, e) {
     get price() {
       return t();
     },
-    set price(w) {
-      t(w), flushSync();
+    set price(y) {
+      t(y), flushSync();
     },
     get compared_at() {
       return s();
     },
-    set compared_at(w) {
-      s(w), flushSync();
+    set compared_at(y) {
+      s(y), flushSync();
     },
     get iso_code() {
       return n();
     },
-    set iso_code(w) {
-      n(w), flushSync();
+    set iso_code(y) {
+      n(y), flushSync();
     },
     get variant_id() {
       return i();
     },
-    set variant_id(w) {
-      i(w), flushSync();
+    set variant_id(y) {
+      i(y), flushSync();
     },
     get theme() {
       return o();
     },
-    set theme(w) {
-      o(w), flushSync();
+    set theme(y) {
+      o(y), flushSync();
     },
     get discountPercentage() {
       return f();
     },
-    set discountPercentage(w) {
-      f(w), flushSync();
+    set discountPercentage(y) {
+      f(y), flushSync();
     }
   };
   init();
   var h = comment(), g = first_child(h);
   {
-    var m = (w) => {
-      var y = root_1$4();
+    var m = (y) => {
+      var w = root_1$4();
       let v;
-      var b = child(y);
-      reset(y), template_effect(
+      var b = child(w);
+      reset(w), template_effect(
         (S) => {
-          v = set_class(y, 1, "discount-percentage svelte-1ru3l9", null, v, S), set_text(b, `-${f() ?? ""}% off`);
+          v = set_class(w, 1, "discount-percentage svelte-1ru3l9", null, v, S), set_text(b, `-${f() ?? ""}% off`);
         },
         [
           () => ({
@@ -16464,10 +16567,10 @@ function ProductDiscountPercentage(r, e) {
             big: o() === "big"
           })
         ]
-      ), append(w, y);
+      ), append(y, w);
     };
-    if_block(g, (w) => {
-      f() && +f() > 0 && w(m);
+    if_block(g, (y) => {
+      f() && +f() > 0 && y(m);
     });
   }
   return append(r, h), pop(_);
@@ -16718,8 +16821,8 @@ function DevMarketDetails(r, e) {
   }, u = comment(), d = first_child(u);
   {
     var f = (_) => {
-      var h = root_1$2(), g = child(h), m = child(g), w = sibling(child(m), 2), y = child(w, !0);
-      reset(w), reset(m);
+      var h = root_1$2(), g = child(h), m = child(g), y = sibling(child(m), 2), w = child(y, !0);
+      reset(y), reset(m);
       var v = sibling(m), b = sibling(child(v), 2), S = child(b, !0);
       reset(b), reset(v);
       var E = sibling(v), P = sibling(child(E), 2), I = child(P, !0);
@@ -16729,7 +16832,7 @@ function DevMarketDetails(r, e) {
       var x = sibling(A), k = sibling(child(x), 2), N = child(k, !0);
       reset(k), reset(x), reset(g), reset(h), template_effect(
         (C, $) => {
-          set_text(y, C), set_text(S, $), set_text(I, t()), set_text(R, s()), set_text(N, n());
+          set_text(w, C), set_text(S, $), set_text(I, t()), set_text(R, s()), set_text(N, n());
         },
         [
           () => getCookie("cart_currency"),
@@ -16762,8 +16865,8 @@ function CartNote(r, e) {
   const n = /* @__PURE__ */ user_derived(() => !0);
   function i(h, g) {
     let m;
-    return (...w) => {
-      clearTimeout(m), m = setTimeout(() => h.apply(this, w), g);
+    return (...y) => {
+      clearTimeout(m), m = setTimeout(() => h.apply(this, y), g);
     };
   }
   const l = i((h) => {
@@ -16799,12 +16902,12 @@ function CartNote(r, e) {
     var _ = (h) => {
       var g = comment(), m = first_child(g);
       {
-        var w = (y) => {
+        var y = (w) => {
           var v = root_2();
-          remove_textarea_child(v), v.__input = [onChange, l], bind_value(v, () => get$2(c), (b) => set(c, b)), append(y, v);
+          remove_textarea_child(v), v.__input = [onChange, l], bind_value(v, () => get$2(c), (b) => set(c, b)), append(w, v);
         };
-        if_block(m, (y) => {
-          get$2(s) && y(w);
+        if_block(m, (w) => {
+          get$2(s) && w(y);
         });
       }
       append(h, g);
@@ -16943,19 +17046,19 @@ function Mousewheel(r) {
     let b = e.el;
     e.params.mousewheel.eventsTarget !== "container" && (b = document.querySelector(e.params.mousewheel.eventsTarget)), b[v]("mouseenter", f), b[v]("mouseleave", p), b[v]("wheel", g);
   }
-  function w() {
+  function y() {
     return e.params.cssMode ? (e.wrapperEl.removeEventListener("wheel", g), !0) : e.mousewheel.enabled ? !1 : (m("addEventListener"), e.mousewheel.enabled = !0, !0);
   }
-  function y() {
+  function w() {
     return e.params.cssMode ? (e.wrapperEl.addEventListener(event, g), !0) : e.mousewheel.enabled ? (m("removeEventListener"), e.mousewheel.enabled = !1, !0) : !1;
   }
   s("init", () => {
-    !e.params.mousewheel.enabled && e.params.cssMode && y(), e.params.mousewheel.enabled && w();
+    !e.params.mousewheel.enabled && e.params.cssMode && w(), e.params.mousewheel.enabled && y();
   }), s("destroy", () => {
-    e.params.cssMode && w(), e.mousewheel.enabled && y();
+    e.params.cssMode && y(), e.mousewheel.enabled && w();
   }), Object.assign(e.mousewheel, {
-    enable: w,
-    disable: y
+    enable: y,
+    disable: w
   });
 }
 function createElementIfNotDefined(r, e, t, s) {
@@ -17025,7 +17128,7 @@ function Scrollbar(r) {
   function m(x) {
     return e.isHorizontal() ? x.clientX : x.clientY;
   }
-  function w(x) {
+  function y(x) {
     const {
       scrollbar: k,
       rtlTranslate: N
@@ -17037,7 +17140,7 @@ function Scrollbar(r) {
     const j = e.minTranslate() + (e.maxTranslate() - e.minTranslate()) * $;
     e.updateProgress(j), e.setTranslate(j), e.updateActiveIndex(), e.updateSlidesClasses();
   }
-  function y(x) {
+  function w(x) {
     const k = e.params.scrollbar, {
       scrollbar: N,
       wrapperEl: C
@@ -17045,7 +17148,7 @@ function Scrollbar(r) {
       el: $,
       dragEl: j
     } = N;
-    o = !0, u = x.target === j ? m(x) - x.target.getBoundingClientRect()[e.isHorizontal() ? "left" : "top"] : null, x.preventDefault(), x.stopPropagation(), C.style.transitionDuration = "100ms", j.style.transitionDuration = "100ms", w(x), clearTimeout(c), $.style.transitionDuration = "0ms", k.hide && ($.style.opacity = 1), e.params.cssMode && (e.wrapperEl.style["scroll-snap-type"] = "none"), n("scrollbarDragStart", x);
+    o = !0, u = x.target === j ? m(x) - x.target.getBoundingClientRect()[e.isHorizontal() ? "left" : "top"] : null, x.preventDefault(), x.stopPropagation(), C.style.transitionDuration = "100ms", j.style.transitionDuration = "100ms", y(x), clearTimeout(c), $.style.transitionDuration = "0ms", k.hide && ($.style.opacity = 1), e.params.cssMode && (e.wrapperEl.style["scroll-snap-type"] = "none"), n("scrollbarDragStart", x);
   }
   function v(x) {
     const {
@@ -17055,7 +17158,7 @@ function Scrollbar(r) {
       el: C,
       dragEl: $
     } = k;
-    o && (x.preventDefault && x.cancelable ? x.preventDefault() : x.returnValue = !1, w(x), N.style.transitionDuration = "0ms", C.style.transitionDuration = "0ms", $.style.transitionDuration = "0ms", n("scrollbarDragMove", x));
+    o && (x.preventDefault && x.cancelable ? x.preventDefault() : x.returnValue = !1, y(x), N.style.transitionDuration = "0ms", C.style.transitionDuration = "0ms", $.style.transitionDuration = "0ms", n("scrollbarDragMove", x));
   }
   function b(x) {
     const k = e.params.scrollbar, {
@@ -17083,7 +17186,7 @@ function Scrollbar(r) {
     } : !1;
     if (!$) return;
     const M = x === "on" ? "addEventListener" : "removeEventListener";
-    $[M]("pointerdown", y, j), i[M]("pointermove", v, j), i[M]("pointerup", b, B);
+    $[M]("pointerdown", w, j), i[M]("pointermove", v, j), i[M]("pointerup", b, B);
   }
   function E() {
     !e.params.scrollbar.el || !e.scrollbar.el || S("on");
@@ -17231,15 +17334,15 @@ function ColorSelector(r, e) {
   let _;
   var h = child(p);
   return each(h, 21, () => get$2(n), index, (g, m) => {
-    var w = root_1$1(), y = child(w), v = child(y);
+    var y = root_1$1(), w = child(y), v = child(w);
     let b;
-    reset(y), reset(w), template_effect(
+    reset(w), reset(y), template_effect(
       (S) => {
         var E;
-        set_attribute(y, "href", get$2(m).url), b = set_class(v, 1, "color-selector--image svelte-1vei7h4", null, b, S), set_attribute(v, "src", (E = get$2(m)) == null ? void 0 : E.images[0]);
+        set_attribute(w, "href", get$2(m).url), b = set_class(v, 1, "color-selector--image svelte-1vei7h4", null, b, S), set_attribute(v, "src", (E = get$2(m)) == null ? void 0 : E.images[0]);
       },
       [() => ({ active: +get$2(m).id == +t() })]
-    ), append(g, w);
+    ), append(g, y);
   }), reset(h), next(2), reset(p), bind_this(p, (g) => set(i, g), () => get$2(i)), reset(f), action(f, (g, m) => removeNonComponentChildren == null ? void 0 : removeNonComponentChildren(g, m), () => get$2(l)), template_effect((g) => _ = set_class(p, 1, "swiper color-selector--swiper-wrapper svelte-1vei7h4", null, _, g), [() => ({ "swiper--inited": get$2(l) })]), append(r, f), pop(d);
 }
 customElements.define("color-selector", create_custom_element(ColorSelector, { activeId: {}, list: {} }, [], [], !1));

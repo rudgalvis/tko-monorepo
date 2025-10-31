@@ -1,4 +1,5 @@
 import { BUY_BUTTONS_CONFIG } from './config.js';
+import type { PaymentOptionManager } from './PaymentOptionManager.js';
 
 /**
  * Manages moving CTA buttons to footer for mobile layout
@@ -8,10 +9,12 @@ export class FooterCTAManager {
 	private footer: HTMLElement | null = null;
 	private isInitialized = false;
 	private onComplete?: () => void;
+	private paymentOptionManager: PaymentOptionManager;
 
-	constructor() {
+	constructor(paymentOptionManager: PaymentOptionManager) {
 		this.productForm = document.querySelector(BUY_BUTTONS_CONFIG.selectors.productForm);
 		this.footer = document.querySelector(BUY_BUTTONS_CONFIG.selectors.footer);
+		this.paymentOptionManager = paymentOptionManager;
 	}
 
 	/**
@@ -28,7 +31,7 @@ export class FooterCTAManager {
 	/**
 	 * Move CTA to footer (for mobile sticky footer)
 	 */
-	async moveCtaToFooter(): Promise<void> {
+	moveCtaToFooter(): void {
 		if (!this.productForm || !this.footer) {
 			// Signal completion even if elements not found
 			if (!this.isInitialized) {
@@ -38,8 +41,8 @@ export class FooterCTAManager {
 			return;
 		}
 
-		let footerContent = this.productForm.cloneNode(true) as HTMLElement;
-		footerContent = await this.cleanFooter(footerContent);
+		const footerContent = this.productForm.cloneNode(true) as HTMLElement;
+		this.cleanFooter(footerContent);
 
 		this.footer.prepend(footerContent);
 		
@@ -52,29 +55,24 @@ export class FooterCTAManager {
 
 	/**
 	 * Clean footer content by removing payment options
-	 * (Globo adds these dynamically, we need to wait for them)
+	 * Uses PaymentOptionManager to efficiently check if payment options exist
+	 * Note: PaymentOptionManager must be initialized before this is called
 	 */
-	private async cleanFooter(
-		footerContent: HTMLElement,
-		retry = 0
-	): Promise<HTMLElement> {
-		const paymentOptions = footerContent.querySelector(
-			BUY_BUTTONS_CONFIG.selectors.paymentOptions
-		);
-
-		if (!paymentOptions) {
-			if (retry >= BUY_BUTTONS_CONFIG.retry.maxFooterRetries) {
-				return footerContent;
-			}
-
-			await new Promise((resolve) =>
-				setTimeout(resolve, BUY_BUTTONS_CONFIG.retry.footerInterval)
+	private cleanFooter(footerContent: HTMLElement): void {
+		// Check if payment options exist on the page using PaymentOptionManager
+		// This is a simple DOM query - no async waiting needed
+		const paymentInfo = this.paymentOptionManager.getPaymentOptionsInfo();
+		
+		// If payment options exist on the page, remove them from the cloned footer content
+		if (paymentInfo.hasPaymentOptions) {
+			const paymentOptions = footerContent.querySelector(
+				BUY_BUTTONS_CONFIG.selectors.paymentOptions
 			);
-			return this.cleanFooter(footerContent, retry + 1);
+			
+			if (paymentOptions) {
+				paymentOptions.parentElement?.removeChild(paymentOptions);
+			}
 		}
-
-		paymentOptions.parentElement?.removeChild(paymentOptions);
-		return footerContent;
 	}
 }
 

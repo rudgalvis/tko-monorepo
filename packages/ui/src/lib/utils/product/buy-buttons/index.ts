@@ -1,5 +1,6 @@
 import { BuyButtonsManager } from './BuyButtonsManager.js';
 import { loadStyles } from '../../dom/load-styles.js';
+import { frontendLogger as logger } from '../../loggers/frontend-logger.js';
 import buyButtonsStyles from './buy-buttons.css?raw';
 import buyButtonsGloboStyles from './buy-buttons-globo.css?raw';
 
@@ -26,6 +27,12 @@ declare global {
  */
 export const buyButtonsInitialize = (onComplete?: () => void) => {
 	console.log('dump', 'buyButtonsInitialize');
+
+	// Destroy previous manager if it exists (for SPA/client-side navigation)
+	if (window.BuyButtonsManager) {
+		logger.debug('🧹 Destroying previous BuyButtonsManager instance');
+		window.BuyButtonsManager.destroy();
+	}
 
     loadStyles(buyButtonsStyles, { id: 'buy-buttons-styles' });
     loadStyles(buyButtonsGloboStyles, { id: 'buy-buttons-globo-styles' });

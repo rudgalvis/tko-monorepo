@@ -3,6 +3,7 @@ import { CTAUpdater } from './CTAUpdater.js';
 import { ResponsiveLayoutManager } from './ResponsiveLayout.js';
 import { FooterCTAManager } from './FooterCTAManager.js';
 import { PaymentOptionManager } from './PaymentOptionManager.js';
+import { SkeletonManager } from './SkeletonManager.js';
 import { BUY_BUTTONS_CONFIG } from './config.js';
 import { frontendLogger as logger } from '../../loggers/frontend-logger.js';
 
@@ -16,24 +17,24 @@ export class BuyButtonsManager {
 	private responsiveLayout: ResponsiveLayoutManager;
 	private footerManager: FooterCTAManager;
 	private paymentOptionManager: PaymentOptionManager;
+	private skeletonManager: SkeletonManager;
 	
 	private completionTracking = new Map<string, boolean>();
-	private skeletonElement: HTMLElement | null = null;
 	private completionPollInterval: ReturnType<typeof setInterval> | null = null;
-	private readonly debug: boolean = false;
+	private readonly debug = false;
 
 	private onAllComplete() {
         if (this.debug) logger.debug('All buy button managers initialized successfully');
-		this.hideCtaSkeleton();
+		this.skeletonManager.hideSkeletons();
     }
 
-	constructor(debug: boolean = false) {
-		this.debug = debug;
+	constructor() {
 		this.priceObserver = new PriceObserver();
 		this.ctaUpdater = new CTAUpdater();
 		this.responsiveLayout = new ResponsiveLayoutManager();
-		this.footerManager = new FooterCTAManager();
 		this.paymentOptionManager = new PaymentOptionManager();
+		this.footerManager = new FooterCTAManager(this.paymentOptionManager);
+		this.skeletonManager = new SkeletonManager();
 	}
 
 	/**
@@ -117,55 +118,18 @@ export class BuyButtonsManager {
 	}
 
 	/**
-	 * Create and show skeleton loading overlay on CTA button
-	 */
-	private showCtaSkeleton(): void {
-		const productFormButtons = document.querySelector('.product-form__buttons');
-		
-		if (!productFormButtons || this.skeletonElement) {
-			return;
-		}
-
-		// Create skeleton overlay element
-		this.skeletonElement = document.createElement('div');
-		this.skeletonElement.className = 'skeleton-wave';
-		this.skeletonElement.style.cssText = `
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			z-index: 10;
-			border-radius: 4px;
-		`;
-
-		productFormButtons.appendChild(this.skeletonElement);
-		if (this.debug) logger.debug('CTA skeleton shown');
-	}
-
-	/**
-	 * Hide and remove skeleton loading overlay
-	 */
-	private hideCtaSkeleton(): void {
-		if (this.skeletonElement && this.skeletonElement.parentElement) {
-			this.skeletonElement.remove();
-			this.skeletonElement = null;
-			if (this.debug) logger.debug('CTA skeleton hidden');
-		}
-	}
-
-	/**
 	 * Initialize all buy button functionality
 	 */
 	init(): void {
 		// Show skeleton loading state
-		this.showCtaSkeleton();
+		this.skeletonManager.showSkeletons();
 
 		// Register managers that will always initialize
 		this.completionTracking.set('priceObserver', false);
 		this.completionTracking.set('ctaUpdater', false);
 		this.completionTracking.set('responsiveLayout', false);
 		this.completionTracking.set('footerManager', false);
+		this.completionTracking.set('paymentOptionManager', false);
 
 		if (this.debug) logger.debug('🚀 Initializing Buy Buttons Manager');
 		if (this.debug) this.logCompletionStatus();
@@ -188,6 +152,14 @@ export class BuyButtonsManager {
 			this.markManagerComplete('footerManager');
 		});
 
+		this.paymentOptionManager.setCompletionCallback(() => {
+			this.markManagerComplete('paymentOptionManager');
+		});
+
+		// Initialize payment option manager (without observer initially)
+		// This makes getPaymentOptionsInfo() available for FooterCTAManager
+		this.paymentOptionManager.initWithoutObserver();
+
 		// Setup price subscription
 		this.priceObserver.subscribe((newPrice) => {
 			this.ctaUpdater.setPrice(newPrice);
@@ -200,12 +172,8 @@ export class BuyButtonsManager {
 		document.addEventListener('globo.preorder.show.preorder', () => {
 			this.ctaUpdater.setIsPreorder(true);
 
-            // Initialize payment option visibility management
-			// This is conditionally initialized, so register it only when needed
-			this.completionTracking.set('paymentOptionManager', false);
-			this.paymentOptionManager.setCompletionCallback(() => {
-				this.markManagerComplete('paymentOptionManager');
-			});
+            // Initialize payment option visibility management with observer
+			// This sets up the hiding behavior for single options
             this.paymentOptionManager.init();
 		});
 
@@ -217,7 +185,6 @@ export class BuyButtonsManager {
 
 		// Handle responsive layout
 		this.responsiveLayout.init();
-
 	}
 
 	/**
@@ -247,5 +214,6 @@ export class BuyButtonsManager {
 		this.priceObserver.destroy();
 		this.responsiveLayout.destroy();
 		this.paymentOptionManager.destroy();
+		this.skeletonManager.destroy();
 	}
 }
