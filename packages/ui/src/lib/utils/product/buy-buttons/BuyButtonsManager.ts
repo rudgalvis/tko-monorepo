@@ -6,6 +6,7 @@ import { PaymentOptionManager } from './PaymentOptionManager.js';
 import { SkeletonManager } from './SkeletonManager.js';
 import { BUY_BUTTONS_CONFIG } from './config.js';
 import { frontendLogger as logger } from '../../loggers/frontend-logger.js';
+import { PreorderStateManager } from './preorder-state.js';
 
 /**
  * Main orchestrator for product buy buttons functionality
@@ -169,12 +170,23 @@ export class BuyButtonsManager {
 		// Start price observation
 		this.priceObserver.startObserving();
 
-		// Setup preorder listener (Globo integration)
+		// Check if preorder was already detected (event fired before this init)
+		if (PreorderStateManager.isPreorderProduct()) {
+			if (this.debug) logger.debug('Preorder product detected via global state');
+			this.ctaUpdater.setIsPreorder(true);
+			// Initialize payment option visibility management with observer
+			// This sets up the hiding behavior for single options
+			this.paymentOptionManager.init();
+		}
+
+		// Setup preorder listener (Globo integration) for cases where event fires after init
 		document.addEventListener('globo.preorder.show.preorder', () => {
+			if (this.debug) logger.debug('Preorder event received in BuyButtonsManager');
 			this.ctaUpdater.setIsPreorder(true);
 
             // Initialize payment option visibility management with observer
 			// This sets up the hiding behavior for single options
+			// Only init if not already initialized to avoid duplicate observers
             this.paymentOptionManager.init();
 		});
 

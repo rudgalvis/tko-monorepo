@@ -11,11 +11,13 @@ export interface PaymentOptionsInfo {
  */
 export class PaymentOptionManager {
     private readonly debug = false
+	
 	private readonly sellingPlanOptionsSelector = '.gPreorderSellingPlanOptions';
 	private readonly sellingPlanParentSelector = '.gPreorderSellingPlanParent';
 	private readonly observerContainerSelector = '.product__info-container';
 	private observer: MutationObserver | null = null;
 	private isInitialized = false;
+	private observerInitialized = false;
 	private onComplete?: () => void;
 
 	/**
@@ -55,8 +57,16 @@ export class PaymentOptionManager {
 	 * Initialize the payment option manager for observing and hiding behavior
 	 * Sets up observer on product info container for dynamic content changes
 	 * Should be called when preorder functionality is active
+	 * Safe to call multiple times - will only initialize once
 	 */
 	init(): void {
+		// Prevent double initialization
+		if (this.observerInitialized) {
+			if(this.debug) logger.debug('PaymentOptionManager already initialized, skipping');
+			return;
+		}
+		
+		this.observerInitialized = true;
 		this.setupObserver();
 		if(this.debug) logger.debug('PaymentOptionManager observer initialized');
 		

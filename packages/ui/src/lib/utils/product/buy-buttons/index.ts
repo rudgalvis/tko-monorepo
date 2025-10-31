@@ -13,6 +13,7 @@ export { CTAUpdater } from './CTAUpdater.js';
 export { ResponsiveLayoutManager } from './ResponsiveLayout.js';
 export { FooterCTAManager } from './FooterCTAManager.js';
 export { PaymentOptionManager } from './PaymentOptionManager.js';
+export { PreorderStateManager } from './preorder-state.js';
 export { BUY_BUTTONS_CONFIG } from './config.js';
 
 declare global {
@@ -26,7 +27,7 @@ declare global {
  * @param onComplete Optional callback to be called when all managers finish initialization
  */
 export const buyButtonsInitialize = (onComplete?: () => void) => {
-	console.log('dump', 'buyButtonsInitialize');
+	console.log('[ui]', 'buyButtonsInitialize');
 
 	// Destroy previous manager if it exists (for SPA/client-side navigation)
 	if (window.BuyButtonsManager) {
