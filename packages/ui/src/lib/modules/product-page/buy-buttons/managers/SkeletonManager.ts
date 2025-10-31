@@ -1,4 +1,6 @@
-import { frontendLogger as logger } from '../../loggers/frontend-logger.js';
+import { BUY_BUTTONS_CONFIG } from '../config.js';
+import { frontendLogger as logger } from '../../../../loggers/frontend-logger.js';
+import type { StyledElement } from '../types.js';
 
 /**
  * Manages skeleton loading state for buy buttons section
@@ -9,21 +11,17 @@ import { frontendLogger as logger } from '../../loggers/frontend-logger.js';
  * to prevent visual flicker. Specifically handles Globo Back In Stock button which loads
  * asynchronously and would otherwise briefly flash before skeleton is removed.
  */
-interface StyledElement {
-	element: HTMLElement;
-	originalHeight: string;
-	originalOverflow: string;
-	originalMarginBottom: string;
-}
-
 export class SkeletonManager {
-	private readonly debug: boolean = false;
-	private readonly productFormButtonsSelector = '.product-form__buttons';
+	private readonly debug: boolean;
 	private readonly SKELETON_HEIGHT = '60px';
 	private readonly HIDE_STYLE_ID = 'skeleton-manager-hide-styles';
 	
 	private styledElements: StyledElement[] = [];
 	private hideStyleElement: HTMLStyleElement | null = null;
+
+	constructor() {
+		this.debug = BUY_BUTTONS_CONFIG.debug.enabled;
+	}
 
 	/**
 	 * Show skeleton loading state
@@ -53,7 +51,9 @@ export class SkeletonManager {
 	 * Handles both original and cloned (footer) instances
 	 */
 	private createSkeleton(): void {
-		const productFormButtonsElements = document.querySelectorAll(this.productFormButtonsSelector);
+		const productFormButtonsElements = document.querySelectorAll(
+			BUY_BUTTONS_CONFIG.selectors.productFormButtons
+		);
 		
 		if (productFormButtonsElements.length === 0) {
 			if (this.debug) logger.debug('No product form buttons found');
@@ -75,7 +75,7 @@ export class SkeletonManager {
 
 			// Create skeleton overlay
 			const skeletonElement = document.createElement('div');
-			skeletonElement.className = 'skeleton-wave';
+			skeletonElement.className = BUY_BUTTONS_CONFIG.selectors.skeletonWave.replace('.', '');
 			skeletonElement.style.cssText = `
 				position: absolute;
 				top: 0;
@@ -96,7 +96,9 @@ export class SkeletonManager {
 			});
 		});
 
-		if (this.debug) logger.debug(`Created ${this.styledElements.length} skeleton instance(s)`);
+		if (this.debug) {
+			logger.debug(`Created ${this.styledElements.length} skeleton instance(s)`);
+		}
 	}
 
 	/**
@@ -105,7 +107,7 @@ export class SkeletonManager {
 	 */
 	private removeSkeleton(): void {
 		// Remove all skeleton-wave elements from the page
-		const allSkeletons = document.querySelectorAll('.skeleton-wave');
+		const allSkeletons = document.querySelectorAll(BUY_BUTTONS_CONFIG.selectors.skeletonWave);
 		allSkeletons.forEach((skeleton) => {
 			skeleton.remove();
 		});
@@ -161,7 +163,7 @@ export class SkeletonManager {
 		const styleElement = document.createElement('style');
 		styleElement.id = this.HIDE_STYLE_ID;
 		styleElement.textContent = `
-			#Globo-Back-In-Stock {
+			${BUY_BUTTONS_CONFIG.selectors.globoBackInStock} {
 				display: none !important;
 			}
 		`;

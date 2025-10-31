@@ -1,21 +1,27 @@
-import { BUY_BUTTONS_CONFIG } from './config.js';
+import { BUY_BUTTONS_CONFIG } from '../config.js';
+import type { CompletionCallback } from '../types.js';
 
 /**
  * Manages CTA button text updates based on price and product state (regular vs preorder)
  */
-export class CTAUpdater {
+export class CTAManager {
+	private readonly debug: boolean;
 	private isPriceReady = false;
 	private isPreorder = false;
 	private price: string | undefined;
 	private isInitialized = false;
-	private onComplete?: () => void;
+	private onComplete?: CompletionCallback;
 	private initializationTimeout: ReturnType<typeof setTimeout> | null = null;
 	private readonly INITIALIZATION_TIMEOUT_MS = 3000; // Fallback timeout
+
+	constructor() {
+		this.debug = BUY_BUTTONS_CONFIG.debug.enabled;
+	}
 
 	/**
 	 * Set completion callback for when CTA updates are complete
 	 */
-	setCompletionCallback(callback: () => void): void {
+	setCompletionCallback(callback: CompletionCallback): void {
 		this.onComplete = callback;
 		// If already initialized, call immediately
 		if (this.isInitialized) {
@@ -24,7 +30,7 @@ export class CTAUpdater {
 			// Set a timeout to force completion if price never arrives
 			this.initializationTimeout = setTimeout(() => {
 				if (!this.isInitialized) {
-					console.warn('⚠️ CTAUpdater: Forcing completion after timeout (price may not have been set)');
+					console.warn('⚠️ CTAManager: Forcing completion after timeout (price may not have been set)');
 					this.forceComplete();
 				}
 			}, this.INITIALIZATION_TIMEOUT_MS);
@@ -69,7 +75,7 @@ export class CTAUpdater {
 				BUY_BUTTONS_CONFIG.selectors.footer
 			);
 			const productFormButtons = document.querySelector<HTMLElement>(
-				'.product-form__buttons'
+				BUY_BUTTONS_CONFIG.selectors.productFormButtons
 			);
 
 			this.addPriceToPreorderButton(footer);
@@ -143,7 +149,7 @@ export class CTAUpdater {
 	 * Force completion without price update (fallback)
 	 */
 	private forceComplete(): void {
-		console.warn('⚠️ CTAUpdater completing without price update', {
+		console.warn('⚠️ CTAManager completing without price update', {
 			isPriceReady: this.isPriceReady,
 			hasPrice: !!this.price,
 			isPreorder: this.isPreorder

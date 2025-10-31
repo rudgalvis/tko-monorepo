@@ -26,8 +26,6 @@ declare global {
  * @param onComplete Optional callback to be called when all managers finish initialization
  */
 export const buyButtonsInitialize = (onComplete?: () => void) => {
-	console.log('[ui]', 'buyButtonsInitialize');
-
 	// Destroy previous manager if it exists (for SPA/client-side navigation)
 	if (window.BuyButtonsManager) {
 		logger.debug('🧹 Destroying previous BuyButtonsManager instance');

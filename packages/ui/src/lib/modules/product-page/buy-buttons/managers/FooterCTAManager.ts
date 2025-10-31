@@ -1,5 +1,6 @@
-import { BUY_BUTTONS_CONFIG } from './config.js';
+import { BUY_BUTTONS_CONFIG } from '../config.js';
 import type { PaymentOptionManager } from './PaymentOptionManager.js';
+import type { CompletionCallback } from '../types.js';
 
 /**
  * Manages moving CTA buttons to footer for mobile layout
@@ -8,7 +9,7 @@ export class FooterCTAManager {
 	private productForm: HTMLElement | null = null;
 	private footer: HTMLElement | null = null;
 	private isInitialized = false;
-	private onComplete?: () => void;
+	private onComplete?: CompletionCallback;
 	private paymentOptionManager: PaymentOptionManager;
 
 	constructor(paymentOptionManager: PaymentOptionManager) {
@@ -20,7 +21,7 @@ export class FooterCTAManager {
 	/**
 	 * Set completion callback for when footer move is complete
 	 */
-	setCompletionCallback(callback: () => void): void {
+	setCompletionCallback(callback: CompletionCallback): void {
 		this.onComplete = callback;
 		// If already initialized, call immediately
 		if (this.isInitialized) {

@@ -1,14 +1,13 @@
-import { BUY_BUTTONS_CONFIG } from './config.js';
-import { frontendLogger as logger } from '../../loggers/frontend-logger.js';
-
-export type PriceCallback = (price: string) => void;
+import { BUY_BUTTONS_CONFIG } from '../config.js';
+import { frontendLogger as logger } from '../../../../loggers/frontend-logger.js';
+import type { PriceCallback, CompletionCallback } from '../types.js';
 
 /**
  * Observes price changes in the DOM and notifies subscribers.
  * Uses the observer pattern to allow multiple parts of the app to react to price updates.
  */
-export class PriceObserver {
-	private readonly debug: boolean = false;
+export class PriceManager {
+	private readonly debug: boolean;
 
 	private subscribers = new Set<PriceCallback>();
 	private currentPrice: string | null = null;
@@ -16,15 +15,19 @@ export class PriceObserver {
 	private priceElement: HTMLElement | null = null;
 	private retryCount = 0;
 	private isInitialized = false;
-	private onComplete?: () => void;
+	private onComplete?: CompletionCallback;
 	private completeTimer: number | null = null;
 	private readonly STABILITY_DELAY_MS = 100;
 	private changeCounter = 0;
 
+	constructor() {
+		this.debug = BUY_BUTTONS_CONFIG.debug.enabled;
+	}
+
 	/**
 	 * Set completion callback for when observer finishes initialization
 	 */
-	setCompletionCallback(callback: () => void): void {
+	setCompletionCallback(callback: CompletionCallback): void {
 		this.onComplete = callback;
 		// If already initialized, call immediately
 		if (this.isInitialized) {

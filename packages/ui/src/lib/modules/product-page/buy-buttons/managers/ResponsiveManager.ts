@@ -1,14 +1,15 @@
-import { BUY_BUTTONS_CONFIG } from './config.js';
+import { BUY_BUTTONS_CONFIG } from '../config.js';
+import type { CompletionCallback } from '../types.js';
 
 /**
  * Manages responsive transformations for product form buttons
  * Handles different layouts for mobile and desktop views
  */
-export class ResponsiveLayoutManager {
+export class ResponsiveManager {
 	private productForm: HTMLElement | null = null;
 	private boundHandleResize: () => void;
 	private isInitialized = false;
-	private onComplete?: () => void;
+	private onComplete?: CompletionCallback;
 
 	constructor(productFormSelector = BUY_BUTTONS_CONFIG.selectors.productForm) {
 		this.productForm = document.querySelector(productFormSelector);
@@ -18,7 +19,7 @@ export class ResponsiveLayoutManager {
 	/**
 	 * Set completion callback for when layout initialization is complete
 	 */
-	setCompletionCallback(callback: () => void): void {
+	setCompletionCallback(callback: CompletionCallback): void {
 		this.onComplete = callback;
 		// If already initialized, call immediately
 		if (this.isInitialized) {

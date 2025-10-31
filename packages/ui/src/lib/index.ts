@@ -41,9 +41,9 @@ export { getAutomaticDiscount };
 /* Buy Buttons */
 export {
 	BuyButtonsManager,
-	PriceObserver,
-	CTAUpdater,
-	ResponsiveLayoutManager,
+	PriceManager,
+	CTAManager,
+	ResponsiveManager,
 	FooterCTAManager,
 	BUY_BUTTONS_CONFIG
-} from './utils/product/buy-buttons/index.js';
+} from './modules/product-page/buy-buttons/index.js';

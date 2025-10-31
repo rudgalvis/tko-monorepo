@@ -1,29 +1,27 @@
-import { frontendLogger as logger } from '../../loggers/frontend-logger.js';
-
-export interface PaymentOptionsInfo {
-	hasPaymentOptions: boolean;
-	optionCount: number;
-}
+import { BUY_BUTTONS_CONFIG } from '../config.js';
+import { frontendLogger as logger } from '../../../../loggers/frontend-logger.js';
+import type { PaymentOptionsInfo, CompletionCallback } from '../types.js';
 
 /**
  * Manages payment option visibility based on available selling plans
  * Hides the parent container if only one selling plan option is available
  */
 export class PaymentOptionManager {
-    private readonly debug = false
+	private readonly debug: boolean;
 	
-	private readonly sellingPlanOptionsSelector = '.gPreorderSellingPlanOptions';
-	private readonly sellingPlanParentSelector = '.gPreorderSellingPlanParent';
-	private readonly observerContainerSelector = '.product__info-container';
 	private observer: MutationObserver | null = null;
 	private isInitialized = false;
 	private observerInitialized = false;
-	private onComplete?: () => void;
+	private onComplete?: CompletionCallback;
+
+	constructor() {
+		this.debug = BUY_BUTTONS_CONFIG.debug.enabled;
+	}
 
 	/**
 	 * Set completion callback for when payment option check is complete
 	 */
-	setCompletionCallback(callback: () => void): void {
+	setCompletionCallback(callback: CompletionCallback): void {
 		this.onComplete = callback;
 		// If already initialized, call immediately
 		if (this.isInitialized) {
@@ -36,7 +34,9 @@ export class PaymentOptionManager {
 	 * Used by SkeletonManager to determine what skeletons to show
 	 */
 	getPaymentOptionsInfo(): PaymentOptionsInfo {
-		const sellingPlanOptions = document.querySelector(this.sellingPlanOptionsSelector);
+		const sellingPlanOptions = document.querySelector(
+			BUY_BUTTONS_CONFIG.selectors.sellingPlanOptions
+		);
 		
 		if (!sellingPlanOptions) {
 			return {
@@ -62,13 +62,17 @@ export class PaymentOptionManager {
 	init(): void {
 		// Prevent double initialization
 		if (this.observerInitialized) {
-			if(this.debug) logger.debug('PaymentOptionManager already initialized, skipping');
+			if (this.debug) {
+				logger.debug('PaymentOptionManager already initialized, skipping');
+			}
 			return;
 		}
 		
 		this.observerInitialized = true;
 		this.setupObserver();
-		if(this.debug) logger.debug('PaymentOptionManager observer initialized');
+		if (this.debug) {
+			logger.debug('PaymentOptionManager observer initialized');
+		}
 		
 		// Check immediately on init
 		this.checkAndHideParent();
@@ -84,7 +88,9 @@ export class PaymentOptionManager {
 			this.isInitialized = true;
 			this.onComplete?.();
 		}
-		if(this.debug) logger.debug('PaymentOptionManager initialized without observer');
+		if (this.debug) {
+			logger.debug('PaymentOptionManager initialized without observer');
+		}
 	}
 
 	/**
@@ -92,7 +98,9 @@ export class PaymentOptionManager {
 	 * Hides parent if only one child exists
 	 */
 	private checkAndHideParent(): void {
-		const sellingPlanOptions = document.querySelector(this.sellingPlanOptionsSelector);
+		const sellingPlanOptions = document.querySelector(
+			BUY_BUTTONS_CONFIG.selectors.sellingPlanOptions
+		);
 
 		if (!sellingPlanOptions) {
 			return;
@@ -102,14 +110,17 @@ export class PaymentOptionManager {
 
 		// Hide parent if only one child exists - meaning theres no options, no noeed to show
 		if (children.length === 1) {
-			const parent = document.querySelector(this.sellingPlanParentSelector);
+			const parent = document.querySelector(
+				BUY_BUTTONS_CONFIG.selectors.sellingPlanParent
+			);
 			if (parent) {
-				if(this.debug) logger.debug('Only one selling plan option found, hiding parent');
+				if (this.debug) {
+					logger.debug('Only one selling plan option found, hiding parent');
+				}
 				(parent as HTMLElement).style.display = 'none';
 				
 				// Stop observing after successful hide - no need to continue watching
 				this.stopObserving();
-				
 			}
 		}
 
@@ -125,10 +136,17 @@ export class PaymentOptionManager {
 	 * Reacts when selling plan options are added to the DOM
 	 */
 	private setupObserver(): void {
-		const observerContainer = document.querySelector(this.observerContainerSelector);
+		const observerContainer = document.querySelector(
+			BUY_BUTTONS_CONFIG.selectors.observerContainer
+		);
 
 		if (!observerContainer) {
-			if(this.debug) logger.debug('Product info container not found', this.observerContainerSelector);
+			if (this.debug) {
+				logger.debug(
+					'Product info container not found',
+					BUY_BUTTONS_CONFIG.selectors.observerContainer
+				);
+			}
 			// Signal completion even if container not found
 			if (!this.isInitialized) {
 				this.isInitialized = true;
@@ -147,7 +165,12 @@ export class PaymentOptionManager {
 			attributes: true
 		});
 
-		if(this.debug) logger.debug('PaymentOptionManager observer started on', this.observerContainerSelector);
+		if (this.debug) {
+			logger.debug(
+				'PaymentOptionManager observer started on',
+				BUY_BUTTONS_CONFIG.selectors.observerContainer
+			);
+		}
 	}
 
 	/**
@@ -157,7 +180,9 @@ export class PaymentOptionManager {
 		if (this.observer) {
 			this.observer.disconnect();
 			this.observer = null;
-			if(this.debug) logger.debug('PaymentOptionManager observer stopped');
+			if (this.debug) {
+				logger.debug('PaymentOptionManager observer stopped');
+			}
 		}
 	}
 
@@ -168,3 +193,4 @@ export class PaymentOptionManager {
 		this.stopObserving();
 	}
 }
+
