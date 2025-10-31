@@ -16,6 +16,7 @@ export class PriceObserver {
 	private isInitialized = false;
 	private onComplete?: () => void;
 	private completeTimer: number | null = null;
+	private readonly debug: boolean = true;
 	private readonly STABILITY_DELAY_MS = 100;
 	private changeCounter = 0;
 
@@ -51,12 +52,14 @@ export class PriceObserver {
 		if (newPrice !== this.currentPrice) {
 			this.currentPrice = newPrice;
 			this.changeCounter++;
-			logger.debug(`💰 Price change #${this.changeCounter}: ${newPrice}`, {
-				previousPrice: this.currentPrice,
-				newPrice,
-				changeNumber: this.changeCounter,
-				subscriberCount: this.subscribers.size
-			});
+			if (this.debug) {
+				logger.debug(`💰 Price change #${this.changeCounter}: ${newPrice}`, {
+					previousPrice: this.currentPrice,
+					newPrice,
+					changeNumber: this.changeCounter,
+					subscriberCount: this.subscribers.size
+				});
+			}
 			this.subscribers.forEach((callback) => {
 				try {
 					callback(newPrice);
@@ -79,10 +82,12 @@ export class PriceObserver {
 		// Schedule completion after stability delay
 		this.completeTimer = window.setTimeout(() => {
 			if (!this.isInitialized) {
-				logger.debug(`✅ Price observer completed after ${this.STABILITY_DELAY_MS}ms stability`, {
-					finalPrice: this.currentPrice,
-					totalChanges: this.changeCounter
-				});
+				if (this.debug) {
+					logger.debug(`✅ Price observer completed after ${this.STABILITY_DELAY_MS}ms stability`, {
+						finalPrice: this.currentPrice,
+						totalChanges: this.changeCounter
+					});
+				}
 				this.isInitialized = true;
 				this.onComplete?.();
 			}
@@ -123,7 +128,7 @@ export class PriceObserver {
 	 * Start observing price element changes
 	 */
 	startObserving(): void {
-		logger.debug('🚀 Starting price observation');
+		if (this.debug) logger.debug('🚀 Starting price observation');
 		if (this.observer) {
 			this.observer.disconnect();
 		}
@@ -144,16 +149,18 @@ export class PriceObserver {
 		);
 
 		if (this.priceElement) {
-			logger.debug('🔍 Price element found, setting up mutation observer');
+			if (this.debug) logger.debug('🔍 Price element found, setting up mutation observer');
 			this.observer = new MutationObserver((mutations) => {
 				mutations.forEach((mutation) => {
 					if (mutation.type === 'childList' || mutation.type === 'characterData') {
 						const newPrice = this.priceElement?.innerText.trim();
 						if (newPrice && newPrice !== this.currentPrice) {
-							logger.debug(`📍 Price mutation detected: ${newPrice}`, {
-								mutationType: mutation.type,
-								newPrice
-							});
+							if (this.debug) {
+								logger.debug(`📍 Price mutation detected: ${newPrice}`, {
+									mutationType: mutation.type,
+									newPrice
+								});
+							}
 							this.notifySubscribers(newPrice);
 							// Reset the completion timer on each price change
 							this.scheduleCompletion();
@@ -170,8 +177,10 @@ export class PriceObserver {
 
 			const initialPrice = this.priceElement.innerText.trim();
 			if (initialPrice) {
-				logger.debug(`🎯 Initial price detected: ${initialPrice}`);
+				if (this.debug) logger.debug(`🎯 Initial price detected: ${initialPrice}`);
 				this.notifySubscribers(initialPrice);
+			} else {
+				if (this.debug) logger.warn('⚠️ Price element found but has no text content');
 			}
 
 			// Schedule completion after stability delay instead of immediately
@@ -185,7 +194,7 @@ export class PriceObserver {
 	private retryObserving(): void {
 		if (this.retryCount < BUY_BUTTONS_CONFIG.retry.maxAttempts) {
 			this.retryCount++;
-			logger.debug(`🔄 Retry attempt #${this.retryCount} to find price element`);
+			if (this.debug) logger.debug(`🔄 Retry attempt #${this.retryCount} to find price element`);
 			setTimeout(() => {
 				this.findAndObservePriceElement();
 				if (!this.priceElement) {
@@ -195,9 +204,12 @@ export class PriceObserver {
 		} else {
 			logger.warn('⚠️ Price observer: Could not find price element after max retries', {
 				maxAttempts: BUY_BUTTONS_CONFIG.retry.maxAttempts,
-				totalRetries: this.retryCount
+				totalRetries: this.retryCount,
+				selector: BUY_BUTTONS_CONFIG.selectors.priceValue,
+				hint: 'Check if the selector matches the DOM structure'
 			});
 			// Signal completion immediately if price element wasn't found
+			// This prevents blocking but subscribers won't receive a price
 			if (!this.isInitialized) {
 				this.isInitialized = true;
 				this.onComplete?.();

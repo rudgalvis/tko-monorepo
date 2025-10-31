@@ -11,8 +11,8 @@ export const BUY_BUTTONS_CONFIG = {
 		productPriceElement: '.pdp-price-container product-price'
 	},
 	retry: {
-		maxAttempts: 10,
-		interval: 100
+		maxAttempts: 100,
+		interval: 150
 	},
 	breakpoints: {
 		mobile: 767

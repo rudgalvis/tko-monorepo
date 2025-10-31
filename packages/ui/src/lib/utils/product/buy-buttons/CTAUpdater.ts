@@ -9,6 +9,8 @@ export class CTAUpdater {
 	private price: string | undefined;
 	private isInitialized = false;
 	private onComplete?: () => void;
+	private initializationTimeout: ReturnType<typeof setTimeout> | null = null;
+	private readonly INITIALIZATION_TIMEOUT_MS = 3000; // Fallback timeout
 
 	/**
 	 * Set completion callback for when CTA updates are complete
@@ -18,6 +20,14 @@ export class CTAUpdater {
 		// If already initialized, call immediately
 		if (this.isInitialized) {
 			callback();
+		} else {
+			// Set a timeout to force completion if price never arrives
+			this.initializationTimeout = setTimeout(() => {
+				if (!this.isInitialized) {
+					console.warn('⚠️ CTAUpdater: Forcing completion after timeout (price may not have been set)');
+					this.forceComplete();
+				}
+			}, this.INITIALIZATION_TIMEOUT_MS);
 		}
 	}
 
@@ -113,8 +123,41 @@ export class CTAUpdater {
 
 		// Signal completion after first update
 		if (!this.isInitialized) {
-			this.isInitialized = true;
-			this.onComplete?.();
+			this.markComplete();
+		}
+	}
+
+	/**
+	 * Mark as complete and clear timeout
+	 */
+	private markComplete(): void {
+		if (this.initializationTimeout) {
+			clearTimeout(this.initializationTimeout);
+			this.initializationTimeout = null;
+		}
+		this.isInitialized = true;
+		this.onComplete?.();
+	}
+
+	/**
+	 * Force completion without price update (fallback)
+	 */
+	private forceComplete(): void {
+		console.warn('⚠️ CTAUpdater completing without price update', {
+			isPriceReady: this.isPriceReady,
+			hasPrice: !!this.price,
+			isPreorder: this.isPreorder
+		});
+		this.markComplete();
+	}
+
+	/**
+	 * Clean up resources
+	 */
+	destroy(): void {
+		if (this.initializationTimeout) {
+			clearTimeout(this.initializationTimeout);
+			this.initializationTimeout = null;
 		}
 	}
 }

@@ -21,7 +21,7 @@ export class BuyButtonsManager {
 	
 	private completionTracking = new Map<string, boolean>();
 	private completionPollInterval: ReturnType<typeof setInterval> | null = null;
-	private readonly debug = false;
+	private readonly debug = true;
 
 	private onAllComplete() {
         if (this.debug) logger.debug('All buy button managers initialized successfully');
@@ -212,6 +212,7 @@ export class BuyButtonsManager {
 	 */
 	destroy(): void {
 		this.priceObserver.destroy();
+		this.ctaUpdater.destroy();
 		this.responsiveLayout.destroy();
 		this.paymentOptionManager.destroy();
 		this.skeletonManager.destroy();

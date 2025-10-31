@@ -3474,8 +3474,8 @@ const isPage = (r) => {
     productPriceElement: ".pdp-price-container product-price"
   },
   retry: {
-    maxAttempts: 10,
-    interval: 100
+    maxAttempts: 100,
+    interval: 150
   },
   breakpoints: {
     mobile: 767
@@ -3498,6 +3498,7 @@ class PriceObserver {
     L(this, "isInitialized", !1);
     L(this, "onComplete");
     L(this, "completeTimer", null);
+    L(this, "debug", !0);
     L(this, "STABILITY_DELAY_MS", 100);
     L(this, "changeCounter", 0);
   }
@@ -3519,7 +3520,7 @@ class PriceObserver {
    * Notify all subscribers of price changes
    */
   notifySubscribers(e) {
-    e !== this.currentPrice && (this.currentPrice = e, this.changeCounter++, frontendLogger.debug(`💰 Price change #${this.changeCounter}: ${e}`, {
+    e !== this.currentPrice && (this.currentPrice = e, this.changeCounter++, this.debug && frontendLogger.debug(`💰 Price change #${this.changeCounter}: ${e}`, {
       previousPrice: this.currentPrice,
       newPrice: e,
       changeNumber: this.changeCounter,
@@ -3538,7 +3539,7 @@ class PriceObserver {
   scheduleCompletion() {
     this.completeTimer !== null && clearTimeout(this.completeTimer), this.completeTimer = window.setTimeout(() => {
       var e;
-      this.isInitialized || (frontendLogger.debug(`✅ Price observer completed after ${this.STABILITY_DELAY_MS}ms stability`, {
+      this.isInitialized || (this.debug && frontendLogger.debug(`✅ Price observer completed after ${this.STABILITY_DELAY_MS}ms stability`, {
         finalPrice: this.currentPrice,
         totalChanges: this.changeCounter
       }), this.isInitialized = !0, (e = this.onComplete) == null || e.call(this));
@@ -3570,7 +3571,7 @@ class PriceObserver {
    * Start observing price element changes
    */
   startObserving() {
-    frontendLogger.debug("🚀 Starting price observation"), this.observer && this.observer.disconnect(), this.findAndObservePriceElement(), this.priceElement || this.retryObserving();
+    this.debug && frontendLogger.debug("🚀 Starting price observation"), this.observer && this.observer.disconnect(), this.findAndObservePriceElement(), this.priceElement || this.retryObserving();
   }
   /**
    * Find price element and set up observer
@@ -3579,12 +3580,12 @@ class PriceObserver {
     if (this.priceElement = document.querySelector(
       BUY_BUTTONS_CONFIG.selectors.priceValue
     ), this.priceElement) {
-      frontendLogger.debug("🔍 Price element found, setting up mutation observer"), this.observer = new MutationObserver((t) => {
+      this.debug && frontendLogger.debug("🔍 Price element found, setting up mutation observer"), this.observer = new MutationObserver((t) => {
         t.forEach((s) => {
           var n;
           if (s.type === "childList" || s.type === "characterData") {
             const i = (n = this.priceElement) == null ? void 0 : n.innerText.trim();
-            i && i !== this.currentPrice && (frontendLogger.debug(`📍 Price mutation detected: ${i}`, {
+            i && i !== this.currentPrice && (this.debug && frontendLogger.debug(`📍 Price mutation detected: ${i}`, {
               mutationType: s.type,
               newPrice: i
             }), this.notifySubscribers(i), this.scheduleCompletion());
@@ -3596,7 +3597,7 @@ class PriceObserver {
         characterData: !0
       });
       const e = this.priceElement.innerText.trim();
-      e && (frontendLogger.debug(`🎯 Initial price detected: ${e}`), this.notifySubscribers(e)), this.scheduleCompletion();
+      e ? (this.debug && frontendLogger.debug(`🎯 Initial price detected: ${e}`), this.notifySubscribers(e)) : this.debug && frontendLogger.warn("⚠️ Price element found but has no text content"), this.scheduleCompletion();
     }
   }
   /**
@@ -3604,11 +3605,13 @@ class PriceObserver {
    */
   retryObserving() {
     var e;
-    this.retryCount < BUY_BUTTONS_CONFIG.retry.maxAttempts ? (this.retryCount++, frontendLogger.debug(`🔄 Retry attempt #${this.retryCount} to find price element`), setTimeout(() => {
+    this.retryCount < BUY_BUTTONS_CONFIG.retry.maxAttempts ? (this.retryCount++, this.debug && frontendLogger.debug(`🔄 Retry attempt #${this.retryCount} to find price element`), setTimeout(() => {
       this.findAndObservePriceElement(), this.priceElement || this.retryObserving();
     }, BUY_BUTTONS_CONFIG.retry.interval)) : (frontendLogger.warn("⚠️ Price observer: Could not find price element after max retries", {
       maxAttempts: BUY_BUTTONS_CONFIG.retry.maxAttempts,
-      totalRetries: this.retryCount
+      totalRetries: this.retryCount,
+      selector: BUY_BUTTONS_CONFIG.selectors.priceValue,
+      hint: "Check if the selector matches the DOM structure"
     }), this.isInitialized || (this.isInitialized = !0, (e = this.onComplete) == null || e.call(this)));
   }
   /**
@@ -3631,12 +3634,17 @@ class CTAUpdater {
     L(this, "price");
     L(this, "isInitialized", !1);
     L(this, "onComplete");
+    L(this, "initializationTimeout", null);
+    L(this, "INITIALIZATION_TIMEOUT_MS", 3e3);
   }
+  // Fallback timeout
   /**
    * Set completion callback for when CTA updates are complete
    */
   setCompletionCallback(e) {
-    this.onComplete = e, this.isInitialized && e();
+    this.onComplete = e, this.isInitialized ? e() : this.initializationTimeout = setTimeout(() => {
+      this.isInitialized || (console.warn("⚠️ CTAUpdater: Forcing completion after timeout (price may not have been set)"), this.forceComplete());
+    }, this.INITIALIZATION_TIMEOUT_MS);
   }
   /**
    * Set the price and trigger update
@@ -3697,8 +3705,30 @@ class CTAUpdater {
    * Update CTA buttons based on current state
    */
   update() {
+    !this.isPriceReady || !this.price || (this.isPreorder ? this.addPriceToPreorderButton() : this.addPriceToBuyButton(), this.isInitialized || this.markComplete());
+  }
+  /**
+   * Mark as complete and clear timeout
+   */
+  markComplete() {
     var e;
-    !this.isPriceReady || !this.price || (this.isPreorder ? this.addPriceToPreorderButton() : this.addPriceToBuyButton(), this.isInitialized || (this.isInitialized = !0, (e = this.onComplete) == null || e.call(this)));
+    this.initializationTimeout && (clearTimeout(this.initializationTimeout), this.initializationTimeout = null), this.isInitialized = !0, (e = this.onComplete) == null || e.call(this);
+  }
+  /**
+   * Force completion without price update (fallback)
+   */
+  forceComplete() {
+    console.warn("⚠️ CTAUpdater completing without price update", {
+      isPriceReady: this.isPriceReady,
+      hasPrice: !!this.price,
+      isPreorder: this.isPreorder
+    }), this.markComplete();
+  }
+  /**
+   * Clean up resources
+   */
+  destroy() {
+    this.initializationTimeout && (clearTimeout(this.initializationTimeout), this.initializationTimeout = null);
   }
 }
 class ResponsiveLayoutManager {
@@ -3906,21 +3936,25 @@ class SkeletonManager {
     L(this, "debug", !1);
     L(this, "productFormButtonsSelector", ".product-form__buttons");
     L(this, "SKELETON_HEIGHT", "60px");
+    L(this, "HIDE_STYLE_ID", "skeleton-manager-hide-styles");
     L(this, "styledElements", []);
+    L(this, "hideStyleElement", null);
   }
   /**
    * Show skeleton loading state
    * Called on initialization
    */
   showSkeletons() {
-    this.createSkeleton(), this.debug && frontendLogger.debug("Skeleton shown");
+    this.createSkeleton(), this.injectHideStyles(), this.debug && frontendLogger.debug("Skeleton shown");
   }
   /**
    * Hide skeleton loading state
    * Called when all managers complete initialization
    */
   hideSkeletons() {
-    this.removeSkeleton(), this.debug && frontendLogger.debug("Skeleton hidden");
+    setTimeout(() => {
+      this.removeSkeleton(), this.removeHideStyles(), this.debug && frontendLogger.debug("Skeleton hidden");
+    }, 150);
   }
   /**
    * Create skeleton loading overlay on all product form buttons instances
@@ -3965,10 +3999,60 @@ class SkeletonManager {
     }), this.debug && frontendLogger.debug(`Removed ${e.length} skeleton element(s) and restored styles for ${this.styledElements.length} element(s)`), this.styledElements = [];
   }
   /**
+   * Inject CSS to hide elements that should not be visible during skeleton state
+   * 
+   * THE PROBLEM:
+   * When a product is out of stock, the Globo Back In Stock app (#Globo-Back-In-Stock)
+   * loads its button dynamically/asynchronously. This creates a flicker sequence:
+   * 1. Our skeleton shows (covering .product-form__buttons)
+   * 2. Globo button appears (outside our skeleton's coverage area)
+   * 3. User sees Globo button briefly
+   * 4. Our skeleton hides
+   * 5. Globo button remains visible (correct final state)
+   * 
+   * THE SOLUTION:
+   * CSS injection with display: none !important applies instantly to any element
+   * matching #Globo-Back-In-Stock, regardless of when it's added to the DOM.
+   * This prevents the flicker because the button is hidden the moment it appears.
+   * 
+   * WHY NOT DIRECT ELEMENT STYLING:
+   * We can't style the element directly because it doesn't exist yet when we show
+   * the skeleton. Even with MutationObserver, there would be a brief moment where
+   * the element is visible before the observer reacts.
+   * 
+   * WHY CSS INJECTION WORKS:
+   * Browser applies CSS rules instantly when elements are inserted into the DOM.
+   * No race condition, no observer overhead, guaranteed to work.
+   */
+  injectHideStyles() {
+    if (document.getElementById(this.HIDE_STYLE_ID)) {
+      this.debug && frontendLogger.debug("Hide styles already exist");
+      return;
+    }
+    const e = document.createElement("style");
+    e.id = this.HIDE_STYLE_ID, e.textContent = `
+			#Globo-Back-In-Stock {
+				display: none !important;
+			}
+		`, document.head.appendChild(e), this.hideStyleElement = e, this.debug && frontendLogger.debug("Hide styles injected");
+  }
+  /**
+   * Remove injected hide styles to reveal hidden elements
+   * 
+   * Removes the CSS rule so #Globo-Back-In-Stock becomes visible again.
+   * Includes fallback removal by ID in case the element reference is lost
+   * (e.g., if this is called after a page navigation or component remount).
+   */
+  removeHideStyles() {
+    this.hideStyleElement && (this.hideStyleElement.remove(), this.hideStyleElement = null, this.debug && frontendLogger.debug("Hide styles removed"));
+    const e = document.getElementById(this.HIDE_STYLE_ID);
+    e && (e.remove(), this.debug && frontendLogger.debug("Hide styles removed via fallback"));
+  }
+  /**
    * Clean up resources
    */
   destroy() {
-    this.removeSkeleton();
+    this.removeSkeleton(), this.removeHideStyles();
   }
 }
 class BuyButtonsManager {
@@ -3981,7 +4065,7 @@ class BuyButtonsManager {
     L(this, "skeletonManager");
     L(this, "completionTracking", /* @__PURE__ */ new Map());
     L(this, "completionPollInterval", null);
-    L(this, "debug", !1);
+    L(this, "debug", !0);
     this.priceObserver = new PriceObserver(), this.ctaUpdater = new CTAUpdater(), this.responsiveLayout = new ResponsiveLayoutManager(), this.paymentOptionManager = new PaymentOptionManager(), this.footerManager = new FooterCTAManager(this.paymentOptionManager), this.skeletonManager = new SkeletonManager();
   }
   onAllComplete() {
@@ -4079,7 +4163,7 @@ class BuyButtonsManager {
    * Clean up all resources
    */
   destroy() {
-    this.priceObserver.destroy(), this.responsiveLayout.destroy(), this.paymentOptionManager.destroy(), this.skeletonManager.destroy();
+    this.priceObserver.destroy(), this.ctaUpdater.destroy(), this.responsiveLayout.destroy(), this.paymentOptionManager.destroy(), this.skeletonManager.destroy();
   }
 }
 const loadStyles = (r, e = {}) => {
