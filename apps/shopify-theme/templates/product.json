@@ -40,6 +40,13 @@
             "specialfeatures": "{{ product.metafields.my_fields.special_information.value }}"
           }
         },
+        "4488487c-6c3b-4726-b3c8-a7e33bdd90d8": {
+          "type": "setsaveme",
+          "settings": {
+            "setsaveproduct": "{{ product.metafields.my_fields.set_save.value }}",
+            "setsavetitle": "{{ block.settings.setsaveproduct.metafields.my_fields.set_save_title.value }}"
+          }
+        },
         "a4739a53-da3f-4905-8564-5650ea958f5e": {
           "type": "description",
           "settings": {}
@@ -103,13 +110,6 @@
             "content": "{{ product.metafields.custom.product_details | metafield_tag }}",
             "page": ""
           }
-        },
-        "4488487c-6c3b-4726-b3c8-a7e33bdd90d8": {
-          "type": "setsaveme",
-          "settings": {
-            "setsaveproduct": "{{ product.metafields.my_fields.set_save.value }}",
-            "setsavetitle": "{{ block.settings.setsaveproduct.metafields.my_fields.set_save_title.value }}"
-          }
         }
       },
       "block_order": [
@@ -118,6 +118,7 @@
         "8805ceec-8265-428c-8d76-cfea9e39d219",
         "25e984c1-bc5d-4ef3-acc0-bb6285839d71",
         "3d8fd3f1-dabc-4ed6-b534-6907890fd7c4",
+        "4488487c-6c3b-4726-b3c8-a7e33bdd90d8",
         "a4739a53-da3f-4905-8564-5650ea958f5e",
         "b0160fe0-9b87-4db2-aa65-11c25a7c5a07",
         "collapsible_tab_t49Vfk",
@@ -125,8 +126,7 @@
         "ed32e24b-274f-4072-a580-527e308ded6d",
         "c7e7f97d-bb19-4d00-981e-dd03893a5c9f",
         "64f0bf9c-b5d7-4235-9496-1af7e578d79c",
-        "collapsible_tab_cfcBjF",
-        "4488487c-6c3b-4726-b3c8-a7e33bdd90d8"
+        "collapsible_tab_cfcBjF"
       ],
       "settings": {
         "bid_header": "{{ product.metafields.my_fields.between_image_title.value }}",
@@ -208,7 +208,7 @@
       "settings": {
         "borderlayoutsub": "hide-border",
         "subbgcolor": "#b4bed6",
-        "subheading": "20% OFF YOUR FIRST ORDER",
+        "subheading": "10% OFF YOUR FIRST ORDER",
         "subbody": "<p>Good things come to those who subscribe. We don’t spam.<br/>Pinky promise</p>",
         "maxwidthofcta": 980,
         "maxwidthofctamobile": 280,
