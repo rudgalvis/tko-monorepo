@@ -4205,8 +4205,7 @@ product-price .skeleton {
 }
 
 .button:disabled, .button[aria-disabled=true], .button.disabled, .customer button:disabled, .customer button[aria-disabled=true], .customer button.disabled {
-    opacity: .2!important;
-    display: none;
+    opacity: .8!important;
 }
 
 .product-form__submit {

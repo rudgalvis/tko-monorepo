@@ -1850,7 +1850,8 @@ deferred-media {
   width: 100%;
 }
 
-.button.loading {
+/* Commented out because PDP main CTA hides when loading */
+/* .button.loading {
   color: transparent;
   position: relative;
 }
@@ -1859,7 +1860,7 @@ deferred-media {
   .button.loading {
     color: rgb(var(--color-foreground));
   }
-}
+} */
 
 .button.loading > .loading-overlay__spinner {
   top: 50%;
