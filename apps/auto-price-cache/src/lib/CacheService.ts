@@ -80,6 +80,13 @@ export class CacheService {
 			throw new Error('Process is already running');
 		}
 
+		// Automatically reset if completed
+		const currentState = this.stateMachine.getState();
+		if (currentState.status === 'COMPLETED') {
+			console.log('[CacheService] Task is completed, automatically resetting before starting fresh');
+			this.reset();
+		}
+
 		// Check if we can resume
 		if (this.stateMachine.canResume()) {
 			return this.resume();
