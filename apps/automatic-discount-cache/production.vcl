@@ -25,7 +25,21 @@ sub vcl_recv {
 }
 
 sub vcl_backend_response {
-    # Force TTL for specific endpoints regardless of backend headers
+    # Handle ALL error and redirect responses - no caching for 3xx, 4xx or 5xx
+    if (beresp.status >= 300) {
+        # Prevent Varnish from caching errors/redirects
+        set beresp.ttl = 0s;
+        set beresp.uncacheable = true;
+        
+        # Prevent browser from caching errors/redirects
+        set beresp.http.Cache-Control = "no-cache, no-store, must-revalidate, private";
+        set beresp.http.Pragma = "no-cache";
+        set beresp.http.Expires = now;
+        
+        return (deliver);
+    }
+
+    # Force TTL for specific endpoints regardless of backend headers (only for successful responses)
     if (bereq.url ~ "currency-rates") {
         # Remove backend TTL headers
         unset beresp.http.Cache-Control;
@@ -48,12 +62,6 @@ sub vcl_backend_response {
 
         set beresp.ttl = 24h;
         set beresp.uncacheable = false;
-    }
-
-    # Handle 5xx errors
-    if (beresp.status >= 500 && beresp.status < 600) {
-        set beresp.ttl = 0s;
-        set beresp.uncacheable = true;
     }
 
     return (deliver);
