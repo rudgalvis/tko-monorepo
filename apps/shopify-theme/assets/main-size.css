@@ -1246,6 +1246,7 @@ a#size-guide2 {
     width: 100%;
     min-height: 200px;
     aspect-ratio: 4/5;
+    object-fit: cover;
 }
 
 .mps-item video {
