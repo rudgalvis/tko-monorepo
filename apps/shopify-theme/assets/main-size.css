@@ -1021,16 +1021,14 @@ a#size-guide2 {
 .pdesc-title {
     font-family: "Monument";
     color: black;
-    font-size: 16px;
-    letter-spacing: -0.25px;
+
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: -0.34px;
 }
 
 .desc-item p {
-    font-family: "Monument Regular";
-    font-size: 16px;
-    color: rgba(0, 0, 0, 0.7);
-    letter-spacing: -0.25px;
-    line-height: 26px;
+    color: rgba(0, 0, 0, 1);
     display: none;
     width: 100%;
     max-width: 95%;
@@ -1038,6 +1036,11 @@ a#size-guide2 {
     margin-block-end: 0em;
     margin-top: 12px;
     margin-bottom: 8px;
+
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0;
+    font-family: "Monument Grotesk", sans-serif;
 }
 
 .desc-item p a {
@@ -1060,15 +1063,15 @@ a#size-guide2 {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .pdesc-arrow img {
-    width: 8px;
+    width: 12px;
 }
 
 .pdesc-arrow.active img {
-    width: 8px;
+    width: 12px;
 }
 
 .desc-item {
@@ -1781,12 +1784,12 @@ small {
     }
 
     .pdesc-title {
-        font-size: 10px;
+        font-size: 14px;
         letter-spacing: -0.15px;
     }
 
     .desc-item p {
-        font-size: 14px;
+        font-size: 16px;
         letter-spacing: -0.22px;
         line-height: 20px;
     }
@@ -2616,13 +2619,12 @@ small {
     }
 
     .pdesc-title {
-        font-size: 10px;
+        font-size: 14px;
         letter-spacing: -0.15px;
     }
 
     .desc-item p {
-        font-size: 14px;
-        letter-spacing: -0.22px;
+        font-size: 16px;
         line-height: 20px;
     }
 
@@ -2631,7 +2633,7 @@ small {
     }
 
     .desc-item {
-        padding: 12px 0px;
+        padding: 16px 0px;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         -webkit-tap-highlight-color: transparent;
         border-top: 0.5px solid black;
@@ -2652,11 +2654,11 @@ small {
     }
 
     .pdesc-arrow img {
-        width: 5px;
+        width: 9px;
     }
 
     .pdesc-arrow.active img {
-        width: 5px;
+        width: 9px;
     }
 
     .setsave-title h2 {
