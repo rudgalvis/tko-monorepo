@@ -1112,7 +1112,7 @@ a#size-guide2 {
   flex-direction: column;
   /* max-width: 540px;*/
   width: 100%;
-  margin-top: 26px;
+  margin: 26px 0;
 }
 
 .setsave-container {
