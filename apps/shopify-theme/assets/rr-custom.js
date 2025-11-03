@@ -17516,7 +17516,7 @@ customElements.define("color-selector", create_custom_element(ColorSelector, { a
 var root_1 = /* @__PURE__ */ from_html("<a> </a>"), root = /* @__PURE__ */ from_html('<div class="size-selector svelte-nkwbzs"></div>');
 const $$css = {
   hash: "svelte-nkwbzs",
-  code: `.size-selector.svelte-nkwbzs {line-height:0;display:flex;gap:8px;}.pill.svelte-nkwbzs {font-family:"Monument", sans-serif;font-size:16px;letter-spacing:-0.15px;text-transform:uppercase;line-height:100%;display:block;color:black;text-decoration:none;border:1px solid black;border-radius:20px;padding:4px 24px;cursor:pointer;transition:background 0.2s ease;}.pill.svelte-nkwbzs:hover:not(.active) {background:rgba(0, 0, 0, 0.1);}.pill.active.svelte-nkwbzs {background:#000;color:#fff;}
+  code: `.size-selector.svelte-nkwbzs {line-height:0;display:flex;gap:8px;flex-wrap:wrap;}.pill.svelte-nkwbzs {font-family:"Monument", sans-serif;font-size:16px;letter-spacing:-0.15px;text-transform:uppercase;line-height:100%;display:block;color:black;text-decoration:none;border:1px solid black;border-radius:20px;padding:4px 24px;cursor:pointer;transition:background 0.2s ease;}.pill.svelte-nkwbzs:hover:not(.active) {background:rgba(0, 0, 0, 0.1);}.pill.active.svelte-nkwbzs {background:#000;color:#fff;}
 @media screen and (max-width: 767px) {.pill.svelte-nkwbzs {font-size:14px;}
 }`
 };

@@ -38,6 +38,7 @@
 		line-height: 0;
 		display: flex;
 		gap: 8px;
+    flex-wrap: wrap;
 	}
 
 	.pill {
