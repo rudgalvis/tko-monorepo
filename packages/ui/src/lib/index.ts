@@ -37,3 +37,13 @@ export { default as SizeSelector } from './custom-elements/pdp/size-selector/Siz
 
 /* Regular exports */
 export { getAutomaticDiscount };
+
+/* Buy Buttons */
+export {
+	BuyButtonsManager,
+	PriceManager,
+	CTAManager,
+	ResponsiveManager,
+	FooterCTAManager,
+	BUY_BUTTONS_CONFIG
+} from './modules/product-page/buy-buttons/index.js';

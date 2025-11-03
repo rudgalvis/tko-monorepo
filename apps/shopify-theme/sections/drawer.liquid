@@ -106,7 +106,13 @@ Create Json for product variant color or image
                      </span>
                     <div class="dpi-detail-container">
                         <div class="dpi-price-size">
+
                             <p class="product-size-drawer" rv-text="item.variant_options.1" style="cursor: pointer" onclick="location.href=this.getAttribute('data-url')" rv-data-url="item.url"></p>
+                            
+                            <div rv-show="item | isPreorderItem">
+                                <p class="badge">Pre order</p>
+                            </div>                          
+                        
                             {%- comment -%}
                             --------------------------------------------------------
                             if you want to show product type delete to comment line.
@@ -137,6 +143,7 @@ Create Json for product variant color or image
 
                             <div class="drawer-price-container">
                                 <p class="drawer-price">
+                                    <div rv-debug="item | isPreorderItem"></div>
                                     <div rv-hide="item | isPartialPayment">
                                         <product-price rv-price="item | final_price | currency"
                                                        rv-compared_at="item | original_price | currency"
@@ -172,7 +179,6 @@ Create Json for product variant color or image
                                             </div>
                                             <p style="font-family: Monument; font-size: 10px; text-transform: uppercase">Pay now:</p>
                                         </div>
-
 
                                         <product-price rv-price="item | checkout_price | currency"
                                                        iso_code="{{ localization.country.iso_code }}"
