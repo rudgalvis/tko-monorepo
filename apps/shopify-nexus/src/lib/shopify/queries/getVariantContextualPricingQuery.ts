@@ -36,6 +36,3 @@ export type GetVariantContextualPricingVars = {
   id: string
   country: string
 }
-
-
-
