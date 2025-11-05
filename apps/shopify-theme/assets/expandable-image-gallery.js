@@ -108,7 +108,18 @@
   function initLightboxMarkup(gallery) {
     // create items inside lightbox - modal slideshow
     var slideshowContent = "";
+    // Create a mapping between gallery item index and slide index
+    gallery.itemToSlideMap = [];
+    var slideIndex = 0;
+    
     for (var i = 0; i < gallery.galleryItems.length; i++) {
+      // Skip gallery items that contain video elements
+      var hasVideo = gallery.galleryItems[i].getElementsByTagName("video").length > 0;
+      if (hasVideo) {
+        gallery.itemToSlideMap[i] = -1; // Mark as no slide
+        continue;
+      }
+      
       var caption = gallery.galleryItems[i].getElementsByClassName(
           "js-exp-gallery__caption",
         ),
@@ -116,6 +127,16 @@
         caption = gallery.galleryItems[i].getElementsByClassName(
           "js-exp-gallery__caption",
         );
+      
+      // Skip if no image found
+      if (!image) {
+        gallery.itemToSlideMap[i] = -1; // Mark as no slide
+        continue;
+      }
+      
+      // Map this gallery item to the current slide index
+      gallery.itemToSlideMap[i] = slideIndex;
+      
       // details
       var src = image.getAttribute("data-modal-src");
 
@@ -156,6 +177,8 @@
         "</div></div>" +
         captionBlock +
         "</li>";
+      
+      slideIndex++;
     }
     gallery.slideshowList.innerHTML = slideshowContent;
     gallery.slides =
@@ -526,18 +549,25 @@
   function openModalLightbox(gallery, event) {
     var item = event.target.closest(".js-exp-gallery__item");
     if (!item) return;
+    
+    // Skip if the clicked item contains a video element
+    var hasVideo = item.getElementsByTagName("video").length > 0;
+    if (hasVideo) return;
+    
     // reset slideshow items visibility
     resetSlideshowItemsVisibility(gallery);
-    gallery.selectedSlide = Array.prototype.indexOf.call(
+    var itemIndex = Array.prototype.indexOf.call(
       gallery.galleryItems,
       item,
     );
+    // Map the gallery item index to the slide index
+    gallery.selectedSlide = gallery.itemToSlideMap[itemIndex];
     setSelectedItem(gallery);
     lazyLoadSlide(gallery);
     if (animationSupported) {
       // start expanding animation
       window.requestAnimationFrame(function () {
-        animateSelectedImage(gallery);
+        animateSelectedImage(gallery, false, itemIndex);
         openModal(gallery, item);
       });
     } else {
@@ -552,12 +582,15 @@
   function resetSlideshowItemsVisibility(gallery) {
     var index = 0;
     for (var i = 0; i < gallery.galleryItems.length; i++) {
+      var slideIndex = gallery.itemToSlideMap[i];
+      if (slideIndex === -1) continue; // Skip items without slides (videos)
+      
       var itemVisible = isVisible(gallery.galleryItems[i]);
       if (itemVisible) {
         index = index + 1;
-        gallery.slides[i].classList.remove("ei1-hide");
+        gallery.slides[slideIndex].classList.remove("ei1-hide");
       } else {
-        gallery.slides[i].classList.add("ei1-hide");
+        gallery.slides[slideIndex].classList.add("ei1-hide");
       }
     }
     toggleSlideshowElements(gallery, index < 2);
@@ -594,22 +627,33 @@
     gallery.selectedSlide = gallery.slideshowObj
       ? gallery.slideshowObj.selectedSlide
       : 0;
+    
+    // Find the gallery item index that corresponds to this slide index
+    var galleryItemIndex = gallery.itemToSlideMap.indexOf(gallery.selectedSlide);
+    if (galleryItemIndex === -1) return; // No corresponding gallery item
+    
     // on close - make sure last selected image (of the gallery) is in the viewport
     var boundingRect =
-      gallery.galleryItems[gallery.selectedSlide].getBoundingClientRect();
+      gallery.galleryItems[galleryItemIndex].getBoundingClientRect();
     if (boundingRect.topf < 0 || boundingRect.top > window.innerHeight) {
       var windowScrollTop =
         window.scrollY || document.documentElement.scrollTop;
       window.scrollTo(0, boundingRect.top + windowScrollTop);
     }
     // animate on close
-    animateSelectedImage(gallery, true);
+    animateSelectedImage(gallery, true, galleryItemIndex);
   }
 
-  function animateSelectedImage(gallery, bool) {
+  function animateSelectedImage(gallery, bool, galleryItemIndex) {
     // create morphing image effect
+    // If galleryItemIndex is not provided, find it from the selected slide
+    if (typeof galleryItemIndex === 'undefined') {
+      galleryItemIndex = gallery.itemToSlideMap.indexOf(gallery.selectedSlide);
+      if (galleryItemIndex === -1) return; // No corresponding gallery item
+    }
+    
     var imgInit =
-        gallery.galleryItems[gallery.selectedSlide].getElementsByTagName(
+        gallery.galleryItems[galleryItemIndex].getElementsByTagName(
           "img",
         )[0],
       imgInitPosition = imgInit.getBoundingClientRect(),
