@@ -30,5 +30,3 @@ export interface StyledElement {
 	originalOverflow: string;
 	originalMarginBottom: string;
 }
-
-

@@ -453,7 +453,6 @@
     }
   },
   "platform_customizations": {
-    "custom_css": [
-    ]
+    "custom_css": []
   }
 }
