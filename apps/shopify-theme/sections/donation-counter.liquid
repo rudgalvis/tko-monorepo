@@ -1,0 +1,28 @@
+{% assign current_donations = shop.metafields.custom.dream_fund_amount.value | default: 0 %}
+{% assign donation_target = 10000 %}
+
+<div id="donation-counter-final-wrapper" class="cta-text-content">
+  <h2>Total Donations Towards Our Goal:</h2>
+
+  <p>
+    <strong>
+      {{ cart.currency.symbol }}{{ current_donations }} 
+
+      / 
+
+      {{ cart.currency.symbol }}{{ donation_target }}
+    </strong>
+  </p>
+</div>
+
+{% schema %}
+{
+  "name": "Donation Counter Display",
+  "presets": [
+    {
+      "name": "Donation Counter",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

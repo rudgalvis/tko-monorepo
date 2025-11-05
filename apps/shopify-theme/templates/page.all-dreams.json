@@ -11,17 +11,15 @@
   "sections": {
     "main": {
       "type": "main-all-dreams",
-      "settings": {
-      }
+      "settings": {}
     },
     "16477721349fb7789f": {
       "type": "static-page-hero",
       "blocks": {
         "1647772134ff4068b2-0": {
           "type": "title",
-          "disabled": true,
           "settings": {
-            "pageherohead": "Lorem Ipsum Dolar Sitamet",
+            "pageherohead": "Give Some, Get Some",
             "herocolor": "#ffffff"
           }
         },
@@ -51,6 +49,46 @@
         "pageherotitledesktop": 900,
         "pageherotitlemobile": 300
       }
+    },
+    "static_onlytext_E3kXcV": {
+      "type": "static-onlytext",
+      "custom_css": [
+        ".cta-text-content p {font-size: 24px; line-height: 35px; font-family: Monument Regular;}",
+        ".cta-text-content h2 {font-family: Panama; font-size: 62px; letter-spacing: -0.95px; line-height: 70px; text-align: center; margin-block-start: 0em; margin-block-end: 0em; text-transform: capitalize;}"
+      ],
+      "name": "Only Text Section No.1",
+      "settings": {
+        "onlyTextlayout": "hide-border",
+        "bgOnlyTextCTA": "#eeeeea",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "Black Friday, Meaningful Edition",
+        "maxwidthoftitle": 800,
+        "maxwidthoftitlemobiled": 400,
+        "bodytextOnlyTextCTA": "Join our Give Some, Get Some initiative - this year we’re raising €10,000 to make our artisans’ dreams come true.\nAdd a contribution to the Dream Fund at checkout and help make dreams like a coffee maker for Danutė or a seaside escape for Rima a reality.",
+        "fontsizetune": "27px",
+        "maxwidthoftext": 1099,
+        "maxwidthoftextmobile": 400,
+        "showurlOnlyTextCTA": false,
+        "linkOnlyTextCTA": "",
+        "linktextOnlyTextCTA": "",
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 20,
+        "containerbottom": 20,
+        "containertopmobile": 20,
+        "containerbottommobile": 20,
+        "sectionID": ""
+      }
+    },
+    "donation_counter_WXKtPL": {
+      "type": "donation-counter",
+      "custom_css": [
+        "#donation-counter-final-wrapper {margin-bottom: 30px; /* Adjust 30px to whatever space you need (e.g., 50px) */}"
+      ],
+      "name": "Donation Counter",
+      "settings": {}
     },
     "164777237130782034": {
       "type": "static-the-dreams-accordion",
@@ -85,14 +123,46 @@
             "fundproduct": "for-the-dream-fund"
           }
         },
+        "accordion_bXzqW7": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Ingrida-bio_424x539_d988b53d-33b9-41c8-a7d8-8ec7efe10ff8.webp",
+            "dreamaccordionthumb": "shopify://shop_images/Ingrida-icon_124x124_e267492b-9a8a-4ec0-85cc-8b165a586a49.webp",
+            "accordionheadingdream": "Ingrida",
+            "accordionsubdream": "A Holiday Trip in Lithuania",
+            "accordioncopydream": "A holiday trip through Lithuania - that’s Ingrida’s dream. A few peaceful days to rest, explore, and recharge before returning to the knits she loves. Every morning at 4 a.m., she wakes before her five children (including two pairs of twins!) for a quiet cup of tea, a gratitude practice, and a moment to dream.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "accordion_dUQTnK": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Danute_Marciukaitiene_2_8e7ed3a4-0f8d-41d1-a252-475e3bc59517.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/Danute_Marciukaitiene_2_8e7ed3a4-0f8d-41d1-a252-475e3bc59517.jpg",
+            "accordionheadingdream": "Danutė",
+            "accordionsubdream": "A New Coffee Maker",
+            "accordioncopydream": "A new coffee maker tops Danutė's wishlist this year - the perfect companion for her knitting rituals. For over five years, she’s been part of The Knotty Ones, finding calm and purpose in every stitch, always with a warm cup of coffee by her side.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
         "d7146837-c390-4e5a-a571-751df82e82cf": {
           "type": "Accordion",
           "settings": {
-            "dreamaccordionimage": "shopify://shop_images/Knitter_Dream_Fund_424x539_586db514-cefe-4422-a61f-c4e4172fb618.webp",
-            "dreamaccordionthumb": "shopify://shop_images/27_124x124_2_124x124_59ced41d-8cf9-47a1-9834-f98d09d6575d.webp",
-            "accordionheadingdream": "Valentina",
-            "accordionsubdream": "A flat screen TV",
-            "accordioncopydream": "Ms. Valentina has been dreaming of a big, flat screen TV. Like the ones you see in the movies! She explains to us that the one she currently has distorts colors and is the size of  a \"banana box\". And damn, we think she deserves a fancy, flat screen TV! Especially given how much she loves true crime TV series.",
+            "dreamaccordionimage": "shopify://shop_images/Danute-bio_424x539_690d901a-219d-4b09-a055-136f138f0682.webp",
+            "dreamaccordionthumb": "shopify://shop_images/Danute-bio_424x539_690d901a-219d-4b09-a055-136f138f0682.webp",
+            "accordionheadingdream": "Danutė",
+            "accordionsubdream": "A Reclining Chair for Knitting",
+            "accordioncopydream": "Danutė dreams of a reclining chair to make her happiest hours, the ones spent knitting, even more comfortable. She calls knitting her meditation, often joined by her three Persian cats and inspired by her daughter, her biggest source of pride.",
             "dreamurlcontrol": false,
             "fundurltext": "",
             "fundurl": "",
@@ -116,14 +186,62 @@
             "fundproduct": "for-the-dream-fund"
           }
         },
+        "accordion_hLxjWP": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Daina-icon_780bd97b-cd81-44a1-b267-18ec92f0c994.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/Daina-icon_780bd97b-cd81-44a1-b267-18ec92f0c994.jpg",
+            "accordionheadingdream": "Daina",
+            "accordionsubdream": "A Pool Membership",
+            "accordioncopydream": "A pool membership is what Daina’s dreaming of. A way to channel her endless energy and love of movement. She starts every day with coffee dusted in cinnamon, then lets spontaneity lead: zip-lining over rivers, experimenting with red hair, or planning her next adventure.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "accordion_FXrXRM": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Valerija_Simoniene_2.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/Valerija_Simoniene_2.jpg",
+            "accordionheadingdream": "Valerija",
+            "accordionsubdream": "A Sightseeing Trip for Two",
+            "accordioncopydream": "Valerija dreams of a sightseeing trip for two. She’s been knitting since she was six, her needles tracing every stage of her life. For her, knitting is pure joy - an endless source of calm and creativity, and the perfect way to unwind wherever she goes.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
         "f21dad0f-361e-4d96-9b03-e1c88f01ef46": {
           "type": "Accordion",
           "settings": {
-            "dreamaccordionimage": "shopify://shop_images/Knitters-_Size-848x1078_-_2_424x539_5026ff3c-27b6-4893-850a-6875d4d3a926.webp",
-            "dreamaccordionthumb": "shopify://shop_images/27_124x124_3_124x124_dcdbe052-eba8-462e-8fe7-80b6c92dce5a.webp",
-            "accordionheadingdream": "Regina",
-            "accordionsubdream": "A set of new teeth",
-            "accordioncopydream": "Regina’s biggest dream is fixing her teeth: orthodontic visits in Lithuania are super expensive but she hopes she’ll feel less self conscious and more open to dating when she’s happier with them. This is one of our Knitter’s Dreams that we’re hoping to help her fulfill. We’d love to see her beautiful smile more often!",
+            "dreamaccordionimage": "shopify://shop_images/Judita_Stulgiene_2.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/Judita_Stulgiene_2.jpg",
+            "accordionheadingdream": "Judita",
+            "accordionsubdream": "A Massage Chair",
+            "accordioncopydream": "Judita dreams of a massage chair to help her unwind after hours of knitting. She made her first sweater at ten and hasn’t stopped since - even movies are better with needles in hand. For her, knitting isn’t just a skill; it’s second nature.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "accordion_QaGzEj": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Laima-knitter.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/Laima-knitter.jpg",
+            "accordionheadingdream": "Laima",
+            "accordionsubdream": "A Spa Subscription",
+            "accordioncopydream": "Laima’s dream is simple: time to rest. A spa subscription would give her the chance to unwind after a lifetime of creating comfort for others. A lifelong maker - from baking at her own café to crafting intricate knits - she now finds quiet joy in each new project she takes on.",
             "dreamurlcontrol": false,
             "fundurltext": "",
             "fundurl": "",
@@ -135,11 +253,11 @@
         "c3a730dd-3681-4110-bbcb-8a4e5fc97414": {
           "type": "Accordion",
           "settings": {
-            "dreamaccordionimage": "shopify://shop_images/Ingrida-bio_424x539_d988b53d-33b9-41c8-a7d8-8ec7efe10ff8.webp",
-            "dreamaccordionthumb": "shopify://shop_images/Ingrida-icon_124x124_e267492b-9a8a-4ec0-85cc-8b165a586a49.webp",
-            "accordionheadingdream": "Ingrida",
-            "accordionsubdream": "Coffee machine and barista classes",
-            "accordioncopydream": "Ingrida loves a good cup of coffee and usually grabs hers from the local gas station. She'd love to make it at home and save money, so we're planning on gifting her a coffee making course so her lattes can be as good (or better) than anywhere else outside her home. Ingrida has five children, so she definitely needs a caffeine-fuelled energy boost and deserves some time to relax and enjoy her coffee in peace!",
+            "dreamaccordionimage": "shopify://shop_images/13_1.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/13_1.jpg",
+            "accordionheadingdream": "Ona",
+            "accordionsubdream": "A Weekend in a Spa",
+            "accordioncopydream": "Ona dreams of a peaceful weekend at a spa—a little getaway to recharge. She’s been knitting for as long as she can remember, and for her, it’s not just work but a true source of joy and relaxation. Ona feels grateful to be part of The Knotty Ones, where she’s found a community of women just like her.",
             "dreamurlcontrol": false,
             "fundurltext": "",
             "fundurl": "",
@@ -167,15 +285,20 @@
       "block_order": [
         "e19065a3-3ba9-4858-9040-c9afb205bead",
         "2a4d7bcd-8cdb-4391-b328-c8894a6ff5e2",
+        "accordion_bXzqW7",
+        "accordion_dUQTnK",
         "d7146837-c390-4e5a-a571-751df82e82cf",
         "b1d7c562-234d-4ffd-949a-1c3691c8bb7c",
+        "accordion_hLxjWP",
+        "accordion_FXrXRM",
         "f21dad0f-361e-4d96-9b03-e1c88f01ef46",
+        "accordion_QaGzEj",
         "c3a730dd-3681-4110-bbcb-8a4e5fc97414",
         "9141a61a-ddb6-4795-bbce-78fc296efaba"
       ],
       "settings": {
         "accordionlayoutdream": "hide-border",
-        "sectionheading": "All Dreams",
+        "sectionheading": "Knitter's Dreams",
         "padding_sizeup": 0,
         "padding_sizedown": 15,
         "padding_sizeupm": 15,
@@ -188,6 +311,7 @@
     },
     "1647775481c865e478": {
       "type": "static-cta-subscribe",
+      "disabled": true,
       "settings": {
         "borderlayoutsub": "hide-border",
         "subbgcolor": "#b4bed6",
@@ -209,6 +333,8 @@
   "order": [
     "main",
     "16477721349fb7789f",
+    "static_onlytext_E3kXcV",
+    "donation_counter_WXKtPL",
     "164777237130782034",
     "1647775481c865e478"
   ]
