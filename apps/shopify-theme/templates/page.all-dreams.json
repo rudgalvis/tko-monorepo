@@ -218,22 +218,6 @@
             "fundproduct": "for-the-dream-fund"
           }
         },
-        "f21dad0f-361e-4d96-9b03-e1c88f01ef46": {
-          "type": "Accordion",
-          "settings": {
-            "dreamaccordionimage": "shopify://shop_images/Judita_Stulgiene_2.jpg",
-            "dreamaccordionthumb": "shopify://shop_images/Judita_Stulgiene_2.jpg",
-            "accordionheadingdream": "Judita",
-            "accordionsubdream": "A Massage Chair",
-            "accordioncopydream": "Judita dreams of a massage chair to help her unwind after hours of knitting. She made her first sweater at ten and hasn’t stopped since - even movies are better with needles in hand. For her, knitting isn’t just a skill; it’s second nature.",
-            "dreamurlcontrol": false,
-            "fundurltext": "",
-            "fundurl": "",
-            "enablefund": true,
-            "multiplier_fund": 5,
-            "fundproduct": "for-the-dream-fund"
-          }
-        },
         "accordion_QaGzEj": {
           "type": "Accordion",
           "settings": {
@@ -250,6 +234,22 @@
             "fundproduct": "for-the-dream-fund"
           }
         },
+        "accordion_c9BxAq": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/42_d6a9b2ae-9f73-4adb-a54d-4392a328ec81.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/42_d6a9b2ae-9f73-4adb-a54d-4392a328ec81.jpg",
+            "accordionheadingdream": "Rima",
+            "accordionsubdream": "A New Coffee Machine",
+            "accordioncopydream": "At the top of Rima's wishlist? A new coffee machine. She learned to knit from her mom and has been knitting ever since. Her family members are decked out from head to toe in knits, and now, she's thrilled to see her pieces traveling all around the world. Rima's all time favorite piece to knit - Jūra sweater in mohair-silk yarn.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
         "c3a730dd-3681-4110-bbcb-8a4e5fc97414": {
           "type": "Accordion",
           "settings": {
@@ -258,6 +258,38 @@
             "accordionheadingdream": "Ona",
             "accordionsubdream": "A Weekend in a Spa",
             "accordioncopydream": "Ona dreams of a peaceful weekend at a spa—a little getaway to recharge. She’s been knitting for as long as she can remember, and for her, it’s not just work but a true source of joy and relaxation. Ona feels grateful to be part of The Knotty Ones, where she’s found a community of women just like her.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "f21dad0f-361e-4d96-9b03-e1c88f01ef46": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Judita_Stulgiene_2.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/Judita_Stulgiene_2.jpg",
+            "accordionheadingdream": "Judita",
+            "accordionsubdream": "A Massage Chair",
+            "accordioncopydream": "Judita dreams of a massage chair to help her unwind after hours of knitting. She made her first sweater at ten and hasn’t stopped since - even movies are better with needles in hand. For her, knitting isn’t just a skill; it’s second nature.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "accordion_g6aVkM": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Laimute_Arzuolaitiene_2.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/Laimute_Arzuolaitiene_2.jpg",
+            "accordionheadingdream": "Laimutė",
+            "accordionsubdream": "A Spa Retreat",
+            "accordioncopydream": "Laimutė dreams of a peaceful spa retreat. Having joined The Knotty Ones, she has embraced her love for the craft. As she says, every stitch holds a little piece of her heart—she believes it brings extra joy to the person who wears it. Laimutė also loves to get creative, adding a spark of imagination to her knits, making each piece uniquely hers.",
             "dreamurlcontrol": false,
             "fundurltext": "",
             "fundurl": "",
@@ -291,9 +323,11 @@
         "b1d7c562-234d-4ffd-949a-1c3691c8bb7c",
         "accordion_hLxjWP",
         "accordion_FXrXRM",
-        "f21dad0f-361e-4d96-9b03-e1c88f01ef46",
         "accordion_QaGzEj",
+        "accordion_c9BxAq",
         "c3a730dd-3681-4110-bbcb-8a4e5fc97414",
+        "f21dad0f-361e-4d96-9b03-e1c88f01ef46",
+        "accordion_g6aVkM",
         "9141a61a-ddb6-4795-bbce-78fc296efaba"
       ],
       "settings": {
