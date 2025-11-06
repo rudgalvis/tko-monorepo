@@ -1,9 +1,9 @@
 import { displayCurrency, localization, marketCurrency } from '$lib/store/currency.js';
 import type { AvailableMarketsCountryCode } from '$lib/types/AvailableMarketsCountryCode.js';
-import { getCookie } from '$lib/utils/browser/get-cookie.js';
 import { isShopifyOnWindow } from '$lib/utils/predicates/is-shopify-on-window.js';
 import { countryToCurrency } from '$lib/utils/transformers/country-to-currency.js';
 import { get } from 'svelte/store';
+import { getCookie } from '../browser/storage/get-cookie.js';
 
 export const initiateCurrencies = () => {
 	if (!isShopifyOnWindow()) return;
@@ -54,8 +54,8 @@ export const initiateCurrencies = () => {
 
 	// Restore our internal state if external changes detected
 	// Happens when user changes market in checkout, causing mismatch
-	if (storage.localization && cookies.localization.toLowerCase() !== storage.localization.toLowerCase()) {
-		url.searchParams.set('country', storage.localization);
-		window.location.href = url.toString();
-	}
+	 if (storage.localization && cookies.localization.toLowerCase() !== storage.localization.toLowerCase()) {
+	 	url.searchParams.set('country', storage.localization);
+	 	window.location.href = url.toString();
+	 }
 };

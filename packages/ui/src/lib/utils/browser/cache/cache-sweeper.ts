@@ -5,7 +5,8 @@ import { isShopifyOnWindow } from '$lib/utils/predicates/is-shopify-on-window.js
 const SWEEP_DATE = '2025-05-23-v2'
 const SWEEP_DATE_KEY = 'storage_cleared_at'
 
-const sweep = () => {
+// Sweeps all the cookies
+export const sweep = () => {
 	// If we haven't cleared storage yet
 		// Clear localStorage (except our flag)
 		const keysToKeep = [SWEEP_DATE_KEY];
@@ -57,3 +58,4 @@ export const cacheSweeper = () => {
 		flagSweepComplete()
 	}
 };
+

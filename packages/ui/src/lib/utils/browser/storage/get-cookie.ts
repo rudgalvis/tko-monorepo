@@ -20,3 +20,19 @@ export const getCookie = (name: string, defaultValue: string | null = null): str
 		return defaultValue;
 	}
 };
+
+export const cookieExists = (name: string): boolean => {
+	if (!name.trim() || typeof document === 'undefined' || !document.cookie) {
+		return false;
+	}
+
+	try {
+		const value = `; ${document.cookie}`;
+		const parts = value.split(`; ${name}=`);
+		return parts.length === 2;
+	} catch (error) {
+		console.error(`Error checking if cookie "${name}" exists:`, error);
+		return false;
+	}
+};
+

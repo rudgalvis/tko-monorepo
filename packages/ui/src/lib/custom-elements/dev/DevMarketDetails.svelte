@@ -2,7 +2,7 @@
 
 <script lang="ts">
 	import { displayCurrency, marketCurrency, localization } from '$lib/store/currency.js';
-	import { getCookie } from '$lib/utils/browser/get-cookie.js';
+	import { getCookie } from '$lib/utils/browser/storage/get-cookie.js';
 
 	const { show = false } = $props<{ show: boolean }>();
 </script>
