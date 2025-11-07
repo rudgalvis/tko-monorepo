@@ -1,4 +1,4 @@
-import { isBrowser } from "../is-browser.js";
+import { isBrowser } from "../../predicates/is-browser.js";
 
 export const getSession = (name: string, defaultValue: string | null = null): string | null => {
 	if (!name.trim() || !isBrowser()) {

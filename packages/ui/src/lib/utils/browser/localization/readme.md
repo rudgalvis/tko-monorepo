@@ -27,73 +27,37 @@ Multi-layer detection and geolocation system:
 ┌────────────────────────────────────────────────────────────┐
 │                    PAGE LOAD                               │
 └────────────────┬───────────────────────────────────────────┘
-                 │
-                 ▼
-        ┌────────────────────────┐
-        │ Check:                 │
-        │ sessionStorage         │
-        │ .localization_         │
-        │ session_initialized?   │
-        └────────┬───────────────┘
-                 │
-         ┌───────┴───────┐
-         │               │
-        YES              NO
-         │               │
-         ▼               ▼
-    ┌────────┐  ┌──────────────────────┐
-    │EXIT    │  │ Check localStorage:  │
-    │Same    │  │ .visited_before?     │
-    │session │  └────────┬─────────────┘
-    └────────┘           │
-                  ┌──────┴──────┐
-                  │             │
-                 NO             YES
-                  │             │
-                  ▼             ▼
-              ┌────────┐  ┌──────────────────┐
-              │FIRST   │  │ Check:           │
-              │VISIT   │  │ localStorage     │
-              │        │  │ .last_checked    │
-              │ACTION: │  │ (timestamp)      │
-              │• Mark  │  └────────┬─────────┘
-              │  visited          │
-              │• Set session   ┌───┴────────┐
-              │• Keep cookie  <24h        >=24h
-              │• EXIT         │            │
-              └────────┘      ▼            ▼
-                         ┌─────────┐  ┌──────────────────────┐
-                         │KEEP     │  │DETECT LOCATION       │
-                         │cookie   │  │(Geolocation API)     │
-                         │Update   │  └──────────┬───────────┘
-                         │timestamp│             │
-                         └─────────┘             ▼
-                                      ┌──────────────────────┐
-                                      │Compare detected      │
-                                      │country with cookie   │
-                                      └──────────┬───────────┘
-                                                 │
-                                      ┌──────────┴──────────┐
-                                      │                     │
-                                   MATCH                MISMATCH
-                                      │                     │
-                                      ▼                     ▼
-                              ┌──────────────┐  ┌──────────────────┐
-                              │Keep current  │  │REDIRECT to       │
-                              │market        │  │?country=XX       │
-                              └──────────────┘  │(triggers market  │
-                                                │switch via        │
-                                                │initiateCurrencies│
-                                                └──────────────────┘
-                              │
-         ┌────────────────────┴────────────────────┐
-         │                                         │
-         ▼                                         ▼
-    ┌──────────────────────────────────────────────────┐
-    │ • Update timestamp                               │
-    │ • Set sessionStorage.session_initialized = true  │
-    │ • EXIT                                           │
-    └──────────────────────────────────────────────────┘
+
+```mermaid
+flowchart TD
+    Start([PAGE LOAD])
+    Start --> CheckSession{"Check:<br/>sessionStorage<br/>.localization_<br/>session_initialized?"}
+    
+    CheckSession -->|YES| ExitSameSession["EXIT<br/>Same session"]
+    CheckSession -->|NO| CheckVisited{"Check localStorage:<br/>.visited_before?"}
+    
+    CheckVisited -->|NO| FirstVisit["FIRST VISIT<br/><br/>ACTION:<br/>• Mark visited<br/>• Set session<br/>• Keep cookie<br/>• EXIT"]
+    CheckVisited -->|YES| CheckTimestamp{"Check:<br/>localStorage<br/>.last_checked<br/>timestamp"}
+    
+    CheckTimestamp -->|&lt;24h| KeepCookie["KEEP cookie<br/>Update timestamp"]
+    CheckTimestamp -->|≥24h| DetectLocation["DETECT LOCATION<br/>Geolocation API"]
+    
+    KeepCookie --> UpdateAndExit["• Update timestamp<br/>• Set sessionStorage.session_initialized = true<br/>• EXIT"]
+    
+    DetectLocation --> CompareCountry{"Compare detected<br/>country with cookie"}
+    
+    CompareCountry -->|MATCH| KeepMarket["Keep current market"]
+    CompareCountry -->|MISMATCH| ResetCurrencies["RESET CURRENCIES<br/>Clear currency cache<br/>Reset store values"]
+    
+    ResetCurrencies --> Redirect["REDIRECT to ?country=XX<br/>triggers market switch via<br/>initiateCurrencies"]
+    
+    KeepMarket --> UpdateAndExit
+    Redirect --> UpdateAndExit
+    
+    FirstVisit --> End([Complete])
+    ExitSameSession --> End
+    UpdateAndExit --> End
+```
 ```
 
 ### User Scenarios

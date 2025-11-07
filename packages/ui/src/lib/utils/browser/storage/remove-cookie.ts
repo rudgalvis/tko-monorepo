@@ -1,4 +1,4 @@
-import { isBrowser } from "../is-browser.js";
+import { isBrowser } from "../../predicates/is-browser.js";
 import { frontendLogger } from "../../loggers/frontend-logger.js";
 
 export const removeCookie = (name: string) => {

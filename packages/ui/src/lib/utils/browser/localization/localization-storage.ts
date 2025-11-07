@@ -1,4 +1,4 @@
-import { isBrowser } from '../is-browser.js';
+import { isBrowser } from '../../predicates/is-browser.js';
 
 // Storage keys
 export const LOCALIZATION_STORAGE_KEYS = {

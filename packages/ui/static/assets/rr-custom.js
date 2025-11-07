@@ -4838,7 +4838,7 @@ const availableMarkets = [
     displayCurrency.set(countryToCurrency(n)), localization.set(n), marketCurrency.set(countryToCurrency(n)), t.searchParams.delete("country"), window.history.replaceState({}, "", t.toString());
     return;
   }
-  r.localization && e.localization.toLowerCase() !== r.localization.toLowerCase() && (t.searchParams.set("country", r.localization), window.location.href = t.toString());
+  r.localization && (e.localization.toLowerCase(), r.localization.toLowerCase());
 }, isBrowser$1 = () => !(typeof document > "u" || !document.cookie), getSession = (r, e = null) => {
   if (!r.trim() || !isBrowser$1())
     return e;
@@ -4891,9 +4891,11 @@ const availableMarkets = [
   } catch (r) {
     return r instanceof Error && r.name === "AbortError" ? frontendLogger.debug("Geolocation: ipapi.co method timed out") : frontendLogger.debug("Geolocation: ipapi.co method failed", r), null;
   }
-}, getCountryFromIpApiCom = async () => {
+}, getCountryFromIpApiProxied = async () => {
   try {
-    const r = new AbortController(), e = setTimeout(() => r.abort(), 5e3), t = await fetch("https://ip-api.com/json/", {
+    const r = new AbortController(), e = setTimeout(() => r.abort(), 5e3);
+    frontendLogger.debug("http://ip-api.com/json/"), await new Promise((n) => setTimeout(n, 1e3));
+    const t = await fetch("http://ip-api.com/json/", {
       method: "GET",
       signal: r.signal
     });
@@ -4904,11 +4906,31 @@ const availableMarkets = [
   } catch (r) {
     return r instanceof Error && r.name === "AbortError" ? frontendLogger.debug("Geolocation: ip-api.com method timed out") : frontendLogger.debug("Geolocation: ip-api.com method failed", r), null;
   }
+}, getCountryFromIpWho = async () => {
+  try {
+    const r = new AbortController(), e = setTimeout(() => r.abort(), 5e3), t = await fetch("https://ipwho.is/", {
+      method: "GET",
+      headers: {
+        Accept: "application/json"
+      },
+      signal: r.signal
+    });
+    if (clearTimeout(e), !t.ok)
+      throw new Error(`HTTP ${t.status}`);
+    const s = await t.json();
+    return s.success && s.country_code ? (frontendLogger.debug(`Geolocation: Detected from ipwho.is: ${s.country_code}`), s.country_code) : null;
+  } catch (r) {
+    return r instanceof Error && r.name === "AbortError" ? frontendLogger.debug("Geolocation: ipwho.is method timed out") : frontendLogger.debug("Geolocation: ipwho.is method failed", r), null;
+  }
 }, detectUserCountry = async () => {
   frontendLogger.debug("Geolocation: Starting country detection...");
   const r = [
+    getCountryFromIpWho,
+    // 10k req/month (final fallback)
     getCountryFromIpApi,
-    getCountryFromIpApiCom
+    // 1000 req/day
+    getCountryFromIpApiProxied
+    // 45 req/min (~65k/day)
   ];
   for (const e of r)
     try {
@@ -4919,12 +4941,12 @@ const availableMarkets = [
       frontendLogger.debug("Geolocation: Method failed, trying next...", t);
     }
   return frontendLogger.warn("Geolocation: All detection methods failed"), null;
-}, normalizeCountryCode = (r) => r.toUpperCase(), LOCALIZATION_COOKIE_NAME = "localization", JUST_REFRESHED_FLAG = "localization_just_refreshed", initializeSession = () => {
+}, normalizeCountryCode = (r) => r.toUpperCase(), LOCALIZATION_COOKIE_NAME$1 = "localization", JUST_REFRESHED_FLAG = "localization_just_refreshed", initializeSession = () => {
   setSession(LOCALIZATION_STORAGE_KEYS.SESSION_INITIALIZED, !0);
 }, wasJustRefreshed = () => isBrowser$1() ? localStorage.getItem(JUST_REFRESHED_FLAG) === "true" : !1, handlePostRefresh = () => {
   if (isBrowser$1())
     try {
-      localStorage.removeItem(JUST_REFRESHED_FLAG), initializeSession(), updateLastLocalizationCheck(), frontendLogger.debug("Localization: Freshened successfully", getCookie(LOCALIZATION_COOKIE_NAME));
+      localStorage.removeItem(JUST_REFRESHED_FLAG), initializeSession(), updateLastLocalizationCheck(), frontendLogger.debug("Localization: Freshened successfully", getCookie(LOCALIZATION_COOKIE_NAME$1));
     } catch (r) {
       frontendLogger.warn("Localization: Error during post-refresh initialization", r);
     }
@@ -4939,7 +4961,7 @@ const availableMarkets = [
         frontendLogger.warn("Localization: Could not detect user country, skipping refresh"), updateLastLocalizationCheck(), initializeSession();
         return;
       }
-      const e = normalizeCountryCode(r), t = getCookie(LOCALIZATION_COOKIE_NAME);
+      const e = normalizeCountryCode(r), t = getCookie(LOCALIZATION_COOKIE_NAME$1);
       if ((t == null ? void 0 : t.toUpperCase()) === e.toUpperCase()) {
         frontendLogger.debug(`Localization: Already in correct market (${e}), no redirect needed`), updateLastLocalizationCheck(), initializeSession();
         return;
@@ -4956,8 +4978,7 @@ const availableMarkets = [
         frontendLogger.warn("Localization: Error setting refresh flag", s);
       }
       try {
-        const s = new URL(window.location.href);
-        s.searchParams.set("country", e), window.location.href = s.toString();
+        new URL(window.location.href).searchParams.set("country", e);
       } catch (s) {
         frontendLogger.warn("Localization: Error during redirect", s);
       }
@@ -4972,7 +4993,7 @@ const availableMarkets = [
   }
 }, handleReturningVisitorNoRefresh = () => {
   updateLastLocalizationCheck(), initializeSession(), frontendLogger.debug("Localization: Recent check, keeping existing cookie");
-}, localizationFreshener = async () => {
+}, LOCALIZATION_COOKIE_NAME = "localization", geolocationMarketEnforcer = async () => {
   if (isBrowser$1())
     try {
       if (wasJustRefreshed()) {
@@ -4996,7 +5017,7 @@ const availableMarkets = [
       frontendLogger.warn("Localization: Unexpected error in freshener", r);
     }
 }, mainHead = async () => {
-  cacheSweeper(), await localizationFreshener(), initiateCurrencies(), enforceCartCalculationConsistency(), initPreorderListener();
+  cacheSweeper(), await geolocationMarketEnforcer(), initiateCurrencies(), enforceCartCalculationConsistency(), initPreorderListener();
 }, BASE_URL = "http://172.20.10.6:5173/api", API_ROUTES = {
   GET_AUTOMATIC_DISCOUNT: (r, e) => `automatic-discount/${r}/${e}`
 }, getAutomaticDiscount = async (r, e) => {
