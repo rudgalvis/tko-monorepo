@@ -81,48 +81,48 @@
             "type": "Announcement",
             "settings": {
               "selectCountry": "US",
-              "announcement_text2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED.</p>",
-              "announcement_text_mobile2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED.</p>"
+              "announcement_text2": "<p>BLACK FRIDAY: 30% OFF KNITS</p>",
+              "announcement_text_mobile2": "<p>BLACK FRIDAY: 30% OFF KNITS</p>"
             }
           },
           "d02e68ec-d38b-4d9f-a1d0-d4c083477e44": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "EU",
-              "announcement_text2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED.</p>",
-              "announcement_text_mobile2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED.</p>"
+              "announcement_text2": "<p>BLACK FRIDAY: 30% OFF KNITS</p>",
+              "announcement_text_mobile2": "<p>BLACK FRIDAY: 30% OFF KNITS</p>"
             }
           },
           "announcement_ekFeUV": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "UK",
-              "announcement_text2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED.</p>",
-              "announcement_text_mobile2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED.</p>"
+              "announcement_text2": "<p>BLACK FRIDAY: 30% OFF KNITS</p>",
+              "announcement_text_mobile2": "<p>BLACK FRIDAY: 30% OFF KNITS</p>"
             }
           },
           "1dc1e8fe-b2e9-45d2-8404-f6255b708b52": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "ALL",
-              "announcement_text2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED.</p>",
-              "announcement_text_mobile2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED.</p>"
+              "announcement_text2": "<p>BLACK FRIDAY: 30% OFF KNITS</p>",
+              "announcement_text_mobile2": "<p>BLACK FRIDAY: 30% OFF KNITS</p>"
             }
           },
           "7ba786a5-7f72-46aa-b6fa-9f994a534b38": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "AU",
-              "announcement_text2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED.</p>",
-              "announcement_text_mobile2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED.</p>"
+              "announcement_text2": "<p>BLACK FRIDAY: 30% OFF KNITS</p>",
+              "announcement_text_mobile2": "<p>BLACK FRIDAY: 30% OFF KNITS</p>"
             }
           },
           "710025a2-82e7-4b4c-8e1c-b10a04d306e2": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "LT",
-              "announcement_text2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED.</p>",
-              "announcement_text_mobile2": "<p>FREE SHIPPING. DUTIES AND TAXES INCLUDED.</p>"
+              "announcement_text2": "<p>BLACK FRIDAY: 30% OFF KNITS</p>",
+              "announcement_text_mobile2": "<p>BLACK FRIDAY: 30% OFF KNITS</p>"
             }
           }
         },
@@ -143,7 +143,7 @@
           "show_announcement2": true,
           "announcement_home_only2": false,
           "announcement_color2": "#000000",
-          "announcement_background2": "#b4bed6"
+          "announcement_background2": "#b33e42"
         }
       },
       "static-header": {
