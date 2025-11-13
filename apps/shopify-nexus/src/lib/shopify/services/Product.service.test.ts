@@ -2,6 +2,13 @@ import { ProductService } from '$lib/shopify/services/Product.service'
 import { test } from 'vitest'
 import { displayResult, exportVariantsToCSV, exportVariantsToJSON } from './Product.service.test.utils'
 
+test('get final vairant price', async () => {
+    const productService = new ProductService()
+    const r = await productService.getFinalVariantPrice('LT', 42965242642675)
+
+    console.log(r)
+})
+
 test('should fetch all available variants with compareAtPrice', async () => {
 	const productService = new ProductService()
 	const result = await productService.getAllAvailableVariantsWithCompareAtPrice()
@@ -77,3 +84,12 @@ test('[GENERATE TEST DATA] should export small variant dataset to JSON for analy
 	})
 }, {timeout: 30000})
 
+
+test('Getting final price', async () => {
+    const productService = new ProductService()
+    console.time('Getting final price')
+    const price = await productService.getFinalVariantPrice('LT', 46461239755100)
+    console.timeEnd('Getting final price')
+
+    console.log(price)
+}, {timeout: 10000})

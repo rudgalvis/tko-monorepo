@@ -46,6 +46,10 @@ import {
 	type GetVariantContextualPricingVars,
 } from '$lib/shopify/queries/getVariantContextualPricingQuery'
 import {
+	getProductIdFromVariantQuery,
+	type GetProductIdFromVariantResponse,
+} from '$lib/shopify/queries/getProductIdFromVariantQuery'
+import {
 	productByHandleQuery,
 	type ProductByHandleReturn,
 	type ProductByHandleVars,
@@ -232,18 +236,55 @@ export class ProductsRepository extends BaseRepository {
 		};
 	}
 
-	async disableSellOutOfStock({ productId, variantId }: { productId: string; variantId: string }) {
+	async getProductIdFromVariant(variantGid: string): Promise<string> {
+		const { data, errors } = await this.client.request<GetProductIdFromVariantResponse>(
+			getProductIdFromVariantQuery,
+			{ variables: { id: variantGid } }
+		)
+
+		if (errors) {
+			throw new Error(`Failed to get product ID from variant: ${errors}`)
+		}
+
+		if (!data?.node) {
+			throw new Error(`Variant not found: ${variantGid}`)
+		}
+
+		return data.node.product.id
+	}
+
+	async disableSellOutOfStock({ variantGid }: { variantGid: string }) {
+		const productId = await this.getProductIdFromVariant(variantGid)
+		
 		const r = await this.variantsBulkUpdate({
 			productId,
 			variants: [
 				{
-					id: variantId,
+					id: variantGid,
 					inventoryPolicy: ProductVariantInventoryPolicy.DENY,
 				},
 			],
 		})
 
 		if (!r) throw new Error('Failed to stop selling out of stock')
+
+		return true
+	}
+
+	async enableSellOutOfStock({ variantGid }: { variantGid: string }) {
+		const productId = await this.getProductIdFromVariant(variantGid)
+		
+		const r = await this.variantsBulkUpdate({
+			productId,
+			variants: [
+				{
+					id: variantGid,
+					inventoryPolicy: ProductVariantInventoryPolicy.CONTINUE,
+				},
+			],
+		})
+
+		if (!r) throw new Error('Failed to enable selling out of stock')
 
 		return true
 	}

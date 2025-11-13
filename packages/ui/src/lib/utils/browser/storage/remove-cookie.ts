@@ -11,3 +11,5 @@ export const removeCookie = (name: string) => {
     frontendLogger.debug('Removed cookie:', name);
 };
 
+
+

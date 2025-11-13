@@ -36,3 +36,5 @@ export const cookieExists = (name: string): boolean => {
 	}
 };
 
+
+
