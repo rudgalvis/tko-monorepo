@@ -11,8 +11,7 @@
   "sections": {
     "main": {
       "type": "main-sustainability",
-      "settings": {
-      }
+      "settings": {}
     },
     "164052221295780e20": {
       "type": "static-onlytext",
@@ -172,8 +171,7 @@
         "bacde3d1-414e-491c-b80f-a25b5f3abb0c",
         "3c2a8bc7-9470-4ba9-a9c2-0d0de2f16914"
       ],
-      "settings": {
-      }
+      "settings": {}
     },
     "164052310178b452d0": {
       "type": "static-CTA-small-text",
@@ -292,8 +290,8 @@
           "type": "Slider",
           "settings": {
             "eoyimage": "shopify://shop_images/2-Yarns-Alpaca-Wool-widget_514x643_a79f4ae0-5fea-43f6-9bdd-85ba8395198b.jpg",
-            "eoyslidertitle": "Alpaca Wool",
-            "eoyslidercopy": "Alpaca fleece is soft, durable and silky. For Žemiau and Ethno we use undyed alpaca wool, which naturally comes in more than 300 shades. Alpaca wool is one of the warmest animal fibers and it's also highly water-resistant. Our Jūra and Laimė supplier is another socially responsible company with a Peru Fair Trade Certification. That means it's also involved in social and cultural projects that support local schools and artists in the Peruvian Highlands.",
+            "eoyslidertitle": "Silk - mohair yarns",
+            "eoyslidercopy": "Our silk–mohair yarns combine two of nature’s most beautiful fibers - the airy softness of mohair\nand the subtle shine of silk. We partner with trusted European mills that value transparency,\nresponsible animal care, and low-impact production. Always and uncompromisingly, the mohair we\nsource is certified under the Responsible Mohair Standard (RMS), which ensures ethical animal\ntreatment and responsible land management. The silk is selected from suppliers focused on\ntraceability and environmentally conscious processing. The result is a light, lustrous, and resilient\nyarn - crafted with care for people, animals, and the planet.",
             "eoyslidersmall": "<p>USED FOR: <a href=\"/products/ethno-sweater-brown\" title=\"Ethno Sweater\">ETHNO SWEATER</a>, <a href=\"/products/zemiau-cardigan-off-white-baltic-fields\" title=\"Žemiau Cardigan\">ŽEMIAU CARDIGAN</a>, <a href=\"/products/jura-sweater-naked\" title=\"Jūra Sweater\">JŪRA SWEATER</a>, <a href=\"/products/laime-vest-naked-oat-milk\" title=\"Laimė Vest\">LAIMĖ VEST</a></p>",
             "eoysmalltext": true,
             "eoylogo": "shopify://shop_images/logos_3_x100_bf80b4df-eea5-4db2-9ac2-f5a445aa2789.webp",
@@ -305,8 +303,8 @@
           "type": "Slider",
           "settings": {
             "eoyimage": "shopify://shop_images/1-Yarns-Merino-Wool-widget_514x643_101cb2b0-0805-41df-9c62-bf6304863a52.webp",
-            "eoyslidertitle": "Merino Wool",
-            "eoyslidercopy": "We know it as Merino wool but you might know it as “cashwool”, thanks to its cashmere-like qualities. We source our Merino wool from Italy, where it’s spun and dyed in-house. The process is carried out locally to ensure absolute control of ethical and sustainable production. Our Italian suppliers are Responsible Wool Standard (RWS) certified, which is an internationally valid license that ensures best practices and respect towards animals, land management and social welfare.",
+            "eoyslidertitle": "Wool yarns",
+            "eoyslidercopy": "We like our wool the way we like our knits - honest, durable, and made with care. We source our\nwool yarns from European mills that share our commitment to animal welfare, craftsmanship, and\nenvironmental responsibility. Our suppliers provide fully traceable, responsibly produced wool—free\nfrom harmful chemicals and made under fair working conditions. We non-negotiably choose\nmulesing-free fibers and yarns certified to trusted standards like the Responsible Wool Standard\n(RWS) or OEKO-TEX Standard 100, ensuring the highest level of animal care, sustainable land\nmanagement, and safe processing practices. By partnering with mills that invest in cleaner energy\nand water-saving technologies, we ensure every strand of wool reflects our belief that comfort and\nconscience should always go hand in hand.",
             "eoyslidersmall": "<p>USED FOR: <a href=\"https://the-knotty-ones-development.myshopify.com/collections/laumes\" target=\"_blank\" title=\"https://the-knotty-ones-development.myshopify.com/collections/laumes\">LAUMĖS SWEATER</a>, <a href=\"/products/preila-merino-wool-cardigan\" target=\"_blank\" title=\"Preila\">PREILA CARDIGAN</a>, <a href=\"/products/milda-merino-wool-sweater\" title=\"Milda\">MILDA TURTLENECK</a></p>",
             "eoysmalltext": true,
             "eoylogo": "shopify://shop_images/responsible-wool-standard-rws-logo-vector_x100_2f93a198-8c0c-4db8-9a0b-49fe4f15581c.webp",
@@ -318,8 +316,8 @@
           "type": "Slider",
           "settings": {
             "eoyimage": "shopify://shop_images/3-Yarns-Wool-widget_514x643_33b63158-f952-463d-99a8-a91c77aef2e9.webp",
-            "eoyslidertitle": "Wool",
-            "eoyslidercopy": "Wool's the OG when it comes to fibers and was one of the first to be woven into fabric. It's the most reusable and recyclable on the planet and is easy to care for, which is why we use it for a large number of our knits. The wool we use comes from sustainable suppliers, who invest into reducing their ecological footprint and encourage conversations and actions in-house about environmental concerns. We use 100% natural, museling free yarn with a GOTS Certificate.",
+            "eoyslidertitle": "Cotton yarns",
+            "eoyslidercopy": "We choose our cotton yarns for their softness, durability, and responsible production. Sourced from\nEuropean mills that prioritize transparency, safe working conditions, and reduced environmental\nimpact, our cotton is grown and processed to the highest quality standards. The majority of our yarns\nare GOTS certified, and we non-negotiably select OEKO-TEX Standard 100 fibers, ensuring they\nare free from harmful chemicals. We partner with suppliers who invest in cleaner dyeing and water-\nmanagement technologies, reducing energy and water use across the supply chain. The result is\nbreathable, long-lasting cotton that feels as good to wear as it is to produce—supporting a more\nmindful approach to everyday essentials.",
             "eoyslidersmall": "<p>USED FOR: <a href=\"/products/barbora-wool-turtleneck\" title=\"Barbora\">BARBORA SWEATER</a>, <a href=\"/products/jurgis-wool-cardigan\" title=\"Jurgis\">JURGIS CARDIGAN</a>, <a href=\"https://the-knotty-ones-development.myshopify.com/collections/heartbreaker\" target=\"_blank\" title=\"https://the-knotty-ones-development.myshopify.com/collections/heartbreaker\">HEARTBREAKER SWEATER</a>, <a href=\"/products/tommy-wool-cardigan\" title=\"Tommy\">TOMMY CARDIGAN</a>, <a href=\"/products/twisted-erik-wool-cardigan\" title=\"Twisted Erik\">TWISTED ERIK CARDIGAN</a>, <a href=\"/products/slabada-wool-sweater\" title=\"Slabada\">SLABADA SWEATER</a>, <a href=\"/products/leggy-wool-sweater-dress\" title=\"Leggy\">LEGGY DRESS</a></p>",
             "eoysmalltext": true,
             "eoylogo": "shopify://shop_images/logos_3_x100_12a26c46-19b3-4bd0-9743-f33789c1f877.webp",
@@ -331,8 +329,8 @@
           "type": "Slider",
           "settings": {
             "eoyimage": "shopify://shop_images/4-Yarns-Cotton-widget_514x643_e55115ca-4149-4e13-855b-fefe734cbd3b.webp",
-            "eoyslidertitle": "Cotton",
-            "eoyslidercopy": "All the cotton we use is OEKO-TEX® certified, which guarantees it's free of substances harmful to human health and that it's safe from an ecological point of view. Our cotton supplier for Delčia, Pilnatis, Pieva, Juostų and Aistis emphasizes the entire lifecycle of the product, sourcing ethical materials from field to fleece and also factoring in their afterlife of the fabric. Their goal is to reduce the overall impact on the environment by reducing our chemical and water expenditures.",
+            "eoyslidertitle": "Cashemere mix yarns",
+            "eoyslidercopy": "Our cashmere-blend yarns bring warmth and softness to timeless knitwear, crafted in partnership\nwith European mills known for their traceability and responsible production practices. We work only\nwith suppliers who prioritise animal welfare, transparency, and reduced environmental impact\nthroughout the supply chain. Many of the fibers we use come from certified or mulesing-free sources\nand are processed in facilities that meet recognised standards such as the Responsible Wool Standard\n(RWS), the Sustainable Fibre Alliance (SFA), or OEKO-TEX Standard 100. Our partners also invest\nin energy-efficient spinning, water recycling, and cleaner dyeing methods to minimise environmental\nimpact. The result is a luxuriously soft, long-lasting yarn that embodies quality, care, and conscious\ncraftsmanship.",
             "eoyslidersmall": "<p>USED FOR: <a href=\"/products/nida-cotton-sweater\" title=\"Nida\">NIDA SWEATER</a>, <a href=\"/products/marina-cotton-cardigan\" title=\"Marina\">MARINA CARDIGAN</a>, <a href=\"/collections/delcia\" title=\"Delčia\">DELČIA SWEATER</a>, <a href=\"/products/pilnatis-cotton-shorts\" title=\"Pilnatis\">PILNATIS SHORTS</a>, <a href=\"/products/pieva-cotton-shorts\" title=\"Pieva\">PIEVA SHORTS</a>, <a href=\"/products/pieva-cotton-bralette\" title=\"Pieva\">PIEVA BRALETTE</a>, <a href=\"/products/juostu-cotton-crop-top\" title=\"Juostų\">JUOSTŲ CROP TOP</a>, <a href=\"/products/aistis-cotton-t-shirt\" title=\"Aistis\">AISTIS T-SHIRT</a></p>",
             "eoysmalltext": true,
             "eoylogo": "shopify://shop_images/logos_4_x100_72622a5c-7af4-4110-87a9-f849b0b5fe75.webp",
