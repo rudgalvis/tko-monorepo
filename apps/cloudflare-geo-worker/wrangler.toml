@@ -1,0 +1,10 @@
+name = "geo-location"
+main = "src/index.ts"
+compatibility_date = "2024-11-13"
+
+# Workers Logs
+[observability]
+enabled = true
+
+
+

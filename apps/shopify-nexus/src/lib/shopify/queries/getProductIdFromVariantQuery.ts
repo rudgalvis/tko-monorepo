@@ -17,3 +17,5 @@ export type GetProductIdFromVariantResponse = {
 	} | null
 }
 
+
+
