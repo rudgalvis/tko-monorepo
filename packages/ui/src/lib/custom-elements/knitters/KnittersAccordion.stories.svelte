@@ -63,9 +63,11 @@
 </script>
 
 <Story name="Default">
-	<knitter-accordion>
-		{#each knitters as knitter}
-			<knitter-accordion-item {...knitter}> </knitter-accordion-item>
-		{/each}
-	</knitter-accordion>
+
 </Story>
+
+<knitter-accordion>
+  {#each knitters as knitter}
+    <knitter-accordion-item {...knitter}> </knitter-accordion-item>
+  {/each}
+</knitter-accordion>
