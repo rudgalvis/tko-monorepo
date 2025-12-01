@@ -49,6 +49,7 @@ export function extractClientIP(event: RequestEvent): string | null {
 	// This is the most reliable header when behind Cloudflare proxy
 	const cfConnectingIP = event.request.headers.get('CF-Connecting-IP');
 	if (cfConnectingIP) {
+		console.log('[Geolocation] Extracted IP from CF-Connecting-IP:', cfConnectingIP);
 		return cfConnectingIP;
 	}
 
@@ -59,6 +60,7 @@ export function extractClientIP(event: RequestEvent): string | null {
 		// X-Forwarded-For can contain multiple IPs, take the first one (original client)
 		const firstIP = xForwardedFor.split(',')[0]?.trim();
 		if (firstIP) {
+			console.log('[Geolocation] Extracted IP from X-Forwarded-For:', firstIP, '(full header:', xForwardedFor + ')');
 			return firstIP;
 		}
 	}
@@ -66,6 +68,7 @@ export function extractClientIP(event: RequestEvent): string | null {
 	// Priority 3: X-Real-IP header (fallback)
 	const xRealIP = event.request.headers.get('X-Real-IP');
 	if (xRealIP) {
+		console.log('[Geolocation] Extracted IP from X-Real-IP:', xRealIP);
 		return xRealIP;
 	}
 
@@ -74,13 +77,21 @@ export function extractClientIP(event: RequestEvent): string | null {
 	try {
 		const clientAddress = event.getClientAddress();
 		if (clientAddress && !isLocalhostIP(clientAddress)) {
+			console.log('[Geolocation] Extracted IP from getClientAddress():', clientAddress);
 			return clientAddress;
+		} else if (clientAddress) {
+			console.log('[Geolocation] getClientAddress() returned localhost IP, skipping:', clientAddress);
 		}
 	} catch (error) {
 		// getClientAddress() may not be available in all environments
-		console.debug('getClientAddress() not available:', error);
+		console.debug('[Geolocation] getClientAddress() not available:', error);
 	}
 
+	console.warn('[Geolocation] Could not extract client IP. Available headers:', {
+		'CF-Connecting-IP': event.request.headers.get('CF-Connecting-IP'),
+		'X-Forwarded-For': event.request.headers.get('X-Forwarded-For'),
+		'X-Real-IP': event.request.headers.get('X-Real-IP'),
+	});
 	return null;
 }
 
@@ -138,9 +149,26 @@ export async function getUserCountryFromRequest(event: RequestEvent): Promise<st
 		const url = new URL(GEO_WORKER_URL);
 		url.searchParams.set('ip', clientIP);
 		
+		// Debug logging to diagnose 500 errors
+		console.log('[Geolocation] Proxying request with IP:', clientIP);
+		console.log('[Geolocation] Full URL:', url.toString());
+		
 		const response = await fetch(url.toString());
 		if (!response.ok) {
-			console.error(`Cloudflare Worker returned ${response.status}`);
+			// Get error details from response body
+			let errorDetails = '';
+			try {
+				const errorData = await response.json();
+				errorDetails = JSON.stringify(errorData);
+			} catch {
+				try {
+					errorDetails = await response.text();
+				} catch {
+					errorDetails = 'Could not read error response';
+				}
+			}
+			console.error(`[Geolocation] Cloudflare Worker returned ${response.status}:`, errorDetails);
+			console.error(`[Geolocation] Requested IP was: ${clientIP}`);
 			return null;
 		}
 		
@@ -185,9 +213,26 @@ export async function getGeoDataFromRequest(event: RequestEvent): Promise<GeoDat
 		const url = new URL(GEO_WORKER_URL);
 		url.searchParams.set('ip', clientIP);
 		
+		// Debug logging to diagnose 500 errors
+		console.log('[Geolocation] Proxying request with IP:', clientIP);
+		console.log('[Geolocation] Full URL:', url.toString());
+		
 		const response = await fetch(url.toString());
 		if (!response.ok) {
-			console.error(`Cloudflare Worker returned ${response.status}`);
+			// Get error details from response body
+			let errorDetails = '';
+			try {
+				const errorData = await response.json();
+				errorDetails = JSON.stringify(errorData);
+			} catch {
+				try {
+					errorDetails = await response.text();
+				} catch {
+					errorDetails = 'Could not read error response';
+				}
+			}
+			console.error(`[Geolocation] Cloudflare Worker returned ${response.status}:`, errorDetails);
+			console.error(`[Geolocation] Requested IP was: ${clientIP}`);
 			return null;
 		}
 		
