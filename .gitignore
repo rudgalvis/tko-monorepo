@@ -25,3 +25,5 @@ vite.config.ts.timestamp-*
 /.run/
 /.pnpm-store/
 /apps/shopify-nexus/logs/
+
+.turbo
