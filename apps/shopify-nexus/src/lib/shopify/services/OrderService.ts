@@ -1,4 +1,4 @@
-import type { NotificationProcessStatus } from '$lib/mailing/MailingService'
+import type { NotificationProcessStatus } from '$lib/modules/mailing/MailingService'
 import { OrderRepository } from '$lib/shopify/repositories/OrderRepository'
 import type { OrderLineInventory } from '$lib/types/OrderLineInventory'
 import type { ProductVariantIdentifier } from '$lib/utils/transformers/order/parse-order-webhook'

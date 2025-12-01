@@ -1,4 +1,4 @@
-import type { MailingService } from '$lib/mailing/MailingService'
+import type { MailingService } from '$lib/modules/mailing/MailingService'
 import type { OrderLineInventoryAnalyzed } from '$lib/types/OrderLineInventoryAnalyzed'
 import type { NotificationGroupRequirement } from '../transformers/order/resolve-notification-groups'
 

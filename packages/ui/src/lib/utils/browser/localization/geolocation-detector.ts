@@ -2,9 +2,10 @@
  * Geolocation Detector
  * 
  * Detects user's country based on their IP address using multiple fallback methods:
- * 1. ipapi.co (1000 requests/day)
- * 2. ipwho.is (10k requests/month, final fallback)
- * 3. ip-api.com (45 req/min, ~65k/day) // Needs to be passed through our backend
+ * 1. Shopify Nexus API (server-side IP detection via Cloudflare Worker)
+ * 2. ipapi.co (1000 requests/day)
+ * 3. ipwho.is (10k requests/month, final fallback)
+ * 4. ip-api.com (45 req/min, ~65k/day) // Needs to be passed through our backend
  *
  * Our capacity (limited only): 66,133/day, 1,984,000/month
  * 
@@ -13,6 +14,7 @@
  */
 
 import { frontendLogger } from "../../loggers/frontend-logger.js";
+import { getGeolocation, logGeolocationAttempt, logGeolocationFailure } from "../../../api/rrxtko.api.js";
 
 /**
  * Method 1: Use ipapi.co free API
@@ -138,6 +140,45 @@ const getCountryFromIpWho = async (): Promise<string | null> => {
 	}
 };
 
+
+/**
+ * Method 0: Use Shopify Nexus API (server-side IP detection)
+ * Uses Cloudflare Worker to detect client IP from server request
+ * This is the preferred method as it uses the server's IP detection capabilities
+ */
+const getCountryFromNexus = async (): Promise<string | null> => {
+	const methodName = 'nexus';
+	try {
+		const controller = new AbortController();
+		const timeout = setTimeout(() => controller.abort(), 5000);
+
+		const country = await getGeolocation(controller.signal);
+
+		clearTimeout(timeout);
+
+		if (country) {
+			frontendLogger.debug(`Geolocation: Detected from Nexus API: ${country}`);
+			// Log successful detection
+			await logGeolocationAttempt(methodName, true, country);
+			return country;
+		}
+
+		// Log failed detection (no country returned)
+		await logGeolocationAttempt(methodName, false, null, 'No country returned');
+		return null;
+	} catch (error) {
+		const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+		if (error instanceof Error && error.name === 'AbortError') {
+			frontendLogger.debug('Geolocation: Nexus API method timed out');
+			await logGeolocationAttempt(methodName, false, null, 'Request timeout');
+		} else {
+			frontendLogger.debug('Geolocation: Nexus API method failed', error);
+			await logGeolocationAttempt(methodName, false, null, errorMessage);
+		}
+		return null;
+	}
+};
+
 /**
  * Main function to detect user's country
  * Tries multiple methods in sequence until one succeeds
@@ -149,9 +190,10 @@ export const detectUserCountry = async (): Promise<string | null> => {
 
 	// Try methods in sequence - ordered by reliability and capacity
 	const methods = [
-		getCountryFromIpWho,         // 10k req/month (final fallback)
+		getCountryFromNexus,           // Unlimited, our own w/ claudflare
+		getCountryFromIpWho,           // 10k req/month (final fallback)
         getCountryFromIpApi,           // 1000 req/day
-		getCountryFromIpApiProxied,        // 45 req/min (~65k/day)
+		getCountryFromIpApiProxied,    // 45 req/min (~65k/day)
 	];
 
 	for (const method of methods) {
@@ -166,9 +208,15 @@ export const detectUserCountry = async (): Promise<string | null> => {
 		}
 	}
 
+	// Log overall failure (all methods failed)
 	frontendLogger.warn('Geolocation: All detection methods failed');
+	await logGeolocationFailure();
+
 	return null;
 };
+
+// Expose for development
+window['detectUserCountry'] = detectUserCountry
 
 /**
  * Normalize country code to uppercase

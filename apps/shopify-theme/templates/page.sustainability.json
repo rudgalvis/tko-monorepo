@@ -59,7 +59,7 @@
           "settings": {
             "videocollage": false,
             "collagevideo": "",
-            "caollageimage": "shopify://shop_images/2-Sustainability-Collage_600x_2b9d34e4-f4df-4b82-9063-9d9bb4b3ed33.webp",
+            "caollageimage": "shopify://shop_images/TKO_poducts_studio_20250248.jpg",
             "caollagecolor": "",
             "collagetext": "",
             "caollagecolortext": ""
@@ -91,7 +91,7 @@
           "settings": {
             "videocollage": false,
             "collagevideo": "https://cdn.shopify.com/s/files/1/0548/6644/4336/files/249044417_2889339151332064_2622184667073844729_n.mp4?v=1640610700",
-            "caollageimage": "shopify://shop_images/5-Sustainability-Collage_600x_25b3cb7d-9e3b-4aa9-a108-d0d6ef65da0c.webp",
+            "caollageimage": "shopify://shop_images/laumes-beige-merino-wool-sweater-8017494.jpg",
             "caollagecolor": "",
             "collagetext": "",
             "caollagecolortext": ""
@@ -102,7 +102,7 @@
           "settings": {
             "videocollage": false,
             "collagevideo": "",
-            "caollageimage": "shopify://shop_images/6-Sustainability-Collage_600x_122df373-f0ed-4eed-bc90-3295701c2a5b.webp",
+            "caollageimage": "shopify://shop_images/tom-taupe-cardigan-hot-pants-set-6580884.jpg",
             "caollagecolor": "",
             "collagetext": "",
             "caollagecolortext": ""
@@ -218,7 +218,7 @@
         "bodycl": "We're seriously proud of the knitters team we've gathered. Some work full time, others knit when they have time after taking care of their families. Currently, we have around 70 hand-knitters who work from home in rural Lithuania and two vetted, audited, family-run, female-founded partner production factories.",
         "pmaxwidthdesktop": 530,
         "pmaxwidthmobile": 253,
-        "cl-image": "shopify://shop_images/Untitled_design_2_0c6319c4-4c5d-4eb0-9b75-b0467d0f4505.png",
+        "cl-image": "shopify://shop_images/Untitled_design_6_c2b1da29-f32c-427d-bb3c-eeea1210054c.png",
         "padding_sizeupm_section": 30,
         "padding_sizedownm_section": 24,
         "padding_sizeup": 19,
@@ -358,7 +358,7 @@
         "b8ebcd1a-f066-450d-b3c7-108496518d11"
       ],
       "custom_css": [
-        ".sliders-container {background-color: #EEEEEA}"
+        ".sliders-container {background-color: #eeeeea;}"
       ],
       "settings": {
         "eoylayoutpage": "only-bottom",

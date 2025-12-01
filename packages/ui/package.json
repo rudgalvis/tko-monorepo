@@ -1,10 +1,11 @@
 {
-  "name": "ui",
+  "name": "@repo/ui",
   "version": "0.0.1",
   "scripts": {
+    "dev": "npm run dev:for-theme",
     "dev:storybook": "storybook dev -p 6006 --ci",
     "dev:regular": "vite dev --config vite.config.js",
-    "dev:for-theme": "vite build --config vite.config.build.js --mode production --watch",
+    "dev:for-theme": "vite build --config vite.config.build.js --mode development --watch",
     "build": "vite build && npm run prepack",
     "build-for-theme": "vite build --config vite.config.build.js --mode production",
     "build-storybook": "storybook build",

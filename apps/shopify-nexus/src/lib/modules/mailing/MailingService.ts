@@ -4,10 +4,10 @@ import {
     MAILGUN_DOMAIN,
     MAILGUN_FROM_USER,
 } from '$env/static/private'
-import { Mailgun, type SendMailStatus } from '$lib/mailing/Mailgun'
-import CustomizedOrderEmailTemplate from '$lib/mailing/templates/CustomizedOrderEmailTemplate.svelte'
-import HandmadeOrderEmailTemplate from '$lib/mailing/templates/HandmadeOrderEmailTemplate.svelte'
-import PreOrderEmailTemplate from '$lib/mailing/templates/PreOrderEmailTemplate.svelte'
+import { Mailgun, type SendMailStatus } from '$lib/modules/mailing/Mailgun'
+import CustomizedOrderEmailTemplate from '$lib/modules/mailing/templates/CustomizedOrderEmailTemplate.svelte'
+import HandmadeOrderEmailTemplate from '$lib/modules/mailing/templates/HandmadeOrderEmailTemplate.svelte'
+import PreOrderEmailTemplate from '$lib/modules/mailing/templates/PreOrderEmailTemplate.svelte'
 import type { OrderLineInventoryAnalyzed } from '$lib/types/OrderLineInventoryAnalyzed'
 import {
     NotificationType,

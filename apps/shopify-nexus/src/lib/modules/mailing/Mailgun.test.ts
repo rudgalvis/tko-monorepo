@@ -1,5 +1,5 @@
 import { MAIL_FROM_NAME, MAILGUN_DOMAIN, MAILGUN_FROM_USER } from '$env/static/private'
-import { Mailgun } from '$lib/mailing/Mailgun'
+import { Mailgun } from '$lib/modules/mailing/Mailgun'
 import { test } from 'vitest'
 
 test('Mailgun service', async () => {

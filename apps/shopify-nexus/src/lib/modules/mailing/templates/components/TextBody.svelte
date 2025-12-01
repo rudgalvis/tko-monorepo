@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { bodyFontFamily } from "$lib/mailing/templates/components/body-font-family.svelte";
+	import { bodyFontFamily } from "$lib/modules/mailing/templates/components/body-font-family.svelte.js";
 
 	let { children } = $props()
 </script>
@@ -7,7 +7,7 @@
 <p
 	style="
 	margin: 0;
-	font-size: 14px;
+	font-size:16px;
 	line-height: 150%;
 	font-family: {bodyFontFamily}"
 >

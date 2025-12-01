@@ -1,0 +1,19 @@
+{
+  "name": "geo-location",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker for IP-based geolocation detection",
+  "main": "src/index.ts",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "tail": "wrangler tail",
+    "test": "wrangler dev --test-scheduled"
+  },
+  "author": "Rokas Rudgalvis",
+  "license": "ISC",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241127.0",
+    "typescript": "^5.7.2",
+    "wrangler": "^3.94.0"
+  }
+}

@@ -2,6 +2,7 @@ import type { Handle } from '@sveltejs/kit';
 
 // Whitelist of allowed origins
 const ALLOWED_ORIGINS = [
+	'http://127.0.0.1:9292',
 	'http://localhost:6006',
 	'http://localhost:3000',
 	'http://localhost:5173',
