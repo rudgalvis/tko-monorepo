@@ -1,13 +1,9 @@
 import winston from 'winston';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
-// Get the directory name in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Path to logs directory (relative to this file)
-const logsDir = path.resolve(__dirname, '../../../../logs');
+// Path to logs directory (relative to process working directory)
+// This works in both dev and production builds
+const logsDir = path.resolve(process.cwd(), 'logs');
 
 // Define log format
 const logFormat = winston.format.combine(

@@ -4667,12 +4667,12 @@ product-price .skeleton {
       r();
     }, 100);
   });
-}, PUBLIC_NEXUS_BASE_URL = "http://localhost:5173";
+}, PUBLIC_NEXUS_BASE_URL = "https://shopify-nexus.tko.rudgalvis.com";
 class NexusApi {
   constructor() {
     L(this, "BASE_URL", PUBLIC_NEXUS_BASE_URL);
     L(this, "API_VERSION_PATH", "api");
-    L(this, "NGROK_SKIP_HEADER", { "ngrok-skip-browser-warning": "true" });
+    L(this, "NGROK_SKIP_HEADER", {});
     L(this, "API_ROUTES", {
       GET_VARIANT_AUTOMATIC_DISCOUNT: (e, t) => `automatic-discount/${e}/${t}`,
       GET_PRODUCT_AUTOMATIC_DISCOUNT: (e, t) => `automatic-discount/product/${e}/${t}`,
