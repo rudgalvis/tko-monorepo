@@ -4,44 +4,81 @@ import type { GeoData } from './types.js';
 const GEO_WORKER_URL = 'https://geo-location.rokas-239.workers.dev';
 
 /**
+ * Check if IP is a localhost/local network address
+ */
+function isLocalhostIP(ip: string): boolean {
+	return (
+		ip === '::1' ||
+		ip === '127.0.0.1' ||
+		ip === 'localhost' ||
+		ip.startsWith('192.168.') ||
+		ip.startsWith('10.') ||
+		ip.startsWith('172.16.') ||
+		ip.startsWith('172.17.') ||
+		ip.startsWith('172.18.') ||
+		ip.startsWith('172.19.') ||
+		ip.startsWith('172.20.') ||
+		ip.startsWith('172.21.') ||
+		ip.startsWith('172.22.') ||
+		ip.startsWith('172.23.') ||
+		ip.startsWith('172.24.') ||
+		ip.startsWith('172.25.') ||
+		ip.startsWith('172.26.') ||
+		ip.startsWith('172.27.') ||
+		ip.startsWith('172.28.') ||
+		ip.startsWith('172.29.') ||
+		ip.startsWith('172.30.') ||
+		ip.startsWith('172.31.') ||
+		ip.startsWith('fe80:') || // IPv6 link-local
+		ip === '::'
+	);
+}
+
+/**
  * Extract client IP address from SvelteKit RequestEvent
- * Priority: getClientAddress() > CF-Connecting-IP > X-Forwarded-For > X-Real-IP
+ * Priority: CF-Connecting-IP > X-Forwarded-For > X-Real-IP > getClientAddress()
+ * 
+ * In production behind proxies/load balancers, headers contain the real client IP,
+ * while getClientAddress() returns the proxy's internal IP.
  * 
  * @param event - SvelteKit RequestEvent
  * @returns Client IP address or null
  */
 export function extractClientIP(event: RequestEvent): string | null {
-	// Priority 1: SvelteKit's built-in getClientAddress()
-	try {
-		const clientAddress = event.getClientAddress();
-		if (clientAddress) {
-			return clientAddress;
-		}
-	} catch (error) {
-		// getClientAddress() may not be available in all environments
-		console.debug('getClientAddress() not available:', error);
-	}
-
-	// Priority 2: CF-Connecting-IP header (if behind Cloudflare)
+	// Priority 1: CF-Connecting-IP header (if behind Cloudflare)
+	// This is the most reliable header when behind Cloudflare proxy
 	const cfConnectingIP = event.request.headers.get('CF-Connecting-IP');
 	if (cfConnectingIP) {
 		return cfConnectingIP;
 	}
 
-	// Priority 3: X-Forwarded-For header (first IP in chain)
+	// Priority 2: X-Forwarded-For header (first IP in chain)
+	// This header is set by most proxies/load balancers
 	const xForwardedFor = event.request.headers.get('X-Forwarded-For');
 	if (xForwardedFor) {
-		// X-Forwarded-For can contain multiple IPs, take the first one
+		// X-Forwarded-For can contain multiple IPs, take the first one (original client)
 		const firstIP = xForwardedFor.split(',')[0]?.trim();
 		if (firstIP) {
 			return firstIP;
 		}
 	}
 
-	// Priority 4: X-Real-IP header (fallback)
+	// Priority 3: X-Real-IP header (fallback)
 	const xRealIP = event.request.headers.get('X-Real-IP');
 	if (xRealIP) {
 		return xRealIP;
+	}
+
+	// Priority 4: SvelteKit's built-in getClientAddress() (last resort)
+	// Only use this if headers are not available, and skip if it's a localhost IP
+	try {
+		const clientAddress = event.getClientAddress();
+		if (clientAddress && !isLocalhostIP(clientAddress)) {
+			return clientAddress;
+		}
+	} catch (error) {
+		// getClientAddress() may not be available in all environments
+		console.debug('getClientAddress() not available:', error);
 	}
 
 	return null;
@@ -75,37 +112,6 @@ export async function getUserCountry(): Promise<string | null> {
  * @param event - SvelteKit RequestEvent containing client request
  * @returns ISO country code (e.g., 'US', 'LT', 'GB') or null
  */
-/**
- * Check if IP is a localhost/local network address
- */
-function isLocalhostIP(ip: string): boolean {
-	return (
-		ip === '::1' ||
-		ip === '127.0.0.1' ||
-		ip === 'localhost' ||
-		ip.startsWith('192.168.') ||
-		ip.startsWith('10.') ||
-		ip.startsWith('172.16.') ||
-		ip.startsWith('172.17.') ||
-		ip.startsWith('172.18.') ||
-		ip.startsWith('172.19.') ||
-		ip.startsWith('172.20.') ||
-		ip.startsWith('172.21.') ||
-		ip.startsWith('172.22.') ||
-		ip.startsWith('172.23.') ||
-		ip.startsWith('172.24.') ||
-		ip.startsWith('172.25.') ||
-		ip.startsWith('172.26.') ||
-		ip.startsWith('172.27.') ||
-		ip.startsWith('172.28.') ||
-		ip.startsWith('172.29.') ||
-		ip.startsWith('172.30.') ||
-		ip.startsWith('172.31.') ||
-		ip.startsWith('fe80:') || // IPv6 link-local
-		ip === '::'
-	);
-}
-
 export async function getUserCountryFromRequest(event: RequestEvent): Promise<string | null> {
 	try {
 		const clientIP = extractClientIP(event);
