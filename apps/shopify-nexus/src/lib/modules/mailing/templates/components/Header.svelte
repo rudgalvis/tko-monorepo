@@ -1,5 +1,5 @@
 <script>
-import TextCaption from "$lib/mailing/templates/components/TextCaption.svelte";
+import TextCaption from "$lib/modules/mailing/templates/components/TextCaption.svelte";
 
 let {orderId, label} = $props();
 </script>

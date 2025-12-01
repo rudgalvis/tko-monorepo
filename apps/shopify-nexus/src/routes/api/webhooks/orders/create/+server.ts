@@ -1,5 +1,5 @@
 import { PUBLIC_ENV } from '$env/static/public'
-import { MailingService } from '$lib/mailing/MailingService'
+import { MailingService } from '$lib/modules/mailing/MailingService'
 import { OrderService } from '$lib/shopify/services/OrderService'
 import type { OrdersCreateWebhookBody } from '$lib/shopify/types/webhooks-payload/orders-create-webhook-body'
 import { writeFile } from '$lib/utils/files/write-file'

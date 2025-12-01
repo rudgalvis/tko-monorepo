@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "turbo --filter shopify-nexus --filter shopify-theme --filter @repo/ui dev ",
     "build:common": "pnpm --filter common-utils build",
     "build:api": "pnpm --filter storefront-api build",
     "build:ui": "pnpm --filter ui build",
@@ -26,5 +27,8 @@
       "svelte-preprocess"
     ]
   },
-  "packageManager": "pnpm@10.19.0"
+  "packageManager": "pnpm@10.19.0",
+  "devDependencies": {
+    "turbo": "^2.6.1"
+  }
 }

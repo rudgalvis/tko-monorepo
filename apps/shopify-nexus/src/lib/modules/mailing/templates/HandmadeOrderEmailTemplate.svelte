@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Body from '$lib/mailing/templates/components/Body.svelte'
-	import Footer from '$lib/mailing/templates/components/Footer.svelte'
-	import Header from '$lib/mailing/templates/components/Header.svelte'
-	import TextBody from '$lib/mailing/templates/components/TextBody.svelte'
-	import View from '$lib/mailing/templates/components/View.svelte'
+	import Body from '$lib/modules/mailing/templates/components/Body.svelte'
+	import Footer from '$lib/modules/mailing/templates/components/Footer.svelte'
+	import Header from '$lib/modules/mailing/templates/components/Header.svelte'
+	import TextBody from '$lib/modules/mailing/templates/components/TextBody.svelte'
+	import View from '$lib/modules/mailing/templates/components/View.svelte'
 
 	export let customerName: string = ''
 	export let orderId: string = ''

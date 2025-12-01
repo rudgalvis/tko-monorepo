@@ -1,4 +1,4 @@
-import { MailingService } from '$lib/mailing/MailingService'
+import { MailingService } from '$lib/modules/mailing/MailingService'
 import type { NotificationGroupRequirement } from '$lib/utils/transformers/order/resolve-notification-groups'
 import { parseOrderWebhook } from '$lib/utils/transformers/order/parse-order-webhook'
 import fs from 'fs'

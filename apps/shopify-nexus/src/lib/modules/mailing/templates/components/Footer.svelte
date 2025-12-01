@@ -1,6 +1,6 @@
 <script>
-	import TextSmall from '$lib/mailing/templates/components/TextSmall.svelte'
-    import Hr from "$lib/mailing/templates/components/Hr.svelte";
+	import TextSmall from '$lib/modules/mailing/templates/components/TextSmall.svelte'
+    import Hr from "$lib/modules/mailing/templates/components/Hr.svelte";
 </script>
 
 <Hr/>

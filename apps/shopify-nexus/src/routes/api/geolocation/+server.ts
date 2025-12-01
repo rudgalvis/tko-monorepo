@@ -1,9 +1,10 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { getUserCountry } from '$lib/utils/geolocation';
+import { getUserCountryFromRequest } from '$lib/modules/geolocating/geolocation';
 
-export const GET: RequestHandler = async () => {
-	const country = await getUserCountry();
+export const GET: RequestHandler = async (event) => {
+	const country = await getUserCountryFromRequest(event);
+
 	return json({ country });
 };
 
