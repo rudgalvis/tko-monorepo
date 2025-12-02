@@ -23,7 +23,7 @@
     "social_instagram_link": "https://www.instagram.com/theknottyones/",
     "social_linkedin_link": "https://www.linkedin.com/company/theknottyones/",
     "favicon": "shopify://shop_images/favicon.png",
-    "show_countdown_timer": true,
+    "show_countdown_timer": false,
     "timer_collection": "black-friday",
     "buttonText": "",
     "selectedmounth": "Dec",
@@ -81,48 +81,48 @@
             "type": "Announcement",
             "settings": {
               "selectCountry": "US",
-              "announcement_text2": "<p>BLACK FRIDAY: 30% SITEWIDE</p>",
-              "announcement_text_mobile2": "<p>BLACK FRIDAY: 30% SITEWIDE</p>"
+              "announcement_text2": "<p>A gift with every €100+ order</p>",
+              "announcement_text_mobile2": "<p>A gift with every €100+ order</p>"
             }
           },
           "d02e68ec-d38b-4d9f-a1d0-d4c083477e44": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "EU",
-              "announcement_text2": "<p>BLACK FRIDAY: 30% SITEWIDE</p>",
-              "announcement_text_mobile2": "<p>BLACK FRIDAY: 30% SITEWIDE</p>"
+              "announcement_text2": "<p>A gift with every €100+ order</p>",
+              "announcement_text_mobile2": "<p>A gift with every €100+ order</p>"
             }
           },
           "announcement_ekFeUV": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "UK",
-              "announcement_text2": "<p>BLACK FRIDAY: 30% SITEWIDE</p>",
-              "announcement_text_mobile2": "<p>BLACK FRIDAY: 30% SITEWIDE</p>"
+              "announcement_text2": "<p>A gift with every €100+ order</p>",
+              "announcement_text_mobile2": "<p>A gift with every €100+ order</p>"
             }
           },
           "1dc1e8fe-b2e9-45d2-8404-f6255b708b52": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "ALL",
-              "announcement_text2": "<p>BLACK FRIDAY: 30% SITEWIDE</p>",
-              "announcement_text_mobile2": "<p>BLACK FRIDAY: 30% SITEWIDE</p>"
+              "announcement_text2": "<p>A gift with every €100+ order</p>",
+              "announcement_text_mobile2": "<p>A gift with every €100+ order</p>"
             }
           },
           "7ba786a5-7f72-46aa-b6fa-9f994a534b38": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "AU",
-              "announcement_text2": "<p>BLACK FRIDAY: 30% SITEWIDE</p>",
-              "announcement_text_mobile2": "<p>BLACK FRIDAY: 30% SITEWIDE</p>"
+              "announcement_text2": "<p>A gift with every €100+ order</p>",
+              "announcement_text_mobile2": "<p>A gift with every €100+ order</p>"
             }
           },
           "710025a2-82e7-4b4c-8e1c-b10a04d306e2": {
             "type": "Announcement",
             "settings": {
               "selectCountry": "LT",
-              "announcement_text2": "<p>BLACK FRIDAY: 30% SITEWIDE</p>",
-              "announcement_text_mobile2": "<p>BLACK FRIDAY: 30% SITEWIDE</p>"
+              "announcement_text2": "<p>A gift with every €100+ order</p>",
+              "announcement_text_mobile2": "<p>A gift with every €100+ order</p>"
             }
           }
         },
@@ -140,10 +140,10 @@
           "aucountries": "AU",
           "ukcountries": "GB",
           "ltcountries": "LT",
-          "show_announcement2": false,
+          "show_announcement2": true,
           "announcement_home_only2": false,
           "announcement_color2": "#000000",
-          "announcement_background2": "#b33e42"
+          "announcement_background2": "#b4bed6"
         }
       },
       "static-header": {
@@ -407,6 +407,18 @@
       "5439026248262864547": {
         "type": "shopify://apps/preorder-globo/blocks/app-embed/e547a0ad-8212-4bcc-b02f-761faa9b8af2",
         "disabled": true,
+        "settings": {}
+      },
+      "10605408327587305396": {
+        "type": "shopify://apps/eg-auto-add-to-cart/blocks/app-embed/0f7d4f74-1e89-4820-aec4-6564d7e535d2",
+        "disabled": false,
+        "settings": {
+          "version": "v3"
+        }
+      },
+      "8605505498557855500": {
+        "type": "shopify://apps/bogos-io-free-gift/blocks/app-embed/0432bba6-720a-4e95-be5a-b868386f7aa6",
+        "disabled": false,
         "settings": {}
       }
     }
