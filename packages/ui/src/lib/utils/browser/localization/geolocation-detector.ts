@@ -218,6 +218,8 @@ export const detectUserCountry = async (): Promise<string | null> => {
 	return null;
 };
 
+window['detectUserCountry'] = detectUserCountry
+
 // Expose for development
 if (typeof window !== 'undefined') {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

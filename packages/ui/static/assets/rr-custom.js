@@ -5030,6 +5030,7 @@ const availableMarkets = [
     }
   return frontendLogger.warn("Geolocation: All detection methods failed"), await logGeolocationFailure(), null;
 };
+window.detectUserCountry = detectUserCountry;
 typeof window < "u" && (window.detectUserCountry = detectUserCountry);
 const normalizeCountryCode = (r) => r.toUpperCase(), LOCALIZATION_COOKIE_NAME$1 = "localization", JUST_REFRESHED_FLAG = "localization_just_refreshed", initializeSession = () => {
   setSession(LOCALIZATION_STORAGE_KEYS.SESSION_INITIALIZED, !0);

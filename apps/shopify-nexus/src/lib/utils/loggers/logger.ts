@@ -1,9 +1,23 @@
 import winston from 'winston';
 import path from 'path';
+import fs from 'fs';
 
 // Path to logs directory (relative to process working directory)
 // This works in both dev and production builds
 const logsDir = path.resolve(process.cwd(), 'logs');
+
+// Ensure logs directory exists
+try {
+	if (!fs.existsSync(logsDir)) {
+		fs.mkdirSync(logsDir, { recursive: true });
+	}
+	// Verify directory is writable
+	fs.accessSync(logsDir, fs.constants.W_OK);
+} catch (error) {
+	console.error('Failed to create or access logs directory:', error);
+	console.error('Logs directory path:', logsDir);
+	console.error('Current working directory:', process.cwd());
+}
 
 // Define log format
 const logFormat = winston.format.combine(
@@ -23,6 +37,30 @@ const consoleFormat = winston.format.combine(
 	})
 );
 
+// Create file transports with error handling
+const createFileTransport = (filename: string, level: string, filterLevel: string) => {
+	const transport = new winston.transports.File({
+		filename: path.join(logsDir, filename),
+		level,
+		maxsize: 5242880, // 5MB
+		maxFiles: 5,
+		format: winston.format.combine(
+			winston.format((info) => {
+				const levelStr = String(info.level).toLowerCase();
+				return levelStr === filterLevel ? info : false;
+			})(),
+			logFormat
+		),
+	});
+
+	// Handle transport errors
+	transport.on('error', (error) => {
+		console.error(`Winston transport error for ${filename}:`, error);
+	});
+
+	return transport;
+};
+
 // Create the winston logger instance
 const winstonLogger = winston.createLogger({
 	level: process.env.LOG_LEVEL || 'info',
@@ -30,63 +68,25 @@ const winstonLogger = winston.createLogger({
 	defaultMeta: { service: 'shopify-nexus' },
 	transports: [
 		// Write all logs to combined.log
-		new winston.transports.File({
-			filename: path.join(logsDir, 'combined.log'),
-			maxsize: 5242880, // 5MB
-			maxFiles: 5,
-		}),
+		(() => {
+			const transport = new winston.transports.File({
+				filename: path.join(logsDir, 'combined.log'),
+				maxsize: 5242880, // 5MB
+				maxFiles: 5,
+			});
+			transport.on('error', (error) => {
+				console.error('Winston transport error for combined.log:', error);
+			});
+			return transport;
+		})(),
 		// Write only errors to error.log
-		new winston.transports.File({
-			filename: path.join(logsDir, 'error.log'),
-			level: 'error',
-			maxsize: 5242880, // 5MB
-			maxFiles: 5,
-			format: winston.format.combine(
-				winston.format((info) => {
-					return info.level === 'error' ? info : false;
-				})(),
-				logFormat
-			),
-		}),
-		// Write only warnings to warn.log
-		new winston.transports.File({
-			filename: path.join(logsDir, 'warn.log'),
-			level: 'warn',
-			maxsize: 5242880, // 5MB
-			maxFiles: 5,
-			format: winston.format.combine(
-				winston.format((info) => {
-					return info.level === 'warn' ? info : false;
-				})(),
-				logFormat
-			),
-		}),
-		// Write only info messages to info.log
-		new winston.transports.File({
-			filename: path.join(logsDir, 'info.log'),
-			level: 'info',
-			maxsize: 5242880, // 5MB
-			maxFiles: 5,
-			format: winston.format.combine(
-				winston.format((info) => {
-					return info.level === 'info' ? info : false;
-				})(),
-				logFormat
-			),
-		}),
-		// Write only debug messages to debug.log
-		new winston.transports.File({
-			filename: path.join(logsDir, 'debug.log'),
-			level: 'debug',
-			maxsize: 5242880, // 5MB
-			maxFiles: 5,
-			format: winston.format.combine(
-				winston.format((info) => {
-					return info.level === 'debug' ? info : false;
-				})(),
-				logFormat
-			),
-		}),
+		createFileTransport('error.log', 'error', 'error'),
+		// Write only warnings to warn.log (exclude errors)
+		createFileTransport('warn.log', 'warn', 'warn'),
+		// Write only info messages to info.log (exclude warn and error)
+		createFileTransport('info.log', 'info', 'info'),
+		// Write only debug messages to debug.log (exclude info, warn, error)
+		createFileTransport('debug.log', 'debug', 'debug'),
 	],
 });
 
