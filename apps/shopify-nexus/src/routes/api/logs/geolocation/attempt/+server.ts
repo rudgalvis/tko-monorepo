@@ -22,7 +22,6 @@ export const POST: RequestHandler = async ({ request }) => {
 		};
 
 		if (data.success) {
-            console.log('success')
 			logger.info('Geolocation detection succeeded', logMessage);
 		} else {
 			logger.warn('Geolocation detection failed', logMessage);
