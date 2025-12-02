@@ -32,6 +32,12 @@ COPY --from=builder /app/build ./build
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json .
 
+# Create logs directory (mkdir -p won't fail if it exists) and ensure correct permissions
+# This must be done BEFORE switching to appuser
+RUN mkdir -p /app/logs && \
+    chown -R appuser:appgroup /app/logs && \
+    chmod 755 /app/logs
+
 # Set ownership to non-root user
 RUN chown -R appuser:appgroup /app
 
