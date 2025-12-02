@@ -433,10 +433,10 @@ function apply_adjustments(r) {
 }
 const batches = /* @__PURE__ */ new Set();
 let current_batch = null, previous_batch = null, batch_values = null, effect_pending_updates = /* @__PURE__ */ new Set(), queued_root_effects = [], last_scheduled_effect = null, is_flushing = !1, is_flushing_sync = !1;
-var pe, ge, _e, ue, we, me, ve, q, ke, ce, $e, Me;
+var pe, ge, _e, ue, we, me, ve, V, ke, ce, $e, Me;
 const Pe = class Pe {
   constructor() {
-    F(this, q);
+    F(this, V);
     L(this, "committed", !1);
     /**
      * The current values of any sources that are updated in this batch
@@ -501,8 +501,8 @@ const Pe = class Pe {
       block_effects: []
     };
     for (const s of e)
-      z(this, q, ke).call(this, s, t);
-    z(this, q, $e).call(this), T(this, ue) > 0 ? (z(this, q, ce).call(this, t.effects), z(this, q, ce).call(this, t.render_effects), z(this, q, ce).call(this, t.block_effects)) : (previous_batch = this, current_batch = null, flush_queued_effects(t.render_effects), flush_queued_effects(t.effects), previous_batch = null), batch_values = null;
+      z(this, V, ke).call(this, s, t);
+    z(this, V, $e).call(this), T(this, ue) > 0 ? (z(this, V, ce).call(this, t.effects), z(this, V, ce).call(this, t.render_effects), z(this, V, ce).call(this, t.block_effects)) : (previous_batch = this, current_batch = null, flush_queued_effects(t.render_effects), flush_queued_effects(t.effects), previous_batch = null), batch_values = null;
   }
   /**
    * Associate a change to a given source with the current
@@ -524,7 +524,7 @@ const Pe = class Pe {
       if (this.activate(), flush_effects(), current_batch !== null && current_batch !== this)
         return;
     } else
-      z(this, q, $e).call(this);
+      z(this, V, $e).call(this);
     this.deactivate();
     for (const e of effect_pending_updates)
       if (effect_pending_updates.delete(e), e(), current_batch !== null)
@@ -572,7 +572,7 @@ const Pe = class Pe {
   apply() {
   }
 };
-pe = new WeakMap(), ge = new WeakMap(), _e = new WeakMap(), ue = new WeakMap(), we = new WeakMap(), me = new WeakMap(), ve = new WeakMap(), q = new WeakSet(), /**
+pe = new WeakMap(), ge = new WeakMap(), _e = new WeakMap(), ue = new WeakMap(), we = new WeakMap(), me = new WeakMap(), ve = new WeakMap(), V = new WeakSet(), /**
  * Traverse the effect tree, executing effects or stashing
  * them for later execution as appropriate
  * @param {Effect} root
@@ -599,7 +599,7 @@ ke = function(e, t) {
     }
     var u = s.parent;
     for (s = s.next; s === null && u !== null; )
-      u === t.effect && (z(this, q, ce).call(this, t.effects), z(this, q, ce).call(this, t.render_effects), z(this, q, ce).call(this, t.block_effects), t = /** @type {EffectTarget} */
+      u === t.effect && (z(this, V, ce).call(this, t.effects), z(this, V, ce).call(this, t.render_effects), z(this, V, ce).call(this, t.block_effects), t = /** @type {EffectTarget} */
       t.parent), s = u.next, u = u.parent;
   }
 }, /**
@@ -613,7 +613,7 @@ ce = function(e) {
     for (const e of T(this, ge)) e();
     T(this, ge).clear();
   }
-  T(this, _e) === 0 && z(this, q, Me).call(this);
+  T(this, _e) === 0 && z(this, V, Me).call(this);
 }, Me = function() {
   var n, i;
   if (batches.size > 1) {
@@ -649,7 +649,7 @@ ce = function(e) {
         if (queued_root_effects.length > 0) {
           current_batch = o, o.apply();
           for (const f of queued_root_effects)
-            z(n = o, q, ke).call(n, f, s);
+            z(n = o, V, ke).call(n, f, s);
           queued_root_effects = [], o.deactivate();
         }
       }
@@ -2290,7 +2290,7 @@ function each(r, e, t, s, n, i = null) {
   }), hydrating && (o = hydrate_node);
 }
 function reconcile(r, e, t, s, n, i, o, l, c) {
-  var M, j, V, X;
+  var M, j, q, X;
   var u = (o & EACH_IS_ANIMATED) !== 0, d = (o & (EACH_ITEM_REACTIVE | EACH_INDEX_REACTIVE)) !== 0, f = e.length, p = t.items, g = t.first, h = g, _, m = null, y, w = [], v = [], b, S, E, A;
   if (u)
     for (A = 0; A < f; A += 1)
@@ -2354,7 +2354,7 @@ function reconcile(r, e, t, s, n, i, o, l, c) {
       var B = o & EACH_IS_CONTROLLED && f === 0 ? n : null;
       if (u) {
         for (A = 0; A < $; A += 1)
-          (V = x[A].a) == null || V.measure();
+          (q = x[A].a) == null || q.measure();
         for (A = 0; A < $; A += 1)
           (X = x[A].a) == null || X.fix();
       }
@@ -4998,35 +4998,35 @@ const availableMarkets = [
     return r instanceof Error && r.name === "AbortError" ? frontendLogger.debug("Geolocation: ipwho.is method timed out") : frontendLogger.debug("Geolocation: ipwho.is method failed", r), null;
   }
 }, getCountryFromNexus = async () => {
-  const r = "nexus";
   try {
-    const e = new AbortController(), t = setTimeout(() => e.abort(), 5e3), s = await getGeolocation(e.signal);
-    return clearTimeout(t), s ? (frontendLogger.debug(`Geolocation: Detected from Nexus API: ${s}`), await logGeolocationAttempt(r, !0, s), s) : (await logGeolocationAttempt(r, !1, null, "No country returned"), null);
-  } catch (e) {
-    const t = e instanceof Error ? e.message : "Unknown error";
-    return e instanceof Error && e.name === "AbortError" ? (frontendLogger.debug("Geolocation: Nexus API method timed out"), await logGeolocationAttempt(r, !1, null, "Request timeout")) : (frontendLogger.debug("Geolocation: Nexus API method failed", e), await logGeolocationAttempt(r, !1, null, t)), null;
+    const r = new AbortController(), e = setTimeout(() => r.abort(), 5e3), t = await getGeolocation(r.signal);
+    return clearTimeout(e), t ? (frontendLogger.debug(`Geolocation: Detected from Nexus API: ${t}`), t) : null;
+  } catch (r) {
+    throw r instanceof Error && r.name === "AbortError" ? frontendLogger.debug("Geolocation: Nexus API method timed out") : frontendLogger.debug("Geolocation: Nexus API method failed", r), r;
   }
 }, detectUserCountry = async () => {
   frontendLogger.debug("Geolocation: Starting country detection...");
   const r = [
-    getGeolocation,
-    // Unlimited, our own w/ claudflare
-    getCountryFromIpWho,
+    [getGeolocation, "cloudflare-worker"],
+    // Unlimited, our own w/ cloudflare
+    [getCountryFromIpWho, "ipwho.is"],
     // 10k req/month (final fallback)
-    getCountryFromIpApi,
+    [getCountryFromIpApi, "ipapi.co"],
     // 1000 req/day
-    getCountryFromIpApiProxied,
+    [getCountryFromIpApiProxied, "ip-api.com"],
     // 45 req/min (~65k/day)
-    getCountryFromNexus
+    [getCountryFromNexus, "nexus"]
     // Uses ipapi, but from server other IP addr
   ];
-  for (const e of r)
+  for (const [e, t] of r)
     try {
-      const t = await e();
-      if (t)
-        return t;
-    } catch (t) {
-      frontendLogger.debug("Geolocation: Method failed, trying next...", t);
+      const s = await e();
+      if (s)
+        return await logGeolocationAttempt(t, !0, s), frontendLogger.debug(`Geolocation: Successfully detected from ${t}: ${s}`), s;
+      await logGeolocationAttempt(t, !1, null, "No country returned");
+    } catch (s) {
+      const n = s instanceof Error ? s.message : "Unknown error";
+      await logGeolocationAttempt(t, !1, null, n), frontendLogger.debug(`Geolocation: Method ${t} failed, trying next...`, s);
     }
   return frontendLogger.warn("Geolocation: All detection methods failed"), await logGeolocationFailure(), null;
 };
@@ -14573,10 +14573,10 @@ function updateSlides() {
             I = x + U + M;
           else {
             const {
-              clientWidth: V,
+              clientWidth: q,
               offsetWidth: X
             } = R;
-            I = x + $ + B + U + M + (X - V);
+            I = x + $ + B + U + M + (X - q);
           }
         }
         k && (R.style.transform = k), N && (R.style.webkitTransform = N), t.roundLengths && (I = Math.floor(I));
@@ -16620,8 +16620,8 @@ function KnittersAccordionItem(r, e) {
     }), l || (l = !0);
   }, y = () => {
   }, w = () => {
-    const j = new URLSearchParams(window.location.search), { knitter: V } = Object.fromEntries(j.entries());
-    V === s() && set(c, !0);
+    const j = new URLSearchParams(window.location.search), { knitter: q } = Object.fromEntries(j.entries());
+    q === s() && set(c, !0);
   };
   onMount(() => {
     get$2(c) ? _() : m(), w();
@@ -16680,9 +16680,9 @@ function KnittersAccordionItem(r, e) {
   var U = sibling($, 2);
   {
     var M = (j) => {
-      var V = root_1$7();
+      var q = root_1$7();
       let X;
-      var ye = child(V);
+      var ye = child(q);
       {
         let Oe = /* @__PURE__ */ derived_safe_equal(() => !get$2(c) || get$2(u));
         KnitterReviewsList(ye, {
@@ -16699,17 +16699,17 @@ function KnittersAccordionItem(r, e) {
         get id() {
           return s();
         }
-      }), reset(V), template_effect((Oe) => X = set_class(V, 1, "reviews svelte-1mwffhh", null, X, Oe), [
+      }), reset(q), template_effect((Oe) => X = set_class(q, 1, "reviews svelte-1mwffhh", null, X, Oe), [
         () => ({ "fade-in": get$2(c), "fade-out": !get$2(c) })
-      ]), append(j, V);
+      ]), append(j, q);
     };
     if_block(U, (j) => {
       s() && j(M);
     });
   }
   return reset(C), bind_this(C, (j) => set(d, j), () => get$2(d)), reset(b), bind_this(b, (j) => set(f, j), () => get$2(f)), template_effect(
-    (j, V, X) => {
-      set_attribute(E, "src", o()), set_attribute(E, "alt", `Small picture of ${t() ?? ""}`), set_text(I, t()), O = set_class(P, 1, "arrow svelte-1mwffhh", null, O, j), N = set_class(k, 1, "svelte-1mwffhh", null, N, V), set_text(x, n()), B = set_class($, 1, "photo svelte-1mwffhh", null, B, X), set_attribute($, "src", i()), set_attribute($, "alt", `Picture of ${t() ?? ""}`);
+    (j, q, X) => {
+      set_attribute(E, "src", o()), set_attribute(E, "alt", `Small picture of ${t() ?? ""}`), set_text(I, t()), O = set_class(P, 1, "arrow svelte-1mwffhh", null, O, j), N = set_class(k, 1, "svelte-1mwffhh", null, N, q), set_text(x, n()), B = set_class($, 1, "photo svelte-1mwffhh", null, B, X), set_attribute($, "src", i()), set_attribute($, "alt", `Picture of ${t() ?? ""}`);
     },
     [
       () => ({ "arrow---down": get$2(c) }),
