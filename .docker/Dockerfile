@@ -59,8 +59,11 @@ COPY --from=builder --chown=appuser:appgroup /app/apps ./apps
 # Create logs and cache directories for auto-price-cache with proper permissions
 RUN mkdir -p /app/apps/auto-price-cache/logs && \
     mkdir -p /app/apps/auto-price-cache/.cache && \
+    mkdir -p /app/apps/shopify-nexus/logs && \
     chown -R appuser:appgroup /app/apps/auto-price-cache/logs && \
-    chown -R appuser:appgroup /app/apps/auto-price-cache/.cache
+    chown -R appuser:appgroup /app/apps/auto-price-cache/.cache && \
+    chown -R appuser:appgroup /app/apps/shopify-nexus/logs && \
+    chmod 755 /app/apps/shopify-nexus/logs
 
 # Create logs directory for shopify-nexus with proper permissions
 RUN mkdir -p /app/apps/shopify-nexus/logs && \
