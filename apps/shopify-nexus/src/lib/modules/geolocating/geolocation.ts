@@ -118,128 +118,54 @@ export async function getUserCountry(): Promise<string | null> {
 
 /**
  * Get user's country code from request event
- * Extracts client IP and proxies it to Cloudflare Worker
+ * Uses Cloudflare's built-in geolocation (no external API needed)
  * 
- * @param event - SvelteKit RequestEvent containing client request
+ * @param _event - SvelteKit RequestEvent (kept for API consistency)
  * @returns ISO country code (e.g., 'US', 'LT', 'GB') or null
  */
-export async function getUserCountryFromRequest(event: RequestEvent): Promise<string | null> {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function getUserCountryFromRequest(_event: RequestEvent): Promise<string | null> {
 	try {
-		const clientIP = extractClientIP(event);
-		
-		if (!clientIP) {
-			console.warn('Could not extract client IP from request');
-			return null;
-		}
-
-		// Skip geolocation lookup for localhost/local network IPs
-		if (isLocalhostIP(clientIP)) {
-			console.debug('Skipping geolocation lookup for localhost IP:', clientIP);
-			// For localhost, make direct request without IP parameter (uses Cloudflare edge detection)
-			const response = await fetch(GEO_WORKER_URL);
-			if (!response.ok) {
-				console.error(`Cloudflare Worker returned ${response.status}`);
-				return null;
-			}
-			const data: GeoData = await response.json();
-			return data.country || null;
-		}
-
-		// Proxy request to Cloudflare Worker with client IP
-		const url = new URL(GEO_WORKER_URL);
-		url.searchParams.set('ip', clientIP);
-		
-		// Debug logging to diagnose 500 errors
-		console.log('[Geolocation] Proxying request with IP:', clientIP);
-		console.log('[Geolocation] Full URL:', url.toString());
-		
-		const response = await fetch(url.toString());
+		// Use Cloudflare's built-in geolocation directly (no external API needed)
+		// Since requests come through Cloudflare, request.cf will have the user's location
+		// This avoids rate limits and external API dependencies
+		const response = await fetch(GEO_WORKER_URL);
 		if (!response.ok) {
-			// Get error details from response body
-			let errorDetails = '';
-			try {
-				const errorData = await response.json();
-				errorDetails = JSON.stringify(errorData);
-			} catch {
-				try {
-					errorDetails = await response.text();
-				} catch {
-					errorDetails = 'Could not read error response';
-				}
-			}
-			console.error(`[Geolocation] Cloudflare Worker returned ${response.status}:`, errorDetails);
-			console.error(`[Geolocation] Requested IP was: ${clientIP}`);
+			console.error(`[Geolocation] Cloudflare Worker returned ${response.status}`);
 			return null;
 		}
 		
 		const data: GeoData = await response.json();
 		return data.country || null;
 	} catch (error) {
-		console.error('Failed to get user country from request:', error);
+		console.error('[Geolocation] Failed to get user country from request:', error);
 		return null;
 	}
 }
 
 /**
  * Get full geolocation data from request event
- * Extracts client IP and proxies it to Cloudflare Worker
+ * Uses Cloudflare's built-in geolocation (no external API needed)
  * 
- * @param event - SvelteKit RequestEvent containing client request
+ * @param _event - SvelteKit RequestEvent (kept for API consistency)
  * @returns Full GeoData object or null
  */
-export async function getGeoDataFromRequest(event: RequestEvent): Promise<GeoData | null> {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function getGeoDataFromRequest(_event: RequestEvent): Promise<GeoData | null> {
 	try {
-		const clientIP = extractClientIP(event);
-		
-		if (!clientIP) {
-			console.warn('Could not extract client IP from request');
-			return null;
-		}
-
-		// Skip geolocation lookup for localhost/local network IPs
-		if (isLocalhostIP(clientIP)) {
-			console.debug('Skipping geolocation lookup for localhost IP:', clientIP);
-			// For localhost, make direct request without IP parameter (uses Cloudflare edge detection)
-			const response = await fetch(GEO_WORKER_URL);
-			if (!response.ok) {
-				console.error(`Cloudflare Worker returned ${response.status}`);
-				return null;
-			}
-			const data: GeoData = await response.json();
-			return data;
-		}
-
-		// Proxy request to Cloudflare Worker with client IP
-		const url = new URL(GEO_WORKER_URL);
-		url.searchParams.set('ip', clientIP);
-		
-		// Debug logging to diagnose 500 errors
-		console.log('[Geolocation] Proxying request with IP:', clientIP);
-		console.log('[Geolocation] Full URL:', url.toString());
-		
-		const response = await fetch(url.toString());
+		// Use Cloudflare's built-in geolocation directly (no external API needed)
+		// Since requests come through Cloudflare, request.cf will have the user's location
+		// This avoids rate limits and external API dependencies
+		const response = await fetch(GEO_WORKER_URL);
 		if (!response.ok) {
-			// Get error details from response body
-			let errorDetails = '';
-			try {
-				const errorData = await response.json();
-				errorDetails = JSON.stringify(errorData);
-			} catch {
-				try {
-					errorDetails = await response.text();
-				} catch {
-					errorDetails = 'Could not read error response';
-				}
-			}
-			console.error(`[Geolocation] Cloudflare Worker returned ${response.status}:`, errorDetails);
-			console.error(`[Geolocation] Requested IP was: ${clientIP}`);
+			console.error(`[Geolocation] Cloudflare Worker returned ${response.status}`);
 			return null;
 		}
 		
 		const data: GeoData = await response.json();
 		return data;
 	} catch (error) {
-		console.error('Failed to get geo data from request:', error);
+		console.error('[Geolocation] Failed to get geo data from request:', error);
 		return null;
 	}
 }

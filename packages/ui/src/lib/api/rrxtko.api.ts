@@ -1,5 +1,4 @@
 import { PUBLIC_NEXUS_BASE_URL } from '$env/static/public';
-import { frontendLogger } from '$lib/utils/loggers/frontend-logger.js';
 
 // Get base URL from environment variable, fallback to relative path for production
 const getBaseUrl = (): string => {
@@ -34,35 +33,6 @@ export const getAutomaticDiscount = async (isoCode: string, variantId: number) =
 	}
 };
 
-/**
- * Get user's country code from Shopify Nexus geolocation API
- * @param signal - Optional AbortSignal for request cancellation
- * @returns ISO country code (e.g., 'US', 'LT', 'GB') or null
- */
-export const getGeolocation = async (signal?: AbortSignal): Promise<string | null> => {
-	try {
-		const response = await fetch(`${BASE_URL}/${API_ROUTES.GET_GEOLOCATION()}`, {
-			method: 'GET',
-			headers: {
-				'Accept': 'application/json'
-			},
-			signal
-		});
-
-		if (!response.ok) {
-			throw new Error(`HTTP ${response.status}`);
-		}
-
-		const data = await response.json();
-		return data.country || null;
-	} catch (error) {
-		if (error instanceof Error && error.name === 'AbortError') {
-			throw error; // Re-throw abort errors so caller can handle timeout
-		}
-		console.error('Failed to get geolocation from Nexus API:', error);
-		return null;
-	}
-};
 
 /**
  * Log geolocation detection attempt to Nexus API

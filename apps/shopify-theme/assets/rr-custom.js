@@ -4875,6 +4875,29 @@ const availableMarkets = [
 }, needsLocalizationRefresh = () => {
   const r = getLastLocalizationCheck();
   return r === null ? !0 : Date.now() - r >= LOCALIZATION_REFRESH_INTERVAL;
+}, CLOUDFLARE_GEO_WORKER_URL = "https://geo-location.rokas-239.workers.dev", getGeolocation = async (r) => {
+  try {
+    const e = new URL(CLOUDFLARE_GEO_WORKER_URL);
+    e.searchParams.set("_t", `${Date.now()}-${Math.random().toString(36).substring(7)}`);
+    const t = await fetch(e.toString(), {
+      method: "GET",
+      headers: {
+        Accept: "application/json"
+      },
+      cache: "no-store",
+      // Prevent browser caching (fetch API option, not a header)
+      credentials: "omit",
+      // Don't send cookies - prevents cookie-based caching
+      signal: r
+    });
+    if (!t.ok)
+      throw new Error(`HTTP ${t.status}`);
+    return (await t.json()).country || null;
+  } catch (e) {
+    if (e instanceof Error && e.name === "AbortError")
+      throw e;
+    return console.error("Failed to get geolocation from Cloudflare Worker:", e), null;
+  }
 }, getBaseUrl = () => {
   const r = PUBLIC_NEXUS_BASE_URL;
   return r.endsWith("/api") ? r : `${r}/api`;
@@ -4892,23 +4915,6 @@ const availableMarkets = [
     return await t.json();
   } catch (s) {
     console.error(s);
-  }
-}, getGeolocation = async (r) => {
-  try {
-    const e = await fetch(`${BASE_URL}/${API_ROUTES.GET_GEOLOCATION()}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json"
-      },
-      signal: r
-    });
-    if (!e.ok)
-      throw new Error(`HTTP ${e.status}`);
-    return (await e.json()).country || null;
-  } catch (e) {
-    if (e instanceof Error && e.name === "AbortError")
-      throw e;
-    return console.error("Failed to get geolocation from Nexus API:", e), null;
   }
 }, logGeolocationAttempt = async (r, e, t, s) => {
   try {
@@ -5003,14 +5009,16 @@ const availableMarkets = [
 }, detectUserCountry = async () => {
   frontendLogger.debug("Geolocation: Starting country detection...");
   const r = [
-    getCountryFromNexus,
+    getGeolocation,
     // Unlimited, our own w/ claudflare
     getCountryFromIpWho,
     // 10k req/month (final fallback)
     getCountryFromIpApi,
     // 1000 req/day
-    getCountryFromIpApiProxied
+    getCountryFromIpApiProxied,
     // 45 req/min (~65k/day)
+    getCountryFromNexus
+    // Uses ipapi, but from server other IP addr
   ];
   for (const e of r)
     try {
@@ -5022,7 +5030,7 @@ const availableMarkets = [
     }
   return frontendLogger.warn("Geolocation: All detection methods failed"), await logGeolocationFailure(), null;
 };
-window.detectUserCountry = detectUserCountry;
+typeof window < "u" && (window.detectUserCountry = detectUserCountry);
 const normalizeCountryCode = (r) => r.toUpperCase(), LOCALIZATION_COOKIE_NAME$1 = "localization", JUST_REFRESHED_FLAG = "localization_just_refreshed", initializeSession = () => {
   setSession(LOCALIZATION_STORAGE_KEYS.SESSION_INITIALIZED, !0);
 }, wasJustRefreshed = () => isBrowser$1() ? localStorage.getItem(JUST_REFRESHED_FLAG) === "true" : !1, handlePostRefresh = () => {

@@ -16,3 +16,4 @@ export interface GeoData {
 	colo: string | null;
 }
 
+

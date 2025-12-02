@@ -14,7 +14,8 @@
  */
 
 import { frontendLogger } from "../../loggers/frontend-logger.js";
-import { getGeolocation, logGeolocationAttempt, logGeolocationFailure } from "../../../api/rrxtko.api.js";
+import { getGeolocation } from "../../../api/cloudflare.api.js";
+import { logGeolocationAttempt, logGeolocationFailure } from "../../../api/rrxtko.api.js";
 
 /**
  * Method 1: Use ipapi.co free API
@@ -190,10 +191,11 @@ export const detectUserCountry = async (): Promise<string | null> => {
 
 	// Try methods in sequence - ordered by reliability and capacity
 	const methods = [
-		getCountryFromNexus,           // Unlimited, our own w/ claudflare
+		getGeolocation,				   // Unlimited, our own w/ claudflare
 		getCountryFromIpWho,           // 10k req/month (final fallback)
         getCountryFromIpApi,           // 1000 req/day
 		getCountryFromIpApiProxied,    // 45 req/min (~65k/day)
+		getCountryFromNexus,           // Uses ipapi, but from server other IP addr
 	];
 
 	for (const method of methods) {
@@ -216,7 +218,10 @@ export const detectUserCountry = async (): Promise<string | null> => {
 };
 
 // Expose for development
-window['detectUserCountry'] = detectUserCountry
+if (typeof window !== 'undefined') {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	(window as any).detectUserCountry = detectUserCountry;
+}
 
 /**
  * Normalize country code to uppercase

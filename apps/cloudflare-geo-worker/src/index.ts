@@ -114,10 +114,13 @@ export default {
 			};
 		}
 
-		// Add cache header for performance (1 hour cache)
+		// Prevent caching to ensure fresh geolocation data on every request
+		// Important: Users may change location (VPN, travel) and need immediate updates
 		const headers = {
 			...corsHeaders,
-			'Cache-Control': 'public, max-age=3600',
+			'Cache-Control': 'no-cache, no-store, must-revalidate, private',
+			'Pragma': 'no-cache',
+			'Expires': '0',
 		};
 
 		return new Response(JSON.stringify(geoData, null, 2), {
