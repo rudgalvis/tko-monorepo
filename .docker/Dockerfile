@@ -43,33 +43,29 @@ RUN corepack enable && corepack prepare pnpm@8.15.5 --activate
 
 WORKDIR /app
 
-# Create a non-root user
-RUN groupadd -r appgroup && useradd -r -g appgroup appuser
-
 # Copy necessary files from builder with ownership set during copy
-# This eliminates the need for the slow recursive chown
-COPY --from=builder --chown=appuser:appgroup /app/package.json ./
-COPY --from=builder --chown=appuser:appgroup /app/pnpm-*.yaml ./
+# Using node:node since docker-compose.yml runs as 'node' user
+COPY --from=builder --chown=node:node /app/package.json ./
+COPY --from=builder --chown=node:node /app/pnpm-*.yaml ./
 
 # Copy node_modules and packages with correct ownership
-COPY --from=builder --chown=appuser:appgroup /app/node_modules ./node_modules
-COPY --from=builder --chown=appuser:appgroup /app/packages ./packages
-COPY --from=builder --chown=appuser:appgroup /app/apps ./apps
+COPY --from=builder --chown=node:node /app/node_modules ./node_modules
+COPY --from=builder --chown=node:node /app/packages ./packages
+COPY --from=builder --chown=node:node /app/apps ./apps
 
-# Create logs and cache directories for auto-price-cache with proper permissions
+# Create logs and cache directories with proper permissions for node user
 RUN mkdir -p /app/apps/auto-price-cache/logs && \
     mkdir -p /app/apps/auto-price-cache/.cache && \
     mkdir -p /app/apps/shopify-nexus/logs && \
-    chown -R appuser:appgroup /app/apps/auto-price-cache/logs && \
-    chown -R appuser:appgroup /app/apps/auto-price-cache/.cache && \
-    chown -R appuser:appgroup /app/apps/shopify-nexus/logs && \
-    chmod 755 /app/apps/shopify-nexus/logs
+    chown -R node:node /app/apps/auto-price-cache/logs && \
+    chown -R node:node /app/apps/auto-price-cache/.cache && \
+    chown -R node:node /app/apps/shopify-nexus/logs && \
+    chmod 755 /app/apps/shopify-nexus/logs && \
+    chmod 755 /app/apps/auto-price-cache/logs && \
+    chmod 755 /app/apps/auto-price-cache/.cache
 
-# Create logs directory for shopify-nexus with proper permissions
-RUN mkdir -p /app/apps/shopify-nexus/logs && \
-    chown -R appuser:appgroup /app/apps/shopify-nexus/logs
-
-USER appuser
+# The node user already exists in the base image, so we don't need to create it
+# docker-compose.yml will set USER node, so we don't set it here
 
 # Assuming your main application is in one of the packages
 # Adjust the command according to your entry point
