@@ -20,8 +20,8 @@
   inset: 0;
   z-index: 99999;
   background: #eeeeea;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   overflow-y: auto;
   overscroll-behavior: contain;
 ">
@@ -29,19 +29,20 @@
     text-align: center;
     max-width: 480px;
     width: 100%;
-    padding: 40px 24px 80px;
-    margin: auto;
+    padding: 24px 24px 80px;
+    margin: 0 auto;
     font-family: inherit;
   ">
-    <a href="/" style="display: inline-block; margin: 0 0 20px;">
+    <a id="archive-sale-lock-logo-link" href="/" style="display: inline-block; margin-bottom: 20px;">
       <img
+        id="archive-sale-lock-logo"
         src="//cdn.shopify.com/s/files/1/0548/6644/4336/files/tko-logo-png_800x800.png?v=1633605522"
         alt="{{ shop.name }}"
-        style="display: block; width: 170px;"
+        style="display: block; width: 257px;"
       />
     </a>
 
-    <div style="border-top: 0.5px solid #121212; border-bottom: 0.5px solid #121212; padding: 120px 0; margin: 0 0 32px; width: 100vw; position: relative; left: 50%; transform: translateX(-50%);">
+    <div id="archive-sale-lock-bordered" style="border-top: 0.5px solid #121212; border-bottom: 0.5px solid #121212; padding: 180px 0; margin: 0 0 32px; width: calc(100vw - 48px); position: relative; left: 50%; transform: translateX(-50%);">
       {% if settings.archive_sale_lock_heading != blank %}
       <h2 id="archive-sale-lock-heading" style="font-size: 22px; font-weight: 400; text-transform: uppercase; letter-spacing: -0.34px; line-height: 22px; color: #000; text-align: center; margin: 0 0 20px;">
         {{ settings.archive_sale_lock_heading }}
@@ -97,6 +98,20 @@
     {% endif %}
     <style>
       @media (max-width: 812px) {
+        #archive-sale-lock-overlay > div {
+          padding-top: 20px !important;
+        }
+        #archive-sale-lock-logo-link {
+          margin-bottom: 12px !important;
+        }
+        #archive-sale-lock-bordered {
+          padding-top: 100px !important;
+          padding-bottom: 100px !important;
+          width: calc(100vw - 20px) !important;
+        }
+        #archive-sale-lock-logo {
+          width: 170px !important;
+        }
         #archive-sale-lock-heading {
           font-size: 14px !important;
           line-height: 16px !important;
