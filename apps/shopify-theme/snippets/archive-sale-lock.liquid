@@ -1,0 +1,234 @@
+{%- liquid
+  assign lock_enabled  = settings.archive_sale_lock_enabled
+  assign lock_end      = settings.archive_sale_lock_end
+  assign lock_password = settings.archive_sale_lock_password
+
+  assign now_ts = 'now' | date: '%s' | plus: 0
+  assign end_ts = lock_end | date: '%s' | plus: 0
+  assign lock_active = false
+  if lock_enabled and lock_end != blank and lock_password != blank and now_ts < end_ts
+    assign lock_active = true
+  endif
+-%}
+
+{% if lock_active %}
+<style id="archive-sale-lock-body-style">html, body { overflow: hidden !important; }</style>
+<div id="archive-sale-lock-backdrop" style="position: fixed; inset: 0; z-index: 99998; background: #eeeeea;"></div>
+<div id="archive-sale-lock-overlay" style="
+  display: flex;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #eeeeea;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+">
+  <div style="
+    text-align: center;
+    max-width: 480px;
+    width: 100%;
+    padding: 40px 24px 80px;
+    margin: auto;
+    font-family: inherit;
+  ">
+    <a href="/" style="display: inline-block; margin: 0 0 20px;">
+      <img
+        src="//cdn.shopify.com/s/files/1/0548/6644/4336/files/tko-logo-png_800x800.png?v=1633605522"
+        alt="{{ shop.name }}"
+        style="display: block; width: 170px;"
+      />
+    </a>
+
+    <div style="border-top: 0.5px solid #121212; border-bottom: 0.5px solid #121212; padding: 120px 0; margin: 0 0 32px; width: 100vw; position: relative; left: 50%; transform: translateX(-50%);">
+      {% if settings.archive_sale_lock_heading != blank %}
+      <h2 id="archive-sale-lock-heading" style="font-size: 22px; font-weight: 400; text-transform: uppercase; letter-spacing: -0.34px; line-height: 22px; color: #000; text-align: center; margin: 0 0 20px;">
+        {{ settings.archive_sale_lock_heading }}
+      </h2>
+      {% endif %}
+
+      <div id="archive-sale-countdown" style="
+        display: flex;
+        justify-content: center;
+        gap: 4px;
+        font-variant-numeric: tabular-nums;
+      ">
+        <div style="display: flex; flex-direction: column; align-items: center; min-width: 64px;">
+          <span id="archive-sale-cd-h" style="font-size: 62px; font-weight: 400; line-height: 1; letter-spacing: -0.02em; color: #121212;">--</span>
+          <span style="font-family: 'Monument', sans-serif; font-size: 10px; letter-spacing: -0.22px; text-transform: uppercase; color: #888; margin-top: 6px;">hrs</span>
+        </div>
+        <span class="archive-sale-cd-num" style="font-size: 62px; font-weight: 300; line-height: 1; padding-top: 0px; color: #aaa;">:</span>
+        <div style="display: flex; flex-direction: column; align-items: center; min-width: 64px;">
+          <span id="archive-sale-cd-m" style="font-size: 62px; font-weight: 400; line-height: 1; letter-spacing: -0.02em; color: #121212;">--</span>
+          <span style="font-family: 'Monument', sans-serif; font-size: 10px; letter-spacing: -0.22px; text-transform: uppercase; color: #888; margin-top: 6px;">min</span>
+        </div>
+        <span class="archive-sale-cd-num" style="font-size: 62px; font-weight: 300; line-height: 1; padding-top: 0px; color: #aaa;">:</span>
+        <div style="display: flex; flex-direction: column; align-items: center; min-width: 64px;">
+          <span id="archive-sale-cd-s" style="font-size: 62px; font-weight: 400; line-height: 1; letter-spacing: -0.02em; color: #121212;">--</span>
+          <span style="font-family: 'Monument', sans-serif; font-size: 10px; letter-spacing: -0.22px; text-transform: uppercase; color: #888; margin-top: 6px;">sec</span>
+        </div>
+      </div>
+    </div>
+    {% if settings.archive_sale_lock_body != blank %}
+    <p id="archive-sale-lock-body" style="font-family: 'Monument Regular', 'Monument', sans-serif; font-size: 14px; letter-spacing: -0.22px; color: #000; line-height: 22px; margin: 0 0 12px; max-width: 600px; margin-left: auto; margin-right: auto; text-align: center;">
+      {{ settings.archive_sale_lock_body }}
+    </p>
+    {% endif %}
+    {% if settings.archive_sale_lock_tagline != blank %}
+    <p id="archive-sale-lock-tagline" style="font-family: 'Panama', serif; font-size: 14px; letter-spacing: -0.22px; color: #999; line-height: 22px; margin: 0 0 6px; font-style: italic; text-align: center;">
+      {{ settings.archive_sale_lock_tagline }}
+    </p>
+    {% endif %}
+    <style>
+      @media (max-width: 812px) {
+        #archive-sale-lock-body,
+        #archive-sale-lock-tagline {
+          font-size: 14px !important;
+          letter-spacing: -0.22px !important;
+          line-height: 20px !important;
+        }
+      }
+    </style>
+    {% if settings.archive_sale_lock_opens_label != blank %}
+    <p id="archive-sale-lock-opens" style="font-family: 'Monument', sans-serif; font-size: 13px; letter-spacing: -0.2px; text-transform: uppercase; color: #777; margin: 40px 0 28px; line-height: 1.4; text-align: center;">
+      {{ settings.archive_sale_lock_opens_label }}<br/><strong id="archive-sale-open-date" style="color: #121212; font-weight: 400;"></strong>
+    </p>
+    {% endif %}
+    <style>
+      @media (max-width: 812px) {
+        #archive-sale-lock-heading {
+          font-size: 14px !important;
+          line-height: 16px !important;
+        }
+        #archive-sale-lock-opens {
+          font-size: 10px !important;
+          letter-spacing: -0.34px !important;
+        }
+      }
+    </style>
+
+    <details style="margin-top: 24px;">
+      <summary style="
+        font-family: 'Monument', sans-serif;
+        font-size: 11px;
+        letter-spacing: -0.22px;
+        text-transform: uppercase;
+        color: #999;
+        cursor: pointer;
+        list-style: none;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      ">Have a password?</summary>
+      <form id="archive-sale-lock-form" style="display: flex; gap: 8px; margin-top: 14px; max-width: 320px; margin-left: auto; margin-right: auto;">
+        <input
+          id="archive-sale-lock-input"
+          type="password"
+          placeholder="Password"
+          autocomplete="off"
+          style="
+            flex: 1;
+            padding: 10px 12px;
+            font-size: 13px;
+            border: 1px solid #d0d0cc;
+            background: transparent;
+            outline: none;
+            letter-spacing: 0.04em;
+            box-sizing: border-box;
+            font-family: inherit;
+          "
+        />
+        <button type="submit" style="
+          padding: 10px 18px;
+          font-size: 11px;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          background: #121212;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+          font-family: inherit;
+          white-space: nowrap;
+        ">
+          Enter
+        </button>
+      </form>
+      <p id="archive-sale-lock-error" style="
+        display: none;
+        color: #b00020;
+        font-size: 12px;
+        margin: 8px 0 0;
+      ">
+        Incorrect password.
+      </p>
+    </details>
+  </div>
+</div>
+
+<script>
+(function () {
+  var SESSION_KEY = 'archive-sale-unlocked';
+  var overlay = document.getElementById('archive-sale-lock-overlay');
+  if (!overlay) return;
+
+  var CORRECT_PASSWORD = {{ lock_password | json }};
+  var LOCK_END = new Date({{ lock_end | json }});
+
+  function unlock() {
+    try { sessionStorage.setItem(SESSION_KEY, '1'); } catch (e) {}
+    overlay.remove();
+    var backdrop = document.getElementById('archive-sale-lock-backdrop');
+    if (backdrop) backdrop.remove();
+    var lockStyle = document.getElementById('archive-sale-lock-body-style');
+    if (lockStyle) lockStyle.remove();
+  }
+
+  try {
+    if (sessionStorage.getItem(SESSION_KEY) === '1') { unlock(); return; }
+  } catch (e) {}
+
+  var openDate = document.getElementById('archive-sale-open-date');
+  if (openDate) {
+    openDate.textContent = LOCK_END.toLocaleString(undefined, {
+      day: 'numeric', month: 'long', year: 'numeric',
+      hour: '2-digit', minute: '2-digit', timeZoneName: 'short'
+    });
+  }
+
+  var cdH = document.getElementById('archive-sale-cd-h');
+  var cdM = document.getElementById('archive-sale-cd-m');
+  var cdS = document.getElementById('archive-sale-cd-s');
+
+  function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+  function tick() {
+    var r = Math.max(0, LOCK_END - new Date());
+    var t = Math.floor(r / 1000);
+    if (cdH) cdH.textContent = pad(Math.floor(t / 3600));
+    if (cdM) cdM.textContent = pad(Math.floor((t % 3600) / 60));
+    if (cdS) cdS.textContent = pad(t % 60);
+    if (r <= 0) { clearInterval(iv); unlock(); }
+  }
+
+  tick();
+  var iv = setInterval(tick, 1000);
+
+  var form  = document.getElementById('archive-sale-lock-form');
+  var input = document.getElementById('archive-sale-lock-input');
+  var error = document.getElementById('archive-sale-lock-error');
+
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (input && input.value === CORRECT_PASSWORD) {
+        clearInterval(iv);
+        unlock();
+      } else {
+        if (error) error.style.display = 'block';
+        if (input) { input.value = ''; input.focus(); }
+      }
+    });
+  }
+})();
+</script>
+{% endif %}

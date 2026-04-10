@@ -239,6 +239,9 @@
 {% section 'static-announcementbar' %}
 {% section 'static-header' %}
 <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+    {% if collection.handle == 'archive-sale' %}
+      {% render 'archive-sale-lock' %}
+    {% endif %}
     {{ content_for_layout }}
 </main>
 {% section 'drawer' %}

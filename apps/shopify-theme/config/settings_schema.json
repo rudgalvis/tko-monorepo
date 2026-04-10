@@ -505,5 +505,60 @@
         "default": 300
       }
     ]
+  },
+  {
+    "name": "Archive Sale Lock",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Archive Sale Password Protection"
+      },
+      {
+        "type": "checkbox",
+        "id": "archive_sale_lock_enabled",
+        "label": "Enable lock",
+        "default": false,
+        "info": "When enabled, the archive sale collection will be password protected until the end date below."
+      },
+      {
+        "type": "text",
+        "id": "archive_sale_lock_end",
+        "label": "Lock end (UTC)",
+        "info": "Format: YYYY-MM-DDTHH:MM — e.g. 2026-05-03T22:00. The lock is active from when enabled until this date."
+      },
+      {
+        "type": "text",
+        "id": "archive_sale_lock_password",
+        "label": "Password"
+      },
+      {
+        "type": "header",
+        "content": "Copy"
+      },
+      {
+        "type": "text",
+        "id": "archive_sale_lock_heading",
+        "label": "Heading",
+        "default": "Archive sale opens in"
+      },
+      {
+        "type": "textarea",
+        "id": "archive_sale_lock_body",
+        "label": "Body text",
+        "default": "Some of our most beloved knits are getting their final bow. Up to 60% off — but grab them fast, once they're gone, they're gone."
+      },
+      {
+        "type": "text",
+        "id": "archive_sale_lock_tagline",
+        "label": "Tagline (italic)",
+        "default": "Those are hayfever tears, we promise."
+      },
+      {
+        "type": "text",
+        "id": "archive_sale_lock_opens_label",
+        "label": "Opens publicly label",
+        "default": "Sale opens publicly on"
+      }
+    ]
   }
 ]
