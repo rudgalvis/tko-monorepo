@@ -97,6 +97,35 @@
       "settings": {
         "headertextalignment": "center"
       }
+    },
+    "static_onlytext_7LFWq9": {
+      "type": "static-onlytext",
+      "disabled": true,
+      "name": "Only Text Section No.1",
+      "settings": {
+        "onlyTextlayout": "top-bottom",
+        "bgOnlyTextCTA": "#eeeeea",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "SECRET SAMPLE SALE:  SHOP PERFECTLY IMPERFECT KNITS",
+        "maxwidthoftitle": 700,
+        "maxwidthoftitlemobiled": 250,
+        "bodytextOnlyTextCTA": "Deadstock? We don’t know her.\nOur secret sample sale is now live — featuring ever-so-slightly imperfect knits and one-of-a-kind production samples at a reduced price.",
+        "fontsizetune": "27px",
+        "maxwidthoftext": 1200,
+        "maxwidthoftextmobile": 1200,
+        "showurlOnlyTextCTA": false,
+        "linkOnlyTextCTA": "",
+        "linktextOnlyTextCTA": "",
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 20,
+        "containerbottom": 20,
+        "containertopmobile": 20,
+        "containerbottommobile": 20,
+        "sectionID": ""
+      }
     }
   },
   "order": [
@@ -104,6 +133,7 @@
     "static_two_column_mdeHcN",
     "static_link_Pz3hyX",
     "static_two_column_alt3_WBLbDp",
-    "main"
+    "main",
+    "static_onlytext_7LFWq9"
   ]
 }

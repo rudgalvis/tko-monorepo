@@ -19,7 +19,7 @@
         "b1d64983-ff5a-46f4-8283-b2ecb6dca949": {
           "type": "Collection",
           "settings": {
-            "colthumbimg": "shopify://shop_images/musa-sea-salt-merino-wool-vest-1745364.jpg",
+            "colthumbimg": "shopify://shop_images/laime-butter-yellow-silk-mohair-vest-1705477.jpg",
             "colthumbtext": "New Arrivals",
             "colthumburl": "shopify://collections/new-arrivals"
           }
@@ -35,7 +35,7 @@
         "bd57781e-ce52-46f5-9644-f91218830e2c": {
           "type": "Collection",
           "settings": {
-            "colthumbimg": "shopify://shop_images/delcia-dusty-pink-cotton-sweater-8397653.jpg",
+            "colthumbimg": "shopify://shop_images/delcia-oat-cotton-sweater-1084293.jpg",
             "colthumbtext": "Sweaters",
             "colthumburl": "shopify://collections/sweaters"
           }
@@ -43,7 +43,7 @@
         "e54308af-eebc-4dff-a58d-eb3d784f05aa": {
           "type": "Collection",
           "settings": {
-            "colthumbimg": "shopify://shop_images/kovas-raven-black-cotton-cardigan-6012828.jpg",
+            "colthumbimg": "shopify://shop_images/pagunda-dew-mohair-silk-cardigan-3872564.jpg",
             "colthumbtext": "Cardigans",
             "colthumburl": "shopify://collections/cardigans"
           }
@@ -91,6 +91,35 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "1768993032975ce19a": {
+      "type": "apps",
+      "blocks": {
+        "instafeed_app_block_yBmaJw": {
+          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+          "settings": {
+            "title": "AS SEEN ON YOU",
+            "title_color": "",
+            "title_size_v2": 0,
+            "alignment": "center",
+            "instafeed_margin_top": 0,
+            "instafeed_margin_bottom": 0,
+            "instafeed_margin_sides": 0,
+            "show_instagram_link": false,
+            "link_alignment": "left",
+            "link_color": "#000000",
+            "background_color": "",
+            "feed_id": "",
+            "html_area": ""
+          }
+        }
+      },
+      "block_order": [
+        "instafeed_app_block_yBmaJw"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
@@ -98,6 +127,7 @@
     "banner",
     "1717768511c13fc46b",
     "product-grid",
-    "17177687261f45a6e4"
+    "17177687261f45a6e4",
+    "1768993032975ce19a"
   ]
 }

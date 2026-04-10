@@ -1,0 +1,960 @@
+{% doc %}
+  @prompt
+    do a slider for 18 knitters profiles layed horizontally on the top, put the arrow buttons above the thumbnails. the photos of thumbnails should be black and white, except for the chosen knitter. also i need a profile of the chosen knitter below with the photo on the left and info about the knitter on the right (name and description). keep fonts and style the same as in the web, put the arrow buttons above the thumbnails. , i need a profile of the chosen knitter below with the photo on the left and info about the knitter on the right (name and description). , good. now when i choose one knitters' thumbnail, i need to see a profile of the chosen knitter below with the photo on the left and info about the knitter on the right (name and description). , make name font "New York" and a bit bigger. add a gap between name and description, great. but also chance the name font to "New York" under the thumbnail, ok, but delete the thumbnail name, only photo is enough, okay, on more thing: the arrows don't look like the whole theme. i need them to be black and minimal (with the horizontal tail and pointy edge), no background
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-knitters-slider-{{ ai_gen_id }} {
+    width: 100%;
+    overflow: hidden;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.padding_vertical }}px 0;
+    display: block;
+  }
+
+  .ai-knitters-slider__container-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .ai-knitters-slider__controls-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 24px;
+    padding: 0 {{ block.settings.side_padding }}px;
+  }
+
+  .ai-knitters-slider__button-{{ ai_gen_id }} {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-knitters-slider__button-{{ ai_gen_id }}:hover {
+    opacity: 0.6;
+  }
+
+  .ai-knitters-slider__button-{{ ai_gen_id }}:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+  }
+
+  .ai-knitters-slider__button-{{ ai_gen_id }} svg {
+    width: 32px;
+    height: 32px;
+    stroke: {{ block.settings.arrow_color }};
+    fill: none;
+  }
+
+  .ai-knitters-slider__track-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.gap }}px;
+    transition: transform 0.5s ease;
+    padding: 0 {{ block.settings.side_padding }}px;
+    margin-bottom: 40px;
+  }
+
+  .ai-knitters-slider__profile-{{ ai_gen_id }} {
+    flex: 0 0 {{ block.settings.profile_width }}px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .ai-knitters-slider__image-wrapper-{{ ai_gen_id }} {
+    width: {{ block.settings.profile_width }}px;
+    height: {{ block.settings.profile_width }}px;
+    border-radius: {{ block.settings.border_radius }}px;
+    overflow: hidden;
+    background-color: #f4f4f4;
+    transition: filter 0.3s ease;
+  }
+
+  .ai-knitters-slider__profile-{{ ai_gen_id }}:not(.active) .ai-knitters-slider__image-wrapper-{{ ai_gen_id }} img {
+    filter: grayscale(100%);
+  }
+
+  .ai-knitters-slider__profile-{{ ai_gen_id }}.active .ai-knitters-slider__image-wrapper-{{ ai_gen_id }} img {
+    filter: grayscale(0%);
+  }
+
+  .ai-knitters-slider__image-wrapper-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-knitters-slider__image-wrapper-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-knitters-slider__detail-{{ ai_gen_id }} {
+    display: none;
+    padding: 0 {{ block.settings.side_padding }}px;
+  }
+
+  .ai-knitters-slider__detail-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .ai-knitters-slider__detail-container-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.detail_gap }}px;
+    align-items: flex-start;
+    max-width: {{ block.settings.detail_max_width }}px;
+    margin: 0 auto;
+  }
+
+  .ai-knitters-slider__detail-image-wrapper-{{ ai_gen_id }} {
+    flex: 0 0 {{ block.settings.detail_image_width }}px;
+    width: {{ block.settings.detail_image_width }}px;
+    height: {{ block.settings.detail_image_height }}px;
+    border-radius: {{ block.settings.detail_border_radius }}px;
+    overflow: hidden;
+    background-color: #f4f4f4;
+  }
+
+  .ai-knitters-slider__detail-image-wrapper-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-knitters-slider__detail-image-wrapper-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-knitters-slider__detail-content-{{ ai_gen_id }} {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.detail_content_gap }}px;
+  }
+
+  .ai-knitters-slider__detail-name-{{ ai_gen_id }} {
+    font-family: {{ block.settings.name_font.family }}, {{ block.settings.name_font.fallback_families }};
+    font-weight: {{ block.settings.name_font.weight }};
+    font-size: {{ block.settings.detail_name_font_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 {{ block.settings.name_description_gap }}px 0;
+    line-height: 1.2;
+  }
+
+  .ai-knitters-slider__detail-description-{{ ai_gen_id }} {
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: {{ block.settings.body_font.weight }};
+    font-size: {{ block.settings.detail_description_font_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.6;
+  }
+
+  .ai-knitters-slider__detail-description-{{ ai_gen_id }} p {
+    margin: 0 0 1em 0;
+  }
+
+  .ai-knitters-slider__detail-description-{{ ai_gen_id }} p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-knitters-slider__profile-{{ ai_gen_id }} {
+      flex: 0 0 {{ block.settings.profile_width_mobile }}px;
+    }
+
+    .ai-knitters-slider__image-wrapper-{{ ai_gen_id }} {
+      width: {{ block.settings.profile_width_mobile }}px;
+      height: {{ block.settings.profile_width_mobile }}px;
+    }
+
+    .ai-knitters-slider__detail-container-{{ ai_gen_id }} {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .ai-knitters-slider__detail-image-wrapper-{{ ai_gen_id }} {
+      flex: 0 0 auto;
+      width: {{ block.settings.detail_image_width_mobile }}px;
+      height: {{ block.settings.detail_image_height_mobile }}px;
+    }
+
+    .ai-knitters-slider__detail-content-{{ ai_gen_id }} {
+      text-align: center;
+    }
+  }
+{% endstyle %}
+
+<knitters-slider-{{ ai_gen_id }} class="ai-knitters-slider-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-knitters-slider__container-{{ ai_gen_id }}">
+    <div class="ai-knitters-slider__controls-{{ ai_gen_id }}">
+      <button
+        class="ai-knitters-slider__button-{{ ai_gen_id }} ai-knitters-slider__button--prev-{{ ai_gen_id }}"
+        aria-label="Previous profiles"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </button>
+      <button
+        class="ai-knitters-slider__button-{{ ai_gen_id }} ai-knitters-slider__button--next-{{ ai_gen_id }}"
+        aria-label="Next profiles"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <div class="ai-knitters-slider__track-{{ ai_gen_id }}">
+      {% for i in (1..18) %}
+        {% liquid
+          assign image_key = 'knitter_' | append: i | append: '_image'
+          assign name_key = 'knitter_' | append: i | append: '_name'
+          assign description_key = 'knitter_' | append: i | append: '_description'
+          
+          assign knitter_image = block.settings[image_key]
+          assign knitter_name = block.settings[name_key]
+          assign knitter_description = block.settings[description_key]
+        %}
+        
+        <div class="ai-knitters-slider__profile-{{ ai_gen_id }} {% if i == 1 %}active{% endif %}" data-knitter-index="{{ i }}">
+          <div class="ai-knitters-slider__image-wrapper-{{ ai_gen_id }}">
+            {% if knitter_image %}
+              <img
+                src="{{ knitter_image | image_url: width: 400 }}"
+                alt="{{ knitter_name | escape }}"
+                loading="lazy"
+                width="400"
+                height="400"
+              >
+            {% else %}
+              {{ 'image' | placeholder_svg_tag }}
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% for i in (1..18) %}
+      {% liquid
+        assign image_key = 'knitter_' | append: i | append: '_image'
+        assign name_key = 'knitter_' | append: i | append: '_name'
+        assign description_key = 'knitter_' | append: i | append: '_description'
+        
+        assign knitter_image = block.settings[image_key]
+        assign knitter_name = block.settings[name_key]
+        assign knitter_description = block.settings[description_key]
+      %}
+      
+      <div class="ai-knitters-slider__detail-{{ ai_gen_id }} {% if i == 1 %}active{% endif %}" data-detail-index="{{ i }}">
+        <div class="ai-knitters-slider__detail-container-{{ ai_gen_id }}">
+          <div class="ai-knitters-slider__detail-image-wrapper-{{ ai_gen_id }}">
+            {% if knitter_image %}
+              <img
+                src="{{ knitter_image | image_url: width: 800 }}"
+                alt="{{ knitter_name | escape }}"
+                loading="lazy"
+                width="800"
+                height="800"
+              >
+            {% else %}
+              {{ 'image' | placeholder_svg_tag }}
+            {% endif %}
+          </div>
+
+          <div class="ai-knitters-slider__detail-content-{{ ai_gen_id }}">
+            {% if knitter_name != blank %}
+              <h2 class="ai-knitters-slider__detail-name-{{ ai_gen_id }}">{{ knitter_name }}</h2>
+            {% endif %}
+
+            {% if knitter_description != blank %}
+              <div class="ai-knitters-slider__detail-description-{{ ai_gen_id }}">
+                {{ knitter_description }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</knitters-slider-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class KnittersSlider{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentIndex = 0;
+        this.selectedKnitter = 1;
+        this.profileWidth = {{ block.settings.profile_width }};
+        this.gap = {{ block.settings.gap }};
+        this.sidePadding = {{ block.settings.side_padding }};
+      }
+
+      connectedCallback() {
+        this.track = this.querySelector('.ai-knitters-slider__track-{{ ai_gen_id }}');
+        this.prevButton = this.querySelector('.ai-knitters-slider__button--prev-{{ ai_gen_id }}');
+        this.nextButton = this.querySelector('.ai-knitters-slider__button--next-{{ ai_gen_id }}');
+        this.profiles = this.querySelectorAll('.ai-knitters-slider__profile-{{ ai_gen_id }}');
+        this.details = this.querySelectorAll('.ai-knitters-slider__detail-{{ ai_gen_id }}');
+        
+        this.setupEventListeners();
+        this.updateButtons();
+        this.handleResize();
+        
+        window.addEventListener('resize', () => this.handleResize());
+      }
+
+      handleResize() {
+        if (window.innerWidth <= 749) {
+          this.profileWidth = {{ block.settings.profile_width_mobile }};
+        } else {
+          this.profileWidth = {{ block.settings.profile_width }};
+        }
+        this.updateSliderPosition();
+      }
+
+      setupEventListeners() {
+        this.prevButton.addEventListener('click', () => this.slide(-1));
+        this.nextButton.addEventListener('click', () => this.slide(1));
+
+        this.profiles.forEach((profile) => {
+          profile.addEventListener('click', () => {
+            const index = parseInt(profile.dataset.knitterIndex);
+            this.selectKnitter(index);
+          });
+        });
+      }
+
+      selectKnitter(index) {
+        this.selectedKnitter = index;
+
+        this.profiles.forEach((profile) => {
+          profile.classList.remove('active');
+        });
+        this.profiles[index - 1].classList.add('active');
+
+        this.details.forEach((detail) => {
+          detail.classList.remove('active');
+        });
+        this.details[index - 1].classList.add('active');
+      }
+
+      getVisibleProfiles() {
+        const containerWidth = this.offsetWidth - (this.sidePadding * 2);
+        return Math.floor(containerWidth / (this.profileWidth + this.gap));
+      }
+
+      slide(direction) {
+        const visibleProfiles = this.getVisibleProfiles();
+        const maxIndex = Math.max(0, this.profiles.length - visibleProfiles);
+        
+        this.currentIndex += direction;
+        this.currentIndex = Math.max(0, Math.min(this.currentIndex, maxIndex));
+        
+        this.updateSliderPosition();
+        this.updateButtons();
+      }
+
+      updateSliderPosition() {
+        const offset = this.currentIndex * (this.profileWidth + this.gap);
+        this.track.style.transform = `translateX(-${offset}px)`;
+      }
+
+      updateButtons() {
+        const visibleProfiles = this.getVisibleProfiles();
+        const maxIndex = Math.max(0, this.profiles.length - visibleProfiles);
+        
+        this.prevButton.disabled = this.currentIndex === 0;
+        this.nextButton.disabled = this.currentIndex >= maxIndex;
+      }
+    }
+
+    customElements.define('knitters-slider-{{ ai_gen_id }}', KnittersSlider{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Knitters slider",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Slider layout"
+    },
+    {
+      "type": "range",
+      "id": "profile_width",
+      "label": "Thumbnail width (desktop)",
+      "min": 80,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "profile_width_mobile",
+      "label": "Thumbnail width (mobile)",
+      "min": 60,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between thumbnails",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "side_padding",
+      "label": "Side padding",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Thumbnail border radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Profile detail layout"
+    },
+    {
+      "type": "range",
+      "id": "detail_max_width",
+      "label": "Maximum width",
+      "min": 600,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "detail_image_width",
+      "label": "Image width (desktop)",
+      "min": 200,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "detail_image_height",
+      "label": "Image height (desktop)",
+      "min": 200,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "detail_image_width_mobile",
+      "label": "Image width (mobile)",
+      "min": 150,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 250
+    },
+    {
+      "type": "range",
+      "id": "detail_image_height_mobile",
+      "label": "Image height (mobile)",
+      "min": 150,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 250
+    },
+    {
+      "type": "range",
+      "id": "detail_gap",
+      "label": "Gap between image and text",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "detail_content_gap",
+      "label": "Gap in content area",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "name_description_gap",
+      "label": "Gap between name and text",
+      "min": 8,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "detail_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#EEEEEA"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "name_font",
+      "label": "Name font",
+      "default": "serif"
+    },
+    {
+      "type": "font_picker",
+      "id": "body_font",
+      "label": "Body font",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "range",
+      "id": "detail_name_font_size",
+      "label": "Profile name size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "detail_description_font_size",
+      "label": "Profile description size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Knitter 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "knitter_1_name",
+      "label": "Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_1_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Knitter 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "knitter_2_name",
+      "label": "Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_2_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Knitter 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "knitter_3_name",
+      "label": "Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_3_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Knitter 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "knitter_4_name",
+      "label": "Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_4_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Knitter 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_5_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "knitter_5_name",
+      "label": "Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_5_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Knitter 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_6_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "knitter_6_name",
+      "label": "Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_6_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Knitter 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_7_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "knitter_7_name",
+      "label": "Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_7_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Knitter 8"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_8_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "knitter_8_name",
+      "label": "Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_8_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Knitter 9"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_9_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "knitter_9_name",
+      "label": "Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_9_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Knitter 10"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_10_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "knitter_10_name",
+      "label": "Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_10_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Knitter 11"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_11_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "knitter_11_name",
+      "label": "Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_11_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Knitter 12"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_12_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "knitter_12_name",
+      "label": "Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_12_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Knitter 13"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_13_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "knitter_13_name",
+      "label": "Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_13_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Knitter 14"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_14_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "knitter_14_name",
+      "label": "Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_14_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Knitter 15"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_15_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "knitter_15_name",
+      "label": "Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_15_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Knitter 16"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_16_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "knitter_16_name",
+      "label": "Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_16_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Knitter 17"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_17_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "knitter_17_name",
+      "label": "Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_17_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Knitter 18"
+    },
+    {
+      "type": "image_picker",
+      "id": "knitter_18_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "knitter_18_name",
+      "label": "Name"
+    },
+    {
+      "type": "richtext",
+      "id": "knitter_18_description",
+      "label": "Description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Knitters slider"
+    }
+  ]
+}
+{% endschema %}

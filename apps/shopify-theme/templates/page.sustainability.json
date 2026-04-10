@@ -329,7 +329,7 @@
           "type": "Slider",
           "settings": {
             "eoyimage": "shopify://shop_images/A3A3068.jpg",
-            "eoyslidertitle": "Cashemere mix yarns",
+            "eoyslidertitle": "Cashmere mix yarns",
             "eoyslidercopy": "Our cashmere-blend yarns bring warmth and softness to timeless knitwear, crafted in partnership\nwith European mills known for their traceability and responsible production practices. We work only\nwith suppliers who prioritise animal welfare, transparency, and reduced environmental impact\nthroughout the supply chain. Many of the fibers we use come from certified or mulesing-free sources\nand are processed in facilities that meet recognised standards such as the Responsible Wool Standard\n(RWS), the Sustainable Fibre Alliance (SFA), or OEKO-TEX Standard 100. Our partners also invest\nin energy-efficient spinning, water recycling, and cleaner dyeing methods to minimise environmental\nimpact. The result is a luxuriously soft, long-lasting yarn that embodies quality, care, and conscious\ncraftsmanship.",
             "eoyslidersmall": "<p>USED FOR:<a href=\"/products/draugyste-rose-melange-cashmere-socks\" title=\"Draugystė: Rose Melange Cashmere Socks\"> RADVILAITĖ HEADPIECE, DRAUGYSTĖ</a></p>",
             "eoysmalltext": true,
@@ -482,7 +482,7 @@
         "borderlayouttwocl": "only-top",
         "textposition": "space-between",
         "sectionlayouttwocl": "text-image",
-        "headingcl": "It’s a conversation we’ll never <br> stop having",
+        "headingcl": "It’s a conversation we’ll never  stop having",
         "showtitletwo": true,
         "h2maxwidthdesktop": 450,
         "h2maxwidthmobile": 200,

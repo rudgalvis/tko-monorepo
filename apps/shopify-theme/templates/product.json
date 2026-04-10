@@ -146,15 +146,18 @@
     "1705487438322c4638": {
       "type": "apps",
       "blocks": {
-        "yotpo_product_photo_reviews_reviews_47zhVJ": {
-          "type": "shopify://apps/yotpo-product-reviews/blocks/reviews/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+        "judge_me_reviews_review_widget_3tJfUE": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
-            "product": "{{product}}"
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
           }
         }
       },
       "block_order": [
-        "yotpo_product_photo_reviews_reviews_47zhVJ"
+        "judge_me_reviews_review_widget_3tJfUE"
       ],
       "settings": {
         "include_margins": true
@@ -221,6 +224,35 @@
         "containertopmobile_": 50,
         "containerbottommobile_": 0
       }
+    },
+    "17689957089d303023": {
+      "type": "apps",
+      "blocks": {
+        "instafeed_app_block_44EHWt": {
+          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+          "settings": {
+            "title": "",
+            "title_color": "",
+            "title_size_v2": 0,
+            "alignment": "center",
+            "instafeed_margin_top": 0,
+            "instafeed_margin_bottom": 0,
+            "instafeed_margin_sides": 0,
+            "show_instagram_link": false,
+            "link_alignment": "left",
+            "link_color": "#000000",
+            "background_color": "",
+            "feed_id": "",
+            "html_area": ""
+          }
+        }
+      },
+      "block_order": [
+        "instafeed_app_block_44EHWt"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
@@ -228,9 +260,10 @@
     "main",
     "171776771318faeac7",
     "1705487438322c4638",
+    "17689957089d303023",
+    "1657101697e2c78553",
     "1657101662970126a6",
     "16571016824386821a",
-    "1657101697e2c78553",
     "16571017306de7ad3a"
   ]
 }

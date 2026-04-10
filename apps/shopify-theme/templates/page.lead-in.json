@@ -16,13 +16,13 @@
     "16400025067a204b40": {
       "type": "static-onlytext",
       "settings": {
-        "onlyTextlayout": "only-bottom",
+        "onlyTextlayout": "hide-border",
         "bgOnlyTextCTA": "#eeeeea",
         "colorOnlyTextCTA": "#000000",
         "headingOnlyTextCTA": "SECRET SAMPLE SALE:  SHOP PERFECTLY IMPERFECT KNITS",
         "maxwidthoftitle": 700,
         "maxwidthoftitlemobiled": 250,
-        "bodytextOnlyTextCTA": "Deadstock? We don’t know her. \nJoin our community to get access to the secret sample sale of ever-so-slightly imperfect knits and one-of-a-kind production samples at a reduced price. Doors open May 26th.",
+        "bodytextOnlyTextCTA": "Deadstock? We don’t know her. \nJoin our community to get access to the secret sample sale of ever-so-slightly imperfect knits and one-of-a-kind production samples at a reduced price.",
         "fontsizetune": "27px",
         "maxwidthoftext": 1200,
         "maxwidthoftextmobile": 320,
@@ -36,6 +36,53 @@
         "containertop": 50,
         "containerbottom": 50,
         "containertopmobile": 20,
+        "containerbottommobile": 20,
+        "sectionID": ""
+      }
+    },
+    "static_link_iCzxeM": {
+      "type": "static-link",
+      "name": "Link Section",
+      "settings": {
+        "onlyTextlayout": "top-bottom",
+        "linktext": "Access our community sale here",
+        "linkurl": "https://docs.google.com/spreadsheets/d/1yMbopGY8u01YminqNAiJSJMmV-xwqSHRk85E4Krwa8s/edit?usp=drivesdk",
+        "thisisbigurl": false,
+        "justheader": false,
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 20,
+        "containerbottom": 20,
+        "containertopmobile": 20,
+        "containerbottommobile": 20
+      }
+    },
+    "static_onlytext_79dqCD": {
+      "type": "static-onlytext",
+      "disabled": true,
+      "settings": {
+        "onlyTextlayout": "hide-border",
+        "bgOnlyTextCTA": "#b4bed6",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "",
+        "maxwidthoftitle": 700,
+        "maxwidthoftitlemobiled": 250,
+        "bodytextOnlyTextCTA": "Stock is limited so you'll want to act fast.",
+        "fontsizetune": "27px",
+        "maxwidthoftext": 1200,
+        "maxwidthoftextmobile": 320,
+        "showurlOnlyTextCTA": false,
+        "linkOnlyTextCTA": "",
+        "linktextOnlyTextCTA": "",
+        "padding_sizeup_sot": 11,
+        "padding_sizedow_sot": 13,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop": 50,
+        "containerbottom": 50,
+        "containertopmobile": 2,
         "containerbottommobile": 20,
         "sectionID": ""
       }
@@ -145,25 +192,6 @@
         "padding_sizeupm_section": 35,
         "padding_sizedownm_section": 15,
         "sectionID": "section-1"
-      }
-    },
-    "16401799220e8e4350": {
-      "type": "static-cta-subscribe",
-      "settings": {
-        "borderlayoutsub": "hide-border",
-        "subbgcolor": "#b4bed6",
-        "subheading": "BE THE FIRST IN LINE",
-        "subbody": "<p>Stock is limited so you'll want to act fast.</p>",
-        "maxwidthofcta": 980,
-        "maxwidthofctamobile": 300,
-        "padding_sizeup": 18,
-        "padding_sizedown": 21,
-        "padding_sizeupm": 14,
-        "padding_sizedownm": 10,
-        "containertop_": 62,
-        "containerbottom_": 33,
-        "containertopmobile_": 50,
-        "containerbottommobile_": 0
       }
     },
     "164009869053d5286d": {
@@ -277,8 +305,9 @@
     },
     "static_onlytext_alt_qU3ijY": {
       "type": "static-onlytext-alt",
+      "disabled": true,
       "settings": {
-        "onlyTextlayout_": "hide-border",
+        "onlyTextlayout_": "only-top",
         "headingOnlyTextCTA_": "Discover timeless artisan knits",
         "maxwidthoftitle_": 400,
         "maxwidthoftitlemobiled_": 400,
@@ -393,6 +422,7 @@
     },
     "static_hp_product_MatVDF": {
       "type": "static-hp-product",
+      "disabled": true,
       "settings": {
         "show_product_secondary_image": true,
         "selectedProduct": "homepage",
@@ -403,6 +433,7 @@
     },
     "static_link_7iJrMj": {
       "type": "static-link",
+      "disabled": true,
       "settings": {
         "onlyTextlayout": "hide-border",
         "linktext": "SEE ALL KNITS",
@@ -418,16 +449,85 @@
         "containertopmobile": 20,
         "containerbottommobile": 20
       }
+    },
+    "blocks_aXwTWG": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_4d02763_izFLqk": {
+          "type": "ai_gen_block_4d02763",
+          "settings": {
+            "max_width": 1200,
+            "section_padding_top": 50,
+            "section_padding_bottom": 50,
+            "section_padding_horizontal": 20,
+            "grid_gap": 40,
+            "mobile_grid_gap": 40,
+            "image_height": 400,
+            "mobile_image_height": 300,
+            "image_object_fit": "cover",
+            "hover_opacity": 70,
+            "caption_font": "assistant_n4",
+            "caption_font_size": 13,
+            "caption_font_weight": "400",
+            "caption_color": "#121212",
+            "caption_spacing": 15,
+            "press_image_1": "shopify://shop_images/laumes-black-merino-wool-sweater-780575.jpg",
+            "press_link_1": "",
+            "press_publication_1": "",
+            "press_title_1": "Knits with imperfections",
+            "press_image_2": "shopify://shop_images/TKO_2026_Guste_x_Gabriele6682.jpg",
+            "press_link_2": "",
+            "press_publication_2": "",
+            "press_title_2": "Sample pieces",
+            "press_image_3": "shopify://shop_images/delcia-fern-green-cotton-sweater-569776.jpg",
+            "press_link_3": "",
+            "press_publication_3": "",
+            "press_title_3": "Archive pieces"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_4d02763_izFLqk"
+      ],
+      "name": "Press mentions",
+      "settings": {}
+    },
+    "static_onlytext_alt_PQHNMT": {
+      "type": "static-onlytext-alt",
+      "name": "Only Text Section No.2",
+      "settings": {
+        "onlyTextlayout_": "top-bottom",
+        "headingOnlyTextCTA_": "",
+        "maxwidthoftitle_": 20,
+        "maxwidthoftitlemobiled_": 20,
+        "bodytextOnlyTextCTA_": "These are the pieces that didn’t make it to launch for small but meaningful reasons: colors we loved but didn’t release, knits that came out half an inch off (yes, we’re that precise), beautiful styles that didn’t make the final cut. They may not be flawless, but they carry the same craftsmanship, softness, and intention behind every stitch. And they deserve a second chance.\n\nWe have 151 pieces available, and it’s first come, first served. Prices start at €20, and all items are final sale.\n\n\nIf you have any questions, reach out to hello@theknottyones.com",
+        "maxwidthoftext_": 1200,
+        "maxwidthoftextmobile_": 320,
+        "showurlOnlyTextCTA_": false,
+        "linkOnlyTextCTA_": "",
+        "linktextOnlyTextCTA_": "",
+        "padding_sizeup_sot": 20,
+        "padding_sizedow_sot": 20,
+        "padding_sizeup_sotm": 20,
+        "padding_sizedow_sotm": 20,
+        "containertop_": 20,
+        "containerbottom_": 20,
+        "containertopmobile_": 20,
+        "containerbottommobile_": 20,
+        "sectionID": ""
+      }
     }
   },
   "order": [
     "main",
     "16400025067a204b40",
+    "static_link_iCzxeM",
+    "static_onlytext_79dqCD",
     "1640010261cb9fbbf2",
     "164001637237a519bf",
     "16446108729381799e",
     "164001900656e472ca",
-    "16401799220e8e4350",
     "164009869053d5286d",
     "1640097600a0caa913",
     "static_onlytext_alt_qU3ijY",
@@ -436,6 +536,8 @@
     "1640179650339e56d9",
     "1640179882f0ead277",
     "static_hp_product_MatVDF",
-    "static_link_7iJrMj"
+    "static_link_7iJrMj",
+    "blocks_aXwTWG",
+    "static_onlytext_alt_PQHNMT"
   ]
 }

@@ -1,0 +1,510 @@
+{% doc %}
+  @prompt
+    The section must be compatible with Shopify Online Store 2.0
+    
+    Use a 3-column CSS Grid layout (grid-template-columns: repeat(3, 1fr))
+    
+     no borders, no cards, no background boxes
+    
+    Each column contains:
+    
+    a clickable image that links to an external press article
+    
+    link opens in a new tab
+    
+    small, understated text underneath the image for:
+    
+    publication name
+    
+    article title
+    
+    Images should be uploaded via the Shopify section settings (image picker)
+    
+    Article links and text should be editable via section schema settings
+    
+    Typography should be minimal, modern, and editorial (luxury fashion feel)
+    
+    Add a very subtle hover effect (slight opacity change only)
+    
+    No buttons, no CTAs, no animations
+    
+    Desktop: 3 columns
+    
+    Mobile: stack into 1 column with spacing Additional requirements:
+    
+    The layout should not be full width. Add configurable horizontal margins / max-width so the content does not touch the edges of the screen.
+    
+    Include section settings that allow adjusting:
+    
+    image height and/or aspect ratio
+    
+    image object-fit (cover / contain)
+    
+    Add customizable typography controls specifically for the caption text under images, including:
+    
+    font family selection (inherit theme font or custom choice)
+    
+    font size (px or rem)
+    
+    font weight
+    
+    text color
+    
+    All spacing, image sizing, and typography controls must be editable via the Shopify theme editor, without code changes. Ensure that image resizing does not distort proportions and maintains an editorial, high-fashion appearance.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-press-mentions-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.section_padding_top }}px {{ block.settings.section_padding_horizontal }}px {{ block.settings.section_padding_bottom }}px;
+  }
+
+  .ai-press-mentions-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+  }
+
+  .ai-press-mentions-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+  }
+
+  .ai-press-mention-item-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ai-press-mention-link-{{ ai_gen_id }} {
+    display: block;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-press-mention-link-{{ ai_gen_id }}:hover {
+    opacity: {{ block.settings.hover_opacity | divided_by: 100.0 }};
+  }
+
+  .ai-press-mention-image-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+    height: {{ block.settings.image_height }}px;
+    overflow: hidden;
+    margin-bottom: {{ block.settings.caption_spacing }}px;
+  }
+
+  .ai-press-mention-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: {{ block.settings.image_object_fit }};
+    display: block;
+  }
+
+  .ai-press-mention-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-press-mention-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+    max-height: 200px;
+    opacity: 0.3;
+  }
+
+  .ai-press-mention-caption-{{ ai_gen_id }} {
+    {% if block.settings.caption_font == 'inherit' %}
+      font-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+    {% else %}
+      font-family: {{ block.settings.caption_font.family }}, {{ block.settings.caption_font.fallback_families }};
+    {% endif %}
+    font-size: {{ block.settings.caption_font_size }}px;
+    font-weight: {{ block.settings.caption_font_weight }};
+    color: {{ block.settings.caption_color }};
+    line-height: 1.4;
+  }
+
+  .ai-press-mention-publication-{{ ai_gen_id }} {
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: {{ block.settings.caption_font_size | times: 0.85 }}px;
+  }
+
+  .ai-press-mention-title-{{ ai_gen_id }} {
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-press-mentions-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: {{ block.settings.mobile_grid_gap }}px;
+    }
+
+    .ai-press-mentions-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_top | times: 0.7 }}px {{ block.settings.section_padding_horizontal | times: 0.5 }}px {{ block.settings.section_padding_bottom | times: 0.7 }}px;
+    }
+
+    .ai-press-mention-image-wrapper-{{ ai_gen_id }} {
+      height: {{ block.settings.mobile_image_height }}px;
+    }
+  }
+{% endstyle %}
+
+<press-mentions-{{ ai_gen_id }} class="ai-press-mentions-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-press-mentions-container-{{ ai_gen_id }}">
+    <div class="ai-press-mentions-grid-{{ ai_gen_id }}">
+      {% for i in (1..3) %}
+        {% liquid
+          assign image_key = 'press_image_' | append: i
+          assign link_key = 'press_link_' | append: i
+          assign publication_key = 'press_publication_' | append: i
+          assign title_key = 'press_title_' | append: i
+
+          assign press_image = block.settings[image_key]
+          assign press_link = block.settings[link_key]
+          assign press_publication = block.settings[publication_key]
+          assign press_title = block.settings[title_key]
+        %}
+
+        <div class="ai-press-mention-item-{{ ai_gen_id }}">
+          {% if press_link != blank %}
+            <a 
+              href="{{ press_link }}" 
+              class="ai-press-mention-link-{{ ai_gen_id }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Read article: {{ press_title | default: press_publication }}"
+            >
+          {% endif %}
+
+          <div class="ai-press-mention-image-wrapper-{{ ai_gen_id }}">
+            {% if press_image %}
+              <img
+                src="{{ press_image | image_url: width: 800 }}"
+                alt="{{ press_publication | escape }}"
+                loading="lazy"
+                width="{{ press_image.width }}"
+                height="{{ press_image.height }}"
+                class="ai-press-mention-image-{{ ai_gen_id }}"
+              >
+            {% else %}
+              <div class="ai-press-mention-image-placeholder-{{ ai_gen_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if press_link != blank %}
+            </a>
+          {% endif %}
+
+          <div class="ai-press-mention-caption-{{ ai_gen_id }}">
+            {% if press_publication != blank %}
+              <div class="ai-press-mention-publication-{{ ai_gen_id }}">
+                {{ press_publication }}
+              </div>
+            {% endif %}
+            {% if press_title != blank %}
+              <p class="ai-press-mention-title-{{ ai_gen_id }}">
+                {{ press_title }}
+              </p>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</press-mentions-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class PressMentions{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.style.display = 'block';
+      }
+    }
+
+    customElements.define('press-mentions-{{ ai_gen_id }}', PressMentions{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Press mentions",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "section_padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Grid gap (desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_grid_gap",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Grid gap (mobile)",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 200,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "label": "Image height (desktop)",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_height",
+      "min": 200,
+      "max": 500,
+      "step": 20,
+      "unit": "px",
+      "label": "Image height (mobile)",
+      "default": 300
+    },
+    {
+      "type": "select",
+      "id": "image_object_fit",
+      "label": "Image fit",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "range",
+      "id": "hover_opacity",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Hover opacity",
+      "default": 70
+    },
+    {
+      "type": "header",
+      "content": "Caption typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "caption_font",
+      "label": "Font family",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "range",
+      "id": "caption_font_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 13
+    },
+    {
+      "type": "select",
+      "id": "caption_font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "color",
+      "id": "caption_color",
+      "label": "Text color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "caption_spacing",
+      "min": 5,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Space below image",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Press mention 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "press_image_1",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "press_link_1",
+      "label": "Article link"
+    },
+    {
+      "type": "text",
+      "id": "press_publication_1",
+      "label": "Publication name",
+      "default": "Vogue"
+    },
+    {
+      "type": "text",
+      "id": "press_title_1",
+      "label": "Article title",
+      "default": "The Future of Sustainable Fashion"
+    },
+    {
+      "type": "header",
+      "content": "Press mention 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "press_image_2",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "press_link_2",
+      "label": "Article link"
+    },
+    {
+      "type": "text",
+      "id": "press_publication_2",
+      "label": "Publication name",
+      "default": "Elle"
+    },
+    {
+      "type": "text",
+      "id": "press_title_2",
+      "label": "Article title",
+      "default": "Minimalist Wardrobe Essentials"
+    },
+    {
+      "type": "header",
+      "content": "Press mention 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "press_image_3",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "press_link_3",
+      "label": "Article link"
+    },
+    {
+      "type": "text",
+      "id": "press_publication_3",
+      "label": "Publication name",
+      "default": "Harper's Bazaar"
+    },
+    {
+      "type": "text",
+      "id": "press_title_3",
+      "label": "Article title",
+      "default": "Timeless Pieces Worth Investing In"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press mentions"
+    }
+  ]
+}
+{% endschema %}

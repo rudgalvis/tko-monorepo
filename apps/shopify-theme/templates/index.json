@@ -15,11 +15,11 @@
         "0e9ae8b2-9428-43ec-b04c-dddf10ea1b00": {
           "type": "Slider",
           "settings": {
-            "slide-image": "shopify://shop_images/Collection_-_Desktop_7d49c2a1-25c8-4167-a99d-a66aea041591.jpg",
-            "slide-image-mobile": "shopify://shop_images/Collection_-_Desktop_7d49c2a1-25c8-4167-a99d-a66aea041591.jpg",
-            "slide-text": "Artisan Gift Shop",
-            "button-text": "SHOP NOW",
-            "button-link": "shopify://collections/holiday-gifts",
+            "slide-image": "shopify://shop_images/Collection_Signature__Delcia_Cover_Desktop_23b3a55b-e2e3-4c1c-b02b-6c9a91007e42_1.jpg",
+            "slide-image-mobile": "shopify://shop_images/prietema-fantasy-blue-crochet-cotton-jacket-204272.jpg",
+            "slide-text": "Archive Sale",
+            "button-text": "SHOP HERE",
+            "button-link": "shopify://collections/archive-sale",
             "slide-text-color": "#ffffff"
           }
         },
@@ -214,20 +214,21 @@
         "containerbottommobile": 20
       }
     },
-    "static_two_column_RRztMx": {
+    "static_two_column_CDMabw": {
       "type": "static-two-column",
+      "disabled": true,
       "settings": {
-        "borderlayouttwocl": "hide-border",
-        "textposition": "center",
-        "sectionlayouttwocl": "image-text",
-        "headingcl": "THE HOLIDAY EDIT",
+        "borderlayouttwocl": "only-bottom",
+        "textposition": "space-between",
+        "sectionlayouttwocl": "text-image",
+        "headingcl": "WE’RE IN THE MOOD FOR GIVING",
         "showtitletwo": true,
-        "h2maxwidthdesktop": 443,
+        "h2maxwidthdesktop": 440,
         "h2maxwidthmobile": 280,
-        "bodycl": "Not every celebration needs sequins.\nSome call for silk threads, sculptural shapes, and just the right shade of red. Limited-edition knits for the season and the moment.",
-        "pmaxwidthdesktop": 485,
+        "bodycl": "Get cashmere Draugystė Socks on us with your €100 order.\n\nAnd with every order until Christmas, we’ll add €10 to the Knitters’ Dream Fund.",
+        "pmaxwidthdesktop": 440,
         "pmaxwidthmobile": 280,
-        "cl-image": "shopify://shop_images/Homepage_Square_900x900_d0de1619-1a09-4597-aaa7-7776cda30c51.jpg",
+        "cl-image": "shopify://shop_images/1_7f09f160-b29b-4697-a4d0-3872964a6dd8.jpg",
         "padding_sizeupm_section": 15,
         "padding_sizedownm_section": 15,
         "padding_sizeup": 15,
@@ -236,7 +237,33 @@
         "padding_sizedownm": 15,
         "showurlcl": true,
         "linkTextcl": "SHOP NOW",
-        "linkclUrl": "shopify://collections/holiday-edit",
+        "linkclUrl": "shopify://collections/ready-to-ship",
+        "sectionID": ""
+      }
+    },
+    "static_two_column_RRztMx": {
+      "type": "static-two-column",
+      "settings": {
+        "borderlayouttwocl": "hide-border",
+        "textposition": "center",
+        "sectionlayouttwocl": "image-text",
+        "headingcl": "CO-DESIGNED WITH JANUARY JONES",
+        "showtitletwo": true,
+        "h2maxwidthdesktop": 443,
+        "h2maxwidthmobile": 280,
+        "bodycl": "The January Cardigan brings together a shared appreciation for heritage knitwear. Inspired by 1940s silhouettes and traditional fisherman knits, crafted from soft merino wool. Limited edition of 20 pieces.",
+        "pmaxwidthdesktop": 485,
+        "pmaxwidthmobile": 280,
+        "cl-image": "shopify://shop_images/Homepage_Square_900x900_6e696b41-2aa8-4b90-b63f-620bb18d3c42.jpg",
+        "padding_sizeupm_section": 15,
+        "padding_sizedownm_section": 15,
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "showurlcl": true,
+        "linkTextcl": "SHOP NOW",
+        "linkclUrl": "shopify://products/january-jones-merino-wool-cardigan",
         "sectionID": ""
       }
     },
@@ -285,47 +312,20 @@
         "padding_sizedownsectionmobile": 45
       }
     },
-    "static_two_column_CDMabw": {
-      "type": "static-two-column",
-      "settings": {
-        "borderlayouttwocl": "only-bottom",
-        "textposition": "space-between",
-        "sectionlayouttwocl": "text-image",
-        "headingcl": "THE SWEATER EDIT",
-        "showtitletwo": true,
-        "h2maxwidthdesktop": 440,
-        "h2maxwidthmobile": 280,
-        "bodycl": "Sweater wheather has arrived. \nEffortless layers, elevated textures, and versatile silhouettes - discover sweaters made for cooler days and endless styling.",
-        "pmaxwidthdesktop": 440,
-        "pmaxwidthmobile": 280,
-        "cl-image": "shopify://shop_images/heartbreaker-speckled-grey-wool-sweater-3452497.jpg",
-        "padding_sizeupm_section": 15,
-        "padding_sizedownm_section": 15,
-        "padding_sizeup": 15,
-        "padding_sizedown": 15,
-        "padding_sizeupm": 15,
-        "padding_sizedownm": 15,
-        "showurlcl": true,
-        "linkTextcl": "SHOP NOW",
-        "linkclUrl": "shopify://collections/sweaters",
-        "sectionID": ""
-      }
-    },
     "static_two_column_BWirn3": {
       "type": "static-two-column",
-      "disabled": true,
       "settings": {
         "borderlayouttwocl": "only-top",
         "textposition": "space-between",
         "sectionlayouttwocl": "image-text",
-        "headingcl": "THE LILAC EDIT: 20% OFF",
+        "headingcl": "New In: Silk-Mohair Knits",
         "showtitletwo": true,
         "h2maxwidthdesktop": 440,
         "h2maxwidthmobile": 280,
-        "bodycl": "This season’s most coveted shade, reimagined in summer-ready knits. For a limited time, enjoy special offers on bestselling lilac pieces starting at 20% off (or more!).",
+        "bodycl": "Spring is unpredictable. Your wardrobe shouldn’t be. Enter, silk-mohair knits: soft on the skin, light under a jacket.",
         "pmaxwidthdesktop": 440,
         "pmaxwidthmobile": 280,
-        "cl-image": "shopify://shop_images/Homepage_Square_900x900_870da088-f0d9-49ab-ad07-327ef5eb04d5.jpg",
+        "cl-image": "shopify://shop_images/Indraja_Ads_Square.png",
         "padding_sizeupm_section": 15,
         "padding_sizedownm_section": 15,
         "padding_sizeup": 15,
@@ -334,7 +334,7 @@
         "padding_sizedownm": 15,
         "showurlcl": true,
         "linkTextcl": "SHOP NOW",
-        "linkclUrl": "shopify://collections/lilac-edit",
+        "linkclUrl": "shopify://collections/new-arrivals",
         "sectionID": ""
       }
     },
@@ -394,7 +394,7 @@
         "af03a630-8238-4ee0-ab57-bb3f7fa57627": {
           "type": "Image",
           "settings": {
-            "c3colimage": "shopify://shop_images/Homepage-Danute_700x874_0f1ae4ce-3042-449c-8ccb-f43c5b29120d.webp",
+            "c3colimage": "shopify://shop_images/Danute-bio_424x539_690d901a-219d-4b09-a055-136f138f0682.webp",
             "nameofknitter": "Danutė",
             "descriptionknitter": "Danutė considers knitting her own personal form of meditation. Knitting is one thing that makes her truly happy; that and her three Persian cats."
           }
@@ -402,15 +402,15 @@
         "5214f13a-f736-4004-8811-01cffaf7a446": {
           "type": "Image",
           "settings": {
-            "c3colimage": "shopify://shop_images/Homepage-Virginija_700x874_d0378e3b-9eff-4954-8519-59a7d382364d.webp",
-            "nameofknitter": "Virginija",
-            "descriptionknitter": "No one knows our Laumės, Preila and Milda knits better than Virginija. As our Quality Control Manager, she checks each garment before it’s posted to you."
+            "c3colimage": "shopify://shop_images/Knitters_Photos_1_5c1e618a-01f7-4242-baff-d7b0676df8d2.jpg",
+            "nameofknitter": "Jurgita",
+            "descriptionknitter": "She says knitting is her favorite kind of therapy and meditation. She only knits when she’s in a good mood so, if you feel extra good vibes when you wear your knit, you’ve got Jurgita to thank."
           }
         },
         "f9f6b262-6ec1-4f59-82a3-e412a493dafd": {
           "type": "Image",
           "settings": {
-            "c3colimage": "shopify://shop_images/Homepage-Ingrida_700x874_7ae9a8a8-7167-4fcd-a411-9d7026e834aa.webp",
+            "c3colimage": "shopify://shop_images/Ingrida-bio_424x539_d988b53d-33b9-41c8-a7d8-8ec7efe10ff8.webp",
             "nameofknitter": "Ingrida",
             "descriptionknitter": "She's an early bird who typically wakes up at 4am, just to get some peace and quiet (in her words) before her five children, including 2 pairs of twins, wake up."
           }
@@ -516,7 +516,7 @@
       "settings": {
         "borderlayouttwoclalt": "only-top",
         "altsectionlayouttwocl": "text-image",
-        "clalt-image": "shopify://shop_images/Vejavaikis2.jpg",
+        "clalt-image": "shopify://shop_images/delcia-olive-cotton-sweater-9177495.jpg",
         "altheadingcl": "Vėjavaikis",
         "maxwidthoftitle": 300,
         "maxwidthoftitlemobiled": 300,
@@ -555,32 +555,6 @@
         "padding_sizedownsectiondesktop": 90,
         "padding_sizeupsectionmobile": 18,
         "padding_sizedownsectionmobile": 18
-      }
-    },
-    "static_two_column_Pa6NN8": {
-      "type": "static-two-column",
-      "settings": {
-        "borderlayouttwocl": "hide-border",
-        "textposition": "space-between",
-        "sectionlayouttwocl": "image-text",
-        "headingcl": "COME SAY HI IN PERSON AT OUR SHOWROOM IN VILNIUS, LITHUANIA",
-        "showtitletwo": true,
-        "h2maxwidthdesktop": 440,
-        "h2maxwidthmobile": 280,
-        "bodycl": "Cool stuff here: our new spring knits, bestsellers, online exchanges and returns, styling tips.",
-        "pmaxwidthdesktop": 600,
-        "pmaxwidthmobile": 400,
-        "cl-image": "shopify://shop_images/Homepage_Square_900x900_7db1d9a6-cd38-4044-b4dc-d6ad977730e4.jpg",
-        "padding_sizeupm_section": 15,
-        "padding_sizedownm_section": 15,
-        "padding_sizeup": 15,
-        "padding_sizedown": 15,
-        "padding_sizeupm": 15,
-        "padding_sizedownm": 15,
-        "showurlcl": true,
-        "linkTextcl": "HOW TO GET THERE",
-        "linkclUrl": "shopify://pages/vilnius-showroom",
-        "sectionID": ""
       }
     },
     "1635174300442e79c2": {
@@ -653,9 +627,9 @@
     "1634312997cd1a9ecc",
     "1634918258b848ff3a",
     "16479497105534c601",
+    "static_two_column_CDMabw",
     "static_two_column_RRztMx",
     "1634559204e2be8fc2",
-    "static_two_column_CDMabw",
     "static_two_column_BWirn3",
     "163481622598749a4b",
     "1717769143b2e15dbb",
@@ -666,7 +640,6 @@
     "1634828385d66a479d",
     "1635168495ecf65d5c",
     "static_trust_slider_fxM6Gr",
-    "static_two_column_Pa6NN8",
     "1635174300442e79c2",
     "1657026851b9d7dff3",
     "61596d23-13de-4e60-9861-989fe7fd1717",

@@ -97,6 +97,35 @@
         "containertopmobile": 20,
         "containerbottommobile": 20
       }
+    },
+    "1768994600e8509ce0": {
+      "type": "apps",
+      "blocks": {
+        "instafeed_app_block_BBfEQi": {
+          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+          "settings": {
+            "title": "AS SEEN ON YOU",
+            "title_color": "",
+            "title_size_v2": 0,
+            "alignment": "center",
+            "instafeed_margin_top": 0,
+            "instafeed_margin_bottom": 0,
+            "instafeed_margin_sides": 0,
+            "show_instagram_link": false,
+            "link_alignment": "left",
+            "link_color": "#000000",
+            "background_color": "",
+            "feed_id": "",
+            "html_area": ""
+          }
+        }
+      },
+      "block_order": [
+        "instafeed_app_block_BBfEQi"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
@@ -105,6 +134,7 @@
     "16491555928618b435",
     "static_collection_link_section_Bj8Ajk",
     "1648817586b25c2c98",
-    "1653579272b0d0b0b7"
+    "1653579272b0d0b0b7",
+    "1768994600e8509ce0"
   ]
 }

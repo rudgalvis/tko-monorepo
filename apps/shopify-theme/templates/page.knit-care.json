@@ -11,8 +11,7 @@
   "sections": {
     "main": {
       "type": "main-knit-care",
-      "settings": {
-      }
+      "settings": {}
     },
     "1640524672c03325da": {
       "type": "static-page-hero",
@@ -61,7 +60,7 @@
           "type": "Accordion",
           "settings": {
             "typeofknit": "WOOL/ALPACA",
-            "accordionimage": "shopify://shop_images/2-Wool-Your-knits-other-home_684x662_730a7835-6925-4050-a2e6-ad03d5b2cce8.webp",
+            "accordionimage": "shopify://shop_images/The-Knotty-Ones-40.jpg",
             "accordionheading": "How to store your knit",
             "accordioncopy": "Wool sweaters are the most delicate and should be stored folded in a cool, dry place rather than on hangers. This can cause your new sweater to stretch and lose its shape. Avoid hanging anything knitted: weight and gravity are not your friends here and the weight of the knit over time will cause it to stretch and distort from its original shape. We recommend folding all knitted garments.",
             "knitaccordionbadge": false,
@@ -87,7 +86,7 @@
           "type": "Accordion",
           "settings": {
             "typeofknit": "WOOL/ALPACA",
-            "accordionimage": "shopify://shop_images/4-Wool-Mom-approved-spot-cleaning_2_684x662_58fa6b56-a362-47af-a885-fc415756439d.webp",
+            "accordionimage": "shopify://shop_images/laime-sea-salt-merino-wool-vest-3141541.jpg",
             "accordionheading": "How to spot clean your knit",
             "accordioncopy": "Use a spot cleaner if your knit only has a little dirt in one teeny place. If you need to remove stains, use only gentle natural soap. You can also try to remove stains by brushing the fabric gently but, professional tip: never rub! For food spills, brush off the food particles as best as you can, and gently clean the area with a sponge and soapy water. And, if you want to be super safe, just take it to the dry cleaners.",
             "knitaccordionbadge": false,
@@ -100,7 +99,7 @@
           "type": "Accordion",
           "settings": {
             "typeofknit": "WOOL/ALPACA",
-            "accordionimage": "shopify://shop_images/5-Wool-Dry-cleaner-tips-you-didnt-know-you-needed_684x662_bc473229-e305-4721-b513-591beb8a3e88.webp",
+            "accordionimage": "shopify://shop_images/e-gift-292337.png",
             "accordionheading": "Finding the right dry cleaner",
             "accordioncopy": "We recommend dry cleaning all of our knits using professional cleaners that offer sustainable/green/safe dry cleaning. These cleaners often use water as the primary solvent, which can substantially reduce toxicity and the CO2 emissions associated with garment care. When you're dropping off your knits, make sure to request that your sweaters are returned folded and bagged, as hanging will cause them to stretch and lose their shape.",
             "knitaccordionbadge": false,
@@ -126,7 +125,7 @@
           "type": "Accordion",
           "settings": {
             "typeofknit": "WOOL/ALPACA",
-            "accordionimage": "shopify://shop_images/7-Wool-Keeping-your-knits-safe_684x662_fb2383bd-50ab-4097-9e0e-fbf53e22cab7.webp",
+            "accordionimage": "shopify://shop_images/1_7f09f160-b29b-4697-a4d0-3872964a6dd8.jpg",
             "accordionheading": "How to protect your knits",
             "accordioncopy": "Turns out moths are pretty big fans of knitwear, too.\n\nThe best way to protect your knits from moths is to keep natural bug repellent in your knit drawers. Bonus: this can also make your knits smell great, as you can use things like blocks of aromatic cedar or lavender or cade oil. If you're storing your woolies for longer periods of time, place them in a cotton or linen storage bag (as opposed to an airtight plastic bin) so they can breathe.",
             "knitaccordionbadge": false,

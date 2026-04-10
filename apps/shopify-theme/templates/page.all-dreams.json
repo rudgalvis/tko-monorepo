@@ -61,10 +61,10 @@
         "onlyTextlayout": "hide-border",
         "bgOnlyTextCTA": "#eeeeea",
         "colorOnlyTextCTA": "#000000",
-        "headingOnlyTextCTA": "Black Friday, Meaningful Edition",
+        "headingOnlyTextCTA": "",
         "maxwidthoftitle": 800,
         "maxwidthoftitlemobiled": 400,
-        "bodytextOnlyTextCTA": "Join our Give Some, Get Some initiative - this year we’re raising €10,000 to make our artisans’ dreams come true.\nAdd a contribution to the Dream Fund at checkout and help make dreams like a coffee maker for Danutė or a seaside escape for Rima a reality.",
+        "bodytextOnlyTextCTA": "Every Black Friday, we run Give Some, Get Some initiative. In 2025, our goal was to raise €10,000 to help make our artisans’ dreams come true. Thanks to you, we’ve raised €5,645 - enough to fulfil six dreams by spring 2026.\n\nYou can still take part. Add a contribution to the Dream Fund at checkout and help turn wishes like a new coffee maker for Danutė or a seaside escape for Rima into reality.",
         "fontsizetune": "27px",
         "maxwidthoftext": 1099,
         "maxwidthoftextmobile": 400,
@@ -115,22 +115,6 @@
             "accordionheadingdream": "Rūta",
             "accordionsubdream": "A trip to Israel with her husband",
             "accordioncopydream": "",
-            "dreamurlcontrol": false,
-            "fundurltext": "",
-            "fundurl": "",
-            "enablefund": true,
-            "multiplier_fund": 5,
-            "fundproduct": "for-the-dream-fund"
-          }
-        },
-        "accordion_bXzqW7": {
-          "type": "Accordion",
-          "settings": {
-            "dreamaccordionimage": "shopify://shop_images/Ingrida-bio_424x539_d988b53d-33b9-41c8-a7d8-8ec7efe10ff8.webp",
-            "dreamaccordionthumb": "shopify://shop_images/Ingrida-icon_124x124_e267492b-9a8a-4ec0-85cc-8b165a586a49.webp",
-            "accordionheadingdream": "Ingrida",
-            "accordionsubdream": "A Holiday Trip in Lithuania",
-            "accordioncopydream": "A holiday trip through Lithuania - that’s Ingrida’s dream. A few peaceful days to rest, explore, and recharge before returning to the knits she loves. Every morning at 4 a.m., she wakes before her five children (including two pairs of twins!) for a quiet cup of tea, a gratitude practice, and a moment to dream.",
             "dreamurlcontrol": false,
             "fundurltext": "",
             "fundurl": "",
@@ -317,7 +301,6 @@
       "block_order": [
         "e19065a3-3ba9-4858-9040-c9afb205bead",
         "2a4d7bcd-8cdb-4391-b328-c8894a6ff5e2",
-        "accordion_bXzqW7",
         "accordion_dUQTnK",
         "d7146837-c390-4e5a-a571-751df82e82cf",
         "b1d7c562-234d-4ffd-949a-1c3691c8bb7c",
@@ -333,6 +316,144 @@
       "settings": {
         "accordionlayoutdream": "hide-border",
         "sectionheading": "Knitter's Dreams",
+        "padding_sizeup": 0,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "showheader": true,
+        "notfirst": true,
+        "hidedescription": false,
+        "sectionID": ""
+      }
+    },
+    "static_the_dreams_accordion_Dzhw3A": {
+      "type": "static-the-dreams-accordion",
+      "blocks": {
+        "accordion_rJcxG3": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Screenshot_2026-03-19_at_18.11.31.png",
+            "dreamaccordionthumb": "shopify://shop_images/Screenshot_2026-03-19_at_18.11.31.png",
+            "accordionheadingdream": "Ingrida",
+            "accordionsubdream": "Holiday trip in Lithuania",
+            "accordioncopydream": "Ingrida's dream was simple: a quiet holiday trip through Lithuania. A few peaceful days to rest and explore. She chose Gradiali Spa as her destination, and thanks to you, she enjoyed a well-earned weekend there.\nIngrida is a mum of five including two pairs of twins!). She usually starts her day at 4 a.m. with a quiet cup of tea, a gratitude practice, and a moment to dream. So this getaway isn't just a treat, it's a reset before the festive season kicks in.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": ""
+          }
+        },
+        "accordion_EA8R9J": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Screenshot_2026-03-19_at_17.06.28.png",
+            "dreamaccordionthumb": "shopify://shop_images/Screenshot_2026-03-19_at_17.06.28.png",
+            "accordionheadingdream": "Jurgita",
+            "accordionsubdream": "Aesthetic dental fillings",
+            "accordioncopydream": "Jurgita has been part of our knitting family for quite some time, crafting many of your handmade favorites.\nHer dream was simple: a smile that shines as brightly as her spirit.\nThanks to your support, we teamed up with a dental clinic in Panevežys to help her make that dream come true with aesthetic sealing. Now, Jurgita's beautiful smile matches the warmth she's always shared with others.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": ""
+          }
+        },
+        "accordion_8hYKah": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Screenshot_2026-04-01_at_11.08.44.png",
+            "dreamaccordionthumb": "shopify://shop_images/Screenshot_2026-04-01_at_11.08.44.png",
+            "accordionheadingdream": "Svetlana",
+            "accordionsubdream": "Sewing Machine",
+            "accordioncopydream": "Svetlana has been part of our knitting family for years - a creative spirit whose love for making things started in childhood, sewing tiny outfits for her dolls before she ever picked up a pair of needles. Later, a friend at school taught her to knit, and she simply never stopped.\nHer dream was to return to her first passion and refresh her sewing skills so she could start creating her own clothes again.\nThanks to our Knitters' Dream Fund, we helped make that dream come true. Svetlana is now the proud owner of a new sewing machine and excited to bring her ideas to life, stitch by stitch.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": ""
+          }
+        },
+        "accordion_Ya4Cfy": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Screenshot_2026-03-20_at_12.34.22.png",
+            "dreamaccordionthumb": "shopify://shop_images/Screenshot_2026-03-20_at_12.34.22.png",
+            "accordionheadingdream": "Rūta",
+            "accordionsubdream": "Pilgrimage",
+            "accordioncopydream": "Ruta has been part of our knitting family for years - a curious soul with a love for\ndiscovering new places and stories. Ever since she was a child, travelling sparked her imagination, but life, family, and work often kept her close to home.\nHer dream was simple yet deeply personal: to finally explore somewhere far beyond her local town and reconnect with that sense of wonder she had growing up.\nThanks to our Knitters' Dream Fund, we helped make that dream come true. Ruta spent a week in Cyprus, taking in its culture, history, and food.\nHer favourite moments were the warmth of the people she met and the seaside views of Paphos - a trip she'll treasure for years to come.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": ""
+          }
+        },
+        "accordion_rB67qn": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Nijole-Fulfilled-Dream_848x1074_05123ea6-25f1-4f81-8a1d-86e0769ec3c2.webp",
+            "dreamaccordionthumb": "shopify://shop_images/Screenshot_2026-04-01_at_10.47.11.png",
+            "accordionheadingdream": "Nijolė",
+            "accordionsubdream": "Nutritionist Consultations",
+            "accordioncopydream": "Nijolė has been part of our knitting family for years - a calm, steady presence whose warmth you can feel in every stitch she makes.\nHer dream was to learn how to better care for her health through nutrition, especially while managing diabetes.\nThanks to our Knitters' Dream Fund, we helped make that dream come true. Nijolė is now working with a licensed dietitian to create a balanced meal plan that helps her feel her best.\nHearing her say how touched she was that\n\"others do care\" reminds us why this fund matters so much.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": ""
+          }
+        },
+        "accordion_38Cnmc": {
+          "type": "Accordion",
+          "settings": {
+            "dreamaccordionimage": "shopify://shop_images/Aldona_1200x1800_fd3208b3-116f-4b6d-a9d4-8cd04c6a4c6c.jpg",
+            "dreamaccordionthumb": "shopify://shop_images/Aldona-icon.jpg",
+            "accordionheadingdream": "Aldona",
+            "accordionsubdream": "Elliptical Machine",
+            "accordioncopydream": "Back in the days when the world slowed down, our lovely knitter Aldona started dreaming about a way to stay active between her knitting sessions.\n\nThanks to our Knitter's Dream Fund, we were able to make that dream come true - getting Aldona her very own elliptical machine so she could keep moving and feel energized while doing what she loves the most.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": false,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        },
+        "accordion_P3Gktx": {
+          "type": "Accordion",
+          "disabled": true,
+          "settings": {
+            "accordionheadingdream": "Angelė",
+            "accordionsubdream": "",
+            "accordioncopydream": "Angelė struggles with health issues and has always dreamt of spending a weekend filled with procedures and physical therapy to learn how to take care of herself in the future. We want to gift her a health-spa package with expert recommendations, doctor-approved procedures and massages, physical therapy and more, so she can learn how best to alleviate her pain and prevent it from getting any worse.",
+            "dreamurlcontrol": false,
+            "fundurltext": "",
+            "fundurl": "",
+            "enablefund": true,
+            "multiplier_fund": 5,
+            "fundproduct": "for-the-dream-fund"
+          }
+        }
+      },
+      "block_order": [
+        "accordion_rJcxG3",
+        "accordion_EA8R9J",
+        "accordion_8hYKah",
+        "accordion_Ya4Cfy",
+        "accordion_rB67qn",
+        "accordion_38Cnmc",
+        "accordion_P3Gktx"
+      ],
+      "name": "Fulfilled Dream Accordion",
+      "settings": {
+        "accordionlayoutdream": "hide-border",
+        "sectionheading": "Fulfilled Dreams",
         "padding_sizeup": 0,
         "padding_sizedown": 15,
         "padding_sizeupm": 15,
@@ -370,6 +491,7 @@
     "static_onlytext_E3kXcV",
     "donation_counter_WXKtPL",
     "164777237130782034",
+    "static_the_dreams_accordion_Dzhw3A",
     "1647775481c865e478"
   ]
 }

@@ -205,7 +205,7 @@
           "settings": {
             "videocollage": false,
             "collagevideo": "",
-            "caollageimage": "shopify://shop_images/TKO_poducts_studio_20250222.jpg",
+            "caollageimage": "shopify://shop_images/Collection_-_Mobile-2_7cff67a6-739a-493d-9cd9-daf6399d0851.jpg",
             "caollagecolor": "",
             "collagetext": "",
             "caollagecolortext": ""
@@ -228,88 +228,175 @@
         "padding_sizedownm": 11
       }
     },
-    "1640267763d0ad4410": {
-      "type": "static-meet-the-knitters",
+    "1774003236948bf3f1": {
+      "type": "_blocks",
       "blocks": {
-        "1880d70d-4902-46dc-ae29-51f70a5634aa": {
-          "type": "Slider",
+        "ai_gen_block_ae26055_4D4aCm": {
+          "type": "ai_gen_block_ae26055",
           "settings": {
-            "contentimage": "shopify://shop_images/Knitters_Photos.jpg",
-            "contentheading": "Danutė",
-            "contentcopy": "You won’t find anyone who loves their 9-5 quite as much as our knitter Danutė does. A ray of sunshine, Danutė adores knitting above anything and considers it her own personal form of meditation. Knitting is one thing that makes her truly happy; that and her 3 Persian cats. One woman that she’s constantly inspired by and is most proud of is her daughter.",
-            "thumbimage": "shopify://shop_images/Knitters_Icons_3.jpg"
-          }
-        },
-        "917dbf8b-e202-4c79-9a0f-b7a20f47fbc4": {
-          "type": "Slider",
-          "settings": {
-            "contentimage": "shopify://shop_images/Knitters_Photos_1_5c1e618a-01f7-4242-baff-d7b0676df8d2.jpg",
-            "contentheading": "Jurgita",
-            "contentcopy": "Jurgita's an avid knitter, frequent baker and lover of active travel. Jurgita got loads of compliments on the first knit she made for herself, so she decided to take the craft more seriously. Now, it's one of her biggest passions. She says knitting is her favorite kind of therapy and meditation. She only knits when she’s in a good mood so, if you feel extra good vibes when you wear your knit, you’ve got Jurgita to thank.",
-            "thumbimage": "shopify://shop_images/Knitters_Icons_2.jpg"
-          }
-        },
-        "1db60e66-2f69-4284-b6eb-618c1285df67": {
-          "type": "Slider",
-          "settings": {
-            "contentimage": "shopify://shop_images/Ruta-bio_420x526_52461e5e-4cf5-48bd-b83e-e4c6f0e582aa.webp",
-            "contentheading": "Rūta",
-            "contentcopy": "Rūta started knitting when she was only five years old, which means she has almost 50 years of experience under her belt. In case you thought that wasn't impressive enough, she's also a licensed veterinarian! Rūta lives only a few minutes away from our warehouse in Prienai so often drops by for tea and chats with the warehouse team and also personally delivers her knits by hand.",
-            "thumbimage": "shopify://shop_images/Ruta-BW-icon_99x99_ba79f084-86ce-4a93-b37f-925e35b662ec.webp"
-          }
-        },
-        "c47705fd-d4bf-436c-bab5-52496b88736a": {
-          "type": "Slider",
-          "settings": {
-            "contentimage": "shopify://shop_images/Aldona-bio_420x526_c9b5428a-4384-4697-9f1e-3ba6a7608053.webp",
-            "contentheading": "Aldona",
-            "contentcopy": "Aldona likes to take two to three months off each summer so she can focus on her garden, where she grows berries, veggies and apple trees. This is great for us, as she always fills our pockets with apples whenever we drop by for a visit! She was one of our very first knitters and has been with us since 2015.",
-            "thumbimage": "shopify://shop_images/Aldona-BW-icon_99x99_33f10bc6-fd74-45c3-97b4-2acbaca007bd.webp"
-          }
-        },
-        "d009941b-ec05-40a9-9022-59d8e90d1ace": {
-          "type": "Slider",
-          "settings": {
-            "contentimage": "shopify://shop_images/Knitters_Photos_1.jpg",
-            "contentheading": "Ingrida",
-            "contentcopy": "Every day, Ingrida tries to remind herself that she’s happy and has a beautiful, healthy family: she's big on practicing gratitude. She's an early bird who typically wakes up at 4am, just to get some peace and quiet (in her words) before her five children, including 2 pairs of twins, wake up! Ingrida always spends her time knitting thinking about new patterns she'd like to play around with.",
-            "thumbimage": "shopify://shop_images/Knitters_Icons_4.jpg"
-          }
+            "title": "MEET ALL KNITTERS",
+            "title_size": 24,
+            "mobile_title_size": 24,
+            "title_color": "#121212",
+            "text_alignment": "center",
+            "show_top_line": false,
+            "show_bottom_line": true,
+            "line_thickness": 1,
+            "line_spacing": 50,
+            "line_color": "#313131",
+            "padding_top": 50,
+            "padding_bottom": 25,
+            "padding_horizontal": 15,
+            "background_color": "#eeeeea",
+            "desktop_width_percent": 100
+          },
+          "blocks": {}
         }
       },
       "block_order": [
-        "1880d70d-4902-46dc-ae29-51f70a5634aa",
-        "917dbf8b-e202-4c79-9a0f-b7a20f47fbc4",
-        "1db60e66-2f69-4284-b6eb-618c1285df67",
-        "c47705fd-d4bf-436c-bab5-52496b88736a",
-        "d009941b-ec05-40a9-9022-59d8e90d1ace"
+        "ai_gen_block_ae26055_4D4aCm"
       ],
-      "settings": {
-        "knitterslayoutpage": "hide-border",
-        "padding_sizeup_sot": 20,
-        "padding_sizedow_sot": 0,
-        "padding_sizeup_sotm": 20,
-        "padding_sizedow_sotm": 0,
-        "sliderheading": "MEET THE KNITTERS",
-        "sectionID": "section-2"
-      }
+      "settings": {}
     },
-    "1653484412354d3133": {
-      "type": "static-link",
+    "17740002219a57f3a3": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_857ec52_3RkRWd": {
+          "type": "ai_gen_block_857ec52",
+          "settings": {
+            "profile_width": 120,
+            "profile_width_mobile": 80,
+            "gap": 16,
+            "side_padding": 10,
+            "padding_vertical": 10,
+            "border_radius": 65,
+            "detail_max_width": 1600,
+            "detail_image_width": 460,
+            "detail_image_height": 540,
+            "detail_image_width_mobile": 300,
+            "detail_image_height_mobile": 330,
+            "detail_gap": 50,
+            "detail_content_gap": 20,
+            "name_description_gap": 52,
+            "detail_border_radius": 0,
+            "background_color": "#eeeeea",
+            "text_color": "#121212",
+            "arrow_color": "#000000",
+            "name_font": "serif",
+            "body_font": "sans_serif_n4",
+            "detail_name_font_size": 56,
+            "detail_description_font_size": 24,
+            "knitter_1_image": "shopify://shop_images/Screenshot_2026-03-20_at_12.31.16.png",
+            "knitter_1_name": "Danutė",
+            "knitter_1_description": "<p>You won’t find anyone who loves their 9-5 quite as much as our knitter Danutė does. A ray of sunshine, Danutė adores knitting above anything and considers it her own personal form of meditation. Knitting is one thing that makes her truly happy; that and her 3 Persian cats. One woman that she’s constantly inspired by and is most proud of is her daughter.</p>",
+            "knitter_2_image": "shopify://shop_images/Screenshot_2026-03-20_at_12.34.22.png",
+            "knitter_2_name": "Rūta",
+            "knitter_2_description": "<p>Rūta started knitting when she was only five years old, which means she has almost 50 years of experience under her belt. In case you thought that wasn't impressive enough, she's also a licensed veterinarian! Rūta lives only a few minutes away from our warehouse in Prienai so often drops by for tea and chats with the warehouse team. This means she also personally delivers her knits by hand, which we're super grateful for.</p>",
+            "knitter_3_image": "shopify://shop_images/Aldona_1200x1800_fd3208b3-116f-4b6d-a9d4-8cd04c6a4c6c.jpg",
+            "knitter_3_name": "Aldona",
+            "knitter_3_description": "<p>Aldona likes to take two to three months off each summer so she can focus on her garden, where she grows berries, veggies and apple trees. This is great for us, as she always fills our pockets with apples whenever we drop by for a visit! She was one of our very first knitters and has been with us since 2015.</p>",
+            "knitter_4_image": "shopify://shop_images/Screenshot_2026-03-19_at_18.11.31.png",
+            "knitter_4_name": "Ingrida",
+            "knitter_4_description": "<p>Every day, Ingrida tries to remind herself that she’s happy and has a beautiful, healthy family: she's big on practicing gratitude. She's an early bird who typically wakes up at 4am, just to get some peace and quiet (in her words) before her five children, including 2 pairs of twins, wake up! Ingrida always spends her time knitting thinking about new patterns she'd like to play around with.</p>",
+            "knitter_5_image": "shopify://shop_images/Zaneta_9754c76b-467a-4a29-b008-6d0ebcef75bf.jpg",
+            "knitter_5_name": "Žaneta",
+            "knitter_5_description": "<p>Žaneta started taking knitting seriously in fifth grade, when she wanted new clothes but couldn't buy any due to lack of supply during the Soviet period. The answer? To make use of the knitting skills and make a new skirt or sweater herself, copying the patterns from magazines. Her favorite combo for relaxation is watching a movie while knitting. She doesn't have a particular favorite, but mostly watches Russian movies.</p>",
+            "knitter_6_image": "shopify://shop_images/Daina_0dd8d785-cb00-4783-adda-8b9ead6c6d3a.jpg",
+            "knitter_6_name": "Daina",
+            "knitter_6_description": "<p>Each morning, Daina starts her day with a cup of coffee with cinnamon sprinkles. That’s one of her non-negotiables. The rest of the day could go in any direction - maybe she will zipline over one of her local rivers in Lithuania or maybe she’ll dye her hair red again (the silliest thing she’s done - her words).</p>",
+            "knitter_7_image": "shopify://shop_images/Screenshot_2026-03-21_at_11.20.13.png",
+            "knitter_7_name": "Marina",
+            "knitter_7_description": "<p>Marina started knitting back in middle school, when she won a Handcraft Competition using crochet napkins made by her mother. Afraid of being caught out, she actually learned how to crochet before learning to knit. Now, every single knit we produce goes past Marina first. She not only manages more than 70 knitters, but she also trained them and made any alterations to your knit before it arrived at your door.</p>",
+            "knitter_8_image": "shopify://shop_images/Screenshot_2026-03-21_at_11.22.43.png",
+            "knitter_8_name": "Ingrida",
+            "knitter_8_description": "<p>Before we headhunted Ingrida as our professional multi-tasker, she used to work at a theme park baking pancakes and later she worked at a big garment factory in Lithuania. Now she basically runs our warehouse: accepting knits as they arrive, checking, folding, packing, labeling and sending them off. She has exceptional attention to detail and she personally quality-checked your knit before handing it over to a courier.</p>",
+            "knitter_9_image": "shopify://shop_images/Virginija_1200x1800_a8438d03-e1f1-4f50-ba72-c3ab39a73d7e.jpg",
+            "knitter_9_name": "Virginija",
+            "knitter_9_description": "<p>No one knows our Laumės, Preila and Milda knits better than Virginija does. As a Quality Control Manager at our partner factory, she personally checks each garment before it’s posted to you. You don’t want to mess with Virginija: not only is she the boss, she also has a great eye for spotting errors. Virginija loves taking 30km bike rides a few times a week.</p>",
+            "knitter_10_image": "shopify://shop_images/Screenshot_2026-03-21_at_11.25.32.png",
+            "knitter_10_name": "Violeta",
+            "knitter_10_description": "<p>We’re pretty envious of Violeta’s steaming skills. Every single knit (including yours) is steamed and folded by Violeta, which is how they arrive so beautifully fresh. It’s a skill our moms wish we were able to do, too. Violeta spends her free time reading crime and romance novels and is a huge fan of anything with Hercule Poirot.</p>",
+            "knitter_11_image": "shopify://shop_images/Screenshot_2026-03-21_at_11.27.14.png",
+            "knitter_11_name": "Mrs Zina",
+            "knitter_11_description": "<p>Mrs Zina is the definition of a true matriarch. She started her knitting career back in the Soviet Union days, as a 19-year-old with a four-month-old baby by her side. When her husband was away working in Kazakhstan, Mrs Zina was secretly knitting in a rented garage. Even though now she’s in charge of her own factory with over 20 employees, she still likes to get involved with crafting a Preila or Laumės knit herself.</p>",
+            "knitter_12_image": "shopify://shop_images/Screenshot_2026-03-21_at_11.29.08.png",
+            "knitter_12_name": "Neringa",
+            "knitter_12_description": "<p>Neringa still remembers knitting her first orange sock sitting by the fireplace. Now she mostly knits sweaters, but once she's sourced the perfect yarn, she dreams of knitting a classy two piece: a blazer and a skirt. All of Neringa's time is spent knitting; it's not only a job but also her biggest hobby. Neringa also loves baking and makes a mean Chebureki (a national Crimean Tatar dish) as well as pies and pizzas.</p>",
+            "knitter_13_image": "shopify://shop_images/Screenshot_2026-03-19_at_17.06.28.png",
+            "knitter_13_name": "Jurgita",
+            "knitter_13_description": "<p>Jurgita's an avid knitter, frequent baker and lover of active travel. Jurgita got loads of compliments on the first knit she made for herself, so she decided to take the craft more seriously. Now, it's one of her biggest passions. She says knitting is her favorite kind of therapy and meditation. She only knits when she’s in a good mood so, if you feel extra good vibes when you wear your knit, you’ve got Jurgita to thank.</p>",
+            "knitter_14_image": "shopify://shop_images/Screenshot_2026-03-21_at_11.31.47.png",
+            "knitter_14_name": "Judita",
+            "knitter_14_description": "<p>For Judita, knitting isn’t just a skill - it’s a way of life. She learned from her mother at a young age and was hooked immediately, even crocheting little gifts for her mom as a child. By the time she was ten, she had already knitted her first sweater. These days, she can’t even watch a movie without knitting in her hands. It’s safe to say knitting is second nature to her.</p>",
+            "knitter_15_image": "shopify://shop_images/Screenshot_2026-03-21_at_11.33.21.png",
+            "knitter_15_name": "Jūratė",
+            "knitter_15_description": "<p>Jūratė has been knitting for as long as she can remember. Back in her student days, she would knit clothes for herself, and later, her children grew up wrapped in her handmade pieces. Even now, her family eagerly awaits her knits - especially her husband, who refuses to wear store-bought sweaters. For Jūratė, knitting is more than a craft; it's her peaceful escape. She has a cozy knitting corner at home where she spends countless hours, lost in the rhythm of the stitches.</p>",
+            "knitter_16_image": "shopify://shop_images/Screenshot_2026-03-21_at_11.35.31.png",
+            "knitter_16_name": "Danutė",
+            "knitter_16_description": "<p>Danutė has been knitting for The Knotty Ones for over five years now. For her, it’s more than just making garments - it’s a way to unwind, recharge, and find a moment of calm in the everyday. With a cup of coffee by her side and no cats to curl up in her lap, it’s just her and the joy of knitting. It’s a quiet ritual that brings her fulfillment and a sense of purpose, one stitch at a time.</p>",
+            "knitter_17_image": "shopify://shop_images/Screenshot_2026-03-21_at_11.37.12.png",
+            "knitter_17_name": "Valerija",
+            "knitter_17_description": "<p>Valerija has been knitting since she was six years old, and her needles have followed her through every stage of life. For her, knitting isn’t just a craft - it’s pure joy. Discovering The Knotty Ones felt like finding a hidden gem, and she calls it one of the best surprises along her journey. Unlike the typical image of a knitter, Valerija doesn’t sip coffee while she knits - she finishes it first. And though she has no cats to tangle up her yarn, she manages just fine without furry assistants.</p>",
+            "knitter_18_image": "shopify://shop_images/Screenshot_2026-03-21_at_11.38.47.png",
+            "knitter_18_name": "Laima",
+            "knitter_18_description": "<p>Laima has been crafting since her school days, a passion inherited from her mother. Over the years, she's explored knitting, crocheting, and embroidery - once even running a cozy outdoor café where she baked kibinai with care. Now, at 55, Laima enjoys the calm of solo life in a new city, finding joy in contributing to The Knotty Ones. She's especially grateful to Marina for keeping her engaged with new patterns and projects. Not every design goes perfectly the first time, she says with a smile - but they always find a way forward together.</p>"
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_ae26055_QzTd8d": {
+          "type": "ai_gen_block_ae26055",
+          "name": "Title text",
+          "settings": {
+            "title": ";",
+            "title_size": 16,
+            "mobile_title_size": 12,
+            "title_color": "#eeeeea",
+            "text_alignment": "center",
+            "show_top_line": true,
+            "show_bottom_line": false,
+            "line_thickness": 1,
+            "line_spacing": 15,
+            "line_color": "#313131",
+            "padding_top": 25,
+            "padding_bottom": 0,
+            "padding_horizontal": 0,
+            "background_color": "#eeeeea",
+            "desktop_width_percent": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_857ec52_3RkRWd",
+        "ai_gen_block_ae26055_QzTd8d"
+      ],
+      "settings": {}
+    },
+    "1640537616c18afe0e": {
+      "type": "static-onlytext",
       "settings": {
         "onlyTextlayout": "only-bottom",
-        "linktext": "SEE ALL KNITTERS",
-        "linkurl": "shopify://pages/see-all-knitters",
-        "thisisbigurl": false,
-        "justheader": false,
-        "padding_sizeup_sot": 40,
-        "padding_sizedow_sot": 20,
+        "bgOnlyTextCTA": "#eeeeea",
+        "colorOnlyTextCTA": "#000000",
+        "headingOnlyTextCTA": "",
+        "maxwidthoftitle": 20,
+        "maxwidthoftitlemobiled": 20,
+        "bodytextOnlyTextCTA": "“Made in Lithuania.” Nope. \nMore like “What’ve you been reading lately, Virginija?” or “What’re you baking this weekend, Ingrida?”",
+        "fontsizetune": "27px",
+        "maxwidthoftext": 1160,
+        "maxwidthoftextmobile": 300,
+        "showurlOnlyTextCTA": false,
+        "linkOnlyTextCTA": "",
+        "linktextOnlyTextCTA": "",
+        "padding_sizeup_sot": 70,
+        "padding_sizedow_sot": 94,
         "padding_sizeup_sotm": 20,
         "padding_sizedow_sotm": 20,
         "containertop": 20,
-        "containerbottom": 38,
-        "containertopmobile": 20,
-        "containerbottommobile": 20
+        "containerbottom": 20,
+        "containertopmobile": 15,
+        "containerbottommobile": 32,
+        "sectionID": ""
       }
     },
     "1644594325eebf8fda": {
@@ -332,33 +419,6 @@
         "padding_sizeupm_section": 27,
         "padding_sizedownm_section": 0,
         "sectionID": "section-3"
-      }
-    },
-    "1640537616c18afe0e": {
-      "type": "static-onlytext",
-      "settings": {
-        "onlyTextlayout": "only-bottom",
-        "bgOnlyTextCTA": "#eeeeea",
-        "colorOnlyTextCTA": "#000000",
-        "headingOnlyTextCTA": "",
-        "maxwidthoftitle": 20,
-        "maxwidthoftitlemobiled": 20,
-        "bodytextOnlyTextCTA": "“Made in Lithuania.” Nope. \nMore like “What’ve you been reading lately, Virginija?” or “What’re you baking this weekend, Ingrida?”",
-        "fontsizetune": "27px",
-        "maxwidthoftext": 1160,
-        "maxwidthoftextmobile": 300,
-        "showurlOnlyTextCTA": false,
-        "linkOnlyTextCTA": "",
-        "linktextOnlyTextCTA": "",
-        "padding_sizeup_sot": 91,
-        "padding_sizedow_sot": 95,
-        "padding_sizeup_sotm": 20,
-        "padding_sizedow_sotm": 20,
-        "containertop": 20,
-        "containerbottom": 20,
-        "containertopmobile": 15,
-        "containerbottommobile": 32,
-        "sectionID": ""
       }
     },
     "16445946127f12c018": {
@@ -420,7 +480,7 @@
           "settings": {
             "pageherobuttext": "SEE ALL KNITTERS’ DREAMS",
             "herobuttonColor": "light",
-            "herourl": "shopify://pages/dream-fund"
+            "herourl": "shopify://pages/see-all-dreams"
           }
         }
       },
@@ -449,10 +509,10 @@
     "1647179955e138dcaa",
     "1647374180b9af9f48",
     "16405372972b43bab6",
-    "1640267763d0ad4410",
-    "1653484412354d3133",
-    "1644594325eebf8fda",
+    "1774003236948bf3f1",
+    "17740002219a57f3a3",
     "1640537616c18afe0e",
+    "1644594325eebf8fda",
     "16445946127f12c018",
     "1644876171ff86ce90",
     "1640537776fe890e26"

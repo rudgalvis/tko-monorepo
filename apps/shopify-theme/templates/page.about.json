@@ -229,6 +229,29 @@
         "padding_sizedownm": 18
       }
     },
+    "static_two_column_alt3_LhgXYk": {
+      "type": "static-two-column-alt3",
+      "name": "2 Column Layout No.3",
+      "settings": {
+        "borderlayouttwoclthreealt": "only-bottom",
+        "altsectionlayouttwthree": "image-text",
+        "nopadding": false,
+        "altthreeimage": "shopify://shop_images/Homepage_Square_900x900_37718455-0341-4191-9765-055b48bf2a4d.jpg",
+        "altheadingclthree": "GROWTH WITH A POINT OF VIEW",
+        "h2maxwidthdesktop": 600,
+        "h2maxwidthmobile": 300,
+        "altbodyclthree": "<p>Every company reaches a moment where it has to decide how it wants to grow. For us, that moment came when we met Sergio Azzolari. We connected instantly over a shared point of view: craftsmanship, authenticity, and conscious consumption matter now more than ever.</p><p><em>“I’m joining The Knotty Ones with great enthusiasm. It’s a unique brand where values come together with contemporary design and deep respect for the craft of knitting. Today, Europe is turning toward Nordic aesthetics and more conscious consumption, with more people seeking long-lasting, responsibly made clothing. These trends are only growing stronger and, I believe, will continue for a long time, which is why The Knotty Ones has every opportunity to achieve significant international success,”</em> says Sergio.</p>",
+        "pmaxwidthdesktop": 600,
+        "pmaxwidthmobile": 300,
+        "padding_sizeup": 15,
+        "padding_sizedown": 15,
+        "padding_sizeupm": 15,
+        "padding_sizedownm": 15,
+        "padding_sizeupm_section": 15,
+        "padding_sizedownm_section": 15,
+        "sectionID": ""
+      }
+    },
     "1640097600a0caa913": {
       "type": "static-two-column-text",
       "settings": {
@@ -453,7 +476,7 @@
       "settings": {
         "borderlayoutsub": "only-top",
         "subbgcolor": "#b4bed6",
-        "subheading": "20% OFF YOUR FIRST ORDER",
+        "subheading": "10% OFF YOUR FIRST ORDER",
         "subbody": "<p>Good things come to those who subscribe. We don’t spam.<br/>Pinky promise</p>",
         "maxwidthofcta": 980,
         "maxwidthofctamobile": 280,
@@ -476,6 +499,7 @@
     "16446108729381799e",
     "164001900656e472ca",
     "164009869053d5286d",
+    "static_two_column_alt3_LhgXYk",
     "1640097600a0caa913",
     "1640096383fb219167",
     "1640179165e980a659",

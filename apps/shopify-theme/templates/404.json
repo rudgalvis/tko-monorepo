@@ -11,15 +11,14 @@
   "sections": {
     "main": {
       "type": "main-404",
-      "settings": {
-      }
+      "settings": {}
     },
     "static_onlytext_DPYakx": {
       "type": "static-onlytext",
       "disabled": true,
       "settings": {
         "onlyTextlayout": "top-bottom",
-        "bgOnlyTextCTA": "#EEEEEA",
+        "bgOnlyTextCTA": "#eeeeea",
         "colorOnlyTextCTA": "#000000",
         "headingOnlyTextCTA": "Oops! THIS KNIT SEEMS TO HAVE VANISHED",
         "maxwidthoftitle": 950,
@@ -41,10 +40,22 @@
         "containerbottommobile": 20,
         "sectionID": ""
       }
+    },
+    "static_hp_product_zGUqGR": {
+      "type": "static-hp-product",
+      "name": "Home Page Collection",
+      "settings": {
+        "show_product_secondary_image": true,
+        "selectedProduct": "homepage",
+        "showproductheader": true,
+        "productheadertext": "KNITS TO FALL IN LOVE WITH",
+        "bottomURL": ""
+      }
     }
   },
   "order": [
     "main",
-    "static_onlytext_DPYakx"
+    "static_onlytext_DPYakx",
+    "static_hp_product_zGUqGR"
   ]
 }

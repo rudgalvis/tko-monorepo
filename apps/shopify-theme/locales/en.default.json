@@ -212,7 +212,7 @@
       }
     },
     "404": {
-      "title": "Page not found",
+      "title": "Oops! This knit seems to have vanished",
       "subtext": "404"
     }
   },

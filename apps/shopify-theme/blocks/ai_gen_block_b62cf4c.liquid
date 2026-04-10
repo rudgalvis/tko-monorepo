@@ -1,0 +1,635 @@
+{% doc %}
+  @prompt
+    The section must be compatible with Shopify Online Store 2.0 Use a 3-column CSS Grid layout (grid-template-columns: repeat(3, 1fr)) no borders, no cards, no background boxes Each column contains: a clickable image that links to an external press article link opens in a new tab small, understated text underneath the image for: publication name article title Images should be uploaded via the Shopify section settings (image picker) Article links and text should be editable via section schema settings Typography should be minimal, modern, and editorial (luxury fashion feel) Add a very subtle hover effect (slight opacity change only) No buttons, no CTAs, no animations Desktop: 3 columns Mobile: stack into 1 column with spacing Additional requirements: The layout should not be full width. Add configurable horizontal margins / max-width so the content does not touch the edges of the screen. Include section settings that allow adjusting: image height and/or aspect ratio image object-fit (cover / contain) Add customizable typography controls specifically for the caption text under images, including: font family selection (inherit theme font or custom choice) font size (px or rem) font weight text color All spacing, image sizing, and typography controls must be editable via the Shopify theme editor, without code changes. Ensure that image resizing does not distort proportions and maintains an editorial, high-fashion appearance. Add a standalone text link underneath the caption text:
+    
+    - Display a small editorial-style text link under the publication name and article title.
+    - Default link text: “Click here to read”.
+    - The link text must be editable via the Shopify section schema settings.
+    - This text link must be a separate element from the image link (clicking the image and clicking the text link must be two distinct actions).
+    - The URL for this “Click here to read” link must be editable independently from the image link.
+    - The link must open immediately in a new tab without any confirmation or warning dialogs, using target="_blank" and rel="noopener noreferrer".
+    - The link must be underlined by default, with a thin, minimal underline suitable for an editorial, luxury aesthetic.
+    - On hover and focus, apply only a very subtle opacity change (no animations).
+    - No button styling, no cards, no background, no icons.
+    - Include theme editor controls for this link’s typography (font family, font size, font weight, text color) and spacing (margin-top).
+    - Ensure accessibility with a visible focus state and appropriate aria-label (e.g., “Read [Article Title] on [Publication]”).
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-press-mentions-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.section_padding_top }}px {{ block.settings.section_padding_horizontal }}px {{ block.settings.section_padding_bottom }}px;
+  }
+
+  .ai-press-mentions-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+  }
+
+  .ai-press-mentions-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+  }
+
+  .ai-press-mention-item-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ai-press-mention-image-link-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-press-mention-image-link-{{ ai_gen_id }}:hover {
+    opacity: {{ block.settings.hover_opacity }};
+  }
+
+  .ai-press-mention-image-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+    height: {{ block.settings.image_height }}px;
+    overflow: hidden;
+  }
+
+  .ai-press-mention-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: {{ block.settings.image_object_fit }};
+  }
+
+  .ai-press-mention-caption-{{ ai_gen_id }} {
+    margin-top: {{ block.settings.caption_margin_top }}px;
+    font-family: {% if block.settings.caption_font_family == 'inherit' %}{{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }}{% else %}{{ block.settings.caption_font_family.family }}, {{ block.settings.caption_font_family.fallback_families }}{% endif %};
+    font-size: {{ block.settings.caption_font_size }}px;
+    font-weight: {{ block.settings.caption_font_weight }};
+    color: {{ block.settings.caption_text_color }};
+    line-height: 1.5;
+  }
+
+  .ai-press-mention-publication-{{ ai_gen_id }} {
+    margin: 0 0 {{ block.settings.caption_line_spacing }}px 0;
+  }
+
+  .ai-press-mention-title-{{ ai_gen_id }} {
+    margin: 0 0 {{ block.settings.caption_line_spacing }}px 0;
+  }
+
+  .ai-press-mention-read-link-{{ ai_gen_id }} {
+    display: inline-block;
+    margin-top: {{ block.settings.read_link_margin_top }}px;
+    font-family: {% if block.settings.read_link_font_family == 'inherit' %}{{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }}{% else %}{{ block.settings.read_link_font_family.family }}, {{ block.settings.read_link_font_family.fallback_families }}{% endif %};
+    font-size: {{ block.settings.read_link_font_size }}px;
+    font-weight: {{ block.settings.read_link_font_weight }};
+    color: {{ block.settings.read_link_text_color }};
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-press-mention-read-link-{{ ai_gen_id }}:hover,
+  .ai-press-mention-read-link-{{ ai_gen_id }}:focus {
+    opacity: {{ block.settings.read_link_hover_opacity }};
+  }
+
+  .ai-press-mention-read-link-{{ ai_gen_id }}:focus {
+    outline: 2px solid {{ block.settings.caption_text_color }};
+    outline-offset: 2px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-press-mentions-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: {{ block.settings.mobile_grid_gap }}px;
+    }
+
+    .ai-press-mentions-{{ ai_gen_id }} {
+      padding: {{ block.settings.mobile_section_padding_top }}px {{ block.settings.mobile_section_padding_horizontal }}px {{ block.settings.mobile_section_padding_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+<press-mentions-{{ ai_gen_id }} class="ai-press-mentions-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-press-mentions-container-{{ ai_gen_id }}">
+    <div class="ai-press-mentions-grid-{{ ai_gen_id }}">
+      {% for i in (1..3) %}
+        {% liquid
+          assign image_key = 'press_image_' | append: i
+          assign image_link_key = 'press_image_link_' | append: i
+          assign publication_key = 'press_publication_' | append: i
+          assign title_key = 'press_title_' | append: i
+          assign read_link_key = 'press_read_link_' | append: i
+          assign read_link_text_key = 'press_read_link_text_' | append: i
+
+          assign press_image = block.settings[image_key]
+          assign press_image_link = block.settings[image_link_key]
+          assign press_publication = block.settings[publication_key]
+          assign press_title = block.settings[title_key]
+          assign press_read_link = block.settings[read_link_key]
+          assign press_read_link_text = block.settings[read_link_text_key]
+        %}
+
+        <div class="ai-press-mention-item-{{ ai_gen_id }}">
+          {% if press_image_link != blank %}
+            <a
+              href="{{ press_image_link }}"
+              class="ai-press-mention-image-link-{{ ai_gen_id }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View {{ press_title }} on {{ press_publication }}"
+            >
+              <div class="ai-press-mention-image-wrapper-{{ ai_gen_id }}">
+                {% if press_image %}
+                  <img
+                    src="{{ press_image | image_url: width: 800 }}"
+                    alt="{{ press_image.alt | default: press_title | escape }}"
+                    class="ai-press-mention-image-{{ ai_gen_id }}"
+                    loading="lazy"
+                    width="{{ press_image.width }}"
+                    height="{{ press_image.height }}"
+                  >
+                {% else %}
+                  <div class="ai-press-mention-image-{{ ai_gen_id }}" style="background-color: #f4f4f4; display: flex; align-items: center; justify-content: center;">
+                    {{ 'image' | placeholder_svg_tag }}
+                  </div>
+                {% endif %}
+              </div>
+            </a>
+          {% else %}
+            <div class="ai-press-mention-image-wrapper-{{ ai_gen_id }}">
+              {% if press_image %}
+                <img
+                  src="{{ press_image | image_url: width: 800 }}"
+                  alt="{{ press_image.alt | default: press_title | escape }}"
+                  class="ai-press-mention-image-{{ ai_gen_id }}"
+                  loading="lazy"
+                  width="{{ press_image.width }}"
+                  height="{{ press_image.height }}"
+                >
+              {% else %}
+                <div class="ai-press-mention-image-{{ ai_gen_id }}" style="background-color: #f4f4f4; display: flex; align-items: center; justify-content: center;">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          <div class="ai-press-mention-caption-{{ ai_gen_id }}">
+            {% if press_publication != blank %}
+              <p class="ai-press-mention-publication-{{ ai_gen_id }}">{{ press_publication }}</p>
+            {% endif %}
+
+            {% if press_title != blank %}
+              <p class="ai-press-mention-title-{{ ai_gen_id }}">{{ press_title }}</p>
+            {% endif %}
+
+            {% if press_read_link != blank and press_read_link_text != blank %}
+              <a
+                href="{{ press_read_link }}"
+                class="ai-press-mention-read-link-{{ ai_gen_id }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Read {{ press_title }} on {{ press_publication }}"
+              >
+                {{ press_read_link_text }}
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</press-mentions-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class PressMentions{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.initializeLinks();
+      }
+
+      initializeLinks() {
+        const links = this.querySelectorAll('a[target="_blank"]');
+        links.forEach(link => {
+          link.addEventListener('click', function(e) {
+            window.open(this.href, '_blank', 'noopener,noreferrer');
+          });
+        });
+      }
+    }
+
+    customElements.define('press-mentions-{{ ai_gen_id }}', PressMentions{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Press mentions",
+  "tag": null,
+  "class": "press-mentions-block",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 800,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "section_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Mobile layout"
+    },
+    {
+      "type": "range",
+      "id": "mobile_section_padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_section_padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_section_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "mobile_grid_gap",
+      "label": "Grid gap",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Image style"
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Image height",
+      "min": 200,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "select",
+      "id": "image_object_fit",
+      "label": "Image fit",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "range",
+      "id": "hover_opacity",
+      "label": "Hover opacity",
+      "min": 0.5,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.8
+    },
+    {
+      "type": "header",
+      "content": "Caption typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "caption_font_family",
+      "label": "Font family",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "range",
+      "id": "caption_font_size",
+      "label": "Font size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "select",
+      "id": "caption_font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "color",
+      "id": "caption_text_color",
+      "label": "Text color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "caption_margin_top",
+      "label": "Spacing above caption",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "caption_line_spacing",
+      "label": "Line spacing",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Read link typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "read_link_font_family",
+      "label": "Font family",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "range",
+      "id": "read_link_font_size",
+      "label": "Font size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "read_link_font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "color",
+      "id": "read_link_text_color",
+      "label": "Text color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "read_link_margin_top",
+      "label": "Spacing above link",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "read_link_hover_opacity",
+      "label": "Hover opacity",
+      "min": 0.5,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.7
+    },
+    {
+      "type": "header",
+      "content": "Press mention 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "press_image_1",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "press_image_link_1",
+      "label": "Image link"
+    },
+    {
+      "type": "text",
+      "id": "press_publication_1",
+      "label": "Publication name"
+    },
+    {
+      "type": "text",
+      "id": "press_title_1",
+      "label": "Article title"
+    },
+    {
+      "type": "url",
+      "id": "press_read_link_1",
+      "label": "Read link URL"
+    },
+    {
+      "type": "text",
+      "id": "press_read_link_text_1",
+      "label": "Read link text",
+      "default": "Click here to read"
+    },
+    {
+      "type": "header",
+      "content": "Press mention 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "press_image_2",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "press_image_link_2",
+      "label": "Image link"
+    },
+    {
+      "type": "text",
+      "id": "press_publication_2",
+      "label": "Publication name"
+    },
+    {
+      "type": "text",
+      "id": "press_title_2",
+      "label": "Article title"
+    },
+    {
+      "type": "url",
+      "id": "press_read_link_2",
+      "label": "Read link URL"
+    },
+    {
+      "type": "text",
+      "id": "press_read_link_text_2",
+      "label": "Read link text",
+      "default": "Click here to read"
+    },
+    {
+      "type": "header",
+      "content": "Press mention 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "press_image_3",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "press_image_link_3",
+      "label": "Image link"
+    },
+    {
+      "type": "text",
+      "id": "press_publication_3",
+      "label": "Publication name"
+    },
+    {
+      "type": "text",
+      "id": "press_title_3",
+      "label": "Article title"
+    },
+    {
+      "type": "url",
+      "id": "press_read_link_3",
+      "label": "Read link URL"
+    },
+    {
+      "type": "text",
+      "id": "press_read_link_text_3",
+      "label": "Read link text",
+      "default": "Click here to read"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press mentions"
+    }
+  ]
+}
+{% endschema %}
